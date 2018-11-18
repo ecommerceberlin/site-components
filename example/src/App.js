@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 import ExampleComponent from 'eventjuicer-site-components'
 

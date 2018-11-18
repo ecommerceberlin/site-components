@@ -1,22 +1,13 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import styles from './styles.css'
-
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
-
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+export * from './components'
+export * from './compositions'
+export * from './datasources'
+export * from './formik'
+export * from './helpers'
+export * from './i18n'
+export * from './layouts'
+export * from './material-ui'
+export * from './next'
+export * from './redux'
+//export * from './roles'
+export * from './services'
