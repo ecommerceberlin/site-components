@@ -1,12 +1,20 @@
 {
+  "passPerPreset": true,
   "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "node": "current"
-      }
-    }],
-    "stage-0",
-    "react"
-  ]
+    "next/babel",
+    "@babel/env"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/env",
+          {
+            "modules": "commonjs"
+          }
+        ],
+        "next/babel"
+      ]
+    }
+  }
 }

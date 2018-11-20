@@ -1,6 +1,6 @@
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import Support from '../../compositions/Support';
+import WidgetSupport from '../../compositions/WidgetSupport';
 import BoothInfoHeader from './BoothInfoHeader';
 
 import {

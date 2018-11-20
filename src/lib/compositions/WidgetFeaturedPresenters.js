@@ -9,7 +9,7 @@ import {
 
 
 
-const FeaturedPresenters = (rest) => (
+const WidgetFeaturedPresenters = (rest) => (
 <Wrapper {...rest}>
 <Presenters  filter={function(item) {
      return item.bio && item.bio.length > 5;
@@ -26,6 +26,8 @@ const FeaturedPresenters = (rest) => (
 )
 
 
-FeaturedPresenters.defaultProps = {
-    label = "presenters.list_full"
+WidgetFeaturedPresenters.defaultProps = {
+    label : "presenters.list_full"
 }
+
+export default WidgetFeaturedPresenters;

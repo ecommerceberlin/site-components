@@ -25,7 +25,7 @@ const styles = theme => ({
 
 
 
-const VideoWithEventInfo = ({ classes, locale }) => (
+const WidgetVideoWithEventInfo = ({ classes, locale }) => (
 
   <FsVideo
     background="https://res.cloudinary.com/eventjuicer/image/upload/v1534542530/poster_presenter_blak.jpg"
@@ -69,4 +69,4 @@ const enhance = compose(
   translate
 )
 
-export default enhance(VideoWithEventInfo);
+export default enhance(WidgetVideoWithEventInfo);

@@ -20,7 +20,7 @@ const styles = theme => ({
   }
 });
 
-const Support = ({
+const WidgetSupport = ({
   classes,
   translate,
   title,
@@ -48,7 +48,7 @@ const Support = ({
   </div>
 );
 
-Support.defaultProps = {
+WidgetSupport.defaultProps = {
   title: 'event.support.hello',
   text: 'event.support.description',
   name: 'Adam Zygadlewicz',
@@ -62,4 +62,4 @@ const enhance = compose(
   translate
 );
 
-export default enhance(Support);
+export default enhance(WidgetSupport);

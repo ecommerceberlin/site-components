@@ -5,7 +5,7 @@ import Avatarlist from '../components/Avatarlist'
 import Wrapper from '../components/Wrapper'
 
 
-const FeaturedExhibitors = (props) => (
+const WidgetFeaturedExhibitors = (props) => (
 
   <Wrapper {...props}>
   <Exhibitors filter={(e) => e.featured} limit="20" mobile="12" sort={['profile.name']}>{
@@ -27,9 +27,9 @@ const FeaturedExhibitors = (props) => (
 
 )
 
-FeaturedExhibitors.defaultProps = {
+WidgetFeaturedExhibitors.defaultProps = {
   label : "exhibitors.list_featured"
 }
 
 
-export default FeaturedExhibitors
+export default WidgetFeaturedExhibitors

@@ -19,15 +19,15 @@ const _items = [
   ];
 
 
-const RoleButtons = ({items}) => (
+const WidgetRoleButtons = ({items}) => (
 
     <FsButtons items={items} />
 
 )
 
-RoleButtons.defaultProps = {
+WidgetRoleButtons.defaultProps = {
     items : _items
 }
 
 
-export default RoleButtons
+export default WidgetRoleButtons

@@ -11,7 +11,7 @@ import {
 } from '../components';
 
 
-const AllExhibitorsAvatarlist = (props) => (
+const WidgetAllExhibitorsAvatarlist = (props) => (
 
   <Wrapper {...props}>
 
@@ -35,4 +35,4 @@ const AllExhibitorsAvatarlist = (props) => (
   </Wrapper>
 
 )
-export default AllExhibitorsAvatarlist
+export default WidgetAllExhibitorsAvatarlist

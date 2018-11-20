@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-const VideoWithReviews = ({ classes }) => (
+const WidgetVideoWithReviews = ({ classes }) => (
 
   <FsVideo
     videoSrc="https://res.cloudinary.com/eventjuicer/video/upload/v1534461948/video_quicktour1.mp4"
@@ -27,4 +27,4 @@ const VideoWithReviews = ({ classes }) => (
 );
 
 
-export default withStyles(styles)(VideoWithReviews);
+export default withStyles(styles)(WidgetVideoWithReviews);

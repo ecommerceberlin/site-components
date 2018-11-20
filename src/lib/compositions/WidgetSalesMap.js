@@ -12,7 +12,7 @@ const steps = [
   ]
 
   
-const SalesMap = (props) => (
+const WidgetSalesMap = (props) => (
 
     <Wrapper {...props}>
     <div>
@@ -29,4 +29,4 @@ const SalesMap = (props) => (
 )
 
 
-export default SalesMap
+export default WidgetSalesMap

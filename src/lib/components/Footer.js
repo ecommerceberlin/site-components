@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 import EventInfo from './EventInfo';
-import Support from '../compositions/Support';
+import WidgetSupport from '../compositions/WidgetSupport';
 import Typography from './MyTypography';
 
 import Wrapper from './Wrapper';

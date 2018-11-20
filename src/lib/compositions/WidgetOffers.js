@@ -8,7 +8,7 @@ import {Centered} from '../components/MyLayouts'
 import MyTypography from '../components/MyTypography'
 import Wrapper from '../components/Wrapper'
 
-const Offers = ({divider, ...rest}) => (
+const WidgetOffers = ({divider, ...rest}) => (
 
     <Wrapper {...rest} label="exhibitors.offers.title" first={true}>
 
@@ -59,8 +59,8 @@ const Offers = ({divider, ...rest}) => (
 
 )
 
-Offers.defaultProps = {
+WidgetOffers.defaultProps = {
     divider : null
 }
 
-export default Offers
+export default WidgetOffers

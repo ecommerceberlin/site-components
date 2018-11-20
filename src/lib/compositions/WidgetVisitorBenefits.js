@@ -51,14 +51,14 @@ const _items = [
 ]
 
 
-const VisitorBenefits = ({items, ...rest}) => (
+const WidgetVisitorBenefits = ({items, ...rest}) => (
     <Wrapper {...rest}>
         <GridBenefits baseLabel="visitors.benefits" items={items} />
     </Wrapper>
 )
 
-VisitorBenefits.defaultProps = {
+WidgetVisitorBenefits.defaultProps = {
     items : _items
 }
 
-export default VisitorBenefits
+export default WidgetVisitorBenefits

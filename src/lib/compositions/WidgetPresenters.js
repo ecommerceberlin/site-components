@@ -4,7 +4,7 @@ import People from '../components/People'
 import Datasource from '../datasources/Presenters'
 
 
-const Presenters = ({label, secondaryLabel, limit, random, filter, link}) => (
+const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, link}) => (
 
     <Wrapper label={label} secondaryLabel={secondaryLabel}>
 
@@ -26,7 +26,7 @@ const Presenters = ({label, secondaryLabel, limit, random, filter, link}) => (
 
 )
 
-Presenters.defaultProps = {
+WidgetPresenters.defaultProps = {
     label : "presenters.list_featured",
     secondaryLabel : "presenters.list_description",
     links : [],
@@ -44,4 +44,4 @@ Presenters.defaultProps = {
 
 */
 
-export default Presenters
+export default WidgetPresenters

@@ -8,7 +8,7 @@ import MyTypography from '../components/MyTypography'
 import Wrapper from '../components/Wrapper'
  
 
-const AllExhibitorsColumnList = (props) => (
+const WidgetAllExhibitorsColumnList = (props) => (
 
     <Wrapper label="exhibitors.list_full" color="#ffffff" {...props}>
 
@@ -36,9 +36,9 @@ const AllExhibitorsColumnList = (props) => (
 
 )
 
-AllExhibitorsColumnList.defaultProps = {
+WidgetAllExhibitorsColumnList.defaultProps = {
 
 
 }
 
-export default AllExhibitorsColumnList
+export default WidgetAllExhibitorsColumnList

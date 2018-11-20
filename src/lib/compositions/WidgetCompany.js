@@ -6,7 +6,7 @@ import { get } from 'lodash';
 import dynamic from 'next/dynamic';
 import { MyHead } from '../next';
 
-const CompanyBookingmap = dynamic(import('../compositions/CompanyBookingmap'));
+const CompanyBookingmap = dynamic(import('./WidgetCompanyBookingmap'));
 
 import {
   getCompanyAltOgImage,
@@ -21,7 +21,7 @@ import CompanyLogotype from '../components/CompanyLogotype'
 import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 
-const Company = ({id, asPath}) => (
+const WidgetCompany = ({id, asPath}) => (
 
   <SingleRecord endpoint="companies" id={id}>
   {
@@ -67,4 +67,4 @@ const Company = ({id, asPath}) => (
 </SingleRecord>)
 
 
-export default Company
+export default WidgetCompany

@@ -7,7 +7,7 @@ import { getCompanyProfileInfo } from '../helpers';
 
 const styles = {};
 
-const CompanyBookingmap = ({ company, label }) => {
+const WidgetCompanyBookingmap = ({ company, label }) => {
   const name = getCompanyProfileInfo(company, 'name');
   const purchases = get(company, 'instances');
   //const data = filterCompanyInstances(purchases, eventId);
@@ -32,13 +32,13 @@ const CompanyBookingmap = ({ company, label }) => {
   );
 };
 
-CompanyBookingmap.propTypes = {
+WidgetCompanyBookingmap.propTypes = {
 //  eventId: PropTypes.number.isRequired,
   company: PropTypes.object.isRequired
 };
 
-CompanyBookingmap.defaultProps = {
+WidgetCompanyBookingmap.defaultProps = {
   label: 'exhibitors.booth_location_full'
 };
 
-export default withStyles(styles)(CompanyBookingmap);
+export default withStyles(styles)(WidgetCompanyBookingmap);

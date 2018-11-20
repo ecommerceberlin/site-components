@@ -1,5 +1,7 @@
 
-import {GridBenefits, Wrapper} from '../components'
+import GridBenefits from '../components/GridBenefits'
+import Wrapper from '../components/Wrapper'
+
 import {
     FaHandshake as Handshake,
     FaComments as Talks,
@@ -40,14 +42,14 @@ const _items = [
 ]
 
 
-const ExhibitorBenefits = ({items, ...rest}) => (
+const WidgetExhibitorBenefits = ({items, ...rest}) => (
     <Wrapper {...rest}>
         <GridBenefits baseLabel="exhibitors.benefits" items={items} />
     </Wrapper>
 )
 
-ExhibitorBenefits.defaultProps = {
+WidgetExhibitorBenefits.defaultProps = {
     items : _items
 }
 
-export default ExhibitorBenefits
+export default WidgetExhibitorBenefits

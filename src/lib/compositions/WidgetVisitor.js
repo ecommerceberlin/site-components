@@ -16,7 +16,7 @@ const styles = theme => ({
 
 })
 
-const Visitor = ({ classes, ...rest }) => (
+const WidgetVisitor = ({ classes, ...rest }) => (
 
 
   <Wrapper {...rest}>
@@ -78,9 +78,9 @@ const Visitor = ({ classes, ...rest }) => (
 
 );
 
-Visitor.defaultProps = {
+WidgetVisitor.defaultProps = {
   links: [],
   label : "visitors.register"
 };
 
-export default withStyles(styles)(Visitor);
+export default withStyles(styles)(WidgetVisitor);
