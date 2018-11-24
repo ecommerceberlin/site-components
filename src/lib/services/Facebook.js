@@ -1,3 +1,6 @@
+import React from 'react';
+
+
 class Facebook extends React.Component {
   componentDidMount() {
     window.fbAsyncInit = function() {

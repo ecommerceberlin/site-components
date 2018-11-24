@@ -1,3 +1,4 @@
+import React from 'react';
 import { translate } from '../../i18n';
 import _get from 'lodash/get';
 

@@ -3,7 +3,7 @@
 
 export const track = (label, payload = {}) => {
 
-    if(window.analytics){
+    if(typeof window !== "undefined" && window.analytics){
         analytics.track(label, payload);
     }
 }

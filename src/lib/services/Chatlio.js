@@ -1,3 +1,4 @@
+import React from 'react';
 import { translate } from '../i18n';
 import Button from '@material-ui/core/Button';
 import red from '@material-ui/core/colors/red';
@@ -6,6 +7,12 @@ import red from '@material-ui/core/colors/red';
 
 class Chatlio extends React.PureComponent {
   componentDidMount() {
+
+    if(typeof window === "undefined"){
+      return;
+    }
+
+
     if (window.__CHATLIO_CUSTOM_EVENT_SET__) {
       return;
     }

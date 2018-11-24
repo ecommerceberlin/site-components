@@ -1,5 +1,8 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
+
+//import Head from 'next/head'
+
 import flush from 'styled-jsx/server';
 import JssProvider from 'react-jss/lib/JssProvider';
 

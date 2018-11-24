@@ -6,6 +6,14 @@ const GTM = 'GTM-MRFVC8';
 const withGtm = WrappedComponent =>
   class GaWrapper extends React.Component {
     componentDidMount() {
+
+
+      if(typeof window === "undefined"){
+        return;
+      }
+
+
+
       // We want to do this code _once_ after the component has successfully
       // mounted in the browser only, so we use a special semiphore here.
       if (window.__NEXT_ROUTER_PAGEVIEW_REGISTERED__) {

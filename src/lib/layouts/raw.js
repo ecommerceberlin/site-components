@@ -1,3 +1,4 @@
+import React from 'react';
 import Router from 'next/router';
 
 import { MyHead as Head } from '../next';
@@ -6,7 +7,8 @@ import { TranslationProvider } from '../i18n';
 import { connect } from 'react-redux';
 
 Router.onRouteChangeComplete = () => {
-  if (window.gtag) {
+
+  if (typeof window !== "undefined" && window.gtag) {
     window.gtag('config', window.gaTrackingId, {
       page_location: window.location.href,
       page_path: window.location.pathname,

@@ -1,4 +1,4 @@
-
+import React from 'react';
 import Typography from '../MyTypography';
 import TicketGroup from './TicketGroup';
 import Benefits from '../Benefits'

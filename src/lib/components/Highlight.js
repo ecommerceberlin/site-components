@@ -1,3 +1,4 @@
+import React from 'react';
 import { translate } from '../i18n'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles';

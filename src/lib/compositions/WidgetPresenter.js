@@ -1,3 +1,4 @@
+import React from 'react';
 
 import { MyHead as Head } from '../next';
 import { getPresenterOgImage } from '../helpers';

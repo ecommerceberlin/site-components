@@ -1,3 +1,4 @@
+import React from 'react';
 
 import GridBenefits from '../components/GridBenefits'
 import Wrapper from '../components/Wrapper'

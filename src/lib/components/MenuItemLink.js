@@ -11,8 +11,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import { translate } from '../i18n';
 
+
+const scrollTo = (to) => {
+
+  if(typeof window !== 'undefined'){
+    Router.push(to).then(() => window.scrollTo(0, 0))
+  }
+}
+
 const MenuItemLink = ({ to, baseLabel, label, text, icon, translate }) => (
-  <ListItem button={true} onClick={() => Router.push(to).then(() => window.scrollTo(0, 0)) }>
+  <ListItem button={true} onClick={() => scrollTo(to) }>
     {/* {icon && <ListItemIcon>{icon}</ListItemIcon>} */}
     <ListItemText
       primary={label ? translate(`common.menu.${baseLabel}.${label}`) : text}

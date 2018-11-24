@@ -1,4 +1,5 @@
 
+import React from 'react';
 
 import Exhibitors from '../datasources/Exhibitors'
 import ColumnList from '../components/ColumnList'

@@ -1,12 +1,8 @@
+import React from 'react';
 
-
-import {
-    People,
-    Wrapper
-  } from '../components';
-
-  import {Presenters} from '../datasources'
-
+import People from '../components/People'
+import Wrapper from '../components/Wrapper'
+import Presenters from '../datasources/Presenters'
 
 
 const WidgetFeaturedPresenters = (rest) => (

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Red = () => (
   <svg style={{display: 'none'}}>
   <defs>

@@ -1,5 +1,8 @@
+import React from 'react';
 
-import {GridBenefits, Wrapper} from '../components'
+import GridBenefits from '../components/GridBenefits'
+import Wrapper from '../components/Wrapper'
+
 import {
     FaWrench as Edu,
     FaHandshake as Handshake,

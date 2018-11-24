@@ -1,5 +1,5 @@
  
-
+import React from 'react';
 import Datasource from '../datasources/Offers'
 import Offer from '../components/Offer'
 import get from 'lodash/get'

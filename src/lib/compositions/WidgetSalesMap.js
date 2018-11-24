@@ -1,3 +1,4 @@
+import React from 'react';
 import Bookingmap from '../components/Bookingmap/Bookingmap'
 import OrderSteps from '../components/Bookingmap/OrderSteps'
 import Legend from '../components/Bookingmap/Legend'

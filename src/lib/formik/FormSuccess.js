@@ -1,3 +1,4 @@
+import React from 'react';
 import { MyTypography } from '../components';
 
 const FormSuccess = props => (

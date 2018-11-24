@@ -1,3 +1,4 @@
+import React from 'react';
 import NextHead from 'next/head';
 import { withRouter } from 'next/router';
 

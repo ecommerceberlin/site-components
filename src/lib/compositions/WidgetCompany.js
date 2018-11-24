@@ -1,4 +1,5 @@
 
+import React from 'react';
 
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
@@ -6,7 +7,17 @@ import { get } from 'lodash';
 import dynamic from 'next/dynamic';
 import { MyHead } from '../next';
 
-const CompanyBookingmap = dynamic(import('./WidgetCompanyBookingmap'));
+
+const Delayed = dynamic({
+
+  modules: () => {
+    const components = {
+      CompanyBookingmap: () => import('./WidgetCompanyBookingmap')
+    }
+    return components
+  },
+  render: (props, { CompanyBookingmap }) => <CompanyBookingmap company={props.company} />
+})  
 
 import {
   getCompanyAltOgImage,
@@ -60,7 +71,7 @@ const WidgetCompany = ({id, asPath}) => (
 
     </Wrapper>
 
-    <CompanyBookingmap company={company} />
+    <Delayed company={company} />
     
     </React.Fragment>
 }

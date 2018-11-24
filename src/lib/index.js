@@ -11,3 +11,7 @@ export * from './next'
 export * from './redux'
 //export * from './roles'
 export * from './services'
+
+export { connect } from 'react-redux';
+export get from 'lodash/get'
+

@@ -1,3 +1,4 @@
+import React from 'react';
 import dynamic from 'next/dynamic';
 import Head from '../next/MyHead';
 import Chatlio from '../services/Chatlio';
@@ -5,9 +6,27 @@ import TranslationProvider from '../i18n/TranslationProvider';
 import MyAppBar from '../components/MyAppBar'
 import Footer from '../components/Footer'
 
-const Dialog = dynamic(import('../components/MyDialog'));
-const Snackbar = dynamic(import('../components/MySnackbar'));
-const Drawer = dynamic(import('../components/MyDrawer'));
+
+const Bundle = dynamic({
+  modules : () => {
+
+    const components = {
+      Dialog : () => import('../components/MyDialog'),
+      Snackbar : () => import('../components/MySnackbar'),
+      Drawer : () => import('../components/MyDrawer')
+    }
+    return components;
+  },
+  render : (props, {Dialog, Snackbar, Drawer}) => 
+    <React.Fragment>
+      <Dialog />
+      <Snackbar />
+      <Drawer menuItems={props.menuItems} />
+    </React.Fragment>
+})
+
+
+
 
 import ScreenSize from '../material-ui/ScreenSize';
 import menuItems from '../components/menuItems';
@@ -26,11 +45,7 @@ const Layout = ({ children }) => {
 
       <Footer />
 
-      <Dialog />
-
-      <Snackbar />
-
-      <Drawer items={menuItems} />
+      <Bundle menuItems={menuItems} />
 
       <Chatlio button={false} />
     </TranslationProvider>
