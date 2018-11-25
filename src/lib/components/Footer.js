@@ -35,19 +35,19 @@ const Footer = ({ links, classes, width }) => (
               {
                 icon: 'location',
                 secondary: 'event.location',
-                primary: 'EXPO XXI Warszawa, Prądzyńskiego 12/14'
+                primary: `${process.env.EVENT_LOCATION}`
               },
 
               {
                 icon: 'date',
                 secondary: 'event.date',
-                primary: '7 listopada 2018'
+                primary: `${process.env.EVENT_DATE}`
               },
 
               {
                 icon: 'alarm',
                 secondary: 'event.hours',
-                primary: '10:00-17:00'
+                primary: `${process.env.EVENT_HOURS}`
               }
             ]}
             orientation="v"
@@ -61,17 +61,17 @@ const Footer = ({ links, classes, width }) => (
             items={[
               {
                 secondary: 'event.organizer.name',
-                primary: 'Infoguru Sp. z o.o. Sp. k.'
+                primary: `${process.env.ORGANIZER_NAME}`
               },
 
               {
                 secondary: 'event.organizer.address',
-                primary: 'POLAND, Poznań, Truskawiecka 13'
+                primary: `${process.env.ORGANIZER_ADDRESS}`
               },
 
               {
                 secondary: 'event.organizer.registration',
-                primary: 'VAT ID 7811967834'
+                primary: `${process.env.ORGANIZER_REGNO}`
               }
             ]}
             orientation="v"
