@@ -49,7 +49,7 @@ const MyLink = ({
 MyLink.defaultProps = {
   prefetch: true,
   name: 'Link',
-  variant: 'flat',
+  variant: 'text',
   size: 'small',
   color: 'default',
   icon: false,

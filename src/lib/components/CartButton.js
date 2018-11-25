@@ -15,7 +15,7 @@ import {
 const CartButton = ({ dialogShow, cartReset, count, label }) => (
   <Badge color="secondary" badgeContent={count}>
     <Button
-      variant="raised"
+      variant="contained"
       onClick={() =>
         dialogShow({
           title: label,

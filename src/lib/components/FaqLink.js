@@ -35,7 +35,7 @@ const FaqLink = ({ selected, url, classes }) => {
       </div>
       <div className={classes.column}>
         <Link
-          variant="raised"
+          variant="contained"
           href={buildLink(url, selected)}
           label="common.faq.share.link"
           prefetch={false}

@@ -32,7 +32,7 @@ const TicketDownload = ({ code, classes, translate, label }) => {
         href={`https://api.eventjuicer.com/v1/services/tickets/${code}`}
         download
         target="_blank"
-        variant="raised"
+        variant="contained"
         size="large"
         color="primary"
         className={classes.button}

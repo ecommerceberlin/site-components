@@ -50,6 +50,10 @@ const MyDrawer = ({ items, classes, drawer, drawerHide }) => (
   </Drawer>
 );
 
+MyDrawer.defaultProps = {
+  items : []
+}
+
 MyDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired

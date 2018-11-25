@@ -19,7 +19,7 @@ const CompanyContactItem = ({ name, link, baseLabel, classes, translate }) => {
     <Button
       disabled={!link || !link.length}
       className={classes.button}
-      variant="flat"
+      variant="text"
       href={link}
       target="_blank"
     >

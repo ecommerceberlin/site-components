@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import dynamic from 'next/dynamic';
+ 
 import { MyHead } from '../next';
 
 import {
@@ -16,12 +16,7 @@ import CompanyData from '../components/CompanyData'
 import CompanyLogotype from '../components/CompanyLogotype'
 import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
-
-
-
-const WidgetCompanyBookingmap = dynamic(() => import('./WidgetCompanyBookingmap'))  
-
-
+import WidgetCompanyBookingmap from './WidgetCompanyBookingmap'
 
 
 const WidgetCompany = ({id, asPath}) => (
