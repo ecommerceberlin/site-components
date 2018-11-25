@@ -3,10 +3,6 @@ import keyBy from 'lodash/keyBy';
 import get from 'lodash/get';
 import { resourceFetchSuccess, resourceFetchSuccessMeta } from '../components/redux';
 
-const { API_HOST } = process.env;
-
-export const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/${API_HOST}/`;
-
 export const checkFetchStatus = response => {
   if (response.ok) {
     return response;
@@ -25,7 +21,7 @@ export const fetcher = async (endpoints, store) => {
 
   const results = await Promise.all(
     endpoints.map(endpoint =>
-      fetch(`${apiUrl}${endpoint}`)
+      fetch(`${process.env.API_PUBLIC}/${endpoint}`)
         .then(response => response.json())
         .then(data => ({ endpoint, data }))
     )

@@ -32,9 +32,6 @@ const validationSchema = ({ fields }) => {
   return Yup.object().shape(_pick(validations, Object.keys(fields || {})));
 };
 
-const apiUrl =
-  'https://api.eventjuicer.com/v1/public/hosts/targiehandlu.pl/register';
-
 export default withFormik({
   validationSchema: validationSchema,
   isInitialValid: false,
@@ -48,7 +45,7 @@ export default withFormik({
   handleSubmit: (payload, { props, setSubmitting, setErrors, setStatus }) => {
     setSubmitting(true);
 
-    fetch(apiUrl, {
+    fetch(`${process.env.API_PUBLIC}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

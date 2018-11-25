@@ -7,17 +7,34 @@ const LRUCache = require('lru-cache');
 const fetch = require('isomorphic-unfetch');
 //const _keyBy = require('lodash/keyBy');
 
-
-
-
 export default function(){
 
 
-  
+
+
+
+
+
+const i18n = require('./i18n');
+const defaultLocale = "en";
+const cachableUtmContent = ["logotype,pl", "logotype,en", "opengraph_image"];
+
+const ssrCache = new LRUCache({
+  max: 100,
+  maxAge: 1000 * 60 * 60 // 1hour
+});
+
+
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dir: '.', dev });
+const handle = app.getRequestHandler();
+
+
 
 
   async function fetchFromApiEndpoint(endpoint) {
-    const _res = await fetch(`${apiUrl}${endpoint}`);
+    const _res = await fetch(`${process.env.API_PUBLIC}/${endpoint}`);
     const res = await _res.json();
     return res;
   }
@@ -100,23 +117,6 @@ export default function(){
 
   
 
-
-
-  const i18n = require('./i18n');
-const apiUrl = 'https://api.eventjuicer.com/v1/public/hosts/targiehandlu.pl/';
-const defaultLocale = "en";
-const cachableUtmContent = ["logotype,pl", "logotype,en", "opengraph_image"];
-
-const ssrCache = new LRUCache({
-  max: 100,
-  maxAge: 1000 * 60 * 60 // 1hour
-});
-
-
-const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dir: '.', dev });
-const handle = app.getRequestHandler();
 
 
     

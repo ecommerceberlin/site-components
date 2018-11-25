@@ -97,7 +97,7 @@ const StepForm = props => {
 };
 
 StepForm.defaultProps = {
-  url: 'https://api.eventjuicer.com/v1/public/hosts/targiehandlu.pl/register'
+  url: `${process.env.API_PUBLIC}/register`
 };
 
 export default withFormik(StepForm);

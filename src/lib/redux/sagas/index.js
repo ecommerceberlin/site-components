@@ -45,13 +45,7 @@ import * as Selectors from '../selectors';
 import {event} from '../../services/gtag'
 import {track} from '../../services/segment'
 
-
-
-
-const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/targiehandlu.pl/`
-
 let fetchTasks = {};
-
 
 function* handleBoothCheck({payload}){
 
@@ -97,7 +91,7 @@ function* fetchAccumulatedFetches(endpoint){
     return
   }
 
-  const response = yield call(fetch, `${apiUrl}${endpoint}`)
+  const response = yield call(fetch, `${process.env.API_PUBLIC}/${endpoint}`)
   const json = yield call([response, response.json])
 
   if (response.ok && response.status >= 200 && 'data' in json) {
