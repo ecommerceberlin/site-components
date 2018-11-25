@@ -1,4 +1,5 @@
 import { RESOURCE_FETCH_SUCCESS } from '../../components/redux/types';
+import { CHANGE_LOCALE_MSGS } from '../../i18n';
 
 export const initialState = {
   formdata: [],
@@ -9,9 +10,6 @@ export const initialState = {
   exhibitors : [],
   texts : {}
 };
-
-import { CHANGE_LOCALE_MSGS } from '../../i18n';
-
 
 const reducer = (state = initialState, action) => {
   const { type, resource, data } = action;

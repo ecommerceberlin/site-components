@@ -9,6 +9,8 @@ import Typography from './MyTypography';
 
 import Wrapper from './Wrapper';
 
+
+
 const styles = theme => ({
   container: {
     borderTop: '1px solid #cccccc'
@@ -24,7 +26,7 @@ const Footer = ({ links, classes, width }) => (
     <Wrapper dense={true} color="#fafafa" >
       <Grid container spacing={8} wrap="wrap" justify="space-around" alignItems="center">
         <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
-          <Support />
+          <WidgetSupport />
         </Grid>
 
         <Grid item xs={12} sm={6} md={5} lg={3} xl={3}>

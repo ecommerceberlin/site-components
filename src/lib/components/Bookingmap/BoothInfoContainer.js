@@ -77,7 +77,7 @@ const BoothInfoContainer = ({header, content, classes, ...rest}) => (
 
                    {content && <Paper className={classes.paper} elevation={1}>{content}</Paper>}
 
-                    <Support title="event.sales.support" />
+                    <WidgetSupport title="event.sales.support" />
 
                 </div>
             </div>

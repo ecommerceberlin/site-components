@@ -93,12 +93,12 @@ export function dialogShow(payload = {}) {
   };
 }
 
-export function dialogModify(name, value) {
-  return {
-    type: Types.DIALOG_MODIFY,
-    payload: payload
-  };
-}
+// export function dialogModify(name, value) {
+//   return {
+//     type: Types.DIALOG_MODIFY,
+//     payload: payload
+//   };
+// }
 
 export function dialogHide() {
   return {

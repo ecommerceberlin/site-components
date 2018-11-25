@@ -1,0 +1,14 @@
+{
+    "presets": [
+      ["next/babel", {
+        "preset-env": {
+            "modules" : "commonjs"
+        },
+        "transform-runtime": {},
+        "styled-jsx": {},
+        "class-properties": {}
+      }]
+    ],
+    "plugins": [],
+    "ignore" : ["**/index.es.js"]
+  }

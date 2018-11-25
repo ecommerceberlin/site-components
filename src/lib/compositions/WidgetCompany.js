@@ -1,23 +1,9 @@
 
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-
 import dynamic from 'next/dynamic';
 import { MyHead } from '../next';
-
-
-const Delayed = dynamic({
-
-  modules: () => {
-    const components = {
-      CompanyBookingmap: () => import('./WidgetCompanyBookingmap')
-    }
-    return components
-  },
-  render: (props, { CompanyBookingmap }) => <CompanyBookingmap company={props.company} />
-})  
 
 import {
   getCompanyAltOgImage,
@@ -25,12 +11,18 @@ import {
 } from '../helpers/data';
 
 import SingleRecord from "../datasources/SingleRecord"
-
 import Wrapper from '../components/Wrapper'
 import CompanyData from '../components/CompanyData'
 import CompanyLogotype from '../components/CompanyLogotype'
 import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
+
+
+
+const WidgetCompanyBookingmap = dynamic(() => import('./WidgetCompanyBookingmap'))  
+
+
+
 
 const WidgetCompany = ({id, asPath}) => (
 
@@ -71,7 +63,7 @@ const WidgetCompany = ({id, asPath}) => (
 
     </Wrapper>
 
-    <Delayed company={company} />
+    <WidgetCompanyBookingmap company={company} />
     
     </React.Fragment>
 }

@@ -5,6 +5,9 @@ import Chatlio from '../services/Chatlio';
 import TranslationProvider from '../i18n/TranslationProvider';
 import MyAppBar from '../components/MyAppBar'
 import Footer from '../components/Footer'
+import ScreenSize from '../material-ui/ScreenSize';
+import menuItems from '../components/menuItems';
+
 
 
 const Bundle = dynamic({
@@ -26,10 +29,6 @@ const Bundle = dynamic({
 })
 
 
-
-
-import ScreenSize from '../material-ui/ScreenSize';
-import menuItems from '../components/menuItems';
 
 
 const Layout = ({ children }) => {
