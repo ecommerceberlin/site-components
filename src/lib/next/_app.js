@@ -98,9 +98,14 @@ class MyApp extends App {
 
   componentDidMount() {
 
-    Router.onRouteChangeComplete = url => {
+    // Router.onRouteChangeComplete = url => {
+    //   console.log("test1")
+    //   gtag.pageview(url);
+    // };
+
+    Router.events.on('routeChangeComplete', (url) => {
       gtag.pageview(url);
-    };
+    })
 
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
