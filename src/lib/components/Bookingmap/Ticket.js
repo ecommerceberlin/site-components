@@ -68,7 +68,8 @@ class Ticket extends React.PureComponent {
 
   getPostEndpointBasedOnLocale() {
     const {locale} = this.props
-    return locale === "en" ? "https://ecommercewarsaw.com/preorder" : "https://stoiska.targiehandlu.pl/preorder";
+    return `${process.env.TEMP_PREORDER_URL}`
+    //return locale === "en" ? "https://ecommercewarsaw.com/preorder" : "https://stoiska.targiehandlu.pl/preorder";
   }
 
   render() {

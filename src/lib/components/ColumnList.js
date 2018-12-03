@@ -10,7 +10,7 @@ const ColumnList = ({data}) => (
   <Grid container spacing={24}>
     {data.map((chunk, i) => (
       <Grid key={i} item xs={12} sm={6} md={4} lg={3} xl={3}>
-        {chunk.map((company) => (
+        {chunk && Array.isArray(chunk) ? chunk.map((company) => (
 
           <ColumnlistItem 
             key={company.id} 
@@ -20,7 +20,7 @@ const ColumnList = ({data}) => (
             highlighted={company.promo ? <Highlight /> : null} 
           />
 
-        ))}
+        )) : null}
       </Grid>
     ))}
   </Grid>
