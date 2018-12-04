@@ -45,11 +45,11 @@ const WidgetVideoWithEventInfo = ({ classes, locale }) => (
           {
             icon: 'location',
             secondary: 'event.location',
-            primary: locale == "en" ? "Warsaw, EXPO XXI" : 'Warszawa, EXPO XXI'
+            primary: locale == "en" ? "Cracow, EXPO Kraków" : 'Kraków, EXPO Kraków'
           },{
             icon: 'date',
             secondary: 'event.date',
-            primary: locale == "en" ? "November, the 7th 2018" : '7 listopada 2018'
+            primary: locale == "en" ? "April, the 17th 2019" : '17 kwietnia 2019'
           }
         ]}
         primaryStyle="heroPrimary"
