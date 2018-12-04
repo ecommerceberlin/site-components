@@ -102,6 +102,8 @@ const SalesInfo = (props) => (
 
 )
 
-
+SalesInfo.defaultProps = {
+  disabled : false
+}
 
 export default SalesInfo

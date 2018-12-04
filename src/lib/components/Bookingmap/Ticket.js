@@ -73,7 +73,7 @@ class Ticket extends React.PureComponent {
   }
 
   render() {
-    const { ticket, classes, boothId, label } = this.props;
+    const { ticket, classes, boothId, label, disabled } = this.props;
 
     if (!ticket) {
       return null;
@@ -105,7 +105,7 @@ class Ticket extends React.PureComponent {
 
         <Grid item xs={12} sm={12} md={3}>
 
-          {ticket.bookable ?
+          {ticket.bookable && !disabled ?
           <form action={this.getPostEndpointBasedOnLocale()} method="post" target="_blank">
           <input type="hidden" name={`tickets[${ticket.id}]`} value="1" />
           <input type="hidden" name={`ticketdata[${ticket.id}]`} value={JSON.stringify(formdata)} />
@@ -144,7 +144,9 @@ Ticket.propTypes = {
   label : PropTypes.string.isRequired
 };
 
-Ticket.defaultProps = {};
+Ticket.defaultProps = {
+  disabled : false
+};
 
 const enhance = compose(
   translate,

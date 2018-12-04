@@ -14,7 +14,8 @@ TicketGroup.defaultProps = {
   tickets : [],
   label : "",
   boothId : "",
-  noBookableTickets: null
+  noBookableTickets: null.
+  disabled : false
 };
 
 

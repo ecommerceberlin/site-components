@@ -62,8 +62,18 @@ class Bookingmap extends React.PureComponent {
 
 
   componentDidMount(){
-    const {resourceFetchRequest} = this.props
+
+    const {resourceFetchRequest, autorefresh} = this.props
+
     resourceFetchRequest(["bookingmap", "ticketgroups", "formdata"])
+
+    if(parseInt(autorefresh, 10) > 5 ){
+      this.interval = setInterval(() => resourceFetchRequest(["formdata"]), autorefresh * 1000);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   getStatus(boothId) {
@@ -91,7 +101,7 @@ class Bookingmap extends React.PureComponent {
  
   onBoothClick = (boothId, groupId, label) => {
 
-    const { dialogShow, boothChecked, translate } = this.props;
+    const { dialogShow, boothChecked, translate, disabled } = this.props;
 
     const status = this.getStatusShort(boothId);
 
@@ -99,23 +109,23 @@ class Bookingmap extends React.PureComponent {
     let modalContent = '';
     let modalButtons = [];
 
-    const props = {boothId, groupId, label, status}
+    const boothProps = {boothId, groupId, label, status, disabled}
 
     switch (status) {
       case 'hold':
         modalTitle = translate("event.sales.booths.hold");
-        modalContent = <BoothInfo {...props} />;
+        modalContent = <BoothInfo {...boothProps} />;
 
         break;
       case 'sold':
         modalTitle = translate("event.sales.booths.sold");
-        modalContent = <BoothInfo {...props} formdata={this.getStatus(boothId)} />;
+        modalContent = <BoothInfo {...boothProps} formdata={this.getStatus(boothId)} />;
 
         break;
       default:
         /* THERE IS NOW FORMDATA FOR UNSOLD BOOTHS!!!! */
         modalTitle = translate("event.sales.booths.free");
-        modalContent = <SalesInfo {...props} />
+        modalContent = <SalesInfo {...boothProps} />
     }
 
     dialogShow({
@@ -192,7 +202,9 @@ Bookingmap.defaultProps = {
   boothsSelected : [],
   formdata : {},
   ticketgroups : {},
-  bookingmap : []
+  bookingmap : [],
+  disabled : false,
+  autorefresh : 15
 };
 
 const enhance = compose(
