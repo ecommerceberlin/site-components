@@ -5,30 +5,29 @@ import Avatarlist from '../components/Avatarlist'
 import Wrapper from '../components/Wrapper'
 
 
-const WidgetFeaturedExhibitors = (props) => (
+const WidgetFeaturedExhibitors = ({filter, limit, mobile, ...wrapper}) => (
 
-  <Wrapper {...props}>
-  <Exhibitors filter={(e) => e.featured} limit="20" mobile="12" sort={['profile.name']}>{
-    (exhibitors, keywords) =>
-
-    <React.Fragment>
-      <Avatarlist data={exhibitors}  />
-
-      {/* <Centered style={{marginTop: 80}}>
-
-        <MyTypography label="exhibitors.list.filter_title" template="SUBH2CH" />
-        <KeywordSelect keywords={keywords} />
-
-      </Centered> */}
-
-    </React.Fragment>
-  }</Exhibitors>
+  <Wrapper {...wrapper}>
+  
+  <Exhibitors 
+    filter={filter} 
+    limit={limit}
+    mobile={mobile} 
+    sort={['profile.name']}
+  >
+    {(exhibitors, keywords) => <Avatarlist data={exhibitors}  />}
+  
+  </Exhibitors>
   </Wrapper>
 
 )
 
 WidgetFeaturedExhibitors.defaultProps = {
-  label : "exhibitors.list_featured"
+  label : "exhibitors.list_featured",
+  secondaryLabel : null,
+  filter : function(item){ return item.featured; },
+  limit : 20,
+  mobile : 12
 }
 
 
