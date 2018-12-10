@@ -17,13 +17,20 @@ const WidgetAllExhibitorsColumnList = (props) => (
       {(exhibitors, keywords) => 
         
     <React.Fragment>
+    {
+      
+      keywords && keywords.length ?
 
-    <Centered style={{marginTop: 80}}>
+      (<Centered style={{marginTop: 80}}>
 
       <MyTypography label="exhibitors.list.filter_title" template="SUBH2CH" />
       <KeywordSelect keywords={keywords} />
 
-    </Centered>
+      </Centered>) : null
+
+    }
+
+    
 
     <ColumnList data={exhibitors} />
 
