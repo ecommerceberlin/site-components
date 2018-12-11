@@ -1,13 +1,15 @@
 
+
+
 export const styleMapping = {
 
-  263 : "style1", //light
-  264 : "style2", //standard
-  265 : "style3", //hot
-  266 : "style4", //superhot
-  267 : "style5", //ultra
-  268 : "style6", //grand
-  269 : "style6"
+  [`${process.env.BOOTH_LIGHT}`] : "style1", //light
+  [`${process.env.BOOTH_STANDARD}`] : "style2", //standard
+  [`${process.env.BOOTH_HOT}`] : "style3", //hot
+  [`${process.env.BOOTH_SUPERHOT}`] : "style4", //superhot
+  [`${process.env.BOOTH_ULTRA}`] : "style5", //ultra
+  [`${process.env.BOOTH_GRAND}`] : "style6", //grand
+  [`${process.env.BOOTH_STAGE}`] : "style6"
 }
 
 export const getStylingName = (groupId) => {
@@ -20,9 +22,9 @@ const styles = {
     position: 'absolute',
     display: 'table',
 
-   backgroundColor: 'lightgreen',
-   border: '1px solid green',
-   color: 'black',
+    backgroundColor: 'lightgreen',
+    border: '1px solid green',
+    color: 'black',
 
     zIndex: 20,
     borderRadius: 3,
@@ -32,7 +34,7 @@ const styles = {
     textAlign: 'center',
     boxShadow: '1px 1px #555555',
     overflow: 'hidden',
-    whiteSpace: 'wrap'
+    whiteSpace: 'nowrap'
   },
 
   boothOnLegend : {
@@ -65,7 +67,7 @@ const styles = {
     lineHeight: 'normal',
     fontWeight: 600,
     fontFamily: 'verdana, arial, sans-serif',
-    fontSize: 10
+    fontSize: 8
   },
 
   boothLogotype: {},

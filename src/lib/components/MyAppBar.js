@@ -51,7 +51,7 @@ const styles = theme => ({
 });
 
 function MyAppBar(props) {
-  const { classes, drawer, drawerShow, dialogShow, cart, position } = props;
+  const { classes, drawer, drawerShow, dialogShow, cart, position, event_name } = props;
 
   const noItems = Object.keys(cart).length;
 
@@ -81,10 +81,8 @@ function MyAppBar(props) {
             >
         
         <RawTranslatedText 
-        
-          pl="Targi eHandlu 17.04.2019" 
-          en="Ecommerce Cracow Expo" 
-          
+          pl={event_name}
+          en={event_name}
         />
 
             </Typography>
@@ -102,7 +100,8 @@ function MyAppBar(props) {
 }
 
 MyAppBar.defaultProps = {
-  position: ''
+  position: '',
+  event_name : `${process.env.EVENT_NAME}`
 };
 
 MyAppBar.propTypes = {

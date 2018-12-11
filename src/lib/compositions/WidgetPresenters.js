@@ -33,7 +33,7 @@ WidgetPresenters.defaultProps = {
     links : [],
     limit : 20,
     random : false,
-    filter : function(item){ return [77504, 77505, 77508, 77529, 77557, 77773, 78014, 78429].indexOf(item.id) > -1 },
+    filter : function(item){ return true; },
     link : true
 }
 

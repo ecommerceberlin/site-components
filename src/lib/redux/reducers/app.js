@@ -8,17 +8,20 @@ import {
   CART_RESET
 } from '../../components/redux';
 
-import { CHANGE_LOCALE } from '../../i18n';
+import {VENUE_SELECT, VENUE_SELECT_RESET} from '../../components/Schedule/redux'
+
+import { CHANGE_LOCALE, DEFAULT_LOCALE } from '../../i18n';
 
 const defaultState = {
   role: '',
   cart: {},
-  locale: 'pl',
+  locale: DEFAULT_LOCALE,
   locale_msgs: {},
   width: 'md',
   filterParams: {
     presenters: {}
-  }
+  },
+  selectedVenue : null
 };
 
 const reducer = (state = defaultState, action) => {
@@ -67,6 +70,14 @@ const reducer = (state = defaultState, action) => {
     case CART_RESET:
       return { ...state, cart: {} };
       break;
+
+    case VENUE_SELECT:
+      return {...state, selectedVenue : action.name}
+    break;
+
+    case VENUE_SELECT_RESET:
+      return {...state, selectedVenue : null}
+    break;
 
     default:
       return state;
