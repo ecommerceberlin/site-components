@@ -14,6 +14,7 @@ const Booth = ({
   zoom,
   buyer,
   groupId,
+  defaultSize,
   legend
 }) => (
   <li
@@ -30,8 +31,8 @@ const Booth = ({
     }
     )}
     style={{
-      height: data.dh * zoom,
-      width: data.dw * zoom,
+      height: (data.dh > 0 ? data.dh : parseInt(defaultSize) )  * zoom,
+      width: (data.dw > 0 ? data.dw : parseInt(defaultSize) ) * zoom,
       top: "dt" in data ? data.dt * zoom : "auto",
       left: "dl" in data ? data.dl * zoom : "auto",
     //  lineHeight: `${data.dh}px`,
@@ -59,6 +60,7 @@ Booth.defaultProps = {
 
 Booth.propTypes = {
   groupId: PropTypes.number.isRequired,
+  defaultSize : PropTypes.string.isRequired,
   zoom: PropTypes.number,
   selected: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,

@@ -67,9 +67,9 @@ class Bookingmap extends React.PureComponent {
 
     resourceFetchRequest(["bookingmap", "ticketgroups", "formdata"])
 
-    if(parseInt(autorefresh, 10) > 5 ){
-      this.interval = setInterval(() => resourceFetchRequest(["formdata"]), autorefresh * 1000);
-    }
+    // if(parseInt(autorefresh, 10) > 5 ){
+    //   this.interval = setInterval(() => resourceFetchRequest(["formdata"]), autorefresh * 1000);
+    // }
   }
 
   componentWillUnmount() {
@@ -94,9 +94,9 @@ class Bookingmap extends React.PureComponent {
     return { cname2 : getCompanyName(company), logotype : getCompanyLogotype(company) };
   }
 
-  getTicketsForGroupId(groupId) {
+  getDefaultSize(groupId) {
     const { ticketgroups } = this.props;
-    return groupId in ticketgroups ? ticketgroups[groupId] : {};
+    return groupId in ticketgroups ? ticketgroups[groupId].map.width : "";
   }
  
   onBoothClick = (boothId, groupId, label) => {
@@ -177,7 +177,8 @@ class Bookingmap extends React.PureComponent {
               {bookingmap.booths &&
                 bookingmap.booths.map(booth => (
                   <Booth
-                    groupId={ booth.g }
+                    groupId={booth.g}
+                    defaultSize={ this.getDefaultSize(booth.g) }
                     zoom={zoom}
                     selected={this.isBoothSelected(booth.id)}
                     onClick={this.onBoothClick}
