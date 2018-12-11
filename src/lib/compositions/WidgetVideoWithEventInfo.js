@@ -25,11 +25,12 @@ const styles = theme => ({
 
 
 
-const WidgetVideoWithEventInfo = ({ classes, locale }) => (
+const WidgetVideoWithEventInfo = ({ classes, locale, event_name, event_date, background, videoSrc, overlay }) => (
 
   <FsVideo
-    background="https://res.cloudinary.com/eventjuicer/image/upload/v1534542530/poster_presenter_blak.jpg"
-    videoSrc="https://res.cloudinary.com/eventjuicer/video/upload/v1534454501/video_presenter_blak.mp4"
+    background={background}
+    videoSrc={videoSrc}
+    overlay={overlay}
   >
 
     <div className={classes.container}>
@@ -45,11 +46,11 @@ const WidgetVideoWithEventInfo = ({ classes, locale }) => (
           {
             icon: 'location',
             secondary: 'event.location',
-            primary: locale == "en" ? "Cracow, EXPO Kraków" : 'Kraków, EXPO Kraków'
+            primary: event_name
           },{
             icon: 'date',
             secondary: 'event.date',
-            primary: locale == "en" ? "April, the 17th 2019" : '17 kwietnia 2019'
+            primary: event_date
           }
         ]}
         primaryStyle="heroPrimary"
@@ -63,6 +64,15 @@ const WidgetVideoWithEventInfo = ({ classes, locale }) => (
 
   </FsVideo>
 );
+
+
+WidgetVideoWithEventInfo.defaultProps = {
+  background : 'https://res.cloudinary.com/eventjuicer/image/upload/v1534542530/poster_presenter_blak.jpg',
+  videoSrc : 'https://res.cloudinary.com/eventjuicer/video/upload/v1534454501/video_presenter_blak.mp4',
+  overlay : "red",
+  event_name : `${process.env.EVENT_NAME}`,
+  event_date : `${process.env.EVENT_DATE}`,
+}
 
 const enhance = compose(
   withStyles(styles),

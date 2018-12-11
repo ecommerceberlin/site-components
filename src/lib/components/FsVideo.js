@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { isBigScreen } from '../helpers';
+import classNames from 'classnames';
 
 const styles = theme => ({
   container: {
@@ -27,12 +28,23 @@ const styles = theme => ({
       left:0,
       bottom:0,
       zIndex: 9,
-      background: 'linear-gradient(to right,rgba(230, 0, 0, 0.4), rgba(250, 0, 0, 0.9))',
+     // background: 'linear-gradient(to right,rgba(230, 0, 0, 0.4), rgba(250, 0, 0, 0.9))',
       overflow: 'hidden',
     }
 
   },
 
+  red : {
+    "&:before" : {
+      background: 'linear-gradient(to right,rgba(230, 0, 0, 0.4), rgba(250, 0, 0, 0.9))',
+    }
+  },
+
+  black : {
+    "&:before" : {
+      background: 'linear-gradient(to right,rgba(25, 25, 25, 0.4), rgba(5, 5, 5, 0.9))',
+    }
+  },
 
   video : {
 
@@ -67,9 +79,11 @@ const styles = theme => ({
   h1: {}
 });
 
-const FsVideo = ({ width, videoSrc, background, classes, children }) => (
+const FsVideo = ({ width, videoSrc, background, classes, children, overlay }) => (
 
-  <section className={classes.container}
+  <section className={classNames(
+    classes.container, classes[overlay]
+    )}
     style={{ backgroundImage: `url(${background})` }}
     >
 
@@ -93,7 +107,8 @@ FsVideo.defaultProps = {
   background: "",
   videoSrc : null,
   label: null,
-  text: ''
+  text: '',
+  overlay : 'red'
 };
 
 
