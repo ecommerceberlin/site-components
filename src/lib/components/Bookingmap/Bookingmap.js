@@ -95,8 +95,12 @@ class Bookingmap extends React.PureComponent {
   }
 
   getDefaultSize(groupId) {
-    const { ticketgroups } = this.props;
-    return groupId in ticketgroups ? ticketgroups[groupId].map.width : "";
+    const { ticketgroups, defaultSize } = this.props;
+    if(! (groupId in ticketgroups)){
+      return 0;
+    }
+    const size = parseInt(ticketgroups[groupId].map.width);
+    return !isNaN(size) ? size : defaultSize; 
   }
  
   onBoothClick = (boothId, groupId, label) => {
@@ -205,7 +209,8 @@ Bookingmap.defaultProps = {
   ticketgroups : {},
   bookingmap : [],
   disabled : false,
-  autorefresh : 15
+  autorefresh : 15,
+  defaultSize : 21
 };
 
 const enhance = compose(

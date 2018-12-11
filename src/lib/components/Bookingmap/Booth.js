@@ -31,8 +31,8 @@ const Booth = ({
     }
     )}
     style={{
-      height: (data.dh > 0 ? data.dh : parseInt(defaultSize) )  * zoom,
-      width: (data.dw > 0 ? data.dw : parseInt(defaultSize) ) * zoom,
+      height: (data.dh > 0 ? data.dh : defaultSize )  * zoom,
+      width: (data.dw > 0 ? data.dw : defaultSize ) * zoom,
       top: "dt" in data ? data.dt * zoom : "auto",
       left: "dl" in data ? data.dl * zoom : "auto",
     //  lineHeight: `${data.dh}px`,
@@ -60,7 +60,7 @@ Booth.defaultProps = {
 
 Booth.propTypes = {
   groupId: PropTypes.number.isRequired,
-  defaultSize : PropTypes.string.isRequired,
+  defaultSize : PropTypes.number.isRequired,
   zoom: PropTypes.number,
   selected: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
