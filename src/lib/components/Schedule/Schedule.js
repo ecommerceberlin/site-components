@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
+import { connect } from 'react-redux'
 
 import _filter from 'lodash/filter';
 import _find from 'lodash/find';
@@ -9,6 +10,7 @@ import _get from 'lodash/get';
 import ScheduleItem from './ScheduleItem';
 import ScheduleVenue from './ScheduleVenue';
 import ScheduleBreak from './ScheduleBreak';
+import {VenueSelector} from './redux'
 
 class Schedule extends React.PureComponent {
  
@@ -40,36 +42,37 @@ class Schedule extends React.PureComponent {
     );
   }
 
-  renderVenues() {
+  renderVenues(iterableVenues, gridData) {
     
     const { venues } = this.props;
-    const noOfVenues = Object.keys(venues).length;
-    const gridData = this.getColNumber();
 
-    return Object.keys(venues).map(venue => (
+    return iterableVenues.map(venue => (
       <Grid key={venue} item {...gridData}>
         <ScheduleVenue
           name={venue}
           company={this.getCompany(_get(venues[venue], 'company_id', 0))}
-          total={noOfVenues}
+          total={iterableVenues.length}
         />
       </Grid>
     ));
   }
 
-  getColNumber(){
-    const {venues} = this.props;
-    const cols = 12 / Object.keys(venues).length;
+  getColNumber(iterableVenues){
+    const cols = 12 / iterableVenues.length;
     return { xs: 12, sm: 12, md: cols, lg: cols, xl: cols };
   }
 
+  render() {  
+    const { venues, times, selectedVenue } = this.props;
+    let iterableVenues = Object.keys(venues);
 
-  render() {
-  
-    const { venues, times } = this.props;
-    const gridData = this.getColNumber();
+    if(selectedVenue && selectedVenue in venues){
+      iterableVenues = [selectedVenue]
+    }
 
-   return (
+    const gridData = this.getColNumber(iterableVenues);
+   
+    return (
       <div>
     
         <Hidden implementation="css" smDown={true}>
@@ -78,7 +81,7 @@ class Schedule extends React.PureComponent {
           container
           spacing={40}
         >
-          {this.renderVenues()}
+          {this.renderVenues(iterableVenues, gridData)}
         </Grid>
 
         </Hidden>
@@ -88,7 +91,7 @@ class Schedule extends React.PureComponent {
             {times[time] !== 'presentation' && this.renderBreak(times[time])}
 
             {times[time] === 'presentation' &&
-              Object.keys(venues).map((venue, j) => (
+              iterableVenues.map((venue, j) => (
                 <Grid key={`${i}${j}`} item {...gridData}>
                   {this.findPresentations(
                     {
@@ -107,6 +110,7 @@ class Schedule extends React.PureComponent {
 }
 
 Schedule.defaultProps = {
+  selectedVenue : null,
   selected: 0,
   presenters: [],
   exhibitors: [],
@@ -135,4 +139,6 @@ Schedule.defaultProps = {
 
 };
 
-export default Schedule
+export default connect((state) => ({
+  selectedVenue : VenueSelector(state)
+}), null)(Schedule)

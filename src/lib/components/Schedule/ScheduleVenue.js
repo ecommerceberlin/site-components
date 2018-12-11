@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose'
 import { getCompanyLogotype } from '../../helpers';
-import {venueSelect} from './redux'
+import {venueSelect, venueSelectReset, VenueSelector} from './redux'
 
 const styles = theme => ({
   root: {
@@ -54,9 +54,9 @@ const styles = theme => ({
   }
 });
 
-const ScheduleVenue = ({ name, company, classes, total, venueSelect}) => (
+const ScheduleVenue = ({ name, company, classes, total, selectedVenue, venueSelect, venueSelectReset}) => (
   <Hidden implementation="css">
-    <div className={classes.root} onClick={ () => venueSelect(name) }>
+    <div className={classes.root} onClick={ () => selectedVenue === name ? venueSelectReset() : venueSelect(name) }>
       <div>
         <Avatar className={classes.avatar}>{name}</Avatar>
       </div>
@@ -79,7 +79,9 @@ ScheduleVenue.defaultProps = {
 
 const enhance = compose(
   withStyles(styles),
-  connect(null, {venueSelect})
+  connect((state) => ({
+    selectedVenue : VenueSelector(state)
+  }), {venueSelect, venueSelectReset})
 )
 
 export default enhance(ScheduleVenue);
