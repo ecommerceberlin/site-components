@@ -2,8 +2,8 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import red from '@material-ui/core/colors/red';
-import { translate } from '../i18n';
 import compose from 'recompose/compose';
+import { translate } from '../../i18n';
 
 const styles = theme => ({
   root: {

@@ -35,10 +35,12 @@ export { default as WidthAwareInfo } from './WidthAwareInfo';
 
 export { default as People } from './People';
 export { default as Schedule } from './Schedule';
+/*
+//we must adapt Schedule to display single stage
 export { default as Stage } from './Stage';
-
-export { default as Presentation } from './Presentation';
-export { default as Presenter } from './Presenter';
+*/
+export { default as Presentation } from './Schedule/Presentation';
+export { default as Presenter } from './Schedule/Presenter';
 
 export { default as Faq } from './Faq';
 export { default as FaqLink } from './FaqLink';

@@ -1,7 +1,7 @@
 import React from 'react';
-import { translate } from '../i18n';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose';
+import { translate } from '../../i18n';
 
 const styles = theme => ({
   root: {

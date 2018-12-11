@@ -7,8 +7,8 @@ import Presentation from './Presentation';
 import Presenter from './Presenter';
 import PresentationLabel from './PresentationLabel';
 
-import { dialogShow } from './redux/actions';
-import { getParticipantCdn } from '../helpers';
+import { dialogShow } from '../redux/actions';
+import { getParticipantCdn } from '../../helpers';
 
 import ScheduleItemPresenter from './ScheduleItemPresenter';
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 
 import _filter from 'lodash/filter';
 import _find from 'lodash/find';
@@ -10,32 +10,25 @@ import ScheduleItem from './ScheduleItem';
 import ScheduleVenue from './ScheduleVenue';
 import ScheduleBreak from './ScheduleBreak';
 
-import { resourceFetchRequest } from './redux/actions';
-import { presenterSelector } from '../redux/reselect';
-
-class Stage extends React.PureComponent {
-  componentDidMount() {
-    if (!this.props.presenters.length) {
-      this.props.resourceFetchRequest('presenters', false);
-    }
-    if (!this.props.exhibitors.length) {
-      this.props.resourceFetchRequest('exhibitors', false);
-    }
-  }
-
+class Schedule extends React.PureComponent {
+ 
   getCompany(id) {
     return _find(this.props.exhibitors, { id }, {});
   }
 
   findPresentations(search, first = false) {
-    const { presenters, selected } = this.props;
+    const { presenters, selected, descriptions } = this.props;
+
     return _filter(presenters, search).map((item, i) => (
+      
       <ScheduleItem
         key={item.id}
         selected={item.id == selected}
         first={i === 0}
         data={item}
+        descriptions={descriptions}
       />
+
     ));
   }
 
@@ -48,47 +41,64 @@ class Stage extends React.PureComponent {
   }
 
   renderVenues() {
-    const { venues, stage } = this.props;
-    const gridData = { xs: 12 };
+    
+    const { venues } = this.props;
+    const noOfVenues = Object.keys(venues).length;
+    const gridData = this.getColNumber();
 
-    const venue = venues[stage.toUpperCase()];
-
-    return (
-      <Grid key={stage} item {...gridData}>
+    return Object.keys(venues).map(venue => (
+      <Grid key={venue} item {...gridData}>
         <ScheduleVenue
-          name={stage.toUpperCase()}
-          company={this.getCompany(_get(venue, 'company_id', 0))}
+          name={venue}
+          company={this.getCompany(_get(venues[venue], 'company_id', 0))}
+          total={noOfVenues}
         />
       </Grid>
-    );
+    ));
   }
 
-  render() {
-    const { presenters, venues, times, stage } = this.props;
-    const gridData = { xs: 12, sm: 12, md: 6 };
+  getColNumber(){
+    const {venues} = this.props;
+    const cols = 12 / Object.keys(venues).length;
+    return { xs: 12, sm: 12, md: cols, lg: cols, xl: cols };
+  }
 
-    return (
+
+  render() {
+  
+    const { venues, times } = this.props;
+    const gridData = this.getColNumber();
+
+   return (
       <div>
+    
+        <Hidden implementation="css" smDown={true}>
+
         <Grid
           container
           spacing={40}
-          hidden={{ implementation: 'css', smDown: true }}
         >
           {this.renderVenues()}
         </Grid>
+
+        </Hidden>
 
         {Object.keys(times).map((time, i) => (
           <Grid key={i} container spacing={40}>
             {times[time] !== 'presentation' && this.renderBreak(times[time])}
 
-            {times[time] === 'presentation' && (
-              <Grid key={stage} item {...gridData}>
-                {this.findPresentations({
-                  presentation_venue: stage.toUpperCase(),
-                  presentation_time: time
-                })}
-              </Grid>
-            )}
+            {times[time] === 'presentation' &&
+              Object.keys(venues).map((venue, j) => (
+                <Grid key={`${i}${j}`} item {...gridData}>
+                  {this.findPresentations(
+                    {
+                      presentation_venue: venue,
+                      presentation_time: time
+                    },
+                    j === 0
+                  )}
+                </Grid>
+              ))}
           </Grid>
         ))}
       </div>
@@ -96,8 +106,7 @@ class Stage extends React.PureComponent {
   }
 }
 
-Stage.defaultProps = {
-  stage: null,
+Schedule.defaultProps = {
   selected: 0,
   presenters: [],
   exhibitors: [],
@@ -114,17 +123,16 @@ Stage.defaultProps = {
     '15:30': 'presentation',
     '16:05': 'presentation'
   },
+
   venues: {
-    A: { company_id: 1175 },
-    B: { company_id: 1158 },
-    C: { company_id: 1194 }
-  }
+    A: { company_id: 0 },
+    B: { company_id: 0 },
+    C: { company_id: 0 },
+    D: { company_id: 0 }
+  },
+
+  descriptions : true
+
 };
 
-export default connect(
-  state => ({
-    presenters: presenterSelector(state),
-    exhibitors: state.resources.exhibitors
-  }),
-  { resourceFetchRequest }
-)(Stage);
+export default Schedule

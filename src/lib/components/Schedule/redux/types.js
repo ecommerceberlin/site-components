@@ -1,0 +1,2 @@
+export const VENUE_SELECT = 'VENUE_SELECT';
+export const VENUE_SELECT_RESET = 'VENUE_SELECT_RESET';
