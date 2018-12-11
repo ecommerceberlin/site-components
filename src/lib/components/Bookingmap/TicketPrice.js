@@ -5,7 +5,7 @@ import _get from 'lodash/get';
 
 const TicketPrice = ({ price, locale, translate }) => {
 
-    const currency = locale === "en" ? "eur" : "pln"
+    const currency = locale === "pl" ? "pln" : "eur"
 
     return `${_get(price, locale, "en")} ${translate(
       `common.currencies.${currency}`
