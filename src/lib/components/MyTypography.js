@@ -121,7 +121,10 @@ const styles = theme => ({
     }
   },
 
-
+  heroGold : {
+    color : "gold"
+  },
+  
   subhero: {
 
     fontSize: '1rem',
@@ -360,6 +363,12 @@ const templates = {
     variant: 'display4',
     component: 'h1',
     classNames: ['hero']
+  },
+
+  heroGold: {
+    variant: 'display4',
+    component: 'h1',
+    classNames: ['hero', 'heroGold']
   },
 
   subhero: {

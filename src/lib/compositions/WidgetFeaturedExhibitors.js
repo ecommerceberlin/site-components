@@ -5,7 +5,7 @@ import Avatarlist from '../components/Avatarlist'
 import Wrapper from '../components/Wrapper'
 
 
-const WidgetFeaturedExhibitors = ({filter, limit, mobile, ...wrapper}) => (
+const WidgetFeaturedExhibitors = ({filter, limit, mobile, center, ...wrapper}) => (
 
   <Wrapper {...wrapper}>
   
@@ -15,7 +15,10 @@ const WidgetFeaturedExhibitors = ({filter, limit, mobile, ...wrapper}) => (
     mobile={mobile} 
     sort={['profile.name']}
   >
-    {(exhibitors, keywords) => <Avatarlist data={exhibitors}  />}
+    {(exhibitors, keywords) => <Avatarlist 
+      data={exhibitors}  
+      justify={center ? 'center' : 'flex-start'}
+    />}
   
   </Exhibitors>
   </Wrapper>
@@ -27,7 +30,8 @@ WidgetFeaturedExhibitors.defaultProps = {
   secondaryLabel : null,
   filter : function(item){ return item.featured; },
   limit : 20,
-  mobile : 12
+  mobile : 12,
+  center : false
 }
 
 

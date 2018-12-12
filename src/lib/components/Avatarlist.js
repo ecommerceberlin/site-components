@@ -3,7 +3,11 @@ import Grid from '@material-ui/core/Grid';
 import AvatarlistCell from './AvatarlistCell';
 
 
-const Avatarlist = ({data}) => (<Grid container spacing={24}>
+const Avatarlist = ({data, ...gridProps}) => (
+<Grid 
+  container 
+  {...gridProps}
+  >
     {data.map((company, i) => (
         <AvatarlistCell key={company.id} id={company.id} company={company} />
     ))}
@@ -11,7 +15,9 @@ const Avatarlist = ({data}) => (<Grid container spacing={24}>
 )
 
 Avatarlist.defaultProps = {
-  data : []
+  data : [],
+  justify : "space-between",
+  spacing : 24
 };
 
 export default Avatarlist

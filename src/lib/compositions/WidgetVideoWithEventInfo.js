@@ -24,8 +24,7 @@ const styles = theme => ({
 });
 
 
-
-const WidgetVideoWithEventInfo = ({ classes, locale, event_name, event_date, background, videoSrc, overlay }) => (
+const WidgetVideoWithEventInfo = ({ classes, locale, template, event_name, event_date, background, videoSrc, overlay }) => (
 
   <FsVideo
     background={background}
@@ -35,7 +34,7 @@ const WidgetVideoWithEventInfo = ({ classes, locale, event_name, event_date, bac
 
     <div className={classes.container}>
 
-      <MyTypography template="hero" label="event.claim" />
+      <MyTypography template={template} label="event.claim" />
 
       <MyTypography template="subhero" label="event.description" />
 
@@ -72,6 +71,7 @@ WidgetVideoWithEventInfo.defaultProps = {
   overlay : "red",
   event_name : `${process.env.EVENT_NAME}`,
   event_date : `${process.env.EVENT_DATE}`,
+  template : "hero"
 }
 
 const enhance = compose(
