@@ -24,7 +24,7 @@ const PresentationLabel = ({ time, venue, classes, translate }) => (
   <div className={classes.root}>
     <Chip label={time} className={classes.chip} />
     <Chip
-      label={`Scena ${venue}`}
+      label={`${translate("common.stage")} ${venue}`}
       className={classes.chip}
       classes={{
         root: classes.venue
