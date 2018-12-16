@@ -1,4 +1,4 @@
-export const GA_TRACKING_ID = 'GTM-MRFVC8';
+export const GA_TRACKING_ID = `${process.env.GTM}`;
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = url => {
