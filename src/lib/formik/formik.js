@@ -52,7 +52,8 @@ export default withFormik({
       },
       body: JSON.stringify({
         fields: payload,
-        tickets: { [props.ticketId]: 1 }
+        tickets: { [props.ticketId]: 1 },
+        template : `${VISITOR_EMAIL_TEMPLATE}`
       })
     })
       .then(response => {
