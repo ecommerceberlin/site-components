@@ -14,7 +14,34 @@ import ScheduleItemPresenter from './ScheduleItemPresenter';
 
 const styles = theme => ({
   item: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    
+    [theme.breakpoints.down('sm')]: {
+      borderWidth : 1,
+      borderStyle : 'solid',
+      borderColor : '#eaeaea',
+      padding: 10
+    },
+
+  },
+
+  vertical : {
+    display : 'flex',
+    flexDirection : 'column'
+  },
+
+  horizontal : {
+    display : 'flex',
+    flexDirection : 'row'
+  },
+
+  presentation : {
+    flexGrow: 1,
+    flexBasis: 0
+  },
+  presenter : {
+    flexGrow: 1,
+    flexBasis: 0
   }
 });
 
@@ -48,6 +75,13 @@ const ScheduleItem = ({ data, selected, classes, first, description, dialogShow 
     >
      
 
+      {first && <PresentationLabel
+        time={data.presentation_time}
+        venue={data.presentation_venue}
+      />}
+
+      <div className={description ? classes.horizontal : classes.vertical}>
+      <div className={classes.presentation}>
       {first && (
         <Presentation
           title={data.presentation_title}
@@ -55,17 +89,16 @@ const ScheduleItem = ({ data, selected, classes, first, description, dialogShow 
           hideDescriptionOnMobile={true}
         />
       )}
-
-      {first && <PresentationLabel
-        time={data.presentation_time}
-        venue={data.presentation_venue}
-      />}
-
+      </div>
+      <div className={classes.presenter}>
       <ScheduleItemPresenter
         title={getFullName(data)}
         text={getFullJobInfo(data)}
         imageSrc={getParticipantCdn(data.avatar)}
       />
+      </div>
+      </div>
+
     </div>
   );
 };

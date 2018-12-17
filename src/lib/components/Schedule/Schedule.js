@@ -19,7 +19,10 @@ class Schedule extends React.PureComponent {
   }
 
   findPresentations(search, first = false) {
-    const { presenters, selected, descriptions } = this.props;
+   
+    const { presenters, venues, selected, selectedVenue, descriptions } = this.props;
+
+    const details = (selectedVenue && selectedVenue in venues);
 
     return _filter(presenters, search).map((item, i) => (
       
@@ -28,7 +31,7 @@ class Schedule extends React.PureComponent {
         selected={item.id == selected}
         first={i === 0}
         data={item}
-        description={descriptions}
+        description={details || descriptions}
       />
 
     ));
