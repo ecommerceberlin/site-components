@@ -124,7 +124,7 @@ const styles = theme => ({
   heroGold : {
     color : "gold"
   },
-  
+
   subhero: {
 
     fontSize: '1rem',
@@ -183,10 +183,10 @@ const styles = theme => ({
   },
 
   presenterImportant: {
-    color: '#f44336',
+    color: '#000000',
     fontSize: '1.1rem',
-    lineHeight: '1.4rem',
-
+    lineHeight: '1.3rem',
+    
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.3rem',
       lineHeight: '1.7rem'

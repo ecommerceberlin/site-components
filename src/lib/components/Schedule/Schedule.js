@@ -28,7 +28,7 @@ class Schedule extends React.PureComponent {
         selected={item.id == selected}
         first={i === 0}
         data={item}
-        descriptions={descriptions}
+        description={descriptions}
       />
 
     ));
@@ -44,7 +44,7 @@ class Schedule extends React.PureComponent {
 
   renderVenues(iterableVenues, gridData) {
     
-    const { venues } = this.props;
+    const { venues, venueStyle } = this.props;
 
     return iterableVenues.map(venue => (
       <Grid key={venue} item {...gridData}>
@@ -52,6 +52,7 @@ class Schedule extends React.PureComponent {
           name={venue}
           company={this.getCompany(_get(venues[venue], 'company_id', 0))}
           total={iterableVenues.length}
+          template={venueStyle}
         />
       </Grid>
     ));
@@ -135,8 +136,8 @@ Schedule.defaultProps = {
     D: { company_id: 0 }
   },
 
-  descriptions : true
-
+  descriptions : true,
+  venueStyle : "black"
 };
 
 export default connect((state) => ({

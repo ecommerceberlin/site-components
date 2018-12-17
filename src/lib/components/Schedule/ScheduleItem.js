@@ -21,7 +21,7 @@ const styles = theme => ({
 const getFullName = data => `${data.fname} ${data.lname}`;
 const getFullJobInfo = data => `${data.position} @ ${data.cname2}`;
 
-const ScheduleItem = ({ data, selected, classes, first, dialogShow }) => {
+const ScheduleItem = ({ data, selected, classes, first, description, dialogShow }) => {
   return (
     <div
       className={classes.item}
@@ -46,18 +46,20 @@ const ScheduleItem = ({ data, selected, classes, first, dialogShow }) => {
         })
       }
     >
-      <PresentationLabel
-        time={data.presentation_time}
-        venue={data.presentation_venue}
-      />
+     
 
       {first && (
         <Presentation
           title={data.presentation_title}
-          description={data.presentation_description}
+          description={description ? data.presentation_description : null}
           hideDescriptionOnMobile={true}
         />
       )}
+
+      {first && <PresentationLabel
+        time={data.presentation_time}
+        venue={data.presentation_venue}
+      />}
 
       <ScheduleItemPresenter
         title={getFullName(data)}
@@ -70,7 +72,8 @@ const ScheduleItem = ({ data, selected, classes, first, dialogShow }) => {
 
 ScheduleItem.defaultProps = {
   selected: false,
-  first: true
+  first: true,
+  description : true
 };
 
 const enhance = compose(

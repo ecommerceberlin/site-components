@@ -6,7 +6,7 @@ import Presenters from '../datasources/Presenters';
 import Exhibitors from '../datasources/Exhibitors';
 
 
-const WidgetSchedule = ({link, times, venues, descriptions, ...wrapper}) => (
+const WidgetSchedule = ({link, times, venues, descriptions, venueStyle, ...wrapper}) => (
 
     <Wrapper {...wrapper}>
     <Exhibitors>{
@@ -26,6 +26,7 @@ const WidgetSchedule = ({link, times, venues, descriptions, ...wrapper}) => (
                 venues={venues}
                 link={link} 
                 descriptions={descriptions}
+                venueStyle={venueStyle}
             />
             
             }</Presenters>
@@ -45,7 +46,7 @@ WidgetSchedule.defaultProps = {
     secondaryLabel : "presenters.list_description",
     links : [],
     link : true,
-    descriptions : true,
+    descriptions : false,
     times: {
         '11:15': 'presentation',
         '11:50': 'presentation',
@@ -63,7 +64,8 @@ WidgetSchedule.defaultProps = {
         A: { company_id: 0 },
         B: { company_id: 0 },
         C: { company_id: 0 }
-      }
+      },
+      venueStyle : "black"
 }
 /* 
 

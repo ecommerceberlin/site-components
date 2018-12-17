@@ -38,6 +38,15 @@ const styles = theme => ({
     }
   },
 
+  black : {
+    
+  },
+
+  gold : {
+    color : "black",
+    backgroundColor : "gold"
+  },
+
   logotype: {
     maxWidth: 200,
     maxHeight: 60,
@@ -54,11 +63,11 @@ const styles = theme => ({
   }
 });
 
-const ScheduleVenue = ({ name, company, classes, total, selectedVenue, venueSelect, venueSelectReset}) => (
+const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue, venueSelect, venueSelectReset}) => (
   <Hidden implementation="css">
     <div className={classes.root} onClick={ () => selectedVenue === name ? venueSelectReset() : venueSelect(name) }>
       <div>
-        <Avatar className={classes.avatar}>{name}</Avatar>
+        <Avatar className={classNames(classes.avatar, classes[template])}>{name}</Avatar>
       </div>
       <div>
         <img
@@ -74,7 +83,8 @@ const ScheduleVenue = ({ name, company, classes, total, selectedVenue, venueSele
 );
 
 ScheduleVenue.defaultProps = {
-  total : 4
+  total : 4,
+  template : "black"
 }
 
 const enhance = compose(
