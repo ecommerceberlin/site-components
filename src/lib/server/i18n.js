@@ -1,7 +1,6 @@
 const fetch = require('isomorphic-unfetch');
-const translationUrl = `https://localise.biz/api/export/all.json?format=multi&pretty&key=${process.env.LOCALISE}`;
 
-async function getTexts(cache, purge) {
+async function getTexts(translationUrl, cache, purge) {
   if (purge) {
     cache.del(translationUrl);
   }

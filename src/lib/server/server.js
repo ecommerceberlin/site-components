@@ -7,12 +7,12 @@ const LRUCache = require('lru-cache');
 const fetch = require('isomorphic-unfetch');
 //const _keyBy = require('lodash/keyBy');
 
-export default function(){
+export default function(options){
 
 
-
-
-
+if(!options){
+  options = {}
+}
 
 
 const i18n = require('./i18n');
@@ -147,7 +147,7 @@ const handle = app.getRequestHandler();
 
       const {lang} = req.query
 
-      const texts = await i18n.getTexts(ssrCache, 'purge' in req.query);
+      const texts = await i18n.getTexts(options.lang_api_endpoint, ssrCache, 'purge' in req.query);
 
       const {locale} = req.session
 
@@ -225,13 +225,13 @@ const handle = app.getRequestHandler();
 
     // Serve the item webpage with next.js as the renderer
     server.get('/setup', async (req, res) => {
-      const texts = await i18n.getTexts(ssrCache, 'purge' in req.query);
+      const texts = await i18n.getTexts(options.lang_api_endpoint, ssrCache, 'purge' in req.query);
       app.render(req, res, '/setup', { texts });
     });
 
     // When rendering client-side, we will request the same data from this route
     server.get('/_data/texts', async (req, res) => {
-      const texts = await i18n.getTexts(ssrCache);
+      const texts = await i18n.getTexts(options.lang_api_endpoint, ssrCache);
       res.json(texts);
     });
 
