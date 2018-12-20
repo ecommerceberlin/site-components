@@ -1,25 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+//import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActions from '@material-ui/core/CardActions';
+import Hidden from '@material-ui/core/Hidden';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
+import compose from 'recompose/compose';
 
 
 import Avatar from './MyAvatar';
 import Typography from './MyTypography';
-
 import { MyLink } from '../next';
-import Hidden from '@material-ui/core/Hidden';
-
 import { generateLinkParams } from '../helpers';
+import SubPageLink from './SubPageLink';
 
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
-import compose from 'recompose/compose';
 
 const styles = {
   avatarContainer: {
@@ -30,6 +28,14 @@ const styles = {
   card: {
     width: '100%',
     maxWidth: 400
+  },
+
+  logotype : {
+    height : 100,
+    display : 'block',
+    backgroundSize : '70%',
+    backgroundPosition : 'center',
+    backgroundRepeat : 'no-repeat'
   },
 
   cardMobile: {},
@@ -46,6 +52,7 @@ const styles = {
 const Person = ({
   classes,
   avatar,
+  logotype,
   title,
   subtitle,
   text,
@@ -58,7 +65,19 @@ const Person = ({
   return (
     <Card className={classes.card} elevation={0}>
       <CardHeader
-        avatar={<Avatar alt="" src={avatar} link={linkParams.as} />}
+        avatar={
+        
+        <div>
+        
+         <Avatar alt="" src={avatar} link={linkParams.as} />
+         <div 
+          className={classes.logotype } 
+          style={{
+            backgroundImage : `url(${logotype})`
+          }} />
+
+        </div>
+         }
         // title="test"
         // subheader="srest"
         className={classes.avatarContainer}
@@ -69,10 +88,14 @@ const Person = ({
 
         {subtitle && <Typography template="presenter2">{subtitle}</Typography>}
 
+
+     
+
         <Hidden smDown implementation="css">
           {text && <Typography template="presenterText">{text}</Typography>}
         </Hidden>
       </CardContent>
+
 
       {link && (
         <CardActions>

@@ -28,6 +28,7 @@ const People = ({data, link}) => {
           key={_get(item, 'id')}
           id={_get(item, 'id')}
           avatar={_get(item, 'avatar')}
+          logotype={_get(item, 'logotype')}
           title={`${_get(item, 'fname')} ${_get(item, 'lname')}`}
           subtitle={
             <FullJobInfo
