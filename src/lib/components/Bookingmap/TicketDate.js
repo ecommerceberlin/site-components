@@ -1,5 +1,5 @@
 import { translate } from '../../i18n';
-import * as moment from 'moment';
+import moment from 'moment';
 
 const TicketDate = ({start, end, inDates, translate}) => {
 
