@@ -15,7 +15,7 @@ const FullJobInfo = ({ company, job }) => (
 );
 
 
-const People = ({data, link}) => {
+const People = ({data, link, bio}) => {
 
   const gridData = { xs: 6, sm: 6, md: 4, lg: 3, xl: 3 };
 
@@ -36,7 +36,7 @@ const People = ({data, link}) => {
               job={_get(item, 'position')}
             />
           }
-          text={_get(item, 'bio')}
+          text={bio ? _get(item, 'bio') : null}
           link={link}
         />
       </Grid>
@@ -50,7 +50,8 @@ const People = ({data, link}) => {
 
 People.defaultProps = {
   data: [],
-  link: false
+  link: false,
+  bio : true
 };
 
 // People.propTypes = {
