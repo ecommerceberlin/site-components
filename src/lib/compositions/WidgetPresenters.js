@@ -5,7 +5,7 @@ import People from '../components/People'
 import Datasource from '../datasources/Presenters'
 
 
-const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, link}) => (
+const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, link, bio}) => (
 
     <Wrapper label={label} secondaryLabel={secondaryLabel}>
 
@@ -18,6 +18,7 @@ const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, link}) 
         <People 
             data={data}
             link={link} 
+            bio={bio}
         />
 
     }</Datasource>
