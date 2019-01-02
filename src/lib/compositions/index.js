@@ -10,7 +10,6 @@ export { default as WidgetCompany } from './WidgetCompany';
 export { default as WidgetPresenter } from './WidgetPresenter';
 export { default as WidgetVisitorBenefits } from './WidgetVisitorBenefits';
 export { default as WidgetExhibitorBenefits } from './WidgetExhibitorBenefits';
-export { default as WidgetRoleButtons } from './WidgetRoleButtons';
 export { default as WidgetSalesMap } from './WidgetSalesMap';
 export { default as WidgetOffers } from './WidgetOffers';
 export { default as WidgetPresenters } from './WidgetPresenters';
