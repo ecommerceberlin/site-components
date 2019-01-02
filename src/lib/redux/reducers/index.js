@@ -10,6 +10,7 @@ import drawer from './drawer';
 import app from './app';
 import visuals from './visuals';
 import services from './services';
+import settings from './settings';
 
 export default {
   app,

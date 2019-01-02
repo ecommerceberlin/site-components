@@ -88,6 +88,14 @@ class MyApp extends App {
       store.dispatch(resourceFetchRequest(componentInitialProps.preload))
     }
 
+    if("settings" in componentInitialProps)
+    {
+      store.dispatch({
+        type: "SETTINGS_SET",
+        payload : componentInitialProps.settings
+      })
+    }
+
     return {
       pageProps: {...componentInitialProps}
     };
