@@ -18,7 +18,7 @@ const defaultFilters = {
 export const getCart = state => state.app.cart;
 export const getResources = state => state.resources;
 export const getFaqs = state => state.visuals.faqs;
-
+export const getSettings = state => state.settings;
 export const getBoothsSelected = state => state.boothsSelected
 
 /*
@@ -67,6 +67,11 @@ export const getRecord = (state, props) => {
   return key in state.resources ? state.resources[key] : {}
 }
 
+export const SettingsSelector = createSelector(
+  getSettings,
+  (_, props) => props.name,
+  (settings, name) => name in settings ? settings[name] : null
+)
 
 export const SingleRecordSelector = createSelector(
   getRecord,

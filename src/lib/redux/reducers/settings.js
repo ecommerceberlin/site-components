@@ -1,22 +1,15 @@
 
 export const initialState = {
     support : {
-
-        title : 'event.support.hello',
-        description: 'event.support.description',
-      
-        people : [
-          {
-            name: 'Adam Zygadlewicz',
-            position : '',
-            langs : [],
-            avatar: '/static/support.jpg',
-            phone: '+48 721 945 134',
-            email: 'hello@targiehandlu.pl',
-            chatlio : true
-          }
-        ]
-       
+        title : '',
+        description: '',
+        people : []
+    },
+    rolebuttons : [],
+    schedule : {
+        times : {},
+        venues : {},
+        venueStyle : ""
     }
 };
 

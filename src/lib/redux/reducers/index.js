@@ -21,5 +21,6 @@ export default {
   boothsSelected,
   resources,
   meta,
-  drawer
+  drawer,
+  settings
 };

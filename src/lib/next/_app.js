@@ -83,10 +83,7 @@ class MyApp extends App {
       ? await Component.getInitialProps(ctx)
       : {};
 
-    if("preload" in componentInitialProps)
-    {
-      store.dispatch(resourceFetchRequest(componentInitialProps.preload))
-    }
+   
 
     if("settings" in componentInitialProps)
     {
@@ -94,6 +91,11 @@ class MyApp extends App {
         type: "SETTINGS_SET",
         payload : componentInitialProps.settings
       })
+    }
+
+    if("preload" in componentInitialProps)
+    {
+      store.dispatch(resourceFetchRequest(componentInitialProps.preload))
     }
 
     return {
