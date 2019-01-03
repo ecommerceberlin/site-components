@@ -3,7 +3,6 @@ export { default as Wrapper } from './Wrapper';
 export { default as MyButton } from './MyButton';
 
 
-export { default as Footer } from './Footer';
 export { default as MyAppBar } from './MyAppBar';
 export { default as MyDrawer } from './MyDrawer';
 export { default as MyTypography } from './MyTypography';
@@ -13,7 +12,7 @@ export { default as ColumnList } from './ColumnList';
 
 export { default as Bookingmap } from './Bookingmap/Bookingmap';
 
-export { default as MyCardSlim } from './MyCardSlim';
+//export { default as MyCardSlim } from './MyCardSlim';
 
 export { default as FsVideo } from './FsVideo';
 export { default as FsButtons } from './FsButtons';
