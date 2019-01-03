@@ -189,8 +189,8 @@ const styles = theme => ({
     fontWeight: 600,
     
     [theme.breakpoints.up('sm')]: {
-      fontSize: '1.3rem',
-      lineHeight: '1.7rem'
+      fontSize: '1.15rem',
+      lineHeight: '1.5rem'
     }
   },
 

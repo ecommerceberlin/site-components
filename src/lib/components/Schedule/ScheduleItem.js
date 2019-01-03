@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
+import classNames from 'classnames'
 
 import Presentation from './Presentation';
 import Presenter from './Presenter';
@@ -13,6 +14,7 @@ import { getParticipantCdn } from '../../helpers';
 import ScheduleItemPresenter from './ScheduleItemPresenter';
 
 const styles = theme => ({
+
   item: {
     cursor: 'pointer',
     
@@ -23,6 +25,12 @@ const styles = theme => ({
       padding: 10
     },
 
+  },
+
+  itemSelected : {
+    borderWidth : 2,
+    borderStyle : 'solid',
+    borderColor : 'gold',
   },
 
   vertical : {
@@ -51,7 +59,11 @@ const getFullJobInfo = data => `${data.position} @ ${data.cname2}`;
 const ScheduleItem = ({ data, selected, classes, first, description, dialogShow }) => {
   return (
     <div
-      className={classes.item}
+      className={classNames(classes.item,
+        {
+          [classes.itemSelected] : selected
+        }
+      )}
       onClick={() =>
         dialogShow({
           title: (

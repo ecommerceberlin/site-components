@@ -3,7 +3,7 @@ import React from 'react';
 import MyHead from './MyHead'
 import WidgetVideoWithEventInfo from '../compositions/WidgetVideoWithEventInfo'
 import WidgetVisitor from '../compositions/WidgetVisitor'
-import WidgetRoleButtons from '../compositions/WidgetRoleButtons'
+import FsButtons from '../components/FsButtons'
 import WidgetAllExhibitorsAvatarlist from '../compositions/WidgetAllExhibitorsAvatarlist'
 import Layout from '../layouts/main'
 
@@ -33,7 +33,7 @@ class PageError extends React.Component {
 
         <WidgetVisitor label="visitors.register" first />
 
-        <WidgetRoleButtons />
+        <FsButtons />
 
         <WidgetAllExhibitorsAvatarlist label="exhibitors.list_full" />
 
