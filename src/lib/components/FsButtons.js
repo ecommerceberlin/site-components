@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import RawTranslatedText from './RawTranslatedText'
-
+import Router from 'next/router'
 
 const styles = theme => ({
   root: {
@@ -83,13 +83,18 @@ const styles = theme => ({
   },
 });
 
+const scrollTo = (to) => {
+  if(typeof window !== 'undefined'){
+    Router.push(to).then(() => window.scrollTo(0, 0))
+  }
+}
 
 function FsButtons(props) {
   const { classes, items } = props;
 
   return (
     <div className={classes.root}>
-      {items.map(({label, url, width, onClick}) => (
+      {items.map(({label, url, width, target}) => (
         <ButtonBase
           focusRipple
           key={label}
@@ -98,7 +103,7 @@ function FsButtons(props) {
           style={{
             width: width,
           }}
-          onClick={onClick}
+          onClick={() => scrollTo(target)}
         >
           <span
             className={classes.imageSrc}
@@ -125,11 +130,26 @@ function FsButtons(props) {
 }
 
 FsButtons.defaultProps = {
-  items : []
+  items : [
+    {
+      url: 'https://static.eventjuicer.com/photos/12961446_1288640741145929_7684227399478032531_o.jpg',
+      label: 'common.visitor',
+      width: '50%',
+      target : "/visit"
+    },
+    {
+      url: 'https://static.eventjuicer.com/photos/12967348_1288628734480463_3860331543127036065_o.jpg',
+      label: 'common.exhibitor',
+      width: '50%',
+      target : "/exhibit"
+    },
+  ]
+
 }
 
 FsButtons.propTypes = {
   classes: PropTypes.object.isRequired,
+  items : PropTypes.array.isRequired
 };
 
 export default withStyles(styles)(FsButtons);
