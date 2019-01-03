@@ -6,6 +6,7 @@ const LRUCache = require('lru-cache');
 //const querystring = require('query-string');
 const fetch = require('isomorphic-unfetch');
 //const _keyBy = require('lodash/keyBy');
+const i18n = require('./i18n');
 
 export default function(options){
 
@@ -14,8 +15,12 @@ if(!options){
   options = {}
 }
 
+let available_locales = ["pl", "en", "de"]
 
-const i18n = require('./i18n');
+if("available_locales" in options && Array.isArray(options.available_locales)){
+  available_locales = options.available_locales;
+}
+
 const defaultLocale = "en";
 const cachableUtmContent = ["logotype,pl", "logotype,en", "opengraph_image"];
 
@@ -151,7 +156,7 @@ const handle = app.getRequestHandler();
 
       const {locale} = req.session
 
-      const browserLocale = req.acceptsLanguages('pl','de','en')
+      const browserLocale = req.acceptsLanguages(...available_locales)
 
       const resolvedLocale = locale || lang || browserLocale || defaultLocale;
       

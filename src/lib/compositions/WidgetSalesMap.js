@@ -3,23 +3,15 @@ import Bookingmap from '../components/Bookingmap/Bookingmap'
 import OrderSteps from '../components/Bookingmap/OrderSteps'
 import Legend from '../components/Bookingmap/Legend'
 import Wrapper from '../components/Wrapper'
+import Settings from '../datasources/Settings';
 
+const WidgetSalesMap = ({allowedGroupIds, steps, ...rest}) => (
 
-const steps = [
-    "choose_booth",
-    "confirm",
-    "pay",
-    "access"
-  ]
-
-  
-const WidgetSalesMap = (props) => (
-
-    <Wrapper {...props}>
+    <Wrapper {...rest}>
     <div>
         <div>
             <OrderSteps items={steps} active={0} />
-            <Legend allowedGroupIds={ [264,265,266,267] } />
+            <Legend allowedGroupIds={allowedGroupIds} />
         </div>
  
         <Bookingmap />
@@ -29,5 +21,14 @@ const WidgetSalesMap = (props) => (
 
 )
 
+WidgetSalesMap.defaultProps = {
+    allowedGroupIds : [264,265,266,267],
+    steps : [
+        "choose_booth",
+        "confirm",
+        "pay",
+        "access"
+    ]
+}
 
 export default WidgetSalesMap

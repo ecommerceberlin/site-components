@@ -1,65 +1,125 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-// import PlayArrowIcon from 'material-ui/icons/PlayArrow';
-
-import compose from 'recompose/compose';
-import translate from '../i18n/translate';
-import Card from '../components/MyCardSlim';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import RawTranslatedText from '../components/RawTranslatedText'
+//import classNames from 'classnames'
+//import PlayArrowIcon from 'material-ui/icons/PlayArrow';
 import Chatlio from '../services/Chatlio';
 
+import Settings from '../datasources/Settings';
+
 const styles = theme => ({
-  container: {
-    // maxWidth : 700
+  root: {
+   
+  },
+  
+  container : {
+    display : 'flex',
+    flexDirection : 'row',
+    marginBottom : 10
+  },
+ 
+  people : {
+    marginBottom : 10,
+  },
+  left : {
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  right : {
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   icon: {
     height: 38,
     width: 38
   },
+  personTeaser : {
+
+  },
   contactInfo : {
     fontWeight : 600
+  },
+  avatar : {
+    width : 120,
+    height : 120
+  },
+  avatarMultiple : {
+    width : 100,
+    height : 100
   }
 });
 
 const WidgetSupport = ({
   classes,
-  translate,
   title,
-  text,
-  name,
-  avatar,
-  phone,
-  email
+  description,
+  people
 }) => (
-  <div className={classes.container}>
-    <Card
-      primary={false}
-      title={translate(title)}
-      text={
-        <div>
-          <p>{translate(text, { person: name })}<br/>
-          <span className={classes.contactInfo}>
-          {email} {phone}  
-          </span></p>
+  <Settings name="support">
+  {({title, description, people}) => (
+    <div className={classes.root}>
+  
+    <Typography variant="headline">
+      <RawTranslatedText label={title} />
+    </Typography>
+    <Typography variant="subheading" color="textSecondary">
+      <RawTranslatedText label={description} />
+    </Typography>
+  
+    <div className={classes.people}>
+   
+    {people.map(({name, position, langs, avatar, phone, email, chatlio}, i) => (
+      
+      <div key={name} className={classes.container}>
+        <div className={classes.left}>
+          <Avatar
+            //alt={opinion.person}
+            src={avatar}
+            className={people.length > 1 ? classes.avatarMultiple : classes.avatar}
+          />
         </div>
-      }
-      imageSrc={avatar}
-      link={<Chatlio />}
-    />
-  </div>
+        <div className={classes.right}>
+        
+        <Typography variant="subheading" color="textSecondary">
+          {`${name} ${position}`}
+        </Typography>
+        <Typography variant="subheading" color="textSecondary">
+        {email}<br/>{phone}  
+        </Typography>
+  
+        {chatlio ? <Chatlio /> : null }
+  
+        </div>
+      </div>
+      
+      )
+    )}
+     </div>
+     
+    </div>
+  )}
+  </Settings>
 );
 
 WidgetSupport.defaultProps = {
-  title: 'event.support.hello',
-  text: 'event.support.description',
-  name: 'Adam Zygadlewicz',
-  avatar: '/static/support.jpg',
-  phone: '+48 721 945 134',
-  email: 'hello@targiehandlu.pl'
+
+  title : 'event.support.hello',
+  description: 'event.support.description',
+
+  people : [
+    {
+      name: '',
+      position : '',
+      langs : [],
+      avatar: '',
+      phone: '000-000-000',
+      email: 'email@domain.com',
+      chatlio : true
+    }
+  ]
+ 
 };
 
-const enhance = compose(
-  withStyles(styles),
-  translate
-);
-
-export default enhance(WidgetSupport);
+export default withStyles(styles)(WidgetSupport);
