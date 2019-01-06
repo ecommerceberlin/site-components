@@ -108,7 +108,7 @@ function MyAppBar(props) {
 
 MyAppBar.defaultProps = {
   position: '',
-  event_name : `${process.env.EVENT_NAME}`
+  event_name : "event name"
 };
 
 MyAppBar.propTypes = {
