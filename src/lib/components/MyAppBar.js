@@ -81,10 +81,13 @@ function MyAppBar(props) {
               className={classes.flex}
             >
         
+        <Settings name="common">{
+          ({event_name}) => (
         <RawTranslatedText 
           pl={event_name}
           en={event_name}
         />
+        )}</Settings>
 
             </Typography>
           </Link>
