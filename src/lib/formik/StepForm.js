@@ -97,7 +97,9 @@ const StepForm = props => {
 };
 
 StepForm.defaultProps = {
-  url: `${process.env.API_PUBLIC}/register`
+  api: "https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/register",
+  template : 'ecommerceberlin-visitor-registration',
+  ticketId : 0
 };
 
 export default withFormik(StepForm);

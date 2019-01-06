@@ -45,7 +45,7 @@ export default withFormik({
   handleSubmit: (payload, { props, setSubmitting, setErrors, setStatus }) => {
     setSubmitting(true);
 
-    fetch(`${process.env.API_PUBLIC}/register`, {
+    fetch(props.api, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export default withFormik({
       body: JSON.stringify({
         fields: payload,
         tickets: { [props.ticketId]: 1 },
-        template : `${VISITOR_EMAIL_TEMPLATE}`
+        template : props.template
       })
     })
       .then(response => {
