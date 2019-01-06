@@ -3,11 +3,8 @@ import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import classNames from 'classnames'
 import Button from '@material-ui/core/Button';
-
-import {translate, availableLocales} from '../i18n'
-
+import {translate} from '../i18n'
 import Language from '@material-ui/icons/Language';
-
 import { withStyles } from '@material-ui/core/styles';
 
 import {
@@ -35,13 +32,13 @@ const styles = theme => ({
 });
 
 
-const LanguageSelect = ({ label, classes, locale, oldLocale, dialogShow, dialogHide, changeLocale, translate }) => (
+const LanguageSelect = ({ label, classes, locale, locales, oldLocale, dialogShow, dialogHide, changeLocale, translate }) => (
   <Button
   //  variant="outlined"
     onClick={() => dialogShow({
         title: translate(label),
         content: <div style={{marginTop: 40}}>{
-          availableLocales.map( loc => {
+          locales.map( loc => {
             return <LanguageButton key={loc} target={loc} />
           })
         }</div>,
@@ -57,6 +54,7 @@ const LanguageSelect = ({ label, classes, locale, oldLocale, dialogShow, dialogH
 
 
 LanguageSelect.defaultProps = {
+  locales : ["en"],
   label: 'common.language.change'
 };
 

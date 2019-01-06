@@ -19,6 +19,7 @@ import LanguageSelect from './LanguageSelect';
 // import Search from './Search';
 
 import RawTranslatedText from './RawTranslatedText'
+import Settings from '../datasources/Settings';
 
 import {
   drawerShow as drawerShowAction,
@@ -89,8 +90,11 @@ function MyAppBar(props) {
           </Link>
 
           {/* <Search /> */}
-
-          <LanguageSelect />
+          
+          <Settings name="system">{
+          ({available_locales}) => (<LanguageSelect locales={available_locales} />)
+          }</Settings>
+          
 
           {noItems > 0 ? <Cart count={noItems} /> : null}
         </Toolbar>
