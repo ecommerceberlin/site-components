@@ -57,7 +57,7 @@ const WidgetSupport = ({
   description,
   people
 }) => (
-  <Settings name="support">
+  <Settings name="sales_support">
   {({title, description, people}) => (
     <div className={classes.root}>
   

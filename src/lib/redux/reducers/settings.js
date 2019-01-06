@@ -12,10 +12,13 @@ export const initialState = {
     },
     visitor : {},
     common : {},
-    support : {
+    sales_support : {
         title : '',
         description: '',
         people : []
+    },
+    customer_support : {
+        
     },
     rolebuttons : [],
     schedule : {
