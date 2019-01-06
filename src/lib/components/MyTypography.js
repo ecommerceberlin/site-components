@@ -19,7 +19,7 @@ const styles = theme => ({
   h2: {
     fontSize: '3.5rem',
     textTransform: 'uppercase',
-    fontWeight: 900,
+    fontWeight: 300,
     marginBottom: '3rem',
 
     [theme.breakpoints.down('sm')]: {

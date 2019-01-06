@@ -1,5 +1,11 @@
 
 export const initialState = {
+    bookingmap : {
+        height : 750
+    },
+    reviews : {
+        
+    },
     hero : {},
     ui : {
         menuItems : []

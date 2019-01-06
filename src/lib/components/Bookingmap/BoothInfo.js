@@ -63,7 +63,7 @@ const BoothInfo = ({ formdata, classes, ...rest}) => {
       return (
         <BoothInfoContainer 
         header={
-          <Legend allowedGroupIds={ [264,265,266,267] } />
+          <Legend />
         } 
         {...rest} />
       )
@@ -73,7 +73,7 @@ const BoothInfo = ({ formdata, classes, ...rest}) => {
 
       <BoothInfoContainer 
       header={
-        <Legend allowedGroupIds={ [264,265,266,267] } />
+        <Legend />
       }
       content={
         <React.Fragment>   
