@@ -10,18 +10,17 @@ const i18n = require('./i18n');
 
 export default function(options){
 
-
-if(!options){
+if(!options || new Object(options) !== options){
   options = {}
 }
 
-let available_locales = ["pl", "en", "de"]
+const {
+  available_locales, 
+  default_locale, 
+  api,
+  lang_api_endpoint
+} = options.system;
 
-if("available_locales" in options && Array.isArray(options.available_locales)){
-  available_locales = options.available_locales;
-}
-
-const defaultLocale = "en";
 const cachableUtmContent = ["logotype,pl", "logotype,en", "opengraph_image"];
 
 const ssrCache = new LRUCache({
@@ -29,17 +28,14 @@ const ssrCache = new LRUCache({
   maxAge: 1000 * 60 * 60 // 1hour
 });
 
-
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dir: '.', dev });
 const handle = app.getRequestHandler();
 
 
-
-
   async function fetchFromApiEndpoint(endpoint) {
-    const _res = await fetch(`${process.env.API_PUBLIC}/${endpoint}`);
+    const _res = await fetch(`${api}/${endpoint}`);
     const res = await _res.json();
     return res;
   }
@@ -69,7 +65,7 @@ const handle = app.getRequestHandler();
   
     //handle utm_content to cache separately....
   
-    return `${getPathName(req)}_${(locale || defaultLocale)}_${utm_content}`;
+    return `${getPathName(req)}_${(locale || default_locale)}_${utm_content}`;
   
   }
   
@@ -79,7 +75,7 @@ const handle = app.getRequestHandler();
   
     if ('purge' in req.query) {
       
-      ["en","pl","de"].forEach(function(l, index, arr){
+      available_locales.forEach(function(l, index, arr){
   
         if(utm_content){
           cachableUtmContent.forEach( v => ssrCache.del(getCacheKey(req, l, utm_content)) )
@@ -152,13 +148,13 @@ const handle = app.getRequestHandler();
 
       const {lang} = req.query
 
-      const texts = await i18n.getTexts(options.lang_api_endpoint, ssrCache, 'purge' in req.query);
+      const texts = await i18n.getTexts(lang_api_endpoint, ssrCache, 'purge' in req.query);
 
       const {locale} = req.session
 
       const browserLocale = req.acceptsLanguages(...available_locales)
 
-      const resolvedLocale = locale || lang || browserLocale || defaultLocale;
+      const resolvedLocale = locale || lang || browserLocale || default_locale;
       
     //  console.log("resolved", resolvedLocale)
 
@@ -230,16 +226,19 @@ const handle = app.getRequestHandler();
 
     // Serve the item webpage with next.js as the renderer
     server.get('/setup', async (req, res) => {
-      const texts = await i18n.getTexts(options.lang_api_endpoint, ssrCache, 'purge' in req.query);
+      const texts = await i18n.getTexts(lang_api_endpoint, ssrCache, 'purge' in req.query);
       app.render(req, res, '/setup', { texts });
     });
 
     // When rendering client-side, we will request the same data from this route
     server.get('/_data/texts', async (req, res) => {
-      const texts = await i18n.getTexts(options.lang_api_endpoint, ssrCache);
+      const texts = await i18n.getTexts(lang_api_endpoint, ssrCache);
       res.json(texts);
     });
 
+    server.get('/_data/settings', (req, res) => {
+      res.json(options);
+    });
     
     // server.get('/:lang([a-z]{2}|)', (req, res) => {
     //   renderAndCache(req, res, '/', {});

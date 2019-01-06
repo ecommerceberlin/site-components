@@ -45,13 +45,13 @@ const WidgetVideoWithEventInfo = ({ classes, locale, template, event_name, event
       <div className={classes.eventinfo}>
       
       <Settings name="common">{
-        ({event_name, event_date}) => (
+        ({event_location, event_date}) => (
         <EventInfo
             items={[
             {
               icon: 'location',
               secondary: 'event.location',
-              primary: event_name
+              primary: event_location
             },{
               icon: 'date',
               secondary: 'event.date',
