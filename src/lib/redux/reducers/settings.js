@@ -1,5 +1,11 @@
 
 export const initialState = {
+    hero : {},
+    ui : {
+        menuItems : []
+    },
+    visitor : {},
+    common : {},
     support : {
         title : '',
         description: '',

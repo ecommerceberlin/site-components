@@ -5,7 +5,7 @@ import translate from '../i18n/translate'
 import FsVideo from '../components/FsVideo'
 import MyTypography from '../components/MyTypography'
 import EventInfo from '../components/EventInfo'
-
+import Settings from '../datasources/Settings';
 
 const styles = theme => ({
   container: {
@@ -26,11 +26,15 @@ const styles = theme => ({
 
 const WidgetVideoWithEventInfo = ({ classes, locale, template, event_name, event_date, background, videoSrc, overlay }) => (
 
-  <FsVideo
+  <Settings name="hero">{
+
+    ({videoSrc, background, overlay, template}) => (
+  
+    <FsVideo
     background={background}
     videoSrc={videoSrc}
     overlay={overlay}
-  >
+    >
 
     <div className={classes.container}>
 
@@ -39,39 +43,46 @@ const WidgetVideoWithEventInfo = ({ classes, locale, template, event_name, event
       <MyTypography template="subhero" label="event.description" />
 
       <div className={classes.eventinfo}>
-
-      <EventInfo
-        items={[
-          {
-            icon: 'location',
-            secondary: 'event.location',
-            primary: event_name
-          },{
-            icon: 'date',
-            secondary: 'event.date',
-            primary: event_date
-          }
-        ]}
-        primaryStyle="heroPrimary"
-        secondaryStyle="heroSecondary"
-        iconStyle="heroIcon"
-        orientation="v"
-      />
+      
+      <Settings name="common">{
+        ({event_name, event_date}) => (
+        <EventInfo
+            items={[
+            {
+              icon: 'location',
+              secondary: 'event.location',
+              primary: event_name
+            },{
+              icon: 'date',
+              secondary: 'event.date',
+              primary: event_date
+            }
+            ]}
+            primaryStyle="heroPrimary"
+            secondaryStyle="heroSecondary"
+            iconStyle="heroIcon"
+            orientation="v"
+        />
+        )
+      }</Settings>
+      
 
       </div>
     </div>
 
   </FsVideo>
+    )
+  }
+  
+  </Settings>
 );
 
 
 WidgetVideoWithEventInfo.defaultProps = {
-  background : 'https://res.cloudinary.com/eventjuicer/image/upload/v1534542530/poster_presenter_blak.jpg',
-  videoSrc : 'https://res.cloudinary.com/eventjuicer/video/upload/v1534454501/video_presenter_blak.mp4',
-  overlay : "red",
-  event_name : `${process.env.EVENT_NAME}`,
-  event_date : `${process.env.EVENT_DATE}`,
-  template : "hero"
+  // background : 'https://res.cloudinary.com/eventjuicer/image/upload/v1534542530/poster_presenter_blak.jpg',
+  // videoSrc : 'https://res.cloudinary.com/eventjuicer/video/upload/v1534454501/video_presenter_blak.mp4',
+  // overlay : "red",
+  // template : "hero"
 }
 
 const enhance = compose(
