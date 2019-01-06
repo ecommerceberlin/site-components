@@ -22,16 +22,14 @@ const WidgetVisitor = ({ classes, ...rest }) => (
 
   <Wrapper {...rest}>
 
+ <Settings name="visitor">{
+  
+({ticket_id, email_template, api, background}) => (
 
   <Grid container spacing={8} justify="space-between">
     <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
 
-      <Settings name="visitor">
-
-      {
-        
-        ({ticket_id, email_template, api, background}) => (
-
+     
         <StepForm
           data={{}}
           ticketId={ticket_id}
@@ -49,43 +47,21 @@ const WidgetVisitor = ({ classes, ...rest }) => (
         />
 
 
-      )}
-      </Settings>
+     
+    
      
     </Grid>
 
-    {/* <Grid item xs={10} sm={6} md={5} lg={3} xl={3}>
-      <EventInfo
-        items={[
-          {
-            icon: 'location',
-            label: 'event.location',
-            text: 'EXPO Kraków, Kraków'
-          },
-
-          {
-            icon: 'date',
-            label: 'event.date',
-            text: '17 kwietnia 2019'
-          },
-
-          {
-            icon: 'alarm',
-            label: 'event.hours',
-            text: '10:00-17:00'
-          }
-        ]}
-        orientation="v"
-      />
-    </Grid> */}
+  
 
     <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
 
-      <img src="/static/lanyard.jpg" className={classes.lanyard} />
+      <img src={background} className={classes.lanyard} />
 
     </Grid>
   </Grid>
 
+  )}</Settings>
 
   </Wrapper>
 
