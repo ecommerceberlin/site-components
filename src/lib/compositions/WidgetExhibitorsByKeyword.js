@@ -13,7 +13,7 @@ const WidgetExhibitorsByKeyword = ({keyword, ...rest}) => (
 
     <Wrapper {...rest}>
 
-    <Exhibitors keyword={keyword} sort={['profile.name']}>
+    <Exhibitors keyword={keyword} sort={['profile.name']} limit={1000} mobile={false}>
       {
         (all, keywords, filtered) =>
 
@@ -23,7 +23,7 @@ const WidgetExhibitorsByKeyword = ({keyword, ...rest}) => (
           <KeywordSelect keywords={keywords} selected={keyword} />
         </Centered>
 
-        <Avatarlist data={filtered} limit="200" mobile={false} />
+        <Avatarlist data={filtered} />
 
         <CompanyLocationMap data={filtered}>{
           (selected) =>  <div style={{marginTop: 30}}><Bookingmap selected={selected} /></div>
