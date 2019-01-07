@@ -43,7 +43,8 @@ class Chatlio extends React.PureComponent {
     }
 
     window._chatlio.configure({
-      titleColor: red[500]
+      titleColor: '#ffd700',
+      titleFontColor : "#000000",
     });
   }
 

@@ -1,51 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-//import CardMedia from '@material-ui/core/CardMedia';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardActions from '@material-ui/core/CardActions';
+
 import Hidden from '@material-ui/core/Hidden';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 import compose from 'recompose/compose';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/icons/ArrowForwardIos';
 
 
 import Avatar from './MyAvatar';
 import Typography from './MyTypography';
-import { MyLink } from '../next';
 import { generateLinkParams } from '../helpers';
-import SubPageLink from './SubPageLink';
+import Router from 'next/router'
 
+
+const scrollTo = (to, as = null) => {
+  if(typeof window !== 'undefined'){
+    Router.push(to, as).then(() => window.scrollTo(0, 0))
+  }
+}
 
 const styles = {
-  avatarContainer: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
 
-  card: {
+  root: {
     width: '100%',
     maxWidth: 400
   },
 
+  images: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection : 'column',
+  },
+
   logotype : {
-    height : 100,
+    marginTop: 10,
+    height : 80,
+    width : '100%',
     display : 'block',
-    backgroundSize : '70%',
+    backgroundSize : '50%',
     backgroundPosition : 'center',
     backgroundRepeat : 'no-repeat'
   },
 
-  cardMobile: {},
+  details : {
+    marginTop: 10,
+    display: 'flex',
+  },
 
-  // media: {
-  //   height: 200,
-  // },
+  data :{
+    paddingLeft : 25,
+  },
 
   bio: {
-    marginTop: 10
+    marginTop: 10,
   }
 };
 
@@ -60,49 +70,41 @@ const Person = ({
   link,
   id
 }) => {
+
   const linkParams = generateLinkParams(title, 'speaker', id);
 
   return (
-    <Card className={classes.card} elevation={0}>
-      <CardHeader
-        avatar={
-        
-        <div>
-        
-         <Avatar alt="" src={avatar} link={linkParams.as} />
-         <div 
-          className={classes.logotype } 
-          style={{
-            backgroundImage : `url(${logotype})`
-          }} />
+    <div className={classes.root}>
 
-        </div>
-         }
-        // title="test"
-        // subheader="srest"
-        className={classes.avatarContainer}
-      />
+      <div className={classes.images}>
+        
+        <Avatar alt="" src={avatar} link={linkParams.as} />
 
-      <CardContent>
+        <div 
+         className={classes.logotype } 
+         style={{
+           backgroundImage : `url(${logotype})`
+         }} />
+
+      </div>
+
+      <div className={classes.details}>
+        
+        <div className={classes.data}>
         <Typography template="presenter1">{title}</Typography>
-
         {subtitle && <Typography template="presenter2">{subtitle}</Typography>}
-
-
-     
-
         <Hidden smDown implementation="css">
           {text && <Typography template="presenterText">{text}</Typography>}
         </Hidden>
-      </CardContent>
+        </div>
 
+        <div>
+          {link &&  <IconButton onClick={() => scrollTo(linkParams.href, linkParams.as)}><Icon /></IconButton>}   
+        </div>
 
-      {link && (
-        <CardActions>
-          <MyLink {...linkParams} label="common.more" />
-        </CardActions>
-      )}
-    </Card>
+      </div>
+     
+    </div>
   );
 };
 

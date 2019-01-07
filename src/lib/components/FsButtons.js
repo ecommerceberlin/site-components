@@ -29,7 +29,7 @@ const styles = theme => ({
         opacity: 0,
       },
       '& $imageTitle': {
-        border: '4px solid gold',
+        border: '4px solid #ffffff',
       },
     },
   },
@@ -43,8 +43,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-   // color: theme.palette.common.white,
-    color : "gold"
+    color: theme.palette.common.white,
   },
   imageSrc: {
     position: 'absolute',
@@ -74,8 +73,7 @@ const styles = theme => ({
   imageMarked: {
     height: 3,
     width: 18,
-    //backgroundColor: theme.palette.common.white,
-    backgroundColor : "gold",
+    backgroundColor: theme.palette.common.white,
     position: 'absolute',
     bottom: -2,
     left: 'calc(50% - 9px)',
@@ -83,7 +81,7 @@ const styles = theme => ({
   },
 });
 
-const scrollTo = (to) => {
+const scrollTo = (to, as) => {
   if(typeof window !== 'undefined'){
     Router.push(to).then(() => window.scrollTo(0, 0))
   }
