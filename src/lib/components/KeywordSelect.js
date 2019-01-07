@@ -26,7 +26,8 @@ const KeywordSelect = ({ keywords, selected, classes }) => {
      <Link
        prefetch={false}
        key={keyword}
-       href={`/exhibitors/${keyword}`}
+       href={`/exhibitors-by-keyword?keyword=${keyword}`}
+       as={`/exhibitors/${keyword}`}
        label={`common.tags.${keyword}`}
        variant={keyword === selected ? "contained" : "outlined"}
        color={keyword === selected ? "primary" : "secondary"}
