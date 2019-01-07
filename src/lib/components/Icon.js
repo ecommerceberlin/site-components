@@ -36,6 +36,12 @@ const styles = theme => ({
     width: 30
   },
 
+  black: {
+    color: '#000000',
+    height: 30,
+    width: 30
+  },
+
   yellow: {
     color: "yellow",
     height: 80,
