@@ -20,7 +20,9 @@ export const initialState = {
     customer_support : {
 
     },
-    rolebuttons : [],
+    rolebuttons : {
+        items : [],
+    },
     schedule : {
         times : {},
         venues : {},

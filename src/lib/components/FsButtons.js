@@ -29,12 +29,9 @@ const styles = theme => ({
         opacity: 0,
       },
       '& $imageTitle': {
-        border: '4px solid currentColor',
+        border: '4px solid gold',
       },
     },
-
-    filter: 'grayscale(100%)'
-
   },
   focusVisible: {},
   imageButton: {
@@ -46,7 +43,8 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: theme.palette.common.white,
+   // color: theme.palette.common.white,
+    color : "gold"
   },
   imageSrc: {
     position: 'absolute',
@@ -56,6 +54,7 @@ const styles = theme => ({
     bottom: 0,
     backgroundSize: 'cover',
     backgroundPosition: 'center 40%',
+    filter: 'grayscale(100%)'
   },
   imageBackdrop: {
     position: 'absolute',
@@ -75,7 +74,8 @@ const styles = theme => ({
   imageMarked: {
     height: 3,
     width: 18,
-    backgroundColor: theme.palette.common.white,
+    //backgroundColor: theme.palette.common.white,
+    backgroundColor : "gold",
     position: 'absolute',
     bottom: -2,
     left: 'calc(50% - 9px)',
@@ -90,10 +90,10 @@ const scrollTo = (to) => {
 }
 
 function FsButtons(props) {
-  const { classes, items } = props;
+  const { classes, items, first } = props;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={ first ? {marginTop: 10} : {}}>
       {items.map(({label, url, width, target}) => (
         <ButtonBase
           focusRipple
@@ -130,6 +130,8 @@ function FsButtons(props) {
 }
 
 FsButtons.defaultProps = {
+  accent : "gold",
+  first : false,
   items : [
     {
       url: 'https://static.eventjuicer.com/photos/12961446_1288640741145929_7684227399478032531_o.jpg',
