@@ -57,6 +57,7 @@ const WidgetFooter = ({ links, classes, width, people}) => (
                       }
                     ]}
                     orientation="v"
+                    iconStyle="black"
                   />
                 )
             }
@@ -76,6 +77,7 @@ const WidgetFooter = ({ links, classes, width, people}) => (
                 organizer_regno
             }) => (
                 <EventInfo
+                
                 items={[
                   {
                     secondary: 'event.organizer.name',
