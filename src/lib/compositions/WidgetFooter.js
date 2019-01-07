@@ -106,7 +106,7 @@ const WidgetFooter = ({ links, classes, width, people}) => (
             }) => (
             <div style={{marginTop: 20, marginBottom : 20}}>
             <Grid container spacing={8} wrap="wrap" justify="space-around" alignItems="center">
-            {links.map(({label, href}) => (<Grid item><Link prefetch={false} href={href} label={label} /></Grid>))}        
+            {links.map(({label, href}) => (<Grid item key={label}><Link prefetch={false} href={href} label={label} /></Grid>))}        
             </Grid>
             </div>
             
