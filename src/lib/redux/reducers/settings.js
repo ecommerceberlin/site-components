@@ -18,14 +18,17 @@ export const initialState = {
         people : []
     },
     customer_support : {
-        
+
     },
     rolebuttons : [],
     schedule : {
         times : {},
         venues : {},
         venueStyle : ""
-    }
+    },
+    footer : {
+        links : []
+    },
 };
 
 const reducer = (state = initialState, action) => {

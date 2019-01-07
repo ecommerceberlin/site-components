@@ -39,7 +39,7 @@ const MyLink = ({
         variant={variant}
         color={color}
         disabled={disabled}
-        className={className}>
+        className={classes[className]}>
         {label ? translate(label) : name}
       </Button>
     </Link>

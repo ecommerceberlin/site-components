@@ -5,6 +5,7 @@ import Wrapper from '../components/Wrapper';
 import EventInfo from '../components/EventInfo';
 import WidgetSupport from './WidgetSupport';
 import Settings from '../datasources/Settings'
+import Link from '../next/MyLink'
 
 
 const styles = theme => ({
@@ -98,6 +99,20 @@ const WidgetFooter = ({ links, classes, width, people}) => (
          
         </Grid>
       </Grid>
+
+      <Settings name="footer">{
+            ({
+                links
+            }) => (
+            <div style={{marginTop: 20, marginBottom : 20}}>
+            <Grid container spacing={8} wrap="wrap" justify="space-around" alignItems="center">
+            {links.map(({label, href}) => (<Grid item><Link prefetch={false} href={href} label={label} /></Grid>))}        
+            </Grid>
+            </div>
+            
+            )
+      }</Settings>
+
     </Wrapper>
   </div>
 );
