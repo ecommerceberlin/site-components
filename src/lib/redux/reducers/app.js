@@ -10,12 +10,12 @@ import {
 
 import {VENUE_SELECT, VENUE_SELECT_RESET} from '../../components/Schedule/redux'
 
-import { CHANGE_LOCALE, DEFAULT_LOCALE } from '../../i18n';
+import { CHANGE_LOCALE } from '../../i18n';
 
 const defaultState = {
   role: '',
   cart: {},
-  locale: DEFAULT_LOCALE,
+  locale: "en",
   locale_msgs: {},
   width: 'md',
   filterParams: {

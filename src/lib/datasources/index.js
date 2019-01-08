@@ -6,4 +6,4 @@ export { default as DatasourcePhotos } from './Photos';
 export { default as DatasourceTickets } from './Tickets';
 export { default as DatasourceSingleRecord } from './SingleRecord';
 export { default as DatasourceOffers } from './Offers';
-export { default as Setttings } from './Settings';
+export { default as Settings } from './Settings';

@@ -14,6 +14,8 @@ import TicketDate from './TicketDate'
 import TicketPrice from './TicketPrice'
 import TicketBuyButton from './TicketBuyButton'
 
+import Settings from '../../datasources/Settings'
+
 import {
   cartItemAdd as cartItemAddAction,
   cartItemRemove as cartItemRemoveAction
@@ -66,11 +68,7 @@ class Ticket extends React.PureComponent {
     return _get(ticket, `names.${locale}`);
   }
 
-  getPostEndpointBasedOnLocale() {
-    const {locale} = this.props
-    return `${process.env.TEMP_PREORDER_URL}`
-    //return locale === "en" ? "https://ecommercewarsaw.com/preorder" : "https://stoiska.targiehandlu.pl/preorder";
-  }
+
 
   render() {
     const { ticket, classes, boothId, label, disabled } = this.props;
@@ -105,12 +103,19 @@ class Ticket extends React.PureComponent {
 
         <Grid item xs={12} sm={12} md={3}>
 
-          {ticket.bookable && !disabled ?
-          <form action={this.getPostEndpointBasedOnLocale()} method="post" target="_blank">
+        <Settings name="bookingmap">{
+        ({api}) => {
+          return ticket.bookable && !disabled ?
+          <form action={api} method="post" target="_blank">
           <input type="hidden" name={`tickets[${ticket.id}]`} value="1" />
           <input type="hidden" name={`ticketdata[${ticket.id}]`} value={JSON.stringify(formdata)} />
           <TicketBuyButton  />
-          </form> : <span></span>}
+          </form> : <span></span>
+        }}
+        </Settings>
+
+
+      
 
         </Grid>
     </Grid>

@@ -12,20 +12,17 @@ const styles = theme => ({
   },
 
   tile: {
-    height: 170,
-    backgroundSize: '50%',
+    height: 150,
+    backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     display: 'block',
     textIndent: -5000,
-    //  filter : 'grayscale(100%)'
-
-  //  border : '1px solid rgba(0, 0, 0, 0.23)',
-  //  borderRadius : 4,
+    marginLeft : '15%',
+    marginRight : '15%',
 
     [theme.breakpoints.down('sm')]: {
       maxHeight: 100,
-      backgroundSize: 'contain'
     }
 
 

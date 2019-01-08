@@ -21,7 +21,7 @@ export const generateLinkParams = (name, subpage, id) => ({
 });
 
 export const fullUrl = subpage => {
-  const prefix = 'https://targiehandlu.pl';
+  const prefix = `${process.env.PUBLIC_URL}`;
   if (subpage.substr(0, prefix.length) !== prefix) {
     return prefix + subpage;
   }
