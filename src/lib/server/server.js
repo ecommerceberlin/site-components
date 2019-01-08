@@ -179,7 +179,9 @@ const handle = app.getRequestHandler();
     // })
 
  
-
+    server.get('/recall/:token', (req, res) => {
+      res.redirect(`https://account.${req.headers.host}/#/login?token=${req.params.token}`)
+    })
 
     server.post('/remember', (req, res) => {
 
