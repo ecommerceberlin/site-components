@@ -86,7 +86,7 @@ MyHead.defaultProps = {
   description: '',
   descriptionLabel: 'event.opengraph.description',
 
-  image: fullUrl('/static/og_teh_default.png'),
+  image: "https://res.cloudinary.com/ecommerceberlin/image/upload/c_limit,w_1024/v1546943854/ebe_og_home.jpg",
   url: fullUrl('/')
 };
 

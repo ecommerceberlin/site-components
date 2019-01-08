@@ -37,10 +37,11 @@ const styles = {
 
   logotype : {
     marginTop: 10,
+    marginBottom : 10,
     height : 80,
-    width : '100%',
+    width : '50%',
     display : 'block',
-    backgroundSize : '50%',
+    backgroundSize : 'contain',
     backgroundPosition : 'center',
     backgroundRepeat : 'no-repeat'
   },
