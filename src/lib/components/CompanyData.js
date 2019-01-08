@@ -30,7 +30,7 @@ const getCompanyProfileSelector = createSelector(
       {name : "about"},
       {name : "products"},
       {name :  "expo"},
-      {name : "contact", sources : ["website", "twitter", "facebook", "linkedin"]}
+      {name : "contact", sources : ["website", "twitter", "facebook", "linkedin", "xing"]}
     ]
 
     return tabs.filter(({name, sources}) => (name in data.profile && data.profile[name].length > 50) || (sources && findSub(sources, data.profile))).map(({name, sources}) => ({name, value : sources ? findSub(sources, data.profile) : data.profile[name]}))
@@ -66,12 +66,24 @@ const styles = theme => ({
 class CompanyData extends React.Component {
 
   state = {
-    tab: typeof this.props.tabs[0] !== 'undefined' ? this.props.tabs[0].name : ""
+    tab: ""
   };
 
   handleChange = (event, tab) => {
     this.setState({ tab });
   };
+
+  static getDerivedStateFromProps(props, state){
+
+    const {tab} = state;
+    const {tabs} = props;
+
+    if(!tab && tabs.length && "name" in tabs[0]){
+      return {tab : tabs[0].name}
+    }
+
+    return null;
+  }
 
   render() {
 
