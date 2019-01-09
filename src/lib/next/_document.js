@@ -21,7 +21,7 @@ class MyDocument extends Document {
     const { pageContext, session } = this.props;
 
     return (
-      <html lang="en" dir="ltr" amp="">
+      <html lang="en" dir="ltr">
         <Head>
           
           <meta charSet="UTF-8" />
