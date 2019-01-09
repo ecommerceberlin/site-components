@@ -18,8 +18,8 @@ const styles = theme => ({
     backgroundPosition: 'center',
     display: 'block',
     textIndent: -5000,
-    marginLeft : '15%',
-    marginRight : '15%',
+    marginLeft : '20%',
+    marginRight : '20%',
 
     [theme.breakpoints.down('sm')]: {
       maxHeight: 100,
