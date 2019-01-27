@@ -7,6 +7,8 @@ import { MyTypography as Typography } from '../components';
 
 import FormSuccess from './FormSuccess';
 
+import { event } from '../services'; 
+
 /*
 dirty : false
 errors : {}
@@ -59,7 +61,29 @@ const StepForm = props => {
 
   const started = Object.keys(touched).length;
 
+
+  if (started) {
+
+    //handle GA event
+    event({
+      action : "registration_start", 
+      category : "visitors", 
+      label : "method",
+      value : ""
+    });
+
+  }
+
   if (status && status === 'ok') {
+
+    //handle GA event
+    event({
+        action : "registration_success", 
+        category : "visitors", 
+        label : "method",
+        value : ""
+    });
+
     return <FormSuccess />;
   }
 
@@ -69,8 +93,7 @@ const StepForm = props => {
     <form onSubmit={handleSubmit}>
       <Typography template="legend" label="visitors.form.intro" />
 
-      {start
-        ? start.map((name, idx) => (
+      {start ? start.map((name, idx) => (
             <TextInput
               key={idx}
               id={name}

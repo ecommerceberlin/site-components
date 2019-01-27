@@ -43,7 +43,7 @@ import {
 
 import * as Selectors from '../selectors';
 import {event} from '../../services/gtag'
-import {track} from '../../services/segment'
+
 
 let fetchTasks = {};
 
@@ -55,12 +55,7 @@ function* handleBoothCheck({payload}){
         //label,
         value : payload
   })
-
-  yield call(track, "booth_click", {
-    category : "ecommerce",
-    value : payload
-  })
-
+  
 }
 
 function* accumulateFetches({resource}) {

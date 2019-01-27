@@ -165,7 +165,7 @@ export const getCompanyOgImage = (company, url) => {
   return wrapImage(
     `c_${company.id}_logotype`, 
     version,
-    `template_4_${companyLang}`,
+    `ebe_template_${companyLang}`,
     undefined,
     'y_-30'
     );
