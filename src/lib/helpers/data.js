@@ -40,7 +40,7 @@ export const getInviteOgImage = (text = '') => {
   text = text.replace(',', ' ');
   text = text.replace('/', ' ');
 
-  return `https://res.cloudinary.com/ecommerceberlin/image/upload/w_0.9,c_scale,fl_relative,l_text:Helvetica_300_bold:${encodeURIComponent(
+  return `https://res.cloudinary.com/eventjuicer/image/upload/w_0.9,c_scale,fl_relative,l_text:Helvetica_300_bold:${encodeURIComponent(
     text
   )},g_north,y_40,co_rgb:FFFF00/v1524447135/template_visitor2.jpg`;
 };
@@ -56,7 +56,7 @@ export const getPresenterOgImage = (
     participant.id
   }_logotype,c_fit`;
 
-  return `https://res.cloudinary.com/ecommerceberlin/image/upload/${avatarTrans}/${logotypeTrans}/${template}.png`;
+  return `https://res.cloudinary.com/eventjuicer/image/upload/${avatarTrans}/${logotypeTrans}/${template}.png`;
 };
 
 
@@ -71,7 +71,7 @@ export const getPresenterFbAd = (
     participant.id
   }_logotype,c_fit`;
 
-  return `https://res.cloudinary.com/ecommerceberlin/image/upload/${avatarTrans}/${logotypeTrans}/${template}.png`;
+  return `https://res.cloudinary.com/eventjuicer/image/upload/${avatarTrans}/${logotypeTrans}/${template}.png`;
 };
 
 
@@ -132,7 +132,7 @@ export const wrapImage = (
   http://res.cloudinary.com/demo/image/upload/w_90,g_center/u_coffee_cup,w_400,h_250,c_fill,g_south/fl_layer_apply/nice_couple.jpg
   */
 
-  return `http://res.cloudinary.com/ecommerceberlin/image/upload/${params}/u_${baseImage},${baseImageParams}/${overlayImageVersion}/${overlayImage}.png`; 
+  return `http://res.cloudinary.com/eventjuicer/image/upload/${params}/u_${baseImage},${baseImageParams}/${overlayImageVersion}/${overlayImage}.jpg`; 
 
   //return `https://res.cloudinary.com/ecommerceberlin/image/upload/c_fit,l_${overlayImage},${params}/${overlayImageVersion}/${baseImage}.png`;
 };
@@ -155,6 +155,10 @@ export const getCompanyOgImage = (company, url) => {
     //temp solution!
     if(params.utm_content.indexOf(",en") > -1){
       companyLang = "en";
+    }
+
+    if(params.utm_content.indexOf(",de") > -1){
+      companyLang = "de";
     }
 
     if(params.utm_content.indexOf(",pl") > -1){
