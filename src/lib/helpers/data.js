@@ -47,7 +47,7 @@ export const getInviteOgImage = (text = '') => {
 
 export const getPresenterOgImage = (
   participant,
-  template = 'template_speaker_teh15_2'
+  template = 'ebe_template_en'
 ) => {
   const avatarTrans = `g_west,x_150,y_25,w_220,h_220,l_p_${
     participant.id

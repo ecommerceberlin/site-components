@@ -34,7 +34,7 @@ const WidgetPresenter = ({id, asPath, ...rest}) => (
             <React.Fragment>
 
             <Head
-            image={getPresenterOgImage(record, 'template_speaker_teh15_2')}
+            image={getPresenterOgImage(record, 'ebe_template_en')}
             url={asPath}
             titleLabel={['presenters.opengraph.title', { name : getSpeakerName(record) }]}
             descriptionLabel={[

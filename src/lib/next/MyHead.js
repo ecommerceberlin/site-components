@@ -39,7 +39,7 @@ const MyHead = ({
   //console.log(router.asPath);
 
   return (
-    
+
     <NextHead>
 
       <title>{tTitle}</title>
@@ -85,8 +85,7 @@ MyHead.defaultProps = {
   description: '',
   descriptionLabel: 'event.opengraph.description',
 
- // image: "", 
-  //"https://res.cloudinary.com/ecommerceberlin/image/upload/c_limit,w_1024/v1546943854/ebe_og_home.jpg",
+  image: "https://res.cloudinary.com/ecommerceberlin/image/upload/c_limit,w_1024/v1546943854/ebe_og_home.jpg",
   url: fullUrl('/')
 };
 
@@ -94,7 +93,7 @@ MyHead.propTypes = {
   //  title: string,
   description: string,
   url: string,
- // image: string
+  image: string
 };
 
 const enhance = compose(
