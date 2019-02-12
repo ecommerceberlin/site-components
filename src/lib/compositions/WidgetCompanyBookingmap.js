@@ -11,8 +11,9 @@ const WidgetCompanyBookingmap = ({ company, label }) => {
   const name = getCompanyProfileInfo(company, 'name');
   const purchases = get(company, 'instances');
   //const data = filterCompanyInstances(purchases, eventId);
-  const selectedBoothIds = map(purchases, 'formdata.id');
-  const selectedBoothNames = map(purchases, 'formdata.ti');
+
+  const selectedBoothIds = map(purchases, 'formdata.id').filter(v => v && v.length);
+  const selectedBoothNames = map(purchases, 'formdata.ti').filter(v => v && v.length);
 
   if(!selectedBoothIds.length)
   {
