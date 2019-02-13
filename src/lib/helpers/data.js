@@ -40,9 +40,9 @@ export const getInviteOgImage = (text = '') => {
   text = text.replace(',', ' ');
   text = text.replace('/', ' ');
 
-  return `https://res.cloudinary.com/eventjuicer/image/upload/w_0.9,c_scale,fl_relative,l_text:Helvetica_300_bold:${encodeURIComponent(
+  return `https://res.cloudinary.com/eventjuicer/image/upload/w_0.9,c_scale,fl_relative,l_text:Roboto_300_bold:${encodeURIComponent(
     text
-  )},g_north,y_40,co_rgb:FFFF00/v1524447135/template_visitor2.jpg`;
+  )},g_north,y_40,co_rgb:000000,f_auto/v1550097368/ebe_template_visitor.jpg`;
 };
 
 export const getPresenterOgImage = (

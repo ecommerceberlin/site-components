@@ -4,8 +4,9 @@ import compose from 'recompose/compose';
 import translate from '../i18n/translate'
 import FsVideo from '../components/FsVideo'
 import MyTypography from '../components/MyTypography'
-import EventInfo from '../components/EventInfo'
 import Settings from '../datasources/Settings';
+import WidgetEventInfo from './WidgetEventInfo'
+
 
 const styles = theme => ({
   container: {
@@ -44,28 +45,15 @@ const WidgetVideoWithEventInfo = ({ classes, locale, template, event_name, event
 
       <div className={classes.eventinfo}>
       
-      <Settings name="common">{
-        ({event_location, event_date}) => (
-        <EventInfo
-            items={[
-            {
-              icon: 'location',
-              secondary: 'event.location',
-              primary: event_location
-            },{
-              icon: 'date',
-              secondary: 'event.date',
-              primary: event_date
-            }
-            ]}
-            primaryStyle="heroPrimary"
-            secondaryStyle="heroSecondary"
-            iconStyle="heroIcon"
-            orientation="v"
-        />
-        )
-      }</Settings>
+      <WidgetEventInfo 
       
+        primaryStyle="heroPrimary"
+        secondaryStyle="heroSecondary"
+        iconStyle="heroIcon"
+        orientation="v"
+
+      />
+
 
       </div>
     </div>

@@ -6,7 +6,7 @@ import EventInfo from '../components/EventInfo';
 import WidgetSupport from './WidgetSupport';
 import Settings from '../datasources/Settings'
 import Link from '../next/MyLink'
-
+import WidgetEventInfo from './WidgetEventInfo'
 
 const styles = theme => ({
   container: {
@@ -26,44 +26,10 @@ const WidgetFooter = ({ links, classes, width, people}) => (
           <WidgetSupport people={people} />
         </Grid>
 
-        <Grid item xs={12} sm={6} md={5} lg={3} xl={3}>
+        <Grid item xs={12} sm={6} md={5} lg={3} xl={3}>        
         
-        <Settings name="common">
-        {
-            ({
-                event_location,
-                event_date,
-                event_hours
-            }) => {
-                return (
-                    <EventInfo
-                    items={[
-                      {
-                        icon: 'location',
-                        secondary: 'event.location',
-                        primary: event_location
-                      },
-        
-                      {
-                        icon: 'date',
-                        secondary: 'event.date',
-                        primary: event_date
-                      },
-        
-                      {
-                        icon: 'alarm',
-                        secondary: 'event.hours',
-                        primary: event_hours
-                      }
-                    ]}
-                    orientation="v"
-                    iconStyle="black"
-                  />
-                )
-            }
-        }
-        </Settings>
-         
+        <WidgetEventInfo />
+ 
         </Grid>
 
         <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>

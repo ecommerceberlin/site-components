@@ -18,7 +18,7 @@ const styles = theme => ({
     width: '100%',
     height: 'auto',
     margin: 20,
-    filter: 'grayscale(100%)',
+   // filter: 'grayscale(100%)',
 
     [theme.breakpoints.down('sm')]: {
       //    maxWidth : 300,
@@ -33,8 +33,8 @@ const Invite = ({ person, classes }) => {
         <Grid item md={5} sm={6} xs={12}>
           <div style={{ marginTop: 20 }}>
             <MyTypography template="subtitle">
-              {_get(person, 'fname')}, poinformuj Znajomych, że wybierasz się na
-              Targi! Może się spotkacie?
+              {_get(person, 'fname')}, 
+              let your friends know that you are going to E-commerce Berlin Expo! 
             </MyTypography>
 
             <Sharer url={`/invite,${person.id}`} />
@@ -44,7 +44,7 @@ const Invite = ({ person, classes }) => {
         <Grid item md={7} sm={6} xs={12}>
           <img
             src={getInviteOgImage(
-              `Będę. ${_get(person, 'fname', '')} z ${_get(person, 'cname2')}.`
+              `See You! ${_get(person, 'fname', '')} from ${_get(person, 'cname2')}.`
             )}
             alt=""
             className={classes.image}
