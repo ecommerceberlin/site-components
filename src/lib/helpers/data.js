@@ -42,7 +42,7 @@ export const getInviteOgImage = (text = '') => {
 
   return `https://res.cloudinary.com/eventjuicer/image/upload/w_0.9,c_scale,fl_relative,l_text:Roboto_300_bold:${encodeURIComponent(
     text
-  )},g_north,y_40,co_rgb:000000,f_auto/v1550100555/ebe_template_visitor.jpg`;
+  )},g_north,y_40,co_rgb:000000,f_auto/v1550158922/ebe_template_visitor.jpg`;
 };
 
 export const getPresenterOgImage = (
