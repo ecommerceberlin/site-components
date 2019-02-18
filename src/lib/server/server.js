@@ -183,6 +183,10 @@ const handle = app.getRequestHandler();
       res.redirect(`https://account.${req.headers.host}/#/login?token=${req.params.token}`)
     })
 
+    server.get('/v', (req, res) => {
+      res.redirect('/visit?utm_source=oldv&utm_medium=sms&utm_campaign=oldv')
+    })
+
     server.post('/remember', (req, res) => {
 
       req.session = {...req.session, ...(req.body || {})}
