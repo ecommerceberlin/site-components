@@ -1,6 +1,11 @@
 const fetch = require('isomorphic-unfetch');
+const defaultTranslations = require("./translation.json");
+
 
 async function getTexts(translationUrl, cache, purge) {
+
+  return defaultTranslations;
+
   if (purge) {
     cache.del(translationUrl);
   }
