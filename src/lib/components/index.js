@@ -29,6 +29,9 @@ export { default as Icon } from './Icon';
 export { default as CompanyData } from './CompanyData';
 export { default as CompanyLogotype } from './CompanyLogotype';
 
+export { default as FacebookVote } from './FacebookVote';
+
+
 export { default as Reviews } from './Reviews';
 export { default as WidthAwareInfo } from './WidthAwareInfo';
 

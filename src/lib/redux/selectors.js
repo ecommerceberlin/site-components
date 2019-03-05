@@ -30,6 +30,7 @@ export const getTicketGroups = state => state.resources.ticketgroups
 export const getBookingmap = state => state.resources.bookingmap
 export const getPhotos = state => state.resources.photos
 export const getExhibitors = (state, props) => state.resources.exhibitors
+export const getCompanies = (state, props) => state.resources.companies
 export const getPresenters = (state, props) => state.resources.presenters
 
 /*
@@ -82,6 +83,12 @@ export const FilteredExhibitors = createSelector(
   getExhibitors,
   getFilteringProps,
   (exhibitors, props) => processArrayData(exhibitors, props)
+)
+
+export const FilteredCompanies = createSelector(
+  getCompanies,
+  getFilteringProps,
+  (companies, props) => processArrayData(companies, props)
 )
 
 export const ExhbitorsWithOffer = createSelector(

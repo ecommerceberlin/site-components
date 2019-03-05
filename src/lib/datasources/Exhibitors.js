@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map, get } from 'lodash';
 import {connect} from 'react-redux'
 
 import {MobileAwareFilteredExhibitors, ExhibitorKeywordsSelector, FilteredByKeywordExhibitors} from '../redux/selectors'

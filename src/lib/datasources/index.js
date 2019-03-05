@@ -1,5 +1,6 @@
 
 export { default as DatasourceExhibitors } from './Exhibitors';
+export { default as DatasourceCompanies } from './Companies';
 export { default as DatasourcePresenters } from './Presenters';
 export { default as DatasourceVisitors } from './Visitors';
 export { default as DatasourcePhotos } from './Photos';

@@ -1,6 +1,11 @@
 import { DRAWER_SHOW, DRAWER_HIDE } from '../../components/redux/types';
 
-const reducer = (state = { chatlion: {} }, action) => {
+
+const defaultState = {
+  chatlio: {}
+}
+
+const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case DRAWER_SHOW:
       return true;

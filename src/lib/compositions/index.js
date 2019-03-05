@@ -3,8 +3,12 @@ export { default as WidgetVideoWithReviews } from './WidgetVideoWithReviews';
 export { default as WidgetVisitor } from './WidgetVisitor';
 export { default as WidgetCompanyBookingmap } from './WidgetCompanyBookingmap';
 export { default as WidgetFeaturedExhibitors } from './WidgetFeaturedExhibitors';
+export { default as WidgetFeaturedCompanies } from './WidgetFeaturedCompanies';
 export { default as WidgetAllExhibitorsAvatarlist } from './WidgetAllExhibitorsAvatarlist';
+
 export { default as WidgetAllExhibitorsColumnList } from './WidgetAllExhibitorsColumnList';
+export { default as WidgetExhibitorsColumnList } from './WidgetExhibitorsColumnList';
+
 export { default as WidgetSupport } from './WidgetSupport';
 export { default as WidgetCompany } from './WidgetCompany';
 export { default as WidgetPresenter } from './WidgetPresenter';
@@ -18,3 +22,5 @@ export { default as WidgetExhibitorsByKeyword } from './WidgetExhibitorsByKeywor
 export { default as WidgetRoleButtons } from './WidgetRoleButtons'
 export { default as WidgetFooter } from './WidgetFooter'
 export { default as WidgetEventInfo } from './WidgetEventInfo'
+
+export { default as WidgetFacebookVote } from './WidgetFacebookVote'

@@ -11,6 +11,7 @@ import app from './app';
 import visuals from './visuals';
 import services from './services';
 import settings from './settings';
+import social from './social';
 
 export default {
   app,
@@ -22,5 +23,6 @@ export default {
   resources,
   meta,
   drawer,
-  settings
+  settings,
+  social
 };

@@ -1,0 +1,1 @@
+export const FB_STATUS_CHANGE = 'FB_STATUS_CHANGE';

@@ -1,33 +1,38 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import { translate } from '../i18n';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import { facebookChangeStatus } from './redux'
 
 class Facebook extends React.Component {
-  componentDidMount() {
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: '<YOUR_APP_ID>',
-        cookie: true, // enable cookies to allow the server to access
-        // the session
-        xfbml: true, // parse social plugins on this page
-        version: 'v2.1' // use version 2.1
-      });
 
-      // Now that we've initialized the JavaScript SDK, we call
-      // FB.getLoginStatus().  This function gets the state of the
-      // person visiting this page and can return one of three states to
-      // the callback you provide.  They can be:
-      //
-      // 1. Logged into your app ('connected')
-      // 2. Logged into Facebook, but not your app ('not_authorized')
-      // 3. Not logged into Facebook and can't tell if they are logged into
-      //    your app or not.
-      //
-      // These three cases are handled in the callback function.
-      FB.getLoginStatus(
-        function(response) {
-          this.statusChangeCallback(response);
-        }.bind(this)
-      );
+  componentDidMount() {
+
+    const {appId, sdkLang} = this.props;
+
+    if (window.__FACEBOOK_SDK_LOADED__) {
+      return;
+    }
+
+    window.fbAsyncInit = function() {
+
+      console.log("__FACEBOOK_SDK_LOADED__")
+
+      window.__FACEBOOK_SDK_LOADED__ = true;
+
+      window.FB.init({
+        appId      : appId,
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v3.2'
+      });
+        
+      window.FB.AppEvents.logPageView();   
+  
+      this.checkLoginState();
+
     }.bind(this);
 
     // Load the SDK asynchronously
@@ -37,9 +42,11 @@ class Facebook extends React.Component {
       if (d.getElementById(id)) return;
       js = d.createElement(s);
       js.id = id;
-      js.src = '//connect.facebook.net/en_US/sdk.js';
+      js.src = `//connect.facebook.net/${sdkLang}/sdk.js`;
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
+
+
   }
 
   // Here we run a very simple test of the Graph API after login is
@@ -47,51 +54,54 @@ class Facebook extends React.Component {
   testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+      console.log('Successful login for: ' + response);
     });
   }
 
-  // This is called with the results from from FB.getLoginStatus().
-  statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      this.testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML =
-        'Please log ' + 'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML =
-        'Please log ' + 'into Facebook.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
+ 
   checkLoginState() {
-    FB.getLoginStatus(
-      function(response) {
-        this.statusChangeCallback(response);
-      }.bind(this)
-    );
+    const {facebookChangeStatus} = this.props;
+    window.FB.getLoginStatus( ({status}) => facebookChangeStatus(status) );
   }
 
-  handleClick() {
-    FB.login(this.checkLoginState());
+  handleClick = () => {
+
+    window.FB.login(() => this.checkLoginState());
+
+    this.testAPI();
   }
 
   render() {
-    return null;
+    const {translate} = this.props;
+    return (
+      <Button
+      variant="outlined"
+      onClick={() => this.handleClick()}
+      color="primary"
+    >
+      {translate('common.login.facebook')}
+    </Button>
+    )
   }
 }
+
+
+Facebook.propTypes = {
+  appId: PropTypes.array.isRequired,
+  // keywords: PropTypes.array.isRequired,
+  // keyword : PropTypes.string
+};
+
+Facebook.defaultProps = {
+  appId : '222959121587772',
+  sdkLang : 'en_US'
+}
+
+const enhance = compose(
+  connect(
+    (state, props) => ({facebook : state.services.facebook}),
+    {facebookChangeStatus}
+  ),
+  translate
+)
+export default enhance(Facebook)

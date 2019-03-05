@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import Companies from '../datasources/Companies'
+import Exhibitors from '../datasources/Exhibitors'
 import ColumnList from '../components/ColumnList'
 import KeywordSelect from '../components/KeywordSelect'
 import {Centered} from '../components/MyLayouts'
@@ -9,11 +9,11 @@ import MyTypography from '../components/MyTypography'
 import Wrapper from '../components/Wrapper'
  
 
-const WidgetAllExhibitorsColumnList = (props) => (
+const WidgetExhibitorsColumnList = (props) => (
 
     <Wrapper label="exhibitors.list_full" color="#ffffff" {...props}>
 
-    <Companies columns={true} sort='profile.name'>
+    <Exhibitors columns={true} sort='profile.name'>
       {(exhibitors, keywords) => 
         
     <React.Fragment>
@@ -37,16 +37,16 @@ const WidgetAllExhibitorsColumnList = (props) => (
     </React.Fragment>
       
        }
-    </Companies>
+    </Exhibitors>
 
     </Wrapper>
 
 
 )
 
-WidgetAllExhibitorsColumnList.defaultProps = {
+WidgetExhibitorsColumnList.defaultProps = {
 
 
 }
 
-export default WidgetAllExhibitorsColumnList
+export default WidgetExhibitorsColumnList
