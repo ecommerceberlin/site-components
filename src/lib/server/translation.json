@@ -1,1 +1,978 @@
-{"en":{"common":{"price":"Price","booths":"Booths","confirm":"Confirm","from":"z","chat":"Online chat","currencies":{"eur":"EUR","pln":"PLN"},"prices":{"net":"net","gross":"gross"},"faq":{"share":{"description":"Generate URL with chosen questions","link":"Generate"}},"tags":{"logistics":"Logistics","payment":"Payment","platform":"E-shop platform","sales_generation":"Sales generation","software":"Software","communication":"Communication","customer_support":"Customer support","analytics":"Analitycs","international_sales":"International sales","omnichannel":"Omnichannel","stages":{"a":"Stage A","b":"Stage B","c":"Stage C","d":"Stage D"},"infrastructure":"Infrastructure"},"more":"more","errors":{"http404":"Page not found","http500":"Something went wrong"},"map":"Exhibition map","share":{"facebook":"Share on Facebook","twitter":"Share on Twitter","linkedin":"Share on LinkedIn"},"menu":{"visitors":{"title":"Participant \/ Visitors","visit":"Free registration","registered":"See who's coming","agenda":"Speakers and topics","schedule":"Presentation topics","presenters":"List of speakers","exhibitors":"Complete list of exhibitors","specials":"Special offers","location":"STATION Berlin","offers":"Exhibitors' offers"},"exhibitors":{"title":"Exhibitor","exhibitors":"List of exhibitors","exhibit":"Book exhibition space","faq":"Practical information","location":"Location"},"general":{"title":"General","home":"Home"}},"locales":{"en":"English","de":"German","pl":"Polish"},"close":"Close","language":{"change":"Change current language"},"pcs":"items","remaining":"remaining","buy":"Buy now","days":"days","visitor":"Visitor","exhibitor":"Exhibitor","coming_soon":"Coming soon","details":"Details","booth_location":"Exhibitor profile","hours":"hour(s)","minutes":"minutes","stage-patrons":"Stage Patrons\n","stage":"Stage","pages":{"imprint":"Imprint","cookies":"How we use Cookies"}},"event":{"gallery":"Expo from the inside","opengraph":{"name":"E-commerce Berlin Expo | Berlin | Feb 20, 2019","description":"Entire e-commerce world in one place"},"date":"Event date","location":"Location","hours":"Duration","organizer":{"name":"Organizer","address":"Legal address","registration":"TIN"},"support":{"hello":"Support","description":"Feel free to contact us regarding our offer. Regards!"},"sales":{"support":"Do you need support?","booths":{"sold":"Sold out","hold":"Reserved. Waiting for payment","available":"Available","free":"This exhibition space is available","owner":"This exhibition space belongs to:"},"pool":{"start":"Start of sales","name":"Name of the sales pool","price":"Price in this sales pool","end":"This sales pool ends on","info":"Exhibition space is sold in tranches. Reserve now to get an optimal location and a lower price.","legend":"You can choose from the following exhibition space categories - Grand, Hot, Standard, Superhot. See the current prices by clicking on the stands in the map below (the darker the color, the better the location and the higher the price)."},"steps":{"choose_booth":"Choose exhibition space (click on the map)","confirm":"Confirm order","pay":"Payment","access":"Access exhibitor's account"}},"claim":"Join over 5000 participants","description":"B2B Expo & Conference for e-commerce service providers","parties":"150 exhibitors, 40 speakers and networking among more than 5000 participants"},"exhibitors":{"map":{"title":"Book a stand","opensales":"Buy exhibition space and meet the visitors","title2":"Become an Exhibitor"},"list_featured":"Featured Exhibitors","booth_location":"Booth %{loc} |||| Booth %{loc}","booth_location_full":"Location %{cname2}: %{loc} |||| Location %{cname2}: %{loc}","list_full":"All Exhibitors","premium":{"title":"Premium offer","presentation":"Presentation slot in the prime time and on the selected stage","networking":{"name":"Networking Zone Partner","area":"150sq m in the central part of the hall, at the intersection of the most important communication routes","arrangement":"Arrangement by a professional external company that cares about the smallest detail","attractions":"Attractions for Fair participants: DJ (chill-out, down-tempo, 80's music), coffee point","branding":"Full-color branding of the central element, branding of seat cubes (30 pieces)","fullservice":"Full Service - we coordinate ALL activities"},"contact":{"title":"Booking, more information","description":"I will gladly provide you with additional information and present a price offer. Feel free to contact me."}},"faq":{"before_event":{"name":"Before the Fair","representatives":{"q":"What is the maximum number of company representatives on the stand?","a":"The number of representatives at your booth is arbitrary, but remember that in the package you have includes only 4 vouchers for lunch (unless you have bought additional vouchers)."},"additional_paid_services":{"q":"Are there any upgrade options or additional services one can order?","a":"Additional services include increasing the power of the current electricity connection (up to 6kW), a greater number of welcome packs for the Exhibitors representatives, floor carpeting, renting selected equipment (f.e. TV screen), more furniture or a comprehensive arrangement of the exhibition space including full print back wall and a counter."},"shipping_of_materials":{"q":"Can I send materials to the Fair location?","a":"Yes. You will find more detailed information on the Exhibitor's Profile."},"standard_offering":{"q":"What is the size of my stand and what is included in the package?","a":"Except for the Grand stands (6m x 3m), all stand stand sizes are 3x3m. If you have not ordered additional services, the package includes 4 stools, 2 tables, 4 lunch vouchers, access to power (300W) and WIFI."},"how_to_promote":{"q":"How to plan participation in the Fair to get as many new customers as possible?","a":"Try to communicate to as many people as possible that your company will be present at the Fair to get new contacts. Invite your partners and people related to your business to the Fair. Use promotional materials that you can find in your Exhibitor Profile. Do not forget to share your profile on social media and invite registered participants to a meeting during the event.\n"},"promo_benefits":{"q":"What are the benefits of promotion of my participation?","a":"In addition to the obvious advantages like establishing business relationships and concluding new deals, you have the chance to win some interesting prizes. Familiarize yourself with the details in your Exhibitor Panel in the 'Awards' tab. The main prize is the ability to conduct a presentation at the event!"},"public_profile":{"q":"How to benefit from public Exhibitors' Profile?","a":"Public Exhibitors' Profile is a dedicated web page and a showcase of your company, thanks to which you can stand out among the competition. Visitors browse the profile before deciding to meet during the Fair, which is why it is so important to complete all information."}},"event":{"name":"During the Fair","hours":{"q":"What time will the event take place?","a":"The Fair will be held from 10:00 to 17:00."},"welcoming":{"q":"Where should I go after entering the hall?","a":"When you get there, go to the Info point for Exhibitors located near registration. You will get all the necessary instructions on how to proceed. Our staff will take you straight to your stand."},"after_party":{"q":"Will there be a networking party?","a":"We invite you to our exclusive networking party on 19 February 2019 from 7pm - 11pm (night before the official expo. The E-commerce Germany Awards 2019 ceremony will take place at the networking party. You will be able to connect with all exhibitors personally and establish some new contacts.\n"},"assembly_caution":{"q":"When can I set up a stand?","a":"The stand can be set up on the assembly day, that is, the day before the event from 14:00 to 23:59 and on the day of the Expo, from 8:30 to 9:30. The Expo starts at 10:00 - prepare yourself to receive the first guests interested in the services of your company"},"catering":{"q":"Where can I collect lunch vouchers?","a":"They lunch vouchers will be waiting for you in the starter pack, which you will find at your booth on the day of the event."},"badges":{"q":"Do I have to print the badges?","a":"There is no need for that. The badges of your company's representatives will be waiting for you in the starter pack at your stand."},"parking_setupday":{"q":"Will it be possible to enter the parking lot on the day of the expo?","a":"Yes, on the eve of the event, all entrance gates will be open. "},"parking_eventday":{"q":"Where can I park my car during the expo?","a":"There is no dedicated parking area at the venue during the expo day.\n\nAlthough you can use a nearby car park, \"PARKHAUS GLEISDREIECK\".\n\nEntering Parkhaus Gleisdreieck: You can drive into the garage via Schöneberger Ufer, Luckenwalder Strasse or Köthener Brücke.\nHours of operation: Open daily from 6 a.m. to 10:00 p.m.\n\nFees for short-term parking:\nHourly: EUR 1.00\/hour\nDaily Pass: EUR 10.00"},"problems_equipment":{"q":"Who should I report to in case of problems with the equipment of the stand?","a":"All problems with stand equipment: chairs, tables, electricity access and the Internet should be reported to the info point for Exhibitors, which is located next to the registration.\n"},"problems_services":{"q":"What to do in case of any other problems?","a":"In the starter pack at your stand, you will find a list of the most important contact numbers. Our staff will help you with a solution to your problem."},"badge_scanner":{"q":"How do I get access to the visitor badge scanner?","a":"Access to the badge scanner application will only be obtained by taking the right place in the Ranking. You can find more details in your Exhibitor Profile under the 'Awards' tab."}},"after_event":{"name":"After the Fair","scans":{"q":"What should you do with the scanned badges?","a":"Contact details of scanned visitors will be available to all representatives of your company. You can easily export them to .xls or .csv files. Next, prepare a summary message of the meeting during the event and finish the negotiations with new contracts."},"next_booth_sales":{"q":"When will I be able to book a stand for the next edition?","a":"Sales for the next edition will start not later than one month after the end of the current one."}},"name":"Frequently asked (and answered) questions","become":{"name":"Ordering an exhibition space","included_services":{"a":"Our stand package includes:\n* Basic furniture (2 high tables and 4 high chairs)\n* Catering vouchers and badges for 4 representatives\n* WiFi\n* Electricity connection 300W\n* Logo placement on event registration page: company name & link\n* Dedicated exhibitor's online profile\n* Company name in the printed materials","q":"What is included in the exhibition space?"},"payment":{"a":"In general, companies are asked to pay for a reservation within 7 working days. ","q":"When should I pay for an exhibition space?"},"onboarding":{"a":"After paying for the exhibition space, you will get access to your Exhibitor Profile and we will also contact you regularly on logistical topics and the promotion of your participation.","q":"What is the next step after payment?"},"resignation":{"a":"The situation is settled depending on the time remaining until the Fair - if the resignation occurs later than 2 months prior the Fair, we will deduct 50% of the service fee. Usually, we try to transfer part of the fee to the next Fair.","q":"Force majeure - what if we cannot exhibit"},"promo_benefits":{"q":"How will we benefit from the trade fair BEFORE it happens?","a":"Having an access to the Exhibitors account, a company should immediately fill in data displayed in public profile. We will use company profile in our promotional activities. Exhibitors are encouraged to use our marketing tools to inform their clients about participation in our Event and also can browse registered visitors and try to schedule a meetup."}}},"list_by_keyword":"Exhibitors by industry","list":{"filter_title":"Filter exhibitors by industry"},"standard":{"electricity":"Electricity 230V - max 300W","catering":"Catering for representatives","space":"Exhibition space of 9 sqm (3m x 3m) or 16 sqm for Grand Stand (4m x 4m) open-space formula (without walls)","info":"Standard exhibition space offer includes","profile":"Company Profile","ids":"Badges for representatives","furniture":"Basic furniture (4 high stools, two tables)"},"benefits":{"title":"Why exhibit?","outreach":{"title":"Find new clients","description":"Prepare an attractive, special offer. Use our tool to schedule meetings with registered parties. Become a magnet for participants visiting the expo."},"all_inclusive":{"title":"No hidden costs","description":"Our standard offer is suitable for over 85% of the exhibiting companies. Basic furniture, catering vouchers, electricity is included in the core package. If you have an advertising wall for the back of the exhibition space you are ready to go! If you prefer a full-service option we offer an upgrade to have it designed by a professional company."},"feedback":{"title":"Get an honest feedback about your services and products","description":"One of the most underestimated benefits of exhibiting is face-to-face contact with a real person and an honest opinion and\/or feedback on your service or product. Small changes that you introduce to your products can have enormous significance for your business. This is not what an anonymous online feedback will give you."},"meet_clients":{"title":"Strengthen your relationships with existing clients","description":"The conference is a great chance to meet with companies that already use your products or services. Give your clients the opportunity to meet your time, gather feedback from them, present future company plans and the ways of developing your products and services. It will pay off."},"organizer":{"title":"Verified formula and organizer","description":"In 2019 the EBE will take place for the fourth time after successful editions in 2016, 2017 and 2018. Within 3 years the EBE has established itself as one of Germany's leading e-commerce events. With more than 10000 visitors and 300 exhibitors, the event has hosted notable companies in the past, such as Google, Samsung, Alibaba, Zalando, Facebook, DHL and L'Oreal."},"inspiration":{"title":"Get inspired by people around you","description":"Networking with the market (and also your competition) is an amazing dose of reflection and inspiration. Take advantage of the event not only to present your products and services but also to find out what is being said behind the scenes and how the future of the industry is perceived by the participants."}},"offers":{"offer":"Offer","list":{"promoted":"Selected offers ","other":"Other expo offers"},"title":"Exhibitors' expo offers"},"agreement":{"title":"Rules for Exhibitors"}},"api":{"errors":{"registration":{"not_enough_data":"error","bad_ticket_ids":"error"}}},"services":{"chatlio":{"hello":"Hello! :)"}},"speakers":{"opengraph":{"title":"%{name} during E-commerce Berlin Expo","description":"%{about}"}},"companies":{"opengraph":{"title":"%{name} invites you to a meeting at the E-commerce Berlin Expo","description":"%{about}"},"profile":{"about":"About","products":"Key products","contact":"Contact","expo":"Expo offer","facebook":"Facebook profile","twitter":"Twitter profile","linkedin":"LinkedIn profile","website":"Exhibitor's website"}},"presenters":{"list_featured":"Featured Speakers","list_full":"Speakers","schedule":"Stage Agenda ","opengraph":{"title":"%{name} on February 20th in Berlin. Free entry!","description":"%{fname} (%{cname2}) will hold a presentation on: %{presentation_title}"},"tba":"Speakers list and schedule are to be announced soon","list_description":"Presentations begin at 10:30AM"},"visitors":{"opengraph":{"title":"%{name} is going to the E-commerce Berlin Expo | %{location}, %{date}","description":"%{description}"},"invite":{"title":"%{name} from %{cname} is going to the E-commerce Berlin Expo","will_you_join":"Do you want a free ticket?","description":"%{description}"},"form":{"register":"Register","intro":"Find your online ticket in your inbox a few days before the event.","success":"Success! Check your inbox!"},"fields":{"fname":"First Name","lname":"Enter your last name","cname2":"Your company name","position":"Position in the company","phone":"Phone number","email":"Email"},"register":"Register for free","register_alt":"Get a free ticket","register_alt2":"Get a free ticket","more_info":"more info","attendees":"See who will be there","thankyou":"%{name}! It will be great to meet you in person!","tickets":{"download":"Download and print a ticket"},"benefits":{"networking":{"title":"Successful networing among people with similar challenges","description":"During the Fair, you can meet not only people representing companies at the stands but you also have the chance to get involved during the Questions and Answers session after each presentation as well as getting to know people in the networking space. These relationships can pay off in the future."},"title":"Why is it worth to visit the Fair","free_entry":{"title":"Free entry (Expo & Presentations)","description":"Registration is free and gives you an access to the expo area and presentation stages. Please be aware that the access to the stages can be limited due to safety reasons."},"special_offers":{"title":"Savings ahead - special offers from exhibitors","description":"Each exhibitor is motivated to offer an exclusive offer for their product and\/or service. Depending on the product or service, you can gain some additional trial period or discount."},"insight":{"title":"Get to know the creators of the product or service","description":"The fair is practically the only opportunity to meet people standing behind the service and product and ask them about what cannot be read on the website and what your customer support will not tell them. Take advantage of this and eliminate your doubts."},"future":{"title":"Find out how to succeed on highly competitive markets","description":"The number one topic of the Fair is always to increase conversions and sales. We strive to include, alongside business optimization issues, some inspiration and knowledge about highly competitive markets."},"case_studies":{"title":"FAQ","description":"Although participation in the presentations is free, we try to ensure that the agenda competes with conferences, for which you usually have to pay dearly. The invited speakers are dominated by practitioners and experienced consultants. After many years of experience, we decided to present a wider spectrum of knowledge in form of shorter presentations. Such a formula makes the presentations an impulse for behind-the-scenes conversations and an exciting Q&A sessions."}},"are_you_visitor":"Not a provider? Register for free and become a visitor.","agreement":{"title":"Rules for visitors"}},"schedule":{"break_5":"5-minute break","break_10":"10-minute break","break_15":"15-minute break","break_20":"20-minute break","break_25":"25-minute break","break_30":"30-minute break","break_35":"35-minute break","break_40":"40-minute break","break_45":"45-minute break","break_50":"50-minute break"},"partners":{"community":{"title":"Community Partners"},"media":{"title":"Media Partners"}},"resources":{"companydata":{"customfields":{"pr_manager":{"name":"PR Manager"},"sales_manager":{"name":"Contact person for visitors"},"xing":{"name":"Company profile on Xing\n"}}}}},"de":{"common":{"price":"Preis","booths":"Stände","confirm":"Bestätigung","from":"z","chat":"Online chat","currencies":{"eur":"EUR","pln":"PLN"},"prices":{"net":"Netto","gross":"Brutto"},"faq":{"share":{"description":"URL mit ausgewählten Fragen generieren","link":"Generieren"}},"tags":{"logistics":"Logistik","payment":"Bezahlung","platform":"E-Shop Platform","sales_generation":"Sales Generation","software":"Software","communication":"Kommunikation","customer_support":"Kundenservice","analytics":"Analysen","international_sales":"International sales","omnichannel":"Omnichannel","stages":{"a":"Bühne A","b":"Bühne B","c":"Bühne C","d":"Bühne D"},"infrastructure":"Infrastruktur"},"more":"mehr","errors":{"http404":"Seite nicht gefunden","http500":"Etwas ist schief gelaufen"},"map":"Ausstellungskarte","share":{"facebook":"Auf Facebook teilen","twitter":"Auf Twitter teilen","linkedin":"Auf LinkedIn teilen"},"menu":{"visitors":{"title":"Teilnehmer \/ Besucher","visit":"Kostenlose Registrierung","registered":"Schau wer dabei ist","agenda":"Speaker und Themen","schedule":"Präsentationsthemen","presenters":"Liste der Speaker","exhibitors":"Gesamte Liste der Aussteller","specials":"Sonderangebote","location":"Veranstaltungsort","offers":"Aussteller Angebot"},"exhibitors":{"title":"Aussteller","exhibitors":"List of the Exhibitors","exhibit":"Buche Ausstellungsfläche","faq":"Praktische Information","location":"Veranstaltungsort"},"general":{"title":"General","home":"Home"}},"locales":{"en":"english","de":"deutsch","pl":"Polnisch"},"close":"Schließen","language":{"change":"Sprache ändern"},"pcs":"Stück","remaining":"übrig","buy":"Kaufe jetzt","days":"Tage","visitor":"Besucher","exhibitor":"Aussteller","coming_soon":"Demnächst","details":"Details","booth_location":"Exhibitor profile","hours":"Std","minutes":"Min","stage-patrons":"Bühnen Patronaten\n","stage":"Bühne","pages":{"imprint":"Imprint","cookies":"Wie wir cookies nutzen"}},"event":{"gallery":"Expo von innen","opengraph":{"name":"E-commerce Berlin Expo","description":"Ganze E-Commerce-Welt an einem Ort"},"date":"Datum","location":"Ort","hours":"Dauer","organizer":{"name":"Veranstalter","address":"Firmenanschrift","registration":"USt-IdNr."},"support":{"hello":"Support","description":"Zögern Sie nicht, uns bezüglich unseres Angebots zu kontaktieren. Schöne Grüße!"},"sales":{"support":"Brauchst Du Hilfe?","booths":{"sold":"Ausverkauft","hold":"Gebucht. Wartet auf Bezahlung","available":"Verfügbar","free":"Diese Ausstellungsfläche ist verfügbar","owner":"Diese Ausstellungsfläche gehört zu:"},"pool":{"start":"Verkaufsbeginn","name":"Name des Verkaufspools","price":"Preis in diesem Verkaufspool","end":"Dieser Verkaufspool endet am","info":"Ausstellungsfläche wird in Tranchen verkauft. Buche jetzt, um einen optimalen Standort und einen niedrigeren Preis zu erhalten.","legend":"Du kannst eine der folgenden Standkategorien wählen -  Grand, Hot, Standard, Superhot. Du findest die aktuellen Preise, indem du auf die Stände in der Karte klickst (je dunkler die Farbe, desto besser die Lage und höher der Preis deines Standes)."},"steps":{"choose_booth":"Wähle eine Ausstellungsfläche (klicke auf die Karte)","confirm":"Bestellung bestätigen","pay":"Stand bezahlen","access":"Zugang zum Ausstellerprofil"}},"claim":"Über 5000 Teilnehmer treffen","description":"B2B Expo & Konferenz für E-commerce Dienstleister","parties":"150 Aussteller, 40 Speaker und Networking mit über 5000 Teilnehmern"},"exhibitors":{"map":{"title":"Buche einen Stand","opensales":"Kaufe die Ausstellungsfläche und triff unsere Besucher","title2":"Aussteller werden"},"list_featured":"Triff unsere Aussteller","booth_location":"Stand %{loc} |||| Stand %{loc}","booth_location_full":"Location %{cname2}: %{loc} |||| Location %{cname2}: %{loc}","list_full":"Alle Aussteller\n","premium":{"title":"Premium-Angebot","presentation":"Präsentationen in der Primetime und auf der ausgewählten Bühne","networking":{"name":"Partner der Networking-Zone","area":"150m2 im zentralen Teil der Halle, an der Kreuzung der wichtigsten Kommunikationswege","arrangement":"Arrangement von einem professionellen, externen Unternehmen, das sich um die kleinsten Details kümmert","attractions":"Highligts für Messeteilnehmer: DJ (Chill-Out, Down-Tempo, 80er-Jahre-Musik), Kaffeepunkt","branding":"Vollfarb-Branding des zentralen Elements, Branding der Sitzwürfel (30 Stück)","fullservice":"Full Service - wir koordinieren ALLE Aktivitäten"},"contact":{"title":"Buchung, weitere Informationen","description":"Ich liefere dir gerne zusätzliche Informationen und stelle ein Preisangebot vor. Bei Fragen stehe ich zur Verfügung."}},"faq":{"before_event":{"name":"Vor der Expo","representatives":{"q":"Wie viele Firmenvertreter dürfen am Stand sein?","a":"Die Anzahl der Vertreter an Ihrem Stand ist willkürlich, aber denke daran, dass in dem Paket nur 4 Vouchers für das Mittagessen enthalten sind (außer wenn zusätzliche Gutscheine gekauft wurden)."},"additional_paid_services":{"q":"Gibt es Upgrade-Optionen oder zusätzliche Services, die man bestellen kann?","a":"Zu den zusätzlichen Dienstleistungen gehören die Erhöhung der Stärke des Stromanschlusses (bis zu 6kW), eine größere Anzahl von Willkommenspaketen für die Ausstellervertreter, Bodenteppich, mehr Möbel oder eine Bebauung der Ausstellungsfläche inklusive vollflächiger Rückwand und Theke."},"shipping_of_materials":{"q":"Kann ich Materialien zum Messegelände schicken?","a":"Ja. Weitere Informationen finden Sie im Ausstellerprofil."},"standard_offering":{"q":"Wie groß ist mein Stand und was ist im Paket enthalten?","a":"Neben den Grand-Ständen (6x3m) sind alle Standard-Stände  3x3m. Wenn du keine zusätzlichen Dienstleistungen bestellt hast, beinhaltet das Paket 4 Stühle, 1 Tisch, 4 Catering-Gutscheine, Zugang zu Strom (300W) und Wifi."},"how_to_promote":{"q":"Was solltest Du für die Teilnahme an der Messe planen, um möglichst viele neue Kunden zu erreichen?","a":"Informiere so viele Kunden wie möglich, dass Du bei der Expo anwesend wirst. Lade Deine Partner und Personen, die mit Deinem Unternehmen zu tun haben, zur Messe ein. Nutze Werbematerialien, die Du in Ihrem Ausstellerprofil finden. Vergesse nicht, Dein Profil in den sozialen Medien zu teilen und lade die Teilnehmer zu einem Treffen während der Veranstaltung."},"promo_benefits":{"q":"Was sind die Vorteile der Bewerbung meiner Teilnahme?","a":"Neben den offensichtlichen Vorteilen wie neue Geschäftsbeziehungen und Deals, Du hast die Möglichkeit, interessante Preise zu gewinnen. Mache Dich mit den Informationen unter \"Awards\"-Tab in Deinem Ausstellerprofil vertraut. Der Hauptpreis ist die Möglichkeit, einen Vortrag auf der Veranstaltung zu halten!"},"public_profile":{"q":"Wie kann ich vom öffentlichen Ausstellerprofil profitieren?","a":"Öffentlicher Ausstellerprofil ist eine dedizierte Webseite und ein Schaufenster für Dein Unternehmen, mit dem Du Dich von der Konkurrenz abheben kannst. Besucher durchsuchen die Profile, bevor sie sich entscheiden, sich während der Messe zu treffen, weshalb es so wichtig ist, alle Informationen zu vervollständigen."}},"event":{"name":"Während der Messe","hours":{"q":"Wann wird die Expo stattfinden?","a":"Die Messe findet von 10:00 bis 17:00 Uhr statt."},"welcoming":{"q":"Wohin soll ich gehen, nachdem ich die Halle betreten habe?","a":"Wenn Du dort ankommst, gehe zum Info-Punkt für Aussteller in der Nähe der Registrierung. Du erhältst alle notwendigen Anweisungen zum weiteren Vorgehen. Unsere Mitarbeiter bringen Dich direkt zu Deinem Stand."},"after_party":{"q":"Wird es eine Networking Party geben?","a":"Wir laden euch zu unserer exklusiven Networking Party am 19. Februar 2019 von 19 - 23 Uhr ein (Vorabend der Expo). Die Gewinnerzeremonie der E-commerce Germany Awards 2019 finden ebenfalls auf der Networking Party statt. Hier habt ihr die Möglichkeit alle Aussteller persönlich zu treffen und euch zu vernetzen."},"assembly_caution":{"q":"Wann kann ich meinen Stand aufbauen?","a":"Der Stand kann am Montagetag, dh am Tag vor der Veranstaltung zwischen 14:00 und 23:59 Uhr und am Tag der Messe zwischen 8:30 und 9:30 Uhr aufgebaut werden. Die Messe beginnt um 10:00 Uhr - bereite Dich auf die ersten Gäste vor, die sich für die Dienstleistungen Deines Unternehmens interessieren"},"catering":{"q":"Wo erhalte ich Essensgutscheine?","a":"Die Essensgutscheine warten im Starterpaket direkt an Deinem Stand am Expotag."},"badges":{"q":"Muss ich die Badges ausdrucken?","a":"Das ist nicht nötig. Die Badges Deiner Unternehmensvertreter warten auf Euch im Starterpaket an Eurem Stand."},"parking_setupday":{"q":"Wird es möglich sein, am Tag der Expo den Parkplatz zu nutzen?","a":"Ja, am Vorabend der Veranstaltung sind alle Einfahrtstore geöffnet. "},"parking_eventday":{"q":"Wo kann ich mein Auto währen der Expo parken?","a":"Es gibt keine gewidmeten Parkplätze auf dem Messegelände während der Expo.\n\nIhr könnt aber ein nahegelegenes Parkaus nutzen, \"PARKHAUS GLEISDREIECK\".\n\nDas Parkhaus kann vom Schöneberger Ufer, von der Luckenwalder Strasse sowie Köthener Brücke erreicht werden.\n\nBetriebszeiten: Täglich, 6 Uhr bis 22 Uhr\n\nGebühren für kurzzeitiges Parken:\nPro Stunde: 1,00€\nPro Tag: 10,00€"},"problems_equipment":{"q":"An wen sollte ich mich bei Problemen mit der Ausstattung des Standes wenden?","a":"Alle Probleme mit der Standausstattung: Stühle, Tische, Stromanschluss und Internet sind an die Infostelle für Aussteller, die sich neben der Anmeldung befindet, zu melden."},"problems_services":{"q":"Was soll ich bei anderen Problemen tun?","a":"Im Starterpaket an Deinem Stand findest Du eine Liste der wichtigsten Kontaktnummern. Unsere Mitarbeiter helfen Dir gerne bei der Lösung Deines Problems."},"badge_scanner":{"q":"Wie kann ich auf den Besucherbadges-Scanner zugreifen?","a":"Der Zugriff auf den \"Badge Scanner\" erfolgt nur, wenn Du den richtigen Platz im Ranking einnimmst. Weitere Details findest Du in Deinem Ausstellerprofil unter dem Tab \"Awards\"."}},"after_event":{"name":"Nach der Expo","scans":{"q":"Was soll ich mit den gescannten Badges tun?","a":"Die Kontaktdaten gescannter Besucher stehen allen Vertretern Deines Unternehmens zur Verfügung. Du kannst sie problemlos in XLS- oder CSV-Dateien exportieren. Bereite als Nächstes eine Zusammenfassung der Besprechung  und beendeDeine Verhandlungen mit neuen Kunden."},"next_booth_sales":{"q":"Wann kann ich einen Stand für die nächste Ausgabe buchen?","a":"Der Verkauf für die nächste Ausgabe beginnt spätestens einen Monat nach dem Ende der aktuellen Ausgabe"}},"name":"Häufig gestellte (und beantwortete) Fragen","become":{"name":"Bestellung der Ausstellungsfläche","included_services":{"a":"Unser Standardpaket beinhaltet:\n* Grundausstattung (2 Stehtisch und 4 Hochstühle)\n* Catering-Gutscheine und Badges für 4 Firmen-Repräsentanten\n* Online Ausstellerprofil\n* Parkkarte\n* Stromanschluss (230V, max 300W)\n*Wifi\n*Logo auf der Registrierungsseite (Firmenname und Link)\n*Firmenname im gedruckten Werbematerial","q":"Was ist im Standardpaket enthalten?"},"payment":{"a":"In der Regel werden Unternehmen aufgefordert, innerhalb von 7 Arbeitstagen für eine Bestellung zu bezahlen.","q":"Wann sollte ich für eine Ausstellungsfläche bezahlen?"},"onboarding":{"a":"Nach dem Bezahlen der Ausstellungsfläche erhaltst Du Zugang zu Deinem Ausstellerprofil und wir werden Dich auch regelmäßig zu logistischen Themen und zur Vermarktung Deiner Teilnahme kontaktieren.","q":"Was ist der nächste Schritt nach der Bezahlung?"},"resignation":{"a":"Die Situation wird abhängig von der verbleibenden Zeit bis zur Messe geregelt - wenn der Rücktritt später als 2 Monate vor der Messe erfolgt, ziehen wir 50% der Servicegebühr ab. In der Regel versuchen wir, einen Teil der Gebühr auf die nächste Messe zu übertragen.","q":"Höhere Gewalt - was, wenn wir nicht ausstellen können?"},"promo_benefits":{"q":"Wie können wir von der Messe profitieren, BEVOR sie stattfindet?","a":"Wenn Du bereits den Zugang zum Ausstellerprofils bekommen hast, solltest Du so schnell wie möglich die Daten ausfüllen. Wir werden das Firmenprofil in unseren Werbeaktivitäten verwenden und es ist öffentlich sichtbar. Aussteller werden ermutigt, unsere Marketing-Tools zu nutzen, um ihre Kunden über die Teilnahme an unserem Event zu informieren, den registrierten Besucher die Möglichket geben, sich über Euch zu informieren und ein Treffen zu vereinbaren."}}},"list_by_keyword":"Aussteller nach Branche","list":{"filter_title":"Aussteller nach Branche filtern"},"standard":{"electricity":"Strom 230V - max 300W","catering":"Catering für Vertreter Deines Unternehmens","space":"Ausstellungsfläche von 9 m2 (3m x 3m) Open-Space-Formel (ohne Wände)","info":"Standard-Ausstellungsfläche umfasst","profile":"Firmenprofil","ids":"Badges für Vertreter Deines Unternehmens","furniture":"Grundausstattung (4 Barhocker, zwei Tischen)"},"benefits":{"title":"Warum ausstellen?","outreach":{"title":"Finde neue Kunden","description":"Bereite ein attraktives Angebot für den Messetag vor. Nutze unser Tool, um Treffen mit registrierten Besuchern zu planen. Werde ein Magnet für die Teilnehmer."},"all_inclusive":{"title":"Keine versteckten Kosten","description":"Unser Standardangebot ist für über 85% der ausstellenden Unternehmen geeignet. Grundausstattung, Catering-Gutscheine, Strom sind im Kernpaket enthalten. Wenn Du bereits eine Werbewand für die Rückseite der Ausstellungsfläche hast, dann bist Du bereit! Wenn Du aber doch eine Full-Service-Option bevorzugst, bieten wir ein Upgrade an, in dem wir Dein Stand von einer professionellen Firma entwerfen lassen."},"feedback":{"title":"Erhalte ein ehrliches Feedback über deine Dienstleistungen und Produkte","description":"Einer der meist unterschätzten Vorteile des Ausstellens ist der persönliche Kontakt mit einer echten Person und deren ehrliche Meinung und\/oder Feedback zu eurem Service oder Produkt. Kleine Änderungen, die du an deinen Produkten vornehmen kannst, können für Dein Unternehmen von enormer Bedeutung sein. Dies ist alles andere, als was Dir die anonyme online Befragung geben kann."},"meet_clients":{"title":"Stärke Beziehungen zu bestehenden Kunden","description":"Die Messe ist eine großartige Gelegenheit, Klienten zu treffen, die bereits eure Produkte und Dienstleistungen nutzen. Gib deinen Kunden die Möglichkeit, euer Team zu treffen. Frag nach Feedback und zeige die neusten Produkte und Dienstleistungen. Es wird sich lohnen."},"organizer":{"title":"Zuverlässige Formel und Organisator","description":"Nach 3 erfolgreichen Ausgaben findet die EBE 2019 bereits zum 4. Mal statt. Innerhalb von 3 Jahren hat sich die EBE als einer der führenden E-commerce Messen Deutschlands durchgesetzt. Mit mehr als 10000 Besuchern und über 300 Ausstellern, hat die Messe in der Vergangenheit einige bemerkenswerte Unternehmen ausgestellt, darunter Google, Samsung, Alibaba, Zalando, Facebook, DHL and L'Oreal.\n"},"inspiration":{"title":"Lass dich von Menschen um dich herum inspirieren","description":"Enger Kontakt mit dem Markt (und auch Wettbewerbern) kann von erstaunlicher Inspiration sein. Nutze den Messetag, um nicht nur deine Produkte und Dienstleistungen zu präsentieren, sondern auch zu erfahren, was hinter den Kulissen gesagt wird und wie die Zukunft der Branche von den Teilnehmern wahrgenommen wird."}},"offers":{"offer":"Offer","list":{"promoted":"Selected offers","other":"Other expo offers"},"title":"Exhibitors' expo offers"},"agreement":{"title":"Regeln für Aussteller"}},"api":{"errors":{"registration":{"not_enough_data":"Fehler","bad_ticket_ids":"Fehler"}}},"services":{"chatlio":{"hello":"Hallo! :)"}},"speakers":{"opengraph":{"title":"%{name} während der E-commerce Berlin Expo","description":"%{about}"}},"companies":{"opengraph":{"title":"%{name} möchte Dich zu der E-commerce Berlin Expo einladen","description":"%{about}"},"profile":{"about":"Über uns","products":"Schlüsselprodukte","contact":"Kontakt","expo":"Angebot der Expo","facebook":"Facebook-Profil","twitter":"Twitter-Profil","linkedin":"LinkedIn-Profil","website":"Aussteller Webseite"}},"presenters":{"list_featured":"Speaker","list_full":"Referenten","schedule":"Bühnen-Agenda","opengraph":{"title":"% {name} am 20. Februar in Berlin. Freier Eintritt!","description":"% {fname} (% {cname2}) hält eine Präsentation auf: % {presentation_title}"},"tba":"Rednerliste und Zeitplan werden in Kürze bekannt gegeben","list_description":"Präsentationen beginnen um 10:30 Uhr"},"visitors":{"opengraph":{"title":"%{name} nimmt an der E-commerce Berlin Expo teil | %{location}, %{date}","description":"%{description}"},"invite":{"title":"%{name} aus %{cname} nimmt an der E-commerce Berlin Expo teil","will_you_join":"Willst Du ein kostenloses Ticket?","description":"%{description}"},"form":{"register":"Anmeldung","intro":"Finde dein Online-Ticket einige Tage vor der Veranstaltung in deinem Posteingang.","success":"Erfolg! Überprüfe deinen Posteingang!"},"fields":{"fname":"Vorname","lname":"Dein Nachname","cname2":"Name der Firma","position":"Position in der Firma","phone":"Telefonnummer","email":"E-Mail"},"register":"Kostenlos registrieren","register_alt":"Bekomme dein kostenloses Ticket","register_alt2":"Bekomme dein kostenloses Ticket","more_info":"mehr Informationen","attendees":"Sieh wer noch kommt","thankyou":"%{name}! Es wäre toll, Dich persönlich zu treffen!","tickets":{"download":"Ticket herunterladen und drucken"},"benefits":{"networking":{"title":"Erfolgreiches Networking bei Menschen mit ähnlichen Herausforderungen","description":"Während der Messe kannst du nicht nur Vertreter von Unternehmen an den Ständen treffen, sondern auch die Möglichkeit, sich nach jeder Präsentation während der Fragen- und Antworten-Runde zu beteiligen und Menschen im Networkingzone kennenzulernen. Diese Beziehungen können sich in Zukunft auszahlen."},"title":"Warum lohnt es sich, die Messe zu besuchen?","free_entry":{"title":"Freier Eintritt (Expo & Präsentationen)","description":"Die Registrierung ist kostenlos und ermöglicht Dir den Zugang zum Expo-Bereich und zur Präsentation. Bitte beachte, dass der Zugang zu den Bühnen aus Sicherheitsgründen eingeschränkt werden kann."},"special_offers":{"title":"Einsparungen - spezielle Angebote von Ausstellern","description":"Jeder Aussteller ist motiviert, ein exklusives Angebot für sein Produkt und \/ oder seine Dienstleistung anzubieten. Je nach Produkt oder Service kannst Du als Besuchern eine längere Testphase oder einen Rabatt erhalten."},"insight":{"title":"Lerne die Schöpfer des Produkts oder der Dienstleistung kennen","description":"Die Messe ist praktisch die beste Möglichkeit, Menchen zu treffen, die hinter den Dienstleistungen und dem Produkt stehen, und sie direkt zu fragen, was auf der Website nicht gelesen werden kann und was die Kundenbetreuung ihnen nicht sagen wird. Nutze dies und beseitige Deine Zweifel."},"future":{"title":"Lerne wie man Erfolg in hart umkämpften Märkten erzielt","description":"Das Hauptthema der Messe ist immer die Steigerung von CRO und Umsatz. Wir sind bestrebt, neben Fragen der Unternehmensoptimierung auch Inspiration und Wissen über wettbewerbsintensive Märkte einzubeziehen."},"case_studies":{"title":"FAQ","description":"Obwohl die Teilnahme an den Präsentationen kostenlos ist, bemühen wir uns sicherzustellen, dass die Agenda mit Konferenzen konkurriert, für die Sie normalerweise teuer bezahlen müssen. Die eingeladenen Referenten setzen sich von Praktikern und erfahrenen Beratern zusammen. Nach langjähriger Erfahrung haben wir uns entschieden, ein breiteres Spektrum an Wissen in Form von kürzeren Präsentationen zu präsentieren. Eine solche Formel macht die Präsentationen zu einem Impuls für Gespräche hinter den Kulissen und spannende Fragen und Antworten Runden."}},"are_you_visitor":"Kein Dienstleister? Registriere Dich kostenlos und werde Besucher.","agreement":{"title":"Regeln für Besucher"}},"schedule":{"break_5":"5-minütige Pause","break_10":"10-minütige Pause","break_15":"15-minütige Pause","break_20":"20-minütige Pause","break_25":"25-minütige Pause","break_30":"30-minütige Pause","break_35":"35-minütige Pause","break_40":"40-minütige Pause","break_45":"45-minütige Pause","break_50":"50-minütige Pause"},"partners":{"community":{"title":"Community Partner"},"media":{"title":"Medienpartner"}},"resources":{"companydata":{"customfields":{"pr_manager":{"name":"PR Manager"},"sales_manager":{"name":"Kontaktperson für Besucher"},"xing":{"name":"Xing Firmenprofil\n"}}}}}}
+{
+    "en": {
+        "common": {
+            "price": "Price",
+            "booths": "Booths",
+            "confirm": "Confirm",
+            "from": "z",
+            "chat": "Online chat",
+            "currencies": {
+                "eur": "EUR",
+                "pln": "PLN"
+            },
+            "prices": {
+                "net": "net",
+                "gross": "gross"
+            },
+            "faq": {
+                "share": {
+                    "description": "Generate URL with chosen questions",
+                    "link": "Generate"
+                }
+            },
+            "tags": {
+                "logistics": "Logistics",
+                "payment": "Payment",
+                "platform": "E-shop platform",
+                "sales_generation": "Sales generation",
+                "software": "Software",
+                "communication": "Communication",
+                "customer_support": "Customer support",
+                "analytics": "Analitycs",
+                "international_sales": "International sales",
+                "omnichannel": "Omnichannel",
+                "stages": {
+                    "a": "Stage A",
+                    "b": "Stage B",
+                    "c": "Stage C",
+                    "d": "Stage D"
+                },
+                "infrastructure": "Infrastructure"
+            },
+            "more": "more",
+            "errors": {
+                "http404": "Page not found",
+                "http500": "Something went wrong"
+            },
+            "map": "Exhibition map",
+            "share": {
+                "facebook": "Share on Facebook",
+                "twitter": "Share on Twitter",
+                "linkedin": "Share on LinkedIn"
+            },
+            "menu": {
+                "visitors": {
+                    "title": "Participant / Visitors",
+                    "visit": "Free registration",
+                    "registered": "See who's coming",
+                    "agenda": "Speakers and topics",
+                    "schedule": "Presentation topics",
+                    "presenters": "List of speakers",
+                    "exhibitors": "Complete list of exhibitors",
+                    "specials": "Special offers",
+                    "location": "STATION Berlin",
+                    "offers": "Exhibitors' offers"
+                },
+                "exhibitors": {
+                    "title": "Exhibitor",
+                    "exhibitors": "List of exhibitors",
+                    "exhibit": "Book exhibition space",
+                    "faq": "Practical information",
+                    "location": "Location"
+                },
+                "general": {
+                    "title": "General",
+                    "home": "Home"
+                }
+            },
+            "locales": {
+                "en": "English",
+                "de": "German",
+                "pl": "Polish"
+            },
+            "close": "Close",
+            "language": {
+                "change": "Change current language"
+            },
+            "pcs": "items",
+            "remaining": "remaining",
+            "buy": "Buy now",
+            "days": "days",
+            "visitor": "Visitor",
+            "exhibitor": "Exhibitor",
+            "coming_soon": "Coming soon",
+            "details": "Details",
+            "booth_location": "Exhibitor profile",
+            "hours": "hour(s)",
+            "minutes": "minutes",
+            "stage-patrons": "Stage Patrons\n",
+            "stage": "Stage",
+            "pages": {
+                "imprint": "Imprint",
+                "cookies": "How we use Cookies"
+            }
+        },
+        "event": {
+            "gallery": "Expo from the inside",
+            "opengraph": {
+                "name": "E-commerce Berlin Expo | Berlin | Feb 13, 2020",
+                "description": "Entire e-commerce world in one place"
+            },
+            "date": "Event date",
+            "location": "Location",
+            "hours": "Duration",
+            "organizer": {
+                "name": "Organizer",
+                "address": "Legal address",
+                "registration": "TIN"
+            },
+            "support": {
+                "hello": "Support",
+                "description": "Feel free to contact us regarding our offer. Regards!"
+            },
+            "sales": {
+                "support": "Do you need support?",
+                "booths": {
+                    "sold": "Sold out",
+                    "hold": "Reserved. Waiting for payment",
+                    "available": "Available",
+                    "free": "This exhibition space is available",
+                    "owner": "This exhibition space belongs to:"
+                },
+                "pool": {
+                    "start": "Start of sales",
+                    "name": "Name of the sales pool",
+                    "price": "Price in this sales pool",
+                    "end": "This sales pool ends on",
+                    "info": "Exhibition space is sold in tranches. Reserve now to get an optimal location and a lower price.",
+                    "legend": "You can choose from the following exhibition space categories - Grand, Hot, Standard, Superhot. See the current prices by clicking on the stands in the map below (the darker the color, the better the location and the higher the price)."
+                },
+                "steps": {
+                    "choose_booth": "Choose exhibition space (click on the map)",
+                    "confirm": "Confirm order",
+                    "pay": "Payment",
+                    "access": "Access exhibitor's account"
+                }
+            },
+            "claim": "Join over 5000 participants",
+            "description": "B2B Expo & Conference for e-commerce service providers",
+            "parties": "150 exhibitors, 40 speakers and networking among more than 5000 participants"
+        },
+        "exhibitors": {
+            "map": {
+                "title": "Book a stand",
+                "opensales": "Buy exhibition space and meet the visitors",
+                "title2": "Become an Exhibitor"
+            },
+            "list_featured": "Featured Exhibitors",
+            "booth_location": "Booth %{loc} |||| Booth %{loc}",
+            "booth_location_full": "Location %{cname2}: %{loc} |||| Location %{cname2}: %{loc}",
+            "list_full": "All Exhibitors",
+            "premium": {
+                "title": "Premium offer",
+                "presentation": "Presentation slot in the prime time and on the selected stage",
+                "networking": {
+                    "name": "Networking Zone Partner",
+                    "area": "150sq m in the central part of the hall, at the intersection of the most important communication routes",
+                    "arrangement": "Arrangement by a professional external company that cares about the smallest detail",
+                    "attractions": "Attractions for Fair participants: DJ (chill-out, down-tempo, 80's music), coffee point",
+                    "branding": "Full-color branding of the central element, branding of seat cubes (30 pieces)",
+                    "fullservice": "Full Service - we coordinate ALL activities"
+                },
+                "contact": {
+                    "title": "Booking, more information",
+                    "description": "I will gladly provide you with additional information and present a price offer. Feel free to contact me."
+                }
+            },
+            "faq": {
+                "before_event": {
+                    "name": "Before the Fair",
+                    "representatives": {
+                        "q": "What is the maximum number of company representatives on the stand?",
+                        "a": "The number of representatives at your booth is arbitrary, but remember that in the package you have includes only 4 vouchers for lunch (unless you have bought additional vouchers)."
+                    },
+                    "additional_paid_services": {
+                        "q": "Are there any upgrade options or additional services one can order?",
+                        "a": "Additional services include increasing the power of the current electricity connection (up to 6kW), a greater number of welcome packs for the Exhibitors representatives, floor carpeting, renting selected equipment (f.e. TV screen), more furniture or a comprehensive arrangement of the exhibition space including full print back wall and a counter."
+                    },
+                    "shipping_of_materials": {
+                        "q": "Can I send materials to the Fair location?",
+                        "a": "Yes. You will find more detailed information on the Exhibitor's Profile."
+                    },
+                    "standard_offering": {
+                        "q": "What is the size of my stand and what is included in the package?",
+                        "a": "Except for the Grand stands (6m x 3m), all stand stand sizes are 3x3m. If you have not ordered additional services, the package includes 4 stools, 2 tables, 4 lunch vouchers, access to power (300W) and WIFI."
+                    },
+                    "how_to_promote": {
+                        "q": "How to plan participation in the Fair to get as many new customers as possible?",
+                        "a": "Try to communicate to as many people as possible that your company will be present at the Fair to get new contacts. Invite your partners and people related to your business to the Fair. Use promotional materials that you can find in your Exhibitor Profile. Do not forget to share your profile on social media and invite registered participants to a meeting during the event.\n"
+                    },
+                    "promo_benefits": {
+                        "q": "What are the benefits of promotion of my participation?",
+                        "a": "In addition to the obvious advantages like establishing business relationships and concluding new deals, you have the chance to win some interesting prizes. Familiarize yourself with the details in your Exhibitor Panel in the 'Awards' tab. The main prize is the ability to conduct a presentation at the event!"
+                    },
+                    "public_profile": {
+                        "q": "How to benefit from public Exhibitors' Profile?",
+                        "a": "Public Exhibitors' Profile is a dedicated web page and a showcase of your company, thanks to which you can stand out among the competition. Visitors browse the profile before deciding to meet during the Fair, which is why it is so important to complete all information."
+                    }
+                },
+                "event": {
+                    "name": "During the Fair",
+                    "hours": {
+                        "q": "What time will the event take place?",
+                        "a": "The Fair will be held from 10:00 to 17:00."
+                    },
+                    "welcoming": {
+                        "q": "Where should I go after entering the hall?",
+                        "a": "When you get there, go to the Info point for Exhibitors located near registration. You will get all the necessary instructions on how to proceed. Our staff will take you straight to your stand."
+                    },
+                    "after_party": {
+                        "q": "Will there be a networking party?",
+                        "a": "We invite you to our exclusive networking party on 12 February 2020 from 7pm - 11pm (night before the official expo. The E-commerce Germany Awards 2020 ceremony will take place at the networking party. You will be able to connect with all exhibitors personally and establish some new contacts.\n"
+                    },
+                    "assembly_caution": {
+                        "q": "When can I set up a stand?",
+                        "a": "The stand can be set up on the assembly day, that is, the day before the event from 14:00 to 23:59 and on the day of the Expo, from 8:30 to 9:30. The Expo starts at 10:00 - prepare yourself to receive the first guests interested in the services of your company"
+                    },
+                    "catering": {
+                        "q": "Where can I collect lunch vouchers?",
+                        "a": "They lunch vouchers will be waiting for you in the starter pack, which you will find at your booth on the day of the event."
+                    },
+                    "badges": {
+                        "q": "Do I have to print the badges?",
+                        "a": "There is no need for that. The badges of your company's representatives will be waiting for you in the starter pack at your stand."
+                    },
+                    "parking_setupday": {
+                        "q": "Will it be possible to enter the parking lot on the day of the expo?",
+                        "a": "Yes, on the eve of the event, all entrance gates will be open. "
+                    },
+                    "parking_eventday": {
+                        "q": "Where can I park my car during the expo?",
+                        "a": "There is no dedicated parking area at the venue during the expo day.\n\nAlthough you can use a nearby car park, \"PARKHAUS GLEISDREIECK\".\n\nEntering Parkhaus Gleisdreieck: You can drive into the garage via Schöneberger Ufer, Luckenwalder Strasse or Köthener Brücke.\nHours of operation: Open daily from 6 a.m. to 10:00 p.m.\n\nFees for short-term parking:\nHourly: EUR 1.00/hour\nDaily Pass: EUR 10.00"
+                    },
+                    "problems_equipment": {
+                        "q": "Who should I report to in case of problems with the equipment of the stand?",
+                        "a": "All problems with stand equipment: chairs, tables, electricity access and the Internet should be reported to the info point for Exhibitors, which is located next to the registration.\n"
+                    },
+                    "problems_services": {
+                        "q": "What to do in case of any other problems?",
+                        "a": "In the starter pack at your stand, you will find a list of the most important contact numbers. Our staff will help you with a solution to your problem."
+                    },
+                    "badge_scanner": {
+                        "q": "How do I get access to the visitor badge scanner?",
+                        "a": "Access to the badge scanner application will only be obtained by taking the right place in the Ranking. You can find more details in your Exhibitor Profile under the 'Awards' tab."
+                    }
+                },
+                "after_event": {
+                    "name": "After the Fair",
+                    "scans": {
+                        "q": "What should you do with the scanned badges?",
+                        "a": "Contact details of scanned visitors will be available to all representatives of your company. You can easily export them to .xls or .csv files. Next, prepare a summary message of the meeting during the event and finish the negotiations with new contracts."
+                    },
+                    "next_booth_sales": {
+                        "q": "When will I be able to book a stand for the next edition?",
+                        "a": "Sales for the next edition will start not later than one month after the end of the current one."
+                    }
+                },
+                "name": "Frequently asked (and answered) questions",
+                "become": {
+                    "name": "Ordering an exhibition space",
+                    "included_services": {
+                        "a": "Our stand package includes:\n* Basic furniture (2 high tables and 4 high chairs)\n* Catering vouchers and badges for 4 representatives\n* WiFi\n* Electricity connection 300W\n* Logo placement on event registration page: company name & link\n* Dedicated exhibitor's online profile\n* Company name in the printed materials",
+                        "q": "What is included in the exhibition space?"
+                    },
+                    "payment": {
+                        "a": "In general, companies are asked to pay for a reservation within 7 working days. ",
+                        "q": "When should I pay for an exhibition space?"
+                    },
+                    "onboarding": {
+                        "a": "After paying for the exhibition space, you will get access to your Exhibitor Profile and we will also contact you regularly on logistical topics and the promotion of your participation.",
+                        "q": "What is the next step after payment?"
+                    },
+                    "resignation": {
+                        "a": "The situation is settled depending on the time remaining until the Fair - if the resignation occurs later than 2 months prior the Fair, we will deduct 50% of the service fee. Usually, we try to transfer part of the fee to the next Fair.",
+                        "q": "Force majeure - what if we cannot exhibit"
+                    },
+                    "promo_benefits": {
+                        "q": "How will we benefit from the trade fair BEFORE it happens?",
+                        "a": "Having an access to the Exhibitors account, a company should immediately fill in data displayed in public profile. We will use company profile in our promotional activities. Exhibitors are encouraged to use our marketing tools to inform their clients about participation in our Event and also can browse registered visitors and try to schedule a meetup."
+                    }
+                }
+            },
+            "list_by_keyword": "Exhibitors by industry",
+            "list": {
+                "filter_title": "Filter exhibitors by industry"
+            },
+            "standard": {
+                "electricity": "Electricity 230V - max 300W",
+                "catering": "Catering for representatives",
+                "space": "Exhibition space of 9 sqm (3m x 3m) or 16 sqm for Grand Stand (4m x 4m) open-space formula (without walls)",
+                "info": "Standard exhibition space offer includes",
+                "profile": "Company Profile",
+                "ids": "Badges for representatives",
+                "furniture": "Basic furniture (4 high stools, two tables)"
+            },
+            "benefits": {
+                "title": "Why exhibit?",
+                "outreach": {
+                    "title": "Find new clients",
+                    "description": "Prepare an attractive, special offer. Use our tool to schedule meetings with registered parties. Become a magnet for participants visiting the expo."
+                },
+                "all_inclusive": {
+                    "title": "No hidden costs",
+                    "description": "Our standard offer is suitable for over 85% of the exhibiting companies. Basic furniture, catering vouchers, electricity is included in the core package. If you have an advertising wall for the back of the exhibition space you are ready to go! If you prefer a full-service option we offer an upgrade to have it designed by a professional company."
+                },
+                "feedback": {
+                    "title": "Get an honest feedback about your services and products",
+                    "description": "One of the most underestimated benefits of exhibiting is face-to-face contact with a real person and an honest opinion and/or feedback on your service or product. Small changes that you introduce to your products can have enormous significance for your business. This is not what an anonymous online feedback will give you."
+                },
+                "meet_clients": {
+                    "title": "Strengthen your relationships with existing clients",
+                    "description": "The conference is a great chance to meet with companies that already use your products or services. Give your clients the opportunity to meet your time, gather feedback from them, present future company plans and the ways of developing your products and services. It will pay off."
+                },
+                "organizer": {
+                    "title": "Verified formula and organizer",
+                    "description": "In 2020 the EBE will take place for the fifth time after successful editions in 2016-2019. Within 4 years the EBE has established itself as one of Germany's leading e-commerce events. With more than 10000 visitors and 300 exhibitors, the event has hosted notable companies in the past, such as Google, Samsung, Alibaba, Zalando, Facebook, DHL and L'Oreal."
+                },
+                "inspiration": {
+                    "title": "Get inspired by people around you",
+                    "description": "Networking with the market (and also your competition) is an amazing dose of reflection and inspiration. Take advantage of the event not only to present your products and services but also to find out what is being said behind the scenes and how the future of the industry is perceived by the participants."
+                }
+            },
+            "offers": {
+                "offer": "Offer",
+                "list": {
+                    "promoted": "Selected offers ",
+                    "other": "Other expo offers"
+                },
+                "title": "Exhibitors' expo offers"
+            },
+            "agreement": {
+                "title": "Rules for Exhibitors"
+            }
+        },
+        "api": {
+            "errors": {
+                "registration": {
+                    "not_enough_data": "error",
+                    "bad_ticket_ids": "error"
+                }
+            }
+        },
+        "services": {
+            "chatlio": {
+                "hello": "Hello! :)"
+            }
+        },
+        "speakers": {
+            "opengraph": {
+                "title": "%{name} during E-commerce Berlin Expo",
+                "description": "%{about}"
+            }
+        },
+        "companies": {
+            "opengraph": {
+                "title": "%{name} invites you to a meeting at the E-commerce Berlin Expo",
+                "description": "%{about}"
+            },
+            "profile": {
+                "about": "About",
+                "products": "Key products",
+                "contact": "Contact",
+                "expo": "Expo offer",
+                "facebook": "Facebook profile",
+                "twitter": "Twitter profile",
+                "linkedin": "LinkedIn profile",
+                "website": "Exhibitor's website"
+            }
+        },
+        "presenters": {
+            "list_featured": "Featured Speakers",
+            "list_full": "Speakers",
+            "schedule": "Stage Agenda ",
+            "opengraph": {
+                "title": "%{name} on February 13th in Berlin. Free entry!",
+                "description": "%{fname} (%{cname2}) will hold a presentation on: %{presentation_title}"
+            },
+            "tba": "Speakers list and schedule are to be announced soon",
+            "list_description": "Presentations begin at 10:30AM"
+        },
+        "visitors": {
+            "opengraph": {
+                "title": "%{name} is going to the E-commerce Berlin Expo | %{location}, %{date}",
+                "description": "%{description}"
+            },
+            "invite": {
+                "title": "%{name} from %{cname} is going to the E-commerce Berlin Expo",
+                "will_you_join": "Do you want a free ticket?",
+                "description": "%{description}"
+            },
+            "form": {
+                "register": "Register",
+                "intro": "Find your online ticket in your inbox a few days before the event.",
+                "success": "Success! Check your inbox!"
+            },
+            "fields": {
+                "fname": "First Name",
+                "lname": "Enter your last name",
+                "cname2": "Your company name",
+                "position": "Position in the company",
+                "phone": "Phone number",
+                "email": "Email"
+            },
+            "register": "Register for free",
+            "register_alt": "Get a free ticket",
+            "register_alt2": "Get a free ticket",
+            "more_info": "more info",
+            "attendees": "See who will be there",
+            "thankyou": "%{name}! It will be great to meet you in person!",
+            "tickets": {
+                "download": "Download and print a ticket"
+            },
+            "benefits": {
+                "networking": {
+                    "title": "Successful networing among people with similar challenges",
+                    "description": "During the Fair, you can meet not only people representing companies at the stands but you also have the chance to get involved during the Questions and Answers session after each presentation as well as getting to know people in the networking space. These relationships can pay off in the future."
+                },
+                "title": "Why is it worth to visit the Fair",
+                "free_entry": {
+                    "title": "Free entry (Expo & Presentations)",
+                    "description": "Registration is free and gives you an access to the expo area and presentation stages. Please be aware that the access to the stages can be limited due to safety reasons."
+                },
+                "special_offers": {
+                    "title": "Savings ahead - special offers from exhibitors",
+                    "description": "Each exhibitor is motivated to offer an exclusive offer for their product and/or service. Depending on the product or service, you can gain some additional trial period or discount."
+                },
+                "insight": {
+                    "title": "Get to know the creators of the product or service",
+                    "description": "The fair is practically the only opportunity to meet people standing behind the service and product and ask them about what cannot be read on the website and what your customer support will not tell them. Take advantage of this and eliminate your doubts."
+                },
+                "future": {
+                    "title": "Find out how to succeed on highly competitive markets",
+                    "description": "The number one topic of the Fair is always to increase conversions and sales. We strive to include, alongside business optimization issues, some inspiration and knowledge about highly competitive markets."
+                },
+                "case_studies": {
+                    "title": "FAQ",
+                    "description": "Although participation in the presentations is free, we try to ensure that the agenda competes with conferences, for which you usually have to pay dearly. The invited speakers are dominated by practitioners and experienced consultants. After many years of experience, we decided to present a wider spectrum of knowledge in form of shorter presentations. Such a formula makes the presentations an impulse for behind-the-scenes conversations and an exciting Q&A sessions."
+                }
+            },
+            "are_you_visitor": "Not a provider? Register for free and become a visitor.",
+            "agreement": {
+                "title": "Rules for visitors"
+            }
+        },
+        "schedule": {
+            "break_5": "5-minute break",
+            "break_10": "10-minute break",
+            "break_15": "15-minute break",
+            "break_20": "20-minute break",
+            "break_25": "25-minute break",
+            "break_30": "30-minute break",
+            "break_35": "35-minute break",
+            "break_40": "40-minute break",
+            "break_45": "45-minute break",
+            "break_50": "50-minute break"
+        },
+        "partners": {
+            "community": {
+                "title": "Community Partners"
+            },
+            "media": {
+                "title": "Media Partners"
+            }
+        },
+        "resources": {
+            "companydata": {
+                "customfields": {
+                    "pr_manager": {
+                        "name": "PR Manager"
+                    },
+                    "sales_manager": {
+                        "name": "Contact person for visitors"
+                    },
+                    "xing": {
+                        "name": "Company profile on Xing\n"
+                    }
+                }
+            }
+        }
+    },
+    "de": {
+        "common": {
+            "price": "Preis",
+            "booths": "Stände",
+            "confirm": "Bestätigung",
+            "from": "z",
+            "chat": "Online chat",
+            "currencies": {
+                "eur": "EUR",
+                "pln": "PLN"
+            },
+            "prices": {
+                "net": "Netto",
+                "gross": "Brutto"
+            },
+            "faq": {
+                "share": {
+                    "description": "URL mit ausgewählten Fragen generieren",
+                    "link": "Generieren"
+                }
+            },
+            "tags": {
+                "logistics": "Logistik",
+                "payment": "Bezahlung",
+                "platform": "E-Shop Platform",
+                "sales_generation": "Sales Generation",
+                "software": "Software",
+                "communication": "Kommunikation",
+                "customer_support": "Kundenservice",
+                "analytics": "Analysen",
+                "international_sales": "International sales",
+                "omnichannel": "Omnichannel",
+                "stages": {
+                    "a": "Bühne A",
+                    "b": "Bühne B",
+                    "c": "Bühne C",
+                    "d": "Bühne D"
+                },
+                "infrastructure": "Infrastruktur"
+            },
+            "more": "mehr",
+            "errors": {
+                "http404": "Seite nicht gefunden",
+                "http500": "Etwas ist schief gelaufen"
+            },
+            "map": "Ausstellungskarte",
+            "share": {
+                "facebook": "Auf Facebook teilen",
+                "twitter": "Auf Twitter teilen",
+                "linkedin": "Auf LinkedIn teilen"
+            },
+            "menu": {
+                "visitors": {
+                    "title": "Teilnehmer / Besucher",
+                    "visit": "Kostenlose Registrierung",
+                    "registered": "Schau wer dabei ist",
+                    "agenda": "Speaker und Themen",
+                    "schedule": "Präsentationsthemen",
+                    "presenters": "Liste der Speaker",
+                    "exhibitors": "Gesamte Liste der Aussteller",
+                    "specials": "Sonderangebote",
+                    "location": "Veranstaltungsort",
+                    "offers": "Aussteller Angebot"
+                },
+                "exhibitors": {
+                    "title": "Aussteller",
+                    "exhibitors": "List of the Exhibitors",
+                    "exhibit": "Buche Ausstellungsfläche",
+                    "faq": "Praktische Information",
+                    "location": "Veranstaltungsort"
+                },
+                "general": {
+                    "title": "General",
+                    "home": "Home"
+                }
+            },
+            "locales": {
+                "en": "english",
+                "de": "deutsch",
+                "pl": "Polnisch"
+            },
+            "close": "Schließen",
+            "language": {
+                "change": "Sprache ändern"
+            },
+            "pcs": "Stück",
+            "remaining": "übrig",
+            "buy": "Kaufe jetzt",
+            "days": "Tage",
+            "visitor": "Besucher",
+            "exhibitor": "Aussteller",
+            "coming_soon": "Demnächst",
+            "details": "Details",
+            "booth_location": "Exhibitor profile",
+            "hours": "Std",
+            "minutes": "Min",
+            "stage-patrons": "Bühnen Patronaten\n",
+            "stage": "Bühne",
+            "pages": {
+                "imprint": "Imprint",
+                "cookies": "Wie wir cookies nutzen"
+            }
+        },
+        "event": {
+            "gallery": "Expo von innen",
+            "opengraph": {
+                "name": "E-commerce Berlin Expo | Berlin | Feb 13, 2020",
+                "description": "Ganze E-Commerce-Welt an einem Ort"
+            },
+            "date": "Datum",
+            "location": "Ort",
+            "hours": "Dauer",
+            "organizer": {
+                "name": "Veranstalter",
+                "address": "Firmenanschrift",
+                "registration": "USt-IdNr."
+            },
+            "support": {
+                "hello": "Support",
+                "description": "Zögern Sie nicht, uns bezüglich unseres Angebots zu kontaktieren. Schöne Grüße!"
+            },
+            "sales": {
+                "support": "Brauchst Du Hilfe?",
+                "booths": {
+                    "sold": "Ausverkauft",
+                    "hold": "Gebucht. Wartet auf Bezahlung",
+                    "available": "Verfügbar",
+                    "free": "Diese Ausstellungsfläche ist verfügbar",
+                    "owner": "Diese Ausstellungsfläche gehört zu:"
+                },
+                "pool": {
+                    "start": "Verkaufsbeginn",
+                    "name": "Name des Verkaufspools",
+                    "price": "Preis in diesem Verkaufspool",
+                    "end": "Dieser Verkaufspool endet am",
+                    "info": "Ausstellungsfläche wird in Tranchen verkauft. Buche jetzt, um einen optimalen Standort und einen niedrigeren Preis zu erhalten.",
+                    "legend": "Du kannst eine der folgenden Standkategorien wählen -  Grand, Hot, Standard, Superhot. Du findest die aktuellen Preise, indem du auf die Stände in der Karte klickst (je dunkler die Farbe, desto besser die Lage und höher der Preis deines Standes)."
+                },
+                "steps": {
+                    "choose_booth": "Wähle eine Ausstellungsfläche (klicke auf die Karte)",
+                    "confirm": "Bestellung bestätigen",
+                    "pay": "Stand bezahlen",
+                    "access": "Zugang zum Ausstellerprofil"
+                }
+            },
+            "claim": "Über 5000 Teilnehmer treffen",
+            "description": "B2B Expo & Konferenz für E-commerce Dienstleister",
+            "parties": "150 Aussteller, 40 Speaker und Networking mit über 5000 Teilnehmern"
+        },
+        "exhibitors": {
+            "map": {
+                "title": "Buche einen Stand",
+                "opensales": "Kaufe die Ausstellungsfläche und triff unsere Besucher",
+                "title2": "Aussteller werden"
+            },
+            "list_featured": "Triff unsere Aussteller",
+            "booth_location": "Stand %{loc} |||| Stand %{loc}",
+            "booth_location_full": "Location %{cname2}: %{loc} |||| Location %{cname2}: %{loc}",
+            "list_full": "Alle Aussteller\n",
+            "premium": {
+                "title": "Premium-Angebot",
+                "presentation": "Präsentationen in der Primetime und auf der ausgewählten Bühne",
+                "networking": {
+                    "name": "Partner der Networking-Zone",
+                    "area": "150m2 im zentralen Teil der Halle, an der Kreuzung der wichtigsten Kommunikationswege",
+                    "arrangement": "Arrangement von einem professionellen, externen Unternehmen, das sich um die kleinsten Details kümmert",
+                    "attractions": "Highligts für Messeteilnehmer: DJ (Chill-Out, Down-Tempo, 80er-Jahre-Musik), Kaffeepunkt",
+                    "branding": "Vollfarb-Branding des zentralen Elements, Branding der Sitzwürfel (30 Stück)",
+                    "fullservice": "Full Service - wir koordinieren ALLE Aktivitäten"
+                },
+                "contact": {
+                    "title": "Buchung, weitere Informationen",
+                    "description": "Ich liefere dir gerne zusätzliche Informationen und stelle ein Preisangebot vor. Bei Fragen stehe ich zur Verfügung."
+                }
+            },
+            "faq": {
+                "before_event": {
+                    "name": "Vor der Expo",
+                    "representatives": {
+                        "q": "Wie viele Firmenvertreter dürfen am Stand sein?",
+                        "a": "Die Anzahl der Vertreter an Ihrem Stand ist willkürlich, aber denke daran, dass in dem Paket nur 4 Vouchers für das Mittagessen enthalten sind (außer wenn zusätzliche Gutscheine gekauft wurden)."
+                    },
+                    "additional_paid_services": {
+                        "q": "Gibt es Upgrade-Optionen oder zusätzliche Services, die man bestellen kann?",
+                        "a": "Zu den zusätzlichen Dienstleistungen gehören die Erhöhung der Stärke des Stromanschlusses (bis zu 6kW), eine größere Anzahl von Willkommenspaketen für die Ausstellervertreter, Bodenteppich, mehr Möbel oder eine Bebauung der Ausstellungsfläche inklusive vollflächiger Rückwand und Theke."
+                    },
+                    "shipping_of_materials": {
+                        "q": "Kann ich Materialien zum Messegelände schicken?",
+                        "a": "Ja. Weitere Informationen finden Sie im Ausstellerprofil."
+                    },
+                    "standard_offering": {
+                        "q": "Wie groß ist mein Stand und was ist im Paket enthalten?",
+                        "a": "Neben den Grand-Ständen (6x3m) sind alle Standard-Stände  3x3m. Wenn du keine zusätzlichen Dienstleistungen bestellt hast, beinhaltet das Paket 4 Stühle, 1 Tisch, 4 Catering-Gutscheine, Zugang zu Strom (300W) und Wifi."
+                    },
+                    "how_to_promote": {
+                        "q": "Was solltest Du für die Teilnahme an der Messe planen, um möglichst viele neue Kunden zu erreichen?",
+                        "a": "Informiere so viele Kunden wie möglich, dass Du bei der Expo anwesend wirst. Lade Deine Partner und Personen, die mit Deinem Unternehmen zu tun haben, zur Messe ein. Nutze Werbematerialien, die Du in Ihrem Ausstellerprofil finden. Vergesse nicht, Dein Profil in den sozialen Medien zu teilen und lade die Teilnehmer zu einem Treffen während der Veranstaltung."
+                    },
+                    "promo_benefits": {
+                        "q": "Was sind die Vorteile der Bewerbung meiner Teilnahme?",
+                        "a": "Neben den offensichtlichen Vorteilen wie neue Geschäftsbeziehungen und Deals, Du hast die Möglichkeit, interessante Preise zu gewinnen. Mache Dich mit den Informationen unter \"Awards\"-Tab in Deinem Ausstellerprofil vertraut. Der Hauptpreis ist die Möglichkeit, einen Vortrag auf der Veranstaltung zu halten!"
+                    },
+                    "public_profile": {
+                        "q": "Wie kann ich vom öffentlichen Ausstellerprofil profitieren?",
+                        "a": "Öffentlicher Ausstellerprofil ist eine dedizierte Webseite und ein Schaufenster für Dein Unternehmen, mit dem Du Dich von der Konkurrenz abheben kannst. Besucher durchsuchen die Profile, bevor sie sich entscheiden, sich während der Messe zu treffen, weshalb es so wichtig ist, alle Informationen zu vervollständigen."
+                    }
+                },
+                "event": {
+                    "name": "Während der Messe",
+                    "hours": {
+                        "q": "Wann wird die Expo stattfinden?",
+                        "a": "Die Messe findet von 10:00 bis 17:00 Uhr statt."
+                    },
+                    "welcoming": {
+                        "q": "Wohin soll ich gehen, nachdem ich die Halle betreten habe?",
+                        "a": "Wenn Du dort ankommst, gehe zum Info-Punkt für Aussteller in der Nähe der Registrierung. Du erhältst alle notwendigen Anweisungen zum weiteren Vorgehen. Unsere Mitarbeiter bringen Dich direkt zu Deinem Stand."
+                    },
+                    "after_party": {
+                        "q": "Wird es eine Networking Party geben?",
+                        "a": "Wir laden euch zu unserer exklusiven Networking Party am 12. Februar 2020 von 19 - 23 Uhr ein (Vorabend der Expo). Die Gewinnerzeremonie der E-commerce Germany Awards 2020 finden ebenfalls auf der Networking Party statt. Hier habt ihr die Möglichkeit alle Aussteller persönlich zu treffen und euch zu vernetzen."
+                    },
+                    "assembly_caution": {
+                        "q": "Wann kann ich meinen Stand aufbauen?",
+                        "a": "Der Stand kann am Montagetag, dh am Tag vor der Veranstaltung zwischen 14:00 und 23:59 Uhr und am Tag der Messe zwischen 8:30 und 9:30 Uhr aufgebaut werden. Die Messe beginnt um 10:00 Uhr - bereite Dich auf die ersten Gäste vor, die sich für die Dienstleistungen Deines Unternehmens interessieren"
+                    },
+                    "catering": {
+                        "q": "Wo erhalte ich Essensgutscheine?",
+                        "a": "Die Essensgutscheine warten im Starterpaket direkt an Deinem Stand am Expotag."
+                    },
+                    "badges": {
+                        "q": "Muss ich die Badges ausdrucken?",
+                        "a": "Das ist nicht nötig. Die Badges Deiner Unternehmensvertreter warten auf Euch im Starterpaket an Eurem Stand."
+                    },
+                    "parking_setupday": {
+                        "q": "Wird es möglich sein, am Tag der Expo den Parkplatz zu nutzen?",
+                        "a": "Ja, am Vorabend der Veranstaltung sind alle Einfahrtstore geöffnet. "
+                    },
+                    "parking_eventday": {
+                        "q": "Wo kann ich mein Auto währen der Expo parken?",
+                        "a": "Es gibt keine gewidmeten Parkplätze auf dem Messegelände während der Expo.\n\nIhr könnt aber ein nahegelegenes Parkaus nutzen, \"PARKHAUS GLEISDREIECK\".\n\nDas Parkhaus kann vom Schöneberger Ufer, von der Luckenwalder Strasse sowie Köthener Brücke erreicht werden.\n\nBetriebszeiten: Täglich, 6 Uhr bis 22 Uhr\n\nGebühren für kurzzeitiges Parken:\nPro Stunde: 1,00€\nPro Tag: 10,00€"
+                    },
+                    "problems_equipment": {
+                        "q": "An wen sollte ich mich bei Problemen mit der Ausstattung des Standes wenden?",
+                        "a": "Alle Probleme mit der Standausstattung: Stühle, Tische, Stromanschluss und Internet sind an die Infostelle für Aussteller, die sich neben der Anmeldung befindet, zu melden."
+                    },
+                    "problems_services": {
+                        "q": "Was soll ich bei anderen Problemen tun?",
+                        "a": "Im Starterpaket an Deinem Stand findest Du eine Liste der wichtigsten Kontaktnummern. Unsere Mitarbeiter helfen Dir gerne bei der Lösung Deines Problems."
+                    },
+                    "badge_scanner": {
+                        "q": "Wie kann ich auf den Besucherbadges-Scanner zugreifen?",
+                        "a": "Der Zugriff auf den \"Badge Scanner\" erfolgt nur, wenn Du den richtigen Platz im Ranking einnimmst. Weitere Details findest Du in Deinem Ausstellerprofil unter dem Tab \"Awards\"."
+                    }
+                },
+                "after_event": {
+                    "name": "Nach der Expo",
+                    "scans": {
+                        "q": "Was soll ich mit den gescannten Badges tun?",
+                        "a": "Die Kontaktdaten gescannter Besucher stehen allen Vertretern Deines Unternehmens zur Verfügung. Du kannst sie problemlos in XLS- oder CSV-Dateien exportieren. Bereite als Nächstes eine Zusammenfassung der Besprechung  und beendeDeine Verhandlungen mit neuen Kunden."
+                    },
+                    "next_booth_sales": {
+                        "q": "Wann kann ich einen Stand für die nächste Ausgabe buchen?",
+                        "a": "Der Verkauf für die nächste Ausgabe beginnt spätestens einen Monat nach dem Ende der aktuellen Ausgabe"
+                    }
+                },
+                "name": "Häufig gestellte (und beantwortete) Fragen",
+                "become": {
+                    "name": "Bestellung der Ausstellungsfläche",
+                    "included_services": {
+                        "a": "Unser Standardpaket beinhaltet:\n* Grundausstattung (2 Stehtisch und 4 Hochstühle)\n* Catering-Gutscheine und Badges für 4 Firmen-Repräsentanten\n* Online Ausstellerprofil\n* Parkkarte\n* Stromanschluss (230V, max 300W)\n*Wifi\n*Logo auf der Registrierungsseite (Firmenname und Link)\n*Firmenname im gedruckten Werbematerial",
+                        "q": "Was ist im Standardpaket enthalten?"
+                    },
+                    "payment": {
+                        "a": "In der Regel werden Unternehmen aufgefordert, innerhalb von 7 Arbeitstagen für eine Bestellung zu bezahlen.",
+                        "q": "Wann sollte ich für eine Ausstellungsfläche bezahlen?"
+                    },
+                    "onboarding": {
+                        "a": "Nach dem Bezahlen der Ausstellungsfläche erhaltst Du Zugang zu Deinem Ausstellerprofil und wir werden Dich auch regelmäßig zu logistischen Themen und zur Vermarktung Deiner Teilnahme kontaktieren.",
+                        "q": "Was ist der nächste Schritt nach der Bezahlung?"
+                    },
+                    "resignation": {
+                        "a": "Die Situation wird abhängig von der verbleibenden Zeit bis zur Messe geregelt - wenn der Rücktritt später als 2 Monate vor der Messe erfolgt, ziehen wir 50% der Servicegebühr ab. In der Regel versuchen wir, einen Teil der Gebühr auf die nächste Messe zu übertragen.",
+                        "q": "Höhere Gewalt - was, wenn wir nicht ausstellen können?"
+                    },
+                    "promo_benefits": {
+                        "q": "Wie können wir von der Messe profitieren, BEVOR sie stattfindet?",
+                        "a": "Wenn Du bereits den Zugang zum Ausstellerprofils bekommen hast, solltest Du so schnell wie möglich die Daten ausfüllen. Wir werden das Firmenprofil in unseren Werbeaktivitäten verwenden und es ist öffentlich sichtbar. Aussteller werden ermutigt, unsere Marketing-Tools zu nutzen, um ihre Kunden über die Teilnahme an unserem Event zu informieren, den registrierten Besucher die Möglichket geben, sich über Euch zu informieren und ein Treffen zu vereinbaren."
+                    }
+                }
+            },
+            "list_by_keyword": "Aussteller nach Branche",
+            "list": {
+                "filter_title": "Aussteller nach Branche filtern"
+            },
+            "standard": {
+                "electricity": "Strom 230V - max 300W",
+                "catering": "Catering für Vertreter Deines Unternehmens",
+                "space": "Ausstellungsfläche von 9 m2 (3m x 3m) Open-Space-Formel (ohne Wände)",
+                "info": "Standard-Ausstellungsfläche umfasst",
+                "profile": "Firmenprofil",
+                "ids": "Badges für Vertreter Deines Unternehmens",
+                "furniture": "Grundausstattung (4 Barhocker, zwei Tischen)"
+            },
+            "benefits": {
+                "title": "Warum ausstellen?",
+                "outreach": {
+                    "title": "Finde neue Kunden",
+                    "description": "Bereite ein attraktives Angebot für den Messetag vor. Nutze unser Tool, um Treffen mit registrierten Besuchern zu planen. Werde ein Magnet für die Teilnehmer."
+                },
+                "all_inclusive": {
+                    "title": "Keine versteckten Kosten",
+                    "description": "Unser Standardangebot ist für über 85% der ausstellenden Unternehmen geeignet. Grundausstattung, Catering-Gutscheine, Strom sind im Kernpaket enthalten. Wenn Du bereits eine Werbewand für die Rückseite der Ausstellungsfläche hast, dann bist Du bereit! Wenn Du aber doch eine Full-Service-Option bevorzugst, bieten wir ein Upgrade an, in dem wir Dein Stand von einer professionellen Firma entwerfen lassen."
+                },
+                "feedback": {
+                    "title": "Erhalte ein ehrliches Feedback über deine Dienstleistungen und Produkte",
+                    "description": "Einer der meist unterschätzten Vorteile des Ausstellens ist der persönliche Kontakt mit einer echten Person und deren ehrliche Meinung und/oder Feedback zu eurem Service oder Produkt. Kleine Änderungen, die du an deinen Produkten vornehmen kannst, können für Dein Unternehmen von enormer Bedeutung sein. Dies ist alles andere, als was Dir die anonyme online Befragung geben kann."
+                },
+                "meet_clients": {
+                    "title": "Stärke Beziehungen zu bestehenden Kunden",
+                    "description": "Die Messe ist eine großartige Gelegenheit, Klienten zu treffen, die bereits eure Produkte und Dienstleistungen nutzen. Gib deinen Kunden die Möglichkeit, euer Team zu treffen. Frag nach Feedback und zeige die neusten Produkte und Dienstleistungen. Es wird sich lohnen."
+                },
+                "organizer": {
+                    "title": "Zuverlässige Formel und Organisator",
+                    "description": "Nach 4 erfolgreichen Ausgaben findet die EBE 2020 bereits zum 5. Mal statt. Innerhalb von 4 Jahren hat sich die EBE als einer der führenden E-commerce Messen Deutschlands durchgesetzt. Mit mehr als 10000 Besuchern und über 300 Ausstellern, hat die Messe in der Vergangenheit einige bemerkenswerte Unternehmen ausgestellt, darunter Google, Samsung, Alibaba, Zalando, Facebook, DHL and L'Oreal."
+                },
+                "inspiration": {
+                    "title": "Lass dich von Menschen um dich herum inspirieren",
+                    "description": "Enger Kontakt mit dem Markt (und auch Wettbewerbern) kann von erstaunlicher Inspiration sein. Nutze den Messetag, um nicht nur deine Produkte und Dienstleistungen zu präsentieren, sondern auch zu erfahren, was hinter den Kulissen gesagt wird und wie die Zukunft der Branche von den Teilnehmern wahrgenommen wird."
+                }
+            },
+            "offers": {
+                "offer": "Offer",
+                "list": {
+                    "promoted": "Selected offers",
+                    "other": "Other expo offers"
+                },
+                "title": "Exhibitors' expo offers"
+            },
+            "agreement": {
+                "title": "Regeln für Aussteller"
+            }
+        },
+        "api": {
+            "errors": {
+                "registration": {
+                    "not_enough_data": "Fehler",
+                    "bad_ticket_ids": "Fehler"
+                }
+            }
+        },
+        "services": {
+            "chatlio": {
+                "hello": "Hallo! :)"
+            }
+        },
+        "speakers": {
+            "opengraph": {
+                "title": "%{name} während der E-commerce Berlin Expo",
+                "description": "%{about}"
+            }
+        },
+        "companies": {
+            "opengraph": {
+                "title": "%{name} möchte Dich zu der E-commerce Berlin Expo einladen",
+                "description": "%{about}"
+            },
+            "profile": {
+                "about": "Über uns",
+                "products": "Schlüsselprodukte",
+                "contact": "Kontakt",
+                "expo": "Angebot der Expo",
+                "facebook": "Facebook-Profil",
+                "twitter": "Twitter-Profil",
+                "linkedin": "LinkedIn-Profil",
+                "website": "Aussteller Webseite"
+            }
+        },
+        "presenters": {
+            "list_featured": "Speaker",
+            "list_full": "Referenten",
+            "schedule": "Bühnen-Agenda",
+            "opengraph": {
+                "title": "% {name} am 13. Februar in Berlin. Freier Eintritt!",
+                "description": "% {fname} (% {cname2}) hält eine Präsentation auf: % {presentation_title}"
+            },
+            "tba": "Rednerliste und Zeitplan werden in Kürze bekannt gegeben",
+            "list_description": "Präsentationen beginnen um 10:30 Uhr"
+        },
+        "visitors": {
+            "opengraph": {
+                "title": "%{name} nimmt an der E-commerce Berlin Expo teil | %{location}, %{date}",
+                "description": "%{description}"
+            },
+            "invite": {
+                "title": "%{name} aus %{cname} nimmt an der E-commerce Berlin Expo teil",
+                "will_you_join": "Willst Du ein kostenloses Ticket?",
+                "description": "%{description}"
+            },
+            "form": {
+                "register": "Anmeldung",
+                "intro": "Finde dein Online-Ticket einige Tage vor der Veranstaltung in deinem Posteingang.",
+                "success": "Erfolg! Überprüfe deinen Posteingang!"
+            },
+            "fields": {
+                "fname": "Vorname",
+                "lname": "Dein Nachname",
+                "cname2": "Name der Firma",
+                "position": "Position in der Firma",
+                "phone": "Telefonnummer",
+                "email": "E-Mail"
+            },
+            "register": "Kostenlos registrieren",
+            "register_alt": "Bekomme dein kostenloses Ticket",
+            "register_alt2": "Bekomme dein kostenloses Ticket",
+            "more_info": "mehr Informationen",
+            "attendees": "Sieh wer noch kommt",
+            "thankyou": "%{name}! Es wäre toll, Dich persönlich zu treffen!",
+            "tickets": {
+                "download": "Ticket herunterladen und drucken"
+            },
+            "benefits": {
+                "networking": {
+                    "title": "Erfolgreiches Networking bei Menschen mit ähnlichen Herausforderungen",
+                    "description": "Während der Messe kannst du nicht nur Vertreter von Unternehmen an den Ständen treffen, sondern auch die Möglichkeit, sich nach jeder Präsentation während der Fragen- und Antworten-Runde zu beteiligen und Menschen im Networkingzone kennenzulernen. Diese Beziehungen können sich in Zukunft auszahlen."
+                },
+                "title": "Warum lohnt es sich, die Messe zu besuchen?",
+                "free_entry": {
+                    "title": "Freier Eintritt (Expo & Präsentationen)",
+                    "description": "Die Registrierung ist kostenlos und ermöglicht Dir den Zugang zum Expo-Bereich und zur Präsentation. Bitte beachte, dass der Zugang zu den Bühnen aus Sicherheitsgründen eingeschränkt werden kann."
+                },
+                "special_offers": {
+                    "title": "Einsparungen - spezielle Angebote von Ausstellern",
+                    "description": "Jeder Aussteller ist motiviert, ein exklusives Angebot für sein Produkt und / oder seine Dienstleistung anzubieten. Je nach Produkt oder Service kannst Du als Besuchern eine längere Testphase oder einen Rabatt erhalten."
+                },
+                "insight": {
+                    "title": "Lerne die Schöpfer des Produkts oder der Dienstleistung kennen",
+                    "description": "Die Messe ist praktisch die beste Möglichkeit, Menchen zu treffen, die hinter den Dienstleistungen und dem Produkt stehen, und sie direkt zu fragen, was auf der Website nicht gelesen werden kann und was die Kundenbetreuung ihnen nicht sagen wird. Nutze dies und beseitige Deine Zweifel."
+                },
+                "future": {
+                    "title": "Lerne wie man Erfolg in hart umkämpften Märkten erzielt",
+                    "description": "Das Hauptthema der Messe ist immer die Steigerung von CRO und Umsatz. Wir sind bestrebt, neben Fragen der Unternehmensoptimierung auch Inspiration und Wissen über wettbewerbsintensive Märkte einzubeziehen."
+                },
+                "case_studies": {
+                    "title": "FAQ",
+                    "description": "Obwohl die Teilnahme an den Präsentationen kostenlos ist, bemühen wir uns sicherzustellen, dass die Agenda mit Konferenzen konkurriert, für die Sie normalerweise teuer bezahlen müssen. Die eingeladenen Referenten setzen sich von Praktikern und erfahrenen Beratern zusammen. Nach langjähriger Erfahrung haben wir uns entschieden, ein breiteres Spektrum an Wissen in Form von kürzeren Präsentationen zu präsentieren. Eine solche Formel macht die Präsentationen zu einem Impuls für Gespräche hinter den Kulissen und spannende Fragen und Antworten Runden."
+                }
+            },
+            "are_you_visitor": "Kein Dienstleister? Registriere Dich kostenlos und werde Besucher.",
+            "agreement": {
+                "title": "Regeln für Besucher"
+            }
+        },
+        "schedule": {
+            "break_5": "5-minütige Pause",
+            "break_10": "10-minütige Pause",
+            "break_15": "15-minütige Pause",
+            "break_20": "20-minütige Pause",
+            "break_25": "25-minütige Pause",
+            "break_30": "30-minütige Pause",
+            "break_35": "35-minütige Pause",
+            "break_40": "40-minütige Pause",
+            "break_45": "45-minütige Pause",
+            "break_50": "50-minütige Pause"
+        },
+        "partners": {
+            "community": {
+                "title": "Community Partner"
+            },
+            "media": {
+                "title": "Medienpartner"
+            }
+        },
+        "resources": {
+            "companydata": {
+                "customfields": {
+                    "pr_manager": {
+                        "name": "PR Manager"
+                    },
+                    "sales_manager": {
+                        "name": "Kontaktperson für Besucher"
+                    },
+                    "xing": {
+                        "name": "Xing Firmenprofil\n"
+                    }
+                }
+            }
+        }
+    }
+}
