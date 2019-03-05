@@ -19,7 +19,7 @@ import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import WidgetCompanyBookingmap from './WidgetCompanyBookingmap'
 
 
-const WidgetCompany = ({id, asPath}) => (
+const WidgetCompany = ({id, asPath, map}) => (
 
   <SingleRecord endpoint="companies" id={id}>
   {
@@ -58,11 +58,16 @@ const WidgetCompany = ({id, asPath}) => (
 
     </Wrapper>
 
-    <WidgetCompanyBookingmap company={company} />
+    {map && <WidgetCompanyBookingmap company={company} />}
     
     </React.Fragment>
 }
 </SingleRecord>)
+
+
+WidgetCompany.defaultProps = {
+  map : true
+}
 
 
 export default WidgetCompany

@@ -19,16 +19,16 @@ const menuItems = [
         to: '/visit'
         //  icon : <IconSetting />
       },
-      {
-        name: 'schedule',
-        to: '/schedule'
-        //    icon : <IconLogistics />
-      },
-      {
-        name: 'presenters',
-        to: '/presenters'
-        //      icon : <IconPeople />
-      },
+      // {
+      //   name: 'schedule',
+      //   to: '/schedule'
+      //   //    icon : <IconLogistics />
+      // },
+      // {
+      //   name: 'presenters',
+      //   to: '/presenters'
+      //   //      icon : <IconPeople />
+      // },
       {
         name: 'exhibitors',
         to: '/exhibitors'
