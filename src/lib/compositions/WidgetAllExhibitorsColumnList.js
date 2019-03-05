@@ -1,52 +1,27 @@
 
 import React from 'react';
 
-import Companies from '../datasources/Companies'
+import AllExhibitors from '../datasources/AllExhibitors'
 import ColumnList from '../components/ColumnList'
-import KeywordSelect from '../components/KeywordSelect'
-import {Centered} from '../components/MyLayouts'
-import MyTypography from '../components/MyTypography'
 import Wrapper from '../components/Wrapper'
  
 
-const WidgetAllExhibitorsColumnList = (props) => (
+const WidgetAllExhibitorsColumnList = ({filter, ...wrapperProps}) => (
 
-    <Wrapper label="exhibitors.list_full" color="#ffffff" {...props}>
+    <Wrapper label="exhibitors.list_full" color="#ffffff" {...wrapperProps}>
 
-    <Companies columns={true} sort='profile.name'>
-      {(exhibitors, keywords) => 
-        
-    <React.Fragment>
-    {
-      
-      keywords && keywords.length ?
+    <AllExhibitors columns={true} filter={filter} sort='profile.name'>
 
-      (<Centered style={{marginTop: 80}}>
+      {(exhibitors) => <ColumnList data={exhibitors} />}
 
-      <MyTypography label="exhibitors.list.filter_title" template="SUBH2CH" />
-      <KeywordSelect keywords={keywords} />
-
-      </Centered>) : null
-
-    }
-
-    
-
-    <ColumnList data={exhibitors} />
-
-    </React.Fragment>
-      
-       }
-    </Companies>
+    </AllExhibitors>
 
     </Wrapper>
-
 
 )
 
 WidgetAllExhibitorsColumnList.defaultProps = {
-
-
+  filter : function(item){ return "name" in item.profile && item.profile.name }
 }
 
 export default WidgetAllExhibitorsColumnList

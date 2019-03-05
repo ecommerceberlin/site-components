@@ -29,26 +29,26 @@ const menuItems = [
       //   to: '/presenters'
       //   //      icon : <IconPeople />
       // },
-      {
-        name: 'exhibitors',
-        to: '/exhibitors'
-        //      icon : <IconPeople />
-      },
-      {
-        name: 'offers',
-        to: '/offers'
-        //      icon : <IconPeople />
-      }
+      // {
+      //   name: 'exhibitors',
+      //   to: '/exhibitors'
+      //   //      icon : <IconPeople />
+      // },
+      // {
+      //   name: 'offers',
+      //   to: '/offers'
+      //   //      icon : <IconPeople />
+      // }
     ]
   },
   {
     name: 'exhibitors',
     items: [
-      {
-        name: 'exhibitors',
-        to: '/exhibitors'
-        //  icon : <IconSetting />
-      },
+      // {
+      //   name: 'exhibitors',
+      //   to: '/exhibitors'
+      //   //  icon : <IconSetting />
+      // },
       {
         name: 'exhibit',
         to: '/exhibit'

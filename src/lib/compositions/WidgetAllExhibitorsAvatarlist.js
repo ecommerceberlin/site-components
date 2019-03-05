@@ -1,38 +1,32 @@
 import React from 'react'
 
-import Exhibitors from '../datasources/Exhibitors'
+import AllExhibitors from '../datasources/AllExhibitors'
 
 import {
   Avatarlist,
-  KeywordSelect,
-  Centered,
-  MyTypography,
+  // KeywordSelect,
+  // Centered,
+  // MyTypography,
   Wrapper
 } from '../components';
 
 
-const WidgetAllExhibitorsAvatarlist = (props) => (
+const WidgetAllExhibitorsAvatarlist = ({filter, ...wrapperProps}) => (
 
-  <Wrapper {...props}>
+  <Wrapper {...wrapperProps}>
 
-  <Exhibitors mobile={false} random={false} sort='profile.name'>{
-    (exhibitors, keywords) =>
+  <AllExhibitors mobile={false} random={false} sort='profile.name' filter={filter}>{
 
-    <React.Fragment>
+    (exhibitors) =>   <Avatarlist data={exhibitors} />
 
-      <Centered style={{marginTop: 80}}>
-
-        <MyTypography label="exhibitors.list.filter_title" template="SUBH2CH" />
-        <KeywordSelect keywords={keywords} />
-
-      </Centered>
-
-      <Avatarlist data={exhibitors} />
-
-    </React.Fragment>
-  }</Exhibitors>
+  }</AllExhibitors>
 
   </Wrapper>
 
 )
+
+WidgetAllExhibitorsAvatarlist.defaultProps = {
+  filter : function(item){ return "name" in item.profile && item.profile.name }
+}
+
 export default WidgetAllExhibitorsAvatarlist

@@ -2,9 +2,12 @@ export { default as WidgetVideoWithEventInfo } from './WidgetVideoWithEventInfo'
 export { default as WidgetVideoWithReviews } from './WidgetVideoWithReviews';
 export { default as WidgetVisitor } from './WidgetVisitor';
 export { default as WidgetCompanyBookingmap } from './WidgetCompanyBookingmap';
+
 export { default as WidgetFeaturedExhibitors } from './WidgetFeaturedExhibitors';
 export { default as WidgetFeaturedCompanies } from './WidgetFeaturedCompanies';
+
 export { default as WidgetAllExhibitorsAvatarlist } from './WidgetAllExhibitorsAvatarlist';
+export { default as WidgetExhibitorsAvatarlist } from './WidgetExhibitorsAvatarlist';
 
 export { default as WidgetAllExhibitorsColumnList } from './WidgetAllExhibitorsColumnList';
 export { default as WidgetExhibitorsColumnList } from './WidgetExhibitorsColumnList';

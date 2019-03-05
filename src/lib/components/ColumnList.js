@@ -5,7 +5,7 @@ import ColumnlistItem from './ColumnlistItem'
 import Highlight from './Highlight'
 
 
-const ColumnList = ({data}) => (
+const ColumnList = ({data, offers}) => (
 
   <Grid container spacing={24}>
     {data.map((chunk, i) => (
@@ -17,7 +17,7 @@ const ColumnList = ({data}) => (
             id={company.id} 
             subpage="company" 
             name={_get(company, 'profile.name')} 
-            highlighted={company.promo ? <Highlight /> : null} 
+            highlighted={offers && company.promo ? <Highlight /> : null} 
           />
 
         )) : null}
@@ -29,6 +29,7 @@ const ColumnList = ({data}) => (
 
 ColumnList.defaultProps = {
   data: [],
+  offers : false
 };
 
 export default ColumnList
