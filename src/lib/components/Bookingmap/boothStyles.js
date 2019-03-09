@@ -55,6 +55,12 @@ const styles = {
     color: '#666666 !important'
   },
 
+  boothUnavailable: {
+    backgroundColor: '#666666 !important',
+    borderSize: 0,
+    boxShadow : 'none'
+  },
+
   boothSelected: {
     backgroundColor: 'blue !important',
     color: 'white !important',

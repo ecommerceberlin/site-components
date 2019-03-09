@@ -16,41 +16,55 @@ const Booth = ({
   groupId,
   defaultSize,
   legend
-}) => (
-  <li
-    onClick={() => onClick(data.id, data.g, data.ti)}
-    className={
-      classNames(
-      classes.booth,
-      classes[getStylingName(groupId)],
-    {
-      [classes.boothSold]: status === 'sold',
-      [classes.boothHold]: status === 'hold',
-      [classes.boothSelected]: selected,
-      [classes.boothOnLegend] : legend
-    }
-    )}
-    style={{
-      height: (data.dh > 0 ? data.dh : defaultSize )  * zoom,
-      width: (data.dw > 0 ? data.dw : defaultSize ) * zoom,
-      top: "dt" in data ? data.dt * zoom : "auto",
-      left: "dl" in data ? data.dl * zoom : "auto",
-    //  lineHeight: `${data.dh}px`,
-    }}
-  >
-    <span
-      className={classNames(classes.boothText, {
-        [classes.boothLogotype]: buyer && 'logotype' in buyer && buyer.logotype
-      })}
-    >
-      {status === 'hold' ? "R" : data.ti}
+}) => {
 
-      {buyer && 'cname2' in buyer && zoom > 1 ? (
-        <span className={classes.cname}>{buyer.cname2}</span>
-      ) : null}
-    </span>
-  </li>
-);
+  if(!data.ti){
+    status = "unavailable"
+  }
+
+  const width = data.dw > 0 ? data.dw : defaultSize;
+  const height = data.dh > 0 ? data.dh : defaultSize;
+
+  zoom = Math.max(1, zoom);
+
+  return (
+    <li
+      onClick={() => onClick(data.id, data.g, data.ti)}
+      className={
+        classNames(
+        classes.booth,
+        classes[getStylingName(groupId)],
+      {
+        [classes.boothSold]: status === 'sold',
+        [classes.boothHold]: status === 'hold',
+        [classes.boothUnavailable]: status === 'unavailable',
+        [classes.boothSelected]: selected,
+        [classes.boothOnLegend] : legend
+      }
+      )}
+      style={{
+        height: height * zoom,
+        width: width * zoom,
+        top: "dt" in data ? data.dt * zoom : "auto",
+        left: "dl" in data ? data.dl * zoom : "auto",
+      //  lineHeight: `${data.dh}px`,
+      }}
+    >
+      <span
+        className={classNames(classes.boothText, {
+          [classes.boothLogotype]: buyer && 'logotype' in buyer && buyer.logotype
+        })}
+      >
+        {status === 'hold' ? "R" : data.ti}
+  
+        {buyer && 'cname2' in buyer && zoom > 1 ? (
+          <span className={classes.cname}>{buyer.cname2}</span>
+        ) : null}
+      </span>
+    </li>
+  );
+
+}
 
 Booth.defaultProps = {
   selected: false,
@@ -70,7 +84,7 @@ Booth.propTypes = {
 };
 
 const enhance = compose(
-  onlyUpdateForKeys(['status', 'selected', 'groupId']),
+ // onlyUpdateForKeys(['status', 'selected', 'groupId', 'defaultSize']),
   withStyles(boothStyles)
 );
 
