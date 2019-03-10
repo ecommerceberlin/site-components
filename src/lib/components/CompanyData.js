@@ -98,8 +98,7 @@ class CompanyData extends React.Component {
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
-            fullWidth={true}
-            scrollable={true}
+            variant="scrollable"
             scrollButtons="off"
           >
             {tabs.map(({name}) => (
