@@ -6,8 +6,10 @@ import withFormik, { filterFields } from './formik';
 import { MyTypography as Typography } from '../components';
 
 import FormSuccess from './FormSuccess';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import { formActionStarted, formActionFinished } from './redux'
 
-import { event } from '../services'; 
 
 /*
 dirty : false
@@ -56,7 +58,11 @@ const StepForm = props => {
     isSubmitting,
     success,
     fields,
-    start
+    start,
+    baseLabel,
+    formActionStarted,
+    formActionFinished
+  
   } = props;
 
   const started = Object.keys(touched).length;
@@ -64,20 +70,19 @@ const StepForm = props => {
 
   if (started) {
 
-    //handle GA event
-    event({
+    formActionStarted({
       action : "registration_start", 
       category : "visitors", 
       label : "method",
       value : ""
     });
-
+  
   }
 
   if (status && status === 'ok') {
 
-    //handle GA event
-    event({
+
+    formActionFinished({
         action : "registration_success", 
         category : "visitors", 
         label : "method",
@@ -91,13 +96,13 @@ const StepForm = props => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Typography template="legend" label="visitors.form.intro" />
+      <Typography template="legend" label={`${baseLabel}.form.intro`} />
 
       {start ? start.map((name, idx) => (
             <TextInput
               key={idx}
               id={name}
-              label={`visitors.fields.${name}`}
+              label={`${baseLabel}.fields.${name}`}
               {...props}
             />
           ))
@@ -108,13 +113,13 @@ const StepForm = props => {
             <TextInput
               key={idx}
               id={name}
-              label={`visitors.fields.${name}`}
+              label={`${baseLabel}.fields.${name}`}
               {...props}
             />
           ))
         : null}
 
-      <FormButton label="visitors.form.register" {...props} />
+      <FormButton label={`${baseLabel}.form.register`} {...props} />
     </form>
   );
 };
@@ -122,7 +127,12 @@ const StepForm = props => {
 StepForm.defaultProps = {
   api: "https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/register",
   template : 'ecommerceberlin-visitor-registration',
-  ticketId : 0
+  ticketId : 0,
+  baseLabel : "visitors"
 };
 
-export default withFormik(StepForm);
+const enhance = compose(
+  withFormik,
+  connect(null, {formActionStarted, formActionFinished})
+)
+export default enhance(StepForm);
