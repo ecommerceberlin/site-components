@@ -17,6 +17,15 @@ export const getCompanyName = (company) => {
   return _get(company, 'slug', '')
 } 
 
+export const getSpeakerName = (speaker) => {
+  if("presenter" in speaker && speaker.presenter.length > 3){
+    return speaker.presenter;
+  }
+
+  return `${_get(speaker, 'fname')} ${_get(speaker, 'lname')}`;
+} 
+
+
 export const getCdnResource = (company, key, scale = true) => {
   const cdn = getCompanyProfileInfo(company, `${key}_cdn`);
   if (cdn && /cloudinary/.test(cdn)) {

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { MyHead as Head } from '../next';
-import { getPresenterOgImage } from '../helpers';
 import Divider from '@material-ui/core/Divider';
 import _get from 'lodash/get';
 
@@ -17,10 +16,13 @@ import {
 
 
 import Presenters from '../datasources/Presenters'
+import { getPresenterOgImage, getSpeakerName } from '../helpers';
 
-const getSpeakerName = (speaker) => `${_get(speaker, 'fname')} ${_get(speaker, 'lname')}`;
+
 const getSpeakerAvatar = (speaker) => _get(speaker, 'avatar');
 const getSpeakerLogotype = (speaker) =>  _get(speaker, 'logotype');
+
+
 
 const WidgetPresenter = ({id, asPath, ...rest}) => (
 
