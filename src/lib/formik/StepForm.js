@@ -4,7 +4,7 @@ import FormButton from './FormButton';
 import withFormik, { filterFields } from './formik';
 
 import { MyTypography as Typography } from '../components';
-
+import { translate } from '../i18n';
 import FormSuccess from './FormSuccess';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
@@ -89,13 +89,14 @@ const StepForm = props => {
         value : ""
     });
 
-    return <FormSuccess />;
+    return <FormSuccess baseLabel={baseLabel} />;
   }
 
   const filteredFields = filterFields(fields, start);
 
   return (
     <form onSubmit={handleSubmit}>
+
       <Typography template="legend" label={`${baseLabel}.form.intro`} />
 
       {start ? start.map((name, idx) => (
@@ -119,7 +120,7 @@ const StepForm = props => {
           ))
         : null}
 
-      <FormButton label={`${baseLabel}.form.register`} {...props} />
+      <FormButton label={`${baseLabel}.form.submit`} {...props} />
     </form>
   );
 };
@@ -132,7 +133,8 @@ StepForm.defaultProps = {
 };
 
 const enhance = compose(
-  withFormik,
-  connect(null, {formActionStarted, formActionFinished})
+  translate,
+  connect(null, {formActionStarted, formActionFinished}),
+  withFormik
 )
 export default enhance(StepForm);

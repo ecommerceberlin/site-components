@@ -94,6 +94,7 @@ const TextInput = props => {
       onChange={handleChange}
       onBlur={handleBlur}
       margin="normal"
+      multiline={ id.indexOf("description") > -1 }
       error={renderError}
       helperText={renderError ? errors[id] : ''}
       placeholder={placeholder ? translate(placeholder) : translatedLabel}
