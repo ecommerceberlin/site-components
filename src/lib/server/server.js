@@ -7,6 +7,7 @@ const LRUCache = require('lru-cache');
 const fetch = require('isomorphic-unfetch');
 //const _keyBy = require('lodash/keyBy');
 const i18n = require('./i18n');
+const sitemap = require('./sitemap')
 
 export default function(options){
 
@@ -163,6 +164,10 @@ const handle = app.getRequestHandler();
 
       next(); // <-- important!
     });
+
+
+
+    sitemap({ server })
 
     //  server.get('/c,:id,:creative', (req, res) => {
     //    const queryParams = { id: req.params.id, creative : req.params.creative }
