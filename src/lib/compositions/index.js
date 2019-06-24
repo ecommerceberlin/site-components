@@ -27,3 +27,5 @@ export { default as WidgetFooter } from './WidgetFooter'
 export { default as WidgetEventInfo } from './WidgetEventInfo'
 
 export { default as WidgetFacebookVote } from './WidgetFacebookVote'
+
+export { default as WidgetTickets } from './WidgetTickets'

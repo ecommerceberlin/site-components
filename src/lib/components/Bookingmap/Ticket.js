@@ -14,7 +14,6 @@ import TicketDate from './TicketDate'
 import TicketPrice from './TicketPrice'
 import TicketBuyButton from './TicketBuyButton'
 
-import Settings from '../../datasources/Settings'
 
 import {
   cartItemAdd as cartItemAddAction,
@@ -77,7 +76,6 @@ class Ticket extends React.PureComponent {
       return null;
     }
 
-    const formdata = {ti: label, id: boothId} 
 
     return (
 
@@ -103,19 +101,7 @@ class Ticket extends React.PureComponent {
 
         <Grid item xs={12} sm={12} md={3}>
 
-        <Settings name="bookingmap">{
-        ({api}) => {
-          return ticket.bookable && !disabled ?
-          <form action={api} method="post" target="_blank">
-          <input type="hidden" name={`tickets[${ticket.id}]`} value="1" />
-          <input type="hidden" name={`ticketdata[${ticket.id}]`} value={JSON.stringify(formdata)} />
-          <TicketBuyButton  />
-          </form> : <span></span>
-        }}
-        </Settings>
-
-
-      
+        <TicketBuyButton formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
 
         </Grid>
     </Grid>
