@@ -11,6 +11,7 @@ export { default as Avatarlist } from './Avatarlist';
 export { default as ColumnList } from './ColumnList';
 
 export { default as Bookingmap } from './Bookingmap/Bookingmap';
+export { default as TicketBuyButton } from './Bookingmap/TicketBuyButton';
 
 //export { default as MyCardSlim } from './MyCardSlim';
 

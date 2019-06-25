@@ -235,6 +235,10 @@ const handle = app.getRequestHandler();
       renderAndCache(req, res, '/exhibitors-by-keyword', { keyword: req.params.keyword });
     });
 
+    server.get('/premium/:slug', (req, res) => {
+      renderAndCache(req, res, '/premium', { slug: req.params.slug });
+    });
+
     // Serve the item webpage with next.js as the renderer
     server.get('/setup', async (req, res) => {
       const texts = await i18n.getTexts(lang_api_endpoint, ssrCache, 'purge' in req.query);
