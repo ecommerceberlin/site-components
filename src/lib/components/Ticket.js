@@ -8,13 +8,15 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+
 import Typography from '@material-ui/core/Typography';
 import compose from 'recompose/compose';
 import { translate } from '../i18n';
 import TicketPrice from './Bookingmap/TicketPrice'
 import TicketBuyButton from './Bookingmap/TicketBuyButton'
+import Router from 'next/router'
 
+import SubPageButton from './SubPageButton';
 //
 
     const styles = {
@@ -51,15 +53,17 @@ import TicketBuyButton from './Bookingmap/TicketBuyButton'
         }
     };
 
-function getTicketName(){
-
+const scrollTo = (to, as) => {
+    if(typeof window !== 'undefined'){
+        Router.push(to).then(() => window.scrollTo(0, 0))
+    }
 }
 
 function Ticket(props) {
   const { data, classes, locale, translate } = props;
   return (
     <Card className={data.bookable ? classes.card : classes.cardDisabled }>
-      <CardActionArea className={classes.cardActionArea}>
+      <CardActionArea className={classes.cardActionArea} onClick={() => scrollTo(data.details_url)} >
 
         {!data.bookable ? <div className={classes.soldout} /> : null}
           
@@ -93,16 +97,19 @@ function Ticket(props) {
 
            
             
-            <TicketBuyButton label="common.buy" bookable={data.bookable} id={data.id} nonBookable={<span></span>} />
+            <TicketBuyButton 
+                label="common.buy" 
+                bookable={data.bookable} 
+                id={data.id} 
+                nonBookable={<span></span>} 
+                right={
+                    data.details_url.length ? <SubPageButton color="default" variant="outlined" target={data.details_url} /> : null
+                }    
+            />
 
  
 
-        {/* <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button> */}
+  
       </CardActions>
     </Card>
   );

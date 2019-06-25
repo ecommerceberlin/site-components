@@ -2,7 +2,7 @@ import React from 'react';
 import MyButton from '../../components/MyButton'
 import Settings from '../../datasources/Settings'
 
-const TicketBuyButton = ({id, bookable, formdata, nonBookable, ...buttonProps}) => (
+const TicketBuyButton = ({id, bookable, formdata, nonBookable, right, ...buttonProps}) => (
 
   <Settings name="bookingmap">{
     ({api}) => {
@@ -16,6 +16,8 @@ const TicketBuyButton = ({id, bookable, formdata, nonBookable, ...buttonProps}) 
         {...buttonProps}
       />
 
+      {right}
+
       </form> : nonBookable
     }}
     </Settings>
@@ -27,7 +29,9 @@ TicketBuyButton.defaultProps = {
   color : "primary",
   type : "submit",
   formdata : {},
-  nonBookable : <span></span>
+  nonBookable : <span></span>,
+  //temporary fix
+  right : null 
 }
 
 TicketBuyButton.propTypes = {

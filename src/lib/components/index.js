@@ -32,6 +32,7 @@ export { default as CompanyLogotype } from './CompanyLogotype';
 
 export { default as FacebookVote } from './FacebookVote';
 
+export { default as SubPageButton} from './SubPageButton';
 
 export { default as Reviews } from './Reviews';
 export { default as WidthAwareInfo } from './WidthAwareInfo';
