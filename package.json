@@ -50,6 +50,7 @@
     "react-dom": "^16.8.4",
     "react-icons": "^3.5.0",
     "react-jss": "^8.4.0",
+    "react-markdown": "^4.1.0",
     "react-redux": "^6.0.1",
     "recompose": "^0.30.0",
     "redux": "^4.0.0",

@@ -61,6 +61,8 @@ export { default as RawTranslatedText } from './RawTranslatedText';
 export { default as Offer } from './Offer';
 
 export { default as MyTable } from './MyTable';
+export { default as Markdown } from './Markdown';
+
 
 export * from './MyLayouts';
 export * from './redux';
