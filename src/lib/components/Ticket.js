@@ -17,35 +17,39 @@ import TicketBuyButton from './Bookingmap/TicketBuyButton'
 
 //
 
-const styles = {
-  card: {
-    maxWidth: 345,
-  },
-  cardActionArea : {
-      position : 'relative'
-  },
-  media: {
-    // ⚠️ object-fit is not supported by IE 11.
-    objectFit: 'cover',
-  },
-  mediaDisabled: {
-    // ⚠️ object-fit is not supported by IE 11.
-    objectFit: 'cover',
-    opacity : 0.5
-  },
-  soldout : {
-    backgroundImage : "url('https://res.cloudinary.com/eventjuicer/image/upload/v1561412798/soldout.png')",
-    backgroundSize : 'contain',
-    backgroundRepeat : 'no-repeat',
-    position: 'absolute',
-    width: '100%',
-    height : '100%'
-  },
-  price : {
-      marginTop : 10,
-     fontWeight : 800
-  }
-};
+    const styles = {
+        card: {
+            maxWidth: 445,
+        },
+
+        cardDisabled : {
+            maxWidth: 445,
+            opacity : 0.5
+        },
+
+        cardActionArea : {
+            position : 'relative'
+        },
+
+        media: {
+            // ⚠️ object-fit is not supported by IE 11.
+            objectFit: 'cover',
+        },
+
+        soldout : {
+            backgroundImage : "url('https://res.cloudinary.com/eventjuicer/image/upload/v1561412798/soldout.png')",
+            backgroundSize : 'contain',
+            backgroundRepeat : 'no-repeat',
+            position: 'absolute',
+            width: '100%',
+            height : '100%',
+        },
+
+        price : {
+            marginTop : 10,
+            fontWeight : 800
+        }
+    };
 
 function getTicketName(){
 
@@ -54,7 +58,7 @@ function getTicketName(){
 function Ticket(props) {
   const { data, classes, locale, translate } = props;
   return (
-    <Card className={classes.card}>
+    <Card className={data.bookable ? classes.card : classes.cardDisabled }>
       <CardActionArea className={classes.cardActionArea}>
 
         {!data.bookable ? <div className={classes.soldout} /> : null}
@@ -63,19 +67,19 @@ function Ticket(props) {
         <CardMedia
           component="img"
           alt=""
-          className={data.bookable ? classes.media : classes.mediaDisabled}
+          className={classes.media}
           height="140"
           image={data.thumbnail}
           title=""
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {translate(`${data.names.pl}.name`)}
+            {translate(`${data.translation_asset_id}.name`)}
           </Typography>
           <Typography component="p">
 
         
-          {translate(`${data.names.pl}.description`)}
+          {translate(`${data.translation_asset_id}.description`)}
           </Typography>
 
 
@@ -89,7 +93,7 @@ function Ticket(props) {
 
            
             
-            <TicketBuyButton label="common.buy" bookable={data.bookable} id={data.id} nonBookable={<span>not bookable</span>} />
+            <TicketBuyButton label="common.buy" bookable={data.bookable} id={data.id} nonBookable={<span></span>} />
 
  
 

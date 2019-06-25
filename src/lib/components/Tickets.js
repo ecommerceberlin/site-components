@@ -8,7 +8,7 @@ const Tickets = ({data, ...gridProps}) => (
   {...gridProps}
   >
     {data.map((ticket, i) => (
-        <Grid item key={ticket.id}><Ticket data={ticket} /></Grid>
+        <Grid item xs="6" sm="6" md="4" lg="3" key={ticket.id}><Ticket data={ticket} /></Grid>
     ))}
   </Grid>
 )
