@@ -278,6 +278,11 @@ const styles = theme => ({
     color: 'rgb(0,0,0,0.6)'
   },
 
+  price : {
+    marginTop : 10,
+    fontWeight : 800
+  }
+
 });
 
 /*
@@ -431,6 +436,12 @@ const templates = {
     variant: 'body1',
     component: 'p',
     classNames: ['presenterBase', 'presenterText', 'presenterFade']
+  },
+
+  price : {
+    variant : "h5",
+    component : "h5",
+    classNames : ['price']
   }
 };
 

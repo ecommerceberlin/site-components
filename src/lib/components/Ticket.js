@@ -14,10 +14,12 @@ import compose from 'recompose/compose';
 import { translate } from '../i18n';
 import TicketPrice from './Bookingmap/TicketPrice'
 import TicketBuyButton from './Bookingmap/TicketBuyButton'
-import Router from 'next/router'
+import {generateSlugLinkParams} from '../helpers'
+import Link from 'next/link'
 
 import SubPageButton from './SubPageButton';
-//
+import MyTypography from './MyTypography';
+
 
     const styles = {
         card: {
@@ -47,23 +49,19 @@ import SubPageButton from './SubPageButton';
             height : '100%',
         },
 
-        price : {
-            marginTop : 10,
-            fontWeight : 800
-        }
     };
 
-const scrollTo = (to, as) => {
-    if(typeof window !== 'undefined'){
-        Router.push(to).then(() => window.scrollTo(0, 0))
-    }
-}
 
 function Ticket(props) {
   const { data, classes, locale, translate } = props;
+
+  const linkParams = generateSlugLinkParams("premium", data.details_url.replace("/premium/", ""))
+
   return (
     <Card className={data.bookable ? classes.card : classes.cardDisabled }>
-      <CardActionArea className={classes.cardActionArea} onClick={() => scrollTo(data.details_url)} >
+
+    <Link {...linkParams}>
+      <CardActionArea className={classes.cardActionArea}>
 
         {!data.bookable ? <div className={classes.soldout} /> : null}
           
@@ -87,12 +85,15 @@ function Ticket(props) {
           </Typography>
 
 
-           <Typography variant="h5" component="h5" className={classes.price}>
-             <TicketPrice price={data.price} />
-           </Typography>
+        <MyTypography template="price">
+            <TicketPrice price={data.price} />
+        </MyTypography>
 
         </CardContent>
       </CardActionArea>
+
+      </Link>
+
       <CardActions>
 
            
@@ -103,7 +104,7 @@ function Ticket(props) {
                 id={data.id} 
                 nonBookable={<span></span>} 
                 right={
-                    data.details_url.length ? <SubPageButton color="default" variant="outlined" target={data.details_url} /> : null
+                    data.details_url.length ? <SubPageButton color="default" variant="outlined" target={linkParams} /> : null
                 }    
             />
 

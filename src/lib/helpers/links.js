@@ -20,6 +20,11 @@ export const generateLinkParams = (name, subpage, id) => ({
   href: `/${subpage}?id=${id}`
 });
 
+export const generateSlugLinkParams = (prefix, param) => ({
+  as: `/${prefix}/${slug(param)}`,
+  href: `/${prefix}?slug=${param}`
+});
+
 export const fullUrl = subpage => {
   const prefix = `${process.env.PUBLIC_URL}`;
   if (subpage.substr(0, prefix.length) !== prefix) {

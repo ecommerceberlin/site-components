@@ -1,20 +1,19 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { translate } from '../i18n';
-import Router from 'next/router'
+import Link from 'next/link'
 
-const scrollTo = (to, as) => {
-    if(typeof window !== 'undefined'){
-        Router.push(to).then(() => window.scrollTo(0, 0))
-    }
-}
 
 const SubPageButton = ({ label, translate, locale, target, ...buttonProps }) => (
-  <Button {...buttonProps} onClick={()=>scrollTo(target)}>{translate(label)}</Button>
+
+<Link {...target}>
+<Button {...buttonProps} >{translate(label)}</Button>
+</Link>
+
 );
 
 SubPageButton.defaultProps = {
-  target : "/no-target-defined",
+  target : {to : "/no-target-defined"},
   variant : "contained",
   label : "common.more",
   color : "primary",

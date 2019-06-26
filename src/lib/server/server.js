@@ -235,7 +235,8 @@ const handle = app.getRequestHandler();
       renderAndCache(req, res, '/exhibitors-by-keyword', { keyword: req.params.keyword });
     });
 
-    server.get('/premium/:slug', (req, res) => {
+
+    server.get('/premium/:slug?', (req, res) => {
       renderAndCache(req, res, '/premium', { slug: req.params.slug });
     });
 
