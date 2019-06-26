@@ -74,7 +74,7 @@ class Chatlio extends React.PureComponent {
   };
 
   render() {
-    const { button, translate } = this.props;
+    const { label, button, translate } = this.props;
 
     if (!button) {
       return null;
@@ -86,7 +86,7 @@ class Chatlio extends React.PureComponent {
         onClick={() => this.chatlioShow()}
         color="primary"
       >
-        {translate('common.chat')}
+        {translate(label)}
       </Button>
     );
   }
@@ -94,6 +94,7 @@ class Chatlio extends React.PureComponent {
 
 Chatlio.defaultProps = {
   hello: 'services.chatlio.hello',
+  label : 'common.chat',
   button: true
 };
 

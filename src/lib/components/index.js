@@ -10,9 +10,6 @@ export { default as MyTypography } from './MyTypography';
 export { default as Avatarlist } from './Avatarlist';
 export { default as ColumnList } from './ColumnList';
 
-export { default as Bookingmap } from './Bookingmap/Bookingmap';
-export { default as TicketBuyButton } from './Bookingmap/TicketBuyButton';
-
 //export { default as MyCardSlim } from './MyCardSlim';
 
 export { default as FsVideo } from './FsVideo';
@@ -65,6 +62,6 @@ export { default as Offer } from './Offer';
 export { default as MyTable } from './MyTable';
 export { default as Markdown } from './Markdown';
 
-
+export * from './Bookingmap';
 export * from './MyLayouts';
 export * from './redux';
