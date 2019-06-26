@@ -19,7 +19,7 @@ import Link from 'next/link'
 
 import SubPageButton from './SubPageButton';
 import MyTypography from './MyTypography';
-
+import {resizeCloudinaryImage} from '../helpers'
 
     const styles = {
         card: {
@@ -71,7 +71,7 @@ function Ticket(props) {
           alt=""
           className={classes.media}
           height="140"
-          image={data.thumbnail}
+          image={resizeCloudinaryImage(data.thumbnail, 500, 500)}
           title=""
         />
         <CardContent>

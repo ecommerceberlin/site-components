@@ -25,14 +25,26 @@ export const getSpeakerName = (speaker) => {
   return `${_get(speaker, 'fname')} ${_get(speaker, 'lname')}`;
 } 
 
+export const resizeCloudinaryImage = (url, width = 600, height = 600, format = "jpg") => {
+
+  //check if not already resized!
+  if (url && /cloudinary/.test(url) && /image\/upload\/v[0-9]+/.test(url)) {
+    return url.replace(/\.svg$/i, `.${format}`).replace("image/upload/", `image/upload/w_${width},h_${height},c_fit/`);
+  }
+
+  return url; //do nothing!
+}
 
 export const getCdnResource = (company, key, scale = true) => {
   const cdn = getCompanyProfileInfo(company, `${key}_cdn`);
-  if (cdn && /cloudinary/.test(cdn)) {
-    const noSvg = cdn.replace(/\.svg/i, '.png');
-    return !scale ? noSvg : noSvg.replace("image/upload/", 'image/upload/w_600,h_600,c_fit/');
-  }
-  return false;
+
+  return scale ? resizeCloudinaryImage(cdn, 600, 600, "png") : cdn.replace(/\.svg$/i, '.png');
+
+  // if (cdn && /cloudinary/.test(cdn)) {
+  //   const noSvg = cdn.replace(/\.svg/i, '.png');
+  //   return !scale ? noSvg : noSvg.replace("image/upload/", 'image/upload/w_600,h_600,c_fit/');
+  // }
+  // return false;
 };
 
 export const getParticipantCdn = (url, size = 100) => {
