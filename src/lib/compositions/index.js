@@ -25,7 +25,6 @@ export { default as WidgetExhibitorsByKeyword } from './WidgetExhibitorsByKeywor
 export { default as WidgetRoleButtons } from './WidgetRoleButtons'
 export { default as WidgetFooter } from './WidgetFooter'
 export { default as WidgetEventInfo } from './WidgetEventInfo'
-
+export { default as WidgetVips } from './WidgetVips'
 export { default as WidgetFacebookVote } from './WidgetFacebookVote'
-
 export { default as WidgetTickets } from './WidgetTickets'

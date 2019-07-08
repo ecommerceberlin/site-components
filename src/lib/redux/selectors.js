@@ -33,6 +33,7 @@ export const getExhibitors = (state, props) => state.resources.exhibitors
 export const getAllExhibitors = (state, props) => state.resources.allexhibitors
 export const getCompanies = (state, props) => state.resources.companies
 export const getPresenters = (state, props) => state.resources.presenters
+export const getVips = (state, props) => state.resources.vips
 
 /*
 RESOURCES
@@ -176,6 +177,28 @@ export const MobileAwareFilteredExhibitors = createSelector(
 /*
 PRESENTERS - START
 */
+
+
+export const FilteredVisitors = createSelector(
+  getVips,
+  getFilteringProps,
+  (visitors, props) => processArrayData(visitors, props)
+)
+
+export const MobileAwareFilteredVisitors = createSelector(
+  FilteredVisitors,
+  getViewPortWidth,
+  getFilteringProps,
+  (visitors, width, props) => {
+
+    if ((width === 'xs' || width === 'sm') && "mobile" in props && props.mobile && visitors.length > props.mobile) {
+      visitors = visitors.slice(0, props.mobile);
+    }
+    return visitors
+
+  }
+)
+
 
 export const FilteredPresenters = createSelector(
   getPresenters,
