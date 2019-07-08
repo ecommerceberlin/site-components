@@ -7,16 +7,7 @@ import PropTypes from 'prop-types';
 
 const styles = theme => ({
    
-    root : {
-      display: 'flex',
-      flexDirection : 'column',
-  //    alignItems: 'center',
-  //    justifyContent: 'center',
-      fontFamily: theme.typography.fontFamily,
-    },
-    person : {
-      textAlign : 'center',
-    },
+   
     tile: {
       height: 150,
       backgroundSize: 'contain',
@@ -36,19 +27,17 @@ const styles = theme => ({
     
 });
 
-const AvatarlistCellDumb = ({classes, source}) => {
+const AvatarlistCellExternal = ({classes, source}) => {
 
-    const {fname, position, cname2, logotype} = source;
+    const {cname2, website, logotype} = source;
   
     const style = logotype ? { backgroundImage: `url(${resizeCloudinaryImage(logotype, 300, 300)})` } : {};
 
-    return (  <Grid item xs={12} sm={6} md={4} lg={3} xl={3} className={classes.root}>
+    return (  <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
 
-        <div className={classes.person}>{`${fname} ${position}`}</div>
-
-        <div className={classes.tile} style={style}>
-         {`test`}
-        </div>
+        <a href={website} rel="nofollow" className={classes.tile} style={style}>
+         {cname2}
+        </a>
 
         </Grid>
       )
@@ -69,4 +58,4 @@ const AvatarlistCellDumb = ({classes, source}) => {
 //     src: PropTypes.string
 //   };
 
-export default withStyles(styles)(AvatarlistCellDumb)
+export default withStyles(styles)(AvatarlistCellExternal)
