@@ -35,7 +35,7 @@ const AvatarlistCellExternal = ({classes, source}) => {
 
     return (  <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
 
-        <a href={website} rel="nofollow" className={classes.tile} style={style}>
+        <a href={website} rel="nofollow" target="_blank" className={classes.tile} style={style}>
          {cname2}
         </a>
 

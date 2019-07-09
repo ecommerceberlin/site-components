@@ -3,7 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import { resizeCloudinaryImage } from '../helpers';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-
+import repeat from 'lodash/repeat'
+import random from 'lodash/random'
 
 const styles = theme => ({
    
@@ -15,8 +16,21 @@ const styles = theme => ({
       fontFamily: theme.typography.fontFamily,
     },
     person : {
+      height: 60,
+      overflow : 'hidden',
       textAlign : 'center',
+      fontSize: theme.typography.pxToRem(15),
     },
+
+    dataMask : {
+      backgroundColor : '#eaeaea',
+    },
+
+    personSecondaryInfo : {
+     // color: 'rgba(0, 0, 0, 0.64)'
+    
+    },
+
     tile: {
       height: 150,
       backgroundSize: 'contain',
@@ -24,11 +38,23 @@ const styles = theme => ({
       backgroundPosition: 'center',
       display: 'block',
       textIndent: -5000,
-      marginLeft : '20%',
-      marginRight : '20%',
-  
+      marginTop : '20%',
+      marginBottom : '20%',
+      marginRight : '10%',
+      marginLeft : '10%',
+
+
+      [theme.breakpoints.down('md')]: {
+        marginTop : 20,
+        marginBottom : 20,
+      },
+
       [theme.breakpoints.down('sm')]: {
-        maxHeight: 100,
+        height: 120,
+      },
+
+      [theme.breakpoints.down('xs')]: {
+        height: 100,
       }
   
   
@@ -36,21 +62,22 @@ const styles = theme => ({
     
 });
 
+
 const AvatarlistCellDumb = ({classes, source}) => {
 
     const {fname, position, cname2, logotype} = source;
   
     const style = logotype ? { backgroundImage: `url(${resizeCloudinaryImage(logotype, 300, 300)})` } : {};
 
-    return (  <Grid item xs={12} sm={6} md={4} lg={3} xl={3} className={classes.root}>
+    return ( 
+    
+    <Grid item xs={12} sm={4} md={3} lg={2} xl={2} className={classes.root}>
 
-        <div className={classes.person}>{`${fname} ${position}`}</div>
+        <div className={classes.person}>{fname} <span className={classes.dataMask}>{ repeat('\u00A0', random(8, 20) )}</span><br/><span className={classes.personSecondaryInfo}>{position}</span></div>
 
-        <div className={classes.tile} style={style}>
-         {`test`}
-        </div>
+        <div className={classes.tile} style={style}>{cname2}</div>
 
-        </Grid>
+      </Grid>
       )
 }
 

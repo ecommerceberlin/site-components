@@ -54,6 +54,19 @@ const menuItems = [
         to: '/exhibit'
         //      icon : <IconPeople />
       },
+
+      {
+        name: 'sample-visitors',
+        to: '/sample-visitors'
+        //      icon : <IconPeople />
+      },
+
+      {
+        name: 'premium-services',
+        to: '/premium'
+        //      icon : <IconPeople />
+      },
+
       {
         name: 'faq',
         to: '/faq'
