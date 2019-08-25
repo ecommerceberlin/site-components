@@ -6,7 +6,7 @@ import Wrapper from '../components/Wrapper'
 import Grid from '@material-ui/core/Grid';
 import AvatarlistCellDumb from '../components/AvatarlistCellDumb'
 
-const WidgetVips = ({filter, limit, mobile, center, spacing, ...wrapper}) => (
+const WidgetVips = ({filter, include, limit, mobile, center, spacing, ...wrapper}) => (
 
   <Wrapper {...wrapper}>
   
@@ -41,7 +41,8 @@ WidgetVips.defaultProps = {
   limit : 20,
   mobile : 12,
   center : false,
-  spacing : 24
+  spacing : 24,
+  include : null
 }
 
 

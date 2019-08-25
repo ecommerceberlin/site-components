@@ -73,7 +73,12 @@ const AvatarlistCellDumb = ({classes, source}) => {
     
     <Grid item xs={12} sm={4} md={3} lg={2} xl={2} className={classes.root}>
 
-        <div className={classes.person}>{fname} <span className={classes.dataMask}>{ repeat('\u00A0', random(8, 20) )}</span><br/><span className={classes.personSecondaryInfo}>{position}</span></div>
+        <div className={classes.person}>
+        
+        {/*
+         {fname} <span className={classes.dataMask}>{ repeat('\u00A0', random(8, 20) )}</span><br/>
+         */}
+        <span className={classes.personSecondaryInfo}>{position}</span></div>
 
         <div className={classes.tile} style={style}>{cname2}</div>
 

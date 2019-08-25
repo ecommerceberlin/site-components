@@ -8,6 +8,11 @@ const menuItems = [
         to: '/'
         //  icon : <IconSetting />
       },
+      {
+        name: 'about',
+        to: '/about'
+        //  icon : <IconSetting />
+      },
     ]
   },
 
