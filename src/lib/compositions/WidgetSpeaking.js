@@ -43,7 +43,7 @@ const WidgetSpeaking = ({ classes, ...rest }) => (
         ]}
         template="ebe-presenters-application"
         cc="speaking@ecommerceberlin.com"
-        url='https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/register'
+        api='https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/register'
       />
 
     </Grid>

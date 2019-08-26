@@ -26,7 +26,6 @@ export default withFormik({
 
     //we should have redux actions?
     
-    console.log(props);
 
     setSubmitting(true);
 
@@ -45,7 +44,7 @@ export default withFormik({
     })
       .then(response => {
         if (response.status !== 200) {
-       
+          console.log(props);
         }
         return response.json();
       })
