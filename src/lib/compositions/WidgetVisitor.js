@@ -33,14 +33,14 @@ const WidgetVisitor = ({ classes, ...rest }) => (
         <StepForm
           data={{}}
           ticketId={ticket_id}
-          fields={{
-            email: 1,
-            fname: 1,
-            lname: 1,
-            cname2: 1,
-            position: 1,
-            phone: 1
-          }}
+          fields={[
+            {name: "email", required: true},
+            {name: "fname", required: true},
+            {name: "lname", required: true},
+            {name: "cname2", required: true},
+            {name: "position", required: true},
+            {name: "phone", required: true}
+          ]}
           start={['email', 'fname']}
           template={email_template}
           api={api}

@@ -4,13 +4,17 @@ import fetch from 'isomorphic-unfetch';
 import { addToken } from '../helpers';
 import { validationSchema } from './validations';
 
-
-export const filterFields = (fields, start) => {
-  const all = Object.keys(fields);
-  return start ? all.filter(f => start.indexOf(f) === -1) : all;
+export const filterFields = (fields, start = []) => {
+  //fields array of objects
+  //start array
+  return Array.isArray(start) && start.length ? fields.filter(item => start.indexOf(item.name) === -1) : fields;
 };
 
-
+export const startFields = (fields, start = []) => {
+  //fields array of objects
+  //start array
+  return Array.isArray(start) && start.length ? fields.filter(item => start.indexOf(item.name) > -1) : [];
+};
 
 export default withFormik({
   validationSchema: validationSchema,

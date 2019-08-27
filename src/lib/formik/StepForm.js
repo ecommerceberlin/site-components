@@ -1,7 +1,11 @@
+
 import React from 'react';
+
 import TextInput from './TextInput';
+import SelectInput from './SelectInput';
+
 import FormButton from './FormButton';
-import withFormik, { filterFields } from './formik';
+import withFormik, { filterFields, startFields } from './formik';
 
 import { MyTypography as Typography } from '../components';
 import { translate } from '../i18n';
@@ -93,31 +97,56 @@ const StepForm = props => {
   }
 
   const filteredFields = filterFields(fields, start);
+  const startedFields = startFields(fields, start);
 
   return (
     <form onSubmit={handleSubmit}>
 
       <Typography template="legend" label={`${baseLabel}.form.intro`} />
 
-      {start ? start.map((name, idx) => (
-            <TextInput
-              key={idx}
-              id={name}
-              label={`${baseLabel}.fields.${name}`}
-              {...props}
-            />
-          ))
-        : null}
+      {start.length ? startedFields.map( (data, idx) => {
+
+        if("options" in data && data.options.length){
+          return (<SelectInput 
+            key={idx}
+            id={data.name}
+            label={`${baseLabel}.fields.${data.name}`}
+            options={data.options}
+            {...props}
+          />)
+        }
+
+        return (<TextInput
+            key={idx}
+            id={data.name}
+            label={`${baseLabel}.fields.${data.name}`}
+            {...props}
+          />)
+      }
+
+      ) : null}
 
       {(started || !start) && filteredFields.length
-        ? filteredFields.map((name, idx) => (
-            <TextInput
+        ? filteredFields.map( (data, idx) => {
+
+          if("options" in data && data.options.length){
+            return (<SelectInput 
               key={idx}
-              id={name}
-              label={`${baseLabel}.fields.${name}`}
+              id={data.name}
+              label={`${baseLabel}.fields.${data.name}`}
+              options={data.options}
               {...props}
-            />
-          ))
+            />)
+          }
+
+          return ( <TextInput
+              key={idx}
+              id={data.name}
+              label={`${baseLabel}.fields.${data.name}`}
+              {...props}
+            /> )
+
+        })
         : null}
 
       <FormButton label={`${baseLabel}.form.submit`} {...props} />

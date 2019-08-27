@@ -12,7 +12,7 @@ const styles = theme => ({
 
 })
 
-const WidgetSpeaking = ({ classes, ...rest }) => (
+const WidgetSpeaking = ({ categories, classes, ...rest }) => (
 
 
   <Wrapper {...rest}>
@@ -25,20 +25,26 @@ const WidgetSpeaking = ({ classes, ...rest }) => (
         data={{}}
         ticketId={1631}
         baseLabel="presenters"
-        fields={{
-          email: 1,
-          fname: 1,
-          lname: 1,
-          cname2: 1,
-          phone: 1,
-          presenter : 1,
-          presentation_title : 1,
-          presentation_description : 1
-        }}
+        fields={[
+          {name: "email", required: true},
+          {name: "fname", required: true},
+          {name: "lname", required: true},
+          {name: "cname2", required: true},
+          {name: "phone", required: true},
+          {name: "presenter", required: true},  
+          {
+            name: "presentation_category", 
+            required: true,
+            options : categories
+          },
+          {name: "presentation_title", required: true},
+          {name: "presentation_description", required: true}
+        ]}
         start={[
           'presenter',
           'presentation_title', 
           'presentation_description',
+          'presentation_category',
           'cname2'
         ]}
         template="ebe-presenters-application"
@@ -63,6 +69,7 @@ const WidgetSpeaking = ({ classes, ...rest }) => (
 
 WidgetSpeaking.defaultProps = {
   links: [],
+  categories : [],
   label : "presenters.form.title"
 };
 

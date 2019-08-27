@@ -25,11 +25,10 @@ export const validations = {
       email: Yup.string()
       .email('Invalid email address')
       .required('Email is required!')
-
-
-
+      
   };
   
   export const validationSchema = ({ fields }) => {
-    return Yup.object().shape(_pick(validations, Object.keys(fields || {})));
+    const fieldNames = fields.map(item => item.name);
+    return Yup.object().shape(_pick(validations, fieldNames));
   };
