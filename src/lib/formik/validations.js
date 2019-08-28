@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import _pick from 'lodash/pick';
 
 
-export const validations = {
+export const validations = (requiredFieldNames) => ({
 
   
       fname: Yup.string()
@@ -25,10 +25,13 @@ export const validations = {
       email: Yup.string()
       .email('Invalid email address')
       .required('Email is required!')
-      
-  };
+
+  });
   
-  export const validationSchema = ({ fields }) => {
+  export const validationSchema = ({fields}) => {
     const fieldNames = fields.map(item => item.name);
-    return Yup.object().shape(_pick(validations, fieldNames));
+    const requiredFieldNames = fields.filter(item => "required" in item && item.required).map(item => item.name)
+    return Yup.object().shape(_pick(validations(requiredFieldNames), fieldNames));
   };
+
+ 

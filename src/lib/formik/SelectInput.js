@@ -113,7 +113,7 @@ const SelectInput = props => {
       // onChange={handleChange}
       // onBlur={handleBlur}
       onChange={
-       (e, { props }) => setFieldValue(id, props.value)
+       (e, menuItemElement) => setFieldValue(id, e.target.value)
       }
       onBlur={() => setFieldTouched(id)}
       margin="normal"
@@ -124,7 +124,7 @@ const SelectInput = props => {
       fullWidth
     > {options.map(option => (
       <MenuItem key={option} value={option}>
-        {translate(`${label}.${option}`)}
+        {translate(`${label}_options.${option}`)}
       </MenuItem>
     ))}
     </TextField>
