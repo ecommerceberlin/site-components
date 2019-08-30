@@ -61,6 +61,12 @@ const menuItems = [
       },
 
       {
+        name: 'speaking',
+        to: '/speaking'
+        //      icon : <IconPeople />
+      },
+
+      {
         name: 'sample-visitors',
         to: '/sample-visitors'
         //      icon : <IconPeople />
