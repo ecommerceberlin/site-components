@@ -30,10 +30,11 @@ export function faqUrl(url) {
   };
 }
 
-export function resourceFetchRequest(resource) {
+export function resourceFetchRequest(resource, reload = false) {
   return {
     type: Types.RESOURCE_FETCH_REQUESTED,
-    resource: resource
+    resource: resource,
+    reload : reload
   };
 }
 

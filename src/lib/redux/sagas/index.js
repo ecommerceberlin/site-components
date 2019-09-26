@@ -58,7 +58,7 @@ function* handleBoothCheck({payload}){
   
 }
 
-function* accumulateFetches({resource}) {
+function* accumulateFetches({resource, reload}) {
 
   const endpoints = [].concat(resource)
 
@@ -69,7 +69,7 @@ function* accumulateFetches({resource}) {
        yield cancel( fetchTasks[endpoint] );
     }
 
-    fetchTasks[endpoint] = yield fork(fetchAccumulatedFetches, endpoint)
+    fetchTasks[endpoint] = yield fork(fetchAccumulatedFetches, endpoint, reload)
   }
 
 }
@@ -80,7 +80,7 @@ function* fetchAccumulatedFetches(endpoint){
 
   const resources = yield select(Selectors.getResources)
 
-  if(endpoint in resources && resources[endpoint] && resources[endpoint].length){
+  if(!reload && endpoint in resources && resources[endpoint] && resources[endpoint].length){
 
     delete fetchTasks[endpoint]
     return
