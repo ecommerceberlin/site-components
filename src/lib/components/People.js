@@ -5,7 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import _get from 'lodash/get';
 import Person from './Person';
 
-import { changeLimitForScreen } from '../helpers';
+import { 
+//  changeLimitForScreen, 
+  getSpeakerName,
+  getSpeakerAvatar,
+  generateLinkParams
+} from '../helpers';
 
 
 const FullJobInfo = ({ company, job }) => (
@@ -15,9 +20,7 @@ const FullJobInfo = ({ company, job }) => (
 );
 
 
-const People = ({data, link, bio}) => {
-
-  const gridData = { xs: 6, sm: 6, md: 4, lg: 3, xl: 3 };
+const People = ({data, gridData, link, title, subtitle, text, voted, moreLabel}) => {
 
   return (
 
@@ -27,17 +30,13 @@ const People = ({data, link, bio}) => {
         <Person
           key={_get(item, 'id')}
           id={_get(item, 'id')}
-          avatar={_get(item, 'avatar')}
-          logotype={_get(item, 'logotype')}
-          title={`${_get(item, 'fname')} ${_get(item, 'lname')}`}
-          subtitle={
-            <FullJobInfo
-              company={_get(item, 'cname2')}
-              job={_get(item, 'position')}
-            />
-          }
-          text={bio ? _get(item, 'bio') : null}
+          avatar={ getSpeakerAvatar(item) }
+          title={ title(item) }
+          subtitle={ subtitle(item) }
+          text={ text(item) }
           link={link}
+          mark={_get(item, "id") in voted}
+          moreLabel={moreLabel}
         />
       </Grid>
     ))}
@@ -49,9 +48,14 @@ const People = ({data, link, bio}) => {
 
 
 People.defaultProps = {
+  gridData : { xs: 6, sm: 6, md: 4, lg: 3, xl: 3 },
   data: [],
-  link: false,
-  bio : true
+  title : (item) => getSpeakerName(item),
+  link: (item) => generateLinkParams( getSpeakerName(item), 'speaker', item.id), 
+  subtitle : (item) => <FullJobInfo company={_get(item, 'cname2')} job={_get(item, 'position')} />,
+  text : (item) => `${_get(item, 'bio', "").substring(0, 350)}...`,
+  voted : {},
+  moreLabel : "common.more"
 };
 
 // People.propTypes = {

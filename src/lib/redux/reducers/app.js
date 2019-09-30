@@ -5,7 +5,9 @@ import {
   ROLE_RESET,
   CART_ITEM_ADD,
   CART_ITEM_REMOVE,
-  CART_RESET
+  CART_RESET,
+  LINKEDIN_TOKEN_SUCCESS,
+  LINKEDIN_TOKEN_RESET
 } from '../../components/redux';
 
 import {VENUE_SELECT, VENUE_SELECT_RESET} from '../../components/Schedule/redux'
@@ -26,21 +28,22 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
+
     case 'SCREEN_SIZE_CHANGED':
       return { ...state, width: action.width };
-      break;
+    break;
 
     case CHANGE_LOCALE:
       return { ...state, locale: action.locale };
-      break;
+    break;
 
     case ROLE_SELECT:
       return { ...state, role: action.role };
-      break;
+    break;
 
     case ROLE_RESET:
       return { ...state, role: '' };
-      break;
+    break;
 
     case CART_ITEM_ADD:
       return {
@@ -77,6 +80,15 @@ const reducer = (state = defaultState, action) => {
 
     case VENUE_SELECT_RESET:
       return {...state, selectedVenue : null}
+    break;
+
+
+    case LINKEDIN_TOKEN_SUCCESS:
+      return {...state, linkedin : action.uid};
+    break;
+
+    case LINKEDIN_TOKEN_RESET:
+      return {...state, linkedin : null};
     break;
 
     default:

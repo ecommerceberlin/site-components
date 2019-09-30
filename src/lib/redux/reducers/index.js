@@ -12,9 +12,11 @@ import visuals from './visuals';
 import services from './services';
 import settings from './settings';
 import social from './social';
+import transactions from './transactions';
 
 export default {
   app,
+  transactions,
   visuals,
   dialog,
   snackbar,

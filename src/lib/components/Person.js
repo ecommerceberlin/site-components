@@ -1,118 +1,112 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import Hidden from '@material-ui/core/Hidden';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
-import compose from 'recompose/compose';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/icons/ArrowForwardIos';
+
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
 
 
 import Avatar from './MyAvatar';
 import Typography from './MyTypography';
+
+import { MyLink } from '../next';
+import Hidden from '@material-ui/core/Hidden';
+
 import { generateLinkParams } from '../helpers';
-import Router from 'next/router'
 
-
-const scrollTo = (to, as = null) => {
-  if(typeof window !== 'undefined'){
-    Router.push(to, as).then(() => window.scrollTo(0, 0))
-  }
-}
+import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
+import compose from 'recompose/compose';
+import isFunction from 'lodash/isFunction';
 
 const styles = {
+  avatarContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
 
-  root: {
+  avatar : {
+    marginRight : 0
+  },
+  card: {
     width: '100%',
     maxWidth: 400
   },
 
-  images: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection : 'column',
-  },
+  cardMobile: {},
 
-  logotype : {
-    marginTop: 10,
-    marginBottom : 10,
-    height : 80,
-    width : '50%',
-    display : 'block',
-    backgroundSize : 'contain',
-    backgroundPosition : 'center',
-    backgroundRepeat : 'no-repeat'
-  },
-
-  details : {
-    marginTop: 10,
-    display: 'flex',
-  },
-
-  data :{
-    paddingLeft : 25,
-  },
+  // media: {
+  //   height: 200,
+  // },
 
   bio: {
-    marginTop: 10,
+    marginTop: 10
   }
 };
 
-const Person = ({
-  classes,
-  avatar,
-  logotype,
-  title,
-  subtitle,
-  text,
-  minimal,
-  link,
-  id
-}) => {
+const Person = (props) => {
 
-  const linkParams = generateLinkParams(title, 'speaker', id);
+  const {
+    classes,
+    avatar,
+    title,
+    subtitle,
+    text,
+    minimal,
+    link,
+    id,
+    data,
+    mark,
+    moreLabel
+  } = props;
+  
+  const linkParams = isFunction(link) ? link(props) : {}
+  const {as, href} = linkParams
 
   return (
-    <div className={classes.root}>
+    <Card className={classes.card} elevation={mark ? 2 : 0}>
+      <CardHeader
+        avatar={<Avatar alt="" src={avatar} link={as} />}
+        // title="test"
+        // subheader="srest"
+        classes={{
+          ...{root : classes.avatarContainer},
+          ...{avatar : classes.avatar}
+        }}
+      />
 
-      <div className={classes.images}>
-        
-        <Avatar alt="" src={avatar} link={linkParams.as} />
-
-        <div 
-         className={classes.logotype } 
-         style={{
-           backgroundImage : `url(${logotype})`
-         }} />
-
-      </div>
-
-      <div className={classes.details}>
-        
-        <div className={classes.data}>
+      <CardContent>
         <Typography template="presenter1">{title}</Typography>
+
         {subtitle && <Typography template="presenter2">{subtitle}</Typography>}
-        <Hidden smDown implementation="css">
-          {text && <Typography template="presenterText">{text}</Typography>}
-        </Hidden>
-        </div>
 
-        <div>
-          {link &&  <IconButton onClick={() => scrollTo(linkParams.href, linkParams.as)}><Icon /></IconButton>}   
-        </div>
+       
+          {text && 
+           <Hidden smDown implementation="css">
+           <Typography template="presenterText">{text}</Typography>
+           </Hidden>
+          }
+        
+      </CardContent>
 
-      </div>
-     
-    </div>
+      {linkParams && (
+        <CardActions>
+          <MyLink {...linkParams} label={moreLabel} />
+        </CardActions>
+      )}
+    </Card>
   );
 };
 
 Person.defaultProps = {
   width: 'md',
   minimal: true,
-  link: false
+  link: false,
+  mark : false,
+  moreLabel : "common.more"
 };
 
 Person.propTypes = {
@@ -124,7 +118,7 @@ Person.propTypes = {
 };
 
 const enhance = compose(
-  onlyUpdateForKeys(['id']),
+  onlyUpdateForKeys(['id', 'mark']),
   withStyles(styles)
 );
 

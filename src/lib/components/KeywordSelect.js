@@ -15,7 +15,7 @@ const styles = {
 
 }
 
-const KeywordSelect = ({ keywords, selected, classes }) => {
+const KeywordSelect = ({ keywords, selected, href, as, classes }) => {
 
    if(!keywords.length) return null
 
@@ -26,8 +26,8 @@ const KeywordSelect = ({ keywords, selected, classes }) => {
      <Link
        prefetch={false}
        key={keyword}
-       href={`/exhibitors-by-keyword?keyword=${keyword}`}
-       as={`/exhibitors/${keyword}`}
+       href={`${href}?keyword=${keyword}`}
+       as={`${as}/${keyword}`}
        label={`common.tags.${keyword}`}
        variant={keyword === selected ? "contained" : "outlined"}
        color={keyword === selected ? "primary" : "secondary"}
@@ -38,13 +38,14 @@ const KeywordSelect = ({ keywords, selected, classes }) => {
 }
 
 KeywordSelect.defaultProps = {
-  keywords : []
+  keywords : [],
+  href : "/exhibitors-by-keyword",
+  as : "/exhibitors"
 }
 
 KeywordSelect.propTypes = {
   keywords: PropTypes.array.isRequired,
   selected: PropTypes.string
-
 };
 
 export default withStyles(styles)(KeywordSelect);

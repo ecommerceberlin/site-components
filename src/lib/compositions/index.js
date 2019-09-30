@@ -28,8 +28,12 @@ export { default as WidgetEventInfo } from './WidgetEventInfo'
 export { default as WidgetVips } from './WidgetVips'
 export { default as WidgetPartners } from './WidgetPartners'
 export { default as WidgetSpeaking } from './WidgetSpeaking'
-
-
-export { default as WidgetFacebookVote } from './WidgetFacebookVote'
 export { default as WidgetTickets } from './WidgetTickets'
+export { default as WidgetPresentersAll } from './WidgetPresentersAll'
 
+
+
+//voting
+export { default as WidgetCallForPapers } from './WidgetCallForPapers'
+export { default as WidgetVotable } from './WidgetVotable'
+export { default as WidgetVoteStatus } from './WidgetVoteStatus'

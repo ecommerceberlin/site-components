@@ -13,7 +13,13 @@ export { default as DatasourceOffers } from './Offers';
 export { default as DatasourceAllExhibitors } from './AllExhibitors';
 export { default as DatasourceVips } from './Vips';
 export { default as DatasourcePartners } from './Partners';
+export { default as DatasourceAllPresenters } from './AllPresenters';
 
 
 
 export { default as Settings } from './Settings';
+
+
+
+export { default as DatasourceCallForPapers } from './CallForPapers';
+export { default as DatasourceVotes } from './Votes';

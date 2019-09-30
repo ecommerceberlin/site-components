@@ -25,27 +25,65 @@ import {
   RESOURCE_FETCH_REQUESTED,
   RESOURCE_FETCH_ERROR,
   FAQ_TOGGLE,
-  BOOTH_CHECKED
+  BOOTH_CHECKED,
+
+
+  //voting
+  LINKEDIN_TOKEN_SUCCESS,
+  LINKEDIN_VOTE_REQUESTED,
+  //LINKEDIN_AUTOVOTE_REQUESTED,
+  LINKEDIN_VOTE_SUCCESS,
+  VOTE_STATUS_CHECK
+
 } from '../../components/redux/types';
 
 
 import {CHANGE_LOCALE} from '../../i18n'
 
 import {
+  resourceFetchRequest,
   resourceFetchSuccess,
   resourceFetchError,
   resourceFetchSuccessMeta,
   boothSelect,
   boothUnselect,
   boothsReset,
-  snackbarShow
+  snackbarShow,
+  //voting
+
+  votingStatusSuccess,
+  votingStatusError,
+  linkedVoteRequest,
+  linkedVoteError,
+  linkedVoteSuccess
+
 } from '../../components/redux/actions';
 
 import * as Selectors from '../selectors';
 import {event} from '../../services/gtag'
 
+import { REHYDRATE } from 'redux-persist/lib/constants'
+
+const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/`
 
 let fetchTasks = {};
+
+
+
+
+
+//https://goshakkk.name/detect-state-change-redux-saga/
+
+function* waitFor(selector) {
+  if (yield select(selector)) return; // (1)
+
+  while (true) {
+    yield take('*'); // (1a)
+    if (yield select(selector)) return; // (1b)
+  }
+}
+
+
 
 function* handleBoothCheck({payload}){
 
@@ -74,7 +112,7 @@ function* accumulateFetches({resource, reload}) {
 
 }
 
-function* fetchAccumulatedFetches(endpoint){
+function* fetchAccumulatedFetches(endpoint, reload){
 
   yield call(delay, 50);
 
@@ -124,6 +162,7 @@ function* selectBoothWhenCartItemAdded(actionData) {
   yield cancel();
 }
 
+
 function* setCookieWhenLocaleChanged(actionData) {
   if (process.browser) {
 
@@ -155,6 +194,99 @@ function* handleFetchErrors(actionData) {
   yield put(snackbarShow({title : actionData.error}));
 }
 
+
+
+/**
+ * VOTING - STARTS
+ */
+
+
+function* handleLinkedinVoteRequest(actionData){
+
+  //we must wait cos we are taking token from persisted part of redux
+  //yield take("persist/REHYDRATE")
+  
+  yield call(waitFor, state => Selectors.getLinkedInToken(state) != null);
+
+  const uid = yield select(Selectors.getLinkedInToken)
+
+  const response = yield call(fetch, `${apiUrl}vote`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    //credentials : 'include',
+    body: JSON.stringify( {...actionData, uid} )
+  }); 
+
+  const json = yield call([response, response.json]);
+
+  if (response.ok && response.status >= 200 && 'data' in json) {
+    yield put( linkedVoteSuccess(json.data) );
+  } else {
+    yield put( linkedVoteError(json.error) );
+  }
+
+}
+
+function* handleVotingData(actionData){
+  const {data} = actionData;
+  yield put(resourceFetchSuccess("votes", data))
+  yield put(resourceFetchRequest("callforpapers", true)) 
+}
+
+
+
+function* handleVoteStatus(actionData){
+
+  //we must wait cos we are taking token from persisted part of redux
+  //yield take("persist/REHYDRATE")
+  //WILL NOT WORK IF REHYDRATE OCCURS BEFORE
+
+  yield call(waitFor, state => Selectors.getLinkedInToken(state) != null);
+
+  const uid = yield select(Selectors.getLinkedInToken)
+
+  const {service} = actionData;
+
+  const response = yield call(fetch, `${apiUrl}vote`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    //credentials : 'include',
+    body: JSON.stringify( {service, uid} )
+  }); 
+
+  const json = yield call([response, response.json]);
+
+  if (response.ok && response.status >= 200 && 'data' in json) {
+    yield put(votingStatusSuccess(json.data));
+  } else {
+    if("error" in json && "message" in json.error){
+      yield put(votingStatusError(json.error));
+    }
+  }
+
+}
+
+function* handleRehydrate(actionData){
+
+  yield take(REHYDRATE);  //Subscribe to when app finishes loading
+   //RESAVE TOKEN DATA!!!!
+   yield put(actionData)
+ }
+
+
+/**
+ * VOTING - ENDS
+ */
+
+
+
+
 const rootSaga = function* root() {
 
   yield all([
@@ -167,7 +299,12 @@ const rootSaga = function* root() {
     takeEvery(CART_RESET, unSelectAllBooths),
     takeEvery(RESOURCE_FETCH_REQUESTED, accumulateFetches),
     takeEvery(RESOURCE_FETCH_ERROR, handleFetchErrors),
-    takeEvery(BOOTH_CHECKED, handleBoothCheck)
+    takeEvery(BOOTH_CHECKED, handleBoothCheck),
+
+    takeEvery(LINKEDIN_VOTE_REQUESTED, handleLinkedinVoteRequest),
+    takeEvery(LINKEDIN_TOKEN_SUCCESS, handleRehydrate),
+    takeEvery(LINKEDIN_VOTE_SUCCESS, handleVotingData),
+    takeEvery(VOTE_STATUS_CHECK, handleVoteStatus)
 
   ]);
 };
