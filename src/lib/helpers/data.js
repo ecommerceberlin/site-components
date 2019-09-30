@@ -17,13 +17,27 @@ export const getCompanyName = (company) => {
   return _get(company, 'slug', '')
 } 
 
+/**
+ * https://raw.githubusercontent.com/eventjuicer/site/5452259d2cac068638919b2a27e2ee594aee0b6e/helpers/data.js
+ */
+
 export const getSpeakerName = (speaker) => {
-  if("presenter" in speaker && speaker.presenter.length > 3){
+  if(speaker && "presenter" in speaker && speaker.presenter.length > 2){
     return speaker.presenter;
   }
 
   return `${_get(speaker, 'fname')} ${_get(speaker, 'lname')}`;
 } 
+
+
+export const getSpeakerAvatar = (speaker, params, size = 250) => getParticipantCdn(_get(speaker, 'avatar_cdn'), size, params) || getParticipantCdn(_get(speaker, 'avatar'), size, params) || '/static/avatar-placeholder.png';
+
+export const getSpeakerLogotype = (speaker, params, size = 300) =>  getParticipantCdn(_get(speaker, 'logotype_cdn'), size, params) || getParticipantCdn(_get(speaker, 'logotype'), size, params) || '/static/avatar-placeholder.png';
+
+/**
+ * END
+ */
+
 
 export const resizeCloudinaryImage = (url, width = 600, height = 600, format = "jpg") => {
 
@@ -50,10 +64,10 @@ export const getCdnResource = (company, key, scale = true) => {
 export const getParticipantCdn = (url, size = 100) => {
 
   if (!url || ! /cloudinary/.test(url)) {
-    return '/static/avatar-placeholder.png';
+    return false;
   }
 
-  return url.replace(/\.svg/, '.png').replace("image/upload/", `image/upload/c_fit,e_grayscale,w_${size},h_${size}/`);
+  return url.trim().replace(/\.svg/, '.png').replace("image/upload/", `image/upload/c_fit,e_grayscale,w_${size},h_${size}/`);
   //  `https://res.cloudinary.com/ecommerceberlin/image/upload/c_fit,e_grayscale,w_${size},h_${size}/p_${participant_id}_${what}.png`;
 };
 
@@ -66,34 +80,6 @@ export const getInviteOgImage = (text = '') => {
   )},g_north,y_40,co_rgb:000000,f_auto/v1550158922/ebe_template_visitor.jpg`;
 };
 
-export const getPresenterOgImage = (
-  participant,
-  template = 'ebe_template_en'
-) => {
-  const avatarTrans = `g_west,x_150,y_25,w_220,h_220,l_p_${
-    participant.id
-  }_avatar,c_fit,r_max`;
-  const logotypeTrans = `g_east,x_150,y_25,w_220,h_220,l_p_${
-    participant.id
-  }_logotype,c_fit`;
-
-  return `https://res.cloudinary.com/eventjuicer/image/upload/${avatarTrans}/${logotypeTrans}/${template}.png`;
-};
-
-
-export const getPresenterFbAd = (
-  participant,
-  template = 'template_speaker_teh15_square'
-) => {
-  const avatarTrans = `g_north,x_-100,y_150,w_450,h_450,l_p_${
-    participant.id
-  }_avatar,c_fit,r_max`;
-  const logotypeTrans = `g_south,x_-100,y_250,w_350,h_250,l_p_${
-    participant.id
-  }_logotype,c_fit`;
-
-  return `https://res.cloudinary.com/eventjuicer/image/upload/${avatarTrans}/${logotypeTrans}/${template}.png`;
-};
 
 
 
@@ -153,7 +139,7 @@ export const wrapImage = (
   http://res.cloudinary.com/demo/image/upload/w_90,g_center/u_coffee_cup,w_400,h_250,c_fill,g_south/fl_layer_apply/nice_couple.jpg
   */
 
-  return `http://res.cloudinary.com/eventjuicer/image/upload/${params}/u_${baseImage},${baseImageParams}/${overlayImageVersion}/${overlayImage}.jpg`; 
+  return `https://res.cloudinary.com/eventjuicer/image/upload/${params}/u_${baseImage},${baseImageParams}/${overlayImageVersion}/${overlayImage}.jpg`; 
 
   //return `https://res.cloudinary.com/ecommerceberlin/image/upload/c_fit,l_${overlayImage},${params}/${overlayImageVersion}/${baseImage}.png`;
 };

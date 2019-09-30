@@ -15,6 +15,8 @@ const defaultFilters = {
   columns : false
 }
 
+
+export const getLinkedInToken = state => state.app.linkedin;
 export const getCart = state => state.app.cart;
 export const getResources = state => state.resources;
 export const getFaqs = state => state.visuals.faqs;
@@ -33,9 +35,13 @@ export const getExhibitors = (state, props) => state.resources.exhibitors
 export const getAllExhibitors = (state, props) => state.resources.allexhibitors
 export const getCompanies = (state, props) => state.resources.companies
 export const getPresenters = (state, props) => state.resources.presenters
+export const getAllPresenters = (state, props) => state.resources.presenters_all
 export const getVips = (state, props) => state.resources.vips
 export const getPartners = (state, props) => state.resources.partners
 
+
+export const getCallForPapers = (state, props) => state.resources.callforpapers
+export const getVotes = (state, props) => state.resources.votes
 /*
 RESOURCES
 */

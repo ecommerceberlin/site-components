@@ -52,7 +52,7 @@ export const processArrayData = (
     return [];
   }
 
-  if (filter) {
+  if (filter && typeof filter === "function") {
     data = data.filter(row => filter(row));
   }
 
