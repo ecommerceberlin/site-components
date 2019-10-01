@@ -124,7 +124,7 @@ function* fetchAccumulatedFetches(endpoint, reload){
     return
   }
 
-  const response = yield call(fetch, `${process.env.API_PUBLIC}/${endpoint}`)
+  const response = yield call(fetch, `${apiUrl}/${endpoint}`)
   const json = yield call([response, response.json])
 
   if (response.ok && response.status >= 200 && 'data' in json) {
