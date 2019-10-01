@@ -84,10 +84,10 @@ const Votable = ({id, vote, status, asPath, classes, ...rest}) => (
             marginBottom: 20
             }}
             >
-            <Avatar src={getSpeakerAvatar(record, [])} minimal={false} grayscale={false} />
+            <Avatar src={getSpeakerAvatar(record)} minimal={false} grayscale={false} />
 
             <img
-            src={getSpeakerLogotype(record, [])}
+            src={getSpeakerLogotype(record)}
             alt=""
             style={{ maxWidth: 300, maxHeight: 200, marginTop: 30 }}
             />
@@ -106,10 +106,10 @@ const Votable = ({id, vote, status, asPath, classes, ...rest}) => (
                 <React.Fragment>
 
                 <Typography template="presenter1">
-                Liczba głosów: {record.votes}
+                Votes: {record.votes}
                 </Typography>
 
-                <Typography template="benefitsText" label="callforpapers.list.description" />
+                <Typography template="benefitsText" label="callforpapers.voting.rules.description" />
               
                 </React.Fragment>
 
@@ -124,7 +124,7 @@ const Votable = ({id, vote, status, asPath, classes, ...rest}) => (
             />
             }
             
-            <KeywordSelect  href="/vote" as="/vote" keywords={[].concat( _get(record, 'cfp_category', "") )} />
+            <KeywordSelect  href="/vote" as="/vote" keywords={[].concat( _get(record, 'presentation_category', "") )} />
             
             <Divider />
             

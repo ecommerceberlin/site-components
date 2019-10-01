@@ -17,7 +17,7 @@ const shareLink = (service, link, title = '', description = '') => {
       break;
 
     case 'twitter':
-      link = `https://twitter.com/home?status=${_escape(link)}`;
+      link = `https://twitter.com/intent/tweet/?url=${_escape(link)}`;
       break;
 
     default:

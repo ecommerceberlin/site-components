@@ -25,8 +25,12 @@ export const getPresenterOgImage = (
     const logotype = getCloudinaryAsset(_get(participant, "logotype_cdn"), true) || getCloudinaryAsset(_get(participant, "logotype"), true)
 
     const avatarTrans = `c_fit,h_200,q_90,r_max,w_200`;
-    const templateTrans = `g_center,u_${template},x_200,y_-25`;
-    const logotypeTrans = `c_fit,g_center,l_${logotype},w_300,h_200,x_175,y_25`;
+    // const templateTrans = `g_center,u_${template},x_200,y_-25`;
+    // const logotypeTrans = `c_fit,g_center,l_${logotype},w_300,h_200,x_175,y_25`;
+
+    //mark's template fix
+    const templateTrans = `g_center,u_${template},x_200,y_0`;
+    const logotypeTrans = `c_fit,g_center,l_${logotype},w_300,h_200,x_175,y_0`;
 
     return `https://res.cloudinary.com/eventjuicer/image/upload/${avatarTrans}/${templateTrans}/${logotypeTrans}/${avatar}.png`;
     
@@ -34,7 +38,7 @@ export const getPresenterOgImage = (
 
 export const getCallForPapersOgImage = (
     participant,
-    template = 'ebe_template_en'
+    template = 'ebe_callforpapers_opengraph_template'
   ) => getPresenterOgImage(participant, template);
     
 export const getPresenterFbAd = (

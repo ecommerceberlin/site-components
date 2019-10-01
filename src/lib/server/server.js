@@ -236,6 +236,17 @@ const handle = app.getRequestHandler();
     });
 
 
+
+    server.get('/vote', (req, res) => {
+      renderAndCache(req, res, '/vote', {});
+    });
+
+    server.get('/vote/:id', (req, res) => {
+      const params = isNaN(req.params.id) ? { keyword: req.params.id } : { id: req.params.id }
+      renderAndCache(req, res, '/vote', params);
+    });
+
+    
     server.get('/premium/:slug?', (req, res) => {
       renderAndCache(req, res, '/premium', { slug: req.params.slug });
     });
