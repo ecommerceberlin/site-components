@@ -7,14 +7,14 @@ import {resourceFetchRequest } from '../components/redux'
 
 // import { getCompanyProfileInfo, filterCompanyInstances } from '../helpers';
 
-class Presenters extends React.Component {
+class PresentersAll extends React.Component {
 
   componentDidMount(){
 
       const {resourceFetchRequest, filtered} = this.props
 
       if(!filtered.length){
-        resourceFetchRequest("presenters")
+        resourceFetchRequest("presenters_all")
       }
   }
 
@@ -35,12 +35,12 @@ class Presenters extends React.Component {
 
 }
 
-Presenters.propTypes = {
+PresentersAll.propTypes = {
   filtered: PropTypes.array.isRequired,
   record : PropTypes.object.isRequired
 };
 
-Presenters.defaultProps = {
+PresentersAll.defaultProps = {
    filtered : [],
    all : [],
    record : {},
@@ -61,4 +61,4 @@ export default connect(
     }
     return mapStateToProps
 
-}, {resourceFetchRequest})(Presenters)
+}, {resourceFetchRequest})(PresentersAll)

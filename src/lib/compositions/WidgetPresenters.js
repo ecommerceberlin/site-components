@@ -34,7 +34,11 @@ WidgetPresenters.defaultProps = {
     links : [],
     limit : 20,
     random : false,
-    filter : function(item){ return true; },
+
+    filter : function(item){ 
+        return item.presentation_title.length > 10 && item.bio.length > 10 && item.avatar.length > 10 && item.logotype.length > 10 
+    },
+
     link : true,
     logotype : true,
     bio : false
