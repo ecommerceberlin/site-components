@@ -30,9 +30,9 @@ export const getSpeakerName = (speaker) => {
 } 
 
 
-export const getSpeakerAvatar = (speaker, params, size = 250) => getParticipantCdn(_get(speaker, 'avatar_cdn'), size, params) || getParticipantCdn(_get(speaker, 'avatar'), size, params) || '/static/avatar-placeholder.png';
+export const getSpeakerAvatar = (speaker, params = ['c_fit'], size = 250) => getParticipantCdn(_get(speaker, 'avatar_cdn'), size, params) || getParticipantCdn(_get(speaker, 'avatar'), size, params) || '/static/avatar-placeholder.png';
 
-export const getSpeakerLogotype = (speaker, params, size = 300) =>  getParticipantCdn(_get(speaker, 'logotype_cdn'), size, params) || getParticipantCdn(_get(speaker, 'logotype'), size, params) || '/static/avatar-placeholder.png';
+export const getSpeakerLogotype = (speaker, params = ['c_fit'], size = 300) =>  getParticipantCdn(_get(speaker, 'logotype_cdn'), size, params) || getParticipantCdn(_get(speaker, 'logotype'), size, params) || '/static/avatar-placeholder.png';
 
 /**
  * END
@@ -61,13 +61,15 @@ export const getCdnResource = (company, key, scale = true) => {
   // return false;
 };
 
-export const getParticipantCdn = (url, size = 100) => {
+export const getParticipantCdn = (url, size = 100, params = ['c_fit']) => {
 
   if (!url || ! /cloudinary/.test(url)) {
     return false;
   }
 
-  return url.trim().replace(/\.svg/, '.png').replace("image/upload/", `image/upload/c_fit,e_grayscale,w_${size},h_${size}/`);
+  const paramsStr = params.length ? `${params.join(",")},` : 'c_fit,'
+
+  return url.trim().replace(/\.svg/, '.png').replace("image/upload/", `image/upload/${paramsStr}e_grayscale,w_${size},h_${size}/`);
   //  `https://res.cloudinary.com/ecommerceberlin/image/upload/c_fit,e_grayscale,w_${size},h_${size}/p_${participant_id}_${what}.png`;
 };
 

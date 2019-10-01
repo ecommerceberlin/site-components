@@ -9,7 +9,10 @@ import Presenter from './Presenter';
 import PresentationLabel from './PresentationLabel';
 
 import { dialogShow } from '../redux/actions';
-import { getParticipantCdn } from '../../helpers';
+import { 
+  getParticipantCdn,
+  getSpeakerAvatar
+ } from '../../helpers';
 
 import ScheduleItemPresenter from './ScheduleItemPresenter';
 
@@ -106,7 +109,7 @@ const ScheduleItem = ({ data, selected, classes, first, description, dialogShow 
       <ScheduleItemPresenter
         title={getFullName(data)}
         text={getFullJobInfo(data)}
-        imageSrc={getParticipantCdn(data.avatar)}
+        imageSrc={ getSpeakerAvatar(data, [], 100) }
       />
       </div>
       </div>

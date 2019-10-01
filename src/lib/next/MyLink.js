@@ -22,7 +22,6 @@ const MyLink = ({
   name,
   label,
   href,
-  prefetch,
   classes,
   translate,
   variant,
@@ -32,8 +31,15 @@ const MyLink = ({
   className,
   disabled
 }) => {
+
+
+  if(!href){
+    return null
+  }
+
+
   return (
-    <Link as={as} href={href} prefetch={prefetch}>
+    <Link as={as} href={href}>
       <Button
         size={size}
         variant={variant}
@@ -47,7 +53,8 @@ const MyLink = ({
 };
 
 MyLink.defaultProps = {
-  prefetch: true,
+  as : "",
+  href : "",
   name: 'Link',
   variant: 'text',
   size: 'small',

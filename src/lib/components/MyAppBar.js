@@ -81,23 +81,18 @@ function MyAppBar(props) {
               className={classes.flex}
             >
         
-        <Settings name="common">{
-          ({event_name}) => (
-        <RawTranslatedText 
-          pl={event_name}
-          en={event_name}
-        />
-        )}</Settings>
-
+      E-commerce Berlin Expo
+      
             </Typography>
           </Link>
 
           {/* <Search /> */}
           
-          <Settings name="system">{
-          ({available_locales}) => (<LanguageSelect locales={available_locales} />)
-          }</Settings>
+          {/* <Settings name="system">{
+          ({available_locales}) => ()
+          }</Settings> */}
           
+          <LanguageSelect locales={["de","en"]} />
 
           {noItems > 0 ? <Cart count={noItems} /> : null}
         </Toolbar>
