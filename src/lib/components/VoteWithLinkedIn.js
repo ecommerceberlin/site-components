@@ -177,7 +177,7 @@ class VoteWithLinkedIn extends Component {
 VoteWithLinkedIn.defaultProps = {
     service : "linkedin",
     votes : {},
-    max_votes : 3,
+    max_votes : 6,
     transaction : {},
     
     labelLoggedIn : "common.vote_now",
