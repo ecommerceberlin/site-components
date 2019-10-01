@@ -105,9 +105,9 @@ const Votable = ({id, vote, status, asPath, classes, ...rest}) => (
 
                 <React.Fragment>
 
-                <Typography template="presenter1">
+                {/* <Typography template="presenter1">
                 Votes: {record.votes}
-                </Typography>
+                </Typography> */}
 
                 <Typography template="benefitsText" label="callforpapers.voting.rules.description" />
               

@@ -24,6 +24,13 @@ const menuItems = [
         to: '/visit'
         //  icon : <IconSetting />
       },
+
+      {
+        name: 'vote',
+        to: '/vote'
+        //  icon : <IconSetting />
+      },
+
       // {
       //   name: 'schedule',
       //   to: '/schedule'

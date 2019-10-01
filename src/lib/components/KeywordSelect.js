@@ -24,7 +24,7 @@ const KeywordSelect = ({ keywords, selected, href, as, classes }) => {
      keywords.map(keyword =>
 
      <Link
-       prefetch={false}
+     //  prefetch={false}
        key={keyword}
        href={`${href}?keyword=${keyword}`}
        as={`${as}/${keyword}`}
