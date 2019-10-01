@@ -29,7 +29,7 @@ const TicketDownload = ({ code, classes, translate, label }) => {
   return (
     <div className={classes.root}>
       <Button
-        href={`${process.env.API_SERVICES}/tickets/${code}`}
+        href={`https://api.eventjuicer.com/v1/services/tickets/${code}`}
         download
         target="_blank"
         variant="contained"

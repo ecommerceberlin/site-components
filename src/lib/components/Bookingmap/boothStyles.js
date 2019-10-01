@@ -3,13 +3,13 @@
 
 export const styleMapping = {
 
-  [`${process.env.BOOTH_LIGHT}`] : "style1", //light
-  [`${process.env.BOOTH_STANDARD}`] : "style2", //standard
-  [`${process.env.BOOTH_HOT}`] : "style3", //hot
-  [`${process.env.BOOTH_SUPERHOT}`] : "style4", //superhot
-  [`${process.env.BOOTH_ULTRA}`] : "style5", //ultra
-  [`${process.env.BOOTH_GRAND}`] : "style6", //grand
-  [`${process.env.BOOTH_STAGE}`] : "style6"
+  286 : "style1", //light
+  281 : "style2", //standard
+  282 : "style3", //hot
+  283 : "style4", //superhot
+  285 : "style5", //ultra
+  284 : "style6", //grand
+  287 : "style6" //stage
 }
 
 export const getStylingName = (groupId) => {

@@ -64,7 +64,7 @@ import {event} from '../../services/gtag'
 
 import { REHYDRATE } from 'redux-persist/lib/constants'
 
-const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/`
+const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com`
 
 let fetchTasks = {};
 
@@ -210,7 +210,7 @@ function* handleLinkedinVoteRequest(actionData){
 
   const uid = yield select(Selectors.getLinkedInToken)
 
-  const response = yield call(fetch, `${apiUrl}vote`,
+  const response = yield call(fetch, `${apiUrl}/vote`,
   {
     method: 'POST',
     headers: {
@@ -250,7 +250,7 @@ function* handleVoteStatus(actionData){
 
   const {service} = actionData;
 
-  const response = yield call(fetch, `${apiUrl}vote`,
+  const response = yield call(fetch, `${apiUrl}/vote`,
   {
     method: 'POST',
     headers: {
