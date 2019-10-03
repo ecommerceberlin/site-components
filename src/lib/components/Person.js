@@ -50,6 +50,7 @@ const styles = {
 const Person = (props) => {
 
   const {
+    id,
     classes,
     avatar,
     title,
@@ -57,7 +58,6 @@ const Person = (props) => {
     text,
     minimal,
     link,
-    id,
     data,
     mark,
     moreLabel
@@ -69,7 +69,7 @@ const Person = (props) => {
   return (
     <Card className={classes.card} elevation={mark ? 2 : 0}>
       <CardHeader
-        avatar={<Avatar alt="" src={avatar} link={as} />}
+        avatar={<Avatar id={id} alt="" src={avatar} link={as} />}
         // title="test"
         // subheader="srest"
         classes={{
@@ -118,7 +118,7 @@ Person.propTypes = {
 };
 
 const enhance = compose(
-  onlyUpdateForKeys(['id', 'mark']),
+  onlyUpdateForKeys(['id', 'avatar', 'mark']),
   withStyles(styles)
 );
 

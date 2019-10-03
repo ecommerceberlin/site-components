@@ -15,7 +15,9 @@ const CallForPapers = ({intro, limit, random, filter, link, keyword, keyword_sou
 return (
 
     <Wrapper {...wrapperProps}>
-            
+
+    {intro}
+
     <CallForPapersDatasource  
        limit={limit}
        random={random}
@@ -36,7 +38,7 @@ return (
 
         <VoteStatus {...votesData}  /> 
 
-        <People 
+        {keyword && <People 
             data={keyword ? filtered : all}
             link={link} 
             title={item => <React.Fragment>{`${item.presenter}, ${item.position}`} <strong>{item.cname2}</strong> </React.Fragment> }
@@ -44,7 +46,7 @@ return (
             text={item => ""}
             voted={votesData.keyed}
             moreLabel="common.vote_details"
-        />
+        />}
             
         </React.Fragment>
 

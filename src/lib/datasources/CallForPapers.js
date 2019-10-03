@@ -48,7 +48,7 @@ CallForPapers.defaultProps = {
    record : {},
    filter : null,
    keywords : [],
-   keyword : "",
+   keyword : null,
    keyword_source : "presentation_category"
 };
 

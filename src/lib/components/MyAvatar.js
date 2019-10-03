@@ -18,7 +18,7 @@ const styles = theme => ({
   }
 });
 
-const MyAvatar = ({ classes, src, link }) => (
+const MyAvatar = ({ classes, src }) => (
   <Avatar
     alt=""
     src={src}
@@ -30,6 +30,7 @@ const MyAvatar = ({ classes, src, link }) => (
 );
 
 MyAvatar.defaultProps = {
+  id : 0,
   src: ''
 };
 
