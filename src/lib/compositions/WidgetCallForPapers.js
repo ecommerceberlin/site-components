@@ -10,7 +10,7 @@ import CallForPapersDatasource from '../datasources/CallForPapers'
 import VotesDatasource from '../datasources/Votes'
 
 
-const CallForPapers = ({intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
+const CallForPapers = ({show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
 
 return (
 
@@ -43,7 +43,7 @@ return (
             link={link} 
             title={item => <React.Fragment>{`${item.presenter}, ${item.position}`} <strong>{item.cname2}</strong> </React.Fragment> }
             subtitle={item => item.presentation_title}
-            text={item => ""}
+            text={item => show_votes ? `/${item.votes} votes/` : null}
             voted={votesData.keyed}
             moreLabel="common.vote_details"
         />}
@@ -78,7 +78,8 @@ CallForPapers.defaultProps = {
     link : function(item){
         return {as : `/vote/${item.id}`, href : `/vote?id=${item.id}`}
     },
-    intro : null
+    intro : null,
+    show_votes : false
 }
 
 
