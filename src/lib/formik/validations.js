@@ -31,8 +31,8 @@ export const validations = (requiredFieldNames) => ({
       .conditionallyRequire(requiredFieldNames, 'Company name is required.'),
   
       phone: Yup.string()
-      .min(9, 'Phone is valid?')
-      .max(13, 'Phone is valid?')
+      .min(9, 'Phone number seems too short')
+      .max(15, 'Phone number is too long. Use numbers only.')
       .conditionallyRequire(requiredFieldNames, 'Phone number is required'),
       
       email: Yup.string()
