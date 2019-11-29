@@ -2,12 +2,14 @@ const express = require('express');
 const url = require('url');
 const cookieSession = require('cookie-session');
 const next = require('next');
-const LRUCache = require('lru-cache');
+//const LRUCache = require('lru-cache');
 //const querystring = require('query-string');
-const fetch = require('isomorphic-unfetch');
+//const fetch = require('isomorphic-unfetch');
 //const _keyBy = require('lodash/keyBy');
 const i18n = require('./i18n');
 const sitemap = require('./sitemap')
+const settings = require('./settings')
+const ssrCache = require('./cache')
 
 export default function(options){
 
@@ -24,10 +26,10 @@ const {
 
 const cachableUtmContent = ["logotype,pl", "logotype,en", "opengraph_image"];
 
-const ssrCache = new LRUCache({
-  max: 100,
-  maxAge: 1000 * 60 * 60 // 1hour
-});
+// const ssrCache = new LRUCache({
+//   max: 100,
+//   maxAge: 1000 * 60 * 60 // 1hour
+// });
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -35,23 +37,6 @@ const app = next({ dir: '.', dev });
 const handle = app.getRequestHandler();
 
 
-  async function fetchFromApiEndpoint(endpoint) {
-    const _res = await fetch(`${api}/${endpoint}`);
-    const res = await _res.json();
-    return res;
-  }
-  
-  function cacheApiResult(endpoint) {
-    if (ssrCache.has(endpoint)) {
-      res.setHeader('x-api-cache', 'HIT');
-      res.send(ssrCache.get(key));
-      return;
-    }
-  
-    // fetchFromApiEndpoint(endpoint).
-    // then(data => data.data).
-    // then()
-  }
   
   function getPathName(req){
   
@@ -264,7 +249,7 @@ const handle = app.getRequestHandler();
     });
 
     server.get('/_data/settings', (req, res) => {
-      res.json(options);
+      settings(req,res, "settings");
     });
     
     // server.get('/:lang([a-z]{2}|)', (req, res) => {
