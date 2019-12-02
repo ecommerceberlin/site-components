@@ -2,28 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-import {resourceFetchRequest } from '../components/redux'
 import * as Selectors from './redux/contestantcompanies'
+import { resourceFetchRequest } from '../components/redux'
 
-class ContestantCompanies extends React.Component {
+class ContestanCompanies extends React.Component {
 
   componentDidMount(){
 
-      const {resourceFetchRequest, data} = this.props
+      const {resourceFetchRequest, all} = this.props
 
-      if(!data.length){
-        resourceFetchRequest("contestant_companies")
-      }
+      //always fetch new data!
+      //if(!all.length){
+        resourceFetchRequest("contestant_companies", true)
+      //}
   }
 
+ 
 
   render(){
 
-    const {children, data} = this.props
+    const {children, ...rest} = this.props
 
     if(children){
 
-      return children(data)
+      return children(rest)
 
     }
 
@@ -32,16 +34,20 @@ class ContestantCompanies extends React.Component {
 
 }
 
-ContestantCompanies.propTypes = {
-  data: PropTypes.array.isRequired,
+ContestanCompanies.propTypes = {
+  all: PropTypes.array.isRequired,
   keywords: PropTypes.array.isRequired,
   keyword : PropTypes.string
 };
 
-ContestantCompanies.defaultProps = {
-  data : [],
-  keywords : [],
-  keyword : ""
+ContestanCompanies.defaultProps = {
+   all : [],
+   filtered : [],
+   record : {},
+   filter : null,
+   keywords : [],
+   keyword : null,
+   keyword_source : "awards_category"
 };
 
 export default connect(
@@ -50,9 +56,16 @@ export default connect(
 
     const mapStateToProps = (state, props) => {
       return {
-     //   data : FilteredCompanies(state, props)
+        record : Selectors.SingleContestantCompaniesSelector(state, props),
+        filtered : Selectors.FilteredByKeywordContestantCompanies(state, props),
+        keywords : Selectors.ContestantCompaniesKeywordsSelector(state, props),
+        all : Selectors.FilteredContestantCompanies(state, props),
       }
     }
     return mapStateToProps
 
-}, {resourceFetchRequest})(ContestantCompanies)
+}, {resourceFetchRequest})(ContestanCompanies)
+
+
+
+

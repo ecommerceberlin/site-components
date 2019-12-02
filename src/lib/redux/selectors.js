@@ -41,6 +41,7 @@ export const getPartners = (state, props) => state.resources.partners
 
 
 export const getCallForPapers = (state, props) => state.resources.callforpapers
+export const getContestantCompanies = (state, props) => state.resources.contestant_companies
 export const getVotes = (state, props) => state.resources.votes
 /*
 RESOURCES

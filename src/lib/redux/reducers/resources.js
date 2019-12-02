@@ -8,7 +8,8 @@ export const initialState = {
   photos: [],
   bookingmap: [],
   exhibitors : [],
-  texts : {}
+  texts : {},
+  contestant_companies : []
 };
 
 const reducer = (state = initialState, action) => {

@@ -83,16 +83,23 @@ class MyApp extends App {
       ? await Component.getInitialProps(ctx)
       : {};
 
+    /**START: settings via api */
+
     const settingsRes = await fetch('http://localhost:3000/_data/settings', {
         headers: { Accept: 'application/json' }
     });
 
     const settings = await settingsRes.json();
 
-    store.dispatch({
-        type: "SETTINGS_SET",
-        payload : settingsRes
-    })
+    if("site" in settings.data){
+        store.dispatch({
+            type: "SETTINGS_SET",
+            payload : settingsRes.data.site
+        })
+    }
+   
+
+     /**END: settings via API */
 
     // if("settings" in componentInitialProps)
     // {

@@ -25,23 +25,30 @@ const styles = theme => ({
 });
 
 
-const WidgetVideoWithEventInfo = ({ classes, locale, template, event_name, event_date, background, videoSrc, overlay }) => (
+const WidgetVideoWithEventInfo = ({ classes, heading, subheading, locale, template, event_name, event_date, background, videoSrc, overlay }) => (
 
   <Settings name="hero">{
 
-    ({videoSrc, background, overlay, template}) => (
+    ({
+      heading,
+      subheading,
+      videoSrc, 
+      background, 
+      overlay, 
+      template
+    }) => (
   
     <FsVideo
-    background={background}
-    videoSrc={videoSrc}
-    overlay={overlay}
+      background={background}
+      videoSrc={videoSrc}
+      overlay={overlay}
     >
 
     <div className={classes.container}>
 
-      <MyTypography template={template} label="event.claim" />
+      <MyTypography template={template} label={heading} />
 
-      <MyTypography template="subhero" label="event.description" />
+      <MyTypography template="subhero" label={subheading} />
 
       <div className={classes.eventinfo}>
       
@@ -71,6 +78,8 @@ WidgetVideoWithEventInfo.defaultProps = {
   // videoSrc : 'https://res.cloudinary.com/eventjuicer/video/upload/v1534454501/video_presenter_blak.mp4',
   // overlay : "red",
   // template : "hero"
+  heading : "event.claim",
+  subheading : "event.description"
 }
 
 const enhance = compose(

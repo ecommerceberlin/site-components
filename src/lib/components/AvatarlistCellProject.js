@@ -16,6 +16,7 @@ const styles = theme => ({
   //    alignItems: 'center',
   //    justifyContent: 'center',
       fontFamily: theme.typography.fontFamily,
+      marginBottom: 30
     },
     person : {
       height: 60,
@@ -34,16 +35,16 @@ const styles = theme => ({
     },
 
     tile: {
-      height: 150,
+      height: 120,
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       display: 'block',
       textIndent: -5000,
-      marginTop : '20%',
-      marginBottom : '20%',
-      marginRight : '10%',
-      marginLeft : '10%',
+      marginTop : '0%',
+      marginBottom : '0%',
+      marginRight : '7%',
+      marginLeft : '7%',
 
 
       [theme.breakpoints.down('md')]: {
@@ -65,16 +66,14 @@ const styles = theme => ({
 });
 
 
-const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source, link}) => {
+const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source, link, moreLabel}) => {
   
     const style = image_source in source && source[image_source] ? { 
       backgroundImage: `url(${resizeCloudinaryImage(source[image_source], 300, 300)})` 
     } : {};
 
     const linkParams = isFunction(link) ? link(source) : {}
-    const {as, href} = linkParams
-
-
+   
     return ( 
     
     <Grid item {...gridData} className={classes.root}>
@@ -87,7 +86,7 @@ const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source
 
         <div className={classes.tile} style={style}>{ alt(source) }</div>
 
-           <MyLink {...linkParams} label={moreLabel} />
+        <MyLink {...linkParams} label={moreLabel} />
 
       </Grid>
       )
@@ -100,7 +99,7 @@ AvatarlistCellDumb.defaultProps = {
     title : function(item){return "position" in item ? item.position : "undefined"; },
     alt : function(item){return "cname2" in item ? item.cname2 : "undefined"; },
     link: false,
-
+    moreLabel : "awards.contestant.details"
 }
 
 

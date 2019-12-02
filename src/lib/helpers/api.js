@@ -21,7 +21,7 @@ export const fetcher = async (endpoints, store) => {
 
   const results = await Promise.all(
     endpoints.map(endpoint =>
-      fetch(`https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/${endpoint}`)
+      fetch(`https://api.eventjuicer.com/v1/public/hosts/${process.env.PROJECT}/${endpoint}`)
         .then(response => response.json())
         .then(data => ({ endpoint, data }))
     )

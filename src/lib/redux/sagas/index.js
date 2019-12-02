@@ -64,7 +64,7 @@ import {event} from '../../services/gtag'
 
 import { REHYDRATE } from 'redux-persist/lib/constants'
 
-const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com`
+const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/${process.env.PROJECT}`
 
 let fetchTasks = {};
 

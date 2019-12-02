@@ -31,9 +31,12 @@ export { default as WidgetSpeaking } from './WidgetSpeaking'
 export { default as WidgetTickets } from './WidgetTickets'
 export { default as WidgetPresentersAll } from './WidgetPresentersAll'
 
-
+export { default as WidgetMenu } from './WidgetMenu'
 
 //voting
 export { default as WidgetCallForPapers } from './WidgetCallForPapers'
+export { default as WidgetContestantCompanies } from './WidgetContestantCompanies'
+
 export { default as WidgetVotable } from './WidgetVotable'
+export { default as WidgetContestantCompany} from './WidgetContestantCompany'
 export { default as WidgetVoteStatus } from './WidgetVoteStatus'

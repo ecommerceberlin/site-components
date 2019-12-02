@@ -1,6 +1,6 @@
 const fetch = require('isomorphic-unfetch');
 const defaultTranslations = require("./translation.json");
-
+const ssrCache = require('./cache').ssrCache
 
 function handleErrors(response) {
   if (!response.ok) {
@@ -9,25 +9,22 @@ function handleErrors(response) {
   return response;
 }
 
-
-
-
-async function getTexts(translationUrl, cache, purge) {
+async function getTexts(translationUrl, purge) {
 
   if (purge) {
-    cache.del(translationUrl);
+    ssrCache.del(translationUrl);
   }
 
-  if (!cache.has(translationUrl)) {
+  if (!ssrCache.has(translationUrl)) {
 
     const data = await fetch(translationUrl, {timeout : 2000}).then(handleErrors).then(response => response.json()).catch(error => defaultTranslations);
   
-    cache.set(translationUrl, data);
+    ssrCache.set(translationUrl, data);
    // console.log('API/texts not found! Fetching and caching...');
     return data;
   } else {
    //console.log('API/texts resolved from cache!');
-    return cache.get(translationUrl);
+    return ssrCache.get(translationUrl);
   }
 }
 

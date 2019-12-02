@@ -1,36 +1,8 @@
 
 export const initialState = {
-    bookingmap : {
-        height : 750
-    },
-    reviews : {
-        
-    },
-    hero : {},
-    ui : {
-        menuItems : []
-    },
-    visitor : {},
-    common : {},
-    sales_support : {
-        title : '',
-        description: '',
-        people : []
-    },
-    customer_support : {
+   
+    widgets : {},
 
-    },
-    rolebuttons : {
-        items : [],
-    },
-    schedule : {
-        times : {},
-        venues : {},
-        venueStyle : ""
-    },
-    footer : {
-        links : []
-    },
 };
 
 const reducer = (state = initialState, action) => {

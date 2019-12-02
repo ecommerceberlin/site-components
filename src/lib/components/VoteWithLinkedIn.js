@@ -187,8 +187,8 @@ VoteWithLinkedIn.defaultProps = {
     labelVotesUsed : "common.votes_used",
 
     disabled : false,
-    url : 'https://ecommerceberlin.com/vote',
-    oAuthUrl : 'https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/ssr'
+    url : `https://${process.env.PROJECT}/vote`,
+    oAuthUrl : `https://api.eventjuicer.com/v1/public/hosts/${process.env.PROJECT}/ssr`
 }
 
 VoteWithLinkedIn.propTypes = {

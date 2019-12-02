@@ -49,7 +49,7 @@ const WidgetSpeaking = ({ categories, classes, ...rest }) => (
         ]}
         template="ebe-presenters-application"
         cc="speaking@ecommerceberlin.com"
-        api='https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/register'
+        api={`https://api.eventjuicer.com/v1/public/hosts/${process.env.PROJECT}/register`}
       />
 
     </Grid>

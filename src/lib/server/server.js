@@ -1,5 +1,4 @@
 const express = require('express');
-const url = require('url');
 const cookieSession = require('cookie-session');
 const next = require('next');
 //const LRUCache = require('lru-cache');
@@ -8,8 +7,17 @@ const next = require('next');
 //const _keyBy = require('lodash/keyBy');
 const i18n = require('./i18n');
 const sitemap = require('./sitemap')
-const settings = require('./settings')
-const ssrCache = require('./cache')
+const settings = require('./externalApi').settings
+const renderAndCache = require('./renderAndCache').renderAndCache
+const available_locales = require('./renderAndCache').available_locales
+const default_locale = require('./renderAndCache').default_locale
+
+
+
+//migrating to env
+
+console.log(available_locales)
+console.log(default_locale)
 
 export default function(options){
 
@@ -18,13 +26,12 @@ if(!options || new Object(options) !== options){
 }
 
 const {
-  available_locales, 
-  default_locale, 
+  // available_locales, 
+  // default_locale, 
   api,
   lang_api_endpoint
 } = options.system;
 
-const cachableUtmContent = ["logotype,pl", "logotype,en", "opengraph_image"];
 
 // const ssrCache = new LRUCache({
 //   max: 100,
@@ -36,80 +43,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dir: '.', dev });
 const handle = app.getRequestHandler();
 
-
-  
-  function getPathName(req){
-  
-    return url.parse(req.url).pathname
-  }
-  
-  /*
-   * NB: make sure to modify this to take into account anything that should trigger
-   * an immediate page change (e.g a locale stored in req.session)
-   */
-  function getCacheKey(req, locale, utm_content) {
-  
-    //handle utm_content to cache separately....
-  
-    return `${getPathName(req)}_${(locale || default_locale)}_${utm_content}`;
-  
-  }
-  
-  async function renderAndCache(req, res, pagePath, queryParams) {
-  
-    const utm_content = "utm_content" in req.query && cachableUtmContent.indexOf(req.query.utm_content) > -1 ? req.query.utm_content : "";
-  
-    if ('purge' in req.query) {
-      
-      available_locales.forEach(function(l, index, arr){
-  
-        if(utm_content){
-          cachableUtmContent.forEach( v => ssrCache.del(getCacheKey(req, l, utm_content)) )
-        }
-        else{
-          ssrCache.del(getCacheKey(req, l, utm_content))
-        }
-      });
-    }
-  
-    const {locale} = res.locals
-    const key = getCacheKey(req, locale, utm_content);
-  
-    // If we have a page in the cache, let's serve it
-    if (ssrCache.has(key)) {
-      res.setHeader('x-cache', 'HIT');
-      res.send(ssrCache.get(key));
-      return;
-    }
-  
-    try {
-      // If not let's render the page into HTML
-      const html = await app.renderToHTML(req, res, pagePath, queryParams);
-  
-      // Something is wrong with the request, let's skip the cache
-      if (dev || res.statusCode !== 200) {
-        res.setHeader('x-cache', 'SKIP');
-        res.send(html);
-        return;
-      }
-  
-      // Let's cache this page
-      ssrCache.set(key, html);
-      res.setHeader('x-cache', 'MISS');
-      res.send(html);
-    } catch (err) {
-      app.renderError(err, req, res, pagePath, queryParams);
-    }
-  }
-
-  
-
-
-
-    
-
-  
-  app
+app
   .prepare()
   .then(() => {
     const server = express();
@@ -134,7 +68,7 @@ const handle = app.getRequestHandler();
 
       const {lang} = req.query
 
-      const texts = await i18n.getTexts(lang_api_endpoint, ssrCache, 'purge' in req.query);
+      const texts = await i18n.getTexts(lang_api_endpoint, 'purge' in req.query);
 
       const {locale} = req.session
 
@@ -154,19 +88,6 @@ const handle = app.getRequestHandler();
 
     sitemap({ server })
 
-    //  server.get('/c,:id,:creative', (req, res) => {
-    //    const queryParams = { id: req.params.id, creative : req.params.creative }
-    //    res.redirect('/agenda?utm_content=')
-    //
-    //   // app.render(req, res, '/exhibitor', queryParams)
-    // //  REDIRECT
-    //    //renderAndCache(req, res, '/company', queryParams)
-    //  })
-
-    // server.get('/locale/:locale', (req, res) => {
-    //   req.session.locale = req.params.locale
-    //  /// res.redirect('/')
-    // })
 
  
     server.get('/recall/:token', (req, res) => {
@@ -185,71 +106,65 @@ const handle = app.getRequestHandler();
     });
 
     server.get('/stage,:stage', (req, res) => {
-      renderAndCache(req, res, '/stage', { stage: req.params.stage });
+      renderAndCache(app, req, res, '/stage', { stage: req.params.stage });
     });
 
     server.get('/ticket,:hash', (req, res) => {
-      renderAndCache(req, res, '/ticket', { hash: req.params.hash });
+      renderAndCache(app, req, res, '/ticket', { hash: req.params.hash });
     });
 
     server.get('/thankyou,:hash', (req, res) => {
-      renderAndCache(req, res, '/thankyou', { hash: req.params.hash });
+      renderAndCache(app, req, res, '/thankyou', { hash: req.params.hash });
     });
 
     server.get('/archive,:id', (req, res) => {
-      renderAndCache(req, res, '/archive', { id: req.params.id });
+      renderAndCache(app, req, res, '/archive', { id: req.params.id });
     });
 
     server.get('/invite,:id', (req, res) => {
-      renderAndCache(req, res, '/invite', { id: req.params.id });
+      renderAndCache(app, req, res, '/invite', { id: req.params.id });
     });
 
     server.get('/:slug,s,:id', (req, res) => {
-      renderAndCache(req, res, '/speaker', { id: req.params.id });
+      renderAndCache(app, req, res, '/speaker', { id: req.params.id });
     });
 
     server.get('/:slug,c,:id', (req, res) => {
-      renderAndCache(req, res, '/company', { id: req.params.id });
+      renderAndCache(app, req, res, '/company', { id: req.params.id });
     });
 
     server.get('/exhibitors', (req, res) => {
-      renderAndCache(req, res, '/exhibitors', {});
+      renderAndCache(app, req, res, '/exhibitors', {});
     });
 
     server.get('/exhibitors/:keyword', (req, res) => {
-      renderAndCache(req, res, '/exhibitors-by-keyword', { keyword: req.params.keyword });
+      renderAndCache(app, req, res, '/exhibitors-by-keyword', { keyword: req.params.keyword });
     });
 
 
 
     server.get('/vote', (req, res) => {
-      renderAndCache(req, res, '/vote', {});
+      renderAndCache(app, req, res, '/vote', {});
     });
 
     server.get('/vote/:id', (req, res) => {
       const params = isNaN(req.params.id) ? { keyword: req.params.id } : { id: req.params.id }
-      renderAndCache(req, res, '/vote', params);
+      renderAndCache(app, req, res, '/vote', params);
     });
 
     
     server.get('/premium/:slug?', (req, res) => {
-      renderAndCache(req, res, '/premium', { slug: req.params.slug });
-    });
-
-    // Serve the item webpage with next.js as the renderer
-    server.get('/setup', async (req, res) => {
-      const texts = await i18n.getTexts(lang_api_endpoint, ssrCache, 'purge' in req.query);
-      app.render(req, res, '/setup', { texts });
+      renderAndCache(app, req, res, '/premium', { slug: req.params.slug });
     });
 
     // When rendering client-side, we will request the same data from this route
     server.get('/_data/texts', async (req, res) => {
-      const texts = await i18n.getTexts(lang_api_endpoint, ssrCache);
+      const texts = await i18n.getTexts(lang_api_endpoint);
       res.json(texts);
     });
 
     server.get('/_data/settings', (req, res) => {
-      settings(req,res, "settings");
+      settings(api, req, res);
     });
     
     // server.get('/:lang([a-z]{2}|)', (req, res) => {
@@ -257,7 +172,7 @@ const handle = app.getRequestHandler();
     // })
 
     server.get('/', (req, res) => {
-      renderAndCache(req, res, '/', {});
+      renderAndCache(app, req, res, '/', {});
     });
 
     server.get('*', (req, res) => {

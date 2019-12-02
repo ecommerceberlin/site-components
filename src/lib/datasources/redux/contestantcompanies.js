@@ -1,48 +1,48 @@
 import { createSelector } from 'reselect';
 import keyBy from 'lodash/keyBy'
-import { getCallForPapers, getFilteringProps} from '../../redux/selectors'
+import { getContestantCompanies, getFilteringProps} from '../../redux/selectors'
 import { processArrayData } from '../../helpers';
 
-export const FilteredCallForPapers = createSelector(
-    getCallForPapers,
+export const FilteredContestantCompanies = createSelector(
+    getContestantCompanies,
     getFilteringProps,
-    (callforpapers, props) => processArrayData(callforpapers, props)
+    (items, props) => processArrayData(items, props)
   )
 
-  export const CallForPapersKeywordsSelector = createSelector(
-    getCallForPapers,
+  export const ContestantCompaniesKeywordsSelector = createSelector(
+    getContestantCompanies,
     getFilteringProps,
-    (callforpapers, props) => {
-      const allUsedKeywords = callforpapers.map(item => "keyword_source" in props && props.keyword_source in item ? item[props.keyword_source] : item.presentation_category).filter(item => item.length > 1)
+    (items, props) => {
+      const allUsedKeywords = items.map(item => "keyword_source" in props && props.keyword_source in item ? item[props.keyword_source] : item.awards_category).filter(item => item.length > 1)
       const uniqueKeywords = [...new Set(allUsedKeywords )];
       return uniqueKeywords
     }
   )
   
-  export const FilteredByKeywordCallForPapers = createSelector(
-    FilteredCallForPapers,
+  export const FilteredByKeywordContestantCompanies = createSelector(
+    FilteredContestantCompanies,
     getFilteringProps,
-    (callforpapers, props) => {
+    (items, props) => {
 
         if(!"keyword" in props){
-            return callforpapers
+            return items
         }
 
         if("keyword_source" in props){
-            return callforpapers.filter(item => item[props.keyword_source] == props.keyword)
+            return items.filter(item => item[props.keyword_source] == props.keyword)
         }
 
-        return callforpapers.filter(item => item.presentation_category == props.keyword)
+        return items.filter(item => item.presentation_category == props.keyword)
     }
   )
   
-  export const KeyedCallForPapersSelector = createSelector(
-    getCallForPapers,
-    (callforpapers) => keyBy(callforpapers, "id")
+  export const KeyedContestantCompaniesSelector = createSelector(
+    getContestantCompanies,
+    (items) => keyBy(items, "id")
   )
   
-  export const SingleCallForPaperSelector = createSelector(
-    KeyedCallForPapersSelector,
+  export const SingleContestantCompaniesSelector = createSelector(
+    KeyedContestantCompaniesSelector,
     (_, props) => "id" in props ? props.id : null,
     (keyed, id) => id && id in keyed ? keyed[id] : {}
   )

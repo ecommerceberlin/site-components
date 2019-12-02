@@ -3,7 +3,7 @@ const path = require('path')
 const companies = require('./companies')
 
 const sitemap = sm.createSitemap({
-  hostname: 'https://ecommerceberlin.com',
+  hostname: `https://${process.env.PROJECT}`,
   cacheTime: 600000 // 600 sec - cache purge period
 })
 

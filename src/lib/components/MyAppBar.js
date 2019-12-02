@@ -81,7 +81,7 @@ function MyAppBar(props) {
               className={classes.flex}
             >
         
-      E-commerce Berlin Expo
+      {`${process.env.NAME || ""}`}
       
             </Typography>
           </Link>
