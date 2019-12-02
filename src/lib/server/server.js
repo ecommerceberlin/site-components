@@ -83,8 +83,17 @@ app
 
  
     server.get('/recall/:token', (req, res) => {
-      res.redirect(`https://account.${req.headers.host}/#/login?token=${req.params.token}`)
+     // res.redirect(`https://account.${req.headers.host}/#/login?token=${req.params.token}`)
+      res.redirect(`https://pages.${req.headers.host}/recall/${req.params.token}`)
+
     })
+
+    server.get('/account', (req, res) => {
+      // res.redirect(`https://account.${req.headers.host}/#/login?token=${req.params.token}`)
+       res.redirect(`https://pages.${req.headers.host}/account`)
+     })
+
+     
 
     server.get('/v', (req, res) => {
       res.redirect('/visit?utm_source=oldv&utm_medium=sms&utm_campaign=oldv')

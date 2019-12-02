@@ -27,6 +27,11 @@ async function renderAndCache(app, req, res, pagePath, queryParams, options) {
 
 const {default_locale, available_locales} = options;
 
+if(!default_locale || !available_locales){
+    res.send("LOCALE settings missing");
+    return;
+}
+
 const utm_content = "utm_content" in req.query && cachableUtmContent.indexOf(req.query.utm_content) > -1 ? req.query.utm_content : "";
 
 if ('purge' in req.query) {

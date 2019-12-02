@@ -1,7 +1,7 @@
 import url from 'url';
 import Router from 'next/router';
 
-const GTM = 'GTM-MRFVC8';
+const {GTM} = process.env;
 
 const withGtm = WrappedComponent =>
   class GaWrapper extends React.Component {
