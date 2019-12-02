@@ -9,15 +9,7 @@ const i18n = require('./i18n');
 const sitemap = require('./sitemap')
 const settings = require('./externalApi').settings
 const renderAndCache = require('./renderAndCache').renderAndCache
-const available_locales = require('./renderAndCache').available_locales
-const default_locale = require('./renderAndCache').default_locale
 
-
-
-//migrating to env
-
-console.log(available_locales)
-console.log(default_locale)
 
 export default function(options){
 
@@ -26,8 +18,8 @@ if(!options || new Object(options) !== options){
 }
 
 const {
-  // available_locales, 
-  // default_locale, 
+  available_locales, 
+  default_locale, 
   api,
   lang_api_endpoint
 } = options.system;
@@ -68,7 +60,7 @@ app
 
       const {lang} = req.query
 
-      const texts = await i18n.getTexts(lang_api_endpoint, 'purge' in req.query);
+      const texts = await i18n.getTexts(lang_api_endpoint, 'purge' in req.query, options.system);
 
       const {locale} = req.session
 
@@ -106,60 +98,60 @@ app
     });
 
     server.get('/stage,:stage', (req, res) => {
-      renderAndCache(app, req, res, '/stage', { stage: req.params.stage });
+      renderAndCache(app, req, res, '/stage', { stage: req.params.stage }, options.system);
     });
 
     server.get('/ticket,:hash', (req, res) => {
-      renderAndCache(app, req, res, '/ticket', { hash: req.params.hash });
+      renderAndCache(app, req, res, '/ticket', { hash: req.params.hash }, options.system);
     });
 
     server.get('/thankyou,:hash', (req, res) => {
-      renderAndCache(app, req, res, '/thankyou', { hash: req.params.hash });
+      renderAndCache(app, req, res, '/thankyou', { hash: req.params.hash }, options.system);
     });
 
     server.get('/archive,:id', (req, res) => {
-      renderAndCache(app, req, res, '/archive', { id: req.params.id });
+      renderAndCache(app, req, res, '/archive', { id: req.params.id }, options.system);
     });
 
     server.get('/invite,:id', (req, res) => {
-      renderAndCache(app, req, res, '/invite', { id: req.params.id });
+      renderAndCache(app, req, res, '/invite', { id: req.params.id }, options.system);
     });
 
     server.get('/:slug,s,:id', (req, res) => {
-      renderAndCache(app, req, res, '/speaker', { id: req.params.id });
+      renderAndCache(app, req, res, '/speaker', { id: req.params.id }, options.system);
     });
 
     server.get('/:slug,c,:id', (req, res) => {
-      renderAndCache(app, req, res, '/company', { id: req.params.id });
+      renderAndCache(app, req, res, '/company', { id: req.params.id }, options.system);
     });
 
     server.get('/exhibitors', (req, res) => {
-      renderAndCache(app, req, res, '/exhibitors', {});
+      renderAndCache(app, req, res, '/exhibitors', {}, options.system);
     });
 
     server.get('/exhibitors/:keyword', (req, res) => {
-      renderAndCache(app, req, res, '/exhibitors-by-keyword', { keyword: req.params.keyword });
+      renderAndCache(app, req, res, '/exhibitors-by-keyword', { keyword: req.params.keyword }, options.system);
     });
 
 
 
     server.get('/vote', (req, res) => {
-      renderAndCache(app, req, res, '/vote', {});
+      renderAndCache(app, req, res, '/vote', {}, options.system);
     });
 
     server.get('/vote/:id', (req, res) => {
       const params = isNaN(req.params.id) ? { keyword: req.params.id } : { id: req.params.id }
-      renderAndCache(app, req, res, '/vote', params);
+      renderAndCache(app, req, res, '/vote', params, options.system);
     });
 
     
     server.get('/premium/:slug?', (req, res) => {
-      renderAndCache(app, req, res, '/premium', { slug: req.params.slug });
+      renderAndCache(app, req, res, '/premium', { slug: req.params.slug }, options.system);
     });
 
     // When rendering client-side, we will request the same data from this route
     server.get('/_data/texts', async (req, res) => {
-      const texts = await i18n.getTexts(lang_api_endpoint);
+      const texts = await i18n.getTexts(lang_api_endpoint, 'purge' in req.query, options.system);
       res.json(texts);
     });
 
@@ -172,7 +164,7 @@ app
     // })
 
     server.get('/', (req, res) => {
-      renderAndCache(app, req, res, '/', {});
+      renderAndCache(app, req, res, '/', {}, options.system);
     });
 
     server.get('*', (req, res) => {

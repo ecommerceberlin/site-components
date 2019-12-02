@@ -3,8 +3,6 @@
 
 const url = require('url');
 const cachableUtmContent = ["logotype,pl", "logotype,en", "opengraph_image"];
-const available_locales = `${process.env.AVAILABLE_LOCALES}`.split(",")
-const default_locale =  `${process.env.DEFAULT_LOCALE}` || "en"
 const dev = process.env.NODE_ENV !== 'production';
 const ssrCache = require('./cache').ssrCache
 
@@ -17,7 +15,7 @@ function getPathName(req){
 * NB: make sure to modify this to take into account anything that should trigger
 * an immediate page change (e.g a locale stored in req.session)
 */
-function getCacheKey(req, locale, utm_content) {
+function getCacheKey(req, locale, utm_content, default_locale) {
 
     //handle utm_content to cache separately....
 
@@ -25,7 +23,9 @@ function getCacheKey(req, locale, utm_content) {
 
 }
 
-async function renderAndCache(app, req, res, pagePath, queryParams) {
+async function renderAndCache(app, req, res, pagePath, queryParams, options) {
+
+const {default_locale, available_locales} = options;
 
 const utm_content = "utm_content" in req.query && cachableUtmContent.indexOf(req.query.utm_content) > -1 ? req.query.utm_content : "";
 
@@ -34,16 +34,16 @@ if ('purge' in req.query) {
     available_locales.forEach(function(l, index, arr){
 
     if(utm_content){
-        cachableUtmContent.forEach( v => ssrCache.del(getCacheKey(req, l, utm_content)) )
+        cachableUtmContent.forEach( v => ssrCache.del(getCacheKey(req, l, utm_content, default_locale)) )
     }
     else{
-        ssrCache.del(getCacheKey(req, l, utm_content))
+        ssrCache.del(getCacheKey(req, l, utm_content, default_locale))
     }
     });
 }
 
 const {locale} = res.locals
-const key = getCacheKey(req, locale, utm_content);
+const key = getCacheKey(req, locale, utm_content, default_locale);
 
 // If we have a page in the cache, let's serve it
 if (ssrCache.has(key)) {
@@ -72,4 +72,4 @@ try {
 }
 }
 
-  module.exports = { renderAndCache, available_locales, default_locale }
+  module.exports = { renderAndCache }

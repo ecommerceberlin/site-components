@@ -18,7 +18,7 @@ async function cacheApiResult(api, endpoint, req, res) {
       res.setHeader(`x-cache-${endpoint}`, 'HIT');
       
       //https://zeit.co/docs/v2/serverless-functions/edge-caching/
-      res.setHeader('Cache-Control', 'max-age=0, s-maxage=600');
+     // res.setHeader('Cache-Control', 'max-age=0, s-maxage=600');
 
       res.json(cache.get(endpoint));
       return;
@@ -40,13 +40,13 @@ async function cacheApiResult(api, endpoint, req, res) {
       res.setHeader(`x-cache-${endpoint}`, 'MISS');
 
       //https://zeit.co/docs/v2/serverless-functions/edge-caching/
-      res.setHeader('Cache-Control', 'max-age=0, s-maxage=600');
+     // res.setHeader('Cache-Control', 'max-age=0, s-maxage=600');
 
       res.json(data);
     } catch (err) {
 
       //https://zeit.co/docs/v2/serverless-functions/edge-caching/
-      res.setHeader('Cache-Control', 'no-cache');
+      // res.setHeader('Cache-Control', 'no-cache');
 
       res.json({error: {code : 500 }});
     }
