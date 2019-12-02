@@ -9,22 +9,21 @@ import {
     MyTypography as Typography,
     TwoColsLayout as Section,
     Wrapper,
-    Presentation,
-    Presenter as PresenterName,
+  
     Sharer,
     MyAvatar as Avatar,
    // Speaker
    KeywordSelect
   } from '../components';
 
+//import CompanyLogotype from '../components/CompanyLogotype'
 
 import DatasourceContestantCompanies from '../datasources/ContestantCompanies'
 
 import { 
-    getCallForPapersOgImage, 
-    getSpeakerName,
-    getSpeakerAvatar,
-    getSpeakerLogotype
+    getCompanyAltOgImage, 
+    getSpeakerLogotype,
+    getCompanyProfileInfo
  } from '../helpers';
 
 const styles = theme => ({
@@ -49,29 +48,46 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
 
         ({filtered, all, record}) => {
             
+
+            const difference = _get(record, 'difference', "");
+
+
             return (
 
             <React.Fragment>
 
+
             <Head
-            image={getCallForPapersOgImage(record)}
+            image={getCompanyAltOgImage(record, asPath)}
             url={asPath}
             titleLabel={[
-                'awards.contest.opengraph.title', 
-                { 
-                    presentation_title : _get(record, 'presentation_title') 
-                }
+            'awards.contest.opengraph.title',
+            { name: getCompanyProfileInfo(record, 'name') }
             ]}
             descriptionLabel={[
             'awards.contest.opengraph.description',
             {
-                name: getSpeakerName(record),
-                cname2: _get(record, 'cname2')
+            // name: getSpeakerName(record),
+            // cname2: _get(record, 'cname2')
             }
             ]}
             />
 
+
             <Wrapper first={false} {...rest}>
+
+
+            <div className={classes.voteButtonContainer}>
+            <div>
+               {vote}
+            </div>
+            <div className={classes.voteInfo}>
+
+                <Typography template="benefitsText" label="awards.voting.rules.description" />
+
+            </div>
+            </div>
+
             <Section
             leftSize={5}
             left={
@@ -84,8 +100,8 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
             marginBottom: 20
             }}
             >
-            <Avatar src={getSpeakerAvatar(record)} minimal={false} grayscale={false} />
 
+          
             <img
             src={getSpeakerLogotype(record)}
             alt=""
@@ -97,42 +113,43 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
             right={
             <div>
             
-            <div className={classes.voteButtonContainer}>
-            <div>
-               {vote}
-            </div>
-            <div className={classes.voteInfo}>
+          
 
                 <React.Fragment>
 
-                <Typography template="presenter1">
+                {/* <Typography template="presenter1">
                 Votes: {record.votes}
+                </Typography> */}
+
+              
+                <Typography template="benefitsTitle">
+                {_get(record, 'product_name', "")}
                 </Typography>
 
-                <Typography template="benefitsText" label="awards.voting.rules.description" />
-              
-                </React.Fragment>
+                <Typography template="benefitsText">
+                {_get(record, 'project_description', "")}
+                </Typography>
 
-            </div>
-            </div>
+                
+                <Typography template="benefitsText">
+                {difference}
+                </Typography>
+
+                 
+                </React.Fragment>
 
             {status}
 
-            { <Presentation
-            title={record.presentation_title}
-            description={record.presentation_description}
-            />
-            }
-            
+          
             <KeywordSelect  href="/vote" as="/vote" keywords={[].concat( _get(record, 'awards_category', "") )} />
             
             <Divider />
             
-            <Sharer url={asPath} />
+            {/* <Sharer url={asPath} /> */}
 
             <Divider />
 
-            <PresenterName data={record} />
+           
 
             </div>
             }
