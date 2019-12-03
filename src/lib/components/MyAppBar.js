@@ -81,7 +81,7 @@ function MyAppBar(props) {
               className={classes.flex}
             >
         
-      {`${process.env.NAME || ""}`}
+      {process.env.NAME || process.env.PROJECT}
       
             </Typography>
           </Link>
