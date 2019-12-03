@@ -19,7 +19,7 @@ const styles = theme => ({
       marginBottom: 30
     },
     person : {
-      height: 60,
+      height: 80,
       overflow : 'hidden',
       textAlign : 'center',
       fontSize: theme.typography.pxToRem(15),
@@ -78,15 +78,18 @@ const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source
     
     <Grid item {...gridData} className={classes.root}>
 
+
+        <div className={classes.tile} style={style}>{ alt(source) }</div>
+
+
         <div className={classes.person}>
        
         <span className={classes.personSecondaryInfo}>{ title(source) }</span>
         
         </div>
 
-        <div className={classes.tile} style={style}>{ alt(source) }</div>
 
-        <MyLink {...linkParams} label={moreLabel} />
+        <MyLink {...linkParams} label={moreLabel} variant="outlined" size="small" />
 
       </Grid>
       )

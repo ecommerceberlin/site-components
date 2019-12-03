@@ -13,7 +13,8 @@ import {
     Sharer,
     MyAvatar as Avatar,
    // Speaker
-   KeywordSelect
+   KeywordSelect,
+   TextSection
   } from '../components';
 
 //import CompanyLogotype from '../components/CompanyLogotype'
@@ -27,20 +28,25 @@ import {
  } from '../helpers';
 
 const styles = theme => ({
-
-    voteButtonContainer : {
-        display : 'flex',
-        [theme.breakpoints.down('sm')]: {
-           flexDirection : 'column'
-        }
+    voteInfoBox : {
+        borderWidth: 1,
+        borderColor: 'rgba(97, 97, 97, 0.5)',
+        borderStyle: 'solid',
+        boxSizing: 'border-box',
+        borderRadius: 4,
+        paddingTop: 4,
+        paddingBottom: 0,
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginTop: 20,
+        backgroundColor: '#eaeaea'
     },
     voteInfo : {
-        marginLeft : 10,
-        marginTop: 5
+        // marginLeft : 10,
+        // marginTop: 5
     }
 
 })
-
 
 const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) => (
 
@@ -48,8 +54,11 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
 
         ({filtered, all, record}) => {
             
-
+            const product_name = _get(record, 'product_name', "");
             const difference = _get(record, 'difference', "");
+            const innovations = _get(record, 'innovations', "");
+            const project_description = _get(record, 'project_description', "");
+            const company_website = _get(record, 'company_website', "");
 
 
             return (
@@ -76,73 +85,74 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
 
             <Wrapper first={false} {...rest}>
 
-
-            <div className={classes.voteButtonContainer}>
-            <div>
-               {vote}
-            </div>
-            <div className={classes.voteInfo}>
-
-                <Typography template="benefitsText" label="awards.voting.rules.description" />
-
-            </div>
-            </div>
-
+          
+          
             <Section
             leftSize={5}
             left={
-            <div
-            style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginTop: 20,
-            marginBottom: 20
-            }}
-            >
-
-          
-            <img
-            src={getSpeakerLogotype(record)}
-            alt=""
-            style={{ maxWidth: 300, maxHeight: 200, marginTop: 30 }}
-            />
-            </div>
+                <div
+                style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginTop: 0,
+                marginBottom: 20
+                }}
+                >
+                    <img
+                    src={getSpeakerLogotype(record)}
+                    alt=""
+                    style={{ maxWidth: 300, maxHeight: 200, marginTop: 30 }}
+                    />
+                </div>
             }
             leftCentered={true}
             right={
             <div>
             
-          
-
                 <React.Fragment>
 
                 {/* <Typography template="presenter1">
                 Votes: {record.votes}
                 </Typography> */}
-
               
                 <Typography template="benefitsTitle">
-                {_get(record, 'product_name', "")}
+                {product_name}
                 </Typography>
 
-                <Typography template="benefitsText">
-                {_get(record, 'project_description', "")}
-                </Typography>
 
-                
-                <Typography template="benefitsText">
-                {difference}
-                </Typography>
+            <div className={classes.voteInfoBox}>
+            <Section
+            leftSize={4}
+            left={
+                vote 
+            }
+           // leftCentered={true}
+            right={
+                <div className={classes.voteInfo}>
+                    <Typography template="benefitsText" label="awards.voting.rules.description" />
+                </div>
+            } />
+            </div>
 
+                 <TextSection record={record} name="company_description" />
+
+                <TextSection record={record} name="company_website" />
+
+                <TextSection record={record} name="difference" />
+
+                <TextSection record={record} name="innovations" />
+
+                 <TextSection record={record} name="project_description" />
                  
                 </React.Fragment>
 
             {status}
 
-          
-            <KeywordSelect  href="/vote" as="/vote" keywords={[].concat( _get(record, 'awards_category', "") )} />
-            
+            <div style={{marginTop: 20, marginBottom: 20}}>
+             <KeywordSelect  href="/vote" as="/vote" keywords={[].concat( _get(record, 'awards_category', "") )} />
+            </div>
+
             <Divider />
             
             {/* <Sharer url={asPath} /> */}

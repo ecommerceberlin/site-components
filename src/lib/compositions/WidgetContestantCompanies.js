@@ -18,7 +18,9 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
 
     <Wrapper {...wrapperProps}>
 
-    {intro}
+    
+    {intro && <div style={{marginBottom: 40}}>{intro}</div>}
+   
 
     <DatasourceContestantCompanies  
        limit={limit}
@@ -37,10 +39,12 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
                 
             <React.Fragment>
     
+          
             <Centered>
               <KeywordSelect href="/vote" as="/vote" keywords={keywords} selected={keyword} />
             </Centered> 
-    
+         
+
             <VoteStatus {...votesData}  /> 
     
            {keyword && 
@@ -84,19 +88,7 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
 
 }
 
-/*
 
-  <People 
-                data={keyword ? filtered : all}
-                link={link} 
-                title={item => <React.Fragment>{`${item.presenter}, ${item.position}`} <strong>{item.cname2}</strong> </React.Fragment> }
-                subtitle={item => item.presentation_title}
-                text={item => show_votes ? `/${item.votes} votes/` : null}
-                voted={votesData.keyed}
-                moreLabel="common.vote_details"
-            />
-
-*/
 
 
 WidgetContestantCompanies.defaultProps = {
