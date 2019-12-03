@@ -74,16 +74,19 @@ function MyAppBar(props) {
           </IconButton>
 
           <Link href="/">
-            <Typography
-              component="a"
-              variant="title"
-              color="inherit"
-              className={classes.flex}
-            >
+          
         
-      {process.env.NAME || process.env.PROJECT}
+            <Settings name="common">{
+          ({event_name}) => (
+            <Typography
+            component="a"
+            variant="title"
+            color="inherit"
+            className={classes.flex}
+          >{event_name}   </Typography>)
+          }</Settings>
       
-            </Typography>
+
           </Link>
 
           {/* <Search /> */}
