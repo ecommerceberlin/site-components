@@ -16,6 +16,21 @@ export const getCloudinaryAsset = (url = "", skipVersion = false) => {
   
 } 
 
+export const getContestantOgImage = (participant, template) => {
+
+  const avatar = getCloudinaryAsset(_get(participant, "logotype_cdn"), false) || getCloudinaryAsset(_get(participant, "logotype"), false)
+
+  const avatarTrans = `c_fit,h_220,q_95,w_800`;
+
+  //mark's template fix
+  const templateTrans = `g_center,u_${template},x_0,y_11`;
+
+  return `https://res.cloudinary.com/eventjuicer/image/upload/${avatarTrans}/${templateTrans}/${avatar}.png`;
+
+
+}
+
+
 export const getPresenterOgImage = (
     participant,
     template = 'ebe_template_en'

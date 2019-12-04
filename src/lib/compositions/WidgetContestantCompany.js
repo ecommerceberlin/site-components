@@ -22,7 +22,7 @@ import {
 import DatasourceContestantCompanies from '../datasources/ContestantCompanies'
 
 import { 
-    getCompanyAltOgImage, 
+    getContestantOgImage, 
     getSpeakerLogotype,
     getCompanyProfileInfo
  } from '../helpers';
@@ -65,10 +65,9 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
 
             <React.Fragment>
 
-
             <Head
-            image={getCompanyAltOgImage(record, asPath)}
-            url={asPath}
+            image={getContestantOgImage(record, "ega2020_opengraph_template")}
+            url={`${asPath}?1`}
             titleLabel={[
             'awards.contest.opengraph.title',
             { name: getCompanyProfileInfo(record, 'name') }
