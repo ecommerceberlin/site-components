@@ -132,6 +132,11 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
                     <Typography template="benefitsText" label="awards.voting.rules.description" />
                 </div>
             } />
+
+            <Divider />
+
+            <Sharer url={asPath} />
+
             </div>
 
                  <TextSection record={record} name="company_description" />
@@ -154,9 +159,7 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
 
             <Divider />
             
-            {/* <Sharer url={asPath} /> */}
-
-            <Divider />
+          
 
            
 
