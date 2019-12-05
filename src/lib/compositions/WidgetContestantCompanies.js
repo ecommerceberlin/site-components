@@ -45,7 +45,7 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
             </Centered> 
          
 
-            <VoteStatus {...votesData}  /> 
+            {/* <VoteStatus {...votesData}  />  */}
     
            {keyword && 
             

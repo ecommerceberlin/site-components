@@ -2,12 +2,35 @@
 
 import Datasource from '../datasources/Votes'
 import SimpleVoteStatus from '../components/VoteStatus'
+import { getLinkedInToken } from '../redux/selectors'
+import { connect } from 'react-redux';
 
 
-const VoteStatus = () => (
+const VoteStatus = ({linkedin}) => {
 
-    <Datasource>{(data) => <SimpleVoteStatus {...data} />}</Datasource>
+    return (
 
-)
+        <Datasource>{(data) => <SimpleVoteStatus enabled={linkedin} {...data} />}</Datasource>
+    
+    )
 
-export default VoteStatus
+}
+
+VoteStatus.defaultProps = {
+    linkedin : null
+}
+
+
+export default connect((state, props) => {
+
+    const mapStateToProps = (state, props) => {
+        return {
+          linkedin : getLinkedInToken(state),
+        //   votes : KeyedVotesSelector(state, props),
+        //   transaction : state.transactions.voting
+        }
+      }
+    return mapStateToProps
+})(VoteStatus)
+
+

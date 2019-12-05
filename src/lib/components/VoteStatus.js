@@ -15,13 +15,13 @@ const styles = {
     }
 }
 
-const VoteStatus = ({all, keyed, classes, translate, total_votes}) => {
+const VoteStatus = ({all, enabled, classes, translate, total_votes}) => {
 
     const remaining = total_votes - all.length;
 
-    return ( <Typography template="benefitsText">
+    return enabled ? ( <Typography template="benefitsText">
     {`${translate("awards.remaining.votes")}: ${remaining}`}
-    </Typography>)
+    </Typography>) : null
 
 }
 
@@ -35,7 +35,8 @@ const VoteStatus = ({all, keyed, classes, translate, total_votes}) => {
 VoteStatus.defaultProps = {
     all : [],
     keyed : {},
-    total_votes : 10
+    total_votes : 10,
+    enabled : false
 }
 
 const enhance = compose(
