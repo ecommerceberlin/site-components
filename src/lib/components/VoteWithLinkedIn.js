@@ -119,7 +119,11 @@ class VoteWithLinkedIn extends Component {
 
         lsSet("oauth_session", uuid);
 
-        window.location.href = `${oAuthUrl}?service=linkedin&from=${ encodeURIComponent(`${url}/${id}`) }&session=${uuid}`
+        if (process.browser) {
+           
+            window.location.href = `${oAuthUrl}?service=linkedin&from=${ encodeURIComponent(`${url}/${id}`) }&session=${uuid}`
+
+        }
 
     }
 
