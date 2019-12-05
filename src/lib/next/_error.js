@@ -17,7 +17,7 @@ class PageError extends React.Component {
 
     return {
       statusCode,
-      preload : ["exhibitors", "presenters"]
+      preload : []
     };
   }
 

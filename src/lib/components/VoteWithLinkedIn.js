@@ -118,12 +118,8 @@ class VoteWithLinkedIn extends Component {
         const uuid = uuidv4();
 
         lsSet("oauth_session", uuid);
-
-        if (process.browser) {
            
-            window.location.href = `${oAuthUrl}?service=linkedin&from=${ encodeURIComponent(`${url}/${id}`) }&session=${uuid}`
-
-        }
+        window.location.href = `${oAuthUrl}?service=linkedin&from=${ encodeURIComponent(`${url}/${id}`) }&session=${uuid}`
 
     }
 
@@ -173,7 +169,7 @@ class VoteWithLinkedIn extends Component {
             service
         } = this.props;
 
-        const savedSession = lsGet("oauth_session");
+        const savedSession = process.browser ? lsGet("oauth_session") : false;
 
         //should the button be disabled?
 
