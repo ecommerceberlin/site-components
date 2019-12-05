@@ -27,10 +27,20 @@ export const validateToken = token => {
   return /^[a-z0-9]{32,40}$/.test(token);
 };
 
+export const uuidv4 = () => {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+
 export const lsGet = key => JSON.parse(localStorage.getItem(key));
 
-export const lsSet = (key, value) =>
-  localStorage.setItem(key, JSON.stringify(value));
+export const lsSet = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+
+export const ssGet = key => JSON.parse(sessionStorage.getItem(key));
+
+export const ssSet = (key, value) => sessionStorage.setItem(key, JSON.stringify(value));
+
 
 export const addToken = token => {
   const tokens = lsGet('tokens') || [];
