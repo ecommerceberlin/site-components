@@ -124,15 +124,17 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
             <Section
             leftSize={4}
             left={
-                vote 
+                vote
             }
            // leftCentered={true}
             right={
                 <div className={classes.voteInfo}>
+                     {status} 
                     <Typography template="benefitsText" label="awards.voting.rules.description" />
                 </div>
             } />
 
+        
             <Divider />
 
             <Sharer url={asPath} />
@@ -151,7 +153,7 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
                  
                 </React.Fragment>
 
-            {status}
+        
 
             <div style={{marginTop: 20, marginBottom: 20}}>
              <KeywordSelect  href="/vote" as="/vote" keywords={[].concat( _get(record, 'awards_category', "") )} />
