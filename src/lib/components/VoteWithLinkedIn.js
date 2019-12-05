@@ -17,8 +17,8 @@ import {
 
 import { getLinkedInToken } from '../redux/selectors'
 import { KeyedVotesSelector } from '../datasources/redux/votes'
-
-
+import { lsSet, lsGet, uuidv4 } from '../helpers'
+ 
 const styles = theme => ({
     buttonContainer : {
         marginBottom: 50,
@@ -50,8 +50,10 @@ class VoteWithLinkedIn extends Component {
         } = this.props;
 
         const uid = extractUrlValue("uid", router.asPath);
-      
-        if(uid && uid.length > 3){
+        const session = extractUrlValue("session", router.asPath);
+        const savedSession = lsGet("oauth_session");
+
+        if(uid && uid.length > 3 && session == savedSession){
             
             linkedUidReceived(uid);
             linkedVoteRequest(service, id);
@@ -105,19 +107,31 @@ class VoteWithLinkedIn extends Component {
 
     }
 
-    handleOAuth(){
+    createSession = (e) => {
 
         const {
-           
-            labelGuest,
             oAuthUrl, 
             id, 
-            translate, 
-            classes,
             url
         } = this.props;
 
-        return   (<Button href={`${oAuthUrl}?service=linkedin&from=${ encodeURIComponent(`${url}/${id}`) }`} variant="contained" size="large" color="primary">
+        const uuid = uuidv4();
+
+        lsSet("oauth_session", uuid);
+
+        window.location.href = `${oAuthUrl}?service=linkedin&from=${ encodeURIComponent(`${url}/${id}`) }&session=${uuid}`
+
+    }
+
+    handleOAuth(){
+
+        const {
+            labelGuest,
+            translate, 
+            classes,
+        } = this.props;
+
+        return   (<Button onClick={ this.createSession } variant="contained" size="large" color="primary">
         <Linkedin className={classes.leftIcon} />{translate(labelGuest)}</Button>)
     }
 
@@ -155,11 +169,13 @@ class VoteWithLinkedIn extends Component {
             service
         } = this.props;
 
+        const savedSession = lsGet("oauth_session");
+
         //should the button be disabled?
 
         return (<div className={classes.buttonContainer}>{
 
-            linkedin ? (
+            linkedin && savedSession ? (
                 <Button variant="contained" disabled={this.isDisabled() !== false } size="large" color="primary" onClick={() => linkedVoteRequest(service, id) }>
                 <Linkedin className={classes.leftIcon} />
                 {translate(this.isDisabled() ? this.isDisabled() : labelLoggedIn)}
