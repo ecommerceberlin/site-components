@@ -48,7 +48,7 @@ const styles = theme => ({
 
 })
 
-const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) => (
+const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes, ...rest}) => (
 
     <DatasourceContestantCompanies id={id}>{
 
@@ -111,13 +111,15 @@ const WidgetContestantCompany = ({id, vote, status, asPath, classes, ...rest}) =
             
                 <React.Fragment>
 
-                {/* <Typography template="presenter1">
-                Votes: {record.votes}
-                </Typography> */}
+                
               
                 <Typography template="benefitsTitle">
                 {product_name}
                 </Typography>
+
+                {show_votes && <Typography template="presenter1">
+                Votes: {record.votes}
+                </Typography>}
 
 
             <div className={classes.voteInfoBox}>
@@ -189,7 +191,8 @@ WidgetContestantCompany.propTypes = {
 WidgetContestantCompany.defaultProps = {
     vote : null,
     status : null,
-    label : "awards.contestants.list.title"
+    label : "awards.contestants.list.title",
+    show_votes : false
 }
 
 export default withStyles(styles)(WidgetContestantCompany)

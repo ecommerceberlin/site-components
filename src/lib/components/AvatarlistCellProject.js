@@ -62,11 +62,15 @@ const styles = theme => ({
   
   
     },
+    votes : {
+      fontWeight: 600,
+      marginTop: 10
+    }
     
 });
 
 
-const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source, link, moreLabel}) => {
+const AvatarlistCellDumb = ({show_votes, gridData, classes, title, alt, source, image_source, link, moreLabel}) => {
   
     const style = image_source in source && source[image_source] ? { 
       backgroundImage: `url(${resizeCloudinaryImage(source[image_source], 300, 300)})` 
@@ -74,20 +78,19 @@ const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source
 
     const linkParams = isFunction(link) ? link(source) : {}
    
+    const votes = show_votes && "votes" in source ? source.votes : 0;
+    
     return ( 
     
     <Grid item {...gridData} className={classes.root}>
 
-
         <div className={classes.tile} style={style}>{ alt(source) }</div>
-
 
         <div className={classes.person}>
        
-        <span className={classes.personSecondaryInfo}>{ title(source) }</span>
-        
+          <div className={classes.personSecondaryInfo}>{ title(source) }</div> 
+          {votes ? <div className={classes.votes}>{`${votes} votes`}</div> : null}
         </div>
-
 
         <MyLink {...linkParams} label={moreLabel} variant="outlined" size="small" />
 
@@ -102,7 +105,8 @@ AvatarlistCellDumb.defaultProps = {
     title : function(item){return "position" in item ? item.position : "undefined"; },
     alt : function(item){return "cname2" in item ? item.cname2 : "undefined"; },
     link: false,
-    moreLabel : "awards.contestant.details"
+    moreLabel : "awards.contestant.details",
+    show_votes : false
 }
 
 

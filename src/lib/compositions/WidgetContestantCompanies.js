@@ -63,6 +63,7 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
                     title={ (item) => "product_name" in item ? item.product_name : "undefined" } 
                     alt={ (item) => "cname2" in item ? item.cname2 : "undefined" }
                     link={ link }
+                    show_votes={ show_votes }
                 />
             
             ))}
