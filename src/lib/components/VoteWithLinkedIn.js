@@ -140,10 +140,16 @@ class VoteWithLinkedIn extends Component {
         const {
             id, 
             votes,
+            disabled,
             max_votes,
             labelAlreadyVoted,
-            labelVotesUsed
+            labelVotesUsed,
+            labelDisabled
         } = this.props;
+
+        if(disabled){
+            return labelDisabled
+        }
 
         if(votes && id in votes){
             return labelAlreadyVoted;
@@ -193,7 +199,7 @@ class VoteWithLinkedIn extends Component {
 VoteWithLinkedIn.defaultProps = {
     service : "linkedin",
     votes : {},
-    max_votes : 6,
+    max_votes : 10,
     transaction : {},
     
     labelLoggedIn : "common.vote_now",
