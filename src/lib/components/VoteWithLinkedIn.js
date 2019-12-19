@@ -179,17 +179,17 @@ class VoteWithLinkedIn extends Component {
 
         //should the button be disabled?
 
-        return (<div className={classes.buttonContainer}>{
+        if(this.isDisabled() !== false){
+            return (
+            <Button variant="contained" disabled={true} size="large" color="primary">
+            <Linkedin className={classes.leftIcon} />
+            { translate( this.isDisabled() ) }
+            </Button>
+            )
+        }
 
-            linkedin && savedSession ? (
-                <Button variant="contained" disabled={this.isDisabled() !== false } size="large" color="primary" onClick={() => linkedVoteRequest(service, id) }>
-                <Linkedin className={classes.leftIcon} />
-                {translate(this.isDisabled() ? this.isDisabled() : labelLoggedIn)}
-                </Button>
-            ) : 
-            
-            this.handleOAuth()
-          
+        return (<div className={classes.buttonContainer}>{ 
+            linkedin && savedSession ? (<Button variant="contained" size="large" color="primary" onClick={() => linkedVoteRequest(service, id) }><Linkedin className={classes.leftIcon} />{translate(labelLoggedIn)}</Button>) : this.handleOAuth() 
         }</div>)
        
     }
