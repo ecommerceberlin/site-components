@@ -5,28 +5,52 @@ import People from '../components/People'
 import Datasource from '../datasources/Presenters'
 
 
-const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, link, bio}) => (
 
-    <Wrapper label={label} secondaryLabel={secondaryLabel}>
+const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, disableTemps, link, bio}) => {
 
-    <Datasource  
-        limit={limit}
-        random={random}
-        filter={filter}  
-    >{
-        (data) => 
-        <People 
-            data={data}
-            link={link} 
-            bio={bio}
-        />
 
-    }</Datasource>
+    const enhancedFilter = (item) => {
+
+        if(disableTemps && (
+            item.presenter.indexOf("TBA") > -1 ||
+            item.cname2.indexOf("TBA") > -1 ||
+            item.position.indexOf("TBA") > -1 ||
+            item.presentation_title.indexOf("TBA") > -1
+        )){
+            return false
+        }
+
+        if(filter){
+            return filter(item)
+        }
+
+        return true
+    }
     
-    </Wrapper> 
 
+    return (
 
-)
+        <Wrapper label={label} secondaryLabel={secondaryLabel}>
+    
+        <Datasource  
+            limit={limit}
+            random={random}
+            filter={enhancedFilter}  
+        >{
+            (data) => 
+            <People 
+                data={data}
+                link={link} 
+                bio={bio}
+            />
+    
+        }</Datasource>
+        
+        </Wrapper> 
+    
+    
+    )
+}
 
 WidgetPresenters.defaultProps = {
     label : "presenters.list_featured",
@@ -41,7 +65,8 @@ WidgetPresenters.defaultProps = {
 
     link : true,
     logotype : true,
-    bio : false
+    bio : false,
+    disableTemps : false
 }
 
 
