@@ -11,15 +11,14 @@ const WidgetSchedule = ({link, descriptions, ...wrapper}) => (
 
     <Wrapper {...wrapper}>
     <Settings name="schedule">
-    {({venues, times, venueStyle}) => (
+    {({venues, times, venueStyle, minimized}) => (
 
 <Exhibitors>{
     (exhibitors) => (
         <Presenters  
-        //limit={20}
         random={false}
         mobile={0}
-   //     filter={function(item){ return [77504, 77505, 77508, 77529, 77557, 77773, 78014, 78429].indexOf(item.id) > -1 }}  
+        filter={false}
         >{
         (presenters) => 
         
@@ -31,6 +30,7 @@ const WidgetSchedule = ({link, descriptions, ...wrapper}) => (
             link={link} 
             descriptions={descriptions}
             venueStyle={venueStyle}
+            minimized={minimized}
         />
         
         }</Presenters>
@@ -57,7 +57,8 @@ WidgetSchedule.defaultProps = {
         B: { company_id: 0 },
         C: { company_id: 0 }
     },
-    venueStyle : "black"
+    venueStyle : "black",
+    minimized : []
 }
 /* 
 

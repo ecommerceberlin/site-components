@@ -8,9 +8,13 @@ import _find from 'lodash/find';
 import _get from 'lodash/get';
 
 import ScheduleItem from './ScheduleItem';
+import ScheduleItemMinimized from './ScheduleItemMinimized';
 import ScheduleVenue from './ScheduleVenue';
+import ScheduleVenueMinimized from './ScheduleVenueMinimized';
+
 import ScheduleBreak from './ScheduleBreak';
 import {VenueSelector} from './redux'
+import colconfig from './colconfig'
 
 class Schedule extends React.PureComponent {
  
@@ -20,21 +24,38 @@ class Schedule extends React.PureComponent {
 
   findPresentations(search, first = false) {
    
-    const { presenters, venues, selected, selectedVenue, descriptions } = this.props;
+    const { presenters, venues, selected, selectedVenue, descriptions, minimized } = this.props;
 
     const details = (selectedVenue && selectedVenue in venues);
 
-    return _filter(presenters, search).map((item, i) => (
-      
-      <ScheduleItem
-        key={item.id}
-        selected={item.id == selected}
-        first={i === 0}
-        data={item}
-        description={details || descriptions}
-      />
+    return _filter(presenters, search).map((item, i) => {
 
-    ));
+      // if(Array.isArray(minimized) && minimized.indexOf(item.presentation_venue)>-1){
+
+      //   return (
+
+      //     <ScheduleItemMinimized
+      //     key={item.id}
+      //     selected={item.id == selected}
+      //     first={i === 0}
+      //     data={item}
+      //   />
+      //   )
+      // }
+
+      return (
+        <ScheduleItem
+          key={item.id}
+          selected={item.id == selected}
+          first={i === 0}
+          data={item}
+          description={details || descriptions}
+        />
+      ) 
+
+    }
+    
+    );
   }
 
   renderBreak(label) {
@@ -45,36 +66,91 @@ class Schedule extends React.PureComponent {
     );
   }
 
-  renderVenues(iterableVenues, gridData) {
+  renderVenues() {
     
-    const { venues, venueStyle } = this.props;
+    const { venues, venueStyle, minimized } = this.props;
+    const iterableVenues = this.getIterableVenues();
 
+
+    /*
+      Array.isArray(minimized) && minimized.indexOf(venue) > -1 ? 
+          
+          <ScheduleVenueMinimized   
+            name={venue}  
+            total={iterableVenues.length}
+            template={venueStyle}
+          />        
+          
+          :
+  
+          */
     return iterableVenues.map(venue => (
-      <Grid key={venue} item {...gridData}>
-        <ScheduleVenue
+      <Grid key={venue} item {...this.getColNumber(venue)}>
+      
+
+        
+          <ScheduleVenue
           name={venue}
           company={this.getCompany(_get(venues[venue], 'company_id', 0))}
           total={iterableVenues.length}
           template={venueStyle}
-        />
+          />
+
+    
       </Grid>
     ));
   }
-
-  getColNumber(iterableVenues){
-    const cols = 12 / iterableVenues.length;
-    return { xs: 12, sm: 12, md: cols, lg: cols, xl: cols };
-  }
-
-  render() {  
-    const { venues, times, selectedVenue } = this.props;
-    let iterableVenues = Object.keys(venues);
+  
+  getIterableVenues(){
+    const { venues, selectedVenue } = this.props;
 
     if(selectedVenue && selectedVenue in venues){
-      iterableVenues = [selectedVenue]
+      return [selectedVenue]
     }
 
-    const gridData = this.getColNumber(iterableVenues);
+    return Object.keys(venues);
+  }
+
+  getColNumber(currentVenue){
+
+    const iterableVenues = this.getIterableVenues();
+    const iterableVenuesCount = iterableVenues.length;
+
+    const {minimized, selectedVenue, colconfig} = this.props;
+
+    //GRID unfriendly number of scenes - 5....
+
+    if(selectedVenue || iterableVenuesCount <= 4){
+
+      const cols = 12 / iterableVenues.length;
+      return { xs: 12, sm: 12, md: cols, lg: cols, xl: cols };
+
+    }else{
+
+      return colconfig[iterableVenuesCount]
+
+      //if we have 5 stages than 2 must be collapsed (=1) and 3 shown...
+      //if we have 7 stages than 6 must be collapsed (3 slots) and 1 shown...
+
+    //   //odd number of stages...
+    //   if(Array.isArray(minimized) && minimized.indexOf(currentVenue)>-1){
+
+    //     return { xs: 12, sm: 12, md: 1, lg: 1, xl: 1 };
+
+    //   }
+
+    //  // const cols = 12 / (iterableVenues.length + minimized.length);
+    //   return { xs: 12, sm: 12, md: 3, lg: 3, xl: 3 };
+
+    }
+    
+  }
+
+
+
+  render() {  
+    const { times } = this.props;
+    const iterableVenues = this.getIterableVenues();
    
     return (
       <div>
@@ -85,18 +161,18 @@ class Schedule extends React.PureComponent {
           container
           spacing={40}
         >
-          {this.renderVenues(iterableVenues, gridData)}
+          {this.renderVenues()}
         </Grid>
 
         </Hidden>
 
         {Object.keys(times).map((time, i) => (
-          <Grid key={i} container spacing={40}>
+          <Grid key={time} container spacing={40}>
             {times[time] !== 'presentation' && this.renderBreak(times[time])}
 
             {times[time] === 'presentation' &&
               iterableVenues.map((venue, j) => (
-                <Grid key={`${i}${j}`} item {...gridData}>
+                <Grid key={`${time}${venue}`} item {...this.getColNumber(venue)}>
                   {this.findPresentations(
                     {
                       presentation_venue: venue,
@@ -128,7 +204,9 @@ Schedule.defaultProps = {
   },
 
   descriptions : true,
-  venueStyle : "black"
+  venueStyle : "black",
+  minimized : [],
+  colconfig : colconfig
 };
 
 export default connect((state) => ({

@@ -34,7 +34,7 @@ WidgetPartners.defaultProps = {
   label : "partners.media.title",
   secondaryLabel : null,
   filter : function(item){ return true; },
-  limit : 20,
+  limit : 50,
   mobile : 12,
   center : false,
   spacing : 24
