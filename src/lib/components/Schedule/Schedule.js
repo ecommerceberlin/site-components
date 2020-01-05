@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import { connect } from 'react-redux'
+// import { withStyles } from '@material-ui/core/styles';
+// import compose from 'recompose/compose'
 
 import _filter from 'lodash/filter';
 import _find from 'lodash/find';
@@ -85,7 +87,7 @@ class Schedule extends React.PureComponent {
   
           */
     return iterableVenues.map(venue => (
-      <Grid key={venue} item {...this.getColNumber(venue)}>
+      <Grid key={venue} item {...this.getColNumber(venue)} style={{minWidth: 300}}>
       
 
         
@@ -153,13 +155,14 @@ class Schedule extends React.PureComponent {
     const iterableVenues = this.getIterableVenues();
    
     return (
-      <div>
+      <div style={{overflowX: "scroll"}}>
     
         <Hidden implementation="css" smDown={true}>
 
         <Grid
           container
           spacing={40}
+          wrap="nowrap" 
         >
           {this.renderVenues()}
         </Grid>
@@ -167,12 +170,12 @@ class Schedule extends React.PureComponent {
         </Hidden>
 
         {Object.keys(times).map((time, i) => (
-          <Grid key={time} container spacing={40}>
+          <Grid key={time} container spacing={40} wrap="nowrap" >
             {times[time] !== 'presentation' && this.renderBreak(times[time])}
 
             {times[time] === 'presentation' &&
               iterableVenues.map((venue, j) => (
-                <Grid key={`${time}${venue}`} item {...this.getColNumber(venue)}>
+                <Grid key={`${time}${venue}`} item {...this.getColNumber(venue)} style={{minWidth: 300}}>
                   {this.findPresentations(
                     {
                       presentation_venue: venue,
