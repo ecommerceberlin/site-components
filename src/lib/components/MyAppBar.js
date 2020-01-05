@@ -73,21 +73,25 @@ function MyAppBar(props) {
             <MenuIcon />
           </IconButton>
 
-          <Link href="/">
+        
           
         
             <Settings name="common">{
           ({event_name}) => (
+            <Link href="/">
             <Typography
             component="a"
             variant="title"
             color="inherit"
-            className={classes.flex}
-          >{event_name}   </Typography>)
+            className={classes.flex}>{
+              event_name
+            }</Typography>
+            </Link>
+            )
           }</Settings>
       
 
-          </Link>
+        
 
           {/* <Search /> */}
           
