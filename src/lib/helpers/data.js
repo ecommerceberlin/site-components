@@ -118,7 +118,7 @@ export const getCdnAssetVersion = (url) => {
 
 } 
 
-export const getCompanyLogotype = (company, scale = true) => {
+export const getCompanyLogotype = (company, scale = true, dumb = true) => {
   const cdn = getCdnResource(company, 'logotype', true);
 
   if (cdn) return cdn;
@@ -126,7 +126,7 @@ export const getCompanyLogotype = (company, scale = true) => {
   const original = getCompanyProfileInfo(company, 'logotype');
   if (original && /^http/.test(original)) return original;
 
-  return '/static/logo-placeholder.jpg';
+  return dumb ? '/static/logo-placeholder.jpg' : null;
 };
 
 export const wrapImage = (

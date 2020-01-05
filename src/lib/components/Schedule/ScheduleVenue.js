@@ -63,24 +63,28 @@ const styles = theme => ({
   }
 });
 
-const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue, venueSelect, venueSelectReset}) => (
-  <Hidden implementation="css">
-    <div className={classes.root} onClick={ () => selectedVenue === name ? venueSelectReset() : venueSelect(name) }>
-      <div>
-        <Avatar className={classNames(classes.avatar, classes[template])}>{name}</Avatar>
+const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue, venueSelect, venueSelectReset}) => {
+
+  const logotype = getCompanyLogotype(company, true, false)
+  return (
+    <Hidden implementation="css">
+      <div className={classes.root} onClick={ () => selectedVenue === name ? venueSelectReset() : venueSelect(name) }>
+        <div>
+          <Avatar className={classNames(classes.avatar, classes[template])}>{name}</Avatar>
+        </div>
+        <div> {logotype &&   <img
+            src={logotype}
+            className={classNames(classes.logotype, {
+              [classes.narrow] : total > 3
+            })}
+            alt=""
+          />}
+        
+        </div>
       </div>
-      <div>
-        <img
-          src={getCompanyLogotype(company)}
-          className={classNames(classes.logotype, {
-            [classes.narrow] : total > 3
-          })}
-          alt=""
-        />
-      </div>
-    </div>
-  </Hidden>
-);
+    </Hidden>
+  );
+} 
 
 ScheduleVenue.defaultProps = {
   total : 4,
