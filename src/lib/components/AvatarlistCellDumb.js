@@ -65,7 +65,7 @@ const styles = theme => ({
 });
 
 
-const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source, link}) => {
+const AvatarlistCellDumb = ({gridData, classes, title, alt, source, image_source, link, moreLabel}) => {
   
     const style = image_source in source && source[image_source] ? { 
       backgroundImage: `url(${resizeCloudinaryImage(source[image_source], 300, 300)})` 
@@ -100,7 +100,7 @@ AvatarlistCellDumb.defaultProps = {
     title : function(item){return "position" in item ? item.position : "undefined"; },
     alt : function(item){return "cname2" in item ? item.cname2 : "undefined"; },
     link: false,
-
+    moreLabel : 'common.more'
 }
 
 
