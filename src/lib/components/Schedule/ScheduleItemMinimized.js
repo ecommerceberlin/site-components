@@ -12,7 +12,8 @@ import PresentationLabel from './PresentationLabel';
 import { dialogShow } from '../redux/actions';
 import { 
   getParticipantCdn,
-  getSpeakerAvatar
+  getSpeakerAvatar,
+  // getSpeakerName
  } from '../../helpers';
 
 import ScheduleItemPresenter from './ScheduleItemPresenter';
@@ -64,8 +65,6 @@ const styles = theme => ({
 
 });
 
-const getFullName = data => `${data.fname} ${data.lname}`;
-const getFullJobInfo = data => `${data.position} @ ${data.cname2}`;
 
 const ScheduleItemMinimized = ({ data, selected, classes, first, description, dialogShow }) => {
   return (
