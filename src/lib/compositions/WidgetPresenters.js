@@ -41,7 +41,7 @@ const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, disable
             <People 
                 data={data}
                 link={link} 
-                bio={bio}
+                text={ bio ? null : (item) => "" }
             />
     
         }</Datasource>
@@ -60,7 +60,7 @@ WidgetPresenters.defaultProps = {
     random : false,
 
     filter : function(item){ 
-        return item.presentation_title.length > 10 && item.bio.length > 10 && item.avatar.length > 10 && item.logotype.length > 10 
+        return "presentation_title" in item && item.presentation_title.length > 10 && "bio" in item && item.bio.length > 10 && "avatar" in item && item.avatar.length > 10 && "logotype" in item && item.logotype.length > 10 
     },
 
     link : true,
