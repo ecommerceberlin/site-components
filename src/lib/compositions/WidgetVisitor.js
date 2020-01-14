@@ -17,7 +17,7 @@ const styles = theme => ({
 
 })
 
-const WidgetVisitor = ({ classes, ...rest }) => (
+const WidgetVisitor = ({ classes, data, ...rest }) => (
 
 
   <Wrapper {...rest}>
@@ -31,7 +31,7 @@ const WidgetVisitor = ({ classes, ...rest }) => (
 
      
         <StepForm
-          data={{}}
+          data={data}
           ticketId={ticket_id}
           fields={[
             {name: "email", required: true},
@@ -69,7 +69,8 @@ const WidgetVisitor = ({ classes, ...rest }) => (
 
 WidgetVisitor.defaultProps = {
   links: [],
-  label : "visitors.register"
+  label : "visitors.register",
+  data : {}
 };
 
 export default withStyles(styles)(WidgetVisitor);
