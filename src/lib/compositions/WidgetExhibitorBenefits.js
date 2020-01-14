@@ -2,55 +2,21 @@ import React from 'react';
 
 import GridBenefits from '../components/GridBenefits'
 import Wrapper from '../components/Wrapper'
-
-import {
-    FaHandshake as Handshake,
-    FaComments as Talks,
-    FaSmile as Prooved,
-    FaPiggyBank as Savings,
-    FaLink as Bounds,
-    FaLightbulb as Inspiration
-} from 'react-icons/fa';
+import Settings from '../datasources/Settings'
 
 
 
-const _items = [
-
-    {
-        icon : Handshake,
-        label :  'outreach',
-    },
-    {   
-        icon : Talks,
-        label : 'feedback'
-    },
-    {   
-        icon : Prooved,
-        label : 'organizer'
-    },
-    {   
-        icon : Savings,
-        label : 'all_inclusive'
-    },
-    {
-        icon : Bounds,
-        label : 'meet_clients'
-    },
-    {
-        icon : Inspiration,
-        label : 'inspiration'
-    }
-]
-
-
-const WidgetExhibitorBenefits = ({items, ...rest}) => (
+const WidgetExhibitorBenefits = ({benefits, ...rest}) => (
     <Wrapper {...rest}>
-        <GridBenefits baseLabel="exhibitors.benefits" items={items} />
+     <Settings name="exhibitors">{
+         ({benefits}) =>   <GridBenefits baseLabel="exhibitors.benefits" items={benefits} />
+     }</Settings>
+      
     </Wrapper>
 )
 
 WidgetExhibitorBenefits.defaultProps = {
-    items : _items
+    benefits : []
 }
 
 export default WidgetExhibitorBenefits

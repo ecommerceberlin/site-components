@@ -5,17 +5,17 @@ import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
 
 
-const WidgetVisitorBenefits = ({benefits, ...rest}) => (
+const WidgetSpeakerBenefits = ({benefits, ...rest}) => (
     <Wrapper {...rest}>
-       <Settings name="visitor">{
-           ({benefits}) => <GridBenefits baseLabel="visitors.benefits" items={benefits} />
+       <Settings name="speakers">{
+           ({benefits}) => <GridBenefits baseLabel="presenters.steps" items={benefits} />
        }</Settings>
       
     </Wrapper>
 )
 
-WidgetVisitorBenefits.defaultProps = {
+WidgetSpeakerBenefits.defaultProps = {
     benefits : []
 }
 
-export default WidgetVisitorBenefits
+export default WidgetSpeakerBenefits

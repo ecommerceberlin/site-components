@@ -3,6 +3,26 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from './MyTypography'
+// import Markdown from './Markdown'
+
+
+import {
+  FaWrench,
+  FaHandshake,
+  FaLockOpen,
+  FaSearch,
+  FaChartLine,
+  FaPiggyBank,
+  FaDotCircle,
+  FaFastForward,
+  FaChair,
+  FaComments,
+  FaSmile,
+  FaLink,
+  FaPoll,
+  FaTrophy,
+  FaLightbulb
+} from 'react-icons/fa';
 
 
 const styles = theme => ({
@@ -41,9 +61,28 @@ const styles = theme => ({
 
 })
 
-const GridBenefitsItem = ({classes, ...other}) => {
+const GridBenefitsItem = ({classes, icon, label}) => {
 
-    const Icon = other.icon;
+
+    const icons = {
+      FaWrench,
+      FaHandshake,
+      FaLockOpen,
+      FaSearch,
+      FaChartLine,
+      FaPiggyBank,
+      FaDotCircle,
+      FaFastForward,
+      FaChair,
+      FaComments,
+      FaSmile,
+      FaLink,
+      FaPoll,
+      FaTrophy,
+      FaLightbulb
+    }
+
+    const ReactIcon = icon in icons ? icons[icon] : icons.FaWrench
 
     return (
 
@@ -52,26 +91,28 @@ const GridBenefitsItem = ({classes, ...other}) => {
         <div className={classes.container}>
 
           <div className={classes.iconContainer}>
-            <Icon className={classes.icon} />
+           <ReactIcon className={classes.icon} />
           </div>
 
           <div className={classes.texts}>
-            <Typography template="benefitsTitle" label={`${other.label}.title`} />
-            <Typography template="benefitsText" label={`${other.label}.description`} />
+            
+            <Typography template="benefitsTitle" label={`${label}.title`} />
+
+            <Typography template="benefitsText" label={`${label}.description`} />
+        
           </div>
 
         </div>
 
       </Grid>
 
-    )
+    ) 
 
 }
 
 
 GridBenefitsItem.defaultProps = {
-  title : "",
-  text : ""
+  label : ""
 }
 
 export default withStyles(styles)(GridBenefitsItem)

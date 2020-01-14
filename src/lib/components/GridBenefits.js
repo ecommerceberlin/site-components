@@ -10,7 +10,7 @@ const GridBenefits = ({items, baseLabel}) => (
 
   <Grid  container spacing={32}>
 
-    {items.map(({label, icon}) => <GridBenefitsItem key={label} icon={icon} label={`${baseLabel}.${label}`} />)}
+    {items && items.map( ({label, icon}) => <GridBenefitsItem key={label} icon={icon} label={`${baseLabel}.${label}`} />)  }
 
   </Grid>
 )
