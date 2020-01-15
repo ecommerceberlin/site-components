@@ -41,7 +41,7 @@ const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, disable
             <People 
                 data={data}
                 link={link} 
-                text={ bio ? null : (item) => "" }
+                text={ bio ? undefined : (item) => "" }
             />
     
         }</Datasource>
