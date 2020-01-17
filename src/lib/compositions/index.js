@@ -44,3 +44,6 @@ export { default as WidgetContestantCompanies } from './WidgetContestantCompanie
 export { default as WidgetVotable } from './WidgetVotable'
 export { default as WidgetContestantCompany} from './WidgetContestantCompany'
 export { default as WidgetVoteStatus } from './WidgetVoteStatus'
+
+
+export { default as DynamicPage} from './DynamicPage';
