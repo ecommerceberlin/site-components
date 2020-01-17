@@ -33,7 +33,7 @@ export const getContestantOgImage = (participant, template) => {
 
 export const getPresenterOgImage = (
     participant,
-    template = 'ebe_template_en'
+    template = 'ebe5_template_en'
   ) => {
     
     const avatar = getCloudinaryAsset(_get(participant, "avatar_cdn")) || getCloudinaryAsset(_get(participant, "avatar"));
@@ -77,7 +77,7 @@ export const getPresenterFbAd = (
 
 export const getPresenterOgImage = (
   participant,
-  template = 'ebe_template_en'
+  template = 'xxxx'
 ) => {
   const avatarTrans = `g_west,x_150,y_25,w_220,h_220,l_p_${
     participant.id

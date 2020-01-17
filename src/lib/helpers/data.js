@@ -133,7 +133,7 @@ export const wrapImage = (
   overlayImage,
   overlayImageVersion,
   baseImage,
-  params = `c_fit,h_270,w_800`,
+  params = `c_fit,h_220,w_800`,
   baseImageParams = ''
 ) => {
 
@@ -178,9 +178,9 @@ export const getCompanyOgImage = (company, url) => {
   return wrapImage(
     `c_${company.id}_logotype`, 
     version,
-    `ebe_template_${companyLang}`,
+    `ebe5_template_${companyLang}`,
     undefined,
-    'y_-30'
+    'y_12'
     );
 };
 
