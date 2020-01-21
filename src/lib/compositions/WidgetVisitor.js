@@ -17,42 +17,28 @@ const styles = theme => ({
 
 })
 
-const WidgetVisitor = ({ classes, data, ...rest }) => (
+const WidgetVisitor = ({ classes, template, ticket_id, fields, start, data, ...rest }) => (
 
 
   <Wrapper {...rest}>
 
  <Settings name="visitor">{
   
-({ticket_id, email_template, api, background}) => (
+({default_ticket_id, default_email_template, api, background}) => (
 
   <Grid container spacing={8} justify="space-between">
     <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
 
-     
         <StepForm
           data={data}
-          ticketId={ticket_id}
-          fields={[
-            {name: "email", required: true},
-            {name: "fname", required: true},
-            {name: "lname", required: true},
-            {name: "cname2", required: true},
-            {name: "position", required: true},
-            {name: "phone", required: true}
-          ]}
-          start={['email', 'fname']}
-          template={email_template}
+          ticketId={ticket_id || default_ticket_id}
+          fields={fields}
+          start={start}
+          template={template || default_email_template}
           api={api}
         />
 
-
-     
-    
-     
     </Grid>
-
-  
 
     <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
 
@@ -70,7 +56,18 @@ const WidgetVisitor = ({ classes, data, ...rest }) => (
 WidgetVisitor.defaultProps = {
   links: [],
   label : "visitors.register",
-  data : {}
+  template : null,
+  ticket_id : 0,
+  data : {},
+  fields : [
+    {name: "email", required: true},
+    {name: "fname", required: true},
+    {name: "lname", required: true},
+    {name: "cname2", required: true},
+    {name: "position", required: true},
+    {name: "phone", required: true}
+  ],
+  start : ['email', 'fname']
 };
 
 export default withStyles(styles)(WidgetVisitor);

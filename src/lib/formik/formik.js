@@ -30,6 +30,15 @@ export default withFormik({
 
     //we should have redux actions?
     
+    const data = {
+      fields: payload,
+      tickets: { [props.ticketId]: 1 },
+      template : "template" in props ? props.template : "",
+      locale : "locale" in props ? props.locale : "",
+      cc : "cc" in props ? props.cc : "" 
+    }
+
+    // console.log(data); return;
 
     setSubmitting(true);
 
@@ -38,13 +47,7 @@ export default withFormik({
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        fields: payload,
-        tickets: { [props.ticketId]: 1 },
-        template : "template" in props ? props.template : "",
-        locale : "locale" in props ? props.locale : "",
-        cc : "cc" in props ? props.cc : "" 
-      })
+      body: JSON.stringify(data)
     })
       .then(response => {
         if (response.status !== 200) {

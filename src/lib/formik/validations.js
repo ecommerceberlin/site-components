@@ -17,9 +17,14 @@ Yup.addMethod(Yup.string, "conditionallyRequire", function(requiredFieldNames, m
 
 export const validations = (requiredFieldNames) => ({
 
+
+    referral: Yup.string()
+      .min(2, "Too short :(")
+      .max(200, 'Invalid')
+      .conditionallyRequire(requiredFieldNames, 'Access code is required.'),
   
       fname: Yup.string()
-    //  .min(2, "C'mon, your first name is longer than that")
+      //.min(2, "C'mon, your first name is longer than that")
       .conditionallyRequire(requiredFieldNames, 'First name is required.'),
   
       lname: Yup.string()
@@ -28,6 +33,10 @@ export const validations = (requiredFieldNames) => ({
   
       cname2: Yup.string()
       .min(2, "C'mon, your company is probably longer than that")
+      .conditionallyRequire(requiredFieldNames, 'Company name is required.'),
+
+      position: Yup.string()
+      .min(2, "Should be longer")
       .conditionallyRequire(requiredFieldNames, 'Company name is required.'),
   
       phone: Yup.string()
