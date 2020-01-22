@@ -50,9 +50,24 @@ values : {}
 class StepForm extends React.Component {
 
   componentDidMount(){
-    const {router, setValues} = this.props;
+
+    const {start, router, setValues, setTouched} = this.props;
     const {query} = router;
-    setValues(query, false);
+
+    const prefilled = Object.keys(query);
+    
+    if(prefilled.length){
+
+      setValues(query);
+
+      let difference = prefilled.filter(x => !(start || []).includes(x));
+  
+      if(difference.length || prefilled.length > 1){
+        setTouched(query);
+      }
+
+    }
+
   }
 
   isStarted(){
