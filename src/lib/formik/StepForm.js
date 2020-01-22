@@ -6,7 +6,7 @@ import SelectInput from './SelectInput';
 
 import FormButton from './FormButton';
 import withFormik, { filterFields, startFields } from './formik';
-
+import { withRouter } from 'next/router';
 import { MyTypography as Typography } from '../components';
 import { translate } from '../i18n';
 import FormSuccess from './FormSuccess';
@@ -47,60 +47,74 @@ validateOnChange : true
 values : {}
 */
 
-const StepForm = props => {
-  const {
-    values,
-    touched,
-    errors,
-    dirty,
-    status,
-    isValid,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    handleReset,
-    isSubmitting,
-    success,
-    fields,
-    start,
-    baseLabel,
-    formActionStarted,
-    formActionFinished
-  
-  } = props;
+class StepForm extends React.Component {
 
-  const started = Object.keys(touched).length;
-
-
-  if (started) {
-
-    formActionStarted({
-      action : "registration_start", 
-      category : "visitors", 
-      label : "method",
-      value : ""
-    });
-  
+  componentDidMount(){
+    const {router, setValues} = this.props;
+    const {query} = router;
+    setValues(query, false);
   }
 
-  if (status && status === 'ok') {
+  isStarted(){
+    const {touched} = this.props;
+    return Object.keys(touched).length;
+  }
 
+  componentDidUpdate(){
+    
+    const {status} = this.props;
 
-    formActionFinished({
-        action : "registration_success", 
+    if( this.isStarted() ) {
+      formActionStarted({
+        action : "registration_start", 
         category : "visitors", 
         label : "method",
         value : ""
-    });
+      });
+    }
 
-    return <FormSuccess baseLabel={baseLabel} />;
+    if(status && status === 'ok') {
+      formActionFinished({
+          action : "registration_success", 
+          category : "visitors", 
+          label : "method",
+          value : ""
+      });    
+    }
+
+   // console.log("updated")
   }
 
-  const filteredFields = filterFields(fields, start);
-  const startedFields = startFields(fields, start);
+  render(){
 
-  return (
-    <form onSubmit={handleSubmit}>
+    const {
+      values,
+      touched,
+      errors,
+      dirty,
+      status,
+      isValid,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      handleReset,
+      isSubmitting,
+      success,
+      fields,
+      start,
+      baseLabel
+    } = this.props;
+
+    const filteredFields = filterFields(fields, start);
+    const startedFields = startFields(fields, start);
+
+    if (status && status === 'ok') {
+      return <FormSuccess baseLabel={baseLabel} />;
+    }
+
+    return (
+      
+      <form onSubmit={handleSubmit}>
 
       <Typography template="legend" label={`${baseLabel}.form.intro`} />
 
@@ -112,7 +126,7 @@ const StepForm = props => {
             id={data.name}
             label={`${baseLabel}.fields.${data.name}`}
             options={data.options}
-            {...props}
+            {...this.props}
           />)
         }
 
@@ -120,13 +134,13 @@ const StepForm = props => {
             key={idx}
             id={data.name}
             label={`${baseLabel}.fields.${data.name}`}
-            {...props}
+            {...this.props}
           />)
       }
 
       ) : null}
 
-      {(started || !start) && filteredFields.length
+      {(this.isStarted() || !start) && filteredFields.length
         ? filteredFields.map( (data, idx) => {
 
           if("options" in data && data.options.length){
@@ -135,7 +149,7 @@ const StepForm = props => {
               id={data.name}
               label={`${baseLabel}.fields.${data.name}`}
               options={data.options}
-              {...props}
+              {...this.props}
             />)
           }
 
@@ -143,16 +157,18 @@ const StepForm = props => {
               key={idx}
               id={data.name}
               label={`${baseLabel}.fields.${data.name}`}
-              {...props}
+              {...this.props}
             /> )
 
         })
         : null}
 
-      <FormButton label={`${baseLabel}.form.submit`} {...props} />
+      <FormButton label={`${baseLabel}.form.submit`} {...this.props} />
     </form>
-  );
-};
+    )
+  }
+}
+
 
 StepForm.defaultProps = {
   api: "https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/register",
@@ -163,6 +179,7 @@ StepForm.defaultProps = {
 
 const enhance = compose(
   translate,
+  withRouter,
   connect(null, {formActionStarted, formActionFinished}),
   withFormik
 )
