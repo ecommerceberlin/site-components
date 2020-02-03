@@ -281,6 +281,11 @@ const styles = theme => ({
   price : {
     marginTop : 10,
     fontWeight : 800
+  },
+
+  error : {
+    color: "red",
+    fontWeight: 600
   }
 
 });
@@ -315,6 +320,12 @@ const templates = {
     variant: 'body1',
     component: 'p',
     classNames: ['benefitsText']
+  },
+
+  benefitsTextError: {
+    variant: 'body1',
+    component: 'p',
+    classNames: ['benefitsText', 'error']
   },
 
   salesInfo : {

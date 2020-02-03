@@ -9,6 +9,7 @@ const i18n = require('./i18n');
 const sitemap = require('./sitemap')
 const settings = require('./externalApi').settings
 const renderAndCache = require('./renderAndCache').renderAndCache
+const basicAuth = require('express-basic-auth')
 
 
 export default function(options){
@@ -21,7 +22,8 @@ const {
   available_locales, 
   default_locale, 
   api,
-  lang_api_endpoint
+  lang_api_endpoint,
+  passwords
 } = options.system;
 
 
@@ -34,6 +36,7 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dir: '.', dev });
 const handle = app.getRequestHandler();
+
 
 app
   .prepare()
@@ -80,7 +83,13 @@ app
 
     sitemap({ server })
 
-
+    server.get('/admin-report', basicAuth({
+      users: passwords,
+      challenge: true,
+      realm: 'Imb4T3st4pp',
+    }), (req, res) => {
+      return handle(req, res);
+    })
  
     server.get('/recall/:token', (req, res) => {
      // res.redirect(`https://account.${req.headers.host}/#/login?token=${req.params.token}`)

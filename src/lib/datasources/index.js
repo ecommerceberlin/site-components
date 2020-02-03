@@ -15,6 +15,7 @@ export { default as DatasourceVips } from './Vips';
 export { default as DatasourcePartners } from './Partners';
 export { default as DatasourceAllPresenters } from './AllPresenters';
 
+export { default as DatasourceAdminReport } from './AdminReport';
 
 
 export { default as Settings } from './Settings';
