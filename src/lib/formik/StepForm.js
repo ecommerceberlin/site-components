@@ -51,14 +51,15 @@ class StepForm extends React.Component {
 
   componentDidMount(){
 
-    const {start, router, setValues, setTouched} = this.props;
+    const {start, router, setValues, setTouched, values} = this.props;
+
     const {query} = router;
 
     const prefilled = Object.keys(query);
     
     if(prefilled.length){
 
-      setValues(query);
+      setValues({...values, ...query})
 
       let difference = prefilled.filter(x => !(start || []).includes(x));
   
