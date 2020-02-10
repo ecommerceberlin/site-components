@@ -35,7 +35,7 @@ const SubPageLink = ({ name, subpage, id, classes, src, highlighted}) => {
   const style = src ? { backgroundImage: `url(${src})` } : {};
   const params = generateLinkParams(name, subpage, id);
   return (
-    <Link {...params}>
+    <Link key={`${subpage}_${id}`} {...params}>
       <a
         className={classNames({
           [classes.tile]: src,
