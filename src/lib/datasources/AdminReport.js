@@ -2,6 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {resourceFetchRequest } from '../components/redux'
+import * as Selectors from './redux/adminreport' 
+
+
+/*
+  {
+    "id": 105957,
+    "company_id": 2,
+    "account": "KM",
+    "profile": {
+        "fname": "Karolina",
+        "lname": "Bartnik-Kura",
+        "phone": "512357745",
+        "booth": "B2.1"
+    },
+    "company": {
+        "keywords": [
+            "platform",
+            "sales_generation",
+            "software"
+        ],
+        "lang": "pl",
+        "name": "Shoper"
+    },
+    "reps": 0,
+    "party": 0,
+    "meetups": 0,
+    "errors": [],
+    "purchases": []
+  }
+*/
 
 
 class Report extends React.Component {
@@ -32,6 +62,7 @@ class Report extends React.Component {
 
 Report.defaultProps = {
    all : [],
+   limit: 0
 };
 
 export default connect(
@@ -40,7 +71,7 @@ export default connect(
 
     const mapStateToProps = (state, props) => {
       return {
-        all : "report" in state.resources ? state.resources.report : [],
+        all : Selectors.FilteredAdminReport(state, props)
       }
     }
     return mapStateToProps
