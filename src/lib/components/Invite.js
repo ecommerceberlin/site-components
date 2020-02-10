@@ -34,7 +34,7 @@ const Invite = ({ person, classes }) => {
           <div style={{ marginTop: 20 }}>
             <MyTypography template="subtitle">
               {_get(person, 'fname')}, 
-              let your friends know that you are going to E-commerce Berlin Expo! 
+              let your friends know that you support E-commerce Berlin Expo! 
             </MyTypography>
 
             <Sharer url={`/invite,${person.id}`} />

@@ -16,10 +16,10 @@ const styles = theme => ({
   button: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(25),
-      padding: '12px 34px'
+      padding: '10px 28px'
     },
 
-    backgroundColor : 'green',
+    backgroundColor : 'red',
 
     // fontWeight: theme.typography.fontWeightRegular,
     // fontFamily : theme.typography.fontFamily,
@@ -27,16 +27,15 @@ const styles = theme => ({
   }
 });
 
-const TicketDownload = ({ code, classes, translate, label }) => {
+const Resignation = ({ code, classes, translate, label }) => {
   return (
     <div className={classes.root}>
       <Button
-        href={`https://api.eventjuicer.com/v1/services/tickets/${code}`}
-        download
+        href={`https://api.eventjuicer.com/v1/services/resignation/${code}`}
         target="_blank"
-        variant="contained"
-        size="large"
-        color="primary"
+        variant="outlined"
+        size="medium"
+        color="default"
         className={classes.button}
       >
         {translate(label)}
@@ -45,8 +44,8 @@ const TicketDownload = ({ code, classes, translate, label }) => {
   );
 };
 
-TicketDownload.defaultProps = {
-  label: 'visitors.tickets.download'
+Resignation.defaultProps = {
+  label: 'visitors.tickets.resignation'
 };
 
 const enhance = compose(
@@ -54,4 +53,4 @@ const enhance = compose(
   translate
 );
 
-export default enhance(TicketDownload);
+export default enhance(Resignation);

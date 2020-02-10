@@ -50,6 +50,8 @@ export { default as MyAvatar } from './MyAvatar';
 export { default as GridBenefits } from './GridBenefits';
 
 export { default as TicketDownload } from './TicketDownload';
+export { default as Resignation } from './Resignation';
+
 export { default as Invite } from './Invite';
 
 export { default as Tags } from './Tags';
