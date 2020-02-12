@@ -14,7 +14,7 @@ const Exhibitor = props => {
       party,
       meetups,
     } = props;
-    const { name, event_manager, pr_manager, keywords, lang } = company;
+    const { name, password, keywords, lang } = company;
     const { booth, fname, lname, phone } = profile;
   
     return (
@@ -25,6 +25,11 @@ const Exhibitor = props => {
         <Text template="benefitsText">
           {fname} {lname} {phone}
         </Text>
+
+        <Text template="benefitsText">
+         mobile pass: <strong>{password}</strong>
+        </Text>
+
         <Text template="benefitsText">Reps: {reps}</Text>
         <Text template={party > 2 ? 'benefitsTextError' : 'benefitsText'}>
           Party: {party}
