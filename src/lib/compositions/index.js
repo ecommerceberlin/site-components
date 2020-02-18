@@ -40,6 +40,9 @@ export { default as WidgetMenu } from './WidgetMenu'
 //voting
 export { default as WidgetCallForPapers } from './WidgetCallForPapers'
 export { default as WidgetContestantCompanies } from './WidgetContestantCompanies'
+export { default as WidgetContestantCompaniesWinners } from './WidgetContestantCompaniesWinners'
+
+
 
 export { default as WidgetVotable } from './WidgetVotable'
 export { default as WidgetContestantCompany} from './WidgetContestantCompany'

@@ -31,7 +31,7 @@ const styles = theme => ({
 
     personSecondaryInfo : {
      // color: 'rgba(0, 0, 0, 0.64)'
-    
+      paddingTop: 10
     },
 
     tile: {
@@ -70,7 +70,7 @@ const styles = theme => ({
 });
 
 
-const AvatarlistCellDumb = ({show_votes, gridData, classes, title, alt, source, image_source, link, moreLabel}) => {
+const AvatarlistCellProject = ({show_votes, gridData, classes, title, alt, source, image_source, link, moreLabel}) => {
   
     const style = image_source in source && source[image_source] ? { 
       backgroundImage: `url(${resizeCloudinaryImage(source[image_source], 300, 300)})` 
@@ -98,7 +98,7 @@ const AvatarlistCellDumb = ({show_votes, gridData, classes, title, alt, source, 
       )
 }
 
-AvatarlistCellDumb.defaultProps = {
+AvatarlistCellProject.defaultProps = {
     gridData : {xs: 12, sm: 4, md: 3, lg: 2, xl: 2},
     source : {},
     image_source : "logotype",
@@ -117,4 +117,4 @@ AvatarlistCellDumb.defaultProps = {
 //     src: PropTypes.string
 //   };
 
-export default withStyles(styles)(AvatarlistCellDumb)
+export default withStyles(styles)(AvatarlistCellProject)

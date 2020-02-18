@@ -67,7 +67,7 @@ export { default as Markdown } from './Markdown';
 
 export { default as VoteStatus } from './VoteStatus';
 export { default as VoteWithLinkedIn } from './VoteWithLinkedIn';
-
+export { default as WinnerCategory } from './WinnerCategory'
 
 export * from './Bookingmap';
 export * from './MyLayouts';
