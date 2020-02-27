@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-import { MobileAwareFilteredPresenters, getPresenters, getPresenterByIdSelector } from '../redux/selectors'
+import { MobileAwareFilteredAllPresenters, FilteredAllPresenters } from './redux/allpresenters'
+import { getAllPresenters } from '../redux/selectors'
 import {resourceFetchRequest } from '../components/redux'
 
 // import { getCompanyProfileInfo, filterCompanyInstances } from '../helpers';
@@ -37,7 +38,7 @@ class PresentersAll extends React.Component {
 
 PresentersAll.propTypes = {
   filtered: PropTypes.array.isRequired,
-  record : PropTypes.object.isRequired
+ // record : PropTypes.object.isRequired
 };
 
 PresentersAll.defaultProps = {
@@ -54,9 +55,9 @@ export default connect(
     const mapStateToProps = (state, props) => {
       return {
         
-        filtered : MobileAwareFilteredPresenters(state, props),
-        all : getPresenters(state, props),
-        record : getPresenterByIdSelector(state, props)
+        filtered : MobileAwareFilteredAllPresenters(state, props),
+     //   all : getAllPresenters(state, props),
+        // record : getPresenterByIdSelector(state, props)
       }
     }
     return mapStateToProps
