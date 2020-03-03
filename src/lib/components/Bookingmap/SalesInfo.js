@@ -26,14 +26,14 @@ const steps = [
 
 
 
-const SalesInfo = (props) => (
+const SalesInfo = ({disabled, disabledTicketIds, ...otherProps}) => (
 
-  <BoothInfoContainer {...props} 
+  <BoothInfoContainer 
   
+  {...otherProps} 
   header={
     <OrderSteps items={steps} active={1} />
   }
-  
   content={
     <React.Fragment>
 
@@ -42,8 +42,10 @@ const SalesInfo = (props) => (
   <Typography template="salesInfo" icon={ Info } label="event.sales.pool.info" />
 
   <TicketGroup
-      noBookableTickets={<div />}
-      {...props}
+    disabled={disabled}
+    disabledTicketIds={disabledTicketIds}
+    noBookableTickets={<div />}
+    {...otherProps}
   />
 
   </div>
@@ -103,7 +105,8 @@ const SalesInfo = (props) => (
 )
 
 SalesInfo.defaultProps = {
-  disabled : false
+  disabled : false,
+  disabledTicketIds : []
 }
 
 export default SalesInfo

@@ -53,7 +53,8 @@ import {resizeCloudinaryImage} from '../helpers'
 
 
 function Ticket(props) {
-  const { data, classes, locale, translate } = props;
+    
+  const { data, classes, locale, translate, disabled } = props;
 
   const linkParams = generateSlugLinkParams("premium", data.details_url.replace("/premium/", ""))
 
@@ -96,7 +97,7 @@ function Ticket(props) {
 
       <CardActions>
 
-           
+         {data.bookable && !disabled ?
             
             <TicketBuyButton 
                 label="common.buy" 
@@ -106,7 +107,7 @@ function Ticket(props) {
                 right={
                     data.details_url.length ? <SubPageButton color="default" variant="outlined" target={linkParams} /> : null
                 }    
-            />
+            /> : <span>unavailable</span>}
 
  
 
@@ -114,6 +115,10 @@ function Ticket(props) {
       </CardActions>
     </Card>
   );
+}
+
+Ticket.defaultProps = {
+    disabled : false
 }
 
 Ticket.propTypes = {

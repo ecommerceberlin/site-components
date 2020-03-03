@@ -5,9 +5,9 @@ import Legend from '../components/Bookingmap/Legend'
 import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings';
 
-const WidgetSalesMap = (props) => (
+const WidgetSalesMap = ({disabled, disabledTicketIds, ...wrapperProps}) => (
 
-    <Wrapper {...props}>
+    <Wrapper {...wrapperProps}>
 
     <Settings name="bookingmap">
     
@@ -20,7 +20,7 @@ const WidgetSalesMap = (props) => (
             <Legend allowedGroupIds={allowedGroupIds} />
         </div>
 
-        <Bookingmap height={height} /> 
+        <Bookingmap disabled={disabled} disabledTicketIds={disabledTicketIds} height={height} /> 
        
     </div>
 
@@ -30,7 +30,8 @@ const WidgetSalesMap = (props) => (
 )
 
 WidgetSalesMap.defaultProps = {
-   
+   disabled : false,
+   disabledTicketIds : []
 }
 
 export default WidgetSalesMap

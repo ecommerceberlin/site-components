@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { getTicketsSortedByStart } from '../../redux/selectors'
 import Ticket from './Ticket';
 
-const TicketGroup = ({tickets, groupId, ...rest}) => {
+const TicketGroup = ({disabled, disabledTicketIds, tickets, groupId, ...rest}) => {
 
-  return tickets.map(ticket => (
-    <Ticket key={ticket.id} ticket={ticket} {...rest} />
+  return tickets.filter(ticket => disabledTicketIds.indexOf(ticket.id)===-1).map(ticket => (
+    <Ticket key={ticket.id} ticket={ticket} disabled={disabled} {...rest} />
   ))
 }
 
@@ -15,7 +15,8 @@ TicketGroup.defaultProps = {
   label : "",
   boothId : "",
   noBookableTickets: null,
-  disabled : false
+  disabled : false,
+  disabledTicketIds : []
 };
 
 
