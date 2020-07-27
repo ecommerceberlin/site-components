@@ -12,7 +12,7 @@ const styles = theme => ({
 
 })
 
-const WidgetSpeaking = ({ categories, classes, ...rest }) => (
+const WidgetSpeaking = ({ categories, classes, ticketId, ...rest }) => (
 
 
   <Wrapper {...rest}>
@@ -23,7 +23,7 @@ const WidgetSpeaking = ({ categories, classes, ...rest }) => (
 
       <StepForm
         data={{}}
-        ticketId={1631}
+        ticketId={ticketId}
         baseLabel="presenters"
         fields={[
           {name: "email", required: true},
@@ -68,6 +68,7 @@ const WidgetSpeaking = ({ categories, classes, ...rest }) => (
 );
 
 WidgetSpeaking.defaultProps = {
+  ticketId : 1842,
   links: [],
   categories : [],
   label : "presenters.form.title"
