@@ -30,7 +30,7 @@ const TwoColsLayout = ({
   const rs = 12 - ls;
 
   return (
-    <Grid container spacing={16}>
+    <Grid container spacing={5}>
       <Grid item xs={12} sm={12} md={ls} lg={ls} xl={ls}>
         {leftCentered ? <Centered>{left}</Centered> : left}
       </Grid>

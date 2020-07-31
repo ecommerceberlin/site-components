@@ -17,7 +17,7 @@ const styles = theme => ({
 
 const Exhibitor = props => (
   <div>
-    <Grid container spacing={8} justify="space-around" alignItems="center">
+    <Grid container spacing={1} justify="space-around" alignItems="center">
       <Grid item xs={10} sm={6} md={6} lg={6} xl={6}>
         <Support />
       </Grid>

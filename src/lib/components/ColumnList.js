@@ -7,7 +7,7 @@ import Highlight from './Highlight'
 
 const ColumnList = ({data, offers}) => (
 
-  <Grid container spacing={24}>
+  <Grid container spacing={7}>
     {data.map((chunk, i) => (
       <Grid key={i} item xs={12} sm={6} md={4} lg={3} xl={3}>
         {chunk && Array.isArray(chunk) ? chunk.map((company) => (

@@ -18,7 +18,7 @@ const WidgetSpeaking = ({ categories, classes, ticketId, ...rest }) => (
   <Wrapper {...rest}>
 
 
-  <Grid container spacing={8} justify="space-between">
+  <Grid container spacing={1} justify="space-between">
     <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
 
       <StepForm

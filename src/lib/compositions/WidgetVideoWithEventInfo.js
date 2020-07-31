@@ -27,28 +27,19 @@ const styles = theme => ({
 
 const WidgetVideoWithEventInfo = ({ classes, heading, subheading, locale, template, event_name, event_date, background, videoSrc, overlay }) => (
 
-  <Settings name="hero">{
-
-    ({
-      heading,
-      subheading,
-      videoSrc, 
-      background, 
-      overlay, 
-      template
-    }) => (
+  <Settings>{(get) => (
   
     <FsVideo
-      background={background}
-      videoSrc={videoSrc}
-      overlay={overlay}
+      background={get("hero.background", background)}
+      videoSrc={get("hero.videoSrc", videoSrc) }
+      overlay={get("hero.overlay", overlay)}
     >
 
     <div className={classes.container}>
 
-      <MyTypography template={template} label={heading} />
+      <MyTypography template={get("hero.template", template) } label={ get("hero.heading", heading) } />
 
-      <MyTypography template="subhero" label={subheading} />
+      <MyTypography template="subhero" label={ get("hero.subheading", subheading) } />
 
       <div className={classes.eventinfo}>
       

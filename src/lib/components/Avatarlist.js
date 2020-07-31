@@ -17,7 +17,7 @@ const Avatarlist = ({data, ...gridProps}) => (
 Avatarlist.defaultProps = {
   data : [],
   justify : "space-between",
-  spacing : 24
+  spacing : 7
 };
 
 export default Avatarlist

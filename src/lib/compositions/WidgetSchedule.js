@@ -6,12 +6,10 @@ import Presenters from '../datasources/Presenters';
 import Exhibitors from '../datasources/Exhibitors';
 import Settings from '../datasources/Settings';
 
-
 const WidgetSchedule = ({link, descriptions, ...wrapper}) => (
 
     <Wrapper {...wrapper}>
-    <Settings name="schedule">
-    {({venues, times, venueStyle, minimized}) => (
+    <Settings> {(get) => (
 
 <Exhibitors>{
     (exhibitors) => (
@@ -25,12 +23,12 @@ const WidgetSchedule = ({link, descriptions, ...wrapper}) => (
         <Schedule
             exhibitors={exhibitors}
             presenters={presenters}
-            times={times}
-            venues={venues}
+            times={ get("schedule.times", times) }
+            venues={ get("schedule.venues", venues) }
             link={link} 
             descriptions={descriptions}
-            venueStyle={venueStyle}
-            minimized={minimized}
+            venueStyle={ get("schedule.venueStyle", venueStyle) }
+            minimized={ get("schedule.minimized", minimized) }
         />
         
         }</Presenters>

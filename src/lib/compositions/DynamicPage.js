@@ -76,7 +76,9 @@ const DynamicPage = ({name, url, params}) => {
     return (
 
         <Layout>
-        <Settings name="pages">{function(pages){
+        <Settings>{ (get) => {
+
+            const pages = get("pages")
 
             if(! (name in pages)){
                 return (<Wrapper>Page not found</Wrapper>)
@@ -112,7 +114,7 @@ const DynamicPage = ({name, url, params}) => {
                             })
 
                             if(globalsUsed.length){
-                                return ( <Settings key={widget.name} name="globals">{(globals) => <Component {...props} {...addGlobalProps(globals, globalsUsed) }/>}</Settings> )
+                                return ( <Settings key={widget.name}>{(get) => <Component {...props} {...addGlobalProps( get("globals"), globalsUsed) }/>}</Settings> )
                             }else{
                                 return ( <Component key={widget.name} {...props }/>)
                             }

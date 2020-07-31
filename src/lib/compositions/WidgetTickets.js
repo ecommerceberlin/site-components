@@ -6,11 +6,12 @@ import DatasourceTickets from '../datasources/Tickets';
 import Settings from '../datasources/Settings';
 
 
+// venues, times, venueStyle
+
 const WidgetTickets = ({filter, ...wrapper}) => (
 
     <Wrapper {...wrapper}>
-    <Settings name="schedule">{
-        ({venues, times, venueStyle}) => (
+    <Settings>{(get) => (
         <DatasourceTickets group_id={294}>{
             (tickets) => (<Tickets data={tickets.filter(filter)} />)
         }</DatasourceTickets>)

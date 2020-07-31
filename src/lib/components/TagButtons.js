@@ -18,7 +18,7 @@ const styles = theme => ({
     marginBottom: 25
   },
   chip: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   },
   chipAlt: {}
 });

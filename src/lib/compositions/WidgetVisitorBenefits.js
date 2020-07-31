@@ -7,8 +7,8 @@ import Settings from '../datasources/Settings'
 
 const WidgetVisitorBenefits = ({benefits, ...rest}) => (
     <Wrapper {...rest}>
-       <Settings name="visitor">{
-           ({benefits}) => <GridBenefits baseLabel="visitors.benefits" items={benefits} />
+       <Settings>{
+           (get) => <GridBenefits baseLabel="visitors.benefits" items={get("visitor.benefits")} />
        }</Settings>
       
     </Wrapper>

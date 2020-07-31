@@ -86,7 +86,7 @@ class Ticket extends React.PureComponent {
 
       <Grid 
         container
-        spacing={16}
+        spacing={5}
         alignItems="center"
       >
         <Grid item xs={12} sm={12} md={3}>

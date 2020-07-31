@@ -4,10 +4,10 @@ import Settings from '../../datasources/Settings'
 
 const TicketBuyButton = ({id, bookable, formdata, nonBookable, right, ...buttonProps}) => (
 
-  <Settings name="bookingmap">{
-    ({api}) => {
+  <Settings>{
+    (get) => {
       return id && bookable ?
-      <form action={api} method="post" target="_blank">
+      <form action={ get("bookingmap.api") } method="post" target="_blank">
       <input type="hidden" name={`tickets[${id}]`} value="1" />
       <input type="hidden" name={`ticketdata[${id}]`} value={JSON.stringify(formdata)} />
       

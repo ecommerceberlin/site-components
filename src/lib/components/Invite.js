@@ -29,7 +29,7 @@ const styles = theme => ({
 const Invite = ({ person, classes }) => {
   return (
     <div className={classes.root}>
-      <Grid container spacing={24}>
+      <Grid container spacing={6}>
         <Grid item md={5} sm={6} xs={12}>
           <div style={{ marginTop: 20 }}>
             <MyTypography template="subtitle">

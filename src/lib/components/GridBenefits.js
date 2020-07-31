@@ -8,7 +8,7 @@ import GridBenefitsItem from './GridBenefitsItem'
 
 const GridBenefits = ({items, baseLabel}) => (
 
-  <Grid  container spacing={32}>
+  <Grid  container spacing={8}>
 
     {items && items.map( ({label, icon}) => <GridBenefitsItem key={label} icon={icon} label={`${baseLabel}.${label}`} />)  }
 

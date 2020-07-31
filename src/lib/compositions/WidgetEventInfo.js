@@ -5,34 +5,28 @@ import EventInfo from '../components/EventInfo';
 
 const WidgetEventInfo = ({items, ...props}) => (
 
-    <Settings name="common">
-  {
-      ({
-          event_location,
-          event_date,
-          event_hours
-      }) => {
+    <Settings>{get => {
 
           const filtered = [
             {
               name : 'location',
               icon: 'location',
               secondary: 'event.location',
-              primary: event_location
+              primary: get("common.event_location")
             },
 
             {
               name : 'date',
               icon: 'date',
               secondary: 'event.date',
-              primary: event_date
+              primary: get("common.event_date")
             },
 
             {
               name : 'hours',
               icon: 'alarm',
               secondary: 'event.hours',
-              primary: event_hours
+              primary: get("common.event_hours")
             }
           ].filter(({name}) => items.indexOf(name) > -1)
 

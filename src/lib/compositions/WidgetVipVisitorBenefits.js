@@ -7,16 +7,14 @@ import Settings from '../datasources/Settings'
 
 const WidgetVipVisitorBenefits = ({label, baseLabel, items, ...wrapperOptions}) => (
 
-        <Settings name="vips">{
-            ({label, baseLabel, items}) =>  
+        <Settings>{(get) =>  
             
-            <Wrapper {...wrapperOptions} label={label} >
-                <GridBenefits baseLabel={baseLabel} items={items} />
+            <Wrapper {...wrapperOptions} label={ get("vips.label", label) } >
+                <GridBenefits baseLabel={ get("vips.baseLabel", baseLabel) } items={ get("vips.items", items) } />
             </Wrapper>
 
         }</Settings>
        
-   
 )
 
 WidgetVipVisitorBenefits.defaultProps = {

@@ -51,26 +51,27 @@ const styles = theme => ({
   }
 });
 
+
 const WidgetSupport = ({
   classes,
   title,
   description,
   people
 }) => (
-  <Settings name="sales_support">
-  {({title, description, people}) => (
+  <Settings>
+  {(get) => (
     <div className={classes.root}>
   
     <Typography variant="headline">
-      <RawTranslatedText label={title} />
+      <RawTranslatedText label={ get("sales_support.title", title) } />
     </Typography>
     <Typography variant="subheading" color="textSecondary">
-      <RawTranslatedText label={description} />
+      <RawTranslatedText label={ get("sales_support.description", description) } />
     </Typography>
   
     <div className={classes.people}>
    
-    {people.map(({name, position, langs, avatar, phone, email, chatlio}, i) => (
+    {get("sales_support.people", people).map(({name, position, langs, avatar, phone, email, chatlio}, i) => (
       
       <div key={name} className={classes.container}>
         <div className={classes.left}>

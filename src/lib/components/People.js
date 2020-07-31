@@ -24,7 +24,7 @@ const People = ({data, gridData, link, title, subtitle, text, voted, moreLabel})
 
   return (
 
-    <Grid container spacing={24}>
+    <Grid container spacing={6}>
     {data.map((item, i) => (
       <Grid key={_get(item, 'id')} item {...gridData}>
         <Person

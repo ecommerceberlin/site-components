@@ -42,7 +42,7 @@ const styles = theme => ({
   },
 
   badge: {
-    //  margin: theme.spacing.unit * 2,
+    //  margin: theme.spacing(2),
   },
 
   menuButton: {
@@ -73,34 +73,27 @@ function MyAppBar(props) {
             <MenuIcon />
           </IconButton>
 
-        
-          
-        
-            <Settings name="common">{
-          ({event_name}) => (
+      <Settings>{(get) => (
             <Link href="/">
             <Typography
             component="a"
             variant="title"
             color="inherit"
             className={classes.flex}>{
-              event_name
+              get("common.event_name")
             }</Typography>
             </Link>
             )
           }</Settings>
       
 
-        
-
           {/* <Search /> */}
           
-          {/* <Settings name="system">{
-          ({available_locales}) => ()
-          }</Settings> */}
+          <Settings>{
+          (get) =>  <LanguageSelect locales={ get("system.available_locales") } /> 
+          }</Settings>
           
-          <LanguageSelect locales={["de","en"]} />
-
+         
           {noItems > 0 ? <Cart count={noItems} /> : null}
         </Toolbar>
       </AppBar>

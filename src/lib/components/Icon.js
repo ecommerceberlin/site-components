@@ -21,10 +21,10 @@ const icons = { Linkedin, Facebook, Twitter, Website, Date, Location, Alarm };
 
 const styles = theme => ({
   leftIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
   small: {
     fontSize: 20

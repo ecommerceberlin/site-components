@@ -21,7 +21,7 @@ const styles = theme => ({
 const WidgetFooter = ({ links, classes, width, people}) => (
   <div className={classes.container}>
     <Wrapper dense={true} color="#fafafa" >
-      <Grid container spacing={8} wrap="wrap" justify="space-around" alignItems="center">
+      <Grid container spacing={1} wrap="wrap" justify="space-around" alignItems="center">
         <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
           <WidgetSupport people={people} />
         </Grid>
@@ -35,29 +35,24 @@ const WidgetFooter = ({ links, classes, width, people}) => (
         <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
           {/* <Typography /> */}
 
-          <Settings name="common">
-          {
-             ({
-                organizer_name,
-                organizer_address,
-                organizer_regno
-            }) => (
-                <EventInfo
+
+
+          <Settings>{(get) => (<EventInfo
                 
                 items={[
                   {
                     secondary: 'event.organizer.name',
-                    primary: organizer_name
+                    primary: get("common.organizer_name")
                   },
     
                   {
                     secondary: 'event.organizer.address',
-                    primary: organizer_address
+                    primary: get("common.organizer_address")
                   },
     
                   {
                     secondary: 'event.organizer.registration',
-                    primary: organizer_regno
+                    primary: get("common.organizer_regno")
                   }
                 ]}
                 orientation="v"
@@ -68,13 +63,10 @@ const WidgetFooter = ({ links, classes, width, people}) => (
         </Grid>
       </Grid>
 
-      <Settings name="footer">{
-            ({
-                links
-            }) => (
+      <Settings>{(get) => (
             <div style={{marginTop: 30, marginBottom : 30}}>
-            <Grid container spacing={8} wrap="wrap" justify="space-around" alignItems="center">
-            {links.map(({label, href}) => (<Grid item key={label}><Link prefetch={false} href={href} label={label} /></Grid>))}        
+            <Grid container spacing={1} wrap="wrap" justify="space-around" alignItems="center">
+            {get("footer.links").map(({label, href}) => (<Grid item key={label}><Link prefetch={false} href={href} label={label} /></Grid>))}        
             </Grid>
             </div>
             

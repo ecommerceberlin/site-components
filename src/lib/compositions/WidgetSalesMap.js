@@ -7,21 +7,18 @@ import Settings from '../datasources/Settings';
 
 const WidgetSalesMap = ({disabled, disabledTicketIds, ...wrapperProps}) => (
 
+    //{steps, allowedGroupIds, height}
+
     <Wrapper {...wrapperProps}>
 
-    <Settings name="bookingmap">
-    
-    {({steps, allowedGroupIds, height}) => (
+    <Settings>{(get) => (
 
     <div>
-
         <div>
-            <OrderSteps items={steps} active={0} />
-            <Legend allowedGroupIds={allowedGroupIds} />
+            <OrderSteps items={ get("bookingmap.steps") } active={0} />
+            <Legend allowedGroupIds={ get("bookingmap.allowedGroupIds") } />
         </div>
-
-        <Bookingmap disabled={disabled} disabledTicketIds={disabledTicketIds} height={height} /> 
-       
+        <Bookingmap disabled={disabled} disabledTicketIds={disabledTicketIds} height={ get("bookingmap.height") } /> 
     </div>
 
     )}</Settings>

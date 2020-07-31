@@ -7,8 +7,8 @@ import Settings from '../datasources/Settings'
 
 const WidgetSpeakerBenefits = ({benefits, ...rest}) => (
     <Wrapper {...rest}>
-       <Settings name="speakers">{
-           ({benefits}) => <GridBenefits baseLabel="presenters.steps" items={benefits} />
+       <Settings>{
+           (get) => <GridBenefits baseLabel="presenters.steps" items={ get("speakers.benefits", benefits) } />
        }</Settings>
       
     </Wrapper>

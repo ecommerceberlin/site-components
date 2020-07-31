@@ -74,7 +74,7 @@ class WhoIsGonnaBeThere extends React.PureComponent {
     const { data } = this.props;
 
     return (
-      <Grid container spacing={24}>
+      <Grid container spacing={5}>
         {data.map((chunk, i) => (
           <Grid key={i} item xs={12} sm={6} md={4} lg={3} xl={3}>
             {chunk.map((person, j) => (

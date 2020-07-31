@@ -2,13 +2,13 @@ import Settings from '../datasources/Settings'
 import MyDrawer from '../components/MyDrawer'
 import defaultMenuItems from '../components/menuItems';
 
-const WidgetMenu = ({items}) => (
+const WidgetMenu = ({defaultMenuItems}) => (
 
-    <Settings name="ui">{
+    <Settings>{
 
-        ({menuItems}) => {
+        (get) => {
 
-            return (<MyDrawer items={menuItems} />)
+            return (<MyDrawer items={ get("ui.menuItems", defaultMenuItems) } />)
 
         }
     }</Settings>
@@ -16,7 +16,7 @@ const WidgetMenu = ({items}) => (
 )
 
 WidgetMenu.defaultProps = {
-    menuItems : defaultMenuItems
+    defaultMenuItems : defaultMenuItems
 }
 
 export default WidgetMenu

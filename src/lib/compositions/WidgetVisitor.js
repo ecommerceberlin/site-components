@@ -19,30 +19,27 @@ const styles = theme => ({
 
 const WidgetVisitor = ({ classes, template, ticket_id, fields, start, data, ...rest }) => (
 
-
   <Wrapper {...rest}>
 
- <Settings name="visitor">{
-  
-({default_ticket_id, default_email_template, api, background}) => (
+ <Settings>{(get) => (
 
-  <Grid container spacing={8} justify="space-between">
+  <Grid container spacing={1} justify="space-between">
     <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
 
         <StepForm
           data={data}
-          ticketId={ticket_id || default_ticket_id}
+          ticketId={ticket_id || get("visitor.default_ticket_id") }
           fields={fields}
           start={start}
-          template={template || default_email_template}
-          api={api}
+          template={template || get("visitor.default_email_template") }
+          api={get("visitor.api") }
         />
 
     </Grid>
 
     <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
 
-      <img src={background} className={classes.lanyard} />
+      <img src={ get("visitor.background") } className={classes.lanyard} />
 
     </Grid>
   </Grid>
