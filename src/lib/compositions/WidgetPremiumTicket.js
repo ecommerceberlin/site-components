@@ -11,57 +11,68 @@ import TicketPrice from  '../components/Bookingmap/TicketPrice'
 import TicketBuyButton from '../components/Bookingmap/TicketBuyButton'
 import DatasourceTickets from '../datasources/Tickets'
 
-const PremiumTicketBody = ({first, name, ticket, resolveLabel, resolveSecondaryLabel, resolveText}) => (
+const PremiumTicketBody = ({first, name, ticket, resolveLabel, resolveSecondaryLabel, resolveText}) => {
 
-  <Wrapper
-  first={first}
-  label={resolveLabel(name)}
-  secondaryLabel={resolveSecondaryLabel(name)}
->
-  <div style={{ marginTop: 80 }}>
-    <TwoColsLayout
-      left={
-        <img
-          src={resizeCloudinaryImage(
-            ticket.image,
-            800,
-            800,
-          )}
-          alt=""
-          style={{ width: '100%' }}
-        />
-      }
-      right={
-        <div style={{ marginLeft: 20 }}>
-          <Markdown
-            label={resolveText(name)}
+  if(! "image" in ticket){
+
+    return null
+  }
+
+
+  return (
+
+    <Wrapper
+    first={first}
+    label={resolveLabel(name)}
+    secondaryLabel={resolveSecondaryLabel(name)}
+  >
+    <div style={{ marginTop: 80 }}>
+      <TwoColsLayout
+        left={
+          <img
+            src={resizeCloudinaryImage(
+              ticket.image,
+              800,
+              800,
+            )}
+            alt=""
+            style={{ width: '100%' }}
           />
-
-          <div style={{ marginBottom: 20 }}>
-            <MyTypography template="price">
-              <TicketPrice price={ticket.price} />
-            </MyTypography>
+        }
+        right={
+          <div style={{ marginLeft: 20 }}>
+            <Markdown
+              label={resolveText(name)}
+            />
+  
+            <div style={{ marginBottom: 20 }}>
+              <MyTypography template="price">
+                <TicketPrice price={ticket.price} />
+              </MyTypography>
+            </div>
+  
+            <TicketBuyButton
+              id={ticket.id}
+              bookable={ticket.bookable}
+              label="common.buy"
+              right={<Chatlio label="common.request_more_info" />}
+            />
           </div>
-
-          <TicketBuyButton
-            id={ticket.id}
-            bookable={ticket.bookable}
-            label="common.buy"
-            right={<Chatlio label="common.request_more_info" />}
-          />
-        </div>
-      }
-    />
-  </div>
-</Wrapper>
-
-)
-
-
+        }
+      />
+    </div>
+  </Wrapper>
+  
+  )
+  
+}
+PremiumTicketBody.defaultProps = {
+  ticket : {}
+}
 
 const WidgetPremiumTicket = ({resolve, name, ticket, ...rest}) => {
 
-  if("id" in ticket){
+  if("id" in ticket && ticket.id){
     return <PremiumTicketBody name={name} ticket={ticket} {...rest} />
   }else{
     return (<DatasourceTickets>{
