@@ -92,7 +92,7 @@ function* handleFetchTranslations(){
 
   if(localise_url.indexOf("http") === 0){
 
-    const response = yield call(fetch, `${process.env.NEXT_PUBLIC_LOCALISE}`)
+    const response = yield call(fetch, localise_url)
     const json = yield call([response, response.json])
   
     if (response.ok && response.status >= 200) {
