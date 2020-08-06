@@ -4,22 +4,31 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-const Settings = ({settings, children}) =>   children(
-    
-                (path, fallback = undefined) => {
+const Settings = ({settings, children}) =>  {
 
-                const out = get(settings, path, undefined)
+    if(typeof(children) !== 'function'){
+        return <div>bad calling Settings</div>
+    }
+
+    return  children(
     
-                if(out !== undefined){
-                    return out
-                }
+        (path, fallback = undefined) => {
+
+        const out = get(settings, path, undefined)
+
+        if(out !== undefined){
+            return out
+        }
+
+        if(fallback !== undefined){
+            return fallback
+        }
+
+        return path
+    }) 
+
     
-                if(fallback !== undefined){
-                    return fallback
-                }
-    
-                return path
-}) 
+} 
 
 Settings.defaultProps = {
     settings : {}
