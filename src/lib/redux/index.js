@@ -1,21 +1,12 @@
 
 import { useMemo } from 'react'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { createWrapper } from 'next-redux-wrapper'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { persistStore, persistCombineReducers } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
+import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['boothsSelected', 'app']
-};
+const SET_CLIENT_STATE = 'SET_CLIENT_STATE';
 
 
 const bindMiddleware = (middleware) => {
@@ -26,71 +17,97 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
 }
 
-export const initStore = (preloadedState = {}) => {
+
+const combinedReducers =  combineReducers(rootReducer)
+
+
+const reducer = (state, action) => {
+
+    switch(action.type){
+
+      case HYDRATE:
+
+      const nextState = {
+        ...state, // use previous state
+        ...action.payload, // apply delta from hydration
+      }
+  
+      if (action.payload.app === 'init') delete action.payload.app;
+      if (action.payload.page === 'init') delete action.payload.page;
+  
+      // if (state.count) nextState.count = state.count // preserve count value on client side navigation
+
+      return nextState
+
+      break;
+
+      case SET_CLIENT_STATE:
+        return {
+        ...state,
+        fromClient: payload}
+      break;
+
+      default: 
+        return combinedReducers(state, action)
+    }
+  
+}
+
+
+let store;
+
+export const initStore = ({ctx}) => {
+
   const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(
-                      persistCombineReducers(persistConfig, reducers), 
-                      preloadedState, 
-                      bindMiddleware([sagaMiddleware])
+
+  const isServer = typeof window === 'undefined';
+
+  if( isServer ){
+     store = createStore(
+      reducer, 
+      bindMiddleware([sagaMiddleware])
+    ) 
+  }else{
+
+    // we need it only on client side
+    const {persistStore, persistReducer} = require('redux-persist');
+    const storage = require('redux-persist/lib/storage').default;
+
+    const persistConfig = {
+      key: 'root',
+      storage : storage,
+      whitelist: ['fromClient', 'boothsSelected', 'app']
+    };
+    
+    store = createStore(
+      persistReducer(persistConfig, reducer), 
+      bindMiddleware([sagaMiddleware])
     )
 
-  store.sagaTask = sagaMiddleware.run(rootSaga)
+    store.__persistor = persistStore(store)
 
+  }
 
   /**
-   * 
-   *  
-   * next-redux-saga depends on `runSagaTask` and `sagaTask` being attached to the store.
-   *
-   *   `runSagaTask` is used to rerun the rootSaga on the client when in sync mode (default)
-   *   `sagaTask` is used to await the rootSaga task before sending results to the client
+   * next-redux-saga depends on `sagaTask` being attached to the store during `getInitialProps`.
+   * It is used to await the rootSaga task before sending results to the client.
+   * However, next-redux-wrapper creates two server-side stores per request:
+   * One before `getInitialProps` and one before SSR (see issue #62 for details).
+   * On the server side, we run rootSaga during `getInitialProps` only:
    */
 
-   /** 
-  _store.runSagaTask = () => {
-    _store.sagaTask = sagaMiddleware.run(rootSaga);
-  };
 
-  // run the rootSaga initially
-  _store.runSagaTask();
+ // if ((ctx && "req" in ctx) || !isServer) {
+    store.sagaTask = sagaMiddleware.run(rootSaga)
+  //}
 
-   */
-
-  const persistor = persistStore(store, null, () => {
-    /* getNotified! */
-  });
-
+  
   return store
 }
 
+export const reduxWrapper = createWrapper(initStore, { debug: true })
 
-export const initializeStore = (preloadedState) => {
-  let _store = store ?? initStore(preloadedState)
-
-  // After navigating to a page with an initial Redux state, merge that state
-  // with the current state in the store, and create a new store
-  if (preloadedState && store) {
-    _store = initStore({
-      ...store.getState(),
-      ...preloadedState,
-    })
-    // Reset the current store
-    store = undefined
-  }
-
-  // For SSG and SSR always create a new store
-  if (typeof window === 'undefined') return _store
-  // Create the store once in the client
-  if (!store) store = _store
-
-  return _store
-}
-
-
-// export function useStore(initialState) {
-//   const store = useMemo(() => initializeStore(initialState), [initialState])
-//   return store
-// }
-
-
-export const wrapper = createWrapper(initializeStore, { debug: true })
+export const setClientState = (clientState) => ({
+    type: SET_CLIENT_STATE,
+    payload: clientState
+});

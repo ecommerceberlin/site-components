@@ -3,8 +3,9 @@ export const GA_TRACKING_ID = `${process.env.GTM}`;
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = url => {
   
-  if(typeof window !== "undefined"){
+  if(typeof window !== "undefined" && window.gtag){
     
+
     window.gtag('config', GA_TRACKING_ID, {
       page_location: url
     });

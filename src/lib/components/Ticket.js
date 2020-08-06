@@ -14,7 +14,7 @@ import compose from 'recompose/compose';
 import { translate } from '../i18n';
 import TicketPrice from './Bookingmap/TicketPrice'
 import TicketBuyButton from './Bookingmap/TicketBuyButton'
-import {generateSlugLinkParams} from '../helpers'
+//import {generateSlugLinkParams} from '../helpers'
 import Link from 'next/link'
 
 import SubPageButton from './SubPageButton';
@@ -52,11 +52,14 @@ import {resizeCloudinaryImage} from '../helpers'
     };
 
 
-function Ticket(props) {
+const Ticket = ({ data, classes, locale, translate, disabled, moreInfoLinkHref }) => {
     
-  const { data, classes, locale, translate, disabled } = props;
 
-  const linkParams = generateSlugLinkParams("premium", data.details_url.replace("/premium/", ""))
+  //const linkParams = generateSlugLinkParams("premium", )
+  const linkParams = {
+      href: moreInfoLinkHref,
+      as: data.details_url
+  }
 
   return (
     <Card className={data.bookable ? classes.card : classes.cardDisabled }>
@@ -118,7 +121,9 @@ function Ticket(props) {
 }
 
 Ticket.defaultProps = {
-    disabled : false
+    disabled : false,
+    data: {},
+    moreInfoLinkHref: "/premium/[name]"
 }
 
 Ticket.propTypes = {

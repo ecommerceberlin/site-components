@@ -5,7 +5,7 @@ import WidgetVideoWithEventInfo from '../compositions/WidgetVideoWithEventInfo'
 import WidgetVisitor from '../compositions/WidgetVisitor'
 import FsButtons from '../components/FsButtons'
 import WidgetAllExhibitorsAvatarlist from '../compositions/WidgetAllExhibitorsAvatarlist'
-import Layout from '../layouts/main'
+import Layout from '../layouts/LayoutMain'
 
 import { connect } from 'react-redux';
 

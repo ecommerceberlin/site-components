@@ -50,3 +50,6 @@ export { default as WidgetVoteStatus } from './WidgetVoteStatus'
 
 
 export { default as DynamicPage} from './DynamicPage';
+export { default as WidgetPremiumTicket } from './WidgetPremiumTicket'
+export { default as WidgetPremiumTickets } from './WidgetPremiumTickets'
+

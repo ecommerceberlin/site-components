@@ -31,8 +31,8 @@ const BookingmapLoader = (props) => (
 
     <ContentLoader
     speed={2}
-    primaryColor="#f3f3f3"
-    secondaryColor="#cccccc"
+    primarycolor="#f3f3f3"
+    secondarycolor="#cccccc"
     {...props}
     >
 

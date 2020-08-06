@@ -7,9 +7,9 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import color from '@material-ui/core/colors/amber';
 
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
@@ -41,12 +41,12 @@ const FaqItem = ({
   classes,
   translate
 }) => (
-  <ExpansionPanel
+  <Accordion
     classes={{ expanded: classes.expanded }}
     onChange={(event, state) => faqToggle([label], state)}
     expanded={selected.indexOf(label) > -1}
   >
-    <ExpansionPanelSummary
+    <AccordionSummary
       classes={{
         root: classes.default,
         expanded: classes.expandedTitle
@@ -54,13 +54,13 @@ const FaqItem = ({
       expandIcon={<ExpandMoreIcon />}
     >
       {translate(`${baseLabel}.${label}.q`)}
-    </ExpansionPanelSummary>
-    <ExpansionPanelDetails
+    </AccordionSummary>
+    <AccordionDetails
       classes={{ root: classNames(classes.default, classes.content) }}
     >
       {translate(`${baseLabel}.${label}.a`)}
-    </ExpansionPanelDetails>
-  </ExpansionPanel>
+    </AccordionDetails>
+  </Accordion>
 );
 
 FaqItem.defaultProps = {

@@ -1,52 +1,67 @@
-import React from 'react';
+
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'next/router';
-import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
-
 import MyTypography from './MyTypography';
 import FaqItem from './FaqItem';
-
 import { faqUrl } from './redux';
+import { useRouter } from 'next/router'
+import  queryString from 'query-string';
 
-class Faq extends React.Component {
 
-  componentDidMount() {
-    //parse URL and dispatch actions!
-    const { url, faqUrl, selected } = this.props;
-
-    if (url && url.query && 'q' in url.query) {
-      faqUrl(url.query.q);
-    }
+/**
+ * ServerRouter {
+  route: '/exhibit',
+  pathname: '/exhibit',
+  query: {},
+  asPath: '/exhibit?q=additional_paid_services',
+  basePath: '',
+  events: undefined,
+  isFallback: false
   }
+ */
 
-  render() {
-    const { classes, items, baseLabel, translate, url } = this.props;
+const Faq = ({ faqUrl, items, baseLabel, selected }) => {
 
-    return (
-      <div
-        style={{
-          flexGrow: 1,
-          marginTop: 20,
-          marginBottom: 20,
-          paddingBottom: 20
-        }}
-      >
-        <MyTypography label={`${baseLabel}.name`} template="SUBH2CH" />
+  const router = useRouter();
 
-        {items.map(item => (
-          <FaqItem key={item.label} baseLabel={baseLabel} {...item} />
-        ))}
-      </div>
-    );
-  }
+  console.log(router);
+
+  // const parsedUrl = queryString.parse(asPath)
+
+  // console.log(parsedUrl)
+
+  useEffect(()=>{
+
+    // if (url && url.query && 'q' in url.query) {
+    //   faqUrl(url.query.q);
+    // }
+
+  }) 
+
+  return (
+    <div
+    style={{
+      flexGrow: 1,
+      marginTop: 20,
+      marginBottom: 20,
+      paddingBottom: 20
+    }}
+  >
+    <MyTypography label={`${baseLabel}.name`} template="SUBH2CH" />
+
+    {items.map(item => (
+      <FaqItem key={item.label} baseLabel={baseLabel} {...item} />
+    ))}
+  </div>
+  )
+
 }
 
 Faq.defaultProps = {
   items: [],
   baseLabel: 'faq',
-  url: {},
   selected: []
 };
 
@@ -54,12 +69,6 @@ Faq.propTypes = {
   //classes: PropTypes.object.isRequired,
 };
 
-const enhance = compose(
-  withRouter,
-  connect(
-    state => ({ selected: state.visuals.faqs }),
-    { faqUrl }
-  )
-);
-
-export default enhance(Faq);
+export default  connect(
+  state => ({ selected: state.visuals.faqs }),
+  { faqUrl })(Faq);

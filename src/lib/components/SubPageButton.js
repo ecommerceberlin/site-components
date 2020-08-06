@@ -13,7 +13,7 @@ const SubPageButton = ({ label, translate, locale, target, ...buttonProps }) => 
 );
 
 SubPageButton.defaultProps = {
-  target : {to : "/no-target-defined"},
+  target : {href : "/no-target-defined"},
   variant : "contained",
   label : "common.more",
   color : "primary",

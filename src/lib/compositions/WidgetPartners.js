@@ -37,7 +37,7 @@ WidgetPartners.defaultProps = {
   limit : 50,
   mobile : 12,
   center : false,
-  spacing : 24
+  spacing : 5
 }
 
 

@@ -8,8 +8,8 @@ export const Logotype = () => (
     height={200}
     width={380}
     speed={2}
-    primaryColor={'#f3f3f3'}
-    secondaryColor={'#ecebeb'}
+    primarycolor={'#f3f3f3'}
+    secondarycolor={'#ecebeb'}
   >
     <rect x="40" y="53.05" rx="0" ry="0" width="300.51" height="86.94" />
   </ContentLoader>

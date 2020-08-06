@@ -1,2 +1,2 @@
-export { default as getMuiContext } from './getMuiContext';
+export { default as theme } from './theme';
 export { default as ScreenSize } from './ScreenSize';

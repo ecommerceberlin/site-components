@@ -1,4 +1,4 @@
-import { delay } from 'redux-saga';
+import { delay } from 'redux-saga/effects';
 import {
   all,
   call,
@@ -11,11 +11,11 @@ import {
   takeLatest,
   throttle
 } from 'redux-saga/effects';
+
 import fetch from 'isomorphic-unfetch';
-
 import _keyBy from 'lodash/keyBy';
-
 import Router from 'next/router';
+import get from 'lodash/get'
 
 import {
   SNACKBAR_SHOW,
@@ -38,7 +38,15 @@ import {
 } from '../../components/redux/types';
 
 
-import {CHANGE_LOCALE} from '../../i18n'
+import {
+  CHANGE_LOCALE, 
+  changeLocale,
+  replaceTranslations
+} from '../../i18n'
+
+import {
+  SETTINGS_SET
+} from '../../settings'
 
 import {
   resourceFetchRequest,
@@ -64,13 +72,40 @@ import {event} from '../../services/gtag'
 
 import { REHYDRATE } from 'redux-persist/lib/constants'
 
-const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/${process.env.PROJECT}`
+const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/${process.env.NEXT_PUBLIC_PROJECT}`
 
 let fetchTasks = {};
 
 
+function* handleFetchTranslations(){
+  
+  const settings = yield select(Selectors.getSettings)
+  const locale = yield select(Selectors.getLocale)
 
+  const localise_url = get(settings, "system.lang_api_endpoint", "").trim()
+  const available_locales = get(settings, "system.available_locales", "")
+  const default_locale = get(settings, "system.default_locale", "").toLowerCase()
 
+  if(!locale){
+    yield put(changeLocale(default_locale))
+  }
+
+  if(localise_url.indexOf("http") === 0){
+
+    const response = yield call(fetch, `${process.env.NEXT_PUBLIC_LOCALISE}`)
+    const json = yield call([response, response.json])
+  
+    if (response.ok && response.status >= 200) {
+      yield put(replaceTranslations(json));
+    } else {
+    //yield put(resourceFetchError(endpoint, `${response.status} ${response.statusText}`));
+    }
+
+  }
+
+ 
+
+}
 
 //https://goshakkk.name/detect-state-change-redux-saga/
 
@@ -114,7 +149,7 @@ function* accumulateFetches({resource, reload}) {
 
 function* fetchAccumulatedFetches(endpoint, reload){
 
-  yield call(delay, 50);
+  yield delay(50);
 
   const resources = yield select(Selectors.getResources)
 
@@ -163,20 +198,6 @@ function* selectBoothWhenCartItemAdded(actionData) {
 }
 
 
-function* setCookieWhenLocaleChanged(actionData) {
-  if (process.browser) {
-
-    const response = yield call(fetch, "/remember", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials : 'include',
-      body: JSON.stringify({ locale: actionData.locale })
-    });
-    const data = yield call([response, response.json]);
-  }
-}
 
 function* unSelectBoothWhenCartItemRemoved(actionData) {
   //console.log(actionData)
@@ -291,7 +312,6 @@ const rootSaga = function* root() {
 
   yield all([
     //takeEvery(SNACKBAR_SHOW, handleLogoutFn),
-    takeEvery(CHANGE_LOCALE, setCookieWhenLocaleChanged),
     takeEvery(FAQ_TOGGLE, changeUrlWhenFaqsSelected),
     takeEvery(CART_ITEM_ADD, selectBoothWhenCartItemAdded),
     takeEvery(CART_ITEM_ADD, updateDialogForQuickCheckout),
@@ -304,8 +324,8 @@ const rootSaga = function* root() {
     takeEvery(LINKEDIN_VOTE_REQUESTED, handleLinkedinVoteRequest),
     takeEvery(LINKEDIN_TOKEN_SUCCESS, handleRehydrate),
     takeEvery(LINKEDIN_VOTE_SUCCESS, handleVotingData),
-    takeEvery(VOTE_STATUS_CHECK, handleVoteStatus)
-
+    takeEvery(VOTE_STATUS_CHECK, handleVoteStatus),
+    takeEvery(SETTINGS_SET, handleFetchTranslations)
   ]);
 };
 

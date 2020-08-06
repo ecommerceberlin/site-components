@@ -5,3 +5,4 @@ export * from './text';
 export * from './links';
 export * from './api';
 export * from './cloudinary';
+export * from './resources';

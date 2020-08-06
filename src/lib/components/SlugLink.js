@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { generateLinkParams } from '../helpers';
-import isEmpty from 'lodash/isEmpty'
 
 const styles = theme => ({
   textLink: {
@@ -32,7 +31,7 @@ const styles = theme => ({
 
 });
 
-const SubPageLink = ({ name, href, as, classes, src, highlighted}) => {
+const SlugLink = ({ name, href, as, id, classes, src, highlighted}) => {
   const style = src ? { backgroundImage: `url(${src})` } : {};
   
   //const params = generateLinkParams(name, subpage, id);
@@ -40,8 +39,8 @@ const SubPageLink = ({ name, href, as, classes, src, highlighted}) => {
     <Link key={href} href={href} as={as}>
       <a
         className={classNames({
-          [classes.tile]: !isEmpty(src),
-          [classes.textLink]: isEmpty(src)
+          [classes.tile]: src,
+          [classes.textLink]: !src
         })}
         style={style}
       >

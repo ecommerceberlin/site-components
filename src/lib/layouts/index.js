@@ -1,2 +1,2 @@
-export { default as LayoutMain } from './main';
-export { default as LayoutRaw } from './raw';
+export { default as LayoutMain } from './LayoutMain';
+export { default as LayoutRaw } from './LayoutRaw';

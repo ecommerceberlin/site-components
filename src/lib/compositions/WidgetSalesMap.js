@@ -5,7 +5,7 @@ import Legend from '../components/Bookingmap/Legend'
 import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings';
 
-const WidgetSalesMap = ({disabled, disabledTicketIds, ...wrapperProps}) => (
+const WidgetSalesMap = ({disabled, steps, allowedGroupIds, ...wrapperProps}) => (
 
     //{steps, allowedGroupIds, height}
 
@@ -15,10 +15,10 @@ const WidgetSalesMap = ({disabled, disabledTicketIds, ...wrapperProps}) => (
 
     <div>
         <div>
-            <OrderSteps items={ get("bookingmap.steps") } active={0} />
-            <Legend allowedGroupIds={ get("bookingmap.allowedGroupIds") } />
+            <OrderSteps items={ get("bookingmap.steps", steps) } active={0} />
+            <Legend allowedGroupIds={ get("bookingmap.allowedGroupIds", []) } />
         </div>
-        <Bookingmap disabled={disabled} disabledTicketIds={disabledTicketIds} height={ get("bookingmap.height") } /> 
+        <Bookingmap disabled={disabled} disabledTicketIds={get("bookingmap.disabledTicketIds", [])} height={ get("bookingmap.height") } /> 
     </div>
 
     )}</Settings>
@@ -27,8 +27,9 @@ const WidgetSalesMap = ({disabled, disabledTicketIds, ...wrapperProps}) => (
 )
 
 WidgetSalesMap.defaultProps = {
-   disabled : false,
-   disabledTicketIds : []
+    steps: [],
+    allowedGroupIds: [],
+   disabled : false
 }
 
 export default WidgetSalesMap

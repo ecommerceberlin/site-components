@@ -311,7 +311,7 @@ const styles = theme => ({
 const templates = {
 
   benefitsTitle : {
-    variant: 'title',
+    variant: 'h6',
     component: 'h3',
     classNames: ['benefitsTitle']
   },
@@ -341,55 +341,55 @@ const templates = {
   },
 
   H2C: {
-    variant: 'headline',
+    variant: 'h5',
     component: 'h2',
     classNames: ['h2', 'centered']
   },
 
   subtitle: {
-    variant: 'subheading',
+    variant: 'subtitle1',
     component: 'h3',
     classNames: ['h3']
   },
 
   H2CB: {
-    variant: 'headline',
+    variant: 'h2',
     component: 'h2',
     classNames: ['h2', 'centered', 'bold']
   },
 
   LIH3: {
-    variant: 'subheading',
+    variant: 'subtitle1',
     component: 'h3',
     classNames: ['bigListItem']
   },
   visitor: {
-    variant: 'body2',
+    variant: 'body1',
     component: 'p',
     classNames: ['visitor']
   },
 
   legend: {
-    variant: 'subheading',
+    variant: 'subtitle1',
     component: 'legend',
     classNames: ['legend']
   },
 
 
   hero: {
-    variant: 'display4',
+    variant: 'h1',
     component: 'h1',
     classNames: ['hero']
   },
 
   heroGold: {
-    variant: 'display4',
+    variant: 'h1',
     component: 'h1',
     classNames: ['hero', 'heroGold']
   },
 
   subhero: {
-    variant: 'headline',
+    variant: 'h3',
     component: 'p',
     classNames: ['subhero']
   },
@@ -402,43 +402,43 @@ const templates = {
   },
 
   SUBH2CH: {
-    variant: 'body2',
+    variant: 'body1',
     component: 'p',
     classNames: ['info', 'centered']
   },
 
   visitor_invite: {
-    variant: 'headline',
+    variant: 'h3',
     component: 'h2',
     classNames: ['h2fat', 'centered']
   },
 
   visitor_invite_join: {
-    variant: 'headline',
+    variant: 'h3',
     component: 'h3',
     classNames: ['fatSubtitle', 'centered']
   },
 
   alert: {
-    variant: 'headline',
+    variant: 'h5',
     component: 'h4',
     classNames: ['alert', 'centered']
   },
 
   presenter1: {
-    variant: 'subheading',
+    variant: 'subtitle1',
     component: 'h3',
     classNames: ['presenterBase', 'presenter1']
   },
 
   presenter2: {
-    variant: 'body1',
+    variant: 'body2',
     component: 'p',
     classNames: ['presenterBase', 'presenterImportant']
   },
 
   presenterText: {
-    variant: 'body1',
+    variant: 'body2',
     component: 'p',
     classNames: ['presenterBase', 'presenterText']
   },

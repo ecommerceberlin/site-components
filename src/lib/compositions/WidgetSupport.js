@@ -62,10 +62,10 @@ const WidgetSupport = ({
   {(get) => (
     <div className={classes.root}>
   
-    <Typography variant="headline">
+    <Typography variant="h4">
       <RawTranslatedText label={ get("sales_support.title", title) } />
     </Typography>
-    <Typography variant="subheading" color="textSecondary">
+    <Typography variant="subtitle1" color="textSecondary">
       <RawTranslatedText label={ get("sales_support.description", description) } />
     </Typography>
   
@@ -83,10 +83,10 @@ const WidgetSupport = ({
         </div>
         <div className={classes.right}>
         
-        <Typography variant="subheading" color="textSecondary">
+        <Typography variant="h6" color="textSecondary">
           {`${name} ${position}`}
         </Typography>
-        <Typography variant="subheading" color="textSecondary">
+        <Typography variant="subtitle1" color="textSecondary">
         {email}<br/>{phone}  
         </Typography>
   

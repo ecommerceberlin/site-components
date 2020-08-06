@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
- 
+import {withRouter} from 'next/router'
 import { MyHead } from '../next';
 
 import {
@@ -18,56 +18,65 @@ import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import WidgetCompanyBookingmap from './WidgetCompanyBookingmap'
 
+const WidgetCompany = ({id, slug, map, router}) => {
 
-const WidgetCompany = ({id, asPath, map}) => (
+  console.log(router);
 
-  <SingleRecord endpoint="companies" id={id}>
-  {
-  (company) =>
-  <React.Fragment>
-  <MyHead
-      image={getCompanyAltOgImage(company, asPath)}
-      url={asPath}
-      titleLabel={[
-        'companies.opengraph.title',
-        { name: getCompanyProfileInfo(company, 'name') }
-      ]}
-    />
+  return (
 
-    <Wrapper label="">
-
-    <TwoColsLayout
-      leftSize={5}
-      left={<CompanyLogotype company={company} />}
-      leftCentered={true}
-      right={
-
-      <div style={{marginTop: 50}}>
-
-        <Centered>
-         <KeywordSelect keywords={get(company, 'profile.keywords', [])} />
-        </Centered>
-
-        <div style={{marginTop: 10}}>
-          <CompanyData id={id} endpoint="companies" />
-        </div>
+    <SingleRecord endpoint="companies" id={id}>{
+    (company) =>
+    <React.Fragment>
+    <MyHead
+        image={getCompanyAltOgImage(company, "/exhibitors")}
+        url={"/companies"}
+        titleLabel={[
+          'companies.opengraph.title',
+          { name: getCompanyProfileInfo(company, 'name') }
+        ]}
+      />
+  
+      <Wrapper label="">
+  
+      <TwoColsLayout
+        leftSize={5}
+        left={<CompanyLogotype company={company} />}
+        leftCentered={true}
+        right={
+  
+        <div style={{marginTop: 50}}>
+  
+          <Centered>
+           <KeywordSelect keywords={get(company, 'profile.keywords', [])} />
+          </Centered>
+  
+          <div style={{marginTop: 10}}>
+            <CompanyData id={id} endpoint="companies" />
+          </div>
+        
+        </div>  
+      }
+      />
+  
+      </Wrapper>
+  
+      {map && <WidgetCompanyBookingmap company={company} />}
       
-      </div>  
-    }
-    />
+      </React.Fragment>
+  }
+  </SingleRecord>)
 
-    </Wrapper>
-
-    {map && <WidgetCompanyBookingmap company={company} />}
-    
-    </React.Fragment>
 }
-</SingleRecord>)
+
+
+
 
 
 WidgetCompany.defaultProps = {
+  id: 0,
+  slug: "",
   map : true
 }
 
 
-export default WidgetCompany
+export default withRouter(WidgetCompany)

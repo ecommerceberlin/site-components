@@ -74,7 +74,7 @@ class Video extends React.PureComponent {
 
           <CardMedia
             className={classes.media}
-            image="/static/vimeo.jpg"
+            image="/public/vimeo.jpg"
             title="relacja video"
             onClick={() =>
               dialogShow({

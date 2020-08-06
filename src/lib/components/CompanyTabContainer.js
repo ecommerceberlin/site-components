@@ -23,7 +23,7 @@ const styles = theme => ({
     '& li:before': {
       content: ' ',
       backgroundSize: 'cover',
-      backgroundImage: 'url("/static/check.png")',
+      backgroundImage: 'url("/public/check.png")',
       width: theme.typography.pxToRem(15),
       height: theme.typography.pxToRem(15),
       position: 'absolute',

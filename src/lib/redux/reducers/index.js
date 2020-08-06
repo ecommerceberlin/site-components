@@ -1,5 +1,4 @@
-//we use persistCombineReducers instead
-//import { combineReducers } from 'redux'
+
 
 import dialog from './dialog';
 import boothsSelected from './booths';
@@ -10,7 +9,7 @@ import drawer from './drawer';
 import app from './app';
 import visuals from './visuals';
 import services from './services';
-import settings from './settings';
+import settings from '../../settings/redux/reducer';
 import social from './social';
 import transactions from './transactions';
 
@@ -28,3 +27,4 @@ export default {
   settings,
   social
 };
+

@@ -57,7 +57,7 @@ const WidgetSpeaking = ({ categories, classes, ticketId, ...rest }) => (
 
     <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
 
-      {/* <img src="/static/lanyard.jpg" className={classes.lanyard} /> */}
+      {/* <img src="/public/lanyard.jpg" className={classes.lanyard} /> */}
 
     </Grid>
   </Grid>

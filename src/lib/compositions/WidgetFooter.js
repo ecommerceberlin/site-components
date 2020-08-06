@@ -66,7 +66,7 @@ const WidgetFooter = ({ links, classes, width, people}) => (
       <Settings>{(get) => (
             <div style={{marginTop: 30, marginBottom : 30}}>
             <Grid container spacing={1} wrap="wrap" justify="space-around" alignItems="center">
-            {get("footer.links").map(({label, href}) => (<Grid item key={label}><Link prefetch={false} href={href} label={label} /></Grid>))}        
+            {get("footer.links", []).map(({label, href}) => (<Grid item key={label}><Link prefetch={false} href={href} label={label} /></Grid>))}        
             </Grid>
             </div>
             
@@ -84,7 +84,7 @@ WidgetFooter.defaultProps = {
       title: 'event.support.hello',
       text: 'event.support.description',
       name: 'Firstname Lastname',
-      avatar: '/static/support.jpg',
+      avatar: '/public/support.jpg',
       phone: '000000000',
       email: 'user@domain.com'
     }

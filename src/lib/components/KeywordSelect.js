@@ -26,8 +26,8 @@ const KeywordSelect = ({ keywords, selected, href, as, classes }) => {
      <Link
      //  prefetch={false}
        key={keyword}
-       href={`${href}?keyword=${keyword}`}
-       as={`${as}/${keyword}`}
+       href={href}
+       as={as(keyword)}
        label={`common.tags.${keyword}`}
        variant={keyword === selected ? "contained" : "outlined"}
        color={keyword === selected ? "primary" : "secondary"}
@@ -39,8 +39,8 @@ const KeywordSelect = ({ keywords, selected, href, as, classes }) => {
 
 KeywordSelect.defaultProps = {
   keywords : [],
-  href : "/exhibitors-by-keyword",
-  as : "/exhibitors"
+  href : "/exhibitor-categories/[keyword]",
+  as : name => `/exhibitor-categories/${name}`
 }
 
 KeywordSelect.propTypes = {

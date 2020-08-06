@@ -5,15 +5,12 @@ import Tickets from '../components/Tickets'
 import DatasourceTickets from '../datasources/Tickets';
 import Settings from '../datasources/Settings';
 
+const WidgetTickets = ({filter, moreInfoLinkHref, ...wrapperProps}) => (
 
-// venues, times, venueStyle
-
-const WidgetTickets = ({filter, ...wrapper}) => (
-
-    <Wrapper {...wrapper}>
+    <Wrapper {...wrapperProps}>
     <Settings>{(get) => (
-        <DatasourceTickets group_id={294}>{
-            (tickets) => (<Tickets data={tickets.filter(filter)} />)
+        <DatasourceTickets>{
+            (tickets) => (<Tickets data={tickets.filter(filter)} moreInfoLinkHref={moreInfoLinkHref} />)
         }</DatasourceTickets>)
     }</Settings>
     </Wrapper> 
@@ -22,7 +19,8 @@ const WidgetTickets = ({filter, ...wrapper}) => (
 
 WidgetTickets.defaultProps = {
     label : "tickets.title",
-    filter : function(){ return true; }
+    filter : function(){ return true; },
+    moreInfoLinkHref: "/premium/[name]"
 }
 
 

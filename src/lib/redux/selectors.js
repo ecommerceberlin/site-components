@@ -15,7 +15,7 @@ const defaultFilters = {
   columns : false
 }
 
-
+export const getLocale = state => state.app.locale;
 export const getLinkedInToken = state => state.app.linkedin;
 export const getCart = state => state.app.cart;
 export const getResources = state => state.resources;

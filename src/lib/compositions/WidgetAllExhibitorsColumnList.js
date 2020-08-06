@@ -12,7 +12,8 @@ const WidgetAllExhibitorsColumnList = ({filter, ...wrapperProps}) => (
 
     <AllExhibitors columns={true} filter={filter} sort='profile.name'>
 
-      {(exhibitors) => <ColumnList data={exhibitors} />}
+      {(exhibitors) => <ColumnList data={exhibitors} />  
+    }
 
     </AllExhibitors>
 

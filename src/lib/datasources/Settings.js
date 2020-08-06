@@ -1,22 +1,47 @@
+
 import React from 'react';
+import get from 'lodash/get'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
-import {SettingsSelector} from '../redux/selectors'
 
-const Settings = ({children, settings}) => {
+const Settings = ({settings, children}) =>   children(
+    
+                (path, fallback = undefined) => {
 
-    return children(settings)
+                const out = get(settings, path, undefined)
+    
+                if(out !== undefined){
+                    return out
+                }
+    
+                if(fallback !== undefined){
+                    return fallback
+                }
+    
+                return path
+}) 
 
+Settings.defaultProps = {
+    settings : {}
 }
 
 Settings.propTypes = {
-    name: PropTypes.string.isRequired,
+    
     settings : PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
     ]).isRequired
 };
   
+
+
+export default connect((state, props) => ({settings : state.settings}))(Settings);
+
+
+/**
+
+import {SettingsSelector} from '../redux/selectors'
+
 
 export default connect(
     (state, props) => {
@@ -31,3 +56,6 @@ export default connect(
     }
 )(Settings);
 
+
+
+ */

@@ -1,8 +1,8 @@
 import Settings from '../datasources/Settings';
 import Wrapper from '../components/Wrapper';
-
+import {withRouter} from 'next/router'
 import Head from '../next/MyHead'
-import Layout from '../layouts/main'
+
 //import dynamic from 'next/dynamic'
 
 //TEMPORARY!
@@ -75,10 +75,10 @@ const DynamicPage = ({name, url, params}) => {
 
     return (
 
-        <Layout>
+    
         <Settings>{ (get) => {
 
-            const pages = get("pages")
+            const pages = get("pages", [])
 
             if(! (name in pages)){
                 return (<Wrapper>Page not found</Wrapper>)
@@ -126,7 +126,7 @@ const DynamicPage = ({name, url, params}) => {
 
 
         }}</Settings>
-        </Layout>
+   
 
     )
 }
@@ -137,4 +137,4 @@ DynamicPage.defaultProps = {
     params : {}
 }
 
-export default DynamicPage
+export default withRouter(DynamicPage)

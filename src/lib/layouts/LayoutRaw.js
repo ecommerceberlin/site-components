@@ -1,9 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
-
 import { MyHead as Head } from '../next';
-
-import { TranslationProvider } from '../i18n';
 import { connect } from 'react-redux';
 
 Router.onRouteChangeComplete = () => {
@@ -18,12 +15,12 @@ Router.onRouteChangeComplete = () => {
 };
 
 const Layout = props => (
-  <TranslationProvider>
+ 
     <div>
       <Head />
       {props.children}
     </div>
-  </TranslationProvider>
+ 
 );
 
 Layout.defaultProps = {};

@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 
 export const Context = React.createContext({ translate: key => key });
 
-const TranslationProvider = ({ locale, messages, children }) => {
+const TranslationProvider = ({ locale, defaultLocale, messages, children }) => {
   const polyglot = new Polyglot({
     locale,
-    phrases: locale in messages ? messages[locale] : {}
+    phrases: locale in messages ? messages[locale] : messages[defaultLocale]
     //onMissingKey : () => ()
   });
 
@@ -21,10 +21,11 @@ const TranslationProvider = ({ locale, messages, children }) => {
   );
 };
 
-// TranslationProvider.defaultProps = {
-//   locale : "pl",
-//   messages : {}
-// }
+TranslationProvider.defaultProps = {
+  locale : "en",
+  messages : {},
+  defaultLocale : "en",
+}
 
 const mapStateToProps = state => ({
   locale: state.app.locale,

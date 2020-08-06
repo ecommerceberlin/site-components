@@ -113,7 +113,7 @@ function FsButtons(props) {
           <span className={classes.imageButton}>
             <Typography
               component="span"
-              variant="subheading"
+              variant="h5"
               color="inherit"
               className={classes.imageTitle}
             >

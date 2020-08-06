@@ -1,5 +1,6 @@
 import _pick from 'lodash/pick';
 
+
 import {
   ROLE_SELECT,
   ROLE_RESET,
@@ -17,7 +18,7 @@ import { CHANGE_LOCALE } from '../../i18n';
 const defaultState = {
   role: '',
   cart: {},
-  locale: "en",
+  locale: "",
   locale_msgs: {},
   width: 'md',
   filterParams: {
@@ -28,6 +29,8 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
+
+
 
     case 'SCREEN_SIZE_CHANGED':
       return { ...state, width: action.width };

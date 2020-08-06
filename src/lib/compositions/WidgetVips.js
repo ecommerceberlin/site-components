@@ -41,7 +41,7 @@ WidgetVips.defaultProps = {
   limit : 20,
   mobile : 12,
   center : false,
-  spacing : 24,
+  spacing : 5,
   include : null
 }
 
