@@ -6,7 +6,6 @@ import { translate } from '../i18n';
 import { fullUrl, prepareForTranslate, canonical } from '../helpers';
 import compose from 'recompose/compose';
 import {Settings} from '../datasources/Settings'
-import { GA_TRACKING_ID } from '../services/gtag';
 import  {theme}  from '../material-ui';
 
 const MyHead = ({
@@ -85,7 +84,7 @@ const MyHead = ({
 <script
 
 async
-src={`https://www.googletagmanager.com/gtm.js?id=${GA_TRACKING_ID}`}
+src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM}`}
 />
 
 <script
@@ -94,7 +93,7 @@ __html: `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${GA_TRACKING_ID}');
+gtag('config', '${process.env.NEXT_PUBLIC_GTM}');
 `
 }}
 />

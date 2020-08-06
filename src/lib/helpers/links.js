@@ -26,7 +26,7 @@ export const generateSlugLinkParams = (prefix, param) => ({
 });
 
 export const fullUrl = subpage => {
-  const prefix = `https://${process.env.PROJECT}`;
+  const prefix = `https://${process.env.NEXT_PUBLIC_PROJECT}`;
   if (subpage.substr(0, prefix.length) !== prefix) {
     return prefix + subpage;
   }

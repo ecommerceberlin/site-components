@@ -209,8 +209,8 @@ VoteWithLinkedIn.defaultProps = {
     labelVotesUsed : "common.votes_used",
 
     disabled : false,
-    url : `https://${process.env.PROJECT}/vote`,
-    oAuthUrl : `https://api.eventjuicer.com/v1/public/hosts/${process.env.PROJECT}/ssr`
+    url : `https://${process.env.NEXT_PUBLIC_PROJECT}/vote`,
+    oAuthUrl : `https://api.eventjuicer.com/v1/public/hosts/${process.env.NEXT_PUBLIC_PROJECT}/ssr`
 }
 
 VoteWithLinkedIn.propTypes = {
