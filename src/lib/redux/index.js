@@ -105,7 +105,7 @@ export const initStore = ({ctx}) => {
   return store
 }
 
-export const reduxWrapper = createWrapper(initStore, { debug: true })
+export const reduxWrapper = createWrapper(initStore, { debug: process.env.NODE_ENV !== 'production' })
 
 export const setClientState = (clientState) => ({
     type: SET_CLIENT_STATE,
