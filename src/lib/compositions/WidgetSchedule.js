@@ -6,41 +6,25 @@ import Presenters from '../datasources/Presenters';
 import Exhibitors from '../datasources/Exhibitors';
 import Settings from '../datasources/Settings';
 
-const WidgetSchedule = ({link, descriptions, ...wrapper}) => (
+const WidgetSchedule = ({link, times, venues, venueStyle, minimized, descriptions, ...wrapper}) => (
 
     <Wrapper {...wrapper}>
-    <Settings> {(get) => (
-
-<Exhibitors>{
-    (exhibitors) => (
-        <Presenters  
-        random={false}
-        mobile={0}
-        filter={false}
-        >{
-        (presenters) => 
-        
-        <Schedule
-            exhibitors={exhibitors}
-            presenters={presenters}
-            times={ get("schedule.times", times) }
-            venues={ get("schedule.venues", venues) }
-            link={link} 
-            descriptions={descriptions}
-            venueStyle={ get("schedule.venueStyle", venueStyle) }
-            minimized={ get("schedule.minimized", minimized) }
-        />
-        
-        }</Presenters>
-    )
-}
-
-
-</Exhibitors>
-    )}
-    </Settings>
-    </Wrapper> 
-
+    <Exhibitors>{
+        (exhibitors) => <Presenters random={false} mobile={0} filter={false}>{
+            (presenters) =>
+            
+            <Settings>{
+                (get) => <Schedule
+                exhibitors={exhibitors}
+                presenters={presenters}
+                times={ get("schedule.times", times) }
+                venues={ get("schedule.venues", venues) }
+                link={link} 
+                descriptions={descriptions}
+                venueStyle={ get("schedule.venueStyle", venueStyle) }
+                minimized={ get("schedule.minimized", minimized) }
+                 />}</Settings>}</Presenters>}</Exhibitors>
+    </Wrapper>  
 )
 
 WidgetSchedule.defaultProps = {
