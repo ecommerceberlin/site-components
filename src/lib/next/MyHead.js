@@ -6,7 +6,7 @@ import { translate } from '../i18n';
 import { fullUrl, prepareForTranslate, canonical } from '../helpers';
 import compose from 'recompose/compose';
 import {Settings} from '../datasources/Settings'
-import  {theme}  from '../material-ui';
+
 
 const MyHead = ({
   title,
@@ -77,49 +77,6 @@ const MyHead = ({
     
           
 
-
-{/* PWA primary color */}
-<meta name="theme-color" content={theme.palette.primary.main} />
-
-<script
-
-async
-src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM}`}
-/>
-
-<script
-dangerouslySetInnerHTML={{
-__html: `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${process.env.NEXT_PUBLIC_GTM}');
-`
-}}
-/>
-
-<link
-rel="stylesheet"
-href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500&subset=latin,latin-ext"
-/>
-
-<link
-rel="stylesheet"
-href="https://fonts.googleapis.com/css?family=Montserrat:500,600,700,800,900&subset=latin,latin-ext"
-/>
-
-
-
-
-          <meta
-          key="viewport"
-          name="viewport"
-          content={
-          'user-scalable=0, initial-scale=1, ' +
-          'minimum-scale=1, width=device-width, height=device-height'
-          }
-          />
-    
     
           <meta key="description" name="description" content={tDescription} />
     

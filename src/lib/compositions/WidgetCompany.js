@@ -18,9 +18,7 @@ import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import WidgetCompanyBookingmap from './WidgetCompanyBookingmap'
 
-const WidgetCompany = ({id, slug, map, router}) => {
-
-  console.log(router);
+const WidgetCompany = ({id, map, router}) => {
 
   return (
 
@@ -74,7 +72,6 @@ const WidgetCompany = ({id, slug, map, router}) => {
 
 WidgetCompany.defaultProps = {
   id: 0,
-  slug: "",
   map : true
 }
 
