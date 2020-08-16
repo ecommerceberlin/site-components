@@ -79,7 +79,7 @@ WidgetContestantCompaniesWinners.defaultProps = {
     keyword_source : "presentation_category",
     sort : "cname2",
     link : function(item){
-        return {as : `/vote/${item.id}`, href : `/vote?id=${item.id}`}
+        return {as : `/vote/${item.id}`, href : `/vote/[id]`}
     },
     intro : null,
     show_votes : false,

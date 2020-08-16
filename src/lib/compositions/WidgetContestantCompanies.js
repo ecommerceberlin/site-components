@@ -41,7 +41,7 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
     
           
             <Centered>
-              <KeywordSelect href="/vote" as="/vote" keywords={keywords} selected={keyword} />
+              <KeywordSelect href="/contestants/[keyword]" as={(keyword) => `/contestants/${keyword}`} keywords={keywords} selected={keyword} />
             </Centered> 
          
 

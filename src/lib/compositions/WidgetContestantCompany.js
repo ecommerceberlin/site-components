@@ -158,7 +158,7 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
         
 
             <div style={{marginTop: 20, marginBottom: 20}}>
-             <KeywordSelect  href="/vote" as="/vote" keywords={[].concat( _get(record, 'awards_category', "") )} />
+             <KeywordSelect  href="/contestants/[keyword]" as={(keyword)=>`/contestants/${keyword}`} keywords={[].concat( _get(record, 'awards_category', "") )} />
             </div>
 
             <Divider />
