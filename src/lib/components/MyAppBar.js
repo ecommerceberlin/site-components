@@ -90,7 +90,7 @@ function MyAppBar(props) {
           {/* <Search /> */}
           
           <Settings>{
-          (get) =>  <LanguageSelect locales={ get("system.available_locales") } /> 
+          (get) =>  <LanguageSelect locales={ get("system.available_locales", []) } /> 
           }</Settings>
           
          

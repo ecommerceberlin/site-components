@@ -54,7 +54,7 @@ const LanguageSelect = ({ label, classes, locale, locales, oldLocale, dialogShow
 
 
 LanguageSelect.defaultProps = {
-  locales : ["en"],
+  locales : [],
   label: 'common.language.change'
 };
 

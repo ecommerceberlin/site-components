@@ -1,7 +1,6 @@
 
 
-export const DEFAULT_LOCALE = "en";
-
+export const DEFAULT_LOCALE = `${ process.env.NEXT_PUBLIC_DEFAULT_LOCALE || "en" }` ;
 
 export * from './redux/types'
 export * from './redux/actions'
