@@ -2,26 +2,26 @@ import React from 'react';
 
 import People from '../components/People'
 import Wrapper from '../components/Wrapper'
-import Presenters from '../datasources/AllPresenters'
+import AllPresenters from '../datasources/AllPresenters'
 
 
-const WidgetPresentersAll = (filter, limit, mobile, bio, ...wrapperProps) => (
+const WidgetPresentersAll = ({filter, limit, mobile, bio, ...wrapperProps}) => (
 
 <Wrapper {...wrapperProps}>
 
-<Presenters 
+<AllPresenters 
     filter={filter}
     limit={limit}
     random={false}
     mobile={mobile}
 >{
-    (filtered, all) =>  (<People
+    (filtered, all, record) =>  (<People
         data={filtered}
         link={false}
         text={ bio ? undefined : () => "" }
      />)
      
-}</Presenters>
+}</AllPresenters>
 </Wrapper>)
 
 WidgetPresentersAll.defaultProps = {

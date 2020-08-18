@@ -19,8 +19,6 @@ class PresentersAll extends React.Component {
       }
   }
 
- 
-
   render(){
 
     const {children, filtered, all, record} = this.props
@@ -38,7 +36,7 @@ class PresentersAll extends React.Component {
 
 PresentersAll.propTypes = {
   filtered: PropTypes.array.isRequired,
- // record : PropTypes.object.isRequired
+  //record : PropTypes.object.isRequired
 };
 
 PresentersAll.defaultProps = {
@@ -52,14 +50,13 @@ export default connect(
 
   (state, props) => {
 
-    const mapStateToProps = (state, props) => {
-      return {
+    const mapStateToProps = (state, props) =>  ({
         
-        filtered : MobileAwareFilteredAllPresenters(state, props),
-     //   all : getAllPresenters(state, props),
-        // record : getPresenterByIdSelector(state, props)
-      }
-    }
+      filtered : MobileAwareFilteredAllPresenters(state, props),
+      //all : getAllPresenters(state, props),
+      //record : getPresenterByIdSelector(state, props)
+    })
+    
     return mapStateToProps
 
 }, {resourceFetchRequest})(PresentersAll)
