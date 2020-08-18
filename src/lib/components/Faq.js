@@ -22,11 +22,9 @@ import  queryString from 'query-string';
   }
  */
 
-const Faq = ({ faqUrl, items, baseLabel, selected }) => {
+const Faq = ({ faqUrl, items, baseLabel, selected, showTitle }) => {
 
   const router = useRouter();
-
-  console.log(router);
 
   // const parsedUrl = queryString.parse(asPath)
 
@@ -49,7 +47,7 @@ const Faq = ({ faqUrl, items, baseLabel, selected }) => {
       paddingBottom: 20
     }}
   >
-    <MyTypography label={`${baseLabel}.name`} template="SUBH2CH" />
+    {showTitle && <MyTypography label={`${baseLabel}.name`} template="SUBH2CH" />}
 
     {items.map(item => (
       <FaqItem key={item.label} baseLabel={baseLabel} {...item} />
@@ -62,7 +60,8 @@ const Faq = ({ faqUrl, items, baseLabel, selected }) => {
 Faq.defaultProps = {
   items: [],
   baseLabel: 'faq',
-  selected: []
+  selected: [],
+  showTitle: true
 };
 
 Faq.propTypes = {
