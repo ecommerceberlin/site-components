@@ -4,13 +4,17 @@ import { CHANGE_LOCALE_MSGS } from '../../i18n';
 export const initialState = {
   formdata: [],
   ticketgroups: [],
+  companies: [],
   tickets: [],
   photos: [],
   bookingmap: [],
   exhibitors : [],
+  presenters: [],
+  presenters_all: [],
   texts : {},
   contestant_companies : [],
-  report : []
+  report : [],
+  jurors: []
 };
 
 const reducer = (state = initialState, action) => {
