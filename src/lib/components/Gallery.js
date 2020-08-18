@@ -6,6 +6,11 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import MyTypography from './MyTypography';
 import Red from './svg/Red'
+import Gold from './svg/Gold'
+import compose from 'recompose/compose'
+import {connect} from 'react-redux'
+import {dialogShow} from './redux/actions';
+
 
 const styles = theme => ({
   root: {
@@ -17,10 +22,14 @@ const styles = theme => ({
     paddingTop: 50
   },
   gridList: {
-    flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
-    height: '100%'
+    // flexWrap: 'nowrap',
+    // // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    // transform: 'translateZ(0)',
+    // height: '100%',
+
+    width: '100%',
+    height: 450,
+
   },
   title: {
     color: theme.palette.primary.light
@@ -31,73 +40,80 @@ const styles = theme => ({
   },
 
   deSaturated: {
-    filter: 'url(#svgRedFilter)'
+    filter: 'url(#svgGoldFilter)'
   },
 
   gridListTile: {
-    [theme.breakpoints.only('xs')]: {
-      height: 300
-    },
+    // [theme.breakpoints.only('xs')]: {
+    //   height: 300
+    // },
 
-    [theme.breakpoints.only('sm')]: {
-      height: 450
-    },
+    // [theme.breakpoints.only('sm')]: {
+    //   height: 450
+    // },
 
-    [theme.breakpoints.only('md')]: {
-      height: 550
-    },
+    // [theme.breakpoints.only('md')]: {
+    //   height: 550
+    // },
 
-    [theme.breakpoints.only('lg')]: {
-      height: 700
-    },
+    // [theme.breakpoints.only('lg')]: {
+    //   height: 700
+    // },
 
-    [theme.breakpoints.only('xl')]: {
-      height: 800
-    }
+    // [theme.breakpoints.only('xl')]: {
+    //   height: 800
+    // }
   }
 });
 
-const Gallery = ({ data, classes, label, size }) => (
+const Gallery = ({ data, classes, label, size, dialogShow }) => {
 
-  <div className={classes.root}>
+  function handleClick(item){
+
+    dialogShow({
+      title: <div>asd</div>,
+      content: <div><img src={item.src} alt="" /></div>,
+  //    buttons: modalButtons
+    });
+  }
+  
 
 
-    <Red />
+  return (
 
-    {label && <MyTypography label={label} template="H2C" />}
+    <div className={classes.root}>
+  
+  
+      <Gold />
+  
+      {label && <MyTypography label={label} template="H2C" />}
+  
+      {/* <WidthAwareInfo /> */}
+  
+      <GridList
+        className={classes.gridList}
+        cols={6}
+        cellHeight={200}
+      >
+        {data.map((item) => (
+          <GridListTile
+            key={item.src}
+            classes={{ root: classes.gridListTile }}
+            cols={item.cols || 3}
+          >
+            <img src={item.src} alt="" className={classes.deSaturated} onClick={() => handleClick(item) } />
+          
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
+  
+  )
+  
 
-    {/* <WidthAwareInfo /> */}
+}
 
-    <GridList
-      className={classes.gridList}
-      cols={size.c}
-      cellHeight={size.h}
-    >
-      {data.map((tile, idx) => (
-        <GridListTile
-          key={tile.id}
-          classes={{ root: classes.gridListTile }}
-        >
-          <img src={tile.src} alt="" className={classes.deSaturated} />
-          {/* <GridListTileBar
-           title={tile.id}
-           subtitle={<span>by: {tile.id}</span>}
-            classes={{
-              root: classes.titleBar,
-              title: classes.title,
-            }}
-            actionIcon={
-              <IconButton>
-                <StarBorderIcon className={classes.title} />
-              </IconButton>
-            }
-          /> */}
-        </GridListTile>
-      ))}
-    </GridList>
-  </div>
 
-)
 
 Gallery.defaultProps = {
   label : "gallery",
@@ -109,5 +125,8 @@ Gallery.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-
-export default withStyles(styles)(Gallery);
+const enhance = compose(
+  withStyles(styles),
+  connect(null, {dialogShow})
+)
+export default enhance(Gallery);
