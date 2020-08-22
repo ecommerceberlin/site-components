@@ -6,7 +6,7 @@ const WidgetPhotostream = (wrapperProps) => (
 
     <Wrapper {...wrapperProps}>
     <Settings>{
-        (get) => <Gallery label={false} data={get("photostream.items", [])} /> 
+        (get) => <Gallery label={false} cols={get("photostream.cols", 12)} data={get("photostream.items", [])} /> 
     }</Settings>
     </Wrapper>
 )

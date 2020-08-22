@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+// import GridListTileBar from '@material-ui/core/GridListTileBar';
 import MyTypography from './MyTypography';
 import Red from './svg/Red'
 import Gold from './svg/Gold'
@@ -66,13 +66,50 @@ const styles = theme => ({
   }
 });
 
-const Gallery = ({ data, classes, label, size, dialogShow }) => {
+
+const CloudinaryResize = ({src, children}) => {
+   
+
+  const resizeCloudinaryImage = (url, width = 1500, height = 1000, format = "jpg") => {
+
+    //check if not already resized!
+    if (url && /cloudinary/.test(url) && /image\/upload\/v[0-9]+/.test(url)) {
+      return url.replace(/\.svg$/i, `.${format}`).replace("image/upload/", `image/upload/w_${width},h_${height},c_fit/`);
+    }
+  
+    return url; //do nothing!
+  }
+
+  return children(resizeCloudinaryImage(src))
+
+}
+
+
+const CloudinaryFace = ({src, children}) => {
+   
+
+  const resizeCloudinaryImage = (url, width = 600, height = 200, format = "jpg") => {
+
+    //check if not already resized!
+    if (url && /cloudinary/.test(url) && /image\/upload\/v[0-9]+/.test(url)) {
+      return url.replace(/\.svg$/i, `.${format}`).replace("image/upload/", `image/upload/w_${width},h_${height},c_fill,g_face/`);
+    }
+  
+    return url; //do nothing!
+  }
+
+  return children(resizeCloudinaryImage(src))
+
+}
+
+
+const Gallery = ({ data, classes, label, cols, dialogShow }) => {
 
   function handleClick(item){
 
     dialogShow({
       title: <div>asd</div>,
-      content: <div><img src={item.src} alt="" /></div>,
+      content: <div><CloudinaryResize src={item.src}>{src => <img src={src} alt="" style={{width: '100%'} }/> }</CloudinaryResize></div>,
   //    buttons: modalButtons
     });
   }
@@ -92,7 +129,7 @@ const Gallery = ({ data, classes, label, size, dialogShow }) => {
   
       <GridList
         className={classes.gridList}
-        cols={6}
+        cols={cols}
         cellHeight={200}
       >
         {data.map((item) => (
@@ -101,7 +138,11 @@ const Gallery = ({ data, classes, label, size, dialogShow }) => {
             classes={{ root: classes.gridListTile }}
             cols={item.cols || 3}
           >
-            <img src={item.src} alt="" className={classes.deSaturated} onClick={() => handleClick(item) } />
+
+          <CloudinaryFace src={item.src}>{
+            src =>  <img src={src} alt="" className={classes.deSaturated} onClick={() => handleClick(item) } />
+          }</CloudinaryFace>
+          
           
           </GridListTile>
         ))}
@@ -118,7 +159,7 @@ const Gallery = ({ data, classes, label, size, dialogShow }) => {
 Gallery.defaultProps = {
   label : "gallery",
   data: [],
-  size : {c : 1.5, h : 450, width : "sm"}
+  cols: 12
 };
 
 Gallery.propTypes = {
