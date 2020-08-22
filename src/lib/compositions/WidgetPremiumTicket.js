@@ -11,7 +11,9 @@ import TicketPrice from  '../components/Bookingmap/TicketPrice'
 import TicketBuyButton from '../components/Bookingmap/TicketBuyButton'
 import DatasourceTickets from '../datasources/Tickets'
 
-const PremiumTicketBody = ({first, name, ticket, resolveLabel, resolveSecondaryLabel, resolveText}) => {
+const PremiumTicketBody = (props) => {
+
+  const {first, name, ticket, labelPrefix, resolveLabel, resolveSecondaryLabel, resolveText} = props;
 
   if(! "image" in ticket){
 
@@ -23,8 +25,8 @@ const PremiumTicketBody = ({first, name, ticket, resolveLabel, resolveSecondaryL
 
     <Wrapper
     first={first}
-    label={resolveLabel(name)}
-    secondaryLabel={resolveSecondaryLabel(name)}
+    label={resolveLabel(props)}
+    secondaryLabel={resolveSecondaryLabel(props)}
   >
     <div style={{ marginTop: 80 }}>
       <TwoColsLayout
@@ -42,7 +44,7 @@ const PremiumTicketBody = ({first, name, ticket, resolveLabel, resolveSecondaryL
         right={
           <div style={{ marginLeft: 20 }}>
             <Markdown
-              label={resolveText(name)}
+              label={resolveText(props)}
             />
   
             <div style={{ marginBottom: 20 }}>
@@ -93,9 +95,10 @@ WidgetPremiumTicket.defaultProps = {
   name: "",
   ticket: {},
   first: true,
-  resolveLabel: (name) => `resources.upgrades.misc.${name}.name`,
-  resolveSecondaryLabel: (name) => `resources.upgrades.misc.${name}.description`,
-  resolveText: (name) => `resources.upgrades.misc.${name}.text`
+  labelPrefix: "resources.upgrades.misc.",
+  resolveLabel: ({name, labelPrefix}) => `${labelPrefix}${name}.name`,
+  resolveSecondaryLabel: ({name, labelPrefix}) => `${labelPrefix}${name}.description`,
+  resolveText: ({name, labelPrefix}) => `${labelPrefix}${name}.text`
 
 }
 
