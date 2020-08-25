@@ -18,5 +18,6 @@ export { default as DatasourceAdminReport } from './AdminReport';
 export { default as Settings } from './Settings';
 export { default as DatasourceCallForPapers } from './CallForPapers';
 export { default as DatasourceContestantCompanies } from './ContestantCompanies';
+export { default as DatasourceContestantCompaniesArchive } from './ContestantCompaniesArchive';
 export { default as DatasourceVotes } from './Votes';
 export { default as DatasourceJurors } from './Jurors';

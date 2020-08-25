@@ -41,7 +41,7 @@ export { default as WidgetMenu } from './WidgetMenu'
 export { default as WidgetCallForPapers } from './WidgetCallForPapers'
 export { default as WidgetContestantCompanies } from './WidgetContestantCompanies'
 export { default as WidgetContestantCompaniesWinners } from './WidgetContestantCompaniesWinners'
-
+export { default as WidgetContestantCompaniesArchiveWinners } from './WidgetContestantCompaniesArchiveWinners'
 
 
 export { default as WidgetVotable } from './WidgetVotable'
