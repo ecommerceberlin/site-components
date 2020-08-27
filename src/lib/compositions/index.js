@@ -56,4 +56,5 @@ export { default as WidgetPremiumTickets } from './WidgetPremiumTickets'
 export { default as WidgetFaq } from './WidgetFaq'
 export { default as WidgetJurors } from './WidgetJurors'
 export { default as WidgetPhotostream } from './WidgetPhotostream'
+export { default as WidgetVerticalTimeline } from './WidgetVerticalTimeline'
 

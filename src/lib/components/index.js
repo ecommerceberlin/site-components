@@ -69,6 +69,9 @@ export { default as VoteStatus } from './VoteStatus';
 export { default as VoteWithLinkedIn } from './VoteWithLinkedIn';
 export { default as WinnerCategory } from './WinnerCategory'
 
+export { default as VerticalTimeline } from './VerticalTimeline'
+
+
 export * from './Bookingmap';
 export * from './MyLayouts';
 export * from './redux';
