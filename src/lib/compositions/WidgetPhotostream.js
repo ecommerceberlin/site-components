@@ -2,19 +2,31 @@ import Gallery from '../components/Gallery'
 import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
 
-const WidgetPhotostream = (wrapperProps) => (
+const WidgetPhotostream = ({setting}) => (
 
-    <Wrapper {...wrapperProps}>
-    <Settings>{
-        (get) => <Gallery label={false} cols={get("photostream.cols", 12)} data={get("photostream.items", [])} /> 
+   
+    <Settings>{(get) => {
+
+        const {items, cols, wrapperProps} = get(setting)
+
+        if(!wrapperProps){
+            return (   <Gallery label={false} cols={cols} data={items} /> )
+        }
+
+        return (
+            <Wrapper {...wrapperProps}>
+              <Gallery label={false} cols={cols} data={items} /> 
+            </Wrapper>
+        )
+
+        }
+    
     }</Settings>
-    </Wrapper>
+  
 )
 
 WidgetPhotostream.defaultProps = {
-    label : "photostream.title",
-    secondaryLabel: "photostream.description",
-    // datasource: "photostream.items"
+    setting: ""
 }
 
 export default WidgetPhotostream
