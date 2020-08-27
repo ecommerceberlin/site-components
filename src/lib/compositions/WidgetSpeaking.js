@@ -12,14 +12,14 @@ const styles = theme => ({
 
 })
 
-const WidgetSpeaking = ({ categories, classes, ticketId, ...rest }) => (
+const WidgetSpeaking = ({ categories, classes, ticketId, right, ...rest }) => (
 
 
   <Wrapper {...rest}>
 
 
   <Grid container spacing={1} justify="space-between">
-    <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
+    <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 
       <StepForm
         data={{}}
@@ -55,9 +55,11 @@ const WidgetSpeaking = ({ categories, classes, ticketId, ...rest }) => (
     </Grid>
 
 
-    <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
+    <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 
       {/* <img src="/public/lanyard.jpg" className={classes.lanyard} /> */}
+
+      {right}
 
     </Grid>
   </Grid>
@@ -71,7 +73,8 @@ WidgetSpeaking.defaultProps = {
   ticketId : 1842,
   links: [],
   categories : [],
-  label : "presenters.form.title"
+  label : "presenters.form.title",
+  right: <div></div>
 };
 
 export default withStyles(styles)(WidgetSpeaking);
