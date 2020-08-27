@@ -453,7 +453,49 @@ const templates = {
     variant : "h5",
     component : "h5",
     classNames : ['price']
-  }
+  },
+
+  h1: {
+    variant: "h1",
+    component: "h1"
+  },
+  h2: {
+    variant: "h2",
+    component: "h2"
+  },
+  h3: {
+    variant: "h3",
+    component: "h3"
+  },
+  h4: {
+    variant: "h4",
+    component: "h4"
+  },
+  h5: {
+    variant: "h5",
+    component: "h5"
+  },
+  h6: {
+    variant: "h6",
+    component: "h6"
+  },
+  subtitle1: {
+    variant: "subtitle1",
+    component: "h4"
+  },
+  subtitle2: {
+    variant: "subtitle2",
+    component: "h5"
+  },
+  body1: {
+    variant: "body1",
+    component: "div"
+  },
+  body2: {
+    variant: "body2",
+    component: "div"
+  },
+
 };
 
 const hl = (highlight, text, className) => {
