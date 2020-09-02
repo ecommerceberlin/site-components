@@ -39,7 +39,7 @@ const styles = theme => ({
   },
 
   deSaturated: {
-    filter: 'url(#svgGoldFilter)'
+    filter: 'url(#svgFilter)'
   },
 
   gridListTile: {
@@ -98,7 +98,7 @@ const makeCloudinaryThumbnail = (url, width = 800, height = 300, format = "jpg")
 }
 
 
-const Gallery = ({ data, classes, label, cols, dialogShow }) => {
+const Gallery = ({ items, classes, label, cols, dialogShow, overlay }) => {
 
   function handleClick(item){
 
@@ -115,8 +115,8 @@ const Gallery = ({ data, classes, label, cols, dialogShow }) => {
 
     <div className={classes.root}>
   
-  
-      <Gold />
+      {overlay == "red" ? <Red /> : <Gold />}
+
   
       {label && <MyTypography label={label} template="H2C" />}
   
@@ -127,7 +127,7 @@ const Gallery = ({ data, classes, label, cols, dialogShow }) => {
         cols={cols}
         cellHeight={300}
       >
-        {data.map((item) => (
+        {items.map((item) => (
 
 
         <GridListTile  key={item.src} cols={item.cols || 3}>
@@ -148,8 +148,9 @@ const Gallery = ({ data, classes, label, cols, dialogShow }) => {
 
 Gallery.defaultProps = {
   label : "gallery",
-  data: [],
-  cols: 12
+  items: [],
+  cols: 12,
+  overlay:  "gold"
 };
 
 Gallery.propTypes = {

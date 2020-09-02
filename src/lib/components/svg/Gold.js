@@ -3,7 +3,7 @@ import React from 'react';
 const Gold = () => (
   <svg style={{display: 'none'}}>
   <defs>
-    <filter id="svgGoldFilter">
+    <filter id="svgFilter">
     <feColorMatrix
       type = "matrix"
       values="1     0     0     0     0

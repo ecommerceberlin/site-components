@@ -7,15 +7,15 @@ const WidgetPhotostream = ({setting}) => (
    
     <Settings>{(get) => {
 
-        const {items, cols, wrapperProps} = get(setting)
+        const {wrapperProps, ...galleryProps} = get(setting)
 
         if(!wrapperProps){
-            return (   <Gallery label={false} cols={cols} data={items} /> )
+            return (   <Gallery label={false} {...galleryProps} /> )
         }
 
         return (
             <Wrapper {...wrapperProps}>
-              <Gallery label={false} cols={cols} data={items} /> 
+              <Gallery label={false} {...galleryProps}/> 
             </Wrapper>
         )
 
