@@ -17,6 +17,7 @@ import classNames from 'classnames';
 import Cart from './CartButton';
 import LanguageSelect from './LanguageSelect';
 // import Search from './Search';
+import AppBarLink from './AppBarLink'
 
 import RawTranslatedText from './RawTranslatedText'
 import Settings from '../datasources/Settings';
@@ -74,25 +75,29 @@ function MyAppBar(props) {
           </IconButton>
 
       <Settings>{(get) => (
+
+            <>
             <Link href="/">
             <Typography
             component="a"
-            variant="title"
+            variant="body1"
             color="inherit"
             className={classes.flex}>{
               get("common.event_name")
             }</Typography>
             </Link>
+
+            {get("appbar.links", []).map(appbarLink => <AppBarLink {...appbarLink} />)}
+
+            <LanguageSelect locales={ get("system.available_locales", []) } /> 
+          </>
+
             )
           }</Settings>
       
 
           {/* <Search /> */}
-          
-          <Settings>{
-          (get) =>  <LanguageSelect locales={ get("system.available_locales", []) } /> 
-          }</Settings>
-          
+    
          
           {noItems > 0 ? <Cart count={noItems} /> : null}
         </Toolbar>
