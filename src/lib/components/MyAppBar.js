@@ -87,7 +87,7 @@ function MyAppBar(props) {
             }</Typography>
             </Link>
 
-            {get("appbar.links", []).map(appbarLink => <AppBarLink {...appbarLink} />)}
+            {get("appbar.links", []).map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
 
             <LanguageSelect locales={ get("system.available_locales", []) } /> 
           </>

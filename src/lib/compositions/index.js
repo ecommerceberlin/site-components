@@ -16,10 +16,7 @@ export { default as WidgetSupport } from './WidgetSupport';
 export { default as WidgetCompany } from './WidgetCompany';
 export { default as WidgetPresenter } from './WidgetPresenter';
 
-export { default as WidgetVisitorBenefits } from './WidgetVisitorBenefits';
-export { default as WidgetVipVisitorBenefits } from './WidgetVipVisitorBenefits';
-export { default as WidgetSpeakerBenefits } from './WidgetSpeakerBenefits';
-export { default as WidgetExhibitorBenefits } from './WidgetExhibitorBenefits';
+export { default as WidgetIconGrid } from './WidgetIconGrid';
 
 export { default as WidgetSalesMap } from './WidgetSalesMap';
 export { default as WidgetOffers } from './WidgetOffers';

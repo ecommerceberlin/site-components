@@ -407,6 +407,13 @@ const templates = {
     classNames: ['info', 'centered']
   },
 
+  SUBH2: {
+    variant: 'body1',
+    component: 'p',
+    classNames: ['info']
+  },
+
+
   visitor_invite: {
     variant: 'h3',
     component: 'h2',
