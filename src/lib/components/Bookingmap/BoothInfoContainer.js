@@ -91,7 +91,8 @@ const BoothInfoContainer = ({header, content, classes, ...rest}) => (
 
 BoothInfoContainer.defaultProps = {
     header : null,
-    content : null
+    content : null,
+    style: {}
 }
 
 

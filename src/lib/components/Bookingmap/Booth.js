@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { onlyUpdateForKeys, compose } from 'recompose';
-import boothStyles, {getStylingName} from './boothStyles'
+import boothStyles from './boothStyles'
 
 const Booth = ({
   status,
@@ -15,7 +15,8 @@ const Booth = ({
   buyer,
   groupId,
   defaultSize,
-  legend
+  legend,
+  style
 }) => {
 
   if(!data.ti){
@@ -27,13 +28,14 @@ const Booth = ({
 
   zoom = Math.max(1, zoom);
 
+
   return (
     <li
       onClick={() => onClick(data.id, data.g, data.ti)}
       className={
         classNames(
         classes.booth,
-        classes[getStylingName(groupId)],
+        classes[style],
       {
         [classes.boothSold]: status === 'sold',
         [classes.boothHold]: status === 'hold',
@@ -81,6 +83,7 @@ Booth.propTypes = {
   status: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   data: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  style: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 const enhance = compose(

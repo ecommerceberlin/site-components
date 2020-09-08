@@ -1,16 +1,14 @@
 import React from 'react';
 
 import compose from 'recompose/compose';
-
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import translate from '../../i18n/translate'
-
-
 import BoothInfo from './BoothInfo';
 import Booth from './Booth';
 import SalesInfo from './SalesInfo';
 import Loader from './Loader'
+import {getStylingName} from './boothStyles'
 
 import {BookingMapSelector} from '../../redux/selectors'
 
@@ -23,7 +21,8 @@ import {
 import {getCompanyLogotype, getCompanyName} from '../../helpers/data'
 
 
-const styles = theme => ({
+const styles = (theme) => ({
+
   scrollableContainer: {
     overflowX: 'auto',
     overflowY: 'visible',
@@ -57,6 +56,8 @@ const styles = theme => ({
     zIndex: 3
   }
 });
+
+
 
 class Bookingmap extends React.PureComponent {
 
@@ -105,7 +106,15 @@ class Bookingmap extends React.PureComponent {
  
   onBoothClick = (boothId, groupId, label) => {
 
-    const { dialogShow, boothChecked, translate, disabled, disabledTicketIds, resourceFetchRequest } = this.props;
+    const { 
+      dialogShow, 
+      boothChecked, 
+      translate, 
+      disabled, 
+      disabledTicketIds, 
+      resourceFetchRequest, 
+      boothStyleMapping
+    } = this.props;
 
     resourceFetchRequest(["formdata", "ticketgroups"]);
 
@@ -118,21 +127,34 @@ class Bookingmap extends React.PureComponent {
 
     const boothProps = {boothId, groupId, label, status}
 
+    const styleName = getStylingName(boothStyleMapping, groupId);
+
     switch (status) {
       case 'hold':
         modalTitle = translate("event.sales.booths.hold");
-        modalContent = <BoothInfo {...boothProps} />;
+        modalContent = <BoothInfo {...boothProps} 
+          style={styleName}  
+        />;
 
         break;
+      
       case 'sold':
         modalTitle = translate("event.sales.booths.sold");
-        modalContent = <BoothInfo {...boothProps} formdata={this.getStatus(boothId)} />;
+        modalContent = <BoothInfo {...boothProps} 
+          style={styleName} 
+          formdata={this.getStatus(boothId)} 
+        />;
 
         break;
       default:
         /* THERE IS NOW FORMDATA FOR UNSOLD BOOTHS!!!! */
         modalTitle = translate("event.sales.booths.free");
-        modalContent = <SalesInfo disabled={disabled} disabledTicketIds={disabledTicketIds} {...boothProps} />
+        modalContent = <SalesInfo 
+          disabled={disabled} 
+          style={styleName} 
+          disabledTicketIds={disabledTicketIds} 
+          {...boothProps} 
+        />
     }
 
     dialogShow({
@@ -159,7 +181,7 @@ class Bookingmap extends React.PureComponent {
   render() {
 
 
-    const { bookingmap, classes, zoom, height } = this.props;
+    const { bookingmap, classes, zoom, height, boothStyleMapping } = this.props;
     return (
       
       <div
@@ -191,6 +213,7 @@ class Bookingmap extends React.PureComponent {
                     onClick={this.onBoothClick}
                     status={this.getStatusShort(booth.id)}
                     key={booth.id}
+                    style={getStylingName(boothStyleMapping, booth.g)}
                 //    buyer={this.getBuyerInfo(booth.id)}
                     data={booth}
                   />
@@ -214,7 +237,8 @@ Bookingmap.defaultProps = {
   disabled : false,
   disabledTicketIds : [],
   autorefresh : 15,
-  defaultSize : 21
+  defaultSize : 21,
+  boothStyleMapping: {}
 };
 
 const enhance = compose(

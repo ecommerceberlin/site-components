@@ -7,8 +7,11 @@ import _get from 'lodash/get';
 import MyTypography from '../MyTypography'
 import {FilteredTicketGroupsSelector} from '../../redux/selectors'
 import PropTypes from 'prop-types'
-
 import Booth from './Booth'
+import { getStylingName } from "./boothStyles";
+import Settings from '../../datasources/Settings';
+
+
 
 const styles = {
     root : {
@@ -37,23 +40,45 @@ const data = {
     dw : 60,
 }
 
-const Legend = ({ticketgroups, classes}) =>  (
-  <div className={classes.root}>
-  <div className={classes.description}>
-    <MyTypography label="event.sales.pool.legend" />
-  </div>
-  <div className={classes.groups}>
-  {ticketgroups.map(tg => <Booth key={tg.name} groupId={tg.id} legend={true} styling={"style1"} selected={false} data={{...data, ti : tg.name}} onClick={function(){} } />)}
-  </div>
-  </div>
+const Legend = ({ticketgroups, boothStyleMapping, allowedGroupIds, classes}) =>  (
+
+  
+    <div className={classes.root}>
+    <div className={classes.description}>
+      <MyTypography label="event.sales.pool.legend" />
+    </div>
+    <div className={classes.groups}>
+
+
+  <Settings>{(get) => 
+
+
+    ticketgroups.filter(tg => get("bookingmap.allowedGroupIds", allowedGroupIds || []).includes(tg.id)).map(tg => <Booth 
+        key={tg.name} 
+        groupId={tg.id} 
+        legend={true} 
+        style={getStylingName(get("bookingmap.boothStyleMapping", boothStyleMapping || {}), tg.id)} 
+        selected={false} 
+        data={{...data, ti : tg.name}} 
+        onClick={function(){} } 
+        />)
+
+}</Settings>
+
+
+    </div>
+    </div>
 )
 
 Legend.propTypes = {
-    allowedGroupIds : PropTypes.array
+    allowedGroupIds : PropTypes.array,
+    ticketgroups: PropTypes.array.isRequired
 }
 
 Legend.defaultProps = {
-    ticketgroups : []
+    ticketgroups : [],
+    allowedGroupIds: [],
+    boothStyleMapping: {}
 }
 
 const enhance = compose(

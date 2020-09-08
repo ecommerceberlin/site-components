@@ -106,7 +106,8 @@ const SalesInfo = ({disabled, disabledTicketIds, ...otherProps}) => (
 
 SalesInfo.defaultProps = {
   disabled : false,
-  disabledTicketIds : []
+  disabledTicketIds : [],
+  style: ""
 }
 
 export default SalesInfo

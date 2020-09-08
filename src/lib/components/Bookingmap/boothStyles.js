@@ -1,22 +1,11 @@
+import camelCase from 'lodash/camelCase'
+
+ export function getStylingName(boothStyleMapping, groupId){
+
+    return groupId in boothStyleMapping ? camelCase(boothStyleMapping[groupId]) : "";
+  }
 
 
-
-export const styleMapping = {
-
-  322 : "style1", //light
-  322 : "style2", //standard
-  323 : "style3", //hot
-  324 : "style4", //superhot
-  325 : "style5", //grand
-  326 : "style6", //networking
-  328 : "style6", //stage
-  329 : "style6", //ultra / premium grand
-
-}
-
-export const getStylingName = (groupId) => {
-  return groupId in styleMapping ? styleMapping[groupId] : "style1"
-}
 
 const styles = {
 
@@ -85,37 +74,51 @@ const styles = {
   },
 
 
-  style1: {
+  light: {
     backgroundColor: "#5fe85d",
     color :  "#ffffff",
     borderColor: "#4bb749",
   },
 
-  style2: {
+  standard: {
     backgroundColor: "#55cf52",
     color :  "#ffffff",
     borderColor: "#409c3e"
   },
 
-  style3: {
+  hot: {
     backgroundColor: "#4bb749",
     color :  "#ffffff",
     borderColor: "#358234"
   },
 
-  style4: {
+  superHot: {
     backgroundColor: "#409c3e",
     color :  "#ffffff",
     borderColor: "#004500"
   },
 
-  style5: {
+  grand: {
     backgroundColor: "#358234",
     color :  "#ffffff",
     borderColor: "#004500"
   },
 
-  style6 : {
+  premiumGrand: {
+    backgroundColor: "#34827a",
+    color :  "#ffffff",
+    borderColor: "#004500"
+  },
+
+  
+  networking : {
+    backgroundColor: "#30bfca",
+    color :  "#ffffff",
+    borderColor: "#1e7980"
+
+  },
+
+  stage : {
     backgroundColor: "#30bfca",
     color :  "#ffffff",
     borderColor: "#1e7980"

@@ -6,12 +6,15 @@ import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 import _get from 'lodash/get';
 
 import { getTicketGroup } from '../../redux/selectors'
-import boothStyles, { getStylingName } from './boothStyles'
+import boothStyles from './boothStyles'
 
 import Typography from '../MyTypography';
 import classNames from 'classnames'
 
 const styles  = {
+
+  ...boothStyles,
+
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -40,8 +43,6 @@ const styles  = {
 
 };
 
-const mergedStyles = Object.assign(styles, boothStyles)
-
 
 const BoothInfoHeader = ({ 
   ticketgroup,
@@ -49,7 +50,8 @@ const BoothInfoHeader = ({
   boothId,
   groupId,
   label,
-  status
+  status,
+  style
  }) => {
   
   const bookable = (status != "hold" && status != "sold")
@@ -60,7 +62,7 @@ const BoothInfoHeader = ({
         className={classNames(
           classes.customBooth,
           { 
-            [classes[getStylingName(ticketgroup.id)]] : bookable,
+            [classes[style]] : bookable,
             [classes.boothSold] : !bookable
           }
         )}
@@ -84,7 +86,7 @@ const enhance = compose(
       }
       return mapStateToProps}
   ),
-  withStyles(mergedStyles),
+  withStyles(styles),
   onlyUpdateForKeys(["status", "groupId"])
 )
 
