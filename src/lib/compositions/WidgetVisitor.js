@@ -17,43 +17,47 @@ const styles = theme => ({
 
 })
 
-const WidgetVisitor = ({ classes, template, ticket_id, fields, start, data, ...rest }) => (
+const WidgetVisitor = ({ setting, classes, email_template, ticket_id, fields, start, data, label, secondaryLabel, background, ...rest }) => (
 
-  <Wrapper {...rest}>
 
- <Settings>{(get) => (
+  
+  <Settings>{(get) => {
+ 
+  return (
+    <Wrapper label={get(`${setting}.label`, label)} secondaryLabel={get(`${setting}.secondaryLabel`, secondaryLabel)} {...rest}  >
+      <Grid container spacing={1} justify="space-between">
+        <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
 
-  <Grid container spacing={1} justify="space-between">
-    <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
+          <StepForm
+          data={ get(`${setting}.data`, data) }
+          ticketId={ get(`${setting}.ticket_id`, ticket_id) }
+          fields={get(`${setting}.fields`, fields)}
+          start={get(`${setting}.start`, start)}
+          template={ get(`${setting}.email_template`, email_template) }
+          api={ get("visitor.api") }
+          />
 
-        <StepForm
-          data={data}
-          ticketId={ticket_id || get("visitor.default_ticket_id") }
-          fields={fields}
-          start={start}
-          template={template || get("visitor.default_email_template") }
-          api={get("visitor.api") }
-        />
+        </Grid>
+    
+        <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
+          <img src={ get(`${setting}.background`, background) } className={classes.lanyard} />
+        </Grid>
 
-    </Grid>
+      </Grid>
+    </Wrapper>
+  )
 
-    <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
-
-      <img src={ get("visitor.background") } className={classes.lanyard} />
-
-    </Grid>
-  </Grid>
-
-  )}</Settings>
-
-  </Wrapper>
+  }}</Settings>
 
 );
 
 WidgetVisitor.defaultProps = {
+
+  setting: "visitor.register",
   links: [],
   label : "visitors.register",
-  template : null,
+  secondaryLabel: null,
+  email_template : null,
   ticket_id : 0,
   data : {},
   fields : [
@@ -62,9 +66,11 @@ WidgetVisitor.defaultProps = {
     {name: "lname", required: true},
     {name: "cname2", required: true},
     {name: "position", required: true},
+    {name: "nip", required: false},
     {name: "phone", required: true}
   ],
-  start : ['email', 'fname']
+  start : ['email', 'fname'],
+  background: "/lanyard.jpg"
 };
 
 export default withStyles(styles)(WidgetVisitor);
