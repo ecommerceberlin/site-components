@@ -1,6 +1,7 @@
+
+
 export { default as WidgetVideoWithEventInfo } from './WidgetVideoWithEventInfo';
 export { default as WidgetVideoWithReviews } from './WidgetVideoWithReviews';
-export { default as WidgetVisitor } from './WidgetVisitor';
 export { default as WidgetCompanyBookingmap } from './WidgetCompanyBookingmap';
 
 export { default as WidgetFeaturedExhibitors } from './WidgetFeaturedExhibitors';
@@ -16,7 +17,6 @@ export { default as WidgetSupport } from './WidgetSupport';
 export { default as WidgetCompany } from './WidgetCompany';
 export { default as WidgetPresenter } from './WidgetPresenter';
 
-export { default as WidgetIconGrid } from './WidgetIconGrid';
 
 export { default as WidgetSalesMap } from './WidgetSalesMap';
 export { default as WidgetOffers } from './WidgetOffers';
@@ -28,7 +28,7 @@ export { default as WidgetFooter } from './WidgetFooter'
 export { default as WidgetEventInfo } from './WidgetEventInfo'
 export { default as WidgetVips } from './WidgetVips'
 export { default as WidgetPartners } from './WidgetPartners'
-export { default as WidgetSpeaking } from './WidgetSpeaking'
+
 export { default as WidgetTickets } from './WidgetTickets'
 export { default as WidgetPresentersAll } from './WidgetPresentersAll'
 
@@ -55,3 +55,9 @@ export { default as WidgetJurors } from './WidgetJurors'
 export { default as WidgetPhotostream } from './WidgetPhotostream'
 export { default as WidgetVerticalTimeline } from './WidgetVerticalTimeline'
 
+//breaking changes
+
+export { default as WidgetIconGrid } from './WidgetIconGrid';
+export { default as WidgetRegForm } from './WidgetRegForm'
+export { default as WidgetSpeaking } from './WidgetSpeaking'
+export { default as WidgetVisitor } from './WidgetVisitor'

@@ -3,6 +3,25 @@ import _pick from 'lodash/pick';
 
 
 
+function isValidNip(nip) {
+  if(typeof nip !== 'string')
+      return false;
+
+  nip = nip.replace(/[\ \-]/gi, '');
+
+  let weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
+  let sum = 0;
+  let controlNumber = parseInt(nip.substring(9, 10));
+  let weightCount = weight.length;
+  for (let i = 0; i < weightCount; i++) {
+      sum += (parseInt(nip.substr(i, 1)) * weight[i]);
+  }
+  
+  return sum % 11 === controlNumber;
+}
+
+
+
 Yup.addMethod(Yup.string, "conditionallyRequire", function(requiredFieldNames, message) {
 
   return this.test("is-required", message, function(value) {

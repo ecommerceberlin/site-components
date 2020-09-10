@@ -9,31 +9,24 @@ import Settings from '../datasources/Settings';
 
 const WidgetSalesMap = ({disabled, steps, allowedGroupIds, boothStyleMapping, disabledTicketIds, ...wrapperProps}) => (
 
-    //{steps, allowedGroupIds, height}
 
     <Wrapper {...wrapperProps}>
-
-    <Settings>{(get) => (
-
-    <div>
-        <div>
-            <OrderSteps items={ get("bookingmap.steps", steps) } active={0} />
-            <Legend  />
-        </div>
-
-        <Bookingmap 
-            disabled={disabled} 
-            disabledTicketIds={get("bookingmap.disabledTicketIds", disabledTicketIds)} 
-            height={ get("bookingmap.height") } 
-            boothStyleMapping={get("bookingmap.boothStyleMapping", boothStyleMapping)}
-        />
-
-    </div>
-
-    )}</Settings>
-
+        <Settings>{(get) => (
+            <div>
+                <div>
+                    <OrderSteps items={ get("bookingmap.steps", steps) } active={0} />
+                 <Legend  />
+                </div>
+                <Bookingmap 
+                    disabled={disabled} 
+                    disabledTicketIds={get("bookingmap.disabledTicketIds", disabledTicketIds)} 
+                    height={ get("bookingmap.height") } 
+                    boothStyleMapping={get("bookingmap.boothStyleMapping", boothStyleMapping)}
+                />
+            </div>
+        )}</Settings>
     </Wrapper>
-)
+    )
 
 WidgetSalesMap.defaultProps = {
     disabledTicketIds: [],

@@ -28,12 +28,19 @@ export default withFormik({
   }),
   handleSubmit: (payload, { props, setSubmitting, setErrors, setStatus }) => {
 
+
+    if(! "ticketId" in props || props.ticketId < 1){
+      console.log("passed props", props);
+      setStatus('error');
+      return;
+    }
+
     //we should have redux actions?
     
     const data = {
       fields: payload,
       tickets: { [props.ticketId]: 1 },
-      template : "template" in props ? props.template : "",
+      template : "template" in props ? props.template : "pass template by props or settings",
       locale : "locale" in props ? props.locale : "",
       cc : "cc" in props ? props.cc : "" 
     }
@@ -51,7 +58,8 @@ export default withFormik({
     })
       .then(response => {
         if (response.status !== 200) {
-          console.log(props);
+          console.log("passed props", props);
+          console.log("final data", data)
         }
         return response.json();
       })

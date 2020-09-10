@@ -187,8 +187,8 @@ class StepForm extends React.Component {
 
 
 StepForm.defaultProps = {
-  api: "https://api.eventjuicer.com/v1/public/hosts/ecommerceberlin.com/register",
-  template : 'ecommerceberlin-visitor-registration',
+  api: "https://api.eventjuicer.com/v1/public/hosts/...",
+  template : 'sparkpost-remplate',
   ticketId : 0,
   baseLabel : "visitors"
 };
