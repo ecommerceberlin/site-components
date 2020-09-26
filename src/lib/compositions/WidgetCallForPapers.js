@@ -33,7 +33,7 @@ return (
         <React.Fragment>
 
         <Centered>
-          <KeywordSelect href="/vote" as="/vote" keywords={keywords} selected={keyword} />
+          <KeywordSelect href="/vote" as={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} />
         </Centered> 
 
         <VoteStatus {...votesData}  /> 
