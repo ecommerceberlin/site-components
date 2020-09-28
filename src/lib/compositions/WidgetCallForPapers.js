@@ -33,7 +33,7 @@ return (
         <React.Fragment>
 
         <Centered>
-          <KeywordSelect href="/vote" as={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} />
+          <KeywordSelect href="/vote/categories/[category]" as={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} />
         </Centered> 
 
         <VoteStatus {...votesData}  /> 
@@ -76,7 +76,7 @@ CallForPapers.defaultProps = {
     keyword_source : "presentation_category",
     sort : "cname2",
     link : function(item){
-        return {as : `/vote/${item.id}`, href : `/vote?id=${item.id}`}
+        return {as : `/vote/${item.id}`, href : `/vote/[id]`}
     },
     intro : null,
     show_votes : false
