@@ -61,3 +61,6 @@ export { default as WidgetIconGrid } from './WidgetIconGrid';
 export { default as WidgetRegForm } from './WidgetRegForm'
 export { default as WidgetSpeaking } from './WidgetSpeaking'
 export { default as WidgetVisitor } from './WidgetVisitor'
+
+
+export { default as WidgetVoteWithLinkedIn } from './WidgetVoteWithLinkedIn'

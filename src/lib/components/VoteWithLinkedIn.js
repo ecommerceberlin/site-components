@@ -16,9 +16,12 @@ import {
 } from './redux/actions'
 
 import { getLinkedInToken } from '../redux/selectors'
-import { KeyedVotesSelector } from '../datasources/redux/votes'
+// import { KeyedVotesSelector } from '../datasources/redux/votes'
 import { lsSet, lsGet, uuidv4 } from '../helpers'
- 
+
+
+import VotesDatasource from '../datasources/Votes'
+
 const styles = theme => ({
     buttonContainer : {
         marginBottom: 50,
@@ -48,6 +51,8 @@ class VoteWithLinkedIn extends Component {
             service,
             id
         } = this.props;
+
+
 
         const uid = extractUrlValue("uid", router.asPath);
         const session = extractUrlValue("session", router.asPath);
@@ -227,7 +232,7 @@ const enhance = compose(
         const mapStateToProps = (state, props) => {
             return {
               linkedin : getLinkedInToken(state),
-              votes : KeyedVotesSelector(state, props),
+            //   votes : KeyedVotesSelector(state, props), //provided by Datasource
               transaction : state.transactions.voting
             }
           }

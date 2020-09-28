@@ -25,7 +25,7 @@ const DetectLocale = ({locale, settings, dispatch}) => {
         const availableLocales = get(settings, "system.available_locales")
         const defaultLocale = get(settings, "default_locale");
 
-        console.log(availableLocales)
+        // console.log(availableLocales)
 
         // const browserLang = getLang().substr(0, 2);
 

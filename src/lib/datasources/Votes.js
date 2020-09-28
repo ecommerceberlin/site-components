@@ -15,9 +15,11 @@ class Votes extends React.Component {
 
         if(! all.length){
              //we cannot preload this data so we leave it as... 
-             //we should throttle in redux saga...
-            votingStatus(service);
+             //we should throttle in redux saga...           
         }
+
+        votingStatus(service);
+
        
     }
 
