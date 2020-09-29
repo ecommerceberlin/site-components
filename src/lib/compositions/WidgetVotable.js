@@ -1,9 +1,11 @@
-import { MyHead as Head } from '../next';
+import { MyHead } from '../next';
 import Divider from '@material-ui/core/Divider';
 import _get from 'lodash/get';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 //import { resourceFetchRequest } from '../components/redux'
+import Head from 'next/head'
+
 
 import {
     MyTypography as Typography,
@@ -53,23 +55,7 @@ const Votable = ({id, vote, status, asPath, classes, ...rest}) => (
 
             <React.Fragment>
 
-            <Head
-            image={getCallForPapersOgImage(record)}
-            url={asPath}
-            titleLabel={[
-                'callforpapers.opengraph.title', 
-                { 
-                    presentation_title : _get(record, 'presentation_title') 
-                }
-            ]}
-            descriptionLabel={[
-            'callforpapers.opengraph.description',
-            {
-                name: getSpeakerName(record),
-                cname2: _get(record, 'cname2')
-            }
-            ]}
-            />
+      
 
             <Wrapper first={false} {...rest}>
             <Section

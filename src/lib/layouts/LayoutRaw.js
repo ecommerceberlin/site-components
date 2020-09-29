@@ -1,6 +1,5 @@
 import React from 'react';
 import Router from 'next/router';
-import { MyHead as Head } from '../next';
 import { connect } from 'react-redux';
 
 Router.onRouteChangeComplete = () => {
@@ -17,7 +16,6 @@ Router.onRouteChangeComplete = () => {
 const Layout = props => (
  
     <div>
-      <Head />
       {props.children}
     </div>
  

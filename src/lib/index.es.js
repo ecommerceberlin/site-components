@@ -12,6 +12,7 @@ export * from './redux'
 //export * from './roles'
 export * from './services'
 export * from './settings/redux/actions'
+export * from './heads'
 
 
 export { connect } from 'react-redux';
