@@ -52,12 +52,15 @@ class VoteWithLinkedIn extends Component {
             id
         } = this.props;
 
-        console.log("router", router)
+       
 
         const uid = extractUrlValue("uid", router.asPath);
         const session = extractUrlValue("session", router.asPath);
         const savedSession = lsGet("oauth_session");
 
+        console.log(uid, session, savedSession)
+
+        
         if(uid && uid.length > 3 && session == savedSession){
             
             linkedUidReceived(uid);
