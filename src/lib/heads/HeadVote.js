@@ -1,6 +1,7 @@
 import { MyHead } from '../next';
 import _get from 'lodash/get';
 import CallForPapers from '../datasources/CallForPapers'
+// import Settings from '../datasources/Settings'
 
 import { 
     getCallForPapersOgImage, 
