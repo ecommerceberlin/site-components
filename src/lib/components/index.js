@@ -71,6 +71,7 @@ export { default as WinnerCategory } from './WinnerCategory'
 
 export { default as VerticalTimeline } from './VerticalTimeline'
 
+export { default as ProfileLogotype } from './ProfileLogotype'
 
 export * from './Bookingmap';
 export * from './MyLayouts';
