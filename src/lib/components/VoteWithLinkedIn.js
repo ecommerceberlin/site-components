@@ -56,15 +56,11 @@ class VoteWithLinkedIn extends Component {
         const session = extractUrlValue("session", asPath);
         const savedSession = lsGet("oauth_session");
 
-        console.log(uid, session, savedSession)
+      //  console.log(uid, session, savedSession)
 
-        if(uid && uid.length > 3 ){
-
-            // lsSet("linkedin_uid", uid)
+        if(uid && uid.length > 3  && session === savedSession){
+        //    console.log("fire up auto voting...");
             linkedUidReceived(uid);
-        }
-
-        if(session == savedSession){
             //check votes and offer voting when coming back from oauth!
             linkedVoteRequest(service, id);
         }
@@ -176,7 +172,7 @@ class VoteWithLinkedIn extends Component {
 
         const savedSession = typeof window !== 'undefined' ? lsGet("oauth_session") : false;
 
-        console.log("Sesja", savedSession)
+       // console.log("render saved session", savedSession)
 
         const disabledStatus = this.isDisabled();
 
@@ -195,7 +191,7 @@ class VoteWithLinkedIn extends Component {
 
         if(linkedin && savedSession){
 
-            console.log("CAN VOTE")
+          //  console.log("CAN VOTE")
 
             return (
             <div className={classes.buttonContainer}>
