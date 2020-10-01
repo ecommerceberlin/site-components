@@ -16,7 +16,7 @@ const defaultFilters = {
 }
 
 export const getLocale = state => state.app.locale;
-export const getLinkedInToken = state => state.app.linkedin;
+export const getLinkedInToken = state => state.social.linkedin;
 export const getCart = state => state.app.cart;
 export const getResources = state => state.resources;
 export const getFaqs = state => state.visuals.faqs;

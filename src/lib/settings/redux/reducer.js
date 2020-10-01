@@ -5,8 +5,6 @@ import {
 
 export const initialState = {
    
-    widgets : {},
-
 };
 
 const reducer = (state = initialState, action) => {

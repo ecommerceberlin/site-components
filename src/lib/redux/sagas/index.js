@@ -71,6 +71,7 @@ import * as Selectors from '../selectors';
 import {event} from '../../services/gtag'
 
 import { REHYDRATE } from 'redux-persist/lib/constants'
+import { HYDRATE } from 'next-redux-wrapper'
 
 const apiUrl = `https://api.eventjuicer.com/v1/public/hosts/${process.env.NEXT_PUBLIC_PROJECT}`
 
@@ -322,7 +323,7 @@ const rootSaga = function* root() {
     takeEvery(BOOTH_CHECKED, handleBoothCheck),
 
     takeEvery(LINKEDIN_VOTE_REQUESTED, handleLinkedinVoteRequest),
-    takeEvery(LINKEDIN_TOKEN_SUCCESS, handleRehydrate),
+    // takeEvery(LINKEDIN_TOKEN_SUCCESS, handleRehydrate),
     takeEvery(LINKEDIN_VOTE_SUCCESS, handleVotingData),
     takeEvery(VOTE_STATUS_CHECK, handleVoteStatus),
     takeEvery(SETTINGS_SET, handleFetchTranslations)

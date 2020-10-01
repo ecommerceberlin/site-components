@@ -6,9 +6,7 @@ import {
   ROLE_RESET,
   CART_ITEM_ADD,
   CART_ITEM_REMOVE,
-  CART_RESET,
-  LINKEDIN_TOKEN_SUCCESS,
-  LINKEDIN_TOKEN_RESET
+  CART_RESET
 } from '../../components/redux';
 
 import {VENUE_SELECT, VENUE_SELECT_RESET} from '../../components/Schedule/redux'
@@ -86,13 +84,7 @@ const reducer = (state = defaultState, action) => {
     break;
 
 
-    case LINKEDIN_TOKEN_SUCCESS:
-      return {...state, linkedin : action.uid};
-    break;
-
-    case LINKEDIN_TOKEN_RESET:
-      return {...state, linkedin : null};
-    break;
+  
 
     default:
       return state;

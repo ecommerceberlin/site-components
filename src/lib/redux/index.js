@@ -1,13 +1,13 @@
 
-import { useMemo } from 'react'
+// import { useMemo } from 'react'
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import rootReducer from './reducers';
 import rootSaga from './sagas';
+// import merge from 'lodash/merge'
 
-const SET_CLIENT_STATE = 'SET_CLIENT_STATE';
-
+ 
 
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -27,25 +27,41 @@ const reducer = (state, action) => {
 
       case HYDRATE:
 
+
+/**
+ * 
+
+  Server and Client state separation
+  
+  Each time when pages that have getStaticProps or getServerSideProps are opened by user the HYDRATE action will be dispatched.
+  The payload of this action will contain the state at the moment of static generation or server side rendering, so your reducer must merge it with existing client state properly.
+  The easiest and most stable way to make sure nothing is accidentally overwritten is to make sure that your reducer applies client side and server side actions to different substates of your state and they never clash:
+  */
+
+
+
       const nextState = {
         ...state, // use previous state
-        ...action.payload, // apply delta from hydration
+        resources: {
+          ...action.payload.resources,
+          ...state.resources, 
+          texts : action.payload.resources.texts
+        }, // apply delta from hydration
+        settings: action.payload.settings
       }
   
-      if (action.payload.app === 'init') delete action.payload.app;
-      if (action.payload.page === 'init') delete action.payload.page;
+      // if (action.payload.app === 'init') delete action.payload.app;
+      // if (action.payload.page === 'init') delete action.payload.page;
   
-      // if (state.count) nextState.count = state.count // preserve count value on client side navigation
+      // if (state.resources.texts) nextState.resources.texts = state.resources.texts // preserve count value on client side navigation
 
       return nextState
 
+      //return merge(state, action.payload)
+
       break;
 
-      case SET_CLIENT_STATE:
-        return {
-        ...state,
-        fromClient: payload}
-      break;
+ 
 
       default: 
         return combinedReducers(state, action)
@@ -76,7 +92,7 @@ export const initStore = ({ctx}) => {
     const persistConfig = {
       key: 'root',
       storage : storage,
-      whitelist: ['fromClient', 'boothsSelected', 'app']
+      whitelist: ['fromClient', 'boothsSelected', 'app', 'social']
     };
     
     store = createStore(

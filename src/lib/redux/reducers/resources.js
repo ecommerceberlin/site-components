@@ -2,19 +2,19 @@ import { RESOURCE_FETCH_SUCCESS, VOTE_STATUS_SUCCESS } from '../../components/re
 import { CHANGE_LOCALE_MSGS } from '../../i18n';
 
 export const initialState = {
-  formdata: [],
-  ticketgroups: [],
-  companies: [],
-  tickets: [],
-  photos: [],
-  bookingmap: [],
-  exhibitors : [],
-  presenters: [],
-  presenters_all: [],
-  texts : {},
-  contestant_companies : [],
-  report : [],
-  jurors: []
+  // formdata: [],
+  // ticketgroups: [],
+  // companies: [],
+  // tickets: [],
+  // photos: [],
+  // bookingmap: [],
+  // exhibitors : [],
+  // presenters: [],
+  // presenters_all: [],
+  // texts : {},
+  // contestant_companies : [],
+  // report : [],
+  // jurors: []
 };
 
 const reducer = (state = initialState, action) => {
