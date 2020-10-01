@@ -30,9 +30,9 @@ export const getSpeakerName = (speaker) => {
 } 
 
 
-export const getSpeakerAvatar = (speaker, params = ['c_fit'], size = 250) => getParticipantCdn(_get(speaker, 'avatar_cdn'), size, params) || getParticipantCdn(_get(speaker, 'avatar'), size, params) || '/public/avatar-placeholder.png';
+export const getSpeakerAvatar = (speaker, params = ['c_fit'], size = 250) => getParticipantCdn(_get(speaker, 'avatar_cdn'), size, params) || getParticipantCdn(_get(speaker, 'avatar'), size, params) || '/avatar-placeholder.png';
 
-export const getSpeakerLogotype = (speaker, params = ['c_fit'], size = 300) =>  getParticipantCdn(_get(speaker, 'logotype_cdn'), size, params) || getParticipantCdn(_get(speaker, 'logotype'), size, params) || '/public/avatar-placeholder.png';
+export const getSpeakerLogotype = (speaker, params = ['c_fit'], size = 300) =>  getParticipantCdn(_get(speaker, 'logotype_cdn'), size, params) || getParticipantCdn(_get(speaker, 'logotype'), size, params) || '/avatar-placeholder.png';
 
 /**
  * END
@@ -126,7 +126,7 @@ export const getCompanyLogotype = (company, scale = true, dumb = true) => {
   const original = getCompanyProfileInfo(company, 'logotype');
   if (original && /^http/.test(original)) return original;
 
-  return dumb ? '/public/logo-placeholder.jpg' : null;
+  return dumb ? '/logo-placeholder.jpg' : null;
 };
 
 export const wrapImage = (
