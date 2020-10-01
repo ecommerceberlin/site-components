@@ -56,6 +56,8 @@ class VoteWithLinkedIn extends Component {
         const session = extractUrlValue("session", asPath);
         const savedSession = lsGet("oauth_session");
 
+        console.log(uid, session, savedSession)
+
         if(uid && uid.length > 3 ){
 
             // lsSet("linkedin_uid", uid)
@@ -192,6 +194,9 @@ class VoteWithLinkedIn extends Component {
         }
 
         if(linkedin && savedSession){
+
+            console.log("CAN VOTE")
+
             return (
             <div className={classes.buttonContainer}>
                 <Button 
@@ -211,7 +216,7 @@ class VoteWithLinkedIn extends Component {
             onClick={(e) => this.createSession(e) } 
             variant="contained" 
             size="large" 
-            color="secondary">{translate(labelGuest)}</Button>)
+            color="primary">{translate(labelGuest)}</Button>)
        
     }
 
