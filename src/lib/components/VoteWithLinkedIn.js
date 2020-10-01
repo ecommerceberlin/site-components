@@ -20,8 +20,6 @@ import { getLinkedInToken } from '../redux/selectors'
 import { lsSet, lsGet, uuidv4 } from '../helpers'
 
 
-import VotesDatasource from '../datasources/Votes'
-
 const styles = theme => ({
     buttonContainer : {
         marginBottom: 50,
@@ -52,21 +50,21 @@ class VoteWithLinkedIn extends Component {
             id
         } = this.props;
 
-       
+        const {asPath} = router;
 
-        const uid = extractUrlValue("uid", router.asPath);
-        const session = extractUrlValue("session", router.asPath);
+        const uid = extractUrlValue("uid", asPath);
+        const session = extractUrlValue("session", asPath);
         const savedSession = lsGet("oauth_session");
 
-        console.log(uid, session, savedSession)
+        if(uid && uid.length > 3 ){
 
-        
-        if(uid && uid.length > 3 && session == savedSession){
-            
+            // lsSet("linkedin_uid", uid)
             linkedUidReceived(uid);
-            linkedVoteRequest(service, id);
+        }
 
+        if(session == savedSession){
             //check votes and offer voting when coming back from oauth!
+            linkedVoteRequest(service, id);
         }
 
     }
@@ -235,7 +233,6 @@ const enhance = compose(
         const mapStateToProps = (state, props) => {
             return {
               linkedin : getLinkedInToken(state),
-            //   votes : KeyedVotesSelector(state, props), //provided by Datasource
               transaction : state.transactions.voting
             }
           }
