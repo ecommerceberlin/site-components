@@ -114,7 +114,7 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
             
             <Divider />
             
-            <Sharer url={`${asPath}/${id}`} />
+            <Sharer url={asPath} />
 
             <Divider />
 
