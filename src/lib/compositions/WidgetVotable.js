@@ -45,7 +45,7 @@ const styles = theme => ({
 })
 
 
-const Votable = ({id, vote, status, asPath, classes, ...rest}) => (
+const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
 
     <CallForPapers id={id}>{
 
@@ -91,9 +91,9 @@ const Votable = ({id, vote, status, asPath, classes, ...rest}) => (
 
                 <React.Fragment>
 
-                <Typography template="presenter1">
+              {show_votes && <Typography template="presenter1">
                 Votes: {record.votes}
-                </Typography>
+                </Typography>}
 
                 <Typography template="benefitsText" label="callforpapers.voting.rules.description" />
               
@@ -144,7 +144,8 @@ Votable.propTypes = {
 Votable.defaultProps = {
     vote : null,
     status : null,
-    label : "callforpapers.list.title"
+    label : "callforpapers.list.title",
+    show_votes: false
 }
 
 export default withStyles(styles)(Votable)
