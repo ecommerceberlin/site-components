@@ -10,7 +10,7 @@ const WidgetTickets = ({filter, moreInfoLinkHref, ...wrapperProps}) => (
     <Wrapper {...wrapperProps}>
     <Settings>{(get) => (
         <DatasourceTickets>{
-            (tickets) => (<Tickets data={tickets.filter(filter)} moreInfoLinkHref={moreInfoLinkHref} />)
+            (tickets) => (<Tickets data={(tickets || []).filter(filter)} moreInfoLinkHref={moreInfoLinkHref} />)
         }</DatasourceTickets>)
     }</Settings>
     </Wrapper> 
