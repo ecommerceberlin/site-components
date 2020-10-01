@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-import * as Selectors from './redux/votes'
+import {KeyedVotesSelector} from './redux/votes'
 import { votingStatus } from '../components/redux'
 import { getVotes } from '../redux/selectors'
 
@@ -57,7 +57,7 @@ export default connect(
     const mapStateToProps = (state, props) => {
       return {
         all : getVotes(state, props),
-        keyed : Selectors.KeyedVotesSelector(state, props),
+        keyed : KeyedVotesSelector(state, props),
       }
     }
     return mapStateToProps

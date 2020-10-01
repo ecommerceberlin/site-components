@@ -75,7 +75,7 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
 
             <ProfileLogotype data={record} />
 
-            <PresenterName data={record} />
+         
 
             </div>
             }
@@ -120,8 +120,9 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
             
             <Sharer url={asPath} />
 
-          
+            <Divider />
 
+          <PresenterName data={record} />
           
 
             </div>
