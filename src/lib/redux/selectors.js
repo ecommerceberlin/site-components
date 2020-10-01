@@ -61,7 +61,7 @@ export const getViewPortWidth = (state) => state.app.width || "xs"
 export const ExhibitorKeywordsSelector = createSelector(
   getExhibitors,
   exhibitors => {
-    const allUsedKeywords = [].concat.apply([], exhibitors.map(e => "keywords" in e.profile && Array.isArray(e.profile.keywords) ? e.profile.keywords : []))
+    const allUsedKeywords = [].concat.apply([], (exhibitors || []).map(e => "keywords" in e.profile && Array.isArray(e.profile.keywords) ? e.profile.keywords : []))
     const uniqueKeywords = [...new Set(allUsedKeywords )];
     return uniqueKeywords
   }

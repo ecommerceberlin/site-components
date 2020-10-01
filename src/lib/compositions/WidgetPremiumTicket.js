@@ -81,7 +81,7 @@ const WidgetPremiumTicket = ({resolve, name, ticket, ...rest}) => {
 
       (alltickets) => {
   
-        const _ticket = alltickets.find(t => resolve(t))
+        const _ticket = (alltickets || []).find(t => resolve(t))
         // const name = ticket.translation_asset_id.replace()
         return <PremiumTicketBody name={name} ticket={_ticket} {...rest} />
   
