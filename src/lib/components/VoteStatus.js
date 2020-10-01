@@ -15,9 +15,9 @@ const styles = {
     }
 }
 
-const VoteStatus = ({all, enabled, classes, translate, total_votes}) => {
+const VoteStatus = ({all, enabled, classes, translate, max_votes}) => {
 
-    const remaining = total_votes - all.length;
+    const remaining = max_votes - all.length;
 
     return enabled ? ( <Typography template="benefitsText">
     {`${translate("awards.remaining.votes")}: ${remaining}`}
@@ -35,7 +35,7 @@ const VoteStatus = ({all, enabled, classes, translate, total_votes}) => {
 VoteStatus.defaultProps = {
     all : [],
     keyed : {},
-    total_votes : 10,
+    max_votes : 10,
     enabled : false
 }
 
