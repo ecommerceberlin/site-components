@@ -16,7 +16,8 @@ import {
     Sharer,
     MyAvatar as Avatar,
    // Speaker
-   KeywordSelect
+   KeywordSelect,
+   ProfileLogotype
   } from '../components';
 
 
@@ -26,7 +27,6 @@ import {
     getCallForPapersOgImage, 
     getSpeakerName,
     getSpeakerAvatar,
-    getSpeakerLogotype
  } from '../helpers';
 
 const styles = theme => ({
@@ -50,6 +50,7 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
     <CallForPapers id={id}>{
 
         ({filtered, all, record}) => {
+
             
             return (
 
@@ -72,11 +73,10 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
             >
             <Avatar src={getSpeakerAvatar(record)} minimal={false} grayscale={false} />
 
-            <img
-            src={getSpeakerLogotype(record)}
-            alt=""
-            style={{ maxWidth: 300, maxHeight: 200, marginTop: 30 }}
-            />
+            <ProfileLogotype data={record} />
+
+            <PresenterName data={record} />
+
             </div>
             }
             leftCentered={true}
@@ -95,6 +95,8 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
                 Votes: {record.votes}
                 </Typography>}
 
+                  {status}
+
                 <Typography template="benefitsText" label="callforpapers.voting.rules.description" />
               
                 </React.Fragment>
@@ -102,7 +104,9 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
             </div>
             </div>
 
-            {status}
+          
+
+            <Divider />
 
             { <Presentation
             title={record.presentation_title}
@@ -116,9 +120,9 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
             
             <Sharer url={asPath} />
 
-            <Divider />
+          
 
-            <PresenterName data={record} />
+          
 
             </div>
             }

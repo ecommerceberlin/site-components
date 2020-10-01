@@ -5,9 +5,7 @@ import CallForPapers from '../datasources/CallForPapers'
 
 import { 
     getCallForPapersOgImage, 
-    getSpeakerName,
-    // getSpeakerAvatar,
-    // getSpeakerLogotype
+    getSpeakerName
  } from '../helpers';
   
  const HeadVote = ({id, path, children}) => (

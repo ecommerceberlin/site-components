@@ -11,7 +11,8 @@ import {
     Presentation,
     Presenter as PresenterName,
     Sharer,
-    MyAvatar as Avatar
+    MyAvatar as Avatar,
+    ProfileLogotype
   } from '../components';
 
 
@@ -20,8 +21,6 @@ import { getPresenterOgImage, getSpeakerName } from '../helpers';
 
 
 const getSpeakerAvatar = (speaker) => _get(speaker, 'avatar');
-const getSpeakerLogotype = (speaker) =>  _get(speaker, 'logotype');
-
 
 
 const WidgetPresenter = ({id, asPath, ...rest}) => (
@@ -64,11 +63,8 @@ const WidgetPresenter = ({id, asPath, ...rest}) => (
             >
             <Avatar src={getSpeakerAvatar(record)} minimal={false} />
 
-            <img
-            src={getSpeakerLogotype(record)}
-            alt=""
-            style={{ maxWidth: 300, maxHeight: 200, marginTop: 30 }}
-            />
+            <ProfileLogotype data={record} />
+
             </div>
             }
             leftCentered={true}

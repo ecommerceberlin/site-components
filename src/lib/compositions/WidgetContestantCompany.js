@@ -9,12 +9,12 @@ import {
     MyTypography as Typography,
     TwoColsLayout as Section,
     Wrapper,
-  
     Sharer,
     MyAvatar as Avatar,
    // Speaker
    KeywordSelect,
-   TextSection
+   TextSection,
+   ProfileLogotype
   } from '../components';
 
 //import CompanyLogotype from '../components/CompanyLogotype'
@@ -23,7 +23,6 @@ import DatasourceContestantCompanies from '../datasources/ContestantCompanies'
 
 import { 
     getContestantOgImage, 
-    getSpeakerLogotype,
     getCompanyProfileInfo
  } from '../helpers';
 
@@ -98,11 +97,7 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
                 marginBottom: 20
                 }}
                 >
-                    <img
-                    src={getSpeakerLogotype(record)}
-                    alt=""
-                    style={{ maxWidth: 300, maxHeight: 200, marginTop: 30 }}
-                    />
+                  <ProfileLogotype data={record} />
                 </div>
             }
             leftCentered={true}
