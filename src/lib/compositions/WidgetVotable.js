@@ -58,7 +58,7 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
 
       
 
-            <Wrapper first={false} {...rest}>
+            <Wrapper first={true} {...rest}>
             <Section
             leftSize={5}
             left={

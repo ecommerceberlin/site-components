@@ -36,7 +36,7 @@ const MyHead = ({
 
   const tags = [
 
-     <title>{tTitle}</title>,
+    <title key="title">{tTitle}</title>,
     <meta key="description" name="description" content={tDescription} />,
     <meta key="og_url" name="og:url" content={prefixedUrl} />,
     <meta key="og_title" name="og:title" content={tTitle || ''} />,
@@ -50,9 +50,7 @@ const MyHead = ({
     <meta key="og_type" name="og:type" content="website" />,
     <meta key="og_fbappid" name="fb:app_id" content={fb_appid} />,
     <link key="canonical" rel="canonical" href={canonical(prefixedUrl)} />,
-   
-   
-        
+       
     <meta key="viewport" name="viewport" content='user-scalable=0, initial-scale=1, minimum-scale=1, width=device-width, height=device-height' />,
     <meta key="theme_color" name="theme-color" content={theme.palette.primary.main} />,
     <script key="gtm" name="gtm" async src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM}`} />,
