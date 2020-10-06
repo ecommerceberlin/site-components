@@ -1,29 +1,30 @@
+
 import React from 'react';
+import WidgetPresenters from './WidgetPresenters';
 
-import People from '../components/People'
-import Wrapper from '../components/Wrapper'
-import Presenters from '../datasources/Presenters'
+const WidgetFeaturedPresenters = (props) => (
 
-
-const WidgetFeaturedPresenters = (rest) => (
-<Wrapper {...rest}>
-<Presenters  filter={function(item) {
-     return item.bio && item.bio.length > 5;
-   }}>
-    {(data) =>  <People
-   link={true}
-   random={false}
-   limit={22}
- />}
-</Presenters>
-
-</Wrapper>
+  <WidgetPresenters {...props} />
 
 )
 
-
 WidgetFeaturedPresenters.defaultProps = {
-    label : "presenters.list_full"
+
+  filter: function(item) {
+      return  (
+        "avatar" in item 
+        && item.avatar.indexOf("http") > -1
+        && "logotype" in item
+        && item.logotype.indexOf("http") > -1
+        //&& item.bio.length > 20
+        && item.featured > 0
+      )
+      
+  },
+
+  bio : false,
+  limit : 16,
+  link: true
 }
 
 export default WidgetFeaturedPresenters;

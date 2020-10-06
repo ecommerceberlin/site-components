@@ -6,6 +6,7 @@ export { default as WidgetCompanyBookingmap } from './WidgetCompanyBookingmap';
 
 export { default as WidgetFeaturedExhibitors } from './WidgetFeaturedExhibitors';
 export { default as WidgetFeaturedCompanies } from './WidgetFeaturedCompanies';
+export { default as WidgetFeaturedPresenters } from './WidgetFeaturedPresenters';
 
 export { default as WidgetAllExhibitorsAvatarlist } from './WidgetAllExhibitorsAvatarlist';
 export { default as WidgetExhibitorsAvatarlist } from './WidgetExhibitorsAvatarlist';
