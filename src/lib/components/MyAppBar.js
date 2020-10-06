@@ -3,28 +3,25 @@ import Link from 'next/link';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-
 import { withStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-
 import MenuIcon from '@material-ui/icons/Menu';
 import classNames from 'classnames';
-
 import Cart from './CartButton';
 import LanguageSelect from './LanguageSelect';
 // import Search from './Search';
 import AppBarLink from './AppBarLink'
-
 import RawTranslatedText from './RawTranslatedText'
 import Settings from '../datasources/Settings';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 import {
-  drawerShow as drawerShowAction,
-  dialogShow as dialogShowAction
+  drawerShow,
+  dialogShow
 } from './redux/actions';
 
 const styles = theme => ({
@@ -53,7 +50,8 @@ const styles = theme => ({
 });
 
 function MyAppBar(props) {
-  const { classes, drawer, drawerShow, dialogShow, cart, position, event_name } = props;
+
+  const { classes, loading, drawerShow, dialogShow, cart, position } = props;
 
   const noItems = Object.keys(cart).length;
 
@@ -63,7 +61,7 @@ function MyAppBar(props) {
         [classes.spaced]: noItems
       })}
     >
-      <AppBar position="fixed" color="inherit">
+      <AppBar position={position} color="inherit">
         <Toolbar>
           <IconButton
             onClick={drawerShow}
@@ -77,6 +75,10 @@ function MyAppBar(props) {
       <Settings>{(get) => (
 
             <>
+
+            {loading && <CircularProgress size={20} />}
+
+
             <Link href="/">
             <Typography
             component="a"
@@ -86,6 +88,8 @@ function MyAppBar(props) {
               get("common.event_name")
             }</Typography>
             </Link>
+
+          
 
             {get("appbar.links", []).map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
 
@@ -107,8 +111,7 @@ function MyAppBar(props) {
 }
 
 MyAppBar.defaultProps = {
-  position: '',
-  event_name : "event name"
+  position: 'fixed',
 };
 
 MyAppBar.propTypes = {
@@ -118,13 +121,10 @@ MyAppBar.propTypes = {
 const enhance = compose(
   connect(
     state => ({
-      //drawer : state.drawer,
-      cart: state.app.cart
+      cart: state.app.cart,
+      loading: "loading" in state.visuals ? state.visuals.loading : false
     }),
-    {
-      drawerShow: drawerShowAction,
-      dialogShow: dialogShowAction
-    }
+    {drawerShow, dialogShow}
   ),
   withStyles(styles)
 );
