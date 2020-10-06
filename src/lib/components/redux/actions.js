@@ -241,3 +241,17 @@ export function searchStarted(query) {
     query: query,
   }
 }
+
+
+export function pageLoadingStart() {
+  return {
+    type: Types.PAGE_LOADING_START
+  }
+}
+
+export function pageLoadingEnd() {
+  return {
+    type: Types.PAGE_LOADING_END
+  }
+}
+
