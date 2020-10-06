@@ -1,6 +1,6 @@
 {
   "name": "eventjuicer-site-components",
-  "version": "2.3.12",
+  "version": "2.3.13",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "repository": {
