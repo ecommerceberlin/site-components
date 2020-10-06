@@ -83,10 +83,10 @@ WidgetFooter.defaultProps = {
     {
       title: 'event.support.hello',
       text: 'event.support.description',
-      name: 'Firstname Lastname',
-      avatar: '/public/support.jpg',
-      phone: '000000000',
-      email: 'user@domain.com'
+      name: '',
+      avatar: '/support.jpg',
+      phone: '',
+      email: ''
     }
   ]
 };
