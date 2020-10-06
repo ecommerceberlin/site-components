@@ -13,7 +13,7 @@ class MySnackbar extends React.PureComponent {
   render() {
     const { snackbar, snackbarHide } = this.props;
 
-    const open = 'title' in snackbar;
+    const open = snackbar && 'title' in snackbar;
 
     return (
       <Snackbar
@@ -46,6 +46,6 @@ class MySnackbar extends React.PureComponent {
 }
 
 export default connect(
-  state => ({ snackbar: state.snackbar }),
+  state => ({ snackbar: "snackbar" in state.visuals ? state.visuals.snackbar : {} }),
   { snackbarHide }
 )(MySnackbar);

@@ -61,7 +61,7 @@ MyDrawer.propTypes = {
 
 const enhance = compose(
   connect(
-    state => ({ drawer: state.drawer }),
+    state => ({ drawer: "drawer" in state.visuals ? state.visuals.drawer : false }),
     { drawerHide }
   ),
   withStyles(styles)
