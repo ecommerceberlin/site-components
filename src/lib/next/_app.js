@@ -50,7 +50,7 @@ const WrappedApp = ({Component, pageProps, head}) => {
 
 }
 
-export default reduxWrapper.withRedux(WrappedApp);
+export default WrappedApp;
 
 
 
