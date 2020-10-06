@@ -44,6 +44,11 @@ const WidgetBanner = ({setting, cloudinaryOpts, defaultSrc}) => {
     
             const {wrapperProps, href, sizes, src} = get(setting)
 
+
+            if((!sizes || !Object.keys(sizes).length) && !src ){
+                return null;
+            }
+
             const imgSrc = sizes && width in sizes ? sizes[width] : (src || defaultSrc);
             const optimized = resizeCloudinaryImage(imgSrc, cloudinaryOpts[width], cloudinaryOpts[width]);
             const component = <Link passHref={true} href={href}><a><img src={optimized} alt="" /></a></Link>
