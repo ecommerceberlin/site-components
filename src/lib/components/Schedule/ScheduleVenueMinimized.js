@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import classNames from 'classnames'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose'
-import { getCompanyLogotype } from '../../helpers';
+import { getCompanyProfileInfo } from '../../helpers';
 import {venueSelect, venueSelectReset, VenueSelector} from './redux'
 
 const styles = theme => ({
@@ -71,7 +71,7 @@ const ScheduleVenueMinimized = ({ name, company, classes, total, template, selec
       </div>
       {/* <div>
         <img
-          src={getCompanyLogotype(company)}
+          src={ getCompanyProfileInfo(company, "thumbnail") }
           className={classNames(classes.logotype, {
             [classes.narrow] : total > 3
           })}

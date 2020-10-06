@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import classNames from 'classnames'
 import { connect } from 'react-redux';
 import compose from 'recompose/compose'
-import { getCompanyLogotype } from '../../helpers';
+import { getCompanyProfileInfo } from '../../helpers';
 import {venueSelect, venueSelectReset, VenueSelector} from './redux'
 
 const styles = theme => ({
@@ -65,7 +65,7 @@ const styles = theme => ({
 
 const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue, venueSelect, venueSelectReset}) => {
 
-  const logotype = getCompanyLogotype(company, true, false)
+  const logotype = getCompanyProfileInfo(company, "thumbnail")
   return (
     <Hidden implementation="css">
       <div className={classes.root} onClick={ () => selectedVenue === name ? venueSelectReset() : venueSelect(name) }>

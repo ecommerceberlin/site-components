@@ -7,7 +7,7 @@ import BoothInfoContainer from './BoothInfoContainer'
 import Legend from './Legend'
 import Tags from '../Tags'
 import MyTypography from '../MyTypography'
-import {getCompanyLogotype, getCompanyName} from '../../helpers'
+import {getCompanyProfileInfo, getCompanyName} from '../../helpers'
 
 //import { resourceFetchRequest as resourceFetchRequestAction } from './redux/actions';
 //import Button from '@material-ui/core/Button';
@@ -82,7 +82,7 @@ const BoothInfo = ({ formdata, classes, ...rest}) => {
 
             <div className={classes.logoAndCnameHolder}>
               <div className={classes.logotype} style={{
-                backgroundImage : `url(${getCompanyLogotype(formdata.company)})`
+                backgroundImage : `url(${ getCompanyProfileInfo(formdata.company, "thumbnail") })`
               }} />
               <div className={classes.cname}>
                 <Typography  variant="headline" component="h2">

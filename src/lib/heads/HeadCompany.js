@@ -4,16 +4,15 @@ import SingleRecord from '../datasources/SingleRecord'
 import Settings from '../datasources/Settings'
 
 import {
-    getCompanyOpenGraphImage,
-    getCompanyProfileInfo,
-  } from '../helpers/data';
+    getCompanyProfileInfo
+} from '../helpers/data';
   
   
  const HeadCompany = ({id, slug, path, ogTemplate, defaultLang, children}) => (
     <Settings>{(get) => (
         <SingleRecord endpoint="companies" id={id} slug={slug}>{(record) => (
             <MyHead
-                image={ getCompanyOpenGraphImage(record, get("exhibitors.ogTemplate", ogTemplate), get("system.default_locale", defaultLang)) }
+                image={ getCompanyProfileInfo(record, 'og_image') }
                 url={`${path}/${slug}`}
                 titleLabel={[
                   'companies.opengraph.title',

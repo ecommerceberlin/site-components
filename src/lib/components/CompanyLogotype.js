@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import { getCompanyLogotype } from '../helpers';
+import { getCompanyProfileInfo } from '../helpers';
 
 const styles = {
   root: {
@@ -16,7 +16,7 @@ const styles = {
 
 const CompanyLogotype = ({ company, classes }) => (
   <div className={classes.root}>
-    <img className={classes.image} src={getCompanyLogotype(company)} alt="" />
+    <img className={classes.image} src={ getCompanyProfileInfo(company, "thumbnail") } alt="" />
   </div>
 );
 

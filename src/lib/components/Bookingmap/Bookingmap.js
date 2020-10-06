@@ -18,7 +18,7 @@ import {
   boothChecked
 } from '../redux/actions';
 
-import {getCompanyLogotype, getCompanyName} from '../../helpers/data'
+import {getCompanyProfileInfo, getCompanyName} from '../../helpers/data'
 
 
 const styles = (theme) => ({
@@ -92,7 +92,7 @@ class Bookingmap extends React.PureComponent {
 
   getBuyerInfo(boothId) {
     const { company } = this.getStatus(boothId);
-    return { cname2 : getCompanyName(company), logotype : getCompanyLogotype(company) };
+    return { cname2 : getCompanyName(company), logotype : getCompanyProfileInfo(company, "thumbnail") };
   }
 
   getDefaultSize(groupId) {

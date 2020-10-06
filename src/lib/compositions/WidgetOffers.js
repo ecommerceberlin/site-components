@@ -3,7 +3,7 @@ import React from 'react';
 import Datasource from '../datasources/Offers'
 import Offer from '../components/Offer'
 import get from 'lodash/get'
-import {getCompanyLogotype} from '../helpers/data'
+import {getCompanyProfileInfo} from '../helpers/data'
 import {Centered} from '../components/MyLayouts'
 import MyTypography from '../components/MyTypography'
 import Wrapper from '../components/Wrapper'
@@ -27,7 +27,7 @@ const WidgetOffers = ({divider, ...rest}) => (
     {promoted.map( ex => <Offer 
     key={ex.id} 
         id={ex.id}
-        imageSrc={getCompanyLogotype(ex)}
+        imageSrc={ getCompanyProfileInfo(ex, "thumbnail") }
         text={get(ex, "profile.expo")}
         name={get(ex, "profile.name")}
         primary={true}
@@ -44,7 +44,7 @@ const WidgetOffers = ({divider, ...rest}) => (
     {rest.map( ex => <Offer 
         key={ex.id} 
         id={ex.id}
-        imageSrc={getCompanyLogotype(ex)}
+        imageSrc={ getCompanyProfileInfo(ex, "thumbnail") }
         text={get(ex, "profile.expo")}
         name={get(ex, "profile.name")}
         primary={false}

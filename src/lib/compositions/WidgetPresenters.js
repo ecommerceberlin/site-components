@@ -2,7 +2,7 @@ import React from 'react';
 
 import Wrapper from '../components/Wrapper'
 import People from '../components/People'
-import Datasource from '../datasources/Presenters'
+import Presenters from '../datasources/Presenters'
 
 
 
@@ -32,7 +32,7 @@ const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, disable
 
         <Wrapper label={label} secondaryLabel={secondaryLabel}>
     
-        <Datasource  
+        <Presenters  
             limit={limit}
             random={random}
             filter={enhancedFilter}  
@@ -44,7 +44,7 @@ const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, disable
                 text={ bio ? undefined : (item) => "" }
             />
     
-        }</Datasource>
+        }</Presenters>
         
         </Wrapper> 
     
