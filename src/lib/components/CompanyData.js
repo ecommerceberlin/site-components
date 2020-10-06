@@ -8,7 +8,7 @@ import Tabs from '@material-ui/core/Tabs';
 
 import Tab from './MyTab';
 import CompanyTabContainer from './CompanyTabContainer'
-import { getRecord } from '../redux/selectors'
+import { SingleRecordSelector } from '../redux/selectors'
 
 
 const findSub = (sources, profile) => {
@@ -18,7 +18,7 @@ const findSub = (sources, profile) => {
 
 const getCompanyProfileSelector = createSelector(
 
-  getRecord,
+  SingleRecordSelector,
 
   data => {
 

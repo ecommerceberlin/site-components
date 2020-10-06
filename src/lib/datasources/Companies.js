@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-import { FilteredCompanies } from '../redux/selectors'
+import { FilteredCompanies, KeyedCompaniesSelector, SingleCompanySelector } from '../redux/selectors'
 import {resourceFetchRequest } from '../components/redux'
 
 // import { getCompanyProfileInfo, filterCompanyInstances } from '../helpers';
@@ -21,11 +21,11 @@ class Companies extends React.Component {
 
   render(){
 
-    const {children, data} = this.props
+    const {children, data, keyed, record} = this.props
 
     if(children){
 
-      return children(data)
+      return children(data, keyed, record)
 
     }
 
@@ -42,8 +42,11 @@ Companies.propTypes = {
 
 Companies.defaultProps = {
   data : [],
+  keyed: {},
+  record: {},
   keywords : [],
-  keyword : ""
+  keyword : "",
+  id: null
 };
 
 export default connect(
@@ -52,7 +55,9 @@ export default connect(
 
     const mapStateToProps = (state, props) => {
       return {
-        data : FilteredCompanies(state, props)
+        data : FilteredCompanies(state, props),
+        keyed : KeyedCompaniesSelector(state, props),
+        record: SingleCompanySelector(state, props)
       }
     }
     return mapStateToProps

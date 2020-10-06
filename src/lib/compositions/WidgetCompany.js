@@ -18,22 +18,13 @@ import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import WidgetCompanyBookingmap from './WidgetCompanyBookingmap'
 
-const WidgetCompany = ({id, map, router}) => {
+const WidgetCompany = ({slug, map, router}) => {
 
   return (
 
-    <SingleRecord endpoint="companies" id={id}>{
-    (company) =>
-    <React.Fragment>
-    <MyHead
-        image={getCompanyAltOgImage(company, "/exhibitors")}
-        url={"/companies"}
-        titleLabel={[
-          'companies.opengraph.title',
-          { name: getCompanyProfileInfo(company, 'name') }
-        ]}
-      />
-  
+    <SingleRecord endpoint="companies" slug={slug}>{
+    (company) => <React.Fragment>
+   
       <Wrapper label="">
   
       <TwoColsLayout
@@ -49,7 +40,7 @@ const WidgetCompany = ({id, map, router}) => {
           </Centered>
   
           <div style={{marginTop: 10}}>
-            <CompanyData id={id} endpoint="companies" />
+            <CompanyData slug={slug} endpoint="companies" />
           </div>
         
         </div>  

@@ -50,6 +50,7 @@ WidgetCompanyBookingmap.propTypes = {
 };
 
 WidgetCompanyBookingmap.defaultProps = {
+  company: {},
   label: 'exhibitors.booth_location_full',
   disabledTicketIds: [],
   steps: [],

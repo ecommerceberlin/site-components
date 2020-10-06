@@ -77,10 +77,10 @@ export const SortedTicketsSelector = createSelector(
   tickets => sortBy(tickets, ['start'])
 )
 
-export const getRecord = (state, props) => {
-  const key = `${props.endpoint}/${props.id}`
-  return key in state.resources ? state.resources[key] : {}
-}
+// export const getRecord = (state, props) => {
+//   const key = `${props.endpoint}/${props.id}`
+//   return key in state.resources ? state.resources[key] : {}
+// }
 
 export const SettingsSelector = createSelector(
   getSettings,
@@ -89,8 +89,22 @@ export const SettingsSelector = createSelector(
 )
 
 export const SingleRecordSelector = createSelector(
-  getRecord,
-  data => data
+  getResources,
+  (_, props) => "id" in props && props.id > 0 ? `${props.endpoint}/${props.id}` : null,
+  (_, props) => "slug" in props && props.slug && props.slug.length > 3 ? `${props.endpoint}/${props.slug}` : null,
+  (resources, id, slug) => {
+
+    if(id && id in resources){
+      return resources[id]
+    }
+
+    if(slug && slug in resources){
+      return resources[slug]
+    }
+
+    return {}
+
+  }
 )
 
 export const FilteredExhibitors = createSelector(
@@ -124,12 +138,49 @@ export const MobileAwareFilteredAllExhibitors = createSelector(
   }
 )
 
+/**
+ * COMPANIES
+ */
 
 export const FilteredCompanies = createSelector(
   getCompanies,
   getFilteringProps,
   (companies, props) => processArrayData(companies, props)
 )
+
+export const KeyedCompaniesSelector = createSelector(
+  getCompanies,
+  (companies) => keyBy(companies, "id")
+)
+
+export const KeyedBySlugCompaniesSelector = createSelector(
+  getCompanies,
+  (companies) => keyBy(companies, "slug")
+)
+
+export const SingleCompanySelector = createSelector(
+  KeyedCompaniesSelector,
+  KeyedBySlugCompaniesSelector,
+  (_, props) => "id" in props && props.id > 0 ? props.id : null,
+  (_, props) => "slug" in props && props.slug && props.slug.length > 3 ? props.slug : null,
+  (keyedById, keyedBySlug, id, slug) => {
+
+    if(id && id in keyedById){
+      return keyedById[id]
+    }
+
+    if(slug && slug in keyedBySlug){
+      return keyedBySlug[slug]
+    }
+
+    return {}
+
+  }
+)
+
+/**
+ * COMPANIES
+ */
 
 export const ExhbitorsWithOffer = createSelector(
   getExhibitors,

@@ -8,8 +8,8 @@ class SingleRecord extends React.PureComponent {
 
   componentDidMount(){
 
-      const {resourceFetchRequest, data, endpoint, id} = this.props
-      const key = `${endpoint}/${id}`
+      const {resourceFetchRequest, data, endpoint, id, slug} = this.props
+      const key = id && id > 0 ? `${endpoint}/${id}` : `${endpoint}/${slug}`;
 
       if(! "id" in data){
         resourceFetchRequest(key)
@@ -28,10 +28,8 @@ class SingleRecord extends React.PureComponent {
 SingleRecord.propTypes = {
   data: PropTypes.object.isRequired,
   endpoint : PropTypes.string.isRequired,
-  id : PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired
+  id : PropTypes.number, 
+  slug: PropTypes.string
 };
 
 SingleRecord.defaultProps = {

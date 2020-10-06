@@ -84,8 +84,9 @@ export const getInviteOgImage = (text = '') => {
 
 
 
+//
 
-export const getCompanyAltOgImage = (company, url) => {
+export const getCompanyAltOgImage = (company, url, template = "") => {
   const params = getUrlParams(url);
 
   //logotype is default....is we have something different we try to use it
@@ -107,7 +108,7 @@ export const getCompanyAltOgImage = (company, url) => {
     }
   }
 
-  return getCompanyOgImage(company, url);
+  return getCompanyOgImage(company, url, template);
 };
 
 export const getCdnAssetVersion = (url) => {
@@ -146,7 +147,7 @@ export const wrapImage = (
   //return `https://res.cloudinary.com/ecommerceberlin/image/upload/c_fit,l_${overlayImage},${params}/${overlayImageVersion}/${baseImage}.png`;
 };
 
-export const getCompanyOgImage = (company, url) => {
+export const getCompanyOgImage = (company, url, template="ebe5_template_") => {
 
   const params = getUrlParams(url);
   const cdn = getCdnResource(company, 'logotype', false);
@@ -178,7 +179,7 @@ export const getCompanyOgImage = (company, url) => {
   return wrapImage(
     `c_${company.id}_logotype`, 
     version,
-    `ebe5_template_${companyLang}`,
+    `${template}${companyLang}`,
     undefined,
     'y_12'
     );
