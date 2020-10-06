@@ -4,8 +4,7 @@ import { getUrlParams } from './links';
 
 export const defaultLocale = 'pl';
  
-export const getCompanyProfileInfo = (company, key) =>
-  _get(company, `profile.${key}`, '');
+export const getCompanyProfileInfo = (company, key, replacement = "") => _get(company, `profile.${key}`, replacement);
 
 
 export const getCompanyName = (company) => {
@@ -84,32 +83,56 @@ export const getInviteOgImage = (text = '') => {
 
 
 
-//
+/** 
+ * Checked. 
+ * getCompanyAltOgImage replacement 
+ * */
 
-export const getCompanyAltOgImage = (company, url, template = "") => {
-  const params = getUrlParams(url);
+export const getCompanyOpenGraphImage = (company, template = "", defaultLang = "en") => {
+  
+  const opengraph_image = getCompanyProfileInfo(company, "opengraph_image")
+  const opengraph_image_cdn = getCompanyProfileInfo(company, "opengraph_image_cdn")
 
-  //logotype is default....is we have something different we try to use it
-  if (
-    'utm_content' in params &&
-    params.utm_content.indexOf('logotype') === -1
-  ) {
-    //clear parameters utm_content params?
-    const cdn = getCdnResource(company, params.utm_content, false);
-    const version = getCdnAssetVersion(cdn);
+  //if we have opengraph_image_cdn - lets serve it!
 
-    if (cdn) {
-      return wrapImage(
-        `c_${company.id}_${params.utm_content}`,
-        version,
-        'template_raw',
-        'c_fit,h_504,w_960'
-      );
-    }
+  if (/cloudinary/.test(opengraph_image_cdn) ){
+    return resizeCloudinaryImage(opengraph_image_cdn, 960, 504);
   }
 
-  return getCompanyOgImage(company, url, template);
+  // if(/http/.test(opengraph_image)){
+  //   return opengraph_image;
+  // }
+ 
+  return getCompanyOgImage(company, template, defaultLang);
 };
+
+export const wrapImage = (
+  overlayImage,
+  overlayImageVersion,
+  baseImage,
+  params = `c_fit,h_210,w_800`,
+  baseImageParams = ''
+) => {
+
+  return `https://res.cloudinary.com/eventjuicer/image/upload/${params}/u_${baseImage},${baseImageParams}/${overlayImageVersion}/${overlayImage}.jpg`; 
+
+};
+
+export const getCompanyOgImage = (company, template="ebe5_template_", defaultLang = "en") => {
+
+  const cdn = getCdnResource(company, 'logotype', false);
+  const version = getCdnAssetVersion(cdn);
+  const companyLang = getCompanyProfileInfo(company, 'lang') || defaultLang;
+ 
+  return wrapImage(
+    `c_${company.id}_logotype`, 
+    version,
+    `${template}${companyLang}`,
+    undefined,
+    'y_5'
+    );
+};
+
 
 export const getCdnAssetVersion = (url) => {
 
@@ -118,6 +141,11 @@ export const getCdnAssetVersion = (url) => {
   return version ? `v${version[1]}` : "";
 
 } 
+
+/** end */
+
+ 
+
 
 export const getCompanyLogotype = (company, scale = true, dumb = true) => {
   const cdn = getCdnResource(company, 'logotype', true);
@@ -130,60 +158,7 @@ export const getCompanyLogotype = (company, scale = true, dumb = true) => {
   return dumb ? '/logo-placeholder.jpg' : null;
 };
 
-export const wrapImage = (
-  overlayImage,
-  overlayImageVersion,
-  baseImage,
-  params = `c_fit,h_220,w_800`,
-  baseImageParams = ''
-) => {
 
-  /* 
-  http://res.cloudinary.com/demo/image/upload/w_90,g_center/u_coffee_cup,w_400,h_250,c_fill,g_south/fl_layer_apply/nice_couple.jpg
-  */
-
-  return `https://res.cloudinary.com/eventjuicer/image/upload/${params}/u_${baseImage},${baseImageParams}/${overlayImageVersion}/${overlayImage}.jpg`; 
-
-  //return `https://res.cloudinary.com/ecommerceberlin/image/upload/c_fit,l_${overlayImage},${params}/${overlayImageVersion}/${baseImage}.png`;
-};
-
-export const getCompanyOgImage = (company, url, template="ebe5_template_") => {
-
-  const params = getUrlParams(url);
-  const cdn = getCdnResource(company, 'logotype', false);
-  const version = getCdnAssetVersion(cdn);
-
-  if (!cdn) {
-    return getCompanyLogotype(company, true);
-  }
-
-  let companyLang = getCompanyProfileInfo(company, 'lang') || defaultLocale;
-
-  //use the lang forced by utm_content!
-
-  if('utm_content' in params){
-    //temp solution!
-    if(params.utm_content.indexOf(",en") > -1){
-      companyLang = "en";
-    }
-
-    if(params.utm_content.indexOf(",de") > -1){
-      companyLang = "de";
-    }
-
-    if(params.utm_content.indexOf(",pl") > -1){
-      companyLang = "pl"; 
-    }
-  }
-  
-  return wrapImage(
-    `c_${company.id}_logotype`, 
-    version,
-    `${template}${companyLang}`,
-    undefined,
-    'y_12'
-    );
-};
 
 export const filterCompanyInstances = (company, eventId) =>
   _filter(company, function(i) {

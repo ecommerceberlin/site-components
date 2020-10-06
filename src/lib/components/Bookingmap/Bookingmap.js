@@ -181,13 +181,13 @@ class Bookingmap extends React.PureComponent {
   render() {
 
 
-    const { bookingmap, classes, zoom, height, boothStyleMapping } = this.props;
+    const { bookingmap, classes, zoom, height, defaultHeight, boothStyleMapping } = this.props;
     return (
       
       <div
         className={classes.scrollableContainer}
         style={{
-          height: height * zoom
+          height: !isNaN(height) ? height * zoom : defaultHeight * zoom
         }}
       >
        
@@ -230,6 +230,7 @@ class Bookingmap extends React.PureComponent {
 Bookingmap.defaultProps = {
   zoom: 1,
   height: 750,
+  defaultHeight: 500,
   boothsSelected : [],
   formdata : {},
   ticketgroups : {},

@@ -25,13 +25,9 @@ export const generateSlugLinkParams = (prefix, param) => ({
   href: `/${prefix}?slug=${param}`
 });
 
-export const fullUrl = subpage => {
-  const prefix = `https://${process.env.NEXT_PUBLIC_PROJECT}`;
-  if (subpage.substr(0, prefix.length) !== prefix) {
-    return prefix + subpage;
-  }
-
-  return subpage;
+export const fullUrl = path => {
+  const domain = `https://${process.env.NEXT_PUBLIC_PROJECT}`;
+  return `${domain}/${ path.replace(/^\/|\/$/g, '') }`;
 };
 
 export const canonical = url => url;

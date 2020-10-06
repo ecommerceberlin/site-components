@@ -6,7 +6,6 @@ import {withRouter} from 'next/router'
 import { MyHead } from '../next';
 
 import {
-  getCompanyAltOgImage,
   getCompanyProfileInfo,
 } from '../helpers/data';
 
