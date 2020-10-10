@@ -31,6 +31,7 @@ const WidgetRegForm = ({
     right, 
     baseLabel, 
     summary,
+    role,
     ...rest }) => (
 
 
@@ -42,20 +43,17 @@ const WidgetRegForm = ({
     <Wrapper label={get(`${setting}.label`, label)} secondaryLabel={get(`${setting}.secondaryLabel`, secondaryLabel)} {...rest}  >
       <Grid container spacing={1} justify="space-between">
         <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
-
           <StepForm
-          baseLabel={ get(`${setting}.baseLabel`, baseLabel) }
-          data={ get(`${setting}.data`, data) }
-          ticketId={ get(`${setting}.ticket_id`, ticket_id) }
-          fields={fieldsWithOptions}
-          start={get(`${setting}.start`, start)}
-          template={ get(`${setting}.email_template`, email_template) }
-          api={ get("visitor.api") }
-          summary={summary}
+            baseLabel={ get(`${setting}.baseLabel`, baseLabel) }
+            data={ get(`${setting}.data`, data) }
+            ticketId={ get(`${setting}.ticket_id`, ticket_id) }
+            fields={fieldsWithOptions}
+            start={get(`${setting}.start`, start)}
+            template={ get(`${setting}.email_template`, email_template) }
+            api={ get("visitor.api") }
+            role={ role }
           />
-
         </Grid>
-    
         {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
           {typeof right === "string" ? <img src={ get(`${setting}.background`, right) } className={classes.lanyard} /> : right}
         </Grid> }
@@ -69,14 +67,13 @@ const WidgetRegForm = ({
 );
 
 WidgetRegForm.defaultProps = {
-
   links: [],
   secondaryLabel: null,
   email_template : "",
   options: {},
   ticket_id : 0,
+  role: "visitor",
   data : {},
-  summary: null,
   right: null
 };
 
