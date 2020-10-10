@@ -74,5 +74,6 @@ export { default as VerticalTimeline } from './VerticalTimeline'
 export { default as ProfileLogotype } from './ProfileLogotype'
 
 export * from './Bookingmap';
+export * from './Meetups';
 export * from './MyLayouts';
 export * from './redux';

@@ -10,42 +10,56 @@ import MyButton from '../MyButton'
 
 import { requestMeetup } from './redux';
 import CheckEmailForm from './CheckEmailForm'
-import {VisitorStepForm } from '../../compositions/Visitor'
 
-import {dialogShow} from '../redux'
+import {dialogShow, pageActionShow, pageActionHide} from '../redux'
+
+
 const styles = {
 
 }
 
 class Button extends React.Component {
 
-    render(){
+
+    componentDidMount(){
+
+        const {pageActionShow} = this.props;
+
+        pageActionShow( this.renderButton() )
+    }
+
+    componentWillUnmount(){
+        pageActionHide();
+    }
+
+    renderButton(){
 
         const {label, company_id, requestMeetup, dialogShow} = this.props;
 
-        return ( 
-        
-        <div style={{margin: 100}}>
-        
-          
-            
-            <MyButton 
-                label="asd" onClick={() => dialogShow({
+        return (<div style={{marginRight: 10}}>
+    
+            <MyButton label={label} onClick={() => dialogShow({
                     title: translate(label),
                     content: <div style={{marginTop: 40}}>
-                      <CheckEmailForm />
-                      <VisitorStepForm/>
+                      <CheckEmailForm  />
+                      {/* <WidgetVisitor/> */}
                     </div>,
                     buttons: []
             })} />
 
         </div>)
     }
+    
+    render(){
+
+
+        return null;
+    }
 
 }
 
 Button.defaultProps = {
-    label : "costam",
+    label : "meetup.schedule",
     company_id : 0,
     register : <div>registration form</div>
 }
@@ -53,7 +67,7 @@ Button.defaultProps = {
 const enhance = compose(
     withStyles(styles),
   //  translate,
-    connect(null, {requestMeetup, dialogShow})
+    connect(null, {requestMeetup, dialogShow, pageActionShow, pageActionHide})
 )
 
 export default enhance(Button)
