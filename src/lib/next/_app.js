@@ -7,7 +7,7 @@ import  {theme}  from '../material-ui';
 import * as gtag from '../services/gtag';
 import {DetectLocale, TranslationProvider} from '../i18n';
 import Layout from '../layouts/LayoutMain'
-import {pageLoadingStart, pageLoadingEnd } from '../components/redux'
+import {pageLoadingStart, pageLoadingEnd, pageActionHide } from '../components/redux'
 import { connect } from 'react-redux';
 
 
@@ -17,7 +17,7 @@ export function reportWebVitals(metric) {
 //  }
 }
 
-const WrappedApp = ({Component, pageProps, head, router, pageLoadingStart, pageLoadingEnd}) => {
+const WrappedApp = ({Component, pageProps, head, router, pageLoadingStart, pageLoadingEnd, pageActionHide}) => {
 
   useEffect(() => {
     
@@ -50,13 +50,25 @@ const WrappedApp = ({Component, pageProps, head, router, pageLoadingStart, pageL
         jssStyles.parentElement.removeChild(jssStyles);
     }
 
+   
+
+
     return () => {
       router.events.off('routeChangeStart', handleStart)
       router.events.off('routeChangeComplete', handleComplete)
       router.events.off('routeChangeError', handleComplete)
+
+
+     // pageActionHide();
+
     }
 
   })
+  
+  /***
+   * https://stackoverflow.com/questions/53464595/how-to-use-componentwillmount-in-react-hooks
+   * empty array as second argument = load only once
+  */
 
   return (
     
@@ -77,7 +89,7 @@ const WrappedApp = ({Component, pageProps, head, router, pageLoadingStart, pageL
 
 }
 
-export default connect(undefined, {pageLoadingStart, pageLoadingEnd})(WrappedApp);
+export default connect(undefined, {pageLoadingStart, pageLoadingEnd, pageActionHide})(WrappedApp);
 
 
 
