@@ -13,39 +13,9 @@ import FormSuccess from './FormSuccess';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { formActionStarted, formActionFinished } from './redux'
-
-
-/*
-dirty : false
-errors : {}
-handleBlur : ƒ (e)
-handleChange : ƒ (e)
-handleReset : ƒ ()
-handleSubmit : ƒ (e)
-initialValues : {}
-isSubmitting : true
-isValid : false
-locale : "pl"
-resetForm : ƒ (nextValues)
-setError : ƒ (error)
-setErrors : ƒ (errors)
-setFieldError : ƒ (field, message)
-setFieldTouched : ƒ (field, touched, shouldValidate)
-setFieldValue : ƒ (field, value, shouldValidate)
-setFormikState : ƒ (s, callback)
-setStatus : ƒ (status)
-setSubmitting : ƒ (isSubmitting)
-setTouched : ƒ (touched)
-setValues : ƒ (values)
-submitForm : ƒ ()
-touched : {}
-translate : ƒ ()
-user : {}
-validateForm : ƒ (values)
-validateOnBlur : true
-validateOnChange : true
-values : {}
-*/
+import { addToken } from '../helpers';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import MyButton from '../components/MyButton'
 
 class StepForm extends React.Component {
 
@@ -78,63 +48,74 @@ class StepForm extends React.Component {
 
   componentDidUpdate(){
     
-    const {status} = this.props;
+    const {status, formActionStarted, formActionFinished, actionStartedProps, actionFinishedProps} = this.props;
 
     if( this.isStarted() ) {
-      formActionStarted({
-        action : "registration_start", 
-        category : "visitors", 
-        label : "method",
-        value : ""
-      });
+      formActionStarted(actionStartedProps);
     }
 
-    if(status && status === 'ok') {
-      formActionFinished({
-          action : "registration_success", 
-          category : "visitors", 
-          label : "method",
-          value : ""
-      });    
+    if(status && "data" in status) {
+      formActionFinished(actionFinishedProps);    
+
+      if('token' in status.data){
+        addToken(status.data.token);
+      }
     }
 
-   // console.log("updated")
+ //  console.log("updated")
+  }
+
+  renderResetButton(label = "reset"){
+
+    const {handleReset} = this.props;
+
+    return <div><MyButton variant="outlined" color="primary" size="medium" onClick={handleReset} label={label} /></div>
+  
   }
 
   render(){
 
     const {
-      values,
-      touched,
-      errors,
-      dirty,
+      // values,
+      // touched,
+      // errors,
+      // dirty,
+      // isValid,
+      // handleChange,
+      // handleBlur,
       status,
-      isValid,
-      handleChange,
-      handleBlur,
       handleSubmit,
-      handleReset,
       isSubmitting,
-      success,
       fields,
       start,
-      baseLabel
+      baseLabel,
+      onSuccess,
+      onError
     } = this.props;
 
     const filteredFields = filterFields(fields, start);
     const startedFields = startFields(fields, start);
+    const showStartFields = start && Array.isArray(start) && start.length;
 
-    if (status && status === 'ok') {
-      return <FormSuccess baseLabel={baseLabel} />;
+    if(isSubmitting){
+      return <CircularProgress />
+    }
+
+    if (status){
+      if( "data" in status){
+          return <div>{onSuccess(this.props)}{this.renderResetButton("reset")}</div>;
+      }
+      if( "error" in status){
+          return <div>{onError(this.props)}{this.renderResetButton("reset")}</div>;
+      }
     }
 
     return (
       
       <form onSubmit={handleSubmit}>
-
       <Typography template="legend" label={`${baseLabel}.form.intro`} />
 
-      {start.length ? startedFields.map( (data, idx) => {
+      {showStartFields ? startedFields.map( (data, idx) => {
 
         if("options" in data && data.options.length){
           return (<SelectInput 
@@ -156,7 +137,7 @@ class StepForm extends React.Component {
 
       ) : null}
 
-      {(this.isStarted() || !start) && filteredFields.length
+      {(this.isStarted() || !showStartFields) && filteredFields.length
         ? filteredFields.map( (data, idx) => {
 
           if("options" in data && data.options.length){
@@ -190,7 +171,22 @@ StepForm.defaultProps = {
   api: "https://api.eventjuicer.com/v1/public/hosts/...",
   template : 'sparkpost-remplate',
   ticketId : 0,
-  baseLabel : "visitors"
+  baseLabel : "visitors",
+  onSuccess: (props) => <FormSuccess baseLabel={props.baseLabel} />,
+  onError: (props) => <div>error</div>,
+  actionStartedProps: {
+    action : "registration_start", 
+    category : "visitors", 
+    label : "method",
+    value : ""
+  },
+  actionFinishedProps: {
+    action : "registration_success", 
+    category : "visitors", 
+    label : "method",
+    value : ""
+  },
+  start: null
 };
 
 const enhance = compose(

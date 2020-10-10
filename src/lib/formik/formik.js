@@ -1,51 +1,41 @@
+
 import { withFormik } from 'formik';
 import fetch from 'isomorphic-unfetch';
-
-import { addToken } from '../helpers';
 import { validationSchema } from './validations';
 
 export const filterFields = (fields, start = []) => {
-  //fields array of objects
-  //start array
   return Array.isArray(start) && start.length ? fields.filter(item => start.indexOf(item.name) === -1) : fields;
 };
 
 export const startFields = (fields, start = []) => {
-  //fields array of objects
-  //start array
   return Array.isArray(start) && start.length ? fields.filter(item => start.indexOf(item.name) > -1) : [];
 };
 
 export default withFormik({
   validationSchema: validationSchema,
-  isInitialValid: false,
+  validateOnMount: false,
   validateOnBlur: true,
   validateOnChange: true,
-  //RE-RENDER on wrapped component props change?
   enableReinitialize: false,
   mapPropsToValues: ({ data }) => ({
     ...data
   }),
   handleSubmit: (payload, { props, setSubmitting, setErrors, setStatus }) => {
 
-
-    if(! "ticketId" in props || props.ticketId < 1){
-      console.log("passed props", props);
-      setStatus('error');
+    if( !("ticketId" in props) && !("role" in props) ){
+      console.error("No ticketId/role set...", props);
+      setStatus({error: {"message": "no ticketId/role set...."}});
       return;
     }
-
-    //we should have redux actions?
     
     const data = {
       fields: payload,
-      tickets: { [props.ticketId]: 1 },
+      tickets: "ticketId" in props? { [props.ticketId]: 1 } : {},
+      role: "role" in props? props.role: null,
       template : "template" in props ? props.template : "pass template by props or settings",
       locale : "locale" in props ? props.locale : "",
       cc : "cc" in props ? props.cc : "" 
     }
-
-    // console.log(data); return;
 
     setSubmitting(true);
 
@@ -66,17 +56,9 @@ export default withFormik({
       .then(data => {
 
         setSubmitting(false);
+        setStatus(data);
 
-        if ('data' in data && 'token' in data.data) {
-          addToken(data.data.token);
-          setStatus('ok');
-        }
-
-        //error?
-        if ('error' in data) {
-          setStatus('error');
-        }
       });
   },
-  displayName: 'MyForm'
+  displayName: 'MyFormikForm'
 });
