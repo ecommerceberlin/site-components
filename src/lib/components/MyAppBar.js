@@ -51,10 +51,10 @@ const styles = theme => ({
 
 function MyAppBar(props) {
 
-  const { classes, loading, drawerShow, dialogShow, cart, position } = props;
+  const { classes, loading, drawerShow, dialogShow, cart, position, page_action } = props;
 
   const noItems = Object.keys(cart).length;
-
+ 
   return (
     <div
       className={classNames(classes.root, {
@@ -89,9 +89,7 @@ function MyAppBar(props) {
             }</Typography>
             </Link>
 
-          
-
-            {get("appbar.links", []).map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
+            {page_action || get("appbar.links", []).map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
 
             <LanguageSelect locales={ get("system.available_locales", []) } /> 
           </>
@@ -122,7 +120,8 @@ const enhance = compose(
   connect(
     state => ({
       cart: state.app.cart,
-      loading: "loading" in state.visuals ? state.visuals.loading : false
+      loading: "loading" in state.visuals ? state.visuals.loading : false,
+      page_action: "page_action" in state.visuals ? state.visuals.page_action : null
     }),
     {drawerShow, dialogShow}
   ),
