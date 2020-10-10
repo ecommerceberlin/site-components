@@ -8,10 +8,12 @@ import {
   DIALOG_SHOW, 
   DIALOG_HIDE,
   SNACKBAR_SHOW, 
-  SNACKBAR_HIDE
+  SNACKBAR_HIDE,
+  PAGE_ACTION_SHOW,
+  PAGE_ACTION_HIDE
 } from '../../components/redux';
 
-const reducer = (state = { faqs: [], loading: false, drawer: false, dialog: {}, snackbar: {} }, action) => {
+const reducer = (state = { faqs: [], loading: false, drawer: false, dialog: {}, snackbar: {}, page_action: null }, action) => {
 
 switch (action.type) {
   
@@ -59,6 +61,15 @@ switch (action.type) {
 
   case SNACKBAR_HIDE:
   return {...state, snackbar: {}};
+  break;
+
+
+  case PAGE_ACTION_SHOW:
+  return {...state, page_action: action.payload};
+  break;
+
+  case PAGE_ACTION_HIDE:
+  return {...state, page_action: null};
   break;
 
 

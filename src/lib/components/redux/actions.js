@@ -255,3 +255,17 @@ export function pageLoadingEnd() {
   }
 }
 
+
+
+export function pageActionShow(payload) {
+  return {
+    type: Types.PAGE_ACTION_SHOW,
+    payload: payload
+  }
+}
+
+export function pageActionHide() {
+  return {
+    type: Types.PAGE_ACTION_HIDE
+  }
+}
