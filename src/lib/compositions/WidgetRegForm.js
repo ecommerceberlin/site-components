@@ -32,12 +32,13 @@ const WidgetRegForm = ({
     baseLabel, 
     summary,
     role,
+    legend,
     ...rest }) => (
 
 
   <Settings>{(get) => {
  
-  const fieldsWithOptions = get(`${setting}.fields`, fields).map(field => "options" in field && field.options in options ? {...field, options: options[field.options]} : field)
+  const fieldsWithOptions = get(`${setting}.fields`, fields).map(field => "options" in field && options && field.options in options ? {...field, options: options[field.options]} : field)
 
   return (
     <Wrapper label={get(`${setting}.label`, label)} secondaryLabel={get(`${setting}.secondaryLabel`, secondaryLabel)} {...rest}  >
@@ -52,6 +53,7 @@ const WidgetRegForm = ({
             template={ get(`${setting}.email_template`, email_template) }
             api={ get("visitor.api") }
             role={ role }
+            legend={ legend }
           />
         </Grid>
         {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>

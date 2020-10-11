@@ -1,16 +1,12 @@
 
 import React from 'react';
-
 import compose from 'recompose/compose';
-
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { translate } from '../../i18n'
 import MyButton from '../MyButton'
-
 import { requestMeetup } from './redux';
-import CheckEmailForm from './CheckEmailForm'
-
+import WidgetMeetup from '../../compositions/WidgetMeetup'
 import {dialogShow, pageActionShow, pageActionHide} from '../redux'
 
 
@@ -41,8 +37,7 @@ class Button extends React.Component {
             <MyButton label={label} onClick={() => dialogShow({
                     title: translate(label),
                     content: <div style={{marginTop: 40}}>
-                      <CheckEmailForm  />
-                      {/* <WidgetVisitor/> */}
+                      <WidgetMeetup  />
                     </div>,
                     buttons: []
             })} />

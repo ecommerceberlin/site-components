@@ -90,7 +90,8 @@ class StepForm extends React.Component {
       start,
       baseLabel,
       onSuccess,
-      onError
+      onError,
+      legend
     } = this.props;
 
     const filteredFields = filterFields(fields, start);
@@ -113,7 +114,8 @@ class StepForm extends React.Component {
     return (
       
       <form onSubmit={handleSubmit}>
-      <Typography template="legend" label={`${baseLabel}.form.intro`} />
+
+      <Typography template="legend" label={(legend || `${baseLabel}.form.intro`)} />
 
       {showStartFields ? startedFields.map( (data, idx) => {
 
@@ -186,7 +188,8 @@ StepForm.defaultProps = {
     label : "method",
     value : ""
   },
-  start: null
+  start: null,
+  legend: null
 };
 
 const enhance = compose(

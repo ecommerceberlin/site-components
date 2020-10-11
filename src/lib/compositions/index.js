@@ -66,3 +66,4 @@ export { default as WidgetVisitor } from './WidgetVisitor'
 
 export { default as WidgetVoteWithLinkedIn } from './WidgetVoteWithLinkedIn'
 export { default as WidgetBanner } from './WidgetBanner'
+export { default as WidgetMeetup } from './WidgetMeetup'
