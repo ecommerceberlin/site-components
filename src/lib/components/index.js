@@ -72,6 +72,7 @@ export { default as WinnerCategory } from './WinnerCategory'
 export { default as VerticalTimeline } from './VerticalTimeline'
 
 export { default as ProfileLogotype } from './ProfileLogotype'
+export { default as TableList } from './TableList'
 
 export * from './Bookingmap';
 export * from './Meetups';

@@ -3,14 +3,15 @@ import {
     People,
     Centered,
     KeywordSelect,
-    VoteStatus
+    VoteStatus,
+    TableList
 } from '../components';
 
 import CallForPapersDatasource from '../datasources/CallForPapers'
 import VotesDatasource from '../datasources/Votes'
 
 
-const CallForPapers = ({show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
+const CallForPapers = ({renderAs, show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
 
 return (
 
@@ -27,19 +28,23 @@ return (
        sort={sort}
    >{({all, filtered, keywords}) => (
 
+    <React.Fragment>
 
-    <VotesDatasource>{(votesData) => (
-                
-        <React.Fragment>
-
-        <Centered>
+     <Centered>
           <KeywordSelect href="/vote/categories/[category]" as={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} />
         </Centered> 
 
+
+    <VotesDatasource>{(votesData) => (
+                
+      
+
+                <React.Fragment>
+
         <VoteStatus {...votesData}  /> 
 
-        {keyword && <People 
-            data={keyword ? filtered : all}
+        {keyword && renderAs==="avatars" && <People 
+            data={filtered}
             link={link} 
             title={item => <React.Fragment>{`${item.presenter}, ${item.position}`} <strong>{item.cname2}</strong> </React.Fragment> }
             subtitle={item => item.presentation_title}
@@ -47,11 +52,32 @@ return (
             voted={votesData.keyed}
             moreLabel="common.vote_details"
         />}
+
+
+         {keyword && renderAs==="table" && <TableList 
+            rows={filtered}
+            columns={[
+                {render: "logotype"},
+                {render: "avatar"},
+                {render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment> },
+                {render: (row) => row.presentation_title, main: true},
+                {render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
+            ]}
+            rowStyling={(row, i) => i < 6}
+            // link={link} 
+            // title={item =>  }
+            // subtitle={item => item.presentation_title}
+            // text={item => show_votes ? `/${item.votes} votes/` : null}
+            // voted={votesData.keyed}
+           
+
+        />}
             
         </React.Fragment>
 
         )}</VotesDatasource>
 
+        </React.Fragment>
 
    )}
     
@@ -79,7 +105,8 @@ CallForPapers.defaultProps = {
         return {as : `/vote/${item.id}`, href : `/vote/[id]`}
     },
     intro : null,
-    show_votes : false
+    show_votes : false,
+    renderAs : "avatars"
 }
 
 
