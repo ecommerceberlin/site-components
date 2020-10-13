@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
   table: {
     minWidth: 650,
+    borderCollapse: "separate", 
+    borderSpacing: "0 3px", 
   },
 
   root: {
@@ -36,11 +38,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   selected: {
-    borderColor: "black",
+    borderTop: '2px solid green',
+    borderBottom: '2px solid green'
   }
 }));
 
 const Cell = ({row, column, total, selected}) => {
+
+  const classes = useStyles();
 
   const {render, link, align, ...rest} = column;
 
@@ -49,26 +54,26 @@ const Cell = ({row, column, total, selected}) => {
     switch(render){
 
       case "avatar":
-        return (<TableCell component="th" scope="row" align={align || "center"}><Avatar id={row.id} alt="" src={getSpeakerAvatar(row)} tiny={true} /></TableCell>)
+        return (<TableCell className={selected ? {root: classes.selected}: {} } component="th" scope="row" align={align || "center"}><Avatar id={row.id} alt="" src={getSpeakerAvatar(row)} tiny={true} /></TableCell>)
 
       case "logotype":
-        return (<TableCell component="th" scope="row" align={align || "center"}><ProfileLogotype data={row} tiny={true} /></TableCell>)
+        return (<TableCell className={selected ? {root: classes.selected}: {} } component="th" scope="row" align={align || "center"}><ProfileLogotype data={row} tiny={true} /></TableCell>)
 
       case "link":
-        return (<TableCell component="th" scope="row" align={align || "left"}><MyLink {...(isFunction(link) ? link(row) : {})} {...rest} /></TableCell>)
+        return (<TableCell className={selected ? {root: classes.selected}: {} } component="th" scope="row" align={align || "left"}><MyLink {...(isFunction(link) ? link(row) : {})} {...rest} /></TableCell>)
       
       default: 
-        return <TableCell component="th" scope="row" align={align || "left"}>{null}</TableCell>
+        return <TableCell className={selected ? {root: classes.selected}: {} } component="th" scope="row" align={align || "left"}>{null}</TableCell>
     }
 
   }else{
-    return <TableCell component="th" scope="row" align={align || "left"}>{column.render(row)}</TableCell>
+    return <TableCell className={selected ? {root: classes.selected}: {} } component="th" scope="row" align={align || "left"}>{column.render(row)}</TableCell>
   }
 
 
 }
 
-const TableList = ({rows, columns, primaryKey, rowStyling}) => {
+const TableList = ({rows, columns, primaryKey, selected}) => {
 
   const classes = useStyles();
   
@@ -91,7 +96,7 @@ const TableList = ({rows, columns, primaryKey, rowStyling}) => {
                 row={row} 
                 column={column} 
                 total={columns.length} 
-                selected={isFunction(rowStyling) && rowStyling(row, i)} />
+                selected={isFunction(selected) && selected(row, i)} />
               )}</TableRow>)
           )}</TableBody>
       </Table>
@@ -101,7 +106,7 @@ const TableList = ({rows, columns, primaryKey, rowStyling}) => {
 
 TableList.defaultProps = {
   primaryKey: "id",
-  rowStyling: null,
+  selected: null,
   rows: [],
   columns: []
 }

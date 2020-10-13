@@ -381,7 +381,7 @@ export const BookingMapSelector = createSelector(
 export const FilteredByKeywordExhibitors = createSelector(
   FilteredExhibitors,
   getFilteringProps,
-  (exhibitors, props) => exhibitors.filter(e => "keywords" in e.profile && e.profile.keywords.includes(props.keyword))
+  (exhibitors, props) => exhibitors.filter(e => "keywords" in e.profile && Array.isArray(e.profile.keywords) && e.profile.keywords.includes(props.keyword))
 
   //
   //

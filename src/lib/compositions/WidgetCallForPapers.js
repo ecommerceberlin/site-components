@@ -63,7 +63,7 @@ return (
                 {render: (row) => row.presentation_title, main: true},
                 {render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
             ]}
-            rowStyling={(row, i) => i < 6}
+            selected={(row, i) => i < 5}
             // link={link} 
             // title={item =>  }
             // subtitle={item => item.presentation_title}
