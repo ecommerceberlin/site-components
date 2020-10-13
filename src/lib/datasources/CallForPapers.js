@@ -14,12 +14,11 @@ class CallForPapers extends React.Component {
       const {resourceFetchRequest, all} = this.props
 
       //always fetch new data!
-      //if(!all.length){
+//      if(!all.length){
         resourceFetchRequest("callforpapers", true)
-      //}
+  //    }
   }
 
- 
 
   render(){
 
@@ -49,7 +48,8 @@ CallForPapers.defaultProps = {
    filter : null,
    keywords : [],
    keyword : null,
-   keyword_source : "presentation_category"
+   keyword_source : "presentation_category",
+   sort: null
 };
 
 export default connect(

@@ -57,11 +57,12 @@ return (
          {keyword && renderAs==="table" && <TableList 
             rows={filtered}
             columns={[
-                {render: "logotype"},
-                {render: "avatar"},
-                {render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment> },
-                {render: (row) => row.presentation_title, main: true},
-                {render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
+                {name: "position", render: (row, position) => position < 6 ? <div style={{backgroundColor: 'green'}}></div> : null},
+                {name: "logotype", render: "logotype"},
+                {name: "avatar", render: "avatar"},
+                {name: "presenter_details", render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment> },
+                {name: "presentation_title", render: (row) => row.presentation_title, main: true},
+                {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
             ]}
             selected={(row, i) => i < 5}
             // link={link} 
@@ -100,7 +101,7 @@ CallForPapers.defaultProps = {
     filter : null,
     keyword : null,
     keyword_source : "presentation_category",
-    sort : "cname2",
+    sort : null,
     link : function(item){
         return {as : `/vote/${item.id}`, href : `/vote/[id]`}
     },
