@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
   selected: {
     borderTop: '2px solid green',
     borderBottom: '2px solid green'
+  },
+
+  big: {
+    fontSize: '2rem'
   }
 }));
 
@@ -48,7 +52,9 @@ const Cell = ({row, column, position, total, selected}) => {
 
   const classes = useStyles();
 
-  const {render, link, align, ...rest} = column;
+  const {name, render, link, align, style, ...rest} = column;
+
+  const styling = style && classes[style] ? {root: classes[style]} : {}
 
   if(!isFunction(render)){
 
@@ -68,7 +74,7 @@ const Cell = ({row, column, position, total, selected}) => {
     }
 
   }else{
-    return <TableCell component="th" scope="row" align={align || "left"}>{column.render(row, position, total)}</TableCell>
+    return <TableCell component="th" scope="row" align={align || "left"} classes={styling}>{column.render(row, position, total)}</TableCell>
   }
 
 

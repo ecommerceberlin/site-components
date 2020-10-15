@@ -61,7 +61,8 @@ return (
                 {name: "logotype", render: "logotype"},
                 {name: "avatar", render: "avatar"},
                 {name: "presenter_details", render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment> },
-                {name: "presentation_title", render: (row) => row.presentation_title, main: true},
+                {name: "presentation_title", render: (row) => row.presentation_title},
+                {name: "votes", render: (row) => row.votes, style: "big", align: "center"},
                 {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
             ]}
             selected={(row, i) => i < 5}
