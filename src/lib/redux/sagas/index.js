@@ -53,6 +53,7 @@ import {
   resourceFetchSuccess,
   resourceFetchError,
   resourceFetchSuccessMeta,
+  resourceList,
   boothSelect,
   boothUnselect,
   boothsReset,
@@ -138,6 +139,15 @@ function* accumulateFetches({resource, reload}) {
 
   for(let endpoint of endpoints){
 
+    //check if endpoint is string or object....
+
+    if(new Object(endpoint) === endpoint){
+      //lets build proper URL
+      const searchParams = new URLSearchParams(endpoint.params)
+      searchParams.sort()
+      endpoint = `${endpoint.resource}?${ searchParams.toString() }` 
+    }
+
     if(endpoint in fetchTasks) {
 
        yield cancel( fetchTasks[endpoint] );
@@ -150,12 +160,15 @@ function* accumulateFetches({resource, reload}) {
 
 function* fetchAccumulatedFetches(endpoint, reload){
 
+  //check if we have params...
+
+  const resource = endpoint.split("?")[0]
+
   yield delay(50);
 
-  const resources = yield select(Selectors.getResources)
+  const lists = yield select(Selectors.getResourceLists)
 
-  if(!reload && endpoint in resources && resources[endpoint] && resources[endpoint].length){
-
+  if(!reload && endpoint in lists && lists[endpoint] && lists[endpoint].length){
     delete fetchTasks[endpoint]
     return
   }
@@ -164,7 +177,12 @@ function* fetchAccumulatedFetches(endpoint, reload){
   const json = yield call([response, response.json])
 
   if (response.ok && response.status >= 200 && 'data' in json) {
-    yield put(resourceFetchSuccess(endpoint, json.data));
+
+    yield put(resourceFetchSuccess(resource, json.data));
+
+    //add list!
+
+    yield put(resourceList(endpoint, json.data))
 
     if("meta" in json){
       yield put(resourceFetchSuccessMeta(json.meta))

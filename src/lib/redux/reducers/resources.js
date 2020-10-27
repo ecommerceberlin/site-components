@@ -1,23 +1,9 @@
 import { RESOURCE_FETCH_SUCCESS, VOTE_STATUS_SUCCESS } from '../../components/redux/types';
 import { CHANGE_LOCALE_MSGS } from '../../i18n';
 
-export const initialState = {
-  // formdata: [],
-  // ticketgroups: [],
-  // companies: [],
-  // tickets: [],
-  // photos: [],
-  // bookingmap: [],
-  // exhibitors : [],
-  // presenters: [],
-  // presenters_all: [],
-  // texts : {},
-  // contestant_companies : [],
-  // report : [],
-  // jurors: []
-};
+ 
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = {}, action) => {
   const { type, resource, data } = action;
 
   switch (type) {

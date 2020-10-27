@@ -19,7 +19,7 @@ export const getLocale = state => state.app.locale;
 export const getLinkedInToken = state => state.social.linkedin;
 export const getCart = state => state.app.cart;
 export const getResources = state => state.resources;
-export const getLists = state => state.lists;
+export const getResourceLists = state => state.resourcelists;
 export const getFaqs = state => state.visuals.faqs;
 export const getSettings = state => state.settings;
 export const getBoothsSelected = state => state.boothsSelected

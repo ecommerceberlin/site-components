@@ -7,7 +7,10 @@ const reducer = (state = {}, action) => {
   switch (type) {
 
     case RESOURCE_LIST:
-      return { ...state, [endpoint]: data };
+
+      const ids = data.map(item => item.id)
+
+      return { ...state, [endpoint]: ids };
     break;
 
     default:
