@@ -123,6 +123,14 @@ export function resourceFetchSuccess(resource, data) {
   };
 }
 
+export function resourceList(endpoint, data) {
+  return {
+    type: Types.RESOURCE_LIST,
+    endpoint: endpoint,
+    data: data
+  };
+}
+
 export function resourceFetchSuccessMeta(meta) {
   return {
     type: Types.RESOURCE_FETCH_SUCCESS_META,

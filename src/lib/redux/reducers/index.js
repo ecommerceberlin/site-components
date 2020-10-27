@@ -2,6 +2,7 @@
 
 import boothsSelected from './booths';
 import resources from './resources';
+import lists from './lists';
 import meta from './meta';
 import app from './app';
 import visuals from './visuals';
@@ -15,6 +16,7 @@ export default {
   visuals,
   boothsSelected,
   resources,
+  lists,
   meta,
   settings,
   social
