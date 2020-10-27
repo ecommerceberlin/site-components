@@ -69,3 +69,4 @@ export { default as WidgetBanner } from './WidgetBanner'
 export { default as WidgetMeetup } from './WidgetMeetup'
 export { default as WidgetContestantCategories } from './WidgetContestantCategories'
 
+export { default as WidgetPosts } from './WidgetPosts'
