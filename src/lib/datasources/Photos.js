@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-import {MobileAwarePhotosSelector, PhotoSizeSelector} from '../redux/selectors'
+import {MobileAwarePhotosSelector, PhotoSizeSelector} from './redux/photos'
 import {resourceFetchRequest } from '../components/redux'
 
 class Photos extends React.PureComponent {

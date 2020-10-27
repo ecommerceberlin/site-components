@@ -4,7 +4,7 @@ import keyBy from 'lodash/keyBy'
 import sortBy from 'lodash/sortBy';
 import get from 'lodash/get';
 
-import { processArrayData, chunkArrayData, getGalleryImageSize } from '../helpers';
+import { processArrayData, chunkArrayData } from '../helpers';
 
 const defaultFilters = {
   random : false,
@@ -19,6 +19,7 @@ export const getLocale = state => state.app.locale;
 export const getLinkedInToken = state => state.social.linkedin;
 export const getCart = state => state.app.cart;
 export const getResources = state => state.resources;
+export const getLists = state => state.lists;
 export const getFaqs = state => state.visuals.faqs;
 export const getSettings = state => state.settings;
 export const getBoothsSelected = state => state.boothsSelected
@@ -45,6 +46,7 @@ export const getJurors = (state, props) => state.resources.jurors
 export const getContestantCompanies = (state, props) => state.resources.contestant_companies
 export const getContestantCompaniesAll = (state, props) => state.resources.contestant_companies_all
 export const getVotes = (state, props) => state.resources.votes
+export const getPosts = (state, props) => state.resources.posts
 export const getAdminReport = (state, props) => "report" in state.resources ? state.resources.report : []
 
 /*
@@ -207,16 +209,7 @@ export const StandardExhibitorOffers = createSelector(
 
 */
 
-export const MobileAwarePhotosSelector = createSelector(
-  getPhotos,
-  getFilteringProps,
-  (photos, props) => processArrayData( photos, props )
-)
 
-export const PhotoSizeSelector = createSelector(
-  getViewPortWidth,
-  width => getGalleryImageSize(width)
-)
 
 export const MobileAwareFilteredExhibitors = createSelector(
   FilteredExhibitors,
