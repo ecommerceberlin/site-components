@@ -2,11 +2,11 @@ import VoteWithLinkedIn from '../components/VoteWithLinkedIn'
 import VotesDatasource from '../datasources/Votes'
 
 
-const WidgetVoteWithLinkedIn = ({id}) => (
+const WidgetVoteWithLinkedIn = ({id, ...rest}) => (
 
     <VotesDatasource>{
 
-        ({all, keyed}) => <VoteWithLinkedIn id={id} votes={keyed} />
+        ({all, keyed}) => <VoteWithLinkedIn id={id} votes={keyed} {...rest} />
 
     }</VotesDatasource>
 
