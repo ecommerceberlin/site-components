@@ -13,7 +13,13 @@ export const FilteredContestantCompanies = createSelector(
     getContestantCompanies,
     getFilteringProps,
     (items, props) => {
-      const allUsedKeywords = items.map(item => "keyword_source" in props && props.keyword_source in item ? item[props.keyword_source] : item.awards_category).filter(item => item.length > 1)
+
+      let allUsedKeywords = [];
+
+      if(Array.isArray(items)){
+        allUsedKeywords = items.map(item => "keyword_source" in props && props.keyword_source in item ? item[props.keyword_source] : item.awards_category).filter(item => item.length > 1)
+      }
+
       const uniqueKeywords = [...new Set(allUsedKeywords )];
       return uniqueKeywords
     }
