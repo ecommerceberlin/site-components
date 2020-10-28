@@ -84,7 +84,7 @@ WidgetContestantCompaniesArchiveWinners.defaultProps = {
     intro : null,
     show_votes : false,
     center : false,
-    spacing : 24,
+    spacing : 8,
     moreLabel : "awards.winners.details"
 }
 
