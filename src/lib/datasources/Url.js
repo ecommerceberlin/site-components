@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {useRouter} from 'next/router'
  
 
-const Url = ({children, router}) => {
+const Url = ({children}) => {
 
     const router = useRouter();
    
