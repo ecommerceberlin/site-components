@@ -22,3 +22,4 @@ export { default as DatasourceContestantCompaniesArchive } from './ContestantCom
 export { default as DatasourceVotes } from './Votes';
 export { default as DatasourceJurors } from './Jurors';
 export { default as DatasourcePosts } from './Posts';
+export { default as DatasourceUrl } from './Url';
