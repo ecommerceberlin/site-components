@@ -1,14 +1,23 @@
 import Wrapper from '../components/Wrapper'
 import Faq from '../components/Faq'
+import Settings from '../datasources/Settings'
 
-const WidgetFaq = ({label, secondaryLabel, ...faqProps}) => (
 
-        <Wrapper 
-            label={label}
-            secondaryLabel={secondaryLabel}
-        >
-        <Faq {...faqProps}/>
-        </Wrapper>
+const WidgetFaq = ({setting, label, baseLabel, ...defaultFaqProps}) => (
+
+    <Settings>{(get) => {
+
+        const {wrapperProps, ...faqProps} = get(setting)
+
+        return (
+            <Wrapper {...{label, baseLabel, ...wrapperProps}}>
+            <Faq {...{...defaultFaqProps, ...faqProps}} />
+            </Wrapper>
+        )
+    }}
+    </Settings>
+
+      
 )
 
 WidgetFaq.defaultProps = {
@@ -17,7 +26,9 @@ WidgetFaq.defaultProps = {
     baseLabel: "cfp.faq",
     items: [],
     url: "/",
-    showTitle: false
+    showTitle: false,
+
+    setting: ""
 
 }
 
