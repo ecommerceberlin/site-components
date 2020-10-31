@@ -22,4 +22,4 @@ export { END } from 'redux-saga'
 export { useDispatch } from 'react-redux'
 export { default as fetch } from 'isomorphic-unfetch'
 export { withRouter, useRouter } from 'next/router'
- 
+export { default as YouTube } from 'react-player/youtube'
