@@ -3,6 +3,7 @@ import React from 'react';
 
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
+import CheckBoxInput from './CheckBoxInput';
 
 import FormButton from './FormButton';
 import withFormik, { filterFields, startFields } from './formik';
@@ -73,6 +74,40 @@ class StepForm extends React.Component {
   
   }
 
+  renderField(data, idx){
+
+    const {baseLabel} = this.props;
+
+    if("options" in data && data.options.length){
+      return (<SelectInput 
+        key={idx}
+        id={data.name}
+        label={`${baseLabel}.fields.${data.name}`}
+        options={data.options}
+        {...this.props}
+      />)
+    }
+
+    if("type" in data && data.type === "confirm"){
+      return  (<CheckBoxInput 
+        key={idx}
+        id={data.name}
+        label={`${baseLabel}.fields.${data.name}`}
+        options={data.options}
+        {...this.props}
+      />)
+    }
+
+    return (<TextInput
+        key={idx}
+        id={data.name}
+        label={`${baseLabel}.fields.${data.name}`}
+        {...this.props}
+      />)
+
+  }
+
+
   render(){
 
     const {
@@ -119,22 +154,7 @@ class StepForm extends React.Component {
 
       {showStartFields ? startedFields.map( (data, idx) => {
 
-        if("options" in data && data.options.length){
-          return (<SelectInput 
-            key={idx}
-            id={data.name}
-            label={`${baseLabel}.fields.${data.name}`}
-            options={data.options}
-            {...this.props}
-          />)
-        }
-
-        return (<TextInput
-            key={idx}
-            id={data.name}
-            label={`${baseLabel}.fields.${data.name}`}
-            {...this.props}
-          />)
+        return this.renderField(data, idx);
       }
 
       ) : null}
@@ -142,22 +162,7 @@ class StepForm extends React.Component {
       {(this.isStarted() || !showStartFields) && filteredFields.length
         ? filteredFields.map( (data, idx) => {
 
-          if("options" in data && data.options.length){
-            return (<SelectInput 
-              key={idx}
-              id={data.name}
-              label={`${baseLabel}.fields.${data.name}`}
-              options={data.options}
-              {...this.props}
-            />)
-          }
-
-          return ( <TextInput
-              key={idx}
-              id={data.name}
-              label={`${baseLabel}.fields.${data.name}`}
-              {...this.props}
-            /> )
+          return this.renderField(data, idx);
 
         })
         : null}
