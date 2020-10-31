@@ -11,28 +11,14 @@ import compose from 'recompose/compose'
 
 
 const styles = theme => ({
-    textField: {
-        width: '90%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingBottom: 0,
-        marginTop: 0,
-
-    },
+  
     input: {
         fontSize: theme.typography.pxToRem(22),
         fontWeight: 700
     }
 });
 
-export const autoCompleteMappings = {
-  email: 'email',
-  fname: 'given-name',
-  lname: 'family-name',
-  cname2: 'org',
-  position: 'organization-title',
-  phone: 'tel-national'
-};
+ 
 
 const CheckBoxInput = props => {
   const {
@@ -41,17 +27,15 @@ const CheckBoxInput = props => {
     label,
     placeholder,
     classes,
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
+    value,
+    error,
     translate,
-    setFieldValue
+    setFieldValue,
+    required,
+    validateField
   } = props;
 
-  const renderError = id in errors;
-  const translatedLabel = translate(label);
+   const translatedLabel = translate(label);
 
   return (
 
@@ -60,17 +44,19 @@ const CheckBoxInput = props => {
     <FormControlLabel
         control={<Checkbox 
             id={id}
+            name={id}
             color="primary" 
-            checked={id in values && values[id]}
-            onChange={() => setFieldValue(id, !values[id]) }
+            checked={Boolean(value)}
+            onChange={() => setFieldValue(id, !value) }
             value="1" 
+            required={required}
             // classes={classes}
         /> }
         label={translatedLabel}
       />
   
  
-    {renderError && <FormHelperText error={true} id={id}>{errors[id]}</FormHelperText>}
+    {error && <FormHelperText error={true} id={id}>{error}</FormHelperText>}
     </FormGroup>
 
   );

@@ -14,8 +14,8 @@ export const startFields = (fields, start = []) => {
 export default withFormik({
   validationSchema: validationSchema,
   validateOnMount: false,
-  validateOnBlur: true,
-  validateOnChange: true,
+  validateOnBlur: false,
+  validateOnChange: false,
   enableReinitialize: false,
   mapPropsToValues: ({ data }) => ({
     ...data

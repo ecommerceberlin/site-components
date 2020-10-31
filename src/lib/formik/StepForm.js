@@ -76,34 +76,24 @@ class StepForm extends React.Component {
 
   renderField(data, idx){
 
-    const {baseLabel} = this.props;
+    const {baseLabel, errors, values, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField} = this.props;
+    const id = data.name;
+    const required = "required" in data && data.required === true;
+    const error = id in errors ? errors[id] : false;
+    const value= id in values ? values[id] : "";
+    const label = `${baseLabel}.fields.${id}`
+ 
+    const passedProps = {id, label, required, error, value, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField};
 
-    if("options" in data && data.options.length){
-      return (<SelectInput 
-        key={idx}
-        id={data.name}
-        label={`${baseLabel}.fields.${data.name}`}
-        options={data.options}
-        {...this.props}
-      />)
+    if("options" in data && Array.isArray(data.options) && data.options.length){
+      return (<SelectInput key={id} options={data.options} {...passedProps} />)
     }
 
     if("type" in data && data.type === "confirm"){
-      return  (<CheckBoxInput 
-        key={idx}
-        id={data.name}
-        label={`${baseLabel}.fields.${data.name}`}
-        options={data.options}
-        {...this.props}
-      />)
+      return  (<CheckBoxInput key={id} {...passedProps} />)
     }
 
-    return (<TextInput
-        key={idx}
-        id={data.name}
-        label={`${baseLabel}.fields.${data.name}`}
-        {...this.props}
-      />)
+    return (<TextInput key={idx} {...passedProps} />)
 
   }
 
@@ -149,24 +139,9 @@ class StepForm extends React.Component {
     return (
       
       <form onSubmit={handleSubmit}>
-
       <Typography template="legend" label={(legend || `${baseLabel}.form.intro`)} />
-
-      {showStartFields ? startedFields.map( (data, idx) => {
-
-        return this.renderField(data, idx);
-      }
-
-      ) : null}
-
-      {(this.isStarted() || !showStartFields) && filteredFields.length
-        ? filteredFields.map( (data, idx) => {
-
-          return this.renderField(data, idx);
-
-        })
-        : null}
-
+      {showStartFields ? startedFields.map( (data, idx) => this.renderField(data, idx)) : null}
+      {(this.isStarted() || !showStartFields) && filteredFields.length ? filteredFields.map( (data, idx) =>  this.renderField(data, idx)) : null}
       <FormButton label={`${baseLabel}.form.submit`} {...this.props} />
     </form>
     )
