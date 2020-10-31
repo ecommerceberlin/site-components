@@ -1,26 +1,26 @@
 import * as Yup from 'yup';
 import _pick from 'lodash/pick';
 
+Yup.addMethod(Yup.string, "validateNip", function(message){
+    return this.test("is_valid_nip", message, function(value){
+        const { path, createError} = this;
 
+        value = value.replace(/[\ \-]/gi, '');
 
-function isValidNip(nip) {
-  if(typeof nip !== 'string')
-      return false;
+        let weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
+        let sum = 0;
+        let controlNumber = parseInt(value.substring(9, 10));
+        for (let i = 0; i < weight.length; i++) {
+        sum += (parseInt(value.substr(i, 1)) * weight[i]);
+        }
 
-  nip = nip.replace(/[\ \-]/gi, '');
+        if(sum % 11 !== controlNumber){
+            return createError({path, message})
+        }
 
-  let weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
-  let sum = 0;
-  let controlNumber = parseInt(nip.substring(9, 10));
-  let weightCount = weight.length;
-  for (let i = 0; i < weightCount; i++) {
-      sum += (parseInt(nip.substr(i, 1)) * weight[i]);
-  }
-  
-  return sum % 11 === controlNumber;
-}
-
-
+        return true
+    });
+});
 
 Yup.addMethod(Yup.mixed, "requireWhenRequired", function(requiredFieldNames, message) {
 
@@ -114,7 +114,7 @@ export const validations = (requiredFieldNames) => ({
       company_website: Yup.string()
       .min(5, "URL address seems invalid")
       .max(200, 'URL address seems invalid')
-      .requireWhenRequired(requiredFieldNames, 'Product/service name is required.'),
+      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
 
       awards_category: Yup.string()
       .min(2, "Please choose category")
