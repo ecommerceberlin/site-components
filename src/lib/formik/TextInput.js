@@ -57,7 +57,7 @@ const TextInput = props => {
           input : classes.input}
       }}
       value={value}
-      onChange={(e) => { handleChange(e); validateField(id); }}
+      onChange={(e) => { handleChange(e); }}
       onBlur={(e) => { handleBlur(e); validateField(id); }}
       margin="normal"
       multiline={multiline }

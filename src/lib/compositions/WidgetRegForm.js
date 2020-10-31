@@ -51,7 +51,7 @@ const WidgetRegForm = ({
             fields={fieldsWithOptions}
             start={get(`${setting}.start`, start)}
             template={ get(`${setting}.email_template`, email_template) }
-            api={ get("visitor.api") }
+            api={ get(`${setting}.api`, get("system.post_api") ) }
             role={ role }
             legend={ legend }
           />
