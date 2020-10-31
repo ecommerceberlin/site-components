@@ -18,17 +18,18 @@ const reducer = (state = { faqs: [], loading: false, drawer: false, dialog: {}, 
 switch (action.type) {
   
   case FAQ_URL:
-  return { ...state, faqs: [...state.faqs, ...action.labels] };
+  return { ...state, faqs: [...new Set([...state.faqs, ...action.labels])] };
   break;
 
   case FAQ_TOGGLE:
+
+    //adding
     if (action.state) {
-      return { ...state, faqs: [...state.faqs, ...action.labels] };
+      return { ...state, faqs: [...new Set([...state.faqs, ...action.labels])] };
     }
-    return {
-      ...state,
-      faqs: state.faqs.filter(item => action.labels.indexOf(item) === -1)
-    };
+
+    //removing
+    return {...state, faqs: state.faqs.filter(item => action.labels.indexOf(item) === -1) };
   break;
 
   case PAGE_LOADING_START:

@@ -6,7 +6,7 @@ import _get from 'lodash/get';
 
 export const collator = new Intl.Collator('pl-PL', {numeric: true, sensitivity: 'base'});
 
-export const parseUrlVals = url => _uniqBy(url.split(',')).filter(x => x);
+// export const parseUrlVals = url => _uniqBy(url.split(',')).filter(x => x);
 
 export const changeLimitForScreen = (maxLimit, width = null, gridData = {}) => {
   if (!width) {

@@ -1,6 +1,6 @@
 import * as Types from './types';
 
-import { parseUrlVals } from '../../helpers/base';
+// import { parseUrlVals } from '../../helpers/base';
 
 
 
@@ -100,10 +100,10 @@ export function faqToggle(labels = [], state = false) {
   };
 }
 
-export function faqUrl(url) {
+export function faqUrl(labels) {
   return {
     type: Types.FAQ_URL,
-    labels: parseUrlVals(url)
+    labels: labels
   };
 }
 

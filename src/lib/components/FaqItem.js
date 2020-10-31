@@ -16,6 +16,17 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { translate } from '../i18n';
 import { faqToggle } from './redux';
 
+import { createSelector } from 'reselect';
+
+
+const faqItemSelector = createSelector(
+  state => state.visuals.faqs,
+  (state, props) => props.label,
+  (items, item) => items.includes(item)
+)
+
+
+
 const styles = theme => ({
   default: {
     fontSize: theme.typography.pxToRem(17),
@@ -44,7 +55,7 @@ const FaqItem = ({
   <Accordion
     classes={{ expanded: classes.expanded }}
     onChange={(event, state) => faqToggle([label], state)}
-    expanded={selected.indexOf(label) > -1}
+    expanded={selected}
   >
     <AccordionSummary
       classes={{
@@ -77,7 +88,9 @@ FaqItem.propTypes = {
 const enhance = compose(
   translate,
   connect(
-    state => ({ selected: state.visuals.faqs }),
+    (state, props) => ({
+      selected: faqItemSelector(state, props)
+    }),
     { faqToggle }
   ),
   withStyles(styles)

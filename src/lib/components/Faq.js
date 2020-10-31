@@ -1,14 +1,12 @@
 
 import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+//import PropTypes from 'prop-types';
+//import { withStyles } from '@material-ui/core/styles';
 import MyTypography from './MyTypography';
 import FaqItem from './FaqItem';
 import { faqUrl } from './redux';
 import { useRouter } from 'next/router'
-import  queryString from 'query-string';
-
+import { useDispatch } from 'react-redux'
 
 /**
  * ServerRouter {
@@ -22,19 +20,18 @@ import  queryString from 'query-string';
   }
  */
 
-const Faq = ({ faqUrl, items, baseLabel, selected, showTitle }) => {
+const Faq = ({ items, baseLabel, selected, showTitle }) => {
 
   const router = useRouter();
-
-  // const parsedUrl = queryString.parse(asPath)
-
-  // console.log(parsedUrl)
+  const dispatch = useDispatch()
 
   useEffect(()=>{
+    
+    const {query} = router;
 
-    // if (url && url.query && 'q' in url.query) {
-    //   faqUrl(url.query.q);
-    // }
+    if (query && 'q' in query && query.q) {
+      dispatch(faqUrl(query.q.split(",")));
+    }
 
   }) 
 
@@ -68,6 +65,4 @@ Faq.propTypes = {
   //classes: PropTypes.object.isRequired,
 };
 
-export default  connect(
-  state => ({ selected: state.visuals.faqs }),
-  { faqUrl })(Faq);
+export default  Faq
