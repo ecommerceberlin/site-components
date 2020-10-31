@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from './MyTypography'
-
+import Markdown from '../components/Markdown'
 
 
 const styles = theme => ({
@@ -47,8 +47,10 @@ const GridBenefitsItem = ({classes, icon, label}) => {
             
             <Typography template="benefitsTitle" label={`${label}.title`} />
 
-            <Typography template="benefitsText" label={`${label}.description`} />
-        
+            {/* <Typography template="benefitsText" label={`${label}.description`} /> */}
+
+            <Markdown label={`${label}.description`} />
+
           </div>
 
         </div>
