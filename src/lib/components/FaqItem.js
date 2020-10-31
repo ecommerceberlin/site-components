@@ -17,6 +17,7 @@ import { translate } from '../i18n';
 import { faqToggle } from './redux';
 
 import { createSelector } from 'reselect';
+import ReactMarkdown from 'react-markdown'
 
 
 const faqItemSelector = createSelector(
@@ -69,7 +70,9 @@ const FaqItem = ({
     <AccordionDetails
       classes={{ root: classNames(classes.default, classes.content) }}
     >
-      {translate(`${baseLabel}.${label}.a`)}
+
+    <Markdown label={`${baseLabel}.${label}.a`} />
+
     </AccordionDetails>
   </Accordion>
 );
