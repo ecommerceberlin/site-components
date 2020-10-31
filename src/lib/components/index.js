@@ -74,6 +74,8 @@ export { default as VerticalTimeline } from './VerticalTimeline'
 export { default as ProfileLogotype } from './ProfileLogotype'
 export { default as TableList } from './TableList'
 
+export { default as GridWithImages } from './GridWithImages'
+
 export * from './Bookingmap';
 export * from './Meetups';
 export * from './MyLayouts';

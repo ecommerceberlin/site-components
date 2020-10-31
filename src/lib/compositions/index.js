@@ -70,3 +70,4 @@ export { default as WidgetMeetup } from './WidgetMeetup'
 export { default as WidgetContestantCategories } from './WidgetContestantCategories'
 
 export { default as WidgetPosts } from './WidgetPosts'
+export { default as WidgetGridWithImages } from './WidgetGridWithImages'
