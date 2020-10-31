@@ -1,18 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
 import MyTypography from './MyTypography';
 import Red from './svg/Red'
 import Gold from './svg/Gold'
-import compose from 'recompose/compose'
-import {connect} from 'react-redux'
-import {dialogShow} from './redux/actions';
+import { dialogShow } from './redux/actions';
+import { useDispatch } from 'react-redux'
 
 
-const styles = theme => ({
+const useStyles = (props) => makeStyles(theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -27,7 +25,7 @@ const styles = theme => ({
     transform: 'translateZ(0)',
     // height: '100%',
     width: '100%',
-    height: 500,
+    height: "100vh",
 
   },
   title: {
@@ -63,53 +61,40 @@ const styles = theme => ({
     //   height: 800
     // }
   }
-});
+}));
 
 
 const CloudinaryResize = ({src, children}) => {
-   
-
   const resizeCloudinaryImage = (url, width = 1500, height = 1000, format = "jpg") => {
-
     //check if not already resized!
     if (url && /cloudinary/.test(url) && /image\/upload\/v[0-9]+/.test(url)) {
       return url.replace(/\.svg$/i, `.${format}`).replace("image/upload/", `image/upload/w_${width},h_${height},c_fit/`);
     }
-  
     return url; //do nothing!
   }
-
   return children(resizeCloudinaryImage(src))
-
 }
 
-
-
-
-
 const makeCloudinaryThumbnail = (url, width = 800, height = 300, format = "jpg") => {
-
   //check if not already resized!
   if (url && /cloudinary/.test(url) && /image\/upload\/v[0-9]+/.test(url)) {
     return url.replace(/\.svg$/i, `.${format}`).replace("image/upload/", `image/upload/w_${width},h_${height},c_fill,g_face/`);
   }
-
   return url; //do nothing!
 }
 
+const Gallery = (props) => {
 
-const Gallery = ({ items, classes, label, cols, dialogShow, overlay }) => {
+  const { items, label, cols, overlay } = props;
+  const classes = useStyles(props)();
+  const dispatch = useDispatch();
 
-  function handleClick(item){
-
-    dialogShow({
+  const handleClick = (item) => dispatch(dialogShow({
       title: <div></div>,
       content: <div><CloudinaryResize src={item.src}>{src => <img src={src} alt="" style={{width: '100%'} }/> }</CloudinaryResize></div>,
-  //    buttons: modalButtons
-    });
-  }
+      //buttons: modalButtons
+  }));
   
-
 
   return (
 
@@ -117,7 +102,6 @@ const Gallery = ({ items, classes, label, cols, dialogShow, overlay }) => {
   
       {overlay == "red" ? <Red /> : <Gold />}
 
-  
       {label && <MyTypography label={label} template="H2C" />}
   
       {/* <WidthAwareInfo /> */}
@@ -128,7 +112,6 @@ const Gallery = ({ items, classes, label, cols, dialogShow, overlay }) => {
         cellHeight={300}
       >
         {items.map((item) => (
-
 
         <GridListTile  key={item.src} cols={item.cols || 3}>
         <img src={makeCloudinaryThumbnail(item.src)} alt="" className={classes.deSaturated} onClick={() => handleClick(item) } />
@@ -141,10 +124,7 @@ const Gallery = ({ items, classes, label, cols, dialogShow, overlay }) => {
   
   )
   
-
 }
-
-
 
 Gallery.defaultProps = {
   label : "gallery",
@@ -152,13 +132,8 @@ Gallery.defaultProps = {
   cols: 12,
   overlay:  "gold"
 };
-
-Gallery.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-const enhance = compose(
-  withStyles(styles),
-  connect(null, {dialogShow})
-)
-export default enhance(Gallery);
+ 
+ 
+export default React.memo(Gallery,  (prevProps, nextProps) => {
+  return prevProps.items.length != nextProps.items.length
+});
