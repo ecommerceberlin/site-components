@@ -86,7 +86,7 @@ const TextInput = props => {
     <TextField
       id={id}
       label={translatedLabel}
-      InputProps={{
+      inputProps={{
         classes : {
           input : classes.input}
       }}
