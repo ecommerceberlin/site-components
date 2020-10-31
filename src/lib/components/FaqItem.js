@@ -17,7 +17,7 @@ import { translate } from '../i18n';
 import { faqToggle } from './redux';
 
 import { createSelector } from 'reselect';
-import ReactMarkdown from 'react-markdown'
+import Markdown from './Markdown'
 
 
 const faqItemSelector = createSelector(
