@@ -22,63 +22,116 @@ function isValidNip(nip) {
 
 
 
-Yup.addMethod(Yup.string, "conditionallyRequire", function(requiredFieldNames, message) {
+Yup.addMethod(Yup.mixed, "requireWhenRequired", function(requiredFieldNames, message) {
 
   return this.test("is-required", message, function(value) {
 
-      const { path, createError } = this;
+      const { path, createError, schema} = this;
 
-      return path in requiredFieldNames ? value.length > 0 : true;
-     
+      if(requiredFieldNames.includes(path)){
+
+        if(typeof value !== "undefined"){
+            switch(schema.type){
+                case "boolean":
+                    if(value === true || value === false){
+                        return true;
+                    }
+                break;
+    
+                case "string":
+                    if(value !== ""){
+                        return true;
+                    }
+                break;
+            }
+        }
+        
+        return createError({path, message})
+
+      }
+
+      return true;
+
   });
 });
+
+// optionalObject: yup.lazy(value => {
+//     if (value !== undefined) {
+//       return yup.object().shape({
+//         otherData: yup.string().required(),
+//       });
+//     }
+//     return yup.mixed().notRequired();
+//   }),
 
 
 export const validations = (requiredFieldNames) => ({
 
-
     referral: Yup.string()
       .min(2, "Too short :(")
       .max(200, 'Invalid')
-      .conditionallyRequire(requiredFieldNames, 'Access code is required.'),
+      .requireWhenRequired(requiredFieldNames, 'Access code is required.'),
   
       fname: Yup.string()
-      //.min(2, "C'mon, your first name is longer than that")
-      .conditionallyRequire(requiredFieldNames, 'First name is required.'),
+      .min(2, "C'mon, your first name is longer than that")
+      .max(200, 'Invalid')
+      .requireWhenRequired(requiredFieldNames, 'First name is required.'),
   
       lname: Yup.string()
       .min(2, "C'mon, your last name is longer than that")
-      .conditionallyRequire(requiredFieldNames, 'Last name is required.'),
+      .max(200, 'Invalid')
+      .requireWhenRequired(requiredFieldNames, 'Last name is required.'),
   
       cname2: Yup.string()
       .min(2, "C'mon, your company is probably longer than that")
-      .conditionallyRequire(requiredFieldNames, 'Company name is required.'),
+      .max(200, 'Invalid')
+      .requireWhenRequired(requiredFieldNames, 'Company name is required.'),
 
       position: Yup.string()
       .min(2, "Should be longer")
-      .conditionallyRequire(requiredFieldNames, 'Company name is required.'),
+      .max(100, 'Invalid')
+      .requireWhenRequired(requiredFieldNames, 'Company name is required.'),
   
       phone: Yup.string()
       .min(9, 'Phone number seems too short')
       .max(15, 'Phone number is too long. Use numbers only.')
-      .conditionallyRequire(requiredFieldNames, 'Phone number is required'),
+      .requireWhenRequired(requiredFieldNames, 'Phone number is required'),
       
       email: Yup.string()
       .email('Invalid email address')
-      .conditionallyRequire(requiredFieldNames, 'Valid email is required!'),
+      .requireWhenRequired(requiredFieldNames, 'Valid email is required!'),
 
       presentation_title: Yup.string()
       .min(2, "Too short :(")
       .max(200, 'Please make it shorter.')
-      .conditionallyRequire(requiredFieldNames, 'Valid presentation title is required.'),
+      .requireWhenRequired(requiredFieldNames, 'Valid presentation title is required.'),
 
+      project_name: Yup.string()
+      .min(2, "Too short :(")
+      .max(200, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Product/service name is required.'),
 
+      website: Yup.string()
+      .min(5, "URL address seems invalid")
+      .max(200, 'URL address seems invalid')
+      .requireWhenRequired(requiredFieldNames, 'Product/service name is required.'),
+
+      awards_category: Yup.string()
+      .min(2, "Please choose category")
+      .max(200, 'Please choose category')
+      .requireWhenRequired(requiredFieldNames, 'Please choose category'),
+
+      accept: Yup.bool()
+      .oneOf([true], 'Please accept terms')
+      .required('Please accept terms')
+      .requireWhenRequired(requiredFieldNames, 'Please choose category'),
   });
   
+
   export const validationSchema = ({fields}) => {
     const fieldNames = fields.map(item => item.name);
     const requiredFieldNames = fields.filter(item => "required" in item && item.required).map(item => item.name)
-    return Yup.object().shape(_pick(validations(requiredFieldNames), fieldNames));
+    return Yup.object(_pick(validations(requiredFieldNames), fieldNames));
   };
 
  
