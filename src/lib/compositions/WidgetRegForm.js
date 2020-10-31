@@ -52,8 +52,8 @@ const WidgetRegForm = ({
             start={get(`${setting}.start`, start)}
             template={ get(`${setting}.email_template`, email_template) }
             api={ get(`${setting}.api`, get("system.post_api") ) }
-            role={ role }
-            legend={ legend }
+            role={ get(`${setting}.role`, role) }
+            legend={ get(`${setting}.legend`, legend)  }
           />
         </Grid>
         {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
