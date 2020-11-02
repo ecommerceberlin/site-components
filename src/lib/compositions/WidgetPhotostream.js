@@ -2,7 +2,7 @@ import Gallery from '../components/Gallery'
 import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
 
-const WidgetPhotostream = ({setting}) => (
+const WidgetPhotostream = ({setting, ...customWrapperProps}) => (
 
    
     <Settings>{(get) => {
@@ -14,7 +14,7 @@ const WidgetPhotostream = ({setting}) => (
         }
 
         return (
-            <Wrapper {...wrapperProps}>
+            <Wrapper  {...wrapperProps} {...customWrapperProps}>
               <Gallery label={false} {...galleryProps}/> 
             </Wrapper>
         )
@@ -26,7 +26,7 @@ const WidgetPhotostream = ({setting}) => (
 )
 
 WidgetPhotostream.defaultProps = {
-    setting: ""
+    setting: "",
 }
 
 export default WidgetPhotostream
