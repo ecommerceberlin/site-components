@@ -8,9 +8,14 @@ const reducer = (state = {}, action) => {
 
     case RESOURCE_LIST:
 
-      const ids = data.map(item => item.id)
+      if(Array.isArray(data)){
+        const ids = data.map(item => item.id)
 
-      return { ...state, [endpoint]: ids };
+        return { ...state, [endpoint]: ids };
+      }
+
+      return state;
+
     break;
 
     default:
