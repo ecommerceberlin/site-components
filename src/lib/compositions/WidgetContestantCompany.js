@@ -19,7 +19,7 @@ import {
 
 //import CompanyLogotype from '../components/CompanyLogotype'
 
-import DatasourceContestantCompanies from '../datasources/ContestantCompanies'
+import SingleRecord from '../datasources/SingleRecord'
 
 import { 
     getContestantOgImage, 
@@ -49,41 +49,24 @@ const styles = theme => ({
 
 const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes, ...rest}) => (
 
-    <DatasourceContestantCompanies id={id}>{
+    <SingleRecord endpoint="contestant_companies" id={id}>{
 
-        ({filtered, all, record}) => {
+        (record) => {
             
+            console.log(record)
+
             const product_name = _get(record, 'product_name', "");
             const difference = _get(record, 'difference', "");
             const innovations = _get(record, 'innovations', "");
             const project_description = _get(record, 'project_description', "");
             const company_website = _get(record, 'company_website', "");
-
+            const keywords = [].concat( _get(record, 'awards_category', "") );
 
             return (
 
             <React.Fragment>
 
-            <Head
-            image={getContestantOgImage(record, "ega2020_opengraph_template")}
-            url={`${asPath}?1`}
-            titleLabel={[
-            'awards.contest.opengraph.title',
-            { name: getCompanyProfileInfo(record, 'name') }
-            ]}
-            descriptionLabel={[
-            'awards.contest.opengraph.description',
-            {
-            // name: getSpeakerName(record),
-            // cname2: _get(record, 'cname2')
-            }
-            ]}
-            />
-
-
-            <Wrapper first={false} {...rest}>
-
-          
+            <Wrapper first={false} {...rest}>          
           
             <Section
             leftSize={5}
@@ -106,8 +89,6 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
             
                 <React.Fragment>
 
-                
-              
                 <Typography template="benefitsTitle">
                 {product_name}
                 </Typography>
@@ -134,7 +115,7 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
         
             <Divider />
 
-            <Sharer url={asPath} />
+            <Sharer url={`/vote/${id}`} />
 
             </div>
 
@@ -153,7 +134,11 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
         
 
             <div style={{marginTop: 20, marginBottom: 20}}>
-             <KeywordSelect  href="/contestants/[keyword]" as={(keyword)=>`/contestants/${keyword}`} keywords={[].concat( _get(record, 'awards_category', "") )} />
+             {/* <KeywordSelect  href="/contestants/[keyword]" as={(keyword)=>`/contestants/${keyword}`} keywords={keywords} /> */}
+           
+             <KeywordSelect href="/vote/categories/[category]" as={name => `/vote/categories/${name}`} keywords={keywords}   />
+
+           
             </div>
 
             <Divider />
@@ -171,7 +156,7 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
         )
     }
 
-    }</DatasourceContestantCompanies>
+    }</SingleRecord>
 
    
 )

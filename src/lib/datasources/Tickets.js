@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { map, get } from 'lodash';
 import {connect} from 'react-redux'
-
 import {TicketsSelector} from '../redux/selectors'
 import {resourceFetchRequest } from '../components/redux'
-
-// import { getCompanyProfileInfo, filterCompanyInstances } from '../helpers';
 
 class Tickets extends React.PureComponent {
 
@@ -15,7 +12,7 @@ class Tickets extends React.PureComponent {
 
       const {resourceFetchRequest, data} = this.props
 
-      if(!data.length){
+      if(!data || !Array.isArray(data) || !data.length){
         resourceFetchRequest(["tickets", "ticketgroups"])
       }
   }
@@ -27,25 +24,6 @@ class Tickets extends React.PureComponent {
 
 }
 
-//  = ({ children, source, ...rest }) => {
-//
-//   const { filters, random, classes, width, mobile, limit } = rest;
-//
-//   const filter = function(item){
-//
-//     return item
-//
-//   }
-//
-//   let filtered = processArrayData(source, { filter, random, limit });
-//
-//   if (width === 'xs' && parseInt(mobile) && filtered.length > mobile) {
-//     filtered = filtered.slice(0, mobile);
-//   }
-//
-//   return children(filtered)
-//
-// };
 
 Tickets.propTypes = {
   group_id: PropTypes.number.isRequired,

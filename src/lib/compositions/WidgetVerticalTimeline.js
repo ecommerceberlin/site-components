@@ -15,18 +15,20 @@ function WidgetVerticalTimeline({translate, locale, setting, icons}){
 
             moment.locale(locale)
 
-            const {baseLabel, items} = get(setting, {})
+            const {baseLabel, items, iconSize} = get(setting, {})
 
             const _baseLabel = baseLabel ? `${baseLabel}.` : ""
 
             const translatedItems = (items || []).map(({name, date, icon, ...rest}) => {
+
+                const IconComponent = icon in icons && icons[icon] ? icons[icon]: Event;
 
                 return ({  
                     ...rest, 
                     date: moment(date).format("LL"),
                     title: translate(`${_baseLabel}${name}.title`), 
                     description: translate(`${_baseLabel}${name}.description`),
-                    icon: icon in icons && React.isValidElement(icons[icon])?  icons[icon]: <Event />
+                    icon: <IconComponent style={{fontSize: iconSize}} />
                })
 
             })

@@ -5,14 +5,14 @@ import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
 
 
-const WidgetIconGrid = ({setting, defaultTypography, defaultSecondaryTypography, defaultDense, icons}) => (
+const WidgetIconGrid = ({setting, defaultTypography, defaultSecondaryTypography, defaultDense, icons, iconColor, iconSize}) => (
   
        <Settings>{ (get) => {
 
             const {label, secondaryLabel, typography, secondaryTypography, dense, ...rest} = get(setting, {})
 
             return (<Wrapper label={label} secondaryLabel={secondaryLabel} typography={typography || defaultTypography} dense={dense || defaultDense}  secondaryTypography={secondaryTypography || defaultSecondaryTypography}>
-                <GridBenefits {...rest} icons={icons} />
+                <GridBenefits {...rest} icons={icons} iconColor={iconColor} iconSize={iconSize} />
                 </Wrapper>)
            }
            
@@ -26,7 +26,9 @@ WidgetIconGrid.defaultProps = {
     icons: {},
     defaultTypography: "H2C",
     defaultSecondaryTypography: 'SUBH2',
-    defaultDense: false
+    defaultDense: false,
+    iconColor: "red",
+    iconSize: 50
 }
 
 export default WidgetIconGrid
