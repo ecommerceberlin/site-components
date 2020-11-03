@@ -5,14 +5,15 @@ import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
 
 
-const WidgetIconGrid = ({setting, defaultTypography, defaultSecondaryTypography, defaultDense, icons, iconColor, iconSize}) => (
+const WidgetIconGrid = ({setting, icons, defaults, ...passedProps}) => (
   
        <Settings>{ (get) => {
 
-            const {label, secondaryLabel, typography, secondaryTypography, dense, ...rest} = get(setting, {})
+            const merged = {...defaults, ... get(setting, {}), ...passedProps};
+            const {iconColor, iconSize, items, baseLabel, ...wrapperProps} = merged
 
-            return (<Wrapper label={label} secondaryLabel={secondaryLabel} typography={typography || defaultTypography} dense={dense || defaultDense}  secondaryTypography={secondaryTypography || defaultSecondaryTypography}>
-                <GridBenefits {...rest} icons={icons} iconColor={iconColor} iconSize={iconSize} />
+            return (<Wrapper {...wrapperProps}>
+                <GridBenefits icons={icons} items={items} baseLabel={baseLabel} iconColor={iconColor} iconSize={iconSize} />
                 </Wrapper>)
            }
            
@@ -24,11 +25,14 @@ const WidgetIconGrid = ({setting, defaultTypography, defaultSecondaryTypography,
 WidgetIconGrid.defaultProps = {
     setting: "speakers.benefits",
     icons: {},
-    defaultTypography: "H2C",
-    defaultSecondaryTypography: 'SUBH2',
-    defaultDense: false,
-    iconColor: "red",
-    iconSize: 50
+    defaults: {
+        typography: "H2C",
+        secondaryTypography: 'SUBH2',
+        dense: false,
+        iconColor: "red",
+        iconSize: 50,
+        first: false
+    }
 }
 
 export default WidgetIconGrid
