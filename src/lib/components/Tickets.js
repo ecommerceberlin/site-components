@@ -18,7 +18,7 @@ const Tickets = ({data, moreInfoLinkHref, ...gridProps}) => (
 Tickets.defaultProps = {
   data : [],
   justify : "space-between",
-  spacing : 24,
+  spacing : 7,
   moreInfoLinkHref: "/premium/[name]"
 };
 

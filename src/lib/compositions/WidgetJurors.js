@@ -5,8 +5,8 @@ import Wrapper from '../components/Wrapper'
 import Jurors from '../datasources/Jurors'
 
 
-const WidgetJurors = ({filter, limit, minToShow, ...wrapperProps}) => (
-    <Jurors filter={filter} limit={limit} random={false} minToShow={minToShow}>{
+const WidgetJurors = ({filter, limit, minToShow, sort, ...wrapperProps}) => (
+    <Jurors filter={filter} limit={limit} sort={sort} random={false} minToShow={minToShow}>{
         ({all}) => {
 
             if(all.length < minToShow){
@@ -32,7 +32,8 @@ WidgetJurors.defaultProps = {
     secondaryLabel : "cfp.jury.description",
     filter : () => true,
     limit: 20,
-    minToShow: 4
+    minToShow: 4,
+    sort: null
 }
 
 export default WidgetJurors;
