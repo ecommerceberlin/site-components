@@ -9,30 +9,62 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Posts from '../datasources/Posts'
 import Link from 'next/link'
+import {useRouter} from 'next/router'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 550,
+    maxWidth: 700,
+    marginBottom: 10,
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: 700,
+    }
   },
-});
+
+  container: {
+
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'stretch'
+    }
+  },
+
+  image : {
+    height: 140,
+    width: "auto",
+    [theme.breakpoints.up('sm')]: {
+      width: 300,
+      flex: "1 0 0"
+    }
+  },
+
+  texts: {
+    [theme.breakpoints.up('sm')]: {
+      flex: "3 0 0",
+    }
+  }
+}));
 
 function WidgetPosts() {
 
     const classes = useStyles();
+    const router = useRouter();
 
     return (<Posts>{({all}) => all.map(post => (
 
     <Card key={post.id} className={classes.root} elevation={0}>
-    <CardActionArea>
+    <CardActionArea className={classes.container} onClick={() => router.push("/chuj")}>
 
       <CardMedia
         component="img"
-        alt="Contemplative Reptile"
-        height="140"
-        image={`https://ehandel.com.pl/${post.cover}`}
-        title="Contemplative Reptile"
+        alt=""
+        // height="140"
+        image={post.cover}
+        title=""
+        className={classes.image}
       />
-      <CardContent>
+      <CardContent className={classes.texts}>
         <Typography gutterBottom variant="h5" component="h2">
           {post.meta.headline}
         </Typography>
