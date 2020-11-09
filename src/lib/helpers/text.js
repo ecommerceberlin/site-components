@@ -3,9 +3,14 @@ import slugify from 'slugify';
 export const slug = (str = '', replacement = '-') =>
   slugify(str, {
     replacement: replacement,
-    remove: null,
-    lower: true
+ //   remove: /[*+~.()'"!:@]/g,
+    lower: true,
+    strict: true,  
+    locale: 'pl'   
+
   });
+
+
 
 export const capitalizeFirstLetter = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);

@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Posts from '../datasources/Posts'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
+import {slug} from '../helpers'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,43 +52,45 @@ function WidgetPosts() {
     const classes = useStyles();
     const router = useRouter();
 
-    return (<Posts>{({all}) => all.map(post => (
+    return (<Posts>{({all}) => all.map(post => {
+      return (
 
-    <Card key={post.id} className={classes.root} elevation={0}>
-    <CardActionArea className={classes.container} onClick={() => router.push("/chuj")}>
-
-      <CardMedia
-        component="img"
-        alt=""
-        // height="140"
-        image={post.cover}
-        title=""
-        className={classes.image}
-      />
-      <CardContent className={classes.texts}>
-        <Typography gutterBottom variant="h5" component="h2">
-          {post.meta.headline}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-          across all continents except Antarctica
-        </Typography>
-      </CardContent>
-    </CardActionArea>
- 
-    {/* <CardActions>
-      <Button size="small" color="primary">
-        Share
-      </Button>
-        <Link href="/publishers/[slug]" as="/publishers/targiehandlupl">
-            <Button size="small" color="primary">
-            {post.company.name}
-            </Button>
-        </Link>
-    </CardActions> */}
-  </Card>
-
-  ))
+        <Card key={post.id} className={classes.root} elevation={0}>
+        <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}>
+    
+          <CardMedia
+            component="img"
+            alt=""
+            // height="140"
+            image={post.cover}
+            title=""
+            className={classes.image}
+          />
+          <CardContent className={classes.texts}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {post.meta.headline}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+              across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+     
+        {/* <CardActions>
+          <Button size="small" color="primary">
+            Share
+          </Button>
+            <Link href="/publishers/[slug]" as="/publishers/targiehandlupl">
+                <Button size="small" color="primary">
+                {post.company.name}
+                </Button>
+            </Link>
+        </CardActions> */}
+      </Card>
+    
+      )
+    })
   }</Posts>);
 }
 
