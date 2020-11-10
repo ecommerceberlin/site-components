@@ -75,6 +75,7 @@ export { default as ProfileLogotype } from './ProfileLogotype'
 export { default as TableList } from './TableList'
 
 export { default as GridWithImages } from './GridWithImages'
+export { default as PostImage } from './PostImage'
 
 export * from './Bookingmap';
 export * from './Meetups';
