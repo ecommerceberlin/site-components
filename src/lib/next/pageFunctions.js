@@ -9,6 +9,8 @@ async function configure(store, config){
 
   const {settings, preload} = config
 
+  const state = store.getState();
+
   if(settings){
     store.dispatch(setSettings(settings))
   }
