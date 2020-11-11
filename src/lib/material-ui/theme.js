@@ -6,8 +6,8 @@ import grey from '@material-ui/core/colors/grey';
 
 //https://material-ui.com/customization/default-theme/?expend-path=$.typography
 
+export const defaultTheme = {
 
-const theme = createMuiTheme({
   typography: {
 
     fontFamily: "'Lato', 'Helvetica', 'Arial', sans-serif",
@@ -41,7 +41,9 @@ const theme = createMuiTheme({
     primary: { main: red[700] },
     secondary: { main: grey[700] }
   }
-});
+};
 
 
-export default responsiveFontSizes(theme);
+const createTheme = (theme) => responsiveFontSizes(createMuiTheme(theme));
+
+export default createTheme;

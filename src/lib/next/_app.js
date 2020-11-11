@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Router, {useRouter} from 'next/router';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import  {theme}  from '../material-ui';
+import  {createTheme, defaultTheme}  from '../material-ui';
 //import { reduxWrapper} from '../redux';
 import * as gtag from '../services/gtag';
 import {DetectLocale, TranslationProvider} from '../i18n';
@@ -17,7 +17,7 @@ export function reportWebVitals(metric) {
 //  }
 }
 
-const WrappedApp = ({Component, pageProps, head, router, pageLoadingStart, pageLoadingEnd, pageActionHide}) => {
+const WrappedApp = ({Component, pageProps, head, theme, router, pageLoadingStart, pageLoadingEnd, pageActionHide}) => {
 
   useEffect(() => {
     
@@ -76,7 +76,7 @@ const WrappedApp = ({Component, pageProps, head, router, pageLoadingStart, pageL
       
     {head}
   
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={createTheme(theme)}>
         <CssBaseline /> 
         <DetectLocale />
         <Layout>
@@ -87,6 +87,10 @@ const WrappedApp = ({Component, pageProps, head, router, pageLoadingStart, pageL
 
   );
 
+}
+
+WrappedApp.defaultProps = {
+  theme: defaultTheme
 }
 
 export default connect(undefined, {pageLoadingStart, pageLoadingEnd, pageActionHide})(WrappedApp);

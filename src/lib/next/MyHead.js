@@ -3,7 +3,7 @@ import React from 'react';
 import { string } from 'prop-types';
 import { translate } from '../i18n';
 import { fullUrl, prepareForTranslate, canonical } from '../helpers';
-import  {theme}  from '../material-ui';
+import  {createTheme, defaultTheme}  from '../material-ui';
 import isFunction from 'lodash/isFunction'
 
 const MyHead = ({
@@ -17,7 +17,8 @@ const MyHead = ({
   height,
   fb_appid,
   translate,
-  children
+  children,
+  font
 }) => {
 
   const titleLabelParams = prepareForTranslate(titleLabel);
@@ -52,7 +53,7 @@ const MyHead = ({
     <link key="canonical" rel="canonical" href={canonical(prefixedUrl)} />,
        
     <meta key="viewport" name="viewport" content='user-scalable=0, initial-scale=1, minimum-scale=1, width=device-width, height=device-height' />,
-    <meta key="theme_color" name="theme-color" content={theme.palette.primary.main} />,
+    // <meta key="theme_color" name="theme-color" content={theme.palette.primary.main} />,
     <script key="gtm" name="gtm" async src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM}`} />,
 
     <script
@@ -68,9 +69,7 @@ const MyHead = ({
     }}
     />,
     
-    <link key="fontLato" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500&subset=latin,latin-ext" />,
-    <link key="fontMontserrat" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500,600,700,800,900&subset=latin,latin-ext" />,
-    <meta key="charset" charSet="UTF-8" />,
+   <meta key="charset" charSet="UTF-8" />,
     <meta key="google-translate" name="google" content="notranslate" />,
     <link key="ati_57" rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png"/>,
     <link key="ati_60" rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png"/>,
@@ -90,15 +89,12 @@ const MyHead = ({
     <meta key="msa_ti" name="msapplication-TileImage" content="/ms-icon-144x144.png"/>,
     // <meta key="theme-color" name="theme-color" content="gold"/>,
 
- 
+    <link key="preconnect" rel="preconnect" href="https://fonts.gstatic.com" />,
+    <link href={`https://fonts.googleapis.com/css2?${font}&display=swap`} rel="stylesheet" />
 
   ]
 
   return isFunction(children) ? children(tags): null;
-
-
-
-
   
 }
 
@@ -109,12 +105,11 @@ MyHead.defaultProps = {
   width: 960,
   height: 504,
   fb_appid: '222959121587772',
-
   description: '',
   descriptionLabel: 'event.opengraph.description',
-
   image: "https://res.cloudinary.com/ecommerceberlin/image/upload/c_limit,w_1024/v1546943854/ebe_og_home.jpg",
-  url: fullUrl('/')
+  url: fullUrl('/'),
+  font: 'family=Lato&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,500;1,600;1,700;1,800;1,900&subset=latin,latin-ext'
 };
 
 MyHead.propTypes = {
@@ -126,3 +121,9 @@ MyHead.propTypes = {
 
 
 export default translate(MyHead);
+
+
+/**
+<link key="fontLato" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500&" />,
+<link key="fontMontserrat" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500,600,700,800,900&subset=latin,latin-ext" />,
+ */
