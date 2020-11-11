@@ -22,27 +22,28 @@ const useStyles = makeStyles(theme => ({
   },
 
   container: {
+    display: 'flex',
 
     [theme.breakpoints.up('sm')]: {
-      display: 'flex',
+    
       flexDirection: 'row',
       justifyContent: 'space-around',
-      alignItems: 'stretch'
+      alignItems: 'baseline'
     }
   },
 
-  image : {
-    height: 140,
-    width: "auto",
+  icons : {
+    width: 300,
     [theme.breakpoints.up('sm')]: {
-      width: 300,
-      flex: "1 0 0"
-    }
+   
+    },
+    flex: "1 0 100px",
   },
 
   texts: {
+    flex: "3 0 300px",
     [theme.breakpoints.up('sm')]: {
-      flex: "3 0 0",
+    
     }
   }
 }));
@@ -58,14 +59,10 @@ function WidgetPosts() {
         <Card key={post.id} className={classes.root} elevation={0}>
         <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}>
     
-          <CardMedia
-            component="img"
-            alt=""
-            // height="140"
-            image={post.cover}
-            title=""
-            className={classes.image}
-          />
+          <div className={classes.icons}>
+            FIRMA<br/>
+            IKONKI
+          </div>
           <CardContent className={classes.texts}>
             <Typography gutterBottom variant="h5" component="h2">
               {post.meta.headline}
