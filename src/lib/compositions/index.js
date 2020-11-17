@@ -72,5 +72,7 @@ export { default as WidgetContestantCategories } from './WidgetContestantCategor
 export { default as WidgetPosts } from './WidgetPosts'
 export { default as WidgetPostsFeatured } from './WidgetPostsFeatured'
 export { default as WidgetPost } from './WidgetPost'
+export { default as WidgetPublishers } from './WidgetPublishers'
+
 
 export { default as WidgetGridWithImages } from './WidgetGridWithImages'
