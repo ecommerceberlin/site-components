@@ -18,7 +18,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 10,
     [theme.breakpoints.up('sm')]: {
       maxWidth: 700,
-    }
+    },
+    padding: 10,
+    backgroundColor: "#fff"
   },
 
   container: {
