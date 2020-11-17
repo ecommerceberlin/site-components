@@ -14,10 +14,10 @@ import {slug} from '../helpers'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 700,
+    // maxWidth: 700,
     marginBottom: 10,
     [theme.breakpoints.up('sm')]: {
-      maxWidth: 700,
+      // maxWidth: 700,
     },
     
     backgroundColor: "#fff"

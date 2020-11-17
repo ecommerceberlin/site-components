@@ -7,7 +7,6 @@ const styles = () => ({
   root: {
     display: 'block',
     minHeight: 350,
-    backgroundColor: '#fff',
 
     paddingBottom: '2rem',
     paddingTop: '2rem',

@@ -59,7 +59,7 @@ function WidgetPostsFeatured({gridSettings}){
         <SvgFilter />
         <Posts>{({all}) => {
         
-        return (<Grid container spacing={5} justify="center" direction="row" wrap="nowrap">{
+        return (<Grid container spacing={5} direction="row">{
 
           take(all, 4).map(post => <Grid item key={post.id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
             <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}>
@@ -96,7 +96,7 @@ WidgetPostsFeatured.defaultProps = {
   gridSettings: {
     xs: 12,
     sm: 6,
-    md: 4,
+    md: 6,
     lg: 3,
     xl: 3,
   }
