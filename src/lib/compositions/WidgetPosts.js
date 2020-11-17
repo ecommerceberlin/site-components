@@ -19,13 +19,13 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       maxWidth: 700,
     },
-    padding: 10,
+    
     backgroundColor: "#fff"
   },
 
   container: {
     display: 'flex',
-
+    padding: 10,
     [theme.breakpoints.up('sm')]: {
     
       flexDirection: 'row',
