@@ -1,19 +1,26 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+
+const useStyles = makeStyles(theme => ({
   middle: {
     display: 'flex',
     alignItems: 'center',
     flexWrap : 'nowrap',
     flexDirection : 'column'
   }
-});
+}));
 
-const Centered = withStyles(styles)(({children, classes, style}) => (
+const Centered = ({children, style}) => {
+
+  const classes = useStyles();
+
+  return (
   <div style={style} className={classes.middle}>{children}</div>
-));
+  )
+
+} 
 
 Centered.defaultProps = {
   style : {}
@@ -45,7 +52,8 @@ const TwoColsLayout = ({
 TwoColsLayout.defaultProps = {
   spacing: false,
   leftCentered: false,
-  rightCentered: false
+  rightCentered: false,
+  // invertColsOnMobile : false
 };
 
 export { TwoColsLayout, Centered };
