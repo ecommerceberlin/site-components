@@ -11,6 +11,7 @@ import Posts from '../datasources/Posts'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {slug} from '../helpers'
+import {useTranslate} from '../i18n'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,8 +55,13 @@ function WidgetPosts() {
 
     const classes = useStyles();
     const router = useRouter();
+    const [translate] = useTranslate();
 
-    return (<Posts>{({all}) => all.map(post => {
+    return (
+    <>
+    <Typography  variant="h4" component="h3" >{translate("posts.latest")}</Typography>
+
+    <Posts>{({all}) => all.map(post => {
       return (
 
         <Card key={post.id} className={classes.root} elevation={0}>
@@ -66,7 +72,7 @@ function WidgetPosts() {
             IKONKI
           </div>
           <CardContent className={classes.texts}>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h5" component="h3">
               {post.meta.headline}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -90,7 +96,7 @@ function WidgetPosts() {
     
       )
     })
-  }</Posts>);
+  }</Posts></>);
 }
 
 

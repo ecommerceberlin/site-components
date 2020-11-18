@@ -18,64 +18,58 @@ const styles = theme => ({
   }
 });
 
-const WidgetFooter = ({ links, classes, width, people}) => (
-  <div className={classes.container}>
-    <Wrapper dense={true} color="#fafafa" >
-      <Grid container spacing={1} wrap="wrap" justify="space-around" alignItems="center">
-        <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
-          <WidgetSupport people={people} />
-        </Grid>
+const WidgetFooter = ({ links, classes, width, people}) => <Settings>{(get) => {
 
-        <Grid item xs={12} sm={6} md={5} lg={3} xl={3}>        
-        
-        <WidgetEventInfo />
- 
-        </Grid>
+const footerLinks = get("footer.links", []);
+const showEventInfo = get("footer.showEventInfo", true)
+const backgroundColor = get("footer.backgroundColor", "#fafafa");
 
-        <Grid item xs={12} sm={6} md={6} lg={4} xl={3}>
-          {/* <Typography /> */}
+return (
+
+<div className={classes.container}>
+<Wrapper dense={true} color={backgroundColor}>
+<Grid container spacing={2} justify="space-around" alignItems="center">
+  <Grid item xs={12} sm={12} md={6}>
+    <WidgetSupport people={people} />
+  </Grid>
+
+  {showEventInfo && <Grid item xs={12} sm={6} md={5}><WidgetEventInfo /></Grid>}
+
+  <Grid item xs={12} sm={6} md={6}>
+    <EventInfo
+      items={[
+        {
+        secondary: 'event.organizer.name',
+        primary: get("common.organizer_name")
+        },
+
+        {
+        secondary: 'event.organizer.address',
+        primary: get("common.organizer_address")
+        },
+
+        {
+        secondary: 'event.organizer.registration',
+        primary: get("common.organizer_regno")
+        }
+      ]}
+      orientation="v"
+    />
+  </Grid>
+</Grid>
 
 
+  <div style={{marginTop: 30, marginBottom : 30}}>
+    <Grid container spacing={1} wrap="wrap" justify="space-around" alignItems="center">
+    {footerLinks.map(({label, href}) => (<Grid item key={label}><Link prefetch={false} href={href} label={label} /></Grid>))}        
+    </Grid>
+  </div> 
 
-          <Settings>{(get) => (<EventInfo
-                
-                items={[
-                  {
-                    secondary: 'event.organizer.name',
-                    primary: get("common.organizer_name")
-                  },
-    
-                  {
-                    secondary: 'event.organizer.address',
-                    primary: get("common.organizer_address")
-                  },
-    
-                  {
-                    secondary: 'event.organizer.registration',
-                    primary: get("common.organizer_regno")
-                  }
-                ]}
-                orientation="v"
-              />
-             ) 
-          }</Settings>
-         
-        </Grid>
-      </Grid>
+</Wrapper>
+</div>)
 
-      <Settings>{(get) => (
-            <div style={{marginTop: 30, marginBottom : 30}}>
-            <Grid container spacing={1} wrap="wrap" justify="space-around" alignItems="center">
-            {get("footer.links", []).map(({label, href}) => (<Grid item key={label}><Link prefetch={false} href={href} label={label} /></Grid>))}        
-            </Grid>
-            </div>
-            
-            )
-      }</Settings>
+}}</Settings>
 
-    </Wrapper>
-  </div>
-);
 
 WidgetFooter.defaultProps = {
   links: [],

@@ -12,6 +12,7 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {slug} from '../helpers'
 import take from 'lodash/take'
+import {useTranslate} from '../i18n'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,8 +56,15 @@ function WidgetPublishers() {
 
     const classes = useStyles();
     const router = useRouter();
+    const [translate] = useTranslate();
 
-    return (<Companies filter={(item)=>item.featured}>{(all) => take(all,3).map(company => {
+    return (
+    
+    <>
+
+    <Typography  variant="h4" component="h3" >{translate("publishers")}</Typography>
+
+    <Companies filter={(item)=>item.featured}>{(all) => take(all,3).map(company => {
       return (
 
         <Card key={company.id} className={classes.root} elevation={0}>
@@ -84,7 +92,7 @@ function WidgetPublishers() {
     
       )
     })
-  }</Companies>);
+  }</Companies></>);
 }
 
 
