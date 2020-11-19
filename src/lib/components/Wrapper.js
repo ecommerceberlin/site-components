@@ -70,14 +70,15 @@ const Wrapper = ({
   color,
   links,
   dense,
-  first
+  first,
+  style
 }) => (
   <section
     className={classNames(classes.root, {
       [classes.dense]: dense,
       [classes.first]: first
     })}
-    style={{ backgroundColor: color }}
+    style={{ backgroundColor: color, ...style }}
   >
     <div className={classes.overlay} />
 
@@ -114,7 +115,8 @@ Wrapper.defaultProps = {
   color: '#ffffff',
   links: [],
   dense: false,
-  typography: 'H2C'
+  typography: 'H2C',
+  style: {}
 };
 
 export default withStyles(styles)(Wrapper);
