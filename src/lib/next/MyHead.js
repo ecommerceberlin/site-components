@@ -90,7 +90,7 @@ const MyHead = ({
     // <meta key="theme-color" name="theme-color" content="gold"/>,
 
     <link key="preconnect" rel="preconnect" href="https://fonts.gstatic.com" />,
-    <link href={`https://fonts.googleapis.com/css2?${font}&display=swap`} rel="stylesheet" />
+    <link key="googlefonts" href={`https://fonts.googleapis.com/css2?${font}&display=swap`} rel="stylesheet" />
 
   ]
 

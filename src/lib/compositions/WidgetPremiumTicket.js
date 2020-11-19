@@ -81,7 +81,10 @@ const WidgetPremiumTicket = ({resolve, name, ticket, ...rest}) => {
 
       (alltickets) => {
   
-        const _ticket = (alltickets || []).find(t => resolve(t))
+        const _ticket = (alltickets || []).find(t => resolve(t, name))
+
+        console.log(_ticket)
+
         // const name = ticket.translation_asset_id.replace()
         return <PremiumTicketBody name={name} ticket={_ticket} {...rest} />
   
@@ -91,7 +94,7 @@ const WidgetPremiumTicket = ({resolve, name, ticket, ...rest}) => {
 } 
 
 WidgetPremiumTicket.defaultProps = {
-  resolve : function(){return true},
+  resolve : function(ticket, name){return ticket.translation_asset_id.indexOf(name)>-1},
   name: "",
   ticket: {},
   first: true,
