@@ -76,6 +76,7 @@ export { default as TableList } from './TableList'
 
 export { default as GridWithImages } from './GridWithImages'
 export { default as PostImage } from './PostImage'
+export { default as Loading } from './Loading'
 
 export * from './Bookingmap';
 export * from './Meetups';
