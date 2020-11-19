@@ -28,7 +28,7 @@ return (
 
 <div className={classes.container}>
 <Wrapper dense={true} color={backgroundColor}>
-<Grid container spacing={2} justify="space-around" alignItems="center">
+<Grid container spacing={2} justify="flext-start" alignItems="center">
   <Grid item xs={12} sm={12} md={6}>
     <WidgetSupport people={people} />
   </Grid>

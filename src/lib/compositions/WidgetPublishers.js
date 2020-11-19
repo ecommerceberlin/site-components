@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Companies from '../datasources/Companies'
 import Link from 'next/link'
@@ -13,39 +13,44 @@ import {useRouter} from 'next/router'
 import {slug} from '../helpers'
 import take from 'lodash/take'
 import {useTranslate} from '../i18n'
+import CompanyLogotype from '../components/CompanyLogotype'
 
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 700,
+    minWidth: 200,
     marginBottom: 10,
     [theme.breakpoints.up('sm')]: {
       maxWidth: 700,
     },
     
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    
   },
 
   container: {
     display: 'flex',
     padding: 10,
+
+    justify: "center",
+    alignItems: "center",
+
+
     [theme.breakpoints.up('sm')]: {
-    
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      alignItems: 'baseline'
+      
     }
   },
 
   icons : {
-    width: 300,
+    width: 200,
     [theme.breakpoints.up('sm')]: {
    
     },
-    flex: "1 0 100px",
+    flexGrow: "1",
   },
 
   texts: {
-    flex: "3 0 300px",
+    flexGrow: "3",
     [theme.breakpoints.up('sm')]: {
     
     }
@@ -63,36 +68,23 @@ function WidgetPublishers() {
     <>
 
     <Typography  variant="h4" component="h3" >{translate("publishers")}</Typography>
-
-    <Companies filter={(item)=>item.featured}>{(all) => take(all,3).map(company => {
+    <Grid container>
+    <Companies filter={(item)=>item.featured}>{(all) => take(all, 5).map(company => {
       return (
-
-        <Card key={company.id} className={classes.root} elevation={0}>
+        <Grid item key={company.id} > 
+        <Card className={classes.root} elevation={0}>
         <CardActionArea 
             className={classes.container} 
-        //    onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}
-        >
-    
-          <div className={classes.icons}>
-            FIRMA<br/>
-            IKONKI
-          </div>
-          <CardContent className={classes.texts}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {/* {post.meta.headline} */}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-              across all continents except Antarctica
-            </Typography>
-          </CardContent>
+            onClick={() => router.push(`/publishers/${company.slug}`)}
+        >  
+         <CompanyLogotype company={company} tiny={true} />
         </CardActionArea>
      
       </Card>
-    
+      </Grid>
       )
     })
-  }</Companies></>);
+  }</Companies></Grid></>);
 }
 
 

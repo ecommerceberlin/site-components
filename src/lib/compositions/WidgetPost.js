@@ -11,7 +11,7 @@ import Markdown from '../components/Markdown'
 
 
 
-const WidgetPost = ({id}) => {
+const WidgetPost = ({id, wrapperProps}) => {
 
   return (
 
@@ -22,7 +22,7 @@ const WidgetPost = ({id}) => {
 
     return (
     <React.Fragment>
-           <Wrapper first={false}>
+           <Wrapper {...wrapperProps} >
             <TwoColsLayout
                 leftSize={8}
                 left={
@@ -43,7 +43,11 @@ const WidgetPost = ({id}) => {
 
 
 WidgetPost.defaultProps = {
-  id: 0
+  id: 0,
+  wrapperProps: {
+    first: false,
+    color: "transparent"
+  }
 }
 
 
