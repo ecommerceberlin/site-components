@@ -29,13 +29,13 @@ return (
 <div className={classes.container}>
 <Wrapper dense={true} color={backgroundColor}>
 <Grid container spacing={2} justify="flex-start" alignItems="center">
-  <Grid item xs={12} sm={12} md={6}>
+  <Grid item xs={12} sm={12} md={showEventInfo? 4: 6}>
     <WidgetSupport people={people} />
   </Grid>
 
-  {showEventInfo && <Grid item xs={12} sm={6} md={5}><WidgetEventInfo /></Grid>}
+  {showEventInfo && <Grid item xs={12} sm={6} md={4}><WidgetEventInfo /></Grid>}
 
-  <Grid item xs={12} sm={6} md={6}>
+  <Grid item xs={12} sm={6} md={showEventInfo? 4: 6}>
     <EventInfo
       items={[
         {
