@@ -13,7 +13,13 @@ import DatasourceTickets from '../datasources/Tickets'
 
 const PremiumTicketBody = (props) => {
 
-  const {first, name, ticket, labelPrefix, resolveLabel, resolveSecondaryLabel, resolveText} = props;
+  const {
+    first,
+    ticket, 
+    resolveLabel, 
+    resolveSecondaryLabel, 
+    resolveText
+  } = props;
 
   if(! "image" in ticket){
 
@@ -25,8 +31,8 @@ const PremiumTicketBody = (props) => {
 
     <Wrapper
     first={first}
-    label={resolveLabel(props)}
-    secondaryLabel={resolveSecondaryLabel(props)}
+    label={resolveLabel(ticket)}
+    secondaryLabel={resolveSecondaryLabel(ticket)}
   >
     <div style={{ marginTop: 80 }}>
       <TwoColsLayout
@@ -44,7 +50,7 @@ const PremiumTicketBody = (props) => {
         right={
           <div style={{ marginLeft: 20 }}>
             <Markdown
-              label={resolveText(props)}
+              label={resolveText(ticket)}
             />
   
             <div style={{ marginBottom: 20 }}>
@@ -68,25 +74,22 @@ const PremiumTicketBody = (props) => {
   )
   
 }
+
 PremiumTicketBody.defaultProps = {
   ticket : {}
 }
 
 const WidgetPremiumTicket = ({resolve, name, ticket, ...rest}) => {
 
-  if("id" in ticket && ticket.id){
-    return <PremiumTicketBody name={name} ticket={ticket} {...rest} />
+  if(ticket && "id" in ticket && ticket.id){
+    return <PremiumTicketBody ticket={ticket} {...rest} />
   }else{
     return (<DatasourceTickets>{
 
       (alltickets) => {
   
         const _ticket = (alltickets || []).find(t => resolve(t, name))
-
-        console.log(_ticket)
-
-        // const name = ticket.translation_asset_id.replace()
-        return <PremiumTicketBody name={name} ticket={_ticket} {...rest} />
+        return <PremiumTicketBody ticket={_ticket} {...rest} />
   
       }
     }</DatasourceTickets>)
@@ -98,10 +101,9 @@ WidgetPremiumTicket.defaultProps = {
   name: "",
   ticket: {},
   first: true,
-  labelPrefix: "resources.upgrades.misc.",
-  resolveLabel: ({name, labelPrefix}) => `${labelPrefix}${name}.name`,
-  resolveSecondaryLabel: ({name, labelPrefix}) => `${labelPrefix}${name}.description`,
-  resolveText: ({name, labelPrefix}) => `${labelPrefix}${name}.text`
+  resolveLabel: (ticket) => `${ticket.translation_asset_id}.name`,
+  resolveSecondaryLabel: (ticket) => `${ticket.translation_asset_id}.description`,
+  resolveText: (ticket) => `${ticket.translation_asset_id}.text`
 
 }
 
