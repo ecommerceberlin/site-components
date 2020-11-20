@@ -14,6 +14,7 @@ import Cart from './CartButton';
 import LanguageSelect from './LanguageSelect';
 // import Search from './Search';
 import AppBarLink from './AppBarLink'
+import UpdateProfileLink from './UpdateProfileLink'
 import RawTranslatedText from './RawTranslatedText'
 import Settings from '../datasources/Settings';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -88,9 +89,11 @@ function MyAppBar(props) {
               get("common.event_name")
             }</Typography>
             </Link>
+            
 
             {page_action || get("appbar.links", []).map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
 
+            <UpdateProfileLink />
             <LanguageSelect locales={ get("system.available_locales", []) } /> 
           </>
 
