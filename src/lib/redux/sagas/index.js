@@ -33,7 +33,8 @@ import {
   LINKEDIN_VOTE_REQUESTED,
   //LINKEDIN_AUTOVOTE_REQUESTED,
   LINKEDIN_VOTE_SUCCESS,
-  VOTE_STATUS_CHECK
+  VOTE_STATUS_CHECK,
+  SET_USER_TOKEN
 
 } from '../../components/redux/types';
 
@@ -316,7 +317,7 @@ function* handleRehydrate(actionData){
 
   yield take(REHYDRATE);  //Subscribe to when app finishes loading
    //RESAVE TOKEN DATA!!!!
-   yield put(actionData)
+  yield put(actionData)
  }
 
 
@@ -341,10 +342,13 @@ const rootSaga = function* root() {
     takeEvery(BOOTH_CHECKED, handleBoothCheck),
 
     takeEvery(LINKEDIN_VOTE_REQUESTED, handleLinkedinVoteRequest),
-    // takeEvery(LINKEDIN_TOKEN_SUCCESS, handleRehydrate),
+  
     takeEvery(LINKEDIN_VOTE_SUCCESS, handleVotingData),
     takeEvery(VOTE_STATUS_CHECK, handleVoteStatus),
-    takeEvery(SETTINGS_SET, handleFetchTranslations)
+    takeEvery(SETTINGS_SET, handleFetchTranslations),
+
+    takeEvery(SET_USER_TOKEN, handleRehydrate),
+
   ]);
 };
 

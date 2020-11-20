@@ -2,7 +2,18 @@ import * as Types from './types';
 
 // import { parseUrlVals } from '../../helpers/base';
 
+export function setUserToken(token){
+  return {
+    type : Types.SET_USER_TOKEN,
+    token: token
+  }
+}
 
+export function removeUserToken() {
+  return {
+    type: Types.REMOVE_USER_TOKEN
+  };
+}
 
 
 export function linkedUidReset(){

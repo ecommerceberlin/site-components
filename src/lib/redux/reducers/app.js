@@ -6,7 +6,9 @@ import {
   ROLE_RESET,
   CART_ITEM_ADD,
   CART_ITEM_REMOVE,
-  CART_RESET
+  CART_RESET,
+  REMOVE_USER_TOKEN,
+  SET_USER_TOKEN
 } from '../../components/redux';
 
 import {VENUE_SELECT, VENUE_SELECT_RESET} from '../../components/Schedule/redux'
@@ -22,13 +24,20 @@ const defaultState = {
   filterParams: {
     presenters: {}
   },
-  selectedVenue : null
+  selectedVenue : null,
+  token: null,
 };
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
 
+    case SET_USER_TOKEN:
+      return {...state, token: action.token}
+    break;
 
+    case REMOVE_USER_TOKEN:
+      return {...state, token: null}
+    break;
 
     case 'SCREEN_SIZE_CHANGED':
       return { ...state, width: action.width };
