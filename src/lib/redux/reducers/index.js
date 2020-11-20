@@ -1,6 +1,6 @@
 
 
-import boothsSelected from './booths';
+import boothsSelected from './boothsSelected';
 import resources from './resources';
 import resourcelists from './resourcelists';
 import meta from './meta';
