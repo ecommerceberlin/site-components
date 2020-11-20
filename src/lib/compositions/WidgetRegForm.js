@@ -34,6 +34,8 @@ const WidgetRegForm = ({
     role,
     legend,
     token,
+    actionFinishedProps,
+    actionStartedProps,
     ...rest }) => (
 
 
@@ -57,6 +59,8 @@ const WidgetRegForm = ({
             role={ get(`${setting}.role`, role) }
             legend={ get(`${setting}.legend`, legend)  }
             token={token}
+            actionFinishedProps={actionFinishedProps}
+            actionStartedProps={actionStartedProps}
           />
         </Grid>
         {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>

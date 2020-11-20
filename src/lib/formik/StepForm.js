@@ -56,7 +56,8 @@ class StepForm extends React.Component {
     }
 
     if(status && "data" in status) {
-    //  formActionFinished(actionFinishedProps);    
+    
+      formActionFinished(actionFinishedProps);    
 
       if('token' in status.data){
         addToken(status.data.token);
