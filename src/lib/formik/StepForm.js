@@ -17,6 +17,7 @@ import { formActionStarted, formActionFinished } from './redux'
 import { addToken } from '../helpers';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MyButton from '../components/MyButton'
+import shallowEqual from 'recompose/shallowEqual'
 
 class StepForm extends React.Component {
 
@@ -49,7 +50,7 @@ class StepForm extends React.Component {
 
   componentDidUpdate(){
     
-    const {status, formActionStarted, formActionFinished, actionStartedProps, actionFinishedProps} = this.props;
+    const {data, values, status, formActionStarted, formActionFinished, actionStartedProps, actionFinishedProps} = this.props;
 
     if( this.isStarted() ) {
      // formActionStarted(actionStartedProps);
@@ -57,7 +58,9 @@ class StepForm extends React.Component {
 
     if(status && "data" in status) {
     
-      formActionFinished(actionFinishedProps);    
+      if(!shallowEqual(data, values)){
+      //  formActionFinished(actionFinishedProps);   
+      }
 
       if('token' in status.data){
         addToken(status.data.token);
@@ -69,9 +72,9 @@ class StepForm extends React.Component {
 
   renderResetButton(label = "reset"){
 
-    const {handleReset} = this.props;
+    const {handleReset, formActionFinished, actionFinishedProps} = this.props;
 
-    return <div><MyButton variant="outlined" color="primary" size="medium" onClick={handleReset} label={label} /></div>
+    return <div><MyButton variant="outlined" color="primary" size="medium" onClick={e => { formActionFinished(actionFinishedProps);  handleReset(); }} label={label} /></div>
   
   }
 
@@ -130,10 +133,10 @@ class StepForm extends React.Component {
     }
 
     if (status){
-      if( "data" in status){
+      if( "data" in status && onSuccess){
           return <div>{onSuccess(this.props)}{this.renderResetButton("reset")}</div>;
       }
-      if( "error" in status){
+      if( "error" in status && onError){
           return <div>{onError(this.props)}{this.renderResetButton("reset")}</div>;
       }
     }

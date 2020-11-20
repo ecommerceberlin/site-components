@@ -26,12 +26,12 @@ export const useUserData = () => {
             dispatch(resourceFetchSuccess("currentUser", data));
         }
         
-        if(api &&  (updates != filteredTransactions || !currentUser || !("token" in currentUser) || currentUser.token != token)){
+        if(api &&  (!currentUser || !("token" in currentUser) || currentUser.token != token)){
             fetchTokenAndSetUser();
-            setUpdates(updates+1);
+            //setUpdates(updates+1);
         }
       
-    }, [token, updates])
+    }, [token, filteredTransactions])
 
     return currentUser;
     
