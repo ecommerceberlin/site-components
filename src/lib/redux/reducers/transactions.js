@@ -3,14 +3,26 @@ import {
     VOTE_STATUS_CHECK,
     VOTE_REQUESTED,
     LINKEDIN_VOTE_REQUESTED,
-    LINKEDIN_VOTE_ERROR } from '../../components/redux/types';
+    LINKEDIN_VOTE_ERROR
+  } from '../../components/redux/types';
+
+import {
+  FORM_ACTION_FINISHED
+} from '../../formik/redux/types'
 
 const defaultState = {
     voting: {},
+    forms: []
 };
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
+
+    case FORM_ACTION_FINISHED:
+
+      return {...state, forms: [...state.forms, action.payload ]}
+
+    break;
 
     case LINKEDIN_VOTE_REQUESTED:
     case VOTE_STATUS_CHECK:

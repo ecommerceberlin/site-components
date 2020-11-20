@@ -23,6 +23,7 @@ export const getResourceLists = state => state.resourcelists;
 export const getFaqs = state => state.visuals.faqs;
 export const getSettings = state => state.settings;
 export const getBoothsSelected = state => state.boothsSelected
+export const getTransactions = state => state.transactions
 
 /*
 RESOURCES
