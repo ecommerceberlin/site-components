@@ -36,6 +36,8 @@ const WidgetRegForm = ({
     token,
     actionFinishedProps,
     actionStartedProps,
+    onSuccess,
+    onError,
     ...rest }) => (
 
 
@@ -61,6 +63,8 @@ const WidgetRegForm = ({
             token={token}
             actionFinishedProps={actionFinishedProps}
             actionStartedProps={actionStartedProps}
+            onSuccess={onSuccess}
+            onError={onError}
           />
         </Grid>
         {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>

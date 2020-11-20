@@ -17,7 +17,8 @@ import { formActionStarted, formActionFinished } from './redux'
 import { addToken } from '../helpers';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MyButton from '../components/MyButton'
-import shallowEqual from 'recompose/shallowEqual'
+// import shallowEqual from 'recompose/shallowEqual'
+import isFunction from 'lodash/isFunction'
 
 class StepForm extends React.Component {
 
@@ -58,9 +59,7 @@ class StepForm extends React.Component {
 
     if(status && "data" in status) {
     
-      if(!shallowEqual(data, values)){
       //  formActionFinished(actionFinishedProps);   
-      }
 
       if('token' in status.data){
         addToken(status.data.token);
@@ -133,10 +132,10 @@ class StepForm extends React.Component {
     }
 
     if (status){
-      if( "data" in status && onSuccess){
+      if( "data" in status && isFunction(onSuccess)){
           return <div>{onSuccess(this.props)}{this.renderResetButton("reset")}</div>;
       }
-      if( "error" in status && onError){
+      if( "error" in status && isFunction(onError)){
           return <div>{onError(this.props)}{this.renderResetButton("reset")}</div>;
       }
     }
