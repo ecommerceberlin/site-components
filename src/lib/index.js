@@ -15,11 +15,9 @@ export * from './settings/redux/actions'
 export * from './heads'
 
 
-export { connect } from 'react-redux';
 export { default as get } from 'lodash/get'
 export { default as Divider } from '@material-ui/core/Divider'
-export { END } from 'redux-saga'
-export { useDispatch } from 'react-redux'
+export { connect, useDispatch, useSelector } from 'react-redux'
 export { default as fetch } from 'isomorphic-unfetch'
 export { withRouter, useRouter } from 'next/router'
 export { default as YouTube } from 'react-player/youtube'
