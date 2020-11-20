@@ -52,11 +52,11 @@ class StepForm extends React.Component {
     const {status, formActionStarted, formActionFinished, actionStartedProps, actionFinishedProps} = this.props;
 
     if( this.isStarted() ) {
-      formActionStarted(actionStartedProps);
+     // formActionStarted(actionStartedProps);
     }
 
     if(status && "data" in status) {
-      formActionFinished(actionFinishedProps);    
+    //  formActionFinished(actionFinishedProps);    
 
       if('token' in status.data){
         addToken(status.data.token);
@@ -82,7 +82,8 @@ class StepForm extends React.Component {
     const error = id in errors ? errors[id] : false;
     const value= id in values ? values[id] : "";
     const label = `${baseLabel}.fields.${id}`
- 
+    const multiline =  "long" in data && data.long || id.indexOf("description") > -1
+
     const passedProps = {id, label, required, error, value, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField};
 
     if("options" in data && Array.isArray(data.options) && data.options.length){
@@ -93,7 +94,7 @@ class StepForm extends React.Component {
       return  (<CheckBoxInput key={id} {...passedProps} />)
     }
 
-    return (<TextInput key={idx} {...passedProps} />)
+    return (<TextInput key={idx} multiline={multiline} {...passedProps} />)
 
   }
 
@@ -150,7 +151,6 @@ class StepForm extends React.Component {
 
 
 StepForm.defaultProps = {
-  api: "https://api.eventjuicer.com/v1/public/hosts/...",
   template : 'sparkpost-remplate',
   ticketId : 0,
   baseLabel : "visitors",
@@ -169,7 +169,8 @@ StepForm.defaultProps = {
     value : ""
   },
   start: null,
-  legend: null
+  legend: null,
+  token: null
 };
 
 const enhance = compose(

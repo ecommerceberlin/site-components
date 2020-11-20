@@ -22,7 +22,7 @@ export default withFormik({
   }),
   handleSubmit: (payload, { props, setSubmitting, setErrors, setStatus }) => {
 
-    if( !("ticketId" in props) && !("role" in props) ){
+    if( !("token" in props && "ticketId" in props && "role" in props) ){
       console.error("No ticketId/role set...", props);
       setStatus({error: {"message": "no ticketId/role set...."}});
       return;
@@ -30,8 +30,10 @@ export default withFormik({
     
     const data = {
       fields: payload,
-      tickets: "ticketId" in props? { [props.ticketId]: 1 } : {},
+      tickets: "ticketId" in props && props.ticketId? { [props.ticketId]: 1 } : {},
+      token: "token" in props? props.token: null,
       role: "role" in props? props.role: null,
+      report: "report" in props? props.report: false,
       template : "template" in props ? props.template : "pass template by props or settings",
       locale : "locale" in props ? props.locale : "",
       cc : "cc" in props ? props.cc : "" 
@@ -45,15 +47,13 @@ export default withFormik({
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    })
-      .then(response => {
+    }).then(response => {
         if (response.status !== 200) {
           console.log("passed props", props);
           console.log("final data", data)
         }
         return response.json();
-      })
-      .then(data => {
+      }).then(data => {
 
         setSubmitting(false);
         setStatus(data);

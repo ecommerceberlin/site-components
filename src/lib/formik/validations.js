@@ -125,6 +125,48 @@ export const validations = (requiredFieldNames) => ({
       .oneOf([true], 'Please accept terms')
       .required('Please accept terms')
       .requireWhenRequired(requiredFieldNames, 'Please choose category'),
+
+      project_description: Yup.string()
+      .min(50, "Too short :(")
+      .max(1000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Product/service description is required.'),
+
+      logotype: Yup.string()
+      .min(5, "URL address seems invalid")
+      .max(200, 'URL address seems invalid')
+      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
+      difference: Yup.string()
+      .min(100, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+
+      innovations: Yup.string()
+      .min(100, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+
+      testimonials: Yup.string()
+      .min(100, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+
+      case_study: Yup.string()
+      .min(100, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+
+      confidential: Yup.string()
+      .min(10, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+
+      video: Yup.string()
+      .min(5, "URL address seems invalid")
+      .max(200, 'URL address seems invalid')
+      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
+
   });
   
 

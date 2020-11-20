@@ -41,11 +41,11 @@ const TextInput = props => {
     handleBlur,
     translate,
     required,
-    validateField
+    validateField,
+    multiline
   } = props;
 
   const translatedLabel = translate(label);
-  const multiline =  id.indexOf("description") > -1
 
   return (
     <TextField
