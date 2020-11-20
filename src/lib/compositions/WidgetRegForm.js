@@ -33,6 +33,7 @@ const WidgetRegForm = ({
     summary,
     role,
     legend,
+    token,
     ...rest }) => (
 
 
@@ -52,8 +53,10 @@ const WidgetRegForm = ({
             start={get(`${setting}.start`, start)}
             template={ get(`${setting}.email_template`, email_template) }
             api={ get(`${setting}.api`, get("system.post_api") ) }
+            updateApi={ get("system.service_api") }
             role={ get(`${setting}.role`, role) }
             legend={ get(`${setting}.legend`, legend)  }
+            token={token}
           />
         </Grid>
         {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
@@ -76,7 +79,8 @@ WidgetRegForm.defaultProps = {
   ticket_id : 0,
   role: "visitor",
   data : {},
-  right: null
+  right: null,
+  token: null,
 };
 
 export default withStyles(styles)(WidgetRegForm);
