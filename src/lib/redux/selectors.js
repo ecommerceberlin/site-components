@@ -39,6 +39,7 @@ export const getPresenters = (state, props) => state.resources.presenters
 export const getAllPresenters = (state, props) => state.resources.presenters_all
 export const getVips = (state, props) => state.resources.vips
 export const getPartners = (state, props) => state.resources.partners
+export const currentUser = (state, props) => state.resources.currentUser
 
 
 export const getCallForPapers = (state, props) => state.resources.callforpapers
