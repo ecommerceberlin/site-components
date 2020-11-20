@@ -71,9 +71,9 @@ class StepForm extends React.Component {
 
   renderResetButton(label = "reset"){
 
-    const {handleReset, formActionFinished, actionFinishedProps} = this.props;
+    const {setStatus, formActionFinished, actionFinishedProps} = this.props;
 
-    return <div><MyButton variant="outlined" color="primary" size="medium" onClick={e => { formActionFinished(actionFinishedProps);  handleReset(); }} label={label} /></div>
+    return <div><MyButton variant="outlined" color="primary" size="medium" onClick={e => { formActionFinished(actionFinishedProps);  setStatus(null); }} label={label} /></div>
   
   }
 
