@@ -76,3 +76,5 @@ export { default as WidgetPublishers } from './WidgetPublishers'
 
 
 export { default as WidgetGridWithImages } from './WidgetGridWithImages'
+export { default as WidgetRoleBasedProfileUpdate } from './WidgetRoleBasedProfileUpdate'
+
