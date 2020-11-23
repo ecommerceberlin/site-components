@@ -105,7 +105,7 @@ class StepForm extends React.Component {
   render(){
 
     const {
-      // values,
+      values,
       // touched,
       // errors,
       // dirty,
@@ -133,10 +133,10 @@ class StepForm extends React.Component {
 
     if (status){
       if( "data" in status && isFunction(onSuccess)){
-          return <div>{onSuccess(this.props)}{this.renderResetButton("reset")}</div>;
+          return <div>{onSuccess({baseLabel, values})}{this.renderResetButton("reset")}</div>;
       }
       if( "error" in status && isFunction(onError)){
-          return <div>{onError(this.props)}{this.renderResetButton("reset")}</div>;
+          return <div>{onError({baseLabel, values})}{this.renderResetButton("reset")}</div>;
       }
     }
 
