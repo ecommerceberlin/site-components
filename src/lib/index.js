@@ -14,7 +14,6 @@ export * from './services'
 export * from './settings/redux/actions'
 export * from './heads'
 
-
 export { default as get } from 'lodash/get'
 export { default as Divider } from '@material-ui/core/Divider'
 export { connect, useDispatch, useSelector } from 'react-redux'

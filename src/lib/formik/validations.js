@@ -101,20 +101,22 @@ export const validations = (requiredFieldNames) => ({
       .email('Invalid email address')
       .requireWhenRequired(requiredFieldNames, 'Valid email is required!'),
 
-      presentation_title: Yup.string()
-      .min(2, "Too short :(")
-      .max(200, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Valid presentation title is required.'),
-
-      project_name: Yup.string()
-      .min(2, "Too short :(")
-      .max(200, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Product/service name is required.'),
 
       company_website: Yup.string()
       .min(5, "URL address seems invalid")
       .max(200, 'URL address seems invalid')
       .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
+      logotype: Yup.string()
+      .min(5, "URL address seems invalid")
+      .max(200, 'URL address seems invalid')
+      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
+      video: Yup.string()
+      .min(5, "URL address seems invalid")
+      .max(200, 'URL address seems invalid')
+      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
 
       awards_category: Yup.string()
       .min(2, "Please choose category")
@@ -126,45 +128,50 @@ export const validations = (requiredFieldNames) => ({
       .required('Please accept terms')
       .requireWhenRequired(requiredFieldNames, 'Please choose category'),
 
-      project_description: Yup.string()
-      .min(50, "Too short :(")
-      .max(1000, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Product/service description is required.'),
 
-      logotype: Yup.string()
-      .min(5, "URL address seems invalid")
-      .max(200, 'URL address seems invalid')
-      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
+      presentation_title: Yup.string()
+      .min(2, "Too short :(")
+      .max(200, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Valid presentation title is required.'),
+
+      project_name: Yup.string()
+      .min(2, "Too short :(")
+      .max(200, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Product/service name is required (2-200 chars).'),
+
+
+      project_description: Yup.string()
+      .min(100, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Product/service description is required (100 - 2000 chars).'),
 
       difference: Yup.string()
       .min(100, "Too short :(")
-      .max(2000, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+      .max(2000, 'Please make it shorter (min 100, max 2000 chars).')
+      .requireWhenRequired(requiredFieldNames, 'Text is required (100 - 2000 chars).'),
 
       innovations: Yup.string()
       .min(100, "Too short :(")
       .max(2000, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+      .requireWhenRequired(requiredFieldNames, 'Text is required (100 - 2000 chars).'),
 
       testimonials: Yup.string()
       .min(100, "Too short :(")
       .max(2000, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+      .requireWhenRequired(requiredFieldNames, 'Text is required (100 - 2000 chars).'),
 
       case_study: Yup.string()
       .min(100, "Too short :(")
       .max(2000, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+      .requireWhenRequired(requiredFieldNames, 'Text is required (100 - 2000 chars).'),
 
       confidential: Yup.string()
       .min(10, "Too short :(")
       .max(2000, 'Please make it shorter.')
-      .requireWhenRequired(requiredFieldNames, 'Text is required.'),
+      .requireWhenRequired(requiredFieldNames, 'Text is required (100 - 2000 chars).'),
 
-      video: Yup.string()
-      .min(5, "URL address seems invalid")
-      .max(200, 'URL address seems invalid')
-      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
 
 
   });
