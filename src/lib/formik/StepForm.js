@@ -19,6 +19,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MyButton from '../components/MyButton'
 // import shallowEqual from 'recompose/shallowEqual'
 import isFunction from 'lodash/isFunction'
+import FileInput from './FileInput'
 
 class StepForm extends React.Component {
 
@@ -93,10 +94,16 @@ class StepForm extends React.Component {
       return (<SelectInput key={id} options={data.options} {...passedProps} />)
     }
 
-    if("type" in data && data.type === "confirm"){
-      return  (<CheckBoxInput key={id} {...passedProps} />)
+    if("type" in data){
+      if(data.type === "confirm"){
+        return  (<CheckBoxInput key={id} {...passedProps} />)
+      }
+      if(data.type === "file"){
+        return  (<FileInput key={id} {...passedProps} />)
+      }
     }
 
+  
     return (<TextInput key={idx} multiline={multiline} {...passedProps} />)
 
   }
