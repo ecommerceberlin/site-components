@@ -4,6 +4,7 @@ import React from 'react';
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
 import CheckBoxInput from './CheckBoxInput';
+// import FileInput from './FileInput'
 
 import FormButton from './FormButton';
 import withFormik, { filterFields, startFields } from './formik';
@@ -19,7 +20,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MyButton from '../components/MyButton'
 // import shallowEqual from 'recompose/shallowEqual'
 import isFunction from 'lodash/isFunction'
-import FileInput from './FileInput'
 
 class StepForm extends React.Component {
 
@@ -99,7 +99,7 @@ class StepForm extends React.Component {
         return  (<CheckBoxInput key={id} {...passedProps} />)
       }
       if(data.type === "file"){
-        return  (<FileInput key={id} {...passedProps} />)
+        // return  (<FileInput key={id} {...passedProps} />)
       }
     }
 

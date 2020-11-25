@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { translate } from '../i18n';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose'
-import {useDropzone} from 'react-dropzone'
+// import {useDropzone} from 'react-dropzone'
 
 const styles = theme => ({
     textField: {
@@ -32,7 +32,7 @@ export const autoCompleteMappings = {
 /**
  * https://github.com/react-dropzone/react-dropzone
  */
-const TextInput = props => {
+const FileInput = props => {
   const {
     type,
     id,
@@ -77,7 +77,7 @@ const TextInput = props => {
   );
 };
 
-TextInput.defaultProps = {
+FileInput.defaultProps = {
   type: 'text'
 };
 
@@ -86,4 +86,4 @@ const enhance = compose(
   withStyles(styles)
 )
 
-export default enhance(TextInput);
+export default enhance(FileInput);
