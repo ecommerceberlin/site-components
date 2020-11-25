@@ -4,6 +4,7 @@ import _get from 'lodash/get';
 import { makeStyles } from '@material-ui/core/styles';
 //import { resourceFetchRequest } from '../components/redux'
 import {useRouter} from 'next/router'
+import Skeleton from '@material-ui/lab/Skeleton';
 
 import {
     MyTypography as Typography,
@@ -51,7 +52,7 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapper
     const router = useRouter()
 
     if (router.isFallback) {
-        return <div>Loading...</div>
+        return <Skeleton variant="rect" width="100%" height={300} />
     }
 
     return (
@@ -63,7 +64,7 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapper
                 const profile = _get(record, "profile", null)
 
                 if(!profile){
-                    return null;
+                    return <Skeleton variant="rect" width="100%" height={300} />
                 }
                     
                 const name = _get(profile, mappings.name, "");

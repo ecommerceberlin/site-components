@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from '../i18n';
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box';
+import ReactMarkdown from 'react-markdown'
 
 
 const useStyles = makeStyles(theme => ({
@@ -21,12 +22,12 @@ const TextSection = ({baseLabel, margin, padding, isOption, record, name, ...box
     if(value && value.length > 2){
 
         if(isOption){
-            return <Box {...boxProps} m={margin} p={padding}><Typography variant="body1" ><strong>{translate(`${baseLabel}.${value}`)}</strong></Typography></Box>
+            return <Box {...boxProps} m={margin} p={padding}><Typography variant="body1" component="div" ><strong>{translate(`${baseLabel}.${value}`)}</strong></Typography></Box>
         }
 
 
-        return (<Box {...boxProps} m={margin} p={padding}><Typography variant="body1" >
-        <strong>{translate(`${baseLabel}.${name}`)}</strong> {value.indexOf("http")>-1 ? <a href={value} target="_blank">{value}</a> : value}
+        return (<Box {...boxProps} m={margin} p={padding}><Typography variant="body1" component="div" >
+        <strong>{translate(`${baseLabel}.${name}`)}</strong><ReactMarkdown children={value} />
         </Typography></Box>)
     }
 
