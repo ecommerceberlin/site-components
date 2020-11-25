@@ -1,13 +1,18 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { translate } from '../i18n';
+import { useTranslate } from '../i18n';
 
-const MyButton = ({ label, translate, ...rest }) => (
-  <Button {...rest}>{translate(label)}</Button>
-);
+const MyButton = ({ label, ...rest }) => {
+
+  const [translate] = useTranslate();
+  
+  return (
+    <Button {...rest}>{translate(label)}</Button>
+  );
+}
 
 MyButton.defaultProps = {
-  label: 'label'
+  label: 'pass label prop'
 };
 
-export default translate(MyButton);
+export default MyButton;
