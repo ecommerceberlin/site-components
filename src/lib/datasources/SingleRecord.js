@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {resourceFetchRequest } from '../components/redux'
 import {SingleRecordSelector} from '../redux/selectors'
@@ -25,12 +24,6 @@ class SingleRecord extends React.PureComponent {
 
 }
 
-SingleRecord.propTypes = {
-  data: PropTypes.object.isRequired,
-  endpoint : PropTypes.string.isRequired,
-  id : PropTypes.number, 
-  slug: PropTypes.string
-};
 
 SingleRecord.defaultProps = {
   data : {}

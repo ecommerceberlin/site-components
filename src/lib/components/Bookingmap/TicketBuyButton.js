@@ -34,9 +34,6 @@ TicketBuyButton.defaultProps = {
   right : null 
 }
 
-TicketBuyButton.propTypes = {
-  id: PropTypes.number.isRequired,
-  bookable: PropTypes.bool.isRequired,
-};
+
 
 export default TicketBuyButton

@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import _get from 'lodash/get';
 import { makeStyles } from '@material-ui/core/styles';
 //import { resourceFetchRequest } from '../components/redux'
+import {useRouter} from 'next/router'
 
 import {
     MyTypography as Typography,
@@ -47,6 +48,11 @@ const useStyles = makeStyles(theme => ({
 const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapperProps}) => {
 
     const classes = useStyles();
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
 
     return (
 
