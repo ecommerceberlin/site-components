@@ -40,13 +40,13 @@ export const getCdnResource = (company, key, scale = true) => {
 
 };
 
-export const getParticipantCdn = (url, size = 100, params = ['c_fit']) => {
+export const getParticipantCdn = (url, size = 100, params = ['c_fit','e_grayscale']) => {
 
   if (!url || ! /cloudinary/.test(url)) {
     return false;
   }
   const paramsStr = params.length ? `${params.join(",")},` : 'c_fit,'
-  return url.trim().replace(/\.svg/, '.png').replace("image/upload/", `image/upload/${paramsStr}e_grayscale,w_${size},h_${size}/`);
+  return url.trim().replace(/\.svg/, '.png').replace("image/upload/", `image/upload/${paramsStr},w_${size},h_${size}/`);
 };
 
 export const getInviteOgImage = (text = '') => {
