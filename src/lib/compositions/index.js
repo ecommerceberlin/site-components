@@ -44,6 +44,8 @@ export { default as WidgetContestantCompaniesArchiveWinners } from './WidgetCont
 
 export { default as WidgetVotable } from './WidgetVotable'
 export { default as WidgetContestantCompany} from './WidgetContestantCompany'
+export { default as WidgetContestantPerson} from './WidgetContestantPerson'
+
 export { default as WidgetVoteStatus } from './WidgetVoteStatus'
 
 
