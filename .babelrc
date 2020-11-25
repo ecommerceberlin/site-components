@@ -1,6 +1,13 @@
 {
     "presets": [
-      ["next/babel"]
+      ["next/babel",  {
+        "preset-env": {
+          "modules": false
+        },
+        "transform-runtime": {},
+        "styled-jsx": {},
+        "class-properties": {}
+      }]
     ],
     "plugins": [],
     "ignore" : ["**/index.es.js"]
