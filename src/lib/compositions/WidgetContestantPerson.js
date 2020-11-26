@@ -124,8 +124,13 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapper
                 <TextSection record={record.profile} name="innovations" mb={2}   />
 
                 <TextSection record={record.profile} name="case_study" mb={2}   />
+                
+                <TextSection record={record.profile} name="testimonials" mb={2}   />
 
                 <TextSection record={record.profile} name="company_website" mb={2}   />
+
+                <TextSection record={record.profile} name="video" mb={2}   />
+
 
                 </Box>
 
