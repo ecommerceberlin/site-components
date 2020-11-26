@@ -7,16 +7,16 @@ import {
     getContestantOgImage
  } from '../helpers';
   
- const HeadVoteContestant = ({id, path, children}) => (
+ const HeadVoteContestant = ({id, path, name_source, template, children}) => (
 
     <SingleRecord endpoint="contestant_companies" id={id}>{
 
-        ({record}) => {
+        (record) => {
 
            const profile = _get(record, "profile", {})
 
-           const image = getContestantOgImage(profile, "ega2020_opengraph_template")
-           const project_name = _get(profile, 'project_name') ;
+           const image = getContestantOgImage(profile, template)
+           const project_name = _get(profile, name_source) ;
            const cname2 = _get(profile, 'cname2') ;
 
             return (<MyHead
@@ -33,7 +33,9 @@ import {
 )
 
 HeadVoteContestant.defaultProps = {
-    path : "/vote"
+    path : "/vote",
+    name_source: "project_name",
+    template: "ega2020_opengraph_template"
 }
 
 export default HeadVoteContestant;
