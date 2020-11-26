@@ -53,8 +53,7 @@ const MyLink = ({
 };
 
 MyLink.defaultProps = {
-  as : "",
-  href : "",
+  href : "/",
   name: 'Link',
   variant: 'text',
   size: 'small',

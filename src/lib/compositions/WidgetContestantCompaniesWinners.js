@@ -8,7 +8,7 @@ import AvatarlistCellProject from '../components/AvatarlistCellProject'
 import DatasourceContestantCompanies from '../datasources/ContestantCompanies'
 import WinnerCategory from '../components/WinnerCategory'
 
-const WidgetContestantCompaniesWinners = ({show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, ...wrapperProps}) => {
+const WidgetContestantCompaniesWinners = ({resolveLink, resolveTitle, resolveAlt, resolveImage, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, ...wrapperProps}) => {
 
 
  return (
@@ -40,14 +40,13 @@ const WidgetContestantCompaniesWinners = ({show_votes, intro, limit, random, fil
             justify={center ? 'center' : 'flex-start'}
             spacing={spacing}
             >
-            {data.map((company) => (
+            {data.map((item) => (
                 <AvatarlistCellProject 
-                    key={company.id} 
-                    source={company}
-                    title={ title } 
-                    alt={ alt }
-                    link={ link }
-                    show_votes={ show_votes }
+                    key={item.id} 
+                    title={ resolveTitle(item) } 
+                    alt={ resolveAlt(item) }
+                    image={ resolveImage(item) }
+                    href={ resolveLink(item)}
                     moreLabel={ moreLabel }
                 />
             
@@ -73,14 +72,16 @@ WidgetContestantCompaniesWinners.defaultProps = {
     first : false,
     random : false,
     filter : (item) => parseInt(item.winner) === 1,
-    title:  (item) => <WinnerCategory keyword={item.awards_category} name={item.product_name} place={item.winner} />, 
-    alt :  (item) => "cname2" in item ? `${item.cname2}` : "undefined",
+   
+    resolveLink : function(item){  return `/vote/${item.id}` },
+    resolveTitle: (item) => <WinnerCategory keyword={item.awards_category} name={item.product_name} place={item.winner} />,
+    resolveAlt:  (item) => "cname2" in item ? `${item.cname2}` : "resolveAlt error",
+    resolveImage: function(item){ return  "logotype_cdn" in item ? item.logotype_cdn : "resolveImage error" },
+
+
     keyword : null,
     keyword_source : "presentation_category",
     sort : "cname2",
-    link : function(item){
-        return {as : `/vote/${item.id}`, href : `/vote/[id]`}
-    },
     intro : null,
     show_votes : false,
     center : false,

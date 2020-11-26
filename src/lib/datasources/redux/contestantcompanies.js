@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import keyBy from 'lodash/keyBy'
 import { getContestantCompanies, getFilteringProps} from '../../redux/selectors'
 import { processArrayData } from '../../helpers';
+import get from 'lodash/get'
 
 export const FilteredContestantCompanies = createSelector(
     getContestantCompanies,
@@ -17,7 +18,7 @@ export const FilteredContestantCompanies = createSelector(
       let allUsedKeywords = [];
 
       if(Array.isArray(items)){
-        allUsedKeywords = items.map(item => "keyword_source" in props && props.keyword_source in item ? item[props.keyword_source] : item.awards_category).filter(item => item.length > 1)
+        allUsedKeywords = items.map(item => "keyword_source" in props && get(item, props.keyword_source, false) ? get(item, props.keyword_source) : get(item, "profile.awards_category")).filter(item => item.length > 1)
       }
 
       const uniqueKeywords = [...new Set(allUsedKeywords )];
@@ -35,10 +36,10 @@ export const FilteredContestantCompanies = createSelector(
         }
 
         if("keyword_source" in props){
-            return items.filter(item => item[props.keyword_source] == props.keyword)
+            return items.filter(item => get(item, props.keyword_source) == props.keyword)
         }
 
-        return items.filter(item => item.presentation_category == props.keyword)
+        return items.filter(item => get(item, "profile.presentation_category") == props.keyword)
     }
   )
   

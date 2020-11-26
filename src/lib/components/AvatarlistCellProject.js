@@ -1,14 +1,11 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import { resizeCloudinaryImage } from '../helpers';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import { MyLink } from '../next';
-import isFunction from 'lodash/isFunction';
-import { generateLinkParams } from '../helpers';
 
-
-const styles = theme => ({
+ 
+const useStyles = makeStyles( theme => ({
    
     root : {
       display: 'flex',
@@ -67,32 +64,32 @@ const styles = theme => ({
       marginTop: 10
     }
     
-});
+}));
 
 
-const AvatarlistCellProject = ({show_votes, gridData, classes, title, alt, source, image_source, link, moreLabel}) => {
+const AvatarlistCellProject = ({gridData, title, alt, image, href, moreLabel}) => {
   
-    const style = image_source in source && source[image_source] ? { 
-      backgroundImage: `url(${resizeCloudinaryImage(source[image_source], 300, 300)})` 
-    } : {};
+    const classes = useStyles();
 
-    const linkParams = isFunction(link) ? link(source) : {}
+    const style = { 
+      backgroundImage: `url(${resizeCloudinaryImage(image, 300, 300)})` 
+     };
    
-    const votes = show_votes && "votes" in source ? source.votes : 0;
+    // const votes = show_votes && "votes" in source ? source.votes : 0;
     
     return ( 
     
     <Grid item {...gridData} className={classes.root}>
 
-        <div className={classes.tile} style={style}>{ alt(source) }</div>
+        <div className={classes.tile} style={style}>{ alt }</div>
 
         <div className={classes.person}>
        
-          <div className={classes.personSecondaryInfo}>{ title(source) }</div> 
-          {votes ? <div className={classes.votes}>{`${votes} votes`}</div> : null}
+          <div className={classes.personSecondaryInfo}>{ title }</div> 
+          {/* {votes ? <div className={classes.votes}>{`${votes} votes`}</div> : null} */}
         </div>
 
-        <MyLink {...linkParams} label={moreLabel} variant="outlined" size="small" />
+        {href && moreLabel && <MyLink href={href} label={moreLabel} variant="outlined" size="small" />}
 
       </Grid>
       )
@@ -100,21 +97,13 @@ const AvatarlistCellProject = ({show_votes, gridData, classes, title, alt, sourc
 
 AvatarlistCellProject.defaultProps = {
     gridData : {xs: 12, sm: 4, md: 3, lg: 2, xl: 2},
-    source : {},
-    image_source : "logotype",
-    title : function(item){return "position" in item ? item.position : "undefined"; },
-    alt : function(item){return "cname2" in item ? item.cname2 : "undefined"; },
-    link: false,
-    moreLabel : "awards.contestant.details",
-    show_votes : false
+    title : "",
+    alt : "",
+    image: "",
+    href: null,
+    moreLabel : "awards.contestant.details"
+
 }
 
 
-//   SubPageLink.propTypes = {
-//     id: PropTypes.number.isRequired,
-//     subpage: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//     src: PropTypes.string
-//   };
-
-export default withStyles(styles)(AvatarlistCellProject)
+export default AvatarlistCellProject

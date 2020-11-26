@@ -2,13 +2,12 @@
 
 import Grid from '@material-ui/core/Grid';
 import Wrapper from '../components/Wrapper'
-import {Centered} from '../components/MyLayouts'
-import KeywordSelect from '../components/KeywordSelect'
 import AvatarlistCellProject from '../components/AvatarlistCellProject'
 import ContestantCompaniesArchive from '../datasources/ContestantCompaniesArchive'
 import WinnerCategory from '../components/WinnerCategory'
+import Box from '@material-ui/core/Box';
 
-const WidgetContestantCompaniesArchiveWinners = ({show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, ...wrapperProps}) => {
+const WidgetContestantCompaniesArchiveWinners = ({resolveLink, resolveTitle, resolveAlt, resolveImage, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, ...wrapperProps}) => {
 
 
  return (
@@ -25,37 +24,20 @@ const WidgetContestantCompaniesArchiveWinners = ({show_votes, intro, limit, rand
 
         const data = keyword ? filtered : all;
         
-        return (
-                
-            <React.Fragment>
-            
-            {/* <Centered>
-                <KeywordSelect href="/vote" as="/vote" keywords={keywords} selected={keyword} />
-            </Centered>  */}
-                         
-            
-            <div style={{marginTop: 40}}>
-            <Grid 
+        return (<Box mt={8}><Grid 
             container 
             justify={center ? 'center' : 'flex-start'}
             spacing={spacing}
             >
-            {data.map((company) => (
-                <AvatarlistCellProject 
-                    key={company.id} 
-                    source={company}
-                    title={ title } 
-                    alt={ alt }
-                    link={ link }
-                    show_votes={ show_votes }
+            {data.map((item) => (<AvatarlistCellProject 
+                    key={item.id} 
+                    title={  resolveTitle(item) } 
+                    alt={ resolveAlt(item) }
+                    href={ resolveLink(item) }
+                    image={ resolveImage(item) }
                     moreLabel={ moreLabel }
-                />
-            
-            ))}
-            </Grid></div>
-            </React.Fragment>
-            )
- }}
+                />))}
+            </Grid></Box>)}}
 
 </ContestantCompaniesArchive>
 </Wrapper>)
@@ -66,6 +48,7 @@ const WidgetContestantCompaniesArchiveWinners = ({show_votes, intro, limit, rand
 
 
 WidgetContestantCompaniesArchiveWinners.defaultProps = {
+
     label : "awards.winners.archive.title",
     secondaryLabel : "awards.winners.archive.description",
     links : [],
@@ -73,14 +56,16 @@ WidgetContestantCompaniesArchiveWinners.defaultProps = {
     first : false,
     random : false,
     filter : (item) => parseInt(item.winner) === 1,
-    title:  (item) => <WinnerCategory keyword={item.awards_category} name={item.product_name} place={item.winner} />, 
-    alt :  (item) => "cname2" in item ? `${item.cname2}` : "undefined",
+
+    resolveLink : function(item){  return `/vote/${item.id}` },
+    resolveTitle: (item) => <WinnerCategory keyword={item.awards_category} name={item.product_name} place={item.winner} />,
+    resolveAlt:  (item) => "cname2" in item ? `${item.cname2}` : "resolveAlt error",
+    resolveImage: function(item){ return  "logotype_cdn" in item ? item.logotype_cdn : "resolveImage error" },
+
     keyword : null,
     keyword_source : "presentation_category",
     sort : "cname2",
-    link : function(item){
-        return {as : `/vote/${item.id}`, href : `/vote/[id]`}
-    },
+ 
     intro : null,
     show_votes : false,
     center : false,
@@ -88,12 +73,5 @@ WidgetContestantCompaniesArchiveWinners.defaultProps = {
     moreLabel : "awards.winners.details"
 }
 
-
-/*
- 
-<Link key="all" href="/presenters" label="common.menu.visitors.presenters" variant="flat" color="secondary" />,
-<Link key="subjects" href="/schedule" label="common.menu.visitors.schedule" variant="flat" color="secondary" />
-
-*/
 
 export default WidgetContestantCompaniesArchiveWinners

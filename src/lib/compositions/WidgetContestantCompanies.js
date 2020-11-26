@@ -10,18 +10,14 @@ import AvatarlistCellProject from '../components/AvatarlistCellProject'
 import DatasourceContestantCompanies from '../datasources/ContestantCompanies'
 import VotesDatasource from '../datasources/Votes'
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
-const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, ...wrapperProps}) => {
+const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, random, filter, resolveLink, resolveTitle, resolveAlt, resolveImage, keyword, keyword_source, sort, center, spacing, path_to_category, ...wrapperProps}) => {
 
-
- return (
-
-    <Wrapper {...wrapperProps}>
-
+ return (<Wrapper {...wrapperProps}>
     
-    {intro && <div style={{marginBottom: 40}}>{intro}</div>}
+    {intro && <Box mb={6}>{intro}</Box>}
    
-
     <DatasourceContestantCompanies  
        limit={limit}
        random={random}
@@ -37,51 +33,35 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
         
         return (
                 
-            <React.Fragment>
-    
-          
-            <Centered>
-              <KeywordSelect href="/contestants/[keyword]" as={(keyword) => `/contestants/${keyword}`} keywords={keywords} selected={keyword} />
-            </Centered> 
-         
+            <Box>
+      
+            <Box mt={8}>
+                <Centered>
+                    <KeywordSelect href={`${path_to_category}/[category]`} as={(category) => `${path_to_category}/${category}`} keywords={keywords} selected={keyword} />
+                </Centered> 
+            </Box>
 
-            {/* <VoteStatus {...votesData}  />  */}
+            {show_vote_status && <VoteStatus {...votesData}  />}
     
-           {keyword && 
-            
-            
-            <div style={{marginTop: 40}}>
+           {keyword && <Box mt={5}>
             <Grid 
             container 
             justify={center ? 'center' : 'flex-start'}
             spacing={spacing}
             >
-            {data.map((company) => (
+            {data.map((item) => (
                 <AvatarlistCellProject 
-                    key={company.id} 
-                    source={company}
-                    title={ (item) => "product_name" in item ? item.product_name : "undefined" } 
-                    alt={ (item) => "cname2" in item ? item.cname2 : "undefined" }
-                    link={ link }
-                    show_votes={ show_votes }
-                />
-            
-            ))}
-            </Grid></div>
-            
-          
-            
-            }
+                    key={item.id} 
+                    title={ resolveTitle(item)  } 
+                    alt={ resolveAlt(item) }
+                    href={ resolveLink(item) }
+                    image={ resolveImage(item) }
+                />))}
+            </Grid></Box>}
                 
-            </React.Fragment>
-    
-            )
+            </Box>)
 
-
-    }}</VotesDatasource>
-
-
-   )}
+    }}</VotesDatasource>)}
     
 </DatasourceContestantCompanies>
 
@@ -93,6 +73,8 @@ const WidgetContestantCompanies = ({show_votes, intro, limit, random, filter, li
 
 
 WidgetContestantCompanies.defaultProps = {
+    
+    path_to_category: "/vote/categories",
     label : "awards.contestants.list.title",
     secondaryLabel : "awards.contestants.list.description",
     links : [],
@@ -101,23 +83,18 @@ WidgetContestantCompanies.defaultProps = {
     random : false,
     filter : null,
     keyword : null,
-    keyword_source : "presentation_category",
+    keyword_source : "profile.awards_category",
     sort : "cname2",
-    link : function(item){
-        return {as : `/vote/${item.id}`, href : `/vote?id=${item.id}`}
-    },
+    resolveLink : function(item){  return `/vote/${item.id}` },
+    resolveTitle: function(item){ return "profile" in item && "project_name" in item.profile ? item.profile.project_name : "resolveTitle error" },
+    resolveAlt: function(item){ return "profile" in item && "cname2" in item.profile ? item.profile.cname2 : "resolveAlt error"},
+    resolveImage: function(item){ return "profile" in item && "logotype_cdn" in item.profile ? item.profile.logotype_cdn : "resolveImage error" },
     intro : null,
     show_votes : false,
+    show_vote_status: false,
     center : false,
-    spacing : 24,
+    spacing : 5,
 }
 
-
-/*
- 
-<Link key="all" href="/presenters" label="common.menu.visitors.presenters" variant="flat" color="secondary" />,
-<Link key="subjects" href="/schedule" label="common.menu.visitors.schedule" variant="flat" color="secondary" />
-
-*/
 
 export default WidgetContestantCompanies
