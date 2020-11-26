@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapperProps}) => {
+const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword_source, name_source, defaultSectionBaseLabel, wrapperProps}) => {
 
     const classes = useStyles();
     const router = useRouter()
@@ -67,14 +67,13 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapper
                     return <Skeleton variant="rect" width="100%" height={300} />
                 }
                     
-                const name = _get(profile, mappings.name, "");
-                const keywords = [].concat( _get(profile, 'awards_category', "") );
+                const keywords = [].concat( _get(profile, keyword_source, "") );
     
                 return (
     
                 <React.Fragment>
     
-                <Wrapper {...wrapperProps} title={name}>          
+                <Wrapper {...wrapperProps} title={_get(profile, "cname2", "")}>          
               
                 <Section
                 leftSize={5}
@@ -94,49 +93,26 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapper
                 }
                 leftCentered={true}
                 right={
-                <div>
-                
-                    <React.Fragment>
+             
+                <Box m={1}>
+                <TextSection record={record.profile} name={name_source} mb={2} />
+
+                {show_votes && <Typography template="presenter1">
+                Votes: {record.votes}
+                </Typography>}
     
-                    {/* <Typography template="benefitsTitle">
-                    {name}
-                    </Typography> */}
-    
-                    {show_votes && <Typography template="presenter1">
-                    Votes: {record.votes}
-                    </Typography>}
-    
-                            
                 {vote &&  <div className={classes.voteInfoBox}><Section
                 leftSize={4}
                 left={ vote }
                 //leftCentered={true}
                 right={<div className={classes.voteInfo}>{status}<Typography template="benefitsText" label="awards.voting.rules.description" /></div>} 
-                /><Divider /><Sharer url={`/vote/${id}`} /></div>}
-    
-        
-                <Box m={1}>
+                />
+                <Divider />
+                <Sharer url={`/vote/${id}`} />
+                </div>}
+                    
+                {sections.map(section =>  <TextSection key={section.name} record={profile} name={section.name} mb={2} baseLabel={defaultSectionBaseLabel}   />)}
 
-                <TextSection record={record.profile} name={mappings.description} mb={2} />
-
-                <TextSection record={record.profile} name="difference" mb={2}  />
-
-                <TextSection record={record.profile} name="innovations" mb={2}   />
-
-                <TextSection record={record.profile} name="case_study" mb={2}   />
-                
-                <TextSection record={record.profile} name="testimonials" mb={2}   />
-
-                <TextSection record={record.profile} name="company_website" mb={2}   />
-
-                <TextSection record={record.profile} name="video" mb={2}   />
-
-
-                </Box>
-
-                </React.Fragment>
-
-    
                 <div style={{marginTop: 20, marginBottom: 20}}>
                  {/* <KeywordSelect  href="/contestants/[keyword]" as={(keyword)=>`/contestants/${keyword}`} keywords={keywords} /> */}               
                  {/* <KeywordSelect href="/vote/categories/[category]" as={name => `/vote/categories/${name}`} keywords={keywords}   /> */}
@@ -144,9 +120,8 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, mappings, wrapper
     
                 <Divider />
                 
-              
-        
-                </div>
+                </Box>
+                      
                 }
                 />
                 </Wrapper>
@@ -172,13 +147,19 @@ WidgetContestantPerson.defaultProps = {
         label : "awards.contestants.list.title",
     },
     show_votes : false,
-    mappings : {
-        name: "project_name",
-        description: "project_description",
-        category: "awards_category",
-        image: "logotype"
-    }
+    defaultSectionBaseLabel: "awards.profile",
+    sections: [
+        {name: "project_description"},
+        {name: "difference"},
+        {name: "innovations"},
+        {name: "case_study"},
+        {name: "testimonials"},
+        {name: "company_website"},
+        {name: "video"}
+    ],
+
+    keyword_source: "awards_category",
+    name_source: "project_name",
 }
 
 export default WidgetContestantPerson
-
