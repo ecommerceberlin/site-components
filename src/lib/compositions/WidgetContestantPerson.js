@@ -113,12 +113,11 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword
                     
                 {sections.map(section =>  <TextSection key={section.name} record={profile} name={section.name} mb={2} baseLabel={defaultSectionBaseLabel}   />)}
 
-                <div style={{marginTop: 20, marginBottom: 20}}>
-                 {/* <KeywordSelect  href="/contestants/[keyword]" as={(keyword)=>`/contestants/${keyword}`} keywords={keywords} /> */}               
-                 {/* <KeywordSelect href="/vote/categories/[category]" as={name => `/vote/categories/${name}`} keywords={keywords}   /> */}
-                </div>
-    
                 <Divider />
+
+                <Box mt={4}>
+                    <KeywordSelect  href="/vote/categories/[category]" as={(category)=>`/vote/categories/${category}`} keywords={keywords} />
+                </Box>
                 
                 </Box>
                       
