@@ -3,14 +3,14 @@ import Faq from '../components/Faq'
 import Settings from '../datasources/Settings'
 
 
-const WidgetFaq = ({setting, label, baseLabel, ...defaultFaqProps}) => (
+const WidgetFaq = ({setting, label, secondaryLabel, ...defaultFaqProps}) => (
 
     <Settings>{(get) => {
 
         const {wrapperProps, ...faqProps} = get(setting)
 
         return (
-            <Wrapper {...{label, baseLabel, ...wrapperProps}}>
+            <Wrapper {...{label, secondaryLabel, ...wrapperProps}}>
             <Faq {...{...defaultFaqProps, ...faqProps}} />
             </Wrapper>
         )
