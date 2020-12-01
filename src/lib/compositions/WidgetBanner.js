@@ -1,7 +1,7 @@
 import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
-import { useTheme } from '@material-ui/core/styles'
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box'
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link'
 import {resizeCloudinaryImage} from '../helpers'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -54,7 +54,7 @@ const WidgetBanner = ({setting, cloudinaryOpts, defaultSrc}) => {
             const component = href.indexOf("http") > -1 ? <a href={href} target="_blank"><img src={optimized} alt="" /></a> : <Link passHref={true} href={href}><a><img src={optimized} alt="" /></a></Link>
 
             if(!wrapperProps){
-                return ( <div className={classes.root}>{component}</div>  )
+                return ( <Box p={1} className={classes.root}>{component}</Box>  )
             }
     
             return (
