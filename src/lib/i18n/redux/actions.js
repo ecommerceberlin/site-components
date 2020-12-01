@@ -2,10 +2,13 @@ import * as Types from './types'
 
 
 export function changeLocale(locale) {
-      return {
-        type: Types.CHANGE_LOCALE,
-        locale: locale
-      };
+      
+     if(locale && locale.length == 2){
+        return {
+          type: Types.CHANGE_LOCALE,
+          locale: locale
+        };
+     }
   }
   
   export function fetchTranslations(){

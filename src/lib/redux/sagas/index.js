@@ -83,15 +83,9 @@ let fetchTasks = {};
 function* handleFetchTranslations(){
   
   const settings = yield select(Selectors.getSettings)
-  const locale = yield select(Selectors.getLocale)
+ // const locale = yield select(Selectors.getLocale)
 
   const localise_url = get(settings, "system.lang_api_endpoint", "").trim()
-  const available_locales = get(settings, "system.available_locales", "")
-  const default_locale = get(settings, "system.default_locale", "").toLowerCase()
-
-  if(!locale){
-    yield put(changeLocale(default_locale))
-  }
 
   if(localise_url.indexOf("http") === 0){
 

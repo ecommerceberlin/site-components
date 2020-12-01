@@ -1,11 +1,13 @@
 
-import { ssrCache as cache } from '../server/cache'
+// import { ssrCache as cache } from '../server/cache'
 import { END } from 'redux-saga';
 import {resourceFetchRequest} from '../components/redux/actions'
 import {setSettings} from '../settings/redux/actions'
+import {changeLocale} from '../i18n'
 
+async function configure(props, config){
 
-async function configure(store, config){
+  const store = "store" in props ? props.store : props;
 
   const {settings, preload} = config
 
@@ -19,12 +21,15 @@ async function configure(store, config){
     store.dispatch(resourceFetchRequest(preload))
   }
 
+  if("locale" in props || "defaultLocale" in props ){
+    changeLocale(props.locale || props.defaultLocale)
+  }
+
   store.dispatch(END)
 
   await store.sagaTask.toPromise()
 
 }
 
+export  {configure};
 
-
-  export  {configure};
