@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import  {createTheme, defaultTheme}  from '../material-ui';
 //import { reduxWrapper} from '../redux';
 import * as gtag from '../services/gtag';
-import {DetectLocale, TranslationProvider} from '../i18n';
+import {TranslationProvider} from '../i18n';
 import Layout from '../layouts/LayoutMain'
 import {pageLoadingStart, pageLoadingEnd, pageActionHide } from '../components/redux'
 import { connect } from 'react-redux';
@@ -43,16 +43,6 @@ const WrappedApp = ({Component, pageProps, head, theme, router, pageLoadingStart
     router.events.on('routeChangeComplete', handleComplete)
     router.events.on('routeChangeError', handleComplete)
 
-
-    /** Material UI */
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
-        jssStyles.parentElement.removeChild(jssStyles);
-    }
-
-   
-
-
     return () => {
       router.events.off('routeChangeStart', handleStart)
       router.events.off('routeChangeComplete', handleComplete)
@@ -64,6 +54,15 @@ const WrappedApp = ({Component, pageProps, head, theme, router, pageLoadingStart
     }
 
   })
+
+
+  useEffect(() => {
+      // Remove the server-side injected CSS.
+      const jssStyles = document.querySelector('#jss-server-side');
+      if (jssStyles) {
+        jssStyles.parentElement.removeChild(jssStyles);
+      }
+  }, [])
   
   /***
    * https://stackoverflow.com/questions/53464595/how-to-use-componentwillmount-in-react-hooks
@@ -78,7 +77,7 @@ const WrappedApp = ({Component, pageProps, head, theme, router, pageLoadingStart
   
     <ThemeProvider theme={createTheme(theme)}>
         <CssBaseline /> 
-        <DetectLocale />
+     
         <Layout>
         <Component {...pageProps} />
         </Layout>
