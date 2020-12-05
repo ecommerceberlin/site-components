@@ -7,15 +7,16 @@ import yellow from '@material-ui/core/colors/yellow';
 
 import { capitalizeFirstLetter } from '../helpers';
 
-import {
-  Linkedin,
-  Facebook,
-  Twitter,
-  Web as Website,
-  CalendarRange as Date,
-  MapMarker as Location,
-  Alarm
-} from 'mdi-material-ui';
+
+import Facebook from '@material-ui/icons/Facebook';
+import Twitter from '@material-ui/icons/Twitter';
+import LinkedIn from '@material-ui/icons/LinkedIn';
+import Website from '@material-ui/icons/Web';
+import Date from '@material-ui/icons/DateRange';
+import Location from '@material-ui/icons/Room';
+import Alarm from '@material-ui/icons/Alarm';
+
+
 
 const icons = { Linkedin, Facebook, Twitter, Website, Date, Location, Alarm };
 

@@ -10,7 +10,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 //import IconButton from '@material-ui/core/IconButton';
 //import red from '@material-ui/core/colors/red';
-//import { DotsVertical } from 'mdi-material-ui';
 
 
 const styles = theme => ({

@@ -5,7 +5,7 @@ import { snackbarHide } from './redux/actions';
 
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
-import CloseIcon from 'mdi-material-ui/Close';
+import CloseIcon from '@material-ui/icons/Close';
 
 //https://material-ui-next.com/api/snackbar/
 

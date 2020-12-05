@@ -4,7 +4,7 @@ import compose from 'recompose/compose';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import {Linkedin} from 'mdi-material-ui'
+import LinkedIn from '@material-ui/icons/LinkedIn';
 import {withRouter} from 'next/router'
 import { translate } from '../i18n'
 import { 
