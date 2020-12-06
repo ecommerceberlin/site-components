@@ -12,7 +12,7 @@ const renderAndCache = require('./renderAndCache').renderAndCache
 const basicAuth = require('express-basic-auth')
 
 
-export default function(options){
+export default function Server(options) {
 
 if(!options || new Object(options) !== options){
   options = {}
