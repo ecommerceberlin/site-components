@@ -1,9 +1,9 @@
 import React from 'react';
 
-const DarkGray = () => (
+const DarkGray = ({id}) => (
   <svg style={{display: 'none'}}>
   <defs>
-    <filter id="svgFilter">
+    <filter id={id}>
     <feColorMatrix
       type = "matrix"
       values="0.5     0     0     0     0
@@ -14,5 +14,9 @@ const DarkGray = () => (
   </defs>
   </svg>
 )
+
+DarkGray.defaultProps = {
+  id: "svgFilter"
+}
 
 export default DarkGray

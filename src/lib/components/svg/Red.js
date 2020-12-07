@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Red = () => (
+const Red = ({id}) => (
   <svg style={{display: 'none'}}>
   <defs>
-    <filter id="svgFilter">
+    <filter id={id}>
       <feColorMatrix
         type = "matrix"
         values="1     0     0     0     0
@@ -14,5 +14,11 @@ const Red = () => (
   </defs>
   </svg>
 )
+
+
+Red.defaultProps = {
+  id: "svgFilter"
+}
+
 
 export default Red

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Gold = () => (
+const Gold = ({id}) => (
   <svg style={{display: 'none'}}>
   <defs>
-    <filter id="svgFilter">
+    <filter id={id}>
     <feColorMatrix
       type = "matrix"
       values="1     0     0     0     0
@@ -14,5 +14,9 @@ const Gold = () => (
   </defs>
   </svg>
 )
+
+Gold.defaultProps = {
+  id: "svgFilter"
+}
 
 export default Gold
