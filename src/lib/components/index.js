@@ -78,6 +78,8 @@ export { default as GridWithImages } from './GridWithImages'
 export { default as PostImage } from './PostImage'
 export { default as Loading } from './Loading'
 
+export { default as ScrollTop } from './ScrollTop'
+
 export * from './Bookingmap';
 export * from './Meetups';
 export * from './MyLayouts';
