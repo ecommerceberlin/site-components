@@ -6,7 +6,8 @@ import WidgetMenu from '../compositions/WidgetMenu'
 import ScreenSize from '../material-ui/ScreenSize';
 import Dialog from '../components/MyDialog'
 import Snackbar from '../components/MySnackbar'
- 
+import ScrollTop from '../components/ScrollTop' 
+
 const Layout = ({ children, appBarOpts, footerOpts }) => {
   return (
 
@@ -15,6 +16,7 @@ const Layout = ({ children, appBarOpts, footerOpts }) => {
     <MyAppBar {...appBarOpts} />
     {children}
     <WidgetFooter {...footerOpts} />
+    <ScrollTop />
     <Dialog />
     <Snackbar />
     <WidgetMenu />
