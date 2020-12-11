@@ -53,17 +53,17 @@ const WidgetPresenters = ({label, secondaryLabel, limit, random, filter, disable
 }
 
 WidgetPresenters.defaultProps = {
-    label : "presenters.list_featured",
+    label : "presenters.list_all",
     secondaryLabel : "presenters.list_description",
     links : [],
-    limit : 20,
+    limit : 100,
     random : false,
 
     filter : function(item){ 
-        return "presentation_title" in item && item.presentation_title.length > 10 && "bio" in item && item.bio.length > 10 && "avatar" in item && item.avatar.length > 10 && "logotype" in item && item.logotype.length > 10 
+        return "avatar" in item && item.avatar.indexOf("http") > -1 && "cname2" in item && item.cname2.length > 2 && "position" in item && item.position.length > 2 
     },
 
-    link : true,
+    link : false,
     logotype : true,
     bio : false,
     disableTemps : false
