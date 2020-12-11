@@ -34,6 +34,15 @@ const addGlobalProps = (globals, globalsUsed) => {
 
                         switch (globals[globalName]) {
 
+
+                            case "filterPresentersBasic":
+                                
+                                addProps[internalName] = function(item){ 
+                                    return  item.avatar.indexOf('http') > -1
+                                }
+
+                            break;
+
                             case "filterPresenterWithBio":
                                 
                                 addProps[internalName] = function(item){ 
