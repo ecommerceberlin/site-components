@@ -1,9 +1,10 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MyTypography from './MyTypography';
 import classNames from 'classnames';
 
-const styles = () => ({
+const useStyles = makeStyles(theme => ({
+
   root: {
     display: 'block',
     minHeight: 350,
@@ -51,60 +52,51 @@ const styles = () => ({
     justifyContent: 'center',
     marginTop: '2rem'
   }
-});
 
-const Wrapper = ({
-  translate,
-  classes,
+}))
 
-  label,
-  title,
-  typography,
 
-  secondaryLabel,
-  secondaryTitle,
-  secondaryTypography,
+const Wrapper = ({label, classes, title, typography, secondaryLabel, secondaryTitle, secondaryTypography, children, color, links, dense, first, style
+}) => {
 
-  children,
+  const _classes = useStyles();
 
-  color,
-  links,
-  dense,
-  first,
-  style
-}) => (
-  <section
-    className={classNames(classes.root, {
-      [classes.dense]: dense,
-      [classes.first]: first
-    })}
-    style={{ backgroundColor: color, ...style }}
-  >
-    <div className={classes.overlay} />
+  return (
+    <section
+      className={classNames(_classes.root, {
+        [_classes.dense]: dense,
+        [_classes.first]: first,
+        [classes.root] : classes && "root" in classes
+      })}
+      style={{ backgroundColor: color, ...style }}
+    >
+      <div className={_classes.overlay} />
+  
+      <div className={_classes.container}>
+        {label && <MyTypography label={label} template={typography} />}
+        {title && <MyTypography template={typography}>{title}</MyTypography>}
+  
+        {secondaryLabel && (
+          <MyTypography
+            label={secondaryLabel}
+            template={secondaryTypography}
+            highlight={true}
+          />
+        )}
+        {secondaryTitle && (
+          <MyTypography template={secondaryTypography} highlight={true}>
+            {secondaryTitle}
+          </MyTypography>
+        )}
+  
+        {children}
+  
+        {links && <div className={_classes.related}>{links}</div>}
+      </div>
+    </section>
+  );
 
-    <div className={classes.container}>
-      {label && <MyTypography label={label} template={typography} />}
-      {title && <MyTypography template={typography}>{title}</MyTypography>}
-
-      {secondaryLabel && (
-        <MyTypography
-          label={secondaryLabel}
-          template={secondaryTypography}
-          highlight={true}
-        />
-      )}
-      {secondaryTitle && (
-        <MyTypography template={secondaryTypography} highlight={true}>
-          {secondaryTitle}
-        </MyTypography>
-      )}
-
-      {children}
-
-      {links && <div className={classes.related}>{links}</div>}
-    </div>
-  </section>
-);
+}
 
 Wrapper.defaultProps = {
   label: null,
@@ -116,7 +108,8 @@ Wrapper.defaultProps = {
   links: [],
   dense: false,
   typography: 'H2C',
-  style: {}
+  style: {},
+  classes: {}
 };
 
-export default withStyles(styles)(Wrapper);
+export default Wrapper;
