@@ -9,6 +9,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import LinkedIn from '@material-ui/icons/LinkedIn';
+
 import classNames from 'classnames';
 import Cart from './CartButton';
 import LanguageSelect from './LanguageSelect';
@@ -18,6 +20,8 @@ import UpdateProfileLink from './UpdateProfileLink'
 import RawTranslatedText from './RawTranslatedText'
 import Settings from '../datasources/Settings';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
 
 
 import {
@@ -50,6 +54,50 @@ const styles = theme => ({
   }
 });
 
+
+
+function ElevationScroll(props) {
+  const { children } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+function HideOnScroll(props) {
+  
+  const { children } = props;
+  const trigger = useScrollTrigger();
+  
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+
+function LoginWithLinkedIn(props){
+
+  return (
+    <IconButton
+    // onClick={drawerShow}
+    // className={classes.menuButton}
+    color="inherit"
+    aria-label="Menu"
+  >
+    <LinkedIn />
+  </IconButton>
+  )
+}
+
 function MyAppBar(props) {
 
   const { classes, loading, drawerShow, dialogShow, cart, position, page_action } = props;
@@ -57,13 +105,18 @@ function MyAppBar(props) {
   const noItems = Object.keys(cart).length;
  
   return (
+
+    <Settings>{(get) => (
+
     <div
       className={classNames(classes.root, {
         [classes.spaced]: noItems
       })}
     >
-      <AppBar position={position} color="inherit">
-        <Toolbar>
+    <ElevationScroll>
+    {/* <HideOnScroll> */}
+      <AppBar elevation={0} color="inherit">
+        <Toolbar >
           <IconButton
             onClick={drawerShow}
             className={classes.menuButton}
@@ -73,9 +126,6 @@ function MyAppBar(props) {
             <MenuIcon />
           </IconButton>
 
-      <Settings>{(get) => (
-
-            <>
 
             {loading && <CircularProgress size={20} />}
 
@@ -92,22 +142,30 @@ function MyAppBar(props) {
             
 
             {page_action || get("appbar.links", []).map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
+            
+
+            {/* <LoginWithLinkedIn /> */}
 
             <UpdateProfileLink />
             <LanguageSelect locales={ get("system.available_locales", []) } /> 
-          </>
-
-            )
-          }</Settings>
-      
 
           {/* <Search /> */}
-    
-         
+             
           {noItems > 0 ? <Cart count={noItems} /> : null}
         </Toolbar>
+
+        {/* <Toolbar/> */}
+
+
       </AppBar>
+      {/* </HideOnScroll> */}
+      </ElevationScroll>
+      <Toolbar id="back-to-top-anchor" />
+
     </div>
+
+    )}</Settings>
+
   );
 }
 
