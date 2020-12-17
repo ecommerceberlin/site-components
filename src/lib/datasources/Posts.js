@@ -11,12 +11,16 @@ class Posts extends React.PureComponent {
 
       const {resourceFetchRequest, all} = this.props
 
-      resourceFetchRequest({
+      resourceFetchRequest(["posts"])
+
+      /**
+       * {
         resource: "posts",
         params: {
           company_id: 1216
         }
-      })
+      }
+       */
   }
 
   render(){
