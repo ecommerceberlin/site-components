@@ -75,10 +75,14 @@ export { default as ProfileLogotype } from './ProfileLogotype'
 export { default as TableList } from './TableList'
 
 export { default as GridWithImages } from './GridWithImages'
-export { default as PostImage } from './PostImage'
+export { default as EmbedPostImage } from './EmbedPostImage'
 export { default as Loading } from './Loading'
 
 export { default as ScrollTop } from './ScrollTop'
+
+export { default as EmbedYouTube } from './EmbedYouTube'
+export { default as EmbedVimeo } from './EmbedVimeo'
+
 
 export * from './Bookingmap';
 export * from './Meetups';

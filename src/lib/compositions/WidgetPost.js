@@ -50,16 +50,11 @@ const WidgetPost = ({id, wrapperProps}) => {
 
     return (
     <React.Fragment>
-
-
        <SvgFilter />
-      
-
       <Box className={classes.container}>
        <CardMedia image={post.cover} title="asd" className={classes.cover} />
           <Typography variant="h1" className={classes.headline} align="left">{headline}</Typography>
        </Box>
-
 
             {/* <img src={post.cover} alt="" /> */}
            <Wrapper {...wrapperProps} >
@@ -80,7 +75,7 @@ const WidgetPost = ({id, wrapperProps}) => {
                       //url: this.props.article.url,
                       identifier: `post${post.id}`,
                       title: headline,
-                      language: 'pl_PL' //e.g. for Traditional Chinese (Taiwan)	
+                      language: 'pl_PL'
                       }
                     }
                   />
