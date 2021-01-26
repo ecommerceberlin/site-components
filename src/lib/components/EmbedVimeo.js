@@ -15,10 +15,15 @@ const EmbedVimeo = ({href}) => {
     /(?:https?:\/\/)?(?:www\.)?vimeo(?:\.com)?\/([0-9]+)$/i
   );
     return (
-      <iframe
-    //  className={this.props.isSelected ? "ProseMirror-selectednode" : ""}
-      src={`https://player.vimeo.com/video/${matches[1]}`}
-    />
+
+      <iframe  
+        src={`https://player.vimeo.com/video/${matches[1]}`} 
+        width="900" 
+        height="506" 
+        frameBorder="0" 
+        allow="autoplay; fullscreen; picture-in-picture" 
+        allowfullscreen></iframe>
+
     )
 }
 

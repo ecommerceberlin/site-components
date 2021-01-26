@@ -29,7 +29,18 @@ import EmbedYouTube from './EmbedYouTube'
 const VimeoEmbed = ({href}) => <div>vimeo</div>
 const YouTubeEmbed = ({href}) => <div>youtube</div>
 
-const renderers = ({id, images}) => ({
+const renderers = ({id, images, cover, ...other}) => ({
+
+    image: (data) => {
+
+        const {alt, node: {url} } = data;
+
+        if(url === cover){
+            return null;
+        }
+
+    },
+
     link: ({href}) => {
 
         if(href.indexOf("vimeo")>-1){
@@ -39,7 +50,7 @@ const renderers = ({id, images}) => ({
         if(href.indexOf("youtu")>-1){
             return <EmbedYouTube href={href} />
         }
-        
+
         return <a href={href}>{href}</a>
     },
 
@@ -59,10 +70,10 @@ const renderers = ({id, images}) => ({
 
 const styles = theme => ({
     root : {
-        fontSize: theme.typography.pxToRem(15),
+        fontSize: theme.typography.pxToRem(21),
         fontWeight: 400,
         fontFamily: theme.typography.fontFamily,
-        lineHeight: theme.typography.pxToRem(23),
+        lineHeight: theme.typography.pxToRem(32),
     }
 })
 
@@ -71,7 +82,7 @@ const Markdown = ({label, translate, locale, classes, children, rendererData}) =
     </div>
 
 Markdown.defaultProps = {
-    label : null,
+    label : null, 
     rendererData: null
 }
 

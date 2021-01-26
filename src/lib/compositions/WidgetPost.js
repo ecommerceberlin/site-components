@@ -67,7 +67,9 @@ const WidgetPost = ({id, wrapperProps}) => {
                 }
                 right={
                 <>
-                  <CompanyLogotype company={post.company} />
+                  <Box mt={5} mb={10}>
+                     <CompanyLogotype company={post.company} />
+                  </Box>
                   <DiscussionEmbed
                     shortname='fp20'
                     config={
