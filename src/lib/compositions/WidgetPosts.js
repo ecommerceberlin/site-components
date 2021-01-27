@@ -75,10 +75,7 @@ function WidgetPosts() {
             <Typography gutterBottom variant="h5" component="h3">
               {post.meta.headline}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-              across all continents except Antarctica
-            </Typography>
+            {post.meta.quote &&   <Typography variant="body2" color="textSecondary" component="p">{post.meta.quote}</Typography>}
           </CardContent>
         </CardActionArea>
      
