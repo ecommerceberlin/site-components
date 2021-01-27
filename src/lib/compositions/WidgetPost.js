@@ -7,6 +7,7 @@ import CompanyLogotype from '../components/CompanyLogotype'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import get from 'lodash/get'
 import Markdown from '../components/Markdown'
+import Alert from '../components/Alert'
 import CardMedia from '@material-ui/core/CardMedia';
 import { DiscussionEmbed } from 'disqus-react';
 import {makeStyles} from '@material-ui/core/styles'
@@ -24,17 +25,26 @@ const useStyles = makeStyles(theme => ({
   cover: {
     width: '100vw',
     height: '100vh',
-    filter: 'url(#svgFilter)'
+    filter: 'url(#svgFilter)',
+    backgroundPosition: "center right"
+  },
+
+  texts: {
+    top: '20vh',
+    left: '10vw',
+    position: 'absolute',
   },
 
   headline: {
     color: "#ffffff",
-    top: '20vh',
-    left: '10vw',
-    paddingRight: '5vw',
-    position: 'absolute',
+  },
 
+  quote: {
+    color: "#ffffff",
+    marginTop: '5vh',
+    marginRight: '15vw'
   }
+
 }))
 
 const WidgetPost = ({id, wrapperProps}) => {
@@ -46,14 +56,24 @@ const WidgetPost = ({id, wrapperProps}) => {
 <SingleRecord endpoint="posts" id={id}>{(post) => {
     
     const headline = get(post, "meta.headline", "")
+    const quote = get(post, "meta.quote", "")
     const body = get(post, "meta.body", "")
+    const published_at_year = get(post, "published_at", "").substring(0, 4)
 
     return (
     <React.Fragment>
+       
        <SvgFilter />
+
       <Box className={classes.container}>
-       <CardMedia image={post.cover} title="asd" className={classes.cover} />
+
+          <CardMedia image={post.cover} title="asd" className={classes.cover} />
+
+          <Box className={classes.texts}>
           <Typography variant="h1" className={classes.headline} align="left">{headline}</Typography>
+          <Typography variant="h3" className={classes.quote} align="left">{quote}</Typography>
+          </Box>
+
        </Box>
 
             {/* <img src={post.cover} alt="" /> */}
@@ -62,6 +82,9 @@ const WidgetPost = ({id, wrapperProps}) => {
                 leftSize={8}
                 left={
                     <Wrapper first={false}>
+
+                    {published_at_year < 2020 && <Alert type="error" label="alerts.content_is_old" />}
+
                     <Markdown children={body} rendererData={post} />
                     </Wrapper>
                 }
