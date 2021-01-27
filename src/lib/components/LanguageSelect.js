@@ -40,9 +40,11 @@ const LanguageSelect = ({ label, selectedLocale, dialogShow, changeLocale }) => 
   const router = useRouter();
   const classes = useStyles();
 
+  console.log(router)
+
   const {locale, locales, defaultLocale} = router;
 
-  if(locales && locales.length === 1){
+  if(!locales || locales.length === 1){
     return null
   }
 
