@@ -83,6 +83,7 @@ export { default as ScrollTop } from './ScrollTop'
 export { default as EmbedYouTube } from './EmbedYouTube'
 export { default as EmbedVimeo } from './EmbedVimeo'
 
+export { default as Alert } from './Alert'
 
 export * from './Bookingmap';
 export * from './Meetups';
