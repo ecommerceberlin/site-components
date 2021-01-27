@@ -57,11 +57,11 @@ function WidgetPostsFeatured({gridSettings}){
 
       <div className={classes.root}>
         <SvgFilter />
-        <Posts>{({all}) => {
+        <Posts>{({featured}) => {
         
         return (<Grid container spacing={5} direction="row">{
 
-          take(all, 4).map(post => <Grid item key={post.id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
+          take(featured, 4).map(post => <Grid item key={post.id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
             <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}>
               <CardMedia
                 component="img"
@@ -75,10 +75,7 @@ function WidgetPostsFeatured({gridSettings}){
                 <Typography gutterBottom variant="h5" component="h2" className={classes.headline}>
                 {post.meta.headline}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                  across all continents except Antarctica
-                </Typography>
+               {post.meta.quote && <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>{post.meta.quote}</Typography>} 
               </CardContent>
             </CardActionArea>
         </Card></Grid>)
