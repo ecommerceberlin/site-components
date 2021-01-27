@@ -7,4 +7,9 @@ export const MobileAwarePostsSelector = createSelector(
     getFilteringProps,
     (posts, props) => processArrayData( posts, props )
 )
-  
+
+
+export const MobileAwareFeaturedPostsSelector = createSelector(
+    MobileAwarePostsSelector,
+    (posts) => posts.filter(post => post.is_sticky || post.is_promoted)
+)
