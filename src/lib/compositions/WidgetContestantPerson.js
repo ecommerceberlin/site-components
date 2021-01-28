@@ -111,7 +111,7 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword
                 <Sharer url={`/vote/${id}`} />
                 </div>}
                     
-                {sections.map(section =>  <TextSection key={section.name} record={profile} name={section.name} mb={2} baseLabel={defaultSectionBaseLabel}   />)}
+                {sections.map(section =>  <TextSection key={section.name} {...section} record={profile} mb={2} baseLabel={defaultSectionBaseLabel}   />)}
 
                 <Divider />
 
@@ -153,7 +153,7 @@ WidgetContestantPerson.defaultProps = {
         {name: "innovations"},
         {name: "case_study"},
         {name: "testimonials"},
-        {name: "company_website"},
+        {name: "company_website", isLink: true},
         {name: "video"}
     ],
 
