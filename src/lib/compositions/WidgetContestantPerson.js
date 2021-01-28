@@ -14,6 +14,7 @@ import {
    // Speaker
    KeywordSelect,
    TextSection,
+   EmbedSection,
    ProfileLogotype,
   } from '../components';
 
@@ -89,6 +90,9 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword
                     >
                     <ProfileLogotype data={profile}  />
                   
+                    {profile.video && <EmbedSection label="awards.profile.video" data={profile.video} />}
+
+
                     </div>
                 }
                 leftCentered={true}
@@ -112,6 +116,7 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword
                 </div>}
                     
                 {sections.map(section =>  <TextSection key={section.name} {...section} record={profile} mb={2} baseLabel={defaultSectionBaseLabel}   />)}
+
 
                 <Divider />
 
@@ -154,7 +159,7 @@ WidgetContestantPerson.defaultProps = {
         {name: "case_study"},
         {name: "testimonials"},
         {name: "company_website", isLink: true},
-        {name: "video"}
+        // {name: "video"}
     ],
 
     keyword_source: "awards_category",
