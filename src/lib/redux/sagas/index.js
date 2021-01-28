@@ -195,7 +195,8 @@ function* changeUrlWhenFaqsSelected(actionData) {
   const faqs = yield select(Selectors.getFaqs);
 
   yield call(Router.push, `${Router.pathname}?q=${faqs.join(',')}`, undefined, {
-    shallow: true
+    shallow: true,
+    scroll: false
   });
 }
 
