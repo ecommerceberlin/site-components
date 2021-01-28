@@ -21,6 +21,7 @@ export { default as Gallery } from './Gallery';
 
 export { default as EventInfo } from './EventInfo';
 export { default as TextSection } from './TextSection';
+export { default as EmbedSection } from './EmbedSection';
 
 export { default as Benefits } from './Benefits';
 export { default as Icon } from './Icon';
