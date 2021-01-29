@@ -1,11 +1,11 @@
 import React from 'react';
-import {translate} from '../i18n'
+import {useTranslate} from '../i18n'
 import ReactMarkdown from 'react-markdown'
-import { withStyles } from '@material-ui/core/styles';
-import compose from 'recompose/compose';
+import { makeStyles } from '@material-ui/core/styles';
 import EmbedPostImage from './EmbedPostImage'
 import EmbedVimeo from './EmbedVimeo'
 import EmbedYouTube from './EmbedYouTube'
+import cn from 'classnames'
 
 /**
  * function Html(props) {
@@ -68,26 +68,35 @@ const renderers = ({id, images, cover, ...other}) => ({
     },
 })
 
-const styles = theme => ({
+const useStyles =  makeStyles(theme => ({
     root : {
+        fontSize: theme.typography.pxToRem(17),
+        fontWeight: 400,
+        fontFamily: theme.typography.fontFamily,
+        lineHeight: theme.typography.pxToRem(28),
+    },
+    post: {
         fontSize: theme.typography.pxToRem(21),
         fontWeight: 400,
         fontFamily: theme.typography.fontFamily,
         lineHeight: theme.typography.pxToRem(32),
     }
-})
+}))
 
-const Markdown = ({label, translate, locale, classes, children, rendererData}) => <div className={classes.root}>
+const Markdown = ({label, children, rendererData, big}) => {
+    const [translate] = useTranslate();
+    const classes = useStyles();
+    return <div className={cn(classes.root, {
+        [classes.post]: big
+    })}>
     <ReactMarkdown source={label ? translate(label) : children} renderers={rendererData? renderers(rendererData): undefined } />
     </div>
+}
 
 Markdown.defaultProps = {
     label : null, 
-    rendererData: null
+    rendererData: null,
+    big: false
 }
-
-const enhance = compose(
-    translate,
-   withStyles(styles)
-)
-export default enhance(Markdown)
+ 
+export default Markdown

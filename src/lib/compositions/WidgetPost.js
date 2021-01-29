@@ -85,7 +85,7 @@ const WidgetPost = ({id, wrapperProps}) => {
 
                     {published_at_year < 2020 && <Alert type="error" label="alerts.content_is_old" />}
 
-                    <Markdown children={body} rendererData={post} />
+                    <Markdown children={body} rendererData={post} big={true} />
                     </Wrapper>
                 }
                 right={
