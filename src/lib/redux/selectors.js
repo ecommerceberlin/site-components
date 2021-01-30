@@ -49,6 +49,7 @@ export const getContestantCompanies = (state, props) => state.resources.contesta
 export const getContestantCompaniesAll = (state, props) => state.resources.contestant_companies_all
 export const getVotes = (state, props) => state.resources.votes
 export const getPosts = (state, props) => state.resources.posts
+export const getPublishers = (state, props) => state.resources.publishers
 export const getAdminReport = (state, props) => "report" in state.resources ? state.resources.report : []
 
 /*

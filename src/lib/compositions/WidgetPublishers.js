@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Companies from '../datasources/Companies'
+import Publishers from '../datasources/Publishers'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {slug} from '../helpers'
@@ -69,13 +69,13 @@ function WidgetPublishers() {
 
     <Typography  variant="h4" component="h3" >{translate("publishers")}</Typography>
     <Grid container>
-    <Companies filter={(item)=>item.featured}>{(all) => take(all, 5).map(company => {
+    <Publishers>{({all}) => all.map(company => {
       return (
         <Grid item key={company.id} > 
         <Card className={classes.root} elevation={0}>
         <CardActionArea 
             className={classes.container} 
-            onClick={() => router.push(`/publishers/${company.slug}`)}
+            onClick={() => router.push(`/authors/${company.slug}`)}
         >  
          <CompanyLogotype company={company} tiny={true} />
         </CardActionArea>
@@ -84,7 +84,7 @@ function WidgetPublishers() {
       </Grid>
       )
     })
-  }</Companies></Grid></>);
+  }</Publishers></Grid></>);
 }
 
 
