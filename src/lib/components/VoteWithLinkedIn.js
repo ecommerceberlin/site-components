@@ -184,7 +184,7 @@ class VoteWithLinkedIn extends Component {
                         disabled={true} 
                         size="large" 
                         color="primary"
-                        startIcon={<Linkedin className={classes.leftIcon} />}>{
+                        startIcon={<LinkedIn className={classes.leftIcon} />}>{
                             translate( disabledStatus ) 
             }</Button>)
         }
@@ -196,7 +196,7 @@ class VoteWithLinkedIn extends Component {
             return (
             <div className={classes.buttonContainer}>
                 <Button 
-                    startIcon={ <Linkedin className={classes.leftIcon} />} 
+                    startIcon={ <LinkedIn className={classes.leftIcon} />} 
                     variant="contained" 
                     size="large" 
                     color="primary" 
@@ -208,7 +208,7 @@ class VoteWithLinkedIn extends Component {
 
         
         return  (<Button 
-            startIcon={ <Linkedin className={classes.leftIcon} />} 
+            startIcon={ <LinkedIn className={classes.leftIcon} />} 
             onClick={(e) => this.createSession(e) } 
             variant="contained" 
             size="large" 
