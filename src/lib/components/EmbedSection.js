@@ -8,7 +8,16 @@ import Vimeo from 'react-player/vimeo'
 
 
 const useStyles = makeStyles(theme => ({
-
+     wrapper : {
+        position: "relative",
+        paddingTop: "56.25%" /* Player ratio: 100 / (1280 / 720) */
+      },
+      
+      player : {
+        position: "absolute",
+        top: 0,
+        left: 0
+      }
 }))
 
 const regexp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
@@ -24,11 +33,11 @@ const EmbedSection = ({label, data, playerProps}) => {
    
     if(data.indexOf("vimeo")!==-1){
 
-        return <Box mt={3}><Vimeo url={data} {...playerProps} /></Box>
+        return <Box mt={3} className={classes.wrapper}><Vimeo className={classes.player} url={data} {...playerProps} /></Box>
 
     }else{
         
-        return <Box mt={3}><YouTube url={data} {...playerProps} /></Box>
+        return <Box mt={3} className={classes.wrapper}><YouTube  className={classes.player} url={data} {...playerProps} /></Box>
     
     }
     
@@ -39,7 +48,9 @@ EmbedSection.defaultProps = {
         controls: true,
         light: true,
         playing: true,
-        loop: true
+        loop: true,
+        width: "100%",
+        height: "100%"
     }
 }
 
