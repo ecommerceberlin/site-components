@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import EmbedPostImage from './EmbedPostImage'
 import EmbedVimeo from './EmbedVimeo'
 import EmbedYouTube from './EmbedYouTube'
+import EmbedTwitter, {EmbedTwitterRegexp} from './EmbedTwitter'
 import cn from 'classnames'
 
 /**
@@ -26,8 +27,6 @@ import cn from 'classnames'
 }
 */
 
-const VimeoEmbed = ({href}) => <div>vimeo</div>
-const YouTubeEmbed = ({href}) => <div>youtube</div>
 
 const renderers = ({id, images, cover, ...other}) => ({
 
@@ -50,6 +49,12 @@ const renderers = ({id, images, cover, ...other}) => ({
         if(href.indexOf("youtu")>-1){
             return <EmbedYouTube href={href} />
         }
+
+        if(EmbedTwitterRegexp.test(href)){
+            return <EmbedTwitter href={href} />
+        }
+
+        console.log(href, EmbedTwitterRegexp.test(href))
 
         return <a href={href}>{href}</a>
     },
