@@ -184,6 +184,7 @@ class VoteWithLinkedIn extends Component {
                         disabled={true} 
                         size="large" 
                         color="primary"
+                        fullWidth
                         startIcon={<LinkedIn className={classes.leftIcon} />}>{
                             translate( disabledStatus ) 
             }</Button>)
@@ -200,6 +201,7 @@ class VoteWithLinkedIn extends Component {
                     variant="contained" 
                     size="large" 
                     color="primary" 
+                    fullWidth
                     onClick={() => linkedVoteRequest(service, id) }>
                    {translate(labelLoggedIn)}
                 </Button>
@@ -212,6 +214,7 @@ class VoteWithLinkedIn extends Component {
             onClick={(e) => this.createSession(e) } 
             variant="contained" 
             size="large" 
+            fullWidth
             color="primary">{translate(labelGuest)}</Button>)
        
     }

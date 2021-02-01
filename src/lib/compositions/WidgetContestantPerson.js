@@ -9,6 +9,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import {
     MyTypography as Typography,
     TwoColsLayout as Section,
+    Centered,
     Wrapper,
     Sharer,
    // Speaker
@@ -28,21 +29,19 @@ import {
 
 const useStyles = makeStyles(theme => ({
     voteInfoBox : {
-        borderWidth: 1,
-        borderColor: 'rgba(97, 97, 97, 0.5)',
-        borderStyle: 'solid',
-        boxSizing: 'border-box',
+    
         borderRadius: 4,
         paddingTop: 4,
         paddingBottom: 0,
         paddingLeft: 10,
         paddingRight: 10,
         marginTop: 20,
-        backgroundColor: '#eaeaea'
+        marginBottom: 10,
+        backgroundColor: '#f0f2f5'
     },
     voteInfo : {
         // marginLeft : 10,
-        // marginTop: 5
+        marginBottom: 7
     }
 
 }))
@@ -79,23 +78,12 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword
                 <Section
                 leftSize={5}
                 left={
-                    <div
-                    style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    marginTop: 0,
-                    marginBottom: 20
-                    }}
-                    >
-                    <ProfileLogotype data={profile}  />
-                  
+                    <div>
+                    <Centered><ProfileLogotype data={profile}  /></Centered>                    
                     {profile.video && <EmbedSection label="awards.profile.video" data={profile.video} />}
-
-
                     </div>
                 }
-                leftCentered={true}
+                leftCentered={false}
                 right={
              
                 <Box m={1}>
@@ -112,7 +100,7 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword
                 right={<div className={classes.voteInfo}>{status}<Typography template="benefitsText" label="awards.voting.rules.description" /></div>} 
                 />
                 <Divider />
-                <Sharer url={`/vote/${id}`} />
+                <Centered><Sharer url={`/vote/${id}`} /></Centered>
                 </div>}
                     
                 {sections.map(section =>  <TextSection key={section.name} {...section} record={profile} mb={2} baseLabel={defaultSectionBaseLabel}   />)}
