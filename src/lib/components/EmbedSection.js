@@ -34,12 +34,14 @@ const EmbedSection = ({label, data, playerProps}) => {
     if(data.indexOf("vimeo")!==-1){
 
         return <Box mt={3} className={classes.wrapper}><Vimeo className={classes.player} url={data} {...playerProps} /></Box>
-
-    }else{
-        
-        return <Box mt={3} className={classes.wrapper}><YouTube  className={classes.player} url={data} {...playerProps} /></Box>
-    
     }
+
+    if(data.indexOf("youtu")!==-1){
+        return <Box mt={3} className={classes.wrapper}><YouTube  className={classes.player} url={data} {...playerProps} /></Box>
+
+    }
+    
+    return null
     
 }
 
