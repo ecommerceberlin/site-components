@@ -30,9 +30,9 @@ const TextSection = ({baseLabel, margin, padding, isOption, record, name, isLink
             return <Box {...boxProps} m={margin} p={padding}><Typography variant="body1" component="div" ><strong>{translate(`${baseLabel}.${value}`)}</strong></Typography></Box>
         }
 
-        if(isLink && !/(?:__|[*#])|\[(.*?)\]\(.*?\)/.test(value)){
-            value = `[${value}](${value})`
-        }
+        // if(isLink && !/(?:__|[*#])|\[(.*?)\]\(.*?\)/.test(value) && value.indexOf("http")){
+        //     value = `[${value}](${value})`
+        // }
 
         return (<Box {...boxProps} m={margin} p={padding}><Typography variant="body1" component="div" >
         <strong>{translate(`${baseLabel}.${name}`)}</strong><ReactMarkdown children={value} />
