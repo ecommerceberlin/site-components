@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function WidgetPosts() {
+function WidgetPosts({company}) {
 
     const classes = useStyles();
     const router = useRouter();
@@ -61,16 +61,12 @@ function WidgetPosts() {
     <>
     <Typography  variant="h4" component="h3" >{translate("posts.latest")}</Typography>
 
-    <Posts>{({all}) => all.map(post => {
+    <Posts company={company}>{({all, filtered}) => (company? filtered: all).map(post => {
       return (
 
         <Card key={post.id} className={classes.root} elevation={0}>
         <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}>
-    
-          <div className={classes.icons}>
-            FIRMA<br/>
-            IKONKI
-          </div>
+          <div className={classes.icons}></div>
           <CardContent className={classes.texts}>
             <Typography gutterBottom variant="h5" component="h3">
               {post.meta.headline}
@@ -96,5 +92,8 @@ function WidgetPosts() {
   }</Posts></>);
 }
 
+WidgetPosts.defaultProps = {
+  company: null
+}
 
 export default WidgetPosts

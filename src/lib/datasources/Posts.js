@@ -9,9 +9,17 @@ class Posts extends React.PureComponent {
 
   componentDidMount(){
 
-      const {resourceFetchRequest, all} = this.props
+      const {resourceFetchRequest, author} = this.props
 
       resourceFetchRequest(["posts"])
+
+      if(author){
+        resourceFetchRequest([{
+          resource: "posts",
+          params: "author=targiehandlupl"
+        }])
+      }
+
 
       /**
        * {
@@ -38,6 +46,12 @@ Posts.defaultProps = {
     all : [],
 };
 
+
+
+Posts.defaultProps = {
+  author: null
+}
+
 export default connect(
 
   (state, props) => {
@@ -45,7 +59,8 @@ export default connect(
     const mapStateToProps = (state, props) => {
       return {
         all : MobileAwarePostsSelector(state, props),
-        featured: MobileAwareFeaturedPostsSelector(state, props)
+        featured: MobileAwareFeaturedPostsSelector(state, props),
+        filtered: MobileAwarePostsSelector(state, props)
       }
     }
     return mapStateToProps

@@ -7,6 +7,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+
+
+import Avatar from '@material-ui/core/Avatar';
+
 import Publishers from '../datasources/Publishers'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
@@ -14,6 +18,7 @@ import {slug} from '../helpers'
 import take from 'lodash/take'
 import {useTranslate} from '../i18n'
 import CompanyLogotype from '../components/CompanyLogotype'
+import get from 'lodash/get'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,6 +59,16 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
     
     }
+  },
+  avatar: {
+    height: 100,
+    width: 180,
+    [theme.breakpoints.up('sm')]: {
+      
+    }
+  },
+  avatarImg: {
+    objectFit: "contain"
   }
 }));
 
@@ -68,16 +83,20 @@ function WidgetPublishers() {
     <>
 
     <Typography  variant="h4" component="h3" >{translate("publishers")}</Typography>
-    <Grid container>
+    <Grid container spacing={1}>
     <Publishers>{({all}) => all.map(company => {
       return (
-        <Grid item key={company.id} > 
+        <Grid item key={company.id}  > 
         <Card className={classes.root} elevation={0}>
         <CardActionArea 
             className={classes.container} 
             onClick={() => router.push(`/authors/${company.slug}`)}
         >  
-         <CompanyLogotype company={company} tiny={true} />
+         {/* <CompanyLogotype company={company} tiny={true} /> */}
+         <Avatar variant="square" src={get(company, "profile.logotype_cdn")} classes={{
+           root: classes.avatar,
+           img: classes.avatarImg
+         }}/>
         </CardActionArea>
      
       </Card>
