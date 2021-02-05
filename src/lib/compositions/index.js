@@ -23,6 +23,8 @@ export { default as WidgetSalesMap } from './WidgetSalesMap';
 export { default as WidgetOffers } from './WidgetOffers';
 export { default as WidgetPresenters } from './WidgetPresenters';
 export { default as WidgetSchedule } from './WidgetSchedule';
+export { default as WidgetStage } from './WidgetStage';
+
 export { default as WidgetExhibitorsByKeyword } from './WidgetExhibitorsByKeyword'
 export { default as WidgetRoleButtons } from './WidgetRoleButtons'
 export { default as WidgetFooter } from './WidgetFooter'
