@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
@@ -19,7 +18,6 @@ const styles = {
 
 const MyLink = ({
   as,
-  name,
   label,
   href,
   classes,
@@ -29,7 +27,8 @@ const MyLink = ({
   size,
   icon,
   className,
-  disabled
+  disabled,
+  children
 }) => {
 
 
@@ -46,15 +45,15 @@ const MyLink = ({
         color={color}
         disabled={disabled}
         className={className}>
-        {label ? translate(label) : name}
+        {label ? translate(label) : children}
       </Button>
     </Link>
   );
 };
 
 MyLink.defaultProps = {
+  label: null,
   href : "/",
-  name: 'Link',
   variant: 'text',
   size: 'small',
   color: 'default',
@@ -62,14 +61,7 @@ MyLink.defaultProps = {
   disabled : false
 };
 
-MyLink.propTypes = {
-  href: PropTypes.string.isRequired,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  variant: PropTypes.string,
-  color: PropTypes.string,
-  classes: PropTypes.object.isRequired
-};
+
 
 const enhance = compose(
   translate,
