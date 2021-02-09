@@ -2,16 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Posts from '../datasources/Posts'
-import Link from 'next/link'
+// import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {slug} from '../helpers'
 import {useTranslate} from '../i18n'
+import get from 'lodash/get'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function WidgetPosts({company}) {
+function WidgetPosts({company, label}) {
 
     const classes = useStyles();
     const router = useRouter();
@@ -59,9 +60,9 @@ function WidgetPosts({company}) {
 
     return (
     <>
-    <Typography  variant="h4" component="h3" >{translate("posts.latest")}</Typography>
+    <Typography  variant="h4" component="h3" >{translate(label)}</Typography>
 
-    <Posts company={company}>{({all, filtered}) => (company? filtered: all).map(post => {
+    <Posts company={company}>{({all, filtered}) => all.map(post => {
       return (
 
         <Card key={post.id} className={classes.root} elevation={0}>
@@ -71,7 +72,7 @@ function WidgetPosts({company}) {
             <Typography gutterBottom variant="h5" component="h3">
               {post.meta.headline}
             </Typography>
-            {post.meta.quote &&   <Typography variant="body2" color="textSecondary" component="p">{post.meta.quote}</Typography>}
+            {post.meta.quote && get(post, "published_at", "").substring(0, 4) > 2018 && <Typography variant="body2" color="textSecondary" component="p">{post.meta.quote}</Typography>}
           </CardContent>
         </CardActionArea>
      
@@ -93,6 +94,7 @@ function WidgetPosts({company}) {
 }
 
 WidgetPosts.defaultProps = {
+  label: "posts.latest",
   company: null
 }
 

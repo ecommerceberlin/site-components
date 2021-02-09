@@ -9,15 +9,16 @@ class Posts extends React.PureComponent {
 
   componentDidMount(){
 
-      const {resourceFetchRequest, author} = this.props
+      const {resourceFetchRequest, company} = this.props
 
-      resourceFetchRequest(["posts"])
 
-      if(author){
+      if(company){
         resourceFetchRequest([{
           resource: "posts",
-          params: "author=targiehandlupl"
+          params: `company=${company}`
         }])
+      }else{
+        resourceFetchRequest(["posts"])
       }
 
 
@@ -49,7 +50,7 @@ Posts.defaultProps = {
 
 
 Posts.defaultProps = {
-  author: null
+  company: null
 }
 
 export default connect(

@@ -14,7 +14,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import SvgFilter from '../components/svg/Black'
 import Box from '@material-ui/core/Box';
-
+import Publisher from '../components/Publisher'
 
 const useStyles = makeStyles(theme => ({
 
@@ -67,11 +67,11 @@ const WidgetPost = ({id, wrapperProps}) => {
 
       <Box className={classes.container}>
 
-          <CardMedia image={post.cover} title="asd" className={classes.cover} />
+          <CardMedia image={post.cover} title="" className={classes.cover} />
 
           <Box className={classes.texts}>
           <Typography variant="h1" className={classes.headline} align="left">{headline}</Typography>
-          <Typography variant="h3" className={classes.quote} align="left">{quote}</Typography>
+          {published_at_year > 2018 && <Typography variant="h3" className={classes.quote} align="left">{quote}</Typography>}
           </Box>
 
        </Box>
@@ -91,7 +91,7 @@ const WidgetPost = ({id, wrapperProps}) => {
                 right={
                 <>
                   <Box mt={5} mb={10}>
-                     <CompanyLogotype company={post.company} />
+                     <Publisher data={post.company} fluid={true} />
                   </Box>
                   <DiscussionEmbed
                     shortname='fp20'
