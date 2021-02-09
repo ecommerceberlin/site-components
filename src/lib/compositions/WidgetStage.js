@@ -53,11 +53,11 @@ const DiscordStats = () => {
     return <div>Staty z discorda ... ostatnia wiadomosc</div>
 }
 
-const WidgetStage = ({stage}) => {
+const WidgetStage = ({stage, playerProps}) => {
 
     const intervalRef = useRef();
     const playerRef = useRef();
-    const [currentVideo, setCurrentVideo] = useState(null)
+    const [userTweaking, setUserTweaking] = useState(null)
     const [translate] = useTranslate();
     const classes = useStyles();
 
@@ -66,10 +66,16 @@ const WidgetStage = ({stage}) => {
         refreshWhenHidden: true 
     })
     
+    const video = data && Array.isArray(data) && data.length ? data.find(item => item.presentation_venue === stage.toUpperCase()) : null
+
+
     const player = useCallback(node => {
-        console.log(playerRef)
+        console.log(node, playerRef)
+
         if(playerRef.current){
             console.log("current playtime in seconds", playerRef.current.getCurrentTime())
+
+            return playerRef.current
         }
          
     })
@@ -88,51 +94,71 @@ const WidgetStage = ({stage}) => {
         //read localstorage
     })
 
+    const handleUserInteraction = (timeInfo = {}) => {
+        console.log(timeInfo)
+        setUserTweaking(true);
+    }
+
+    const handleJumpLive = () => {
+        const ref = player()
+
+        try{
+            ref.seekTo(video.seconds, "seconds")
+            setUserTweaking(false);
+        }catch{
+
+        }
+    }
+
     // const handleProgress = debounce(({playedSeconds}) => {
     //     console.log("zapisuje co 5 sekund", playedSeconds)
     // }, 1000);
 
-    const filtered = data && Array.isArray(data) && data.length ? data.filter(item => item.presentation_venue === stage.toUpperCase()) : null
 
-    console.info(stage, data, filtered)
+    console.info(stage, video)
 
     return (<Wrapper>
         {error && <div>failed to load</div>}
         {!data && <div>loading...</div>}
-        {filtered && filtered.map(item => 
-       <Box key={item.id} mt={3}>
+        {video && "id" in video ? ( 
+       <Box mt={3}>
        <Grid container spacing={2}>
        <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
         <div className={classes.wrapper}>
-                <Vimeo 
-                    className={classes.player}
-                    ref={playerRef} 
-                    //onProgress={handleProgress} 
-                    controls={true} 
-                    playing={true} 
-                    url={item.video} 
-                    width="100%"
-                    height="100%"
-                />
+            <Vimeo 
+                className={classes.player}
+                {...playerProps}
+                ref={playerRef} 
+                onSeek={handleUserInteraction}
+                onPause={handleUserInteraction}
+                url={video.video} 
+            />
             </div>
        </Grid>
       
        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} >
-       <Button variant="contained">LIVE</Button>
+       <Button variant="contained" onClick={handleJumpLive}>{userTweaking ? "NOT LIVE" : "LIVE"}</Button>
        <OtherStages data={data} stage={stage} />
        <DiscordStats />
        </Grid>
      
         </Grid>
-        </Box>)}
-        {!filtered && <Box mt={3} p={10}>szmata standby</Box> }
+        </Box>) : <Box mt={3} p={10}>szmata standby</Box>}
+
     </Wrapper>)
    
 
 }
 
 WidgetStage.defaultProps = {
-   stage: ""
+   stage: "",
+   placeholder: "",
+   playerProps: {
+    controls: true, 
+    playing: true,  
+    width: "100%",
+    height: "100%"
+   }
 }
 
 
