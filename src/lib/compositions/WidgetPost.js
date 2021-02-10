@@ -2,7 +2,6 @@ import React from 'react';
 import SingleRecord from "../datasources/SingleRecord"
 import Wrapper from '../components/Wrapper'
 // import CompanyData from '../components/CompanyData'
-import CompanyLogotype from '../components/CompanyLogotype'
 // import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import get from 'lodash/get'
@@ -76,7 +75,7 @@ const WidgetPost = ({id, wrapperProps}) => {
 
        </Box>
 
-            {/* <img src={post.cover} alt="" /> */}
+       
            <Wrapper {...wrapperProps} >
             <TwoColsLayout
                 leftSize={8}
