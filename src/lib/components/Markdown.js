@@ -7,6 +7,7 @@ import EmbedVimeo from './EmbedVimeo'
 import EmbedYouTube from './EmbedYouTube'
 import EmbedTwitter, {EmbedTwitterRegexp} from './EmbedTwitter'
 import cn from 'classnames'
+import { resizeCloudinaryImage } from '../helpers';
 
 /**
  * function Html(props) {
@@ -38,6 +39,7 @@ const renderers = ({id, images, cover, ...other}) => ({
             return null;
         }
 
+        return <img src={resizeCloudinaryImage(url, 1000, 1000)} alt="" style={{width: "100%"}} />;
     },
 
     link: ({href}) => {
