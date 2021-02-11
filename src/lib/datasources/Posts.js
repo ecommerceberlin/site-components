@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 
-import {MobileAwarePostsSelector, MobileAwareFeaturedPostsSelector} from './redux/posts'
+import {
+  MobileAwarePostsSelector, 
+  MobileAwareFeaturedPostsSelector, 
+  MobileAwareFilteredPostsSelector
+} from './redux/posts'
 import {resourceFetchRequest } from '../components/redux'
 
 class Posts extends React.PureComponent {
@@ -61,7 +65,7 @@ export default connect(
       return {
         all : MobileAwarePostsSelector(state, props),
         featured: MobileAwareFeaturedPostsSelector(state, props),
-        filtered: MobileAwarePostsSelector(state, props)
+        filtered: MobileAwareFilteredPostsSelector(state, props)
       }
     }
     return mapStateToProps

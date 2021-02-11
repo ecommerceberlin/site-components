@@ -62,7 +62,7 @@ function WidgetPosts({company, label}) {
     <>
     <Typography  variant="h4" component="h3" >{translate(label)}</Typography>
 
-    <Posts company={company}>{({all, filtered}) => all.map(post => {
+    <Posts company={company}>{({all, filtered}) => (company? filtered: all).map(post => {
       return (
 
         <Card key={post.id} className={classes.root} elevation={0}>

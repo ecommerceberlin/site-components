@@ -1,7 +1,7 @@
 import { RESOURCE_FETCH_SUCCESS, VOTE_STATUS_SUCCESS } from '../../components/redux/types';
 import { CHANGE_LOCALE_MSGS } from '../../i18n';
 
- 
+import keyBy from 'lodash/keyBy'
 
 const reducer = (state = {}, action) => {
   const { type, resource, data } = action;
@@ -9,6 +9,15 @@ const reducer = (state = {}, action) => {
   switch (type) {
 
     case RESOURCE_FETCH_SUCCESS:
+
+      /**
+       * experimental
+       */
+
+      if(resource === "posts"){
+        return {...state, [resource]: {...state[resource], ...keyBy(data, "id")}}     
+      }
+
       return { ...state, [resource]: data };
     break;
 
