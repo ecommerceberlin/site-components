@@ -3,7 +3,6 @@
 import boothsSelected from './boothsSelected';
 import resources from './resources';
 import resourcelists from './resourcelists';
-import meta from './meta';
 import app from './app';
 import visuals from './visuals';
 import settings from '../../settings/redux/reducer';
@@ -17,7 +16,6 @@ export default {
   boothsSelected,
   resources,
   resourcelists,
-  meta,
   settings,
   social
 };

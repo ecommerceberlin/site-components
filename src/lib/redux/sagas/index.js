@@ -26,8 +26,6 @@ import {
   RESOURCE_FETCH_ERROR,
   FAQ_TOGGLE,
   BOOTH_CHECKED,
-
-
   //voting
   LINKEDIN_TOKEN_SUCCESS,
   LINKEDIN_VOTE_REQUESTED,
@@ -35,9 +33,7 @@ import {
   LINKEDIN_VOTE_SUCCESS,
   VOTE_STATUS_CHECK,
   SET_USER_TOKEN
-
 } from '../../components/redux/types';
-
 
 import {
   CHANGE_LOCALE, 
@@ -53,7 +49,6 @@ import {
   resourceFetchRequest,
   resourceFetchSuccess,
   resourceFetchError,
-  resourceFetchSuccessMeta,
   resourceList,
   boothSelect,
   boothUnselect,
@@ -71,7 +66,7 @@ import {
 
 import * as Selectors from '../selectors';
 import {event} from '../../services/gtag'
-
+import {resourceToUrl} from '../../helpers';
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import { HYDRATE } from 'next-redux-wrapper'
 
@@ -136,18 +131,14 @@ function* accumulateFetches({resource, reload}) {
 
     //check if endpoint is string or object....
 
-    if(new Object(endpoint) === endpoint){
-      //lets build proper URL
-      const searchParams = new URLSearchParams(endpoint.params)
-      searchParams.sort()
-      endpoint = `${endpoint.resource}?${ searchParams.toString() }` 
-    }
+    endpoint = resourceToUrl(endpoint)
 
     if(endpoint in fetchTasks) {
-
+       //already added... cancel as we add new
        yield cancel( fetchTasks[endpoint] );
     }
 
+    //task will be delayed by 50ms so we may cancel it
     fetchTasks[endpoint] = yield fork(fetchAccumulatedFetches, endpoint, reload)
   }
 
@@ -156,14 +147,15 @@ function* accumulateFetches({resource, reload}) {
 function* fetchAccumulatedFetches(endpoint, reload){
 
   //check if we have params...
-
   const resource = endpoint.split("?")[0]
 
   yield delay(50);
 
   const lists = yield select(Selectors.getResourceLists)
 
-  if(!reload && endpoint in lists && lists[endpoint] && lists[endpoint].length){
+  //check if we already fetched the URL .. so we should have resourcelist and resource...
+  if(!reload && endpoint in lists && Array.isArray(lists[endpoint]) && lists[endpoint].length){
+   // should we delete it? dunno.
     delete fetchTasks[endpoint]
     return
   }
@@ -178,10 +170,6 @@ function* fetchAccumulatedFetches(endpoint, reload){
     //add list!
 
     yield put(resourceList(endpoint, json.data))
-
-    if("meta" in json){
-      yield put(resourceFetchSuccessMeta(json.meta))
-    }
 
   } else {
     yield put(resourceFetchError(endpoint, `${response.status} ${response.statusText}`));
@@ -348,3 +336,46 @@ const rootSaga = function* root() {
 };
 
 export default rootSaga;
+
+
+
+/**
+ * 
+ * export default function* appSaga() {
+
+
+  const sagas = [
+    function* changeEventSaga(){ 
+      yield takeEvery(CHANGE_EVENT, changeEvent)
+    },
+    function* changeGroupSaga(){ 
+      yield takeEvery(CHANGE_GROUP, changeGroup)
+    },
+    function* asdasdSaga(){ 
+      yield takeEvery(CRUD_GET_LIST_SUCCESS, getAdminsWhen)
+    },
+    function* handleRecordUpdateAfterFileUpload(){
+      yield takeEvery(FILE_UPLOAD, recordUpdateAfterFileUpload)
+    }
+    
+  ];
+
+  yield all(sagas.map(saga =>
+    spawn(function* () {
+      while (true) {
+        try {
+          yield call(saga)
+          break
+        } catch (e) {
+          console.log(e)
+        }
+      }
+    }))
+  );
+
+
+  
+  // yield all([takeEvery(`${BULK_CHANGE_COMPANY_ADMIN}_SUCCESS`, removeCompanyFilters)]);
+}
+
+ */

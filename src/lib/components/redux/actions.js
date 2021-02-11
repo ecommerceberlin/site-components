@@ -142,14 +142,6 @@ export function resourceList(endpoint, data) {
   };
 }
 
-export function resourceFetchSuccessMeta(meta) {
-  return {
-    type: Types.RESOURCE_FETCH_SUCCESS_META,
-    meta: meta
-  };
-}
-
-
 export function resourceFetchError(resource, error) {
   return {
     type: Types.RESOURCE_FETCH_ERROR,

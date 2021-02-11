@@ -41,12 +41,20 @@ const reducer = (state, action) => {
 
 
       const nextState = {
+        
         ...state, // use previous state
+
         resources: {
           ...action.payload.resources,
           ...state.resources, 
           texts : action.payload.resources.texts
         }, // apply delta from hydration
+
+        resourcelists: {
+          ...action.payload.resourcelists,
+          ...state.resourcelists
+        }, 
+
         settings: action.payload.settings
       }
   
