@@ -22,7 +22,7 @@ const EmbedVimeo = ({href}) => {
         height="506" 
         frameBorder="0" 
         allow="autoplay; fullscreen; picture-in-picture" 
-        allowfullscreen></iframe>
+        allowFullScreen></iframe>
 
     )
 }
