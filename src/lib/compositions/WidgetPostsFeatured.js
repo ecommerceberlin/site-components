@@ -70,24 +70,31 @@ function WidgetPostsFeatured({page, gridSettings}){
         
         return (<Grid container spacing={5} direction="row">{
 
-          take(featured, 4).map(post => <Grid item key={post.id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
-            <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(get(post, "meta.headline"))},${post.id}`)}>
-              <CardMedia
-                component="img"
-                alt=""
-                height="250"
-                image={post.cover}
-                title=""
-                className={classes.filter}
-              />
-              <CardContent className={classes.content}>
-                <Typography gutterBottom variant="h5" component="h2" className={classes.headline}>
-                {get(post, "meta.headline")}
-                </Typography>
-               {get(post, "meta.quote", null) && <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>{get(post,"meta.quote")}</Typography>} 
-              </CardContent>
-            </CardActionArea>
-        </Card></Grid>)
+          take(featured, 4).map(post => {
+
+            const id = get(post, "id")
+            const headline = get(post, "meta.headline");
+            const quote = get(post, "meta.quote", null);
+
+            return (<Grid item key={id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
+              <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(headline)},${id}`)}>
+                <CardMedia
+                  component="img"
+                  alt=""
+                  height="250"
+                  image={post.cover}
+                  title=""
+                  className={classes.filter}
+                />
+                <CardContent className={classes.content}>
+                  <Typography gutterBottom variant="h5" component="h2" className={classes.headline}>
+                  {headline}
+                  </Typography>
+                 {quote && <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>{quote}</Typography>} 
+                </CardContent>
+              </CardActionArea>
+          </Card></Grid>)
+          })
 
         }</Grid>)
 

@@ -72,16 +72,21 @@ function WidgetPosts({company, page, label}) {
         params: { company: company}
       }
     }}>{({all, filtered}) => (company? filtered: all).map(post => {
+
+      const id = get(post, 'id')
+      const quote = get(post, "meta.quote");
+      const headline = get(post, "meta.headline");
+      const published_at_year = get(post, "published_at", "").substring(0, 4);
       return (
 
         <Card key={post.id} className={classes.root} elevation={0}>
-        <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(get(post, "meta.headline"))},${post.id}`)}>
+        <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(headline)},${id}`)}>
           <div className={classes.icons}></div>
           <CardContent className={classes.texts}>
             <Typography gutterBottom variant="h5" component="h3">
-              {get(post,"meta.headline")}
+              {headline}
             </Typography>
-            {post.meta.quote && get(post, "published_at", "").substring(0, 4) > 2018 && <Typography variant="body2" color="textSecondary" component="p">{get(post, "meta.quote")}</Typography>}
+            {quote &&  published_at_year > 2018 && <Typography variant="body2" color="textSecondary" component="p">{quote}</Typography>}
           </CardContent>
         </CardActionArea>
      
