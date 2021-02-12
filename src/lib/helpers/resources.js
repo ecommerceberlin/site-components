@@ -30,7 +30,17 @@ export const resourceToUrl = (endpoint) => {
       searchParams = new URLSearchParams(endpoint.params)
     }
 
-    if(!searchParams.has("page")){
+    //remove null params
+    searchParams.forEach((value, key) => {
+      if(value === null || value === undefined){
+        searchParams.delete(key)
+      }
+      if(typeof value === "boolean"){
+        searchParams.set(key, +value)
+      }
+    })
+
+    if( !searchParams.has("page") && !searchParams.has("id") ){
       searchParams.set("page", 1)
     }
 
