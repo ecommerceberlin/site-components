@@ -12,6 +12,7 @@ import {useRouter} from 'next/router'
 import {slug} from '../helpers'
 import SvgFilter from '../components/svg/Black'
 import Posts from '../datasources/Posts'
+import get from 'lodash/get'
 
 const useStyles = makeStyles(theme => ({
     
@@ -70,7 +71,7 @@ function WidgetPostsFeatured({page, gridSettings}){
         return (<Grid container spacing={5} direction="row">{
 
           take(featured, 4).map(post => <Grid item key={post.id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
-            <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}>
+            <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(get(post, "meta.headline"))},${post.id}`)}>
               <CardMedia
                 component="img"
                 alt=""
@@ -81,9 +82,9 @@ function WidgetPostsFeatured({page, gridSettings}){
               />
               <CardContent className={classes.content}>
                 <Typography gutterBottom variant="h5" component="h2" className={classes.headline}>
-                {post.meta.headline}
+                {get(post, "meta.headline")}
                 </Typography>
-               {post.meta.quote && <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>{post.meta.quote}</Typography>} 
+               {get(post, "meta.quote", null) && <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>{get(post,"meta.quote")}</Typography>} 
               </CardContent>
             </CardActionArea>
         </Card></Grid>)

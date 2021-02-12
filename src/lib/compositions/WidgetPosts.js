@@ -75,13 +75,13 @@ function WidgetPosts({company, page, label}) {
       return (
 
         <Card key={post.id} className={classes.root} elevation={0}>
-        <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(post.meta.headline)},${post.id}`)}>
+        <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(get(post, "meta.headline"))},${post.id}`)}>
           <div className={classes.icons}></div>
           <CardContent className={classes.texts}>
             <Typography gutterBottom variant="h5" component="h3">
-              {post.meta.headline}
+              {get(post,"meta.headline")}
             </Typography>
-            {post.meta.quote && get(post, "published_at", "").substring(0, 4) > 2018 && <Typography variant="body2" color="textSecondary" component="p">{post.meta.quote}</Typography>}
+            {post.meta.quote && get(post, "published_at", "").substring(0, 4) > 2018 && <Typography variant="body2" color="textSecondary" component="p">{get(post, "meta.quote")}</Typography>}
           </CardContent>
         </CardActionArea>
      
