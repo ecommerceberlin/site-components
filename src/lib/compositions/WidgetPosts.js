@@ -79,7 +79,7 @@ function WidgetPosts({company, page, label}) {
       const published_at_year = get(post, "published_at", "").substring(0, 4);
       return (
 
-        <Card key={post.id} className={classes.root} elevation={0}>
+        <Card key={id} className={classes.root} elevation={0}>
         <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(headline)},${id}`)}>
           <div className={classes.icons}></div>
           <CardContent className={classes.texts}>
