@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function WidgetPostsFeatured({gridSettings}){
+function WidgetPostsFeatured({page, gridSettings}){
     
     const classes = useStyles();
     const router = useRouter();
@@ -57,7 +57,13 @@ function WidgetPostsFeatured({gridSettings}){
 
       <div className={classes.root}>
         <SvgFilter />
-        <Posts>{({featured}) => {
+        <Posts queries={{
+          featured: {
+            resource: "posts",
+            params: { page: page},
+            filter: (post) => post.is_sticky || post.is_promoted
+          }
+        }}>{({featured}) => {
         
         return (<Grid container spacing={5} direction="row">{
 
@@ -96,7 +102,8 @@ WidgetPostsFeatured.defaultProps = {
     md: 6,
     lg: 3,
     xl: 3,
-  }
+  },
+  page: 1
 }
   
   export default WidgetPostsFeatured

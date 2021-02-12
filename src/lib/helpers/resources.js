@@ -7,36 +7,35 @@ export const tagsUsed = (data, source) => [...new Set(data.map(c => get(c, sourc
 
 export const resourceToUrl = (endpoint) => {
 
-    
     //this is in order to properly sort params...
-    if(isString(endpoint) && endpoint.indexOf("?")>0){
+    if(isString(endpoint)){
         const parts = endpoint.split("?")
         endpoint = {
           resource: parts[0],
-          params: parts[1]
+          params: typeof parts[1] === "undefined"? "": parts[1]
         }
-
     }
 
-    if( isObject(endpoint) && "resource" in endpoint && "params" in endpoint ){
-        let searchParams;
+    let searchParams;
 
-        if( isObject(endpoint.params) ){
-          //object
-          searchParams = new URLSearchParams()
+    if( isObject(endpoint.params) ){
+      //object
+      searchParams = new URLSearchParams()
 
-          Object.keys(endpoint.params).forEach(key => {
-            searchParams.set(key, endpoint.params[key])
-          })
+      Object.keys(endpoint.params).forEach(key => {
+        searchParams.set(key, endpoint.params[key])
+      })
 
-        }else{
-          searchParams = new URLSearchParams(endpoint.params)
-        }
+    }else{
+      searchParams = new URLSearchParams(endpoint.params)
+    }
 
-        searchParams.sort()
-        return `${endpoint.resource}?${ searchParams.toString() }` 
-     }
-    
-    return endpoint;
+    if(!searchParams.has("page")){
+      searchParams.set("page", 1)
+    }
+
+    searchParams.sort()
+
+    return `${endpoint.resource}?${ searchParams.toString() }` 
 
 }

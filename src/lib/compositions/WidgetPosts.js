@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function WidgetPosts({company, label}) {
+function WidgetPosts({company, page, label}) {
 
     const classes = useStyles();
     const router = useRouter();
@@ -62,7 +62,16 @@ function WidgetPosts({company, label}) {
     <>
     <Typography  variant="h4" component="h3" >{translate(label)}</Typography>
 
-    <Posts company={company}>{({all, filtered}) => (company? filtered: all).map(post => {
+    <Posts queries={{
+      all: {
+        resource: "posts",
+        params: { page: page}
+      },
+      filtered: {
+        resource: "posts",
+        params: { company: company}
+      }
+    }}>{({all, filtered}) => (company? filtered: all).map(post => {
       return (
 
         <Card key={post.id} className={classes.root} elevation={0}>
@@ -95,7 +104,8 @@ function WidgetPosts({company, label}) {
 
 WidgetPosts.defaultProps = {
   label: "posts.latest",
-  company: null
+  company: null,
+  page: 1
 }
 
 export default WidgetPosts
