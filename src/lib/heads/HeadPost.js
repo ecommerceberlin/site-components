@@ -3,17 +3,21 @@ import { MyHead } from '../next';
 import SingleRecord from '../datasources/SingleRecord'
 import Settings from '../datasources/Settings'
 import get from 'lodash/get'
-
+import {slug} from '../helpers'
   
- const HeadPost = ({id, slug, path, ogTemplate, defaultLang, children}) => (
+ const HeadPost = ({id, record, children}) => (
     <Settings>{(get) => (
         <SingleRecord endpoint="posts" id={id} slug={slug}>{(record) => (
             <MyHead
                 image={ record.og_image }
-                url={`${path}/${slug}`}
+                url={ `/${slug(get(record, "meta.headline"))},${get(record,"id")}` }
                 titleLabel={[
-                  'post.opengraph.title',
-                  { name: get(record, 'meta.headline') }
+                    'post.og_title',
+                    { title: get(record, 'meta.headline') }
+                ]}
+                descriptionLabel={[
+                    'post.og_description',
+                    { description: get(record, 'meta.quote') }
                 ]}>{children}</MyHead>
         )}</SingleRecord>
     )}</Settings>
@@ -21,9 +25,7 @@ import get from 'lodash/get'
 )
 
 HeadPost.defaultProps = {
-    path : "/",
-    id: null,
-    slug: null
+    record: {}
 }
 
 export default HeadPost;
