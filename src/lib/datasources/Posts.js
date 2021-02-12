@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {resourceFetchRequest } from '../components/redux'
-import {MatchListWithData} from '../redux/selectors'
+import {FilteredDataSelector} from '../redux/selectors'
 
 class Posts extends React.PureComponent {
 
@@ -44,7 +44,7 @@ export default connect(
 
     const mapStateToProps = (state, props) => {
       return {
-        results: MatchListWithData(state, props)
+        results: FilteredDataSelector(state, props)
       }
     }
     return mapStateToProps

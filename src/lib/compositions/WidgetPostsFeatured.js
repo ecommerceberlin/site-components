@@ -61,7 +61,9 @@ function WidgetPostsFeatured({page, gridSettings}){
           featured: {
             resource: "posts",
             params: { page: page},
-            filter: (post) => post.is_sticky || post.is_promoted
+            filters: {
+              filter: (item) => item.is_sticky || item.is_promoted
+            }
           }
         }}>{({featured}) => {
         

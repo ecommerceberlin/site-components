@@ -5,6 +5,7 @@ import sortBy from 'lodash/sortBy';
 import get from 'lodash/get';
 import isObject from 'lodash/isObject';
 
+
 import { processArrayData, chunkArrayData, resourceToUrl } from '../helpers';
 
 const defaultFilters = {
@@ -26,37 +27,40 @@ export const getSettings = state => state.settings;
 export const getBoothsSelected = state => state.boothsSelected
 export const getTransactions = state => state.transactions
 
+export const getPropsQueries = (state, props) => "queries" in props && isObject(props.queries)? props.queries: {};
 
-export const translateQueriesToUrls = (state, props) => {
-  if(!"queries" in props || !isObject(props.queries) ){
-    return {}
+export const ResourceListsSelector = createSelector(
+  getPropsQueries,
+  (state, props) => "resourcelists" in state && isObject(state.resourcelists)? state.resourcelists: {},
+  (requested, available) => {
+    const dataSet = {};
+    Object.keys(requested).forEach(name => {
+      const value = requested[name];
+      const url = resourceToUrl(value)
+      dataSet[name] = {
+        resource: value.resource,
+        ids: url in available? available[url]: []
+      }
+    })
+    return dataSet;
   }
-  const dataSet = {};
-  Object.keys(props.queries).forEach(name => {
-    const value = props.queries[name];
-    const url = resourceToUrl(value)
-    dataSet[name] = {
-      resource: value.resource,
-      ids: url in state.resourcelists? state.resourcelists[url]: []
-    }
-  })
-  return dataSet;
-}
+)
 
-export const getRequestedResources = (state, props) => {
-  if(!"queries" in props || !isObject(props.queries) ){
-    return {}
+export const ResourceSelector = createSelector(
+  getPropsQueries,
+  (state, props) => "resources" in state && isObject(state.resources)? state.resources: {},
+  (requested, available) => {
+    const dataSet = {};
+    Object.values(requested).forEach(({resource}) => {
+      dataSet[resource] = resource in available? available[resource]: {};
+    });
+    return dataSet;
   }
-  const dataSet = {};
-  Object.values(props.queries).forEach(({resource}) => {
-    dataSet[resource] = resource in state.resources? state.resources[resource]: {};
-  });
-  return dataSet;
-}
+)
 
-export const MatchListWithData = createSelector(
-  translateQueriesToUrls,
-  getRequestedResources,
+export const MatchListWithDataSelector = createSelector(
+  ResourceListsSelector,
+  ResourceSelector,
   (lists, data) => {
     const dataSet = {}
     Object.keys(lists).forEach(name => {
@@ -66,6 +70,24 @@ export const MatchListWithData = createSelector(
     return dataSet;
   }
 )
+
+export const FilteredDataSelector = createSelector(
+  getPropsQueries,
+  MatchListWithDataSelector,
+  (requested, data) => {
+    const dataSet = {}
+    Object.keys(data).map(name => {
+      if("filters" in requested[name] && isObject(requested[name]["filters"])){
+        dataSet[name] = processArrayData(data[name], {...defaultFilters, ...requested[name]["filters"]})
+      }else{
+        dataSet[name] = data[name]
+      }
+    })  
+    return dataSet;
+  }
+)
+
+
 
 
 /*
