@@ -13,6 +13,7 @@ import {slug} from '../helpers'
 import SvgFilter from '../components/svg/Black'
 import Posts from '../datasources/Posts'
 import get from 'lodash/get'
+import { resizeCloudinaryImage } from '../helpers';
 
 const useStyles = makeStyles(theme => ({
     
@@ -82,7 +83,7 @@ function WidgetPostsFeatured({page, gridSettings}){
                   component="img"
                   alt=""
                   height="250"
-                  image={post.cover}
+                  image={resizeCloudinaryImage(post.cover)}
                   title=""
                   className={classes.filter}
                 />
