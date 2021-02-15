@@ -1,3 +1,4 @@
+import React from 'react'
 import {
     Wrapper,
 //    People,
@@ -11,8 +12,12 @@ import DatasourceContestantCompanies from '../datasources/ContestantCompanies'
 import VotesDatasource from '../datasources/Votes'
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import TableList from '../components/TableList'
+import get from 'lodash/get'
+import Publisher from '../components/Publisher'
+import Typography from '@material-ui/core/Typography'
 
-const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, random, filter, resolveLink, resolveTitle, resolveAlt, resolveImage, keyword, keyword_source, sort, center, spacing, path_to_category, ...wrapperProps}) => {
+const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, random, filter, resolveLink, resolveTitle, resolveAlt, resolveImage, keyword, keyword_source, sort, center, spacing, path_to_category, renderAs, ...wrapperProps}) => {
 
  return (<Wrapper {...wrapperProps}>
     
@@ -43,7 +48,7 @@ const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, 
 
             {show_vote_status && <VoteStatus {...votesData}  />}
     
-           {keyword && <Box mt={5}>
+           {keyword && renderAs==="avatars" && <Box mt={5}>
             <Grid 
             container 
             justify={center ? 'center' : 'flex-start'}
@@ -58,10 +63,36 @@ const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, 
                     image={ resolveImage(item) }
                 />))}
             </Grid></Box>}
+
+
+            {keyword && renderAs==="table" && <TableList 
+            rows={data}
+            columns={[
+                {name: "position", render: (row, position) => position < 6 ? <div style={{backgroundColor: 'green'}}></div> : null},
+                {name: "logotype", render: (row)=> <Publisher data={row} transparent={true} resolveLink={(data)=> `/vote/${data.id}`} />},
+                {name: "cname2_and_project_name", render: (row) => <><Typography variant="h6">{get(row, "profile.project_name")}</Typography><div>by <Typography display="inline" variant="subtitle1">{get(row, 'profile.cname2')}</Typography></div></> },
+                {name: "votes", render: (row) => `${row.votes || 0} votes`, style: "big", align: "center"},
+                {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
+            ]}
+            selected={(row, i) => i < 5}
+            // link={link} 
+            // title={item =>  }
+            // subtitle={item => item.presentation_title}
+            text={item => show_votes ? `/${item.votes} votes/` : null}
+            // voted={votesData.keyed}
+           
+
+            />}
                 
             </Box>)
 
-    }}</VotesDatasource>)}
+    }
+    
+    
+    
+    
+    
+    }</VotesDatasource>)}
     
 </DatasourceContestantCompanies>
 
@@ -94,6 +125,7 @@ WidgetContestantCompanies.defaultProps = {
     show_vote_status: false,
     center : false,
     spacing : 5,
+    renderAs: "avatarlist"
 }
 
 

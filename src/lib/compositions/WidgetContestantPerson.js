@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import _get from 'lodash/get';

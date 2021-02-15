@@ -10,6 +10,8 @@ import {useRouter} from 'next/router'
 // import {slug} from '../helpers'
 import {useTranslate} from '../i18n'
 import get from 'lodash/get'
+import cn from 'classnames'
+import isFunction from 'lodash/isFunction'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +22,9 @@ const useStyles = makeStyles(theme => ({
       maxWidth: 700,
     },
     backgroundColor: "#fff",
+  },
+  transparent: {
+    backgroundColor: "transparent",
   },
   container: {
     display: 'flex',
@@ -45,16 +50,19 @@ function Publisher(props) {
     const classes = useStyles();
     const router = useRouter();
     const [translate] = useTranslate();
-    const {data, fluid} = props;
+    const {data, fluid, transparent, resolveLink, profileDataContainer} = props;
 
     return (
 
-        <Card className={classes.root} elevation={0}>
+        <Card className={cn(
+          classes.root, 
+          transparent? classes.transparent: null
+          )} elevation={0}>
         <CardActionArea 
             className={classes.container} 
-            onClick={() => router.push(`/authors/${data.slug}`)}
+            onClick={() => isFunction(resolveLink)? router.push(resolveLink(data)): null}
         > 
-         <Avatar variant="square" src={get(data, "profile.logotype_cdn")} classes={{
+         <Avatar variant="square" src={get(data, `${profileDataContainer}.logotype_cdn`)} classes={{
            root: fluid? classes.avatarFluid: classes.avatar,
            img: classes.avatarImg
          }}/>
@@ -66,7 +74,10 @@ function Publisher(props) {
 
 Publisher.defaultProps = {
     data: {},
-    fluid: false
+    fluid: false,
+    transparent: false,
+    resolveLink: (data) => `/authors/${data.slug}`,
+    profileDataContainer: 'profile'
 }
 
 export default Publisher

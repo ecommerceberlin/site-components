@@ -39,7 +39,8 @@ export const defaultTheme = {
   },
   palette: {
     primary: { main: red[700] },
-    secondary: { main: grey[700] }
+    secondary: { main: grey[700] },
+    black: {main: "#000000"},
   }
 };
 
