@@ -99,7 +99,7 @@ const TableList = ({rows, columns, primaryKey, selected}) => {
         <TableBody>
           {rows.map((row, position) => (
             <TableRow key={row[primaryKey]} selected={isFunction(selected) && selected(row, position)}>{
-              columns.map(column => <Cell 
+              columns.filter(item => item && "name" in item).map(column => <Cell 
                 key={`${column.name}${position}`}
                 row={row} 
                 position={ position+1 }

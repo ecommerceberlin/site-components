@@ -71,7 +71,7 @@ const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, 
                 {name: "position", render: (row, position) => position < 6 ? <div style={{backgroundColor: 'green'}}></div> : null},
                 {name: "logotype", render: (row)=> <Publisher data={row} transparent={true} resolveLink={(data)=> `/vote/${data.id}`} />},
                 {name: "cname2_and_project_name", render: (row) => <><Typography variant="h6">{get(row, "profile.project_name")}</Typography><div>by <Typography display="inline" variant="subtitle1">{get(row, 'profile.cname2')}</Typography></div></> },
-                {name: "votes", render: (row) => `${row.votes || 0} votes`, style: "big", align: "center"},
+                show_votes?  {name: "votes", render: (row) => `${row.votes || 0} votes`, style: "big", align: "center"}: null,
                 {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
             ]}
             selected={(row, i) => i < 5}
