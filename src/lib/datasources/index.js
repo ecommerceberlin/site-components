@@ -21,5 +21,5 @@ export { default as DatasourceContestantCompanies } from './ContestantCompanies'
 export { default as DatasourceContestantCompaniesArchive } from './ContestantCompaniesArchive';
 export { default as DatasourceVotes } from './Votes';
 export { default as DatasourceJurors } from './Jurors';
-export { default as DatasourcePosts } from './Posts';
+export { default as CachableDatasource } from './CachableDatasource';
 export { default as DatasourceUrl } from './Url';

@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {resourceFetchRequest } from '../components/redux'
 import {FilteredDataSelector} from '../redux/selectors'
-import find from 'lodash/find'
+// import find from 'lodash/find'
 
-class Posts extends React.PureComponent {
+class CachableDatasource extends React.PureComponent {
 
   componentDidMount(){
 
@@ -25,27 +24,21 @@ class Posts extends React.PureComponent {
 
 }
 
-Posts.propTypes = {
-
+CachableDatasource.defaultProps = {
+  results : {},
 };
 
-Posts.defaultProps = {
-    all : [],
-};
-
-Posts.defaultProps = {
+CachableDatasource.defaultProps = {
   queries: {}
 }
 
-export default connect(
+export default connect((state, props) => {
+  const dataSet = {};
+  Object.keys(props.queries).forEach(key => {
+    dataSet[key] = FilteredDataSelector(state, props.queries[key])
+  })
+  return ({results: dataSet});
+}, {resourceFetchRequest})(CachableDatasource)
 
-  (state, props) => {
 
-    const mapStateToProps = (state, props) => {
-      return {
-        results: FilteredDataSelector(state, props)
-      }
-    }
-    return mapStateToProps
 
-}, {resourceFetchRequest})(Posts)

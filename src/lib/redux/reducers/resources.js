@@ -14,10 +14,12 @@ const reducer = (state = {}, action) => {
        * experimental
        */
 
-      if(resource === "posts"){
-        return {...state, [resource]: {...state[resource], ...keyBy(data, "id")}}     
+      if(resource === "posts" || resource === "publishers"){
+        const keyed = keyBy(data, "id");
+        return {...state, [resource]: {...state[resource], ...keyed}}     
       }
 
+      //simple replace for old-type resources...
       return { ...state, [resource]: data };
     break;
 

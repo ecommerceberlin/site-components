@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import {createCachedSelector} from 're-reselect';
 
 import keyBy from 'lodash/keyBy'
 import sortBy from 'lodash/sortBy';
@@ -29,66 +30,30 @@ export const getTransactions = state => state.transactions
 
 export const getPropsQueries = (state, props) => "queries" in props && isObject(props.queries)? props.queries: {};
 
-export const ResourceListsSelector = createSelector(
-  getPropsQueries,
-  (state, props) => "resourcelists" in state && isObject(state.resourcelists)? state.resourcelists: {},
-  (requested, available) => {
-    const dataSet = {};
-    Object.keys(requested).forEach(name => {
-      const value = requested[name];
-      const url = resourceToUrl(value)
-      dataSet[name] = {
-        resource: value.resource,
-        ids: url in available? available[url]: []
-      }
-    })
-    return dataSet;
-  }
-)
 
-export const ResourceSelector = createSelector(
-  getPropsQueries,
-  (state, props) => "resources" in state && isObject(state.resources)? state.resources: {},
-  (requested, available) => {
-    const dataSet = {};
-    Object.values(requested).forEach(({resource}) => {
-      dataSet[resource] = resource in available? available[resource]: {};
-    });
-    return dataSet;
-  }
-)
+export const MatchListWithDataSelector = createCachedSelector(
+  (state, resourceParams) => {
+    const url = resourceToUrl(resourceParams)
+    return "resourcelists" in state && isObject(state.resourcelists) && url in state.resourcelists? state.resourcelists[url]: []
+  },
+  (state, resourceParams) => {
+    const {resource, params} = resourceParams;
+    return "resources" in state && isObject(state.resources) && resource in state.resources? state.resources[resource]: {}
+  },
+  (ids, data) => ids.map(id => id in data? data[id]: {})
+)( (state, resourceParams) => resourceToUrl(resourceParams) )
 
-export const MatchListWithDataSelector = createSelector(
-  ResourceListsSelector,
-  ResourceSelector,
-  (lists, data) => {
-    const dataSet = {}
-    Object.keys(lists).forEach(name => {
-      const {resource, ids} = lists[name]
-      dataSet[name] =  resource in data? ids.map(id => id in data[resource]? data[resource][id]: {}): []
-    })
-    return dataSet;
-  }
-)
 
 export const FilteredDataSelector = createSelector(
-  getPropsQueries,
+  (state, resourceParams) => "filters" in resourceParams? resourceParams.filters: null,
   MatchListWithDataSelector,
-  (requested, data) => {
-    const dataSet = {}
-    Object.keys(data).map(name => {
-      if("filters" in requested[name] && isObject(requested[name]["filters"])){
-        dataSet[name] = processArrayData(data[name], {...defaultFilters, ...requested[name]["filters"]})
-      }else{
-        dataSet[name] = data[name]
-      }
-    })  
-    return dataSet;
+  (filters, data) => {
+    if(!filters){
+      return data;
+    }
+    return processArrayData( data, {...defaultFilters, ...filters} );
   }
 )
-
-
-
 
 /*
 RESOURCES
