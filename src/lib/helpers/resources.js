@@ -5,6 +5,7 @@ import isObject from 'lodash/isObject';
 
 export const tagsUsed = (data, source) => [...new Set(data.map(c => get(c, source)).flat())].filter(item=>item); 
 
+
 export const resourceToUrl = (endpoint) => {
 
     //this is in order to properly sort params...
@@ -23,7 +24,8 @@ export const resourceToUrl = (endpoint) => {
       searchParams = new URLSearchParams()
 
       Object.keys(endpoint.params).forEach(key => {
-        searchParams.set(key, endpoint.params[key])
+        const value = endpoint.params[key];
+        searchParams.set(key, value)
       })
 
     }else{
@@ -32,11 +34,21 @@ export const resourceToUrl = (endpoint) => {
 
     //remove null params
     searchParams.forEach((value, key) => {
-      if(value === null || value === undefined){
+
+      let _value;
+
+      try{
+         _value =  JSON.parse(value)
+      }catch{
+         _value = value; //for cases like "xxxx-xxxxx"
+      }
+
+      if(_value === null || _value === undefined){
         searchParams.delete(key)
       }
-      if(typeof value === "boolean"){
-        searchParams.set(key, +value)
+      //convert booleans to numbers
+      if(typeof _value === "boolean"){
+        searchParams.set(key, +_value)
       }
     })
 
