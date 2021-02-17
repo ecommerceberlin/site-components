@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DarkGray = ({id}) => (
-  <svg style={{display: 'none'}}>
+  <svg style={{position: "absolute", height:0}}>
   <defs>
     <filter id={id}>
     <feColorMatrix
