@@ -62,16 +62,19 @@ function WidgetPostsFeatured({page, gridSettings}){
         <CachableDatasource queries={{
           featured: {
             resource: "posts",
-            params: { page: page},
+            params: { 
+              page: page,
+              is_promoted: 1
+            },
             filters: {
-              filter: (item) => item.is_sticky || item.is_promoted
+              limit: 4
             }
           }
         }}>{({featured}) => {
         
         return (<Grid container spacing={5} direction="row">{
 
-          take(featured, 4).map(post => {
+          featured.map(post => {
 
             const id = get(post, "id")
             const headline = get(post, "meta.headline");
