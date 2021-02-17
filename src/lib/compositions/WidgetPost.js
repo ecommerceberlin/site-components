@@ -32,7 +32,7 @@ const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id
     const other =   <WidgetPostsByAuthor except={id} company_id={company_id} />
 
     const publisher =  <Box mt={5} mb={10}>
-                      <Publisher data={post.company} fluid={true} />  
+                      <Publisher id={company_id} data={post.company} fluid={true} />  
                       </Box>
 
     const props = {wrapperProps, id, headline, content, publisher, other}

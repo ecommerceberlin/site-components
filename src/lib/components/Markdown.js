@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createElement} from 'react';
 import {useTranslate} from '../i18n'
 import ReactMarkdown from 'react-markdown'
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,25 +9,14 @@ import EmbedTwitter, {EmbedTwitterRegexp} from './EmbedTwitter'
 import cn from 'classnames'
 import { resizeCloudinaryImage } from '../helpers';
 
-/**
- * function Html(props) {
-  if (props.skipHtml) {
-    return null
-  }
 
-  const dangerous = props.allowDangerousHtml || props.escapeHtml === false
+// const urlShortener = (url) => {
 
-  const tag = props.isBlock ? 'div' : 'span'
+//     url = url.replace(/(^\w+:|^)\/\//, '');
+//     url = url.substr(0, 20)
 
-  if (!dangerous) {
-    return createElement(React.Fragment || tag, null, props.value)
-  }
-
-  const nodeProps = {dangerouslySetInnerHTML: {__html: props.value}}
-  return createElement(tag, nodeProps)
-}
-*/
-
+//     return `${url}...`
+// }
 
 const renderers = ({id, images, cover, ...other}) => ({
 
@@ -42,7 +31,7 @@ const renderers = ({id, images, cover, ...other}) => ({
         return <img src={resizeCloudinaryImage(url, 1000, 1000)} alt="" style={{width: "100%"}} />;
     },
 
-    link: ({href}) => {
+    link: ({href, node, children}) => {
 
         if(href.indexOf("vimeo")>-1){
             return <EmbedVimeo href={href} />
@@ -56,12 +45,11 @@ const renderers = ({id, images, cover, ...other}) => ({
             return <EmbedTwitter href={href} />
         }
 
-        console.log(href, EmbedTwitterRegexp.test(href))
+        return <a href={href} target="_blank">{children}</a>
 
-        return <a href={href}>{href}</a>
     },
 
-    html: ({value, children}) => {
+    html: ({value, children, ...rest}) => {
         if(value === "</data-image>"){
             return null;
         }
@@ -71,7 +59,7 @@ const renderers = ({id, images, cover, ...other}) => ({
             return <EmbedPostImage post_id={id} images={images} id={groups.id} />
         }
     
-        return null;
+        return value;
     },
 })
 
