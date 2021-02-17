@@ -3,14 +3,14 @@ import {connect} from 'react-redux'
 import {resourceFetchRequest } from '../components/redux'
 import {SingleRecordSelector} from '../redux/selectors'
 
-class SingleRecord extends React.PureComponent {
+class SingleRecord extends React.Component {
 
   componentDidMount(){
 
       const {resourceFetchRequest, data, endpoint, id, slug} = this.props
       const key = id && id > 0 ? `${endpoint}/${id}` : `${endpoint}/${slug}`;
 
-      if(! "id" in data){
+      if(! ("id" in data)){
         resourceFetchRequest(key)
       }
   }
