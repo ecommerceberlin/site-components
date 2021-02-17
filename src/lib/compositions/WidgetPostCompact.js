@@ -26,17 +26,12 @@ const WidgetPostCompact = ({wrapperProps, id, headline, content, publisher, othe
     <TwoColsLayout
         leftSize={8}
         left={
-            <>
             <Wrapper first={false}>
             <Typography variant="h2" className={classes.headline_when_short} align="left">{headline}</Typography>
             {content}
+            {other}
             </Wrapper>
     
-            
-            {other}
-       
-           
-            </>
         }
         right={publisher}
     />

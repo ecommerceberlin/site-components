@@ -24,12 +24,13 @@ const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id
     const isOld = published_at_year < 2020
     const short = ["news"].includes(get(post, "category"));
     const company_id = get(post, "company.id", 0)
+    const hasCover = get(post, "cover", "").indexOf("cloudinary") > 0
 
     const content = <>{isOld && <Alert type="error" label="alerts.content_is_old" />}
                     <Markdown children={body} rendererData={post} big={true} />
                     
                     </>
-    const other =   <WidgetPostsByAuthor except={id} company_id={company_id} />
+    const other =   null//<WidgetPostsByAuthor except={id} company_id={company_id} />
 
     const publisher =  <Box mt={5} mb={10}>
                       <Publisher id={company_id} data={post.company} fluid={true} />  
@@ -37,7 +38,7 @@ const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id
 
     const props = {wrapperProps, id, headline, content, publisher, other}
 
-    return short? <WidgetPostCompact {...props} />: <WidgetPostCovered cover={post.cover} isOld={isOld} quote={quote} {...props} />
+    return short || !hasCover? <WidgetPostCompact {...props} />: <WidgetPostCovered cover={post.cover} isOld={isOld} quote={quote} {...props} />
     
   }}</SingleRecord>
 

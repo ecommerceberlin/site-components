@@ -64,13 +64,10 @@ const WidgetPost = ({id, wrapperProps, headline, cover, quote, publisher, conten
             <TwoColsLayout
                 leftSize={8}
                 left={
-                    <>
                     <Wrapper first={false}>
                     {content}
-                    </Wrapper>
-                    
                     {other}
-                    </>
+                    </Wrapper>
                 }
                 right={
                 <>
