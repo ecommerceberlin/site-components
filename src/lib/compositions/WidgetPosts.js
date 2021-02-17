@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 // import CardMedia from '@material-ui/core/CardMedia';
 // import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Posts from '../datasources/Posts'
+import CachableDatasource from '../datasources/CachableDatasource'
 // import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {slug} from '../helpers'
@@ -62,7 +62,7 @@ function WidgetPosts({company, page, label}) {
     <>
     <Typography  variant="h4" component="h3" >{translate(label)}</Typography>
 
-    <Posts queries={{
+    <CachableDatasource queries={{
       all: {
         resource: "posts",
         params: { page: page}
@@ -77,6 +77,11 @@ function WidgetPosts({company, page, label}) {
       const quote = get(post, "meta.quote");
       const headline = get(post, "meta.headline");
       const published_at_year = get(post, "published_at", "").substring(0, 4);
+
+      if(!id){
+        return null;
+      }
+
       return (
 
         <Card key={id} className={classes.root} elevation={0}>
@@ -104,7 +109,7 @@ function WidgetPosts({company, page, label}) {
     
       )
     })
-  }</Posts></>);
+  }</CachableDatasource></>);
 }
 
 WidgetPosts.defaultProps = {

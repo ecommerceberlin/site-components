@@ -11,7 +11,7 @@ import {useRouter} from 'next/router'
 /** */
 import {slug} from '../helpers'
 import SvgFilter from '../components/svg/Black'
-import Posts from '../datasources/Posts'
+import CachableDatasource from '../datasources/CachableDatasource'
 import get from 'lodash/get'
 import { resizeCloudinaryImage } from '../helpers';
 
@@ -59,7 +59,7 @@ function WidgetPostsFeatured({page, gridSettings}){
 
       <div className={classes.root}>
         <SvgFilter />
-        <Posts queries={{
+        <CachableDatasource queries={{
           featured: {
             resource: "posts",
             params: { page: page},
@@ -77,6 +77,10 @@ function WidgetPostsFeatured({page, gridSettings}){
             const headline = get(post, "meta.headline");
             const quote = get(post, "meta.quote", null);
 
+            if(!id){
+              return null;
+            }
+      
             return (<Grid item key={id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
               <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(headline)},${id}`)}>
                 <CardMedia
@@ -99,7 +103,7 @@ function WidgetPostsFeatured({page, gridSettings}){
 
         }</Grid>)
 
-        }}</Posts>
+        }}</CachableDatasource>
          
       
       </div>

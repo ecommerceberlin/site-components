@@ -75,10 +75,17 @@ export { default as WidgetContestantCategories } from './WidgetContestantCategor
 
 export { default as WidgetPosts } from './WidgetPosts'
 export { default as WidgetPostsFeatured } from './WidgetPostsFeatured'
+
 export { default as WidgetPost } from './WidgetPost'
+export { default as WidgetPostCovered } from './WidgetPostCovered'
+export { default as WidgetPostCompact } from './WidgetPostCompact'
+export { default as WidgetPostsByAuthor } from './WidgetPostsByAuthor'
+export { default as WidgetPublisher } from './WidgetPublisher'
+
+
+
+
 export { default as WidgetPublishers } from './WidgetPublishers'
-
-
 export { default as WidgetGridWithImages } from './WidgetGridWithImages'
 export { default as WidgetRoleBasedProfileUpdate } from './WidgetRoleBasedProfileUpdate'
 
