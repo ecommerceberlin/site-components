@@ -6,7 +6,7 @@ import {useTranslate} from '../i18n'
 import Publisher from '../components/Publisher'
 
 
-function WidgetPublishers({page}) {
+function WidgetPublishers({page, excludeBySlug}) {
 
     const [translate] = useTranslate();
 
@@ -16,7 +16,10 @@ function WidgetPublishers({page}) {
     <CachableDatasource queries={{
       all: {
         resource: "publishers",
-        params: { page: page}
+        params: { page: page},
+        filters: {
+          filter: item => !excludeBySlug.includes(item.slug)
+        }
       }
     }}>{({all}) => all.map(company => {
       return (
@@ -29,7 +32,8 @@ function WidgetPublishers({page}) {
 }
 
 WidgetPublishers.defaultProps = {
-  page: 1
+  page: 1,
+  excludeBySlug: ["targiehandlupl"] 
 }
 
 

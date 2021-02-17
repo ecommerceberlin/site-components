@@ -32,17 +32,23 @@ const useStyles = makeStyles(theme => ({
     justify: "center",
     alignItems: "center",
   },
-  avatar: {
+
+  avatarImg: {
+    objectFit: "contain",
+    height: "80%",
+    width: "80%",
+  },
+
+  avatarContainerFluid: {
+    height: "80%",
+    width: "80%",
+  },
+
+  avatarContainer: {
     height: 100,
     width: 180,
   },
-  avatarImg: {
-    objectFit: "contain"
-  },
-  avatarFluid: {
-    height: "100%",
-    width: "100%",
-  }
+
 }));
 
 function Publisher(props) {
@@ -51,6 +57,7 @@ function Publisher(props) {
     const router = useRouter();
     const [translate] = useTranslate();
     const {data, fluid, transparent, resolveLink, profileDataContainer} = props;
+    const link = isFunction(resolveLink)? resolveLink(data): null
 
     return (
 
@@ -60,10 +67,11 @@ function Publisher(props) {
           )} elevation={0}>
         <CardActionArea 
             className={classes.container} 
-            onClick={() => isFunction(resolveLink)? router.push(resolveLink(data)): null}
+            href={link}
+            onClick={() => router.push(link) }
         > 
          <Avatar variant="square" src={get(data, `${profileDataContainer}.logotype_cdn`)} classes={{
-           root: fluid? classes.avatarFluid: classes.avatar,
+           root: fluid? classes.avatarContainerFluid: classes.avatarContainer,
            img: classes.avatarImg
          }}/>
         </CardActionArea>
