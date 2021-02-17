@@ -1,4 +1,3 @@
-import { delay } from 'redux-saga/effects';
 import {
   all,
   call,
@@ -9,7 +8,9 @@ import {
   cancel,
   takeEvery,
   takeLatest,
-  throttle
+  throttle,
+  spawn,
+  delay
 } from 'redux-saga/effects';
 
 import fetch from 'isomorphic-unfetch';
@@ -129,8 +130,6 @@ function* accumulateFetches({resource, reload}) {
 
   for(let endpoint of endpoints){
 
-    //check if endpoint is string or object....
-
     endpoint = resourceToUrl(endpoint)
 
     if(endpoint in fetchTasks) {
@@ -155,9 +154,15 @@ function* fetchAccumulatedFetches(endpoint, reload){
 
   //check if we already fetched the URL .. so we should have resourcelist and resource...
   if(!reload && endpoint in lists && Array.isArray(lists[endpoint]) && lists[endpoint].length){
-   // should we delete it? dunno.
-    delete fetchTasks[endpoint]
-    return
+    
+    /**
+     * we should rather compare lists vs resource
+     * ...or just fuck it as we use re-reselect and we should not have re-render problems
+    */
+
+    // should we delete it? dunno.
+    // delete fetchTasks[endpoint]
+    // return
   }
 
   const response = yield call(fetch, `${apiUrl}/${endpoint}`)
@@ -313,7 +318,7 @@ function* handleRehydrate(actionData){
 
 const rootSaga = function* root() {
 
-  yield all([
+  const sagas = [
     //takeEvery(SNACKBAR_SHOW, handleLogoutFn),
     takeEvery(FAQ_TOGGLE, changeUrlWhenFaqsSelected),
     takeEvery(CART_ITEM_ADD, selectBoothWhenCartItemAdded),
@@ -332,7 +337,13 @@ const rootSaga = function* root() {
 
     takeEvery(SET_USER_TOKEN, handleRehydrate),
 
-  ]);
+  ]
+
+  yield all(sagas);
+
+
+ 
+
 };
 
 export default rootSaga;
