@@ -85,7 +85,7 @@ function WidgetPosts({company, page, label}) {
       return (
 
         <Card key={id} className={classes.root} elevation={0}>
-        <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(headline)},${id}`)}>
+        <CardActionArea className={classes.container} href={`/${slug(headline)},${id}`} onClick={() => router.push(`/${slug(headline)},${id}`)}>
           <div className={classes.icons}></div>
           <CardContent className={classes.texts}>
             <Typography gutterBottom variant="h5" component="h3">

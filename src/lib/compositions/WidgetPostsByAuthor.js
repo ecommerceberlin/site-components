@@ -93,7 +93,7 @@ function WidgetPostsByAuthor({except, company_id, page, label}) {
             return (
       
               <Card key={id} className={classes.root} elevation={0}>
-              <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(headline)},${id}`)}>
+              <CardActionArea className={classes.container} href={`/${slug(headline)},${id}`} onClick={() => router.push(`/${slug(headline)},${id}`)}>
                 <CardContent className={classes.texts}>
                   <Typography gutterBottom variant="h6" component="h6">
                     {headline}

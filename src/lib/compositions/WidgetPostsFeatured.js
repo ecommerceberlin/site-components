@@ -82,7 +82,7 @@ function WidgetPostsFeatured({page, gridSettings}){
             }
       
             return (<Grid item key={id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
-              <CardActionArea className={classes.container} onClick={() => router.push(`/${slug(headline)},${id}`)}>
+              <CardActionArea className={classes.container} href={`/${slug(headline)},${id}`} onClick={() => router.push(`/${slug(headline)},${id}`)}>
                 <CardMedia
                   component="img"
                   alt=""
