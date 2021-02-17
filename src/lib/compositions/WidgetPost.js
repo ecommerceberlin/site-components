@@ -32,7 +32,7 @@ const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id
                     </>
     const other =   null//<WidgetPostsByAuthor except={id} company_id={company_id} />
 
-    const publisher =  <Box mt={5} mb={10}>
+    const publisher =  <Box mb={15}>
                       <Publisher id={company_id} data={post.company} fluid={true} />  
                       </Box>
 
