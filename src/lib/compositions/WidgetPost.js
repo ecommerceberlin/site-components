@@ -33,7 +33,7 @@ const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id
     const other =   null//<WidgetPostsByAuthor except={id} company_id={company_id} />
 
     const publisher =  <div style={{marginBottom: 20}}> 
-                      <WidgetPublisher id={company_id} data={post.company} />  
+                      <WidgetPublisher id={company_id} initialData={post.company} />  
                       <Sharer url={`/${slug(headline)},${id}`} />
                       </div>
 
