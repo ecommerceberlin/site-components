@@ -35,7 +35,12 @@ const useStyles = makeStyles(theme => ({
   quote: {
     color: "#ffffff",
     marginTop: '5vh',
-    marginRight: '15vw'
+    maxWidth: 800
+  },
+
+  content: {
+    position: "relative",
+    top: -200
   }
 
 }))
@@ -60,19 +65,17 @@ const WidgetPost = ({id, wrapperProps, headline, cover, quote, publisher, conten
 
        </Box>}
        
-           <Wrapper {...wrapperProps} >
+           <Wrapper {...wrapperProps} classes={{
+             root: classes.content
+           }} >
             <TwoColsLayout
                 leftSize={8}
                 left={
                     <Wrapper first={false}>
                     {content}
                     {other}
-                    </Wrapper>
-                }
-                right={
-                <>
-                  {publisher}
-                  <DiscussionEmbed
+
+                    <DiscussionEmbed
                     shortname='fp20'
                     config={
                       {
@@ -83,7 +86,13 @@ const WidgetPost = ({id, wrapperProps, headline, cover, quote, publisher, conten
                       }
                     }
                   />
-                </>}
+
+                    </Wrapper>
+                }
+                right={
+                  <div style={{position: 'relative', top: 200}}>{
+                    publisher
+                  }</div>}
             />
         </Wrapper>
     </React.Fragment>)

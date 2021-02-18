@@ -10,9 +10,9 @@ import Publisher from '../components/Publisher'
 import Markdown from '../components/Markdown'
 import Alert from '../components/Alert'
 // import WidgetPostsByAuthor from './WidgetPostsByAuthor'
-
+import Sharer from '../components/Sharer'
 import dynamic from 'next/dynamic'
-
+import {slug} from '../helpers'
 const WidgetPostsByAuthor = dynamic(() => import('./WidgetPostsByAuthor'))
 
 const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id}>{(post) => {
@@ -32,9 +32,10 @@ const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id
                     </>
     const other =   null//<WidgetPostsByAuthor except={id} company_id={company_id} />
 
-    const publisher =  <Box mb={15}>
+    const publisher =  <div style={{marginBottom: 20}}> 
                       <Publisher id={company_id} data={post.company} fluid={true} />  
-                      </Box>
+                      <Sharer url={`/${slug(headline)},${id}`} />
+                      </div>
 
     const props = {wrapperProps, id, headline, content, publisher, other}
 

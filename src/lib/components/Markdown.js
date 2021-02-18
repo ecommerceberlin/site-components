@@ -69,13 +69,24 @@ const useStyles =  makeStyles(theme => ({
         fontWeight: 400,
         fontFamily: theme.typography.fontFamily,
         lineHeight: theme.typography.pxToRem(28),
+
+        "& blockquote": {
+            fontSize: "120%",
+            fontWeight: 500
+        }
     },
     post: {
         fontSize: theme.typography.pxToRem(21),
         fontWeight: 400,
         fontFamily: theme.typography.fontFamily,
         lineHeight: theme.typography.pxToRem(32),
-    }
+
+        "& blockquote": {
+            fontSize: "120%",
+            fontWeight: 500
+        }
+    },
+
 }))
 
 const Markdown = ({label, children, rendererData, big}) => {

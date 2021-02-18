@@ -3,6 +3,8 @@ import Wrapper from '../components/Wrapper'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { DiscussionEmbed } from 'disqus-react';
+
 
 const useStyles = makeStyles(theme => ({
 
@@ -30,6 +32,19 @@ const WidgetPostCompact = ({wrapperProps, id, headline, content, publisher, othe
             <Typography variant="h2" className={classes.headline_when_short} align="left">{headline}</Typography>
             {content}
             {other}
+
+            <DiscussionEmbed
+                shortname='fp20'
+                config={
+                  {
+                  //url: this.props.article.url,
+                  identifier: `post${id}`,
+                  title: headline,
+                  language: 'pl_PL'
+                  }
+                }
+              />
+
             </Wrapper>
     
         }
