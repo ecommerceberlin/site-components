@@ -3,8 +3,7 @@ import {useTranslate} from '../i18n'
 import ReactMarkdown from 'react-markdown'
 import { makeStyles } from '@material-ui/core/styles';
 import EmbedPostImage from './EmbedPostImage'
-import EmbedVimeo from './EmbedVimeo'
-import EmbedYouTube from './EmbedYouTube'
+import EmbedSection from './EmbedSection'
 import EmbedTwitter, {EmbedTwitterRegexp} from './EmbedTwitter'
 import cn from 'classnames'
 import { resizeCloudinaryImage } from '../helpers';
@@ -33,12 +32,8 @@ const renderers = ({id, images, cover, ...other}) => ({
 
     link: ({href, node, children}) => {
 
-        if(href.indexOf("vimeo")>-1){
-            return <EmbedVimeo href={href} />
-        }
-
-        if(href.indexOf("youtu")>-1){
-            return <EmbedYouTube href={href} />
+        if(href.indexOf("vimeo")>-1 || href.indexOf("youtu")>-1){
+            return <EmbedSection data={href} playerProps={{light: false}} />
         }
 
         if(EmbedTwitterRegexp.test(href)){

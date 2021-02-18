@@ -81,8 +81,7 @@ export { default as Loading } from './Loading'
 
 export { default as ScrollTop } from './ScrollTop'
 
-export { default as EmbedYouTube } from './EmbedYouTube'
-export { default as EmbedVimeo } from './EmbedVimeo'
+
 export { default as EmbedTwitter } from './EmbedTwitter'
 
 export { default as Alert } from './Alert'

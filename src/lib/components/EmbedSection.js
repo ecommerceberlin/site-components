@@ -27,17 +27,26 @@ const EmbedSection = ({label, data, playerProps}) => {
     const [translate] = useTranslate();
     const classes = useStyles();
 
+    const mergedPlayerProps = {...{
+        controls: true,
+        light: true,
+        playing: true,
+        loop: true,
+        width: "100%",
+        height: "100%"
+    }, ...playerProps}
+
     if(!regexp.test(data)){
         return null;
     }
    
     if(data.indexOf("vimeo")!==-1){
 
-        return <Box mt={3} className={classes.wrapper}><Vimeo className={classes.player} url={data} {...playerProps} /></Box>
+        return <Box mt={3} className={classes.wrapper}><Vimeo className={classes.player} url={data} {...mergedPlayerProps} /></Box>
     }
 
     if(data.indexOf("youtu")!==-1){
-        return <Box mt={3} className={classes.wrapper}><YouTube  className={classes.player} url={data} {...playerProps} /></Box>
+        return <Box mt={3} className={classes.wrapper}><YouTube  className={classes.player} url={data} {...mergedPlayerProps} /></Box>
 
     }
     
@@ -47,12 +56,7 @@ const EmbedSection = ({label, data, playerProps}) => {
 
 EmbedSection.defaultProps = {
     playerProps: {
-        controls: true,
-        light: true,
-        playing: true,
-        loop: true,
-        width: "100%",
-        height: "100%"
+
     }
 }
 
