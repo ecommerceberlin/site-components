@@ -29,13 +29,23 @@ const useStyles = makeStyles(theme => ({
 
   headline: {
     color: "#ffffff",
+
+    [theme.breakpoints.down('md')]: {
+      fontSize: theme.typography.pxToRem(60),
+    }
+
   },
 
 
   quote: {
     color: "#ffffff",
     marginTop: '5vh',
-    maxWidth: 800
+    maxWidth: 800,
+
+    [theme.breakpoints.down('md')]: {
+      fontSize: theme.typography.pxToRem(30),
+    }
+
   },
 
   content: {
