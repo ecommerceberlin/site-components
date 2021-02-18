@@ -6,9 +6,9 @@ import SingleRecord from "../datasources/SingleRecord"
 import Publisher from '../components/Publisher'
 import CompanyTabContainer from '../components/CompanyTabContainer'
 
-const WidgetPublisher = ({id, company, data}) => <SingleRecord endpoint="publishers" id={id} slug={company}>{(data) => {
+const WidgetPublisher = ({id, company, initialData}) => <SingleRecord initialData={initialData} endpoint="publishers" id={id} slug={company}>{(data) => {
     
-    const about = get(data, "profile.about")
+    const about = get(data, "profile.about", "")
 
     return  (<Box mt={5} mb={10}>
     <Publisher data={data} fluid={true} /> 
@@ -23,7 +23,7 @@ const WidgetPublisher = ({id, company, data}) => <SingleRecord endpoint="publish
 WidgetPublisher.defaultProps = {
   company: null,
   id: 0,
-  data: {}
+  initialData: {}
 }
 
 
