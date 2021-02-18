@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
   texts: {
     top: '20vh',
     left: '10vw',
+    marginRight: '5vw',
     position: 'absolute',
   },
 
