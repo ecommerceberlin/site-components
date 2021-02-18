@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
 
     [theme.breakpoints.down('md')]: {
       fontSize: theme.typography.pxToRem(60),
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.typography.pxToRem(50),
     }
 
   },
@@ -43,7 +46,10 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 800,
 
     [theme.breakpoints.down('md')]: {
-      fontSize: theme.typography.pxToRem(30),
+      fontSize: theme.typography.pxToRem(35),
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.typography.pxToRem(25),
     }
 
   },
