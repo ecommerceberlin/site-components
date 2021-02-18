@@ -6,7 +6,7 @@ import get from 'lodash/get'
 import SingleRecord from "../datasources/SingleRecord"
 import WidgetPostCompact from './WidgetPostCompact'
 import WidgetPostCovered from './WidgetPostCovered'
-import Publisher from '../components/Publisher'
+import WidgetPublisher from './WidgetPublisher'
 import Markdown from '../components/Markdown'
 import Alert from '../components/Alert'
 // import WidgetPostsByAuthor from './WidgetPostsByAuthor'
@@ -33,7 +33,7 @@ const WidgetPost = ({id, wrapperProps}) => <SingleRecord endpoint="posts" id={id
     const other =   null//<WidgetPostsByAuthor except={id} company_id={company_id} />
 
     const publisher =  <div style={{marginBottom: 20}}> 
-                      <Publisher id={company_id} data={post.company} fluid={true} />  
+                      <WidgetPublisher id={company_id} data={post.company} />  
                       <Sharer url={`/${slug(headline)},${id}`} />
                       </div>
 

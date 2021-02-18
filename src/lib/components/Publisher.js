@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
   transparent: {
     backgroundColor: "transparent",
   },
+
   container: {
     display: 'flex',
     padding: 10,
@@ -33,21 +34,23 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
   },
 
-  avatarImg: {
-    objectFit: "contain",
-    height: "80%",
-    width: "80%",
+  avatarContainer: {
+    height: 100,
+    width: 180,
   },
 
   avatarContainerFluid: {
     height: "80%",
     width: "80%",
+    padding: "5%"
   },
 
-  avatarContainer: {
-    height: 100,
-    width: 180,
+  avatarImg: {
+    objectFit: "contain",
+    maxHeight: "80%",
+    maxWidth: "80%",
   },
+
 
 }));
 
