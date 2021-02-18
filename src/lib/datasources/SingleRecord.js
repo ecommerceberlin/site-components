@@ -17,16 +17,22 @@ class SingleRecord extends React.Component {
 
   render(){
 
-    const {children, data} = this.props
+    const {children, data, initialData} = this.props
+
+    if(!("id" in data) && "id" in initialData){
+      return children(initialData)
+    }
 
     return children(data)
+    
   }
 
 }
 
 
 SingleRecord.defaultProps = {
-  data : {}
+  data : {},
+  initialData: {}
 };
 
 export default connect(
