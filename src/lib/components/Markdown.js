@@ -33,7 +33,11 @@ const renderers = ({id, images, cover, ...other}) => ({
     link: ({href, node, children}) => {
 
         if(href.indexOf("vimeo")>-1 || href.indexOf("youtu")>-1){
-            return <EmbedSection data={href} playerProps={{light: false}} />
+            return <EmbedSection data={href} playerProps={{
+                light: false,
+                playing: false,
+                loop: false,
+            }} />
         }
 
         if(EmbedTwitterRegexp.test(href)){
