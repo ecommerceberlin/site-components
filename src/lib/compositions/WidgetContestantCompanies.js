@@ -17,7 +17,27 @@ import get from 'lodash/get'
 import Publisher from '../components/Publisher'
 import Typography from '@material-ui/core/Typography'
 
-const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, random, filter, resolveLink, resolveTitle, resolveAlt, resolveImage, keyword, keyword_source, sort, center, spacing, path_to_category, renderAs, ...wrapperProps}) => {
+const WidgetContestantCompanies = ({
+    show_votes, 
+    show_vote_status, 
+    intro, 
+    limit, 
+    random, 
+    filter, 
+    resolveLink, 
+    resolveTitle, 
+    resolveAlt, 
+    resolveImage, 
+    keyword, 
+    keyword_source, 
+    sort, 
+    center, 
+    spacing, 
+    path_to_category, 
+    renderAs, 
+    resolveSelected,
+    ...wrapperProps
+}) => {
 
  return (<Wrapper {...wrapperProps}>
     
@@ -68,13 +88,13 @@ const WidgetContestantCompanies = ({show_votes, show_vote_status, intro, limit, 
             {keyword && renderAs==="table" && <TableList 
             rows={data}
             columns={[
-                {name: "position", render: (row, position) => position < 6 ? <div style={{backgroundColor: 'green'}}></div> : null},
+                // {name: "position", render: (row, position) => position < 11 ? <div style={{backgroundColor: 'green'}}></div> : null},
                 {name: "logotype", render: (row)=> <Publisher data={row} transparent={true} resolveLink={(data)=> `/vote/${data.id}`} />},
                 {name: "cname2_and_project_name", render: (row) => <><Typography variant="h6">{get(row, "profile.project_name")}</Typography><div>by <Typography display="inline" variant="subtitle1">{get(row, 'profile.cname2')}</Typography></div></> },
                 show_votes?  {name: "votes", render: (row) => `${row.votes || 0} votes`, style: "big", align: "center"}: null,
                 {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
             ]}
-            selected={(row, i) => i < 5}
+            selected={resolveSelected}
             // link={link} 
             // title={item =>  }
             // subtitle={item => item.presentation_title}
@@ -125,7 +145,8 @@ WidgetContestantCompanies.defaultProps = {
     show_vote_status: false,
     center : false,
     spacing : 5,
-    renderAs: "avatarlist"
+    renderAs: "avatarlist",
+    resolveSelected: (row, i) => i < 10
 }
 
 
