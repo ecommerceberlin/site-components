@@ -12,10 +12,12 @@ import {slug} from '../helpers'
             const headline = get(record, "meta.headline")
             const id = get(record, "id")
             const quote = get(record, "meta.quote")
+            const image = get(record, "og_image")
 
             return (
                 <MyHead
-                    image={ record.og_image }
+                    key={ id }
+                    image={ image }
                     url={ `/${slug(headline)},${id}` }
                     titleLabel={[
                         'post.og_title',
