@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { string } from 'prop-types';
-import { translate } from '../i18n';
+import { useTranslate } from '../i18n';
 import { fullUrl, prepareForTranslate, canonical } from '../helpers';
 import  {createTheme, defaultTheme}  from '../material-ui';
 import isFunction from 'lodash/isFunction'
@@ -16,10 +16,11 @@ const MyHead = ({
   width,
   height,
   fb_appid,
-  translate,
   children,
   font
 }) => {
+
+  const [translate] = useTranslate();
 
   const titleLabelParams = prepareForTranslate(titleLabel);
   const descriptionLabelParams = prepareForTranslate(descriptionLabel);
@@ -69,7 +70,7 @@ const MyHead = ({
     }}
     />,
     
-   <meta key="charset" charSet="UTF-8" />,
+    <meta key="charset" charSet="UTF-8" />,
     <meta key="google-translate" name="google" content="notranslate" />,
     <link key="ati_57" rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png"/>,
     <link key="ati_60" rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png"/>,
@@ -120,7 +121,7 @@ MyHead.propTypes = {
 };
 
 
-export default translate(MyHead);
+export default MyHead;
 
 
 /**

@@ -1,18 +1,19 @@
 import { MyHead } from '../next';
-//import Companies from '../datasources/Companies'
 import SingleRecord from '../datasources/SingleRecord'
 import Settings from '../datasources/Settings'
-import get from 'lodash/get'
 import {slug} from '../helpers'
-  
- const HeadPost = ({id, record, children}) => (
-    <Settings>{(get) => (
-        <SingleRecord endpoint="posts" id={id} slug={slug}>{(record) => {
+import get from 'lodash/get'
 
-            const headline = get(record, "meta.headline")
-            const id = get(record, "id")
-            const quote = get(record, "meta.quote")
-            const image = get(record, "og_image")
+ const HeadPost = ({id, record, children}) => (
+
+    <Settings>{(getSetting) => (
+
+        <SingleRecord endpoint="posts" id={id}>{(record) => {
+
+            const headline = get(record, "meta.headline", "")
+            const id = get(record, "id", 0)
+            const quote = get(record, "meta.quote", "")
+            const image = get(record, "og_image", "")
 
             return (
                 <MyHead
@@ -34,7 +35,8 @@ import {slug} from '../helpers'
 )
 
 HeadPost.defaultProps = {
-    record: {}
+    record: {},
+    id: 0
 }
 
 export default HeadPost;
