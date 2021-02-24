@@ -1,3 +1,4 @@
+import React from 'react'
 import GridWithImages from '../components/GridWithImages'
 import Settings from '../datasources/Settings'
 import Wrapper from '../components/Wrapper'

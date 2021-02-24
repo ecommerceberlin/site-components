@@ -1,3 +1,4 @@
+import React from 'react'
 import Wrapper from '../components/Wrapper'
 import Faq from '../components/Faq'
 import Settings from '../datasources/Settings'

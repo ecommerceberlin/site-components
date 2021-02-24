@@ -1,3 +1,4 @@
+import React from 'react'
 import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
 import Box from '@material-ui/core/Box'

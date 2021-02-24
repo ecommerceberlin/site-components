@@ -1,3 +1,4 @@
+import React from 'react'
 import Settings from '../datasources/Settings';
 import Wrapper from '../components/Wrapper';
 import {withRouter} from 'next/router'

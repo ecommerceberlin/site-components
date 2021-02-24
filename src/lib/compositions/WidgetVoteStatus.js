@@ -1,5 +1,5 @@
 //import PropTypes from 'prop-types';
-
+import React from 'react'
 import Datasource from '../datasources/Votes'
 import SimpleVoteStatus from '../components/VoteStatus'
 import { getLinkedInToken } from '../redux/selectors'

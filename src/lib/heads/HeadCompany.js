@@ -1,3 +1,4 @@
+import React from 'react'
 import { MyHead } from '../next';
 //import Companies from '../datasources/Companies'
 import SingleRecord from '../datasources/SingleRecord'

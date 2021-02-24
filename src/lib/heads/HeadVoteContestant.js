@@ -1,3 +1,4 @@
+import React from 'react'
 import { MyHead } from '../next';
 import _get from 'lodash/get';
 import SingleRecord from '../datasources/SingleRecord'

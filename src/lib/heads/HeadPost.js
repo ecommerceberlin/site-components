@@ -1,3 +1,4 @@
+import React from 'react'
 import { MyHead } from '../next';
 import SingleRecord from '../datasources/SingleRecord'
 import Settings from '../datasources/Settings'

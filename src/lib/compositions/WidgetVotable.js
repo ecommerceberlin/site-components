@@ -1,3 +1,4 @@
+import React from 'react'
 import { MyHead } from '../next';
 import Divider from '@material-ui/core/Divider';
 import _get from 'lodash/get';

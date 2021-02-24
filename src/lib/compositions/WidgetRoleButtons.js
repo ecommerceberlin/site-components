@@ -1,3 +1,4 @@
+import React from 'react'
 import FsButtons from '../components/FsButtons';
 import Settings from '../datasources/Settings';
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import VoteWithLinkedIn from '../components/VoteWithLinkedIn'
 import VotesDatasource from '../datasources/Votes'
 

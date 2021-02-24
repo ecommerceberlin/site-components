@@ -26,7 +26,7 @@ class Tickets extends React.PureComponent {
 
 
 Tickets.propTypes = {
-  group_id: PropTypes.number.isRequired,
+
   // filters : PropTypes.object
 };
 
