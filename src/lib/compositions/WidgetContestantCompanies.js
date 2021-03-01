@@ -89,7 +89,9 @@ const WidgetContestantCompanies = ({
             rows={data}
             columns={[
                 // {name: "position", render: (row, position) => position < 11 ? <div style={{backgroundColor: 'green'}}></div> : null},
-                {name: "logotype", render: (row)=> <Publisher data={row} transparent={true} resolveLink={(data)=> `/vote/${data.id}`} />},
+                {name: "logotype", render: (row)=> {
+                    return <Publisher logotype={get(row, "profile.logotype_cdn")} transparent={true} link={`/vote/${data.id}`} />
+                }},
                 {name: "cname2_and_project_name", render: (row) => <><Typography variant="h6">{get(row, "profile.project_name")}</Typography><div>by <Typography display="inline" variant="subtitle1">{get(row, 'profile.cname2')}</Typography></div></> },
                 show_votes?  {name: "votes", render: (row) => `${row.votes || 0} votes`, style: "big", align: "center"}: null,
                 {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
