@@ -85,6 +85,9 @@ export { default as ScrollTop } from './ScrollTop'
 export { default as EmbedTwitter } from './EmbedTwitter'
 
 export { default as Alert } from './Alert'
+export { default as Localised } from './Localised'
+export { default as PostCard } from './PostCard'
+export { default as PostFeaturedCard } from './PostFeaturedCard'
 
 export * from './Bookingmap';
 export * from './Meetups';

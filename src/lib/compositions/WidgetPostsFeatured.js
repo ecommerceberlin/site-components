@@ -1,63 +1,16 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import take from 'lodash/take'
-import {useRouter} from 'next/router'
-/** */
-import {slug} from '../helpers'
 import SvgFilter from '../components/svg/Black'
 import CachableDatasource from '../datasources/CachableDatasource'
 import get from 'lodash/get'
-import { resizeCloudinaryImage } from '../helpers';
+import PostFeaturedCard from '../components/PostFeaturedCard'
 
-const useStyles = makeStyles(theme => ({
+function WidgetPostsFeatured({page, limit, skip, gridSettings, top, bottom, spacing, direction, secondary}){
     
-    filter: {
-      filter: 'url(#svgFilter)'
-    },
-
-    root: {
-
-        marginBottom: 25
-    },
-
-    container: {
-      position: 'relative',
-    },
-
-    content: {
-      
-        position: 'absolute',
-        left: 0,
-        bottom: 0,
-        zIndex: 10
-
-    },
-
-    headline: {
-       color: "#fff",
-    },
-
-    description: {
-      color: "#fff",
-    }
-
-}));
-
-
-function WidgetPostsFeatured({page, gridSettings}){
-    
-    const classes = useStyles();
-    const router = useRouter();
-
     return (
 
-      <div className={classes.root}>
+      <div style={{marginTop: top, marginBottom: bottom}}>
         <SvgFilter />
         <CachableDatasource queries={{
           featured: {
@@ -67,53 +20,42 @@ function WidgetPostsFeatured({page, gridSettings}){
               is_promoted: 1
             },
             filters: {
-              limit: 4
+              limit: limit,
+              skip: skip
             }
           }
         }}>{({featured}) => {
         
-        return (<Grid container spacing={5} direction="row">{
+        return (<Grid container spacing={spacing} direction={direction}>{
 
           featured.map(post => {
 
             const id = get(post, "id")
             const headline = get(post, "meta.headline");
             const quote = get(post, "meta.quote", null);
+            const cover = get(post, "cover", null);
 
             if(!id){
               return null;
             }
       
-            return (<Grid item key={id} {...gridSettings}><Card elevation={0} square={false} className={classes.root}>
-              <CardActionArea className={classes.container} href={`/${slug(headline)},${id}`} onClick={() => router.push(`/${slug(headline)},${id}`)}>
-                <CardMedia
-                  component="img"
-                  alt=""
-                  height="250"
-                  image={resizeCloudinaryImage(post.cover)}
-                  title=""
-                  className={classes.filter}
-                />
-                <CardContent className={classes.content}>
-                  <Typography gutterBottom variant="h5" component="h2" className={classes.headline}>
-                  {headline}
-                  </Typography>
-                 {quote && <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>{quote}</Typography>} 
-                </CardContent>
-              </CardActionArea>
-          </Card></Grid>)
-          })
-
-        }</Grid>)
-
-        }}</CachableDatasource>
-         
-      
+            return (<Grid item key={id} {...gridSettings}>
+              <PostFeaturedCard 
+                id={id} 
+                headline={headline} 
+                quote={quote} 
+                cover={cover} 
+                secondary={secondary}
+              />
+            </Grid>)})
+        }</Grid>)}}</CachableDatasource>
       </div>
     );
   }
 
 WidgetPostsFeatured.defaultProps = {
+  skip: 0,
+  limit: 4,
   gridSettings: {
     xs: 12,
     sm: 6,
@@ -121,7 +63,12 @@ WidgetPostsFeatured.defaultProps = {
     lg: 3,
     xl: 3,
   },
-  page: 1
+  page: 1,
+  top: 0,
+  bottom: 20,
+  spacing: 4,
+  direction: "row",
+  secondary: false
 }
   
   export default WidgetPostsFeatured

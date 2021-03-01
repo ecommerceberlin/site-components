@@ -13,49 +13,12 @@ import {useRouter} from 'next/router'
 import {slug} from '../helpers'
 import {useTranslate} from '../i18n'
 import get from 'lodash/get'
+import PostCard from '../components/PostCard'
+import nth from 'lodash/nth'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    // maxWidth: 700,
-    marginBottom: 10,
-    [theme.breakpoints.up('sm')]: {
-      // maxWidth: 700,
-    },
-    
-    backgroundColor: "#fff"
-  },
 
-  container: {
-    display: 'flex',
-    padding: 10,
-    [theme.breakpoints.up('sm')]: {
-    
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      alignItems: 'baseline'
-    }
-  },
+function WidgetPosts({company, page, label, insert, insertPos}) {
 
-  icons : {
-    width: 300,
-    [theme.breakpoints.up('sm')]: {
-   
-    },
-    flex: "1 0 100px",
-  },
-
-  texts: {
-    flex: "3 0 300px",
-    [theme.breakpoints.up('sm')]: {
-    
-    }
-  }
-}));
-
-function WidgetPosts({company, page, label}) {
-
-    const classes = useStyles();
-    const router = useRouter();
     const [translate] = useTranslate();
 
     return (
@@ -71,51 +34,47 @@ function WidgetPosts({company, page, label}) {
         resource: "posts",
         params: { company: company}
       }
-    }}>{({all, filtered}) => (company? filtered: all).map(post => {
+    }}>{({all, filtered}) => {
 
-      const id = get(post, 'id')
-      const quote = get(post, "meta.quote");
-      const headline = get(post, "meta.headline");
-      const published_at_year = get(post, "published_at", "").substring(0, 4);
+      const arr = (company? filtered: all);
+      const insertPlace = get(nth(arr, insertPos), "id");
 
-      if(!id){
-        return null;
-      }
+      return arr.map(post => {
 
-      return (
+        const id = get(post, 'id')
+  
+        if(!id){
+          return null;
+        }
+  
+        const headline = get(post, "meta.headline", "");
+        const _quote = get(post, "meta.quote", "");
+        const body = get(post, "meta.body", "")
+  
+        const published_at_year = get(post, "published_at", "").substring(0, 4);
+  
+        let quote;
+  
+        if(_quote.length > 10 && published_at_year > 2018){
+          quote = _quote
+        }else{
+          quote = body.substr(0, 200).replace(/(\*|#|!?\[[^\]]*\]\([^\)]+\))/gm, "");
+        }
+  
+        return <>{(!company && insert && insertPlace == id) && insert}<PostCard key={id} id={id} headline={headline} quote={quote}/></>
+  
+      })
 
-        <Card key={id} className={classes.root} elevation={0}>
-        <CardActionArea className={classes.container} href={`/${slug(headline)},${id}`} onClick={() => router.push(`/${slug(headline)},${id}`)}>
-          {/* <div className={classes.icons}></div> */}
-          <CardContent className={classes.texts}>
-            <Typography gutterBottom variant="h5" component="h3">
-              {headline}
-            </Typography>
-            {quote &&  published_at_year > 2018 && <Typography variant="body2" color="textSecondary" component="p">{quote}</Typography>}
-          </CardContent>
-        </CardActionArea>
-     
-        {/* <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-            <Link href="/publishers/[slug]" as="/publishers/targiehandlupl">
-                <Button size="small" color="primary">
-                {post.company.name}
-                </Button>
-            </Link>
-        </CardActions> */}
-      </Card>
-    
-      )
-    })
-  }</CachableDatasource></>);
+    }}
+  </CachableDatasource></>);
 }
 
 WidgetPosts.defaultProps = {
   label: "posts.latest",
   company: null,
-  page: 1
+  page: 1,
+  insert : null,
+  insertPos: 4
 }
 
 export default WidgetPosts
