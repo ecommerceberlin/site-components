@@ -61,7 +61,7 @@ function Publisher({id, logotype, fluid, transparent, link}) {
     const classes = useStyles();
     const router = useRouter();
     // const [translate] = useTranslate();
-    const logotypeSize = fluid? 400: 200;
+    const logotypeSize = fluid? 450: 200;
     return (
 
         <Card className={cn(

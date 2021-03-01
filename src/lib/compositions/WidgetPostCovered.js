@@ -7,6 +7,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import SvgFilter from '../components/svg/Black'
 import Box from '@material-ui/core/Box';
+import { resizeCloudinaryImage } from '../helpers';
 
 const useStyles = makeStyles(theme => ({
 
@@ -73,7 +74,7 @@ const WidgetPost = ({id, wrapperProps, headline, cover, quote, publisher, conten
 
       {cover && <Box className={classes.container}>
     
-          <CardMedia image={cover} title="" className={classes.cover} />
+          <CardMedia image={resizeCloudinaryImage(cover, 2000, 1500)} title="" className={classes.cover} />
 
           <Box className={classes.texts}>
           <Typography variant="h1" className={classes.headline} align="left">{headline}</Typography>
