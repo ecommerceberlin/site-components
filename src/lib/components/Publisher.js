@@ -12,6 +12,8 @@ import {useTranslate} from '../i18n'
 import get from 'lodash/get'
 import cn from 'classnames'
 import isFunction from 'lodash/isFunction'
+import { resizeCloudinaryImage } from '../helpers';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,7 +61,7 @@ function Publisher({id, logotype, fluid, transparent, link}) {
     const classes = useStyles();
     const router = useRouter();
     // const [translate] = useTranslate();
-
+    const logotypeSize = fluid? 400: 200;
     return (
 
         <Card className={cn(
@@ -73,7 +75,7 @@ function Publisher({id, logotype, fluid, transparent, link}) {
             href={link}
             onClick={link ? () => router.push(link): null }
         > 
-         <Avatar variant="square" src={logotype} classes={{
+         <Avatar variant="square" src={ resizeCloudinaryImage(logotype, logotypeSize, logotypeSize) } classes={{
            root: fluid? classes.avatarContainerFluid: classes.avatarContainer,
            img: classes.avatarImg
          }}/>
