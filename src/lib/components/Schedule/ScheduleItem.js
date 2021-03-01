@@ -61,7 +61,12 @@ const getFullJobInfo = data => `${data.position} @ ${data.cname2}`;
 
 
 
-const ScheduleItem = ({ data, selected, classes, first, description, dialogShow }) => {
+const ScheduleItem = ({ data, selected, classes, first, description, dialogShow, showPlaceDetails, showPresentationDetails }) => {
+
+  if(!data || !("presentation_time" in data) ){
+    return null
+  }
+
   return (
     <div
       className={classNames(classes.item,
@@ -92,14 +97,14 @@ const ScheduleItem = ({ data, selected, classes, first, description, dialogShow 
     >
      
 
-      {first && <PresentationLabel
+      {(first || showPlaceDetails) && <PresentationLabel
         time={data.presentation_time}
         venue={data.presentation_venue}
       />}
 
       <div className={description ? classes.horizontal : classes.vertical}>
       <div className={classes.presentation}>
-      {first && (
+      {(first || showPresentationDetails) && (
         <Presentation
           title={data.presentation_title}
           description={description ? data.presentation_description : null}
@@ -123,7 +128,9 @@ const ScheduleItem = ({ data, selected, classes, first, description, dialogShow 
 ScheduleItem.defaultProps = {
   selected: false,
   first: true,
-  description : true
+  description : true,
+  showPresentationDetails: true,
+  showPlaceDetails: true
 };
 
 const enhance = compose(
