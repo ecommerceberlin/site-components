@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import CachableDatasource from '../datasources/CachableDatasource'
 import {useTranslate} from '../i18n'
 import Publisher from '../components/Publisher'
-
+import get from 'lodash/get'
 
 function WidgetPublishers({page, excludeBySlug}) {
 
@@ -22,9 +22,11 @@ function WidgetPublishers({page, excludeBySlug}) {
         }
       }
     }}>{({all}) => all.map(company => {
+      const id = get(company, "id")
+      const logotype = get(company, "profile.logotype_cdn")
       return (
-        <Grid item key={company.id}> 
-        <Publisher data={company} />
+      <Grid item key={id}> 
+        <Publisher id={id} logotype={logotype} link={`authors/${id}`}/>
       </Grid>
       )
     })

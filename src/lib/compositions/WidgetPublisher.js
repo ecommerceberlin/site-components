@@ -8,10 +8,12 @@ import CompanyTabContainer from '../components/CompanyTabContainer'
 
 const WidgetPublisher = ({id, company, initialData}) => <SingleRecord initialData={initialData} endpoint="publishers" id={id} slug={company}>{(data) => {
     
+    const id = get(data, "id", 0)
     const about = get(data, "profile.about", "")
+    const logotype = get(data, "profile.logotype_cdn", "")
 
     return  (<Box mt={5} mb={10}>
-    <Publisher data={data} fluid={true} /> 
+    <Publisher logotype={logotype} fluid={true} link={`/authors/${id}`} /> 
       <Box mt={5}>
      <CompanyTabContainer data={about}  />
      </Box>

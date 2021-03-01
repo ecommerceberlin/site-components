@@ -1,21 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-// import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CachableDatasource from '../datasources/CachableDatasource'
-// import Link from 'next/link'
-import {useRouter} from 'next/router'
-import {slug} from '../helpers'
 import {useTranslate} from '../i18n'
 import get from 'lodash/get'
 import PostCard from '../components/PostCard'
 import nth from 'lodash/nth'
-
 
 function WidgetPosts({company, page, label, insert, insertPos}) {
 
@@ -50,9 +39,12 @@ function WidgetPosts({company, page, label, insert, insertPos}) {
         const headline = get(post, "meta.headline", "");
         const _quote = get(post, "meta.quote", "");
         const body = get(post, "meta.body", "")
-  
-        const published_at_year = get(post, "published_at", "").substring(0, 4);
-  
+        const published_at = get(post, "published_at", "")
+        const published_at_year = published_at.substring(0, 4);
+        const isOwn = get(post, "company.id") == 1216
+        const logotype = !company && !isOwn? get(post, "company.profile.logotype_cdn") : null
+        const alt = get(post, "company.profile.name", "")
+
         let quote;
   
         if(_quote.length > 10 && published_at_year > 2018){
@@ -61,7 +53,15 @@ function WidgetPosts({company, page, label, insert, insertPos}) {
           quote = body.substr(0, 200).replace(/(\*|#|!?\[[^\]]*\]\([^\)]+\))/gm, "");
         }
   
-        return <>{(!company && insert && insertPlace == id) && insert}<PostCard key={id} id={id} headline={headline} quote={quote}/></>
+        return <>{(!company && insert && insertPlace == id) && insert}<PostCard 
+            key={id} 
+            id={id} 
+            headline={headline} 
+            quote={quote} 
+            logotype={logotype} 
+            alt={alt}
+            published_at={published_at}
+            /></>
   
       })
 

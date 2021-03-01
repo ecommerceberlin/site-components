@@ -54,26 +54,26 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function Publisher(props) {
+function Publisher({id, logotype, fluid, transparent, link}) {
 
     const classes = useStyles();
     const router = useRouter();
-    const [translate] = useTranslate();
-    const {data, fluid, transparent, resolveLink, profileDataContainer} = props;
-    const link = isFunction(resolveLink)? resolveLink(data): null
+    // const [translate] = useTranslate();
 
     return (
 
         <Card className={cn(
           classes.root, 
-          transparent? classes.transparent: null
+          {
+            [classes.transparent]: transparent
+          }
           )} elevation={0}>
         <CardActionArea 
             className={classes.container} 
             href={link}
-            onClick={() => router.push(link) }
+            onClick={link ? () => router.push(link): null }
         > 
-         <Avatar variant="square" src={get(data, `${profileDataContainer}.logotype_cdn`)} classes={{
+         <Avatar variant="square" src={logotype} classes={{
            root: fluid? classes.avatarContainerFluid: classes.avatarContainer,
            img: classes.avatarImg
          }}/>
@@ -84,11 +84,11 @@ function Publisher(props) {
 }
 
 Publisher.defaultProps = {
-    data: {},
+    id: 0,
+    logotype: "",
     fluid: false,
     transparent: false,
-    resolveLink: (data) => `/authors/${data.slug}`,
-    profileDataContainer: 'profile'
+    link: null
 }
 
 export default Publisher
