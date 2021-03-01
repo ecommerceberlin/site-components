@@ -171,7 +171,10 @@ export const validations = (requiredFieldNames) => ({
       .max(2000, 'Please make it shorter.')
       .requireWhenRequired(requiredFieldNames, 'Text is required (100 - 2000 chars).'),
 
-
+      nip: Yup.string()
+      .min(9, "Too short :(")
+      .max(15, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Registration number is required'),
 
 
   });
