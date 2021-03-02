@@ -75,10 +75,14 @@ const useStyles =  makeStyles(theme => ({
         }
     },
     post: {
-        fontSize: theme.typography.pxToRem(21),
+        fontSize: theme.typography.pxToRem(20),
         fontWeight: 400,
         fontFamily: theme.typography.fontFamily,
         lineHeight: theme.typography.pxToRem(32),
+
+        [theme.breakpoints.down('sm')]: {
+            fontSize: theme.typography.pxToRem(17),
+          },
 
         "& blockquote": {
             fontSize: "120%",

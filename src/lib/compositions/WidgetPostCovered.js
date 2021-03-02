@@ -32,11 +32,17 @@ const useStyles = makeStyles(theme => ({
   headline: {
     color: "#ffffff",
 
+    [theme.breakpoints.down('lg')]: {
+      fontSize: theme.typography.pxToRem(70),
+    },
     [theme.breakpoints.down('md')]: {
       fontSize: theme.typography.pxToRem(60),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(50),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(40),
     }
 
   },
@@ -47,11 +53,18 @@ const useStyles = makeStyles(theme => ({
     marginTop: '5vh',
     maxWidth: 800,
 
+    [theme.breakpoints.down('lg')]: {
+      fontSize: theme.typography.pxToRem(40),
+    },
+
     [theme.breakpoints.down('md')]: {
-      fontSize: theme.typography.pxToRem(35),
+      fontSize: theme.typography.pxToRem(32),
     },
     [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(25),
+      fontSize: theme.typography.pxToRem(22),
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.typography.pxToRem(20),
     }
 
   },
