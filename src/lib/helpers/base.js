@@ -55,9 +55,8 @@ export const isBigScreen = width => {
   return width === 'xl' || width === 'lg';
 };
 
-export const processArrayData = (
-  data = [], { sort = null, filter = null, limit = null, random = null }
-) => {
+export const processArrayData = (data = [], { sort = null, filter = null, limit = null, random = null, skip = 0 }) => {
+  
   if (!Array.isArray(data)) {
     return [];
   }
@@ -76,6 +75,10 @@ export const processArrayData = (
   // if (random) {
   //   data = _shuffle(data);
   // }
+
+  if(skip && data.length > skip){
+    data = data.slice(skip);
+  }
 
   if (limit && data.length > limit) {
     data = data.slice(0, limit);
