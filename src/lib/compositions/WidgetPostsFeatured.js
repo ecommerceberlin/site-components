@@ -1,17 +1,34 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import take from 'lodash/take'
 import SvgFilter from '../components/svg/Black'
 import CachableDatasource from '../datasources/CachableDatasource'
 import get from 'lodash/get'
 import PostFeaturedCard from '../components/PostFeaturedCard'
 
-function WidgetPostsFeatured({page, limit, skip, gridSettings, top, bottom, spacing, direction, secondary}){
+const defaultGridSettings = {
+  xs: 12,
+  sm: 6,
+  md: 6,
+  lg: 3,
+  xl: 3,
+}
+
+function WidgetPostsFeatured({page=1, limit=4, skip=0, top=0, bottom=20, gridSettings = defaultGridSettings, spacing=4, direction="row", maxPerRow=4, secondary=false}){
+    
+    const _gridSettings = Object.assign({}, gridSettings)
+
+    Object.keys(_gridSettings).forEach(key => {
+      if(12 / _gridSettings[key] > maxPerRow){
+        _gridSettings[key] = 12 / maxPerRow;
+      }
+    })
     
     return (
 
       <div style={{marginTop: top, marginBottom: bottom}}>
-        <SvgFilter />
+      <SvgFilter />
+      <Grid container spacing={spacing} direction={direction}>
+     
         <CachableDatasource queries={{
           featured: {
             resource: "posts",
@@ -24,11 +41,7 @@ function WidgetPostsFeatured({page, limit, skip, gridSettings, top, bottom, spac
               skip: skip
             }
           }
-        }}>{({featured}) => {
-        
-        return (<Grid container spacing={spacing} direction={direction}>{
-
-          featured.map(post => {
+        }}>{({featured}) => featured.map(post => {
 
             const id = get(post, "id")
             const headline = get(post, "meta.headline");
@@ -39,7 +52,7 @@ function WidgetPostsFeatured({page, limit, skip, gridSettings, top, bottom, spac
               return null;
             }
       
-            return (<Grid item key={id} {...gridSettings}>
+            return (<Grid item key={id} id={id} {..._gridSettings}>
               <PostFeaturedCard 
                 id={id} 
                 headline={headline} 
@@ -48,27 +61,11 @@ function WidgetPostsFeatured({page, limit, skip, gridSettings, top, bottom, spac
                 secondary={secondary}
               />
             </Grid>)})
-        }</Grid>)}}</CachableDatasource>
+        }</CachableDatasource>
+        </Grid>
       </div>
     );
   }
 
-WidgetPostsFeatured.defaultProps = {
-  skip: 0,
-  limit: 4,
-  gridSettings: {
-    xs: 12,
-    sm: 6,
-    md: 6,
-    lg: 3,
-    xl: 3,
-  },
-  page: 1,
-  top: 0,
-  bottom: 20,
-  spacing: 4,
-  direction: "row",
-  secondary: false
-}
-  
-  export default WidgetPostsFeatured
+
+export default WidgetPostsFeatured
