@@ -165,7 +165,11 @@ function* fetchAccumulatedFetches(endpoint, reload){
     // return
   }
 
-  const response = yield call(fetch, `${apiUrl}/${endpoint}`)
+
+  const settings = yield select(Selectors.getSettings) 
+  const _apiUrl = get(settings, "system.api", "").trim() || apiUrl
+
+  const response = yield call(fetch, `${_apiUrl}/${endpoint}`)
   const json = yield call([response, response.json])
 
   if (response.ok && response.status >= 200 && 'data' in json) {

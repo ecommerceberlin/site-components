@@ -19,7 +19,12 @@ const useStyles = makeStyles(theme => ({
 
   dense: {
     paddingBottom: '1rem',
-    paddingTop: '1rem'
+    paddingTop: '1rem',
+
+    [theme.breakpoints.down('md')]: {
+      paddingBottom: '0',
+      paddingTop: '0',
+    }
   },
 
   first: {

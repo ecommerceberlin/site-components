@@ -12,7 +12,7 @@ function WidgetPosts({company, page, label, insert, insertPos}) {
 
     return (
     <>
-    <Typography  variant="h4" component="h3" >{translate(label)}</Typography>
+    {label && <Typography  variant="h4" component="h3" >{translate(label)}</Typography>}
 
     <CachableDatasource queries={{
       all: {
