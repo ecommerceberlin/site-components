@@ -37,8 +37,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   avatarContainer: {
-    height: 100,
-    width: 180,
+    minHeight: 80,
+    minWidth: 150,
   },
 
   avatarContainerFluid: {
