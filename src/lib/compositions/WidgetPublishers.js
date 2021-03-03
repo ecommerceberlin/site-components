@@ -25,7 +25,7 @@ function WidgetPublishers({page, excludeBySlug}) {
       const id = get(company, "id")
       const logotype = get(company, "profile.logotype_cdn")
       return (
-      <Grid item key={id}> 
+      <Grid item key={id} xs={6} sm={4} md={4} lg={4} xl={4}> 
         <Publisher id={id} logotype={logotype} link={`authors/${id}`}/>
       </Grid>
       )

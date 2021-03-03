@@ -89,6 +89,9 @@ export { default as Localised } from './Localised'
 export { default as PostCard } from './PostCard'
 export { default as PostFeaturedCard } from './PostFeaturedCard'
 
+export { default as DiscordChat } from './DiscordChat'
+export { default as StageContent } from './StageContent'
+
 export * from './Bookingmap';
 export * from './Meetups';
 export * from './MyLayouts';
