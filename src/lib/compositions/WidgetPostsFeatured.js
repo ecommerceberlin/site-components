@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import SvgFilter from '../components/svg/Black'
+import SvgFilter from '../components/svg/DarkBlack'
 import CachableDatasource from '../datasources/CachableDatasource'
 import get from 'lodash/get'
 import PostFeaturedCard from '../components/PostFeaturedCard'

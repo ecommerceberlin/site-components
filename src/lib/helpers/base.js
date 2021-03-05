@@ -76,7 +76,7 @@ export const processArrayData = (data = [], { sort = null, filter = null, limit 
   //   data = _shuffle(data);
   // }
 
-  if(skip && data.length > skip){
+  if(skip){
     data = data.slice(skip);
   }
 

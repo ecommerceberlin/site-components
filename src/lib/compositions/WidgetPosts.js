@@ -5,8 +5,10 @@ import {useTranslate} from '../i18n'
 import get from 'lodash/get'
 import PostCard from '../components/PostCard'
 import nth from 'lodash/nth'
+import isObject from 'lodash/isObject'
+import keyBy from 'lodash/keyBy'
 
-function WidgetPosts({company, page, label, insert, insertPos}) {
+function WidgetPosts({company, page, label, inserts}) {
 
     const [translate] = useTranslate();
 
@@ -26,7 +28,13 @@ function WidgetPosts({company, page, label, insert, insertPos}) {
     }}>{({all, filtered}) => {
 
       const arr = (company? filtered: all);
-      const insertPlace = get(nth(arr, insertPos), "id");
+
+      //get IDs for insers
+
+      const insertPosIds = keyBy((isObject(inserts)? Object.keys(inserts): []).map(pos => ({
+        id: get(nth(arr, pos), "id"),
+        insert: inserts[pos]
+      })), "id")
 
       return arr.map(post => {
 
@@ -35,7 +43,10 @@ function WidgetPosts({company, page, label, insert, insertPos}) {
         if(!id){
           return null;
         }
-  
+
+        const insert = !company && id in insertPosIds ? insertPosIds[id]["insert"] : null;
+      
+
         const headline = get(post, "meta.headline", "");
         const _quote = get(post, "meta.quote", "");
         const body = get(post, "meta.body", "")
@@ -53,7 +64,7 @@ function WidgetPosts({company, page, label, insert, insertPos}) {
           quote = body.substr(0, 200).replace(/(\*|#|!?\[[^\]]*\]\([^\)]+\))/gm, "");
         }
   
-        return <>{(!company && insert && insertPlace == id) && insert}<PostCard 
+        return <>{insert}<PostCard 
             key={id} 
             id={id} 
             headline={headline} 
@@ -73,8 +84,7 @@ WidgetPosts.defaultProps = {
   label: "posts.latest",
   company: null,
   page: 1,
-  insert : null,
-  insertPos: 4
+  inserts : null
 }
 
 export default WidgetPosts
