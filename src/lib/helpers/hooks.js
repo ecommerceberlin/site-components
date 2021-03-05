@@ -6,6 +6,26 @@ import {getUserByToken} from './api'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
 
+export const useSettings = () => {
+
+    const settings = useSelector(state => state.settings)
+
+    return (path, fallback = undefined) => {
+
+        const out = get(settings, path, undefined)
+
+        if(out !== undefined){
+            return out
+        }
+
+        if(fallback !== undefined){
+            return fallback
+        }
+
+        return path
+    } 
+}
+
 export const useUserData = () => {
 
     const [updates, setUpdates] = useState(0);
