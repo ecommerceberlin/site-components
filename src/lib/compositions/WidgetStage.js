@@ -10,6 +10,7 @@ import StageOverview from '../components/StageOverview'
 import StageContent from '../components/StageContent'
 import StagesOther from '../components/StagesOther'
 import DiscordChat from '../components/DiscordChat'
+import {useSettings} from '../helpers'
 
 const useStyles = makeStyles(theme => ({
 
@@ -21,6 +22,12 @@ const WidgetStage = ({stage, placeholder}) => {
 
     // const [translate] = useTranslate()
     // const classes = useStyles()
+
+    const getSetting = useSettings();
+    const stages = getSetting("stages");
+
+    console.log(stages)
+
 
     const { data, error } = useSWR('https://proxy.eventjuicer.com/api/schedule', fetcher, { 
         refreshInterval: 10*1000, //pull every 10 seconds

@@ -69,6 +69,21 @@ const useStyles = makeStyles(theme => ({
 
   },
 
+
+  // mark: {
+  //   margin: '0 -0.4em',
+  //   padding: '0.1em 0.4em',
+  //   borderRadius: '0.8em 0.3em',
+  //   background: 'transparent',
+  //   backgroundImage: 'linear-gradient(
+  //     to right,
+  //     rgba(255, 225, 0, 0.1),
+  //     rgba(255, 225, 0, 0.7) 4%,
+  //     rgba(255, 225, 0, 0.3)
+  //   )',
+  //   boxDecorationBreak: 'clone'
+  // }
+
   content: {
     position: "relative",
     top: -200
