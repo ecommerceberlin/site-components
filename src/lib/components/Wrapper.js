@@ -42,14 +42,18 @@ const useStyles = makeStyles(theme => ({
     right: 0
   },
 
-  container: {
+  containerBase: {
     width: '90%',
     maxWidth: 1600,
     margin: '0 auto',
-    marginTop: '2rem',
     zIndex: 123,
     position: 'relative'
   },
+
+  container: {
+    marginTop: '2rem',
+  },
+
 
   related: {
     display: 'flex',
@@ -77,7 +81,9 @@ const Wrapper = ({label, classes, title, typography, secondaryLabel, secondaryTi
     >
       <div className={_classes.overlay} />
   
-      <div className={_classes.container}>
+      <div className={classNames(_classes.containerBase, {
+        [_classes.container]: !dense  
+      })}>
         {label && <MyTypography label={label} template={typography} />}
         {title && <MyTypography template={typography}>{title}</MyTypography>}
   
