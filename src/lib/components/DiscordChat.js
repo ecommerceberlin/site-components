@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         display: 'inline',
     },
     button: {
-          marginLeft: 60,
+     //     marginLeft: 60,
     }    
 }))
 
@@ -52,7 +52,7 @@ const DiscordJoinButton = ({href}) => {
         target="_blank"
         className={classes.button} 
         startIcon={<DiscordLogotype style={{height: 40, width: "auto"}} />} 
-        variant="outlined" />
+        variant="text" />
     )
 }
 
@@ -65,29 +65,33 @@ const clearDiscordMsg = (msg) => {
     return msg
 }
 
-const DiscordChat = ({stage, discord}) => {
+const DiscordChat = ({chatId, avatars = true, join = ""}) => {
 
     const [translate] = useTranslate()
     const classes = useStyles()
 
-    const { data, error } = useSWR('https://proxy.eventjuicer.com/api/discord/803929566233231411', fetcher, { 
+    const { data, error } = useSWR(`https://proxy.eventjuicer.com/api/discord/${chatId}`, fetcher, { 
         refreshInterval: 60*1000, //pull every minute
-        refreshWhenHidden: false 
+        refreshWhenHidden: true 
     })
 
     if(error || isEmpty(data)){
-        return <DiscordJoinButton href={discord} />;
+        return (<div>
+            <Typography variant="h5" gutterBottom>{translate("streaming.chat.title")}</Typography><DiscordJoinButton href={join} />
+        </div>)
     }
     
     return (
-        <div>
-           
+        <div>  
+            
+            <Typography variant="h6" gutterBottom>{translate("streaming.chat.title")}</Typography>
+
             <List className={classes.root}>
             {data.map(item => (
                 <ListItem alignItems="flex-start">
-                <ListItemAvatar>
+               {avatars && <ListItemAvatar>
                     <Avatar alt={item.user} src={item.avatar} />
-                </ListItemAvatar>
+                </ListItemAvatar>}
                 <ListItemText
                     primary={clearDiscordMsg(item.content)}
                     secondary={`${item.user}`}
@@ -95,17 +99,9 @@ const DiscordChat = ({stage, discord}) => {
                 </ListItem>
             ))}
             </List>
-            <DiscordJoinButton href={discord} />
+            <DiscordJoinButton href={join} />
         </div>
     )
-   
 }
-
-DiscordChat.defaultProps = {
-   stage: "",
-}
-
-
-
 
 export default DiscordChat

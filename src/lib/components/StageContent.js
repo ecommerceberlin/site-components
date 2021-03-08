@@ -1,25 +1,10 @@
 
-import React, {useCallback, useRef, useEffect, useState} from 'react';
-// import WidgetSchedule from './WidgetSchedule'
-import useSWR from 'swr'
-import fetch from 'isomorphic-unfetch'
+import React from 'react';
 import Player from 'react-player'
-
-
 import { makeStyles } from '@material-ui/core/styles';
-
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Wrapper from '../components/Wrapper'
-import Link from '../next/MyLink'
-
-
 import { useTranslate } from '../i18n';
-import {useUserData} from '../helpers'
+import { useUserData } from '../helpers'
 import WidgetVisitor from '../compositions/WidgetVisitor'
-
 
 const useStyles = makeStyles(theme => ({
      wrapper : {
@@ -35,32 +20,20 @@ const useStyles = makeStyles(theme => ({
         left: 0
       },
 
-      stage: {
-          marginTop: 20
-      },
-
-      scheduleItem: {
-        maxWidth: 500
-      }
 }))
 
-const getStage = (stages, stage) => stages && Array.isArray(stages) && stages.length ? stages.find(item => item.presentation_venue === stage.toUpperCase()) : null
-
-
-const StageContent = ({stage, data, playerProps, placeholder}) => {
+const StageContent = ({embed, stage, playerProps, placeholder, regform}) => {
 
     const [translate] = useTranslate()
     const classes = useStyles()
     const user = useUserData();
 
-    const stageData = getStage(data, stage)
-
-    if(!data || !stage || !stageData){
+    if(!embed){
         return <img src={placeholder} alt="" style={{width: "100%"}} />
     }
 
     if(!user){
-       return <WidgetVisitor right={null} label={null} secondaryLabel={null} legend="asd" />
+       return <WidgetVisitor setting={regform} />
     }
 
     return (
@@ -68,13 +41,15 @@ const StageContent = ({stage, data, playerProps, placeholder}) => {
         <Player 
             className={classes.player}
             {...playerProps}
-            url={stageData.video} 
+            url={embed} 
         />
         </div>
     )
 }
 
 StageContent.defaultProps = {
+    embed: "",
+    regform: "streaming_registration",
     playerProps: {
         controls: true, 
         playing: true,  

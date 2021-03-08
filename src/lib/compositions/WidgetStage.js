@@ -17,43 +17,50 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const fetcher = url => fetch(url).then(r => r.json())
+const getStage = (stages, stage) => stages && Array.isArray(stages) && stages.length ? stages.find(item => item.presentation_venue === stage.toUpperCase()) : null
 
-const WidgetStage = ({stage, placeholder}) => {
+const WidgetStage = ({stage, setting}) => {
 
     // const [translate] = useTranslate()
     // const classes = useStyles()
+    const _stage = stage.toUpperCase()
+    const {regform, api, discordProps, ...stages} = useSettings(setting, {});
 
-    const getSetting = useSettings();
-    const stages = getSetting("stages");
+     const {
+        stream, 
+        discord, 
+        restricted,
+        sponsor,
+        placeholder
+    } = _stage in stages? stages[_stage]: {};
 
-    console.log(stages)
-
-
-    const { data, error } = useSWR('https://proxy.eventjuicer.com/api/schedule', fetcher, { 
+    //AGENDA
+    const { data, error } = useSWR(api, fetcher, { 
         refreshInterval: 10*1000, //pull every 10 seconds
-        refreshWhenHidden: true 
+        refreshWhenHidden: false 
     })
 
+    const current = getStage(data, _stage)
 
     return (
-        <Wrapper>
-            <Box mt={3}>
-                
-                <StageOverview data={data} stage={stage} />
-
+        <Wrapper label={["streaming.stage.title", {name: _stage}]} dense={true}>     
+                {current && <StageOverview data={current} stage={_stage} />}
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={8} lg={8} xl={7}>
-                        <StageContent data={data} stage={stage} placeholder={placeholder} />
+                        <StageContent 
+                            stage={_stage} 
+                            embed={stream} 
+                            placeholder={placeholder} 
+                            regform={regform}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={12} md={4} lg={4} xl={3} >
-                    
-                        <DiscordChat stage={stage} />
+                        <DiscordChat chatId={discord} {...discordProps} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
-                        <StagesOther data={data} stage={stage} />
+                        <StagesOther data={data} stage={_stage} />
                     </Grid>
                 </Grid>
-            </Box>
         </Wrapper>
     )
    
@@ -61,8 +68,7 @@ const WidgetStage = ({stage, placeholder}) => {
 
 WidgetStage.defaultProps = {
    stage: "",
-   placeholder: "https://res.cloudinary.com/eventjuicer/image/upload/f_auto/v1614810311/stillphoto.jpg"
+   setting: "stages",
 }
-
 
 export default WidgetStage
