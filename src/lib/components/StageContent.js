@@ -10,8 +10,6 @@ const useStyles = makeStyles(theme => ({
      wrapper : {
         position: "relative",
         paddingTop: "56.25%", /* Player ratio: 100 / (1280 / 720) */
-        minWidth: 640,
-        minHeight: 360
       },
       
       player : {
@@ -55,7 +53,7 @@ StageContent.defaultProps = {
         playing: true,  
         width: "100%",
         height: "100%"
-       },
+    },
 }
 
 export default StageContent;
