@@ -10,14 +10,15 @@ const WidgetVisitor = (props) => (
 
 WidgetVisitor.defaultProps = {
 
+  wrapperProps: {
+    label : "visitors.register", //wrapper prop,
+    secondaryLabel: null, //wrapper prop
+
+  },
+
   setting: "visitor.register",
-
-  label : "visitors.register", //wrapper prop
-  links: [], //wrapper prop
-  secondaryLabel: null, //wrapper prop
-  
   baseLabel: "visitors", //stepform prop
-
+  links: [], //wrapper prop
   right: "/lanyard.jpg", //grid prop
 
   fields : [

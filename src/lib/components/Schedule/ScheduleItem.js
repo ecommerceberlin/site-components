@@ -1,9 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
+import { makeStyles } from '@material-ui/core/styles';
+import {useDispatch} from 'react-redux'
+import IconButton from '@material-ui/core/IconButton';
+import HelpIcon from '@material-ui/icons/Help';
 import classNames from 'classnames'
-
 import Presentation from './Presentation';
 import Presenter from './Presenter';
 import PresentationLabel from './PresentationLabel';
@@ -17,10 +17,9 @@ import {
 
 import ScheduleItemPresenter from './ScheduleItemPresenter';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
 
   item: {
-    cursor: 'pointer',
     
     [theme.breakpoints.down('sm')]: {
       borderWidth : 1,
@@ -55,13 +54,35 @@ const styles = theme => ({
     flexGrow: 1,
     flexBasis: 0
   }
-});
+}));
 
 const getFullJobInfo = data => `${data.position} @ ${data.cname2}`;
 
 
 
-const ScheduleItem = ({ data, selected, classes, first, description, dialogShow, showPlaceDetails, showPresentationDetails }) => {
+const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, showPresentationDetails, buttons }) => {
+
+  const classes = useStyles()
+  const dispatch = useDispatch();
+
+  const dialogData = {
+    title: (
+      <PresentationLabel
+        time={data.presentation_time}
+        venue={data.presentation_venue}
+      />
+    ),
+    content: (
+      <div>
+        <Presentation
+          title={data.presentation_title}
+          description={data.presentation_description}
+        />
+        <Presenter data={data} />
+      </div>
+    ),
+    buttons: []
+  } 
 
   if(!data || !("presentation_time" in data) ){
     return null
@@ -74,42 +95,29 @@ const ScheduleItem = ({ data, selected, classes, first, description, dialogShow,
           [classes.itemSelected] : selected
         }
       )}
-      onClick={() =>
-        dialogShow({
-          title: (
-            <PresentationLabel
-              time={data.presentation_time}
-              venue={data.presentation_venue}
-            />
-          ),
-          content: (
-            <div>
-              <Presentation
-                title={data.presentation_title}
-                description={data.presentation_description}
-              />
-              <Presenter data={data} />
-            </div>
-          ),
-          buttons: []
-        })
-      }
     >
      
-
       {(first || showPlaceDetails) && <PresentationLabel
         time={data.presentation_time}
         venue={data.presentation_venue}
+        buttons={[
+          <IconButton onClick={() => dispatch(dialogShow(dialogData))}>
+            <HelpIcon fontSize="large" />
+          </IconButton>,
+          ...buttons
+        ]}
       />}
 
       <div className={description ? classes.horizontal : classes.vertical}>
       <div className={classes.presentation}>
       {(first || showPresentationDetails) && (
-        <Presentation
+        <div >
+          <Presentation
           title={data.presentation_title}
           description={description ? data.presentation_description : null}
           hideDescriptionOnMobile={true}
         />
+        </div>
       )}
       </div>
       <div className={classes.presenter}>
@@ -130,15 +138,9 @@ ScheduleItem.defaultProps = {
   first: true,
   description : true,
   showPresentationDetails: true,
-  showPlaceDetails: true
+  showPlaceDetails: true,
+  buttons: []
 };
 
-const enhance = compose(
-  withStyles(styles),
-  connect(
-    null,
-    { dialogShow }
-  )
-);
 
-export default enhance(ScheduleItem);
+export default ScheduleItem

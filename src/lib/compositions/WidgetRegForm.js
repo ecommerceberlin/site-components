@@ -28,6 +28,7 @@ const WidgetRegForm = ({
     data, 
     label, 
     secondaryLabel, 
+    dense,
     right, 
     baseLabel, 
     summary,
@@ -38,17 +39,21 @@ const WidgetRegForm = ({
     actionStartedProps,
     onSuccess,
     onError,
-    ...rest }) => (
+    wrapperProps
+  }) => (
 
 
   <Settings>{(get) => {
  
   const fieldsWithOptions = get(`${setting}.fields`, fields).map(field => "options" in field && options && field.options in options ? {...field, options: options[field.options]} : field)
 
+  const _wrapperProps = {...wrapperProps, ...get(`${setting}.wrapperProps`, {})}
+  const _right = get(`${setting}.right`, right)
+
   return (
-    <Wrapper label={get(`${setting}.label`, label)} secondaryLabel={get(`${setting}.secondaryLabel`, secondaryLabel)} {...rest}  >
+    <Wrapper {..._wrapperProps}>
       <Grid container spacing={1} justify="space-between">
-        <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
+        <Grid item xs={12} sm={12} md={_right? 7: 12} lg={_right? 7: 12} xl={_right? 7: 12}>
           <StepForm
             baseLabel={ get(`${setting}.baseLabel`, baseLabel) }
             data={ get(`${setting}.data`, data) }
@@ -67,10 +72,9 @@ const WidgetRegForm = ({
             onError={onError}
           />
         </Grid>
-        {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
-          {typeof right === "string" ? <img src={ get(`${setting}.background`, right) } className={classes.lanyard} /> : right}
+        {_right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
+          {typeof _right === "string" ? <img src={ get(`${setting}.background`, right) } className={classes.lanyard} /> : _right}
         </Grid> }
-
       </Grid>
     </Wrapper>
   )
@@ -80,8 +84,11 @@ const WidgetRegForm = ({
 );
 
 WidgetRegForm.defaultProps = {
+  wrapperProps: {
+    secondaryLabel: null,
+  },
   links: [],
-  secondaryLabel: null,
+  dense: false,
   email_template : "",
   options: {},
   ticket_id : 0,
