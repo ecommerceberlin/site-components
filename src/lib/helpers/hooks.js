@@ -1,16 +1,16 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import {resourceFetchSuccess, setUserToken} from '../components/redux/actions'
+import {resourceFetchSuccess, setUserToken, removeUserToken} from '../components/redux/actions'
 import {getUserByToken} from './api'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
 
-export const useSettings = () => {
+export const useSettings = (_path = null, _fallback = undefined) => {
 
     const settings = useSelector(state => state.settings)
 
-    return (path, fallback = undefined) => {
+    const func = (path, fallback = undefined) => {
 
         const out = get(settings, path, undefined)
 
@@ -23,7 +23,9 @@ export const useSettings = () => {
         }
 
         return path
-    } 
+    }
+    
+    return _path? func(_path, _fallback): func;
 }
 
 export const useUserData = () => {
@@ -55,6 +57,18 @@ export const useUserData = () => {
 
     return currentUser;
     
+}
+
+export const useUserLogout = () => {
+
+    const dispatch = useDispatch(); 
+
+    const handleLogout = useCallback(() => {
+        dispatch(removeUserToken())
+        dispatch(resourceFetchSuccess("currentUser", null));
+    })
+
+    return handleLogout
 }
 
 export const useToken = (token, target = "/account") => {
