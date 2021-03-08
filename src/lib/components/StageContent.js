@@ -37,9 +37,14 @@ const StageContent = ({embed, stage, playerProps, placeholder, regform}) => {
     return (
         <div className={classes.wrapper}>
         <Player 
-            className={classes.player}
             {...playerProps}
+            className={classes.player}
             url={embed} 
+            style={{
+                position: "absolute",
+                top: 0,
+                left: 0
+            }}
         />
         </div>
     )
