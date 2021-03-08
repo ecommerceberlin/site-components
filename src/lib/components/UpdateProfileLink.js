@@ -3,8 +3,8 @@ import Button from '@material-ui/core/Button';
 import { useTranslate } from '../i18n'
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router'
-import { useUserData } from '../helpers'
-
+import { useUserData, useSettings, useUserLogout } from '../helpers'
+import isEmpty from 'lodash/isEmpty'
 
 const useStyles = makeStyles(theme => ({
   selectors : {
@@ -25,30 +25,39 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const UpdateProfileLink = ({ href, label, variant, color, size }) => {
-
-    const currentUser = useUserData();
-    const classes = useStyles();
-    const router = useRouter();
-    const [translate, locale] = useTranslate();
-
-    if(currentUser){
-        return (<Button variant={variant} color={color} size={size} onClick={_ => router.push(href)}>
-            { translate(label) }
-            </Button>)
-    }
-
-    return null
-
+const buttonDefaultProps = {
+  variant : "outlined", 
+  color: "secondary",
+  size: "medium"
 }
 
-UpdateProfileLink.defaultProps = {
-  variant: "outlined",
-  color: "secondary",
-  size: "medium",
-  href: "/account",
-  label: 'common.edit_profile'
-};
+const ProfileEditButton = ({href= "/account", label= 'common.edit_profile', buttonProps = buttonDefaultProps}) => {
+  const [translate, locale] = useTranslate();
+  const router = useRouter();
+  return (<Button {...buttonProps} onClick={() => router.push(href)}>{ translate(label) }</Button>)
+}
 
+const UserLogoutButton = ({onClick, label= 'common.logout', buttonProps = buttonDefaultProps}) => {
+  const [translate, locale] = useTranslate();
+  return (<Button {...buttonProps} onClick={onClick}>{ translate(label) }</Button>)
+}
+
+const UpdateProfileLink = ({ setting = "appbar.profile" }) => {
+
+    const settings = useSettings();
+    const currentUser = useUserData();
+    const logout = useUserLogout();
+    const classes = useStyles();
+
+    //end of hooks
+    const modes = settings(setting)
+
+    if(isEmpty(modes) || !Array.isArray(modes) || !currentUser){
+      return null
+    }
+
+    return <span>{modes.includes("edit") && <ProfileEditButton />}{modes.includes("logout") && <UserLogoutButton onClick={logout} />}</span>
+
+}
  
 export default UpdateProfileLink
