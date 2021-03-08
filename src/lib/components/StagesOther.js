@@ -7,7 +7,7 @@ import ScheduleItem from '../components/Schedule/ScheduleItem'
 import MyButton from '../components/MyButton'
 import Typography from '@material-ui/core/Typography';
 import {useRouter} from 'next/router'
-
+import isEmpty from 'lodash/isEmpty'
 
 const useStyles = makeStyles(theme => ({
 
@@ -30,8 +30,7 @@ const StagesOther = ({data, stage}) => {
 
     const other = data && Array.isArray(data) && data.length ? data.filter(item => item.presentation_venue !== stage.toUpperCase()) : null
     
-    if(!data){
-        console.log(data)
+    if(isEmpty(data)){
         return null
     }
 

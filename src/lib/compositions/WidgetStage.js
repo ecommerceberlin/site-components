@@ -11,6 +11,7 @@ import StageContent from '../components/StageContent'
 import StagesOther from '../components/StagesOther'
 import DiscordChat from '../components/DiscordChat'
 import {useSettings} from '../helpers'
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
 
@@ -43,10 +44,12 @@ const WidgetStage = ({stage, setting}) => {
     const current = getStage(data, _stage)
 
     return (
-        <Wrapper label={["streaming.stage.title", {name: _stage}]} dense={true}>     
+      
+        <Wrapper label={["streaming.stage.title", {name: _stage}]} dense={true}> 
+       
                 {current && <StageOverview data={current} stage={_stage} />}
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={12} md={8} lg={8} xl={7}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12} md={12} lg={8} xl={7}>
                         <StageContent 
                             stage={_stage} 
                             embed={stream} 
@@ -54,14 +57,16 @@ const WidgetStage = ({stage, setting}) => {
                             regform={regform}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={4} lg={4} xl={3} >
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={3} >
                         <DiscordChat chatId={discord} {...discordProps} />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12} xl={2}>
+                    <Grid item xs={12} sm={12} md={6} lg={12} xl={2}>
                         <StagesOther data={data} stage={_stage} />
                     </Grid>
                 </Grid>
+          
         </Wrapper>
+       
     )
    
 }

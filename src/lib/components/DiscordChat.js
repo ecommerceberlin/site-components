@@ -14,8 +14,10 @@ import fetch from 'isomorphic-unfetch'
 // import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { useTranslate } from '../i18n';
+import moment from 'moment'
 
 const fetcher = url => fetch(url).then(r => r.json())
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -67,7 +69,7 @@ const clearDiscordMsg = (msg) => {
 
 const DiscordChat = ({chatId, avatars = true, join = ""}) => {
 
-    const [translate] = useTranslate()
+    const [translate, locale] = useTranslate()
     const classes = useStyles()
 
     const { data, error } = useSWR(`https://proxy.eventjuicer.com/api/discord/${chatId}`, fetcher, { 
@@ -75,26 +77,30 @@ const DiscordChat = ({chatId, avatars = true, join = ""}) => {
         refreshWhenHidden: true 
     })
 
+    moment.locale(locale);
+
+    const title = `${translate("streaming.chat.title")}`.toUpperCase()
+
     if(error || isEmpty(data)){
         return (<div>
-            <Typography variant="h5" gutterBottom>{translate("streaming.chat.title")}</Typography><DiscordJoinButton href={join} />
+            <Typography variant="h5" gutterBottom>{title}</Typography><DiscordJoinButton href={join} />
         </div>)
     }
     
     return (
         <div>  
             
-            <Typography variant="h6" gutterBottom>{translate("streaming.chat.title")}</Typography>
+            <Typography variant="h6" gutterBottom>{title}</Typography>
 
             <List className={classes.root}>
             {data.map(item => (
-                <ListItem alignItems="flex-start">
+                <ListItem alignItems="flex-start" disableGutters dense={true} divider={true}>
                {avatars && <ListItemAvatar>
                     <Avatar alt={item.user} src={item.avatar} />
                 </ListItemAvatar>}
                 <ListItemText
                     primary={clearDiscordMsg(item.content)}
-                    secondary={`${item.user}`}
+                    secondary={`${item.user} ${moment(item.ts).fromNow()}`}
                 />
                 </ListItem>
             ))}
