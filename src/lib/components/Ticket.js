@@ -1,75 +1,68 @@
 import React from 'react';
-//import Grid from '@material-ui/core/Grid';
-
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-
 import Typography from '@material-ui/core/Typography';
-import compose from 'recompose/compose';
-import { translate } from '../i18n';
+import {useRouter} from 'next/router'
+import { makeStyles } from '@material-ui/core/styles';
+import { useTranslate } from '../i18n';
 import TicketPrice from './Bookingmap/TicketPrice'
 import TicketBuyButton from './Bookingmap/TicketBuyButton'
-//import {generateSlugLinkParams} from '../helpers'
-import Link from 'next/link'
-
+import {useSettings, resizeCloudinaryImage} from '../helpers'
 import SubPageButton from './SubPageButton';
 import MyTypography from './MyTypography';
-import {resizeCloudinaryImage} from '../helpers'
 
-    const styles = {
-        card: {
-            maxWidth: 445,
-        },
+const useStyles = makeStyles(theme => ({
 
-        cardDisabled : {
-            maxWidth: 445,
-            opacity : 0.5
-        },
+    card: {
+        maxWidth: 445,
+    },
 
-        cardActionArea : {
-            position : 'relative'
-        },
+    cardDisabled : {
+        maxWidth: 445,
+        opacity : 0.5
+    },
 
-        media: {
-            // ⚠️ object-fit is not supported by IE 11.
-            objectFit: 'cover',
-        },
+    cardActionArea : {
+        position : 'relative'
+    },
 
-        soldout : {
-            backgroundImage : "url('https://res.cloudinary.com/eventjuicer/image/upload/v1561412798/soldout.png')",
-            backgroundSize : 'contain',
-            backgroundRepeat : 'no-repeat',
-            position: 'absolute',
-            width: '100%',
-            height : '100%',
-        },
+    media: {
+        // ⚠️ object-fit is not supported by IE 11.
+        objectFit: 'cover',
+    },
 
-    };
+    soldout : {
+        backgroundImage : "url('https://res.cloudinary.com/eventjuicer/image/upload/v1561412798/soldout.png')",
+        backgroundSize : 'contain',
+        backgroundRepeat : 'no-repeat',
+        position: 'absolute',
+        width: '100%',
+        height : '100%',
+    },
 
+}))
+  
 
-const Ticket = ({ data, classes, locale, translate, disabled, moreInfoLinkHref }) => {
+const Ticket = ({ setting="premium", data }) => {
     
+  const [translate, locale] = useTranslate(); 
+  const {disabledBuying, disabledTicketIds = []} = useSettings(setting);
+  const classes = useStyles();
+  const router = useRouter();
 
-  //const linkParams = generateSlugLinkParams("premium", )
-  const linkParams = {
-      href: moreInfoLinkHref,
-      as: data.details_url
-  }
+  const jumpToDetails = data.details_url ? {
+      href: data.details_url,
+      onClick: () => router.push(data.details_url)
+  }: {}
 
-  return (
-    <Card className={data.bookable ? classes.card : classes.cardDisabled }>
-
-    <Link {...linkParams}>
-      <CardActionArea className={classes.cardActionArea}>
+  return (<Card className={data.bookable ? classes.card : classes.cardDisabled }>
+      <CardActionArea {...jumpToDetails} className={classes.cardActionArea}>
 
         {!data.bookable ? <div className={classes.soldout} /> : null}
           
-
         <CardMedia
           component="img"
           alt=""
@@ -79,60 +72,33 @@ const Ticket = ({ data, classes, locale, translate, disabled, moreInfoLinkHref }
           title=""
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {translate(`${data.translation_asset_id}.name`)}
-          </Typography>
+          <Typography gutterBottom variant="h5" component="h2">{translate(`${data.translation_asset_id}.name`)}</Typography>
           <Typography component="p">
-
-        
           {translate(`${data.translation_asset_id}.description`)}
           </Typography>
-
-
         <MyTypography template="price">
             <TicketPrice price={data.price} />
         </MyTypography>
-
         </CardContent>
       </CardActionArea>
-
-      </Link>
-
       <CardActions>
-
-         {data.bookable && !disabled ?
-            
+      {disabledBuying && <SubPageButton color="default" variant="outlined" target={jumpToDetails} />}
+      {!disabledBuying && data.bookable && !disabledTicketIds.includes(data.id) ?      
             <TicketBuyButton 
                 label="common.buy" 
                 bookable={data.bookable} 
                 id={data.id} 
                 nonBookable={<span></span>} 
                 right={
-                    data.details_url.length ? <SubPageButton color="default" variant="outlined" target={linkParams} /> : null
+                    data.details_url.length ? <SubPageButton color="default" variant="outlined" target={jumpToDetails} /> : null
                 }    
-            /> : <span>unavailable</span>}
+            /> : null}
 
- 
-
-  
       </CardActions>
     </Card>
   );
 }
 
-Ticket.defaultProps = {
-    disabled : false,
-    data: {},
-    moreInfoLinkHref: "/premium/[name]"
-}
 
-Ticket.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-const enhance = compose(
-    translate,
-    withStyles(styles)
-)
-export default enhance(Ticket);
+export default Ticket
 
