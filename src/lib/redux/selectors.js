@@ -102,15 +102,7 @@ export const ExhibitorKeywordsSelector = createSelector(
   }
 )
 
-export const TicketsSelector = createSelector(
-  getTickets,
-  tickets => tickets
-)
 
-export const SortedTicketsSelector = createSelector(
-  getTickets,
-  tickets => sortBy(tickets, ['start'])
-)
 
 // export const getRecord = (state, props) => {
 //   const key = `${props.endpoint}/${props.id}`

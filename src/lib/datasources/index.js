@@ -7,7 +7,6 @@ export { default as DatasourceCompanies } from './Companies';
 export { default as DatasourcePresenters } from './Presenters';
 export { default as DatasourceVisitors } from './Visitors';
 export { default as DatasourcePhotos } from './Photos';
-export { default as DatasourceTickets } from './Tickets';
 export { default as DatasourceSingleRecord } from './SingleRecord';
 export { default as DatasourceOffers } from './Offers';
 export { default as DatasourceAllExhibitors } from './AllExhibitors';
