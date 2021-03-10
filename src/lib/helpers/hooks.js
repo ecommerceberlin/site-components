@@ -1,10 +1,43 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import {resourceFetchSuccess, setUserToken, removeUserToken} from '../components/redux/actions'
+import {resourceFetchRequest, resourceFetchSuccess, setUserToken, removeUserToken, dialogShow} from '../components/redux/actions'
 import {getUserByToken} from './api'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
+import { FilteredDataSelector } from '../redux/selectors'
+import {useTranslate} from '../i18n'
+
+export const useDialog = () => {
+    const [translate] = useTranslate();
+    const dispatch = useDispatch();
+    return useCallback(({label, content, buttons})=> dispatch(dialogShow({
+        title: translate(label),
+        content: content,
+        buttons: buttons
+    })))
+}
+
+
+export const useDatasource = (queries = {}, props = {}) => {
+
+    const dispatch = useDispatch();
+    const results = useSelector((state) => {
+            const dataSet = {};
+            Object.keys(queries).forEach(key => {
+              dataSet[key] = FilteredDataSelector(state, queries[key])
+            })
+            return dataSet
+          }
+    );
+
+    useEffect(()=>{
+        Object.values(queries).forEach(query => dispatch(resourceFetchRequest(query)) )
+    }, [])
+
+    return results;
+
+}
 
 export const useSettings = (_path = null, _fallback = undefined) => {
 
