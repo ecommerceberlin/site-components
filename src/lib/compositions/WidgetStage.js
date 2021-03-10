@@ -49,7 +49,7 @@ const WidgetStage = ({stage, setting}) => {
        
                 {current && <StageOverview data={current} stage={_stage} />}
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={12} md={12} lg={8} xl={7}>
+                    <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
                         <StageContent 
                             stage={_stage} 
                             embed={stream} 
@@ -57,14 +57,18 @@ const WidgetStage = ({stage, setting}) => {
                             regform={regform}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={4} xl={3} >
+                    <Grid item xs={12} sm={12} md={5} lg={3} xl={3} >
                         <DiscordChat chatId={discord} {...discordProps} />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={12} xl={2}>
-                        <StagesOther data={data} stage={_stage} />
+
+                    <Grid item xs={12} sm={12} md={7} lg={12} xl={12} >
+                    <StagesOther data={data} stage={_stage} />
                     </Grid>
+
                 </Grid>
-          
+
+              
+
         </Wrapper>
        
     )

@@ -36,7 +36,7 @@ const StagesOther = ({data, stage}) => {
 
     return (<div className={classes.stage}>
     <Typography variant="h6" gutterBottom>{translate("streaming.stages.other")}</Typography>
-    <Grid container spacing={1}>{
+    <Grid container spacing={2}>{
         other && other.map(item => {
 
             const _venue = (item.presentation_venue || "").toLowerCase()
