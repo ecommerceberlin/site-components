@@ -36,6 +36,11 @@ async function configure(props, config){
 
   await store.sagaTask.toPromise()
 
+  return {
+    props: "params" in props? props.params: {},
+    revalidate: 10
+  }
+
 }
 
 export  {configure};
