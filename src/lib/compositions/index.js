@@ -32,7 +32,6 @@ export { default as WidgetEventInfo } from './WidgetEventInfo'
 export { default as WidgetVips } from './WidgetVips'
 export { default as WidgetPartners } from './WidgetPartners'
 
-export { default as WidgetTickets } from './WidgetTickets'
 export { default as WidgetPresentersAll } from './WidgetPresentersAll'
 
 export { default as WidgetMenu } from './WidgetMenu'
@@ -54,6 +53,10 @@ export { default as WidgetVoteStatus } from './WidgetVoteStatus'
 export { default as DynamicPage} from './DynamicPage';
 export { default as WidgetPremiumTicket } from './WidgetPremiumTicket'
 export { default as WidgetPremiumTickets } from './WidgetPremiumTickets'
+/** compat */
+export { default as WidgetTickets } from './WidgetPremiumTickets'
+/** compat */
+
 
 export { default as WidgetFaq } from './WidgetFaq'
 export { default as WidgetJurors } from './WidgetJurors'
@@ -82,6 +85,7 @@ export { default as WidgetPostCompact } from './WidgetPostCompact'
 export { default as WidgetPostsByAuthor } from './WidgetPostsByAuthor'
 export { default as WidgetPublisher } from './WidgetPublisher'
 
+export { default as WidgetTicketOwners } from './WidgetTicketOwners'
 
 
 
