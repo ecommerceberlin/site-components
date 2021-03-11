@@ -2,7 +2,7 @@ import React from 'react';
 
 import MyHead from './MyHead'
 import WidgetVideoWithEventInfo from '../compositions/WidgetVideoWithEventInfo'
-import WidgetVisitor from '../compositions/WidgetVisitor'
+import WidgetRegForm from '../compositions/WidgetRegForm'
 import FsButtons from '../components/FsButtons'
 import WidgetAllExhibitorsAvatarlist from '../compositions/WidgetAllExhibitorsAvatarlist'
 import Layout from '../layouts/LayoutMain'
@@ -31,7 +31,7 @@ class PageError extends React.Component {
 
         <WidgetVideoWithEventInfo />
 
-        <WidgetVisitor label="visitors.register" first />
+        <WidgetRegForm label="visitors.register" first />
 
         <FsButtons />
 

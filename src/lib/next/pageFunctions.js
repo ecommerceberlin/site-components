@@ -13,7 +13,7 @@ async function configure(props, config){
    * */
   const store = "store" in props ? props.store : props;
 
-  const {settings, preload} = config
+  const {settings, preload, cache} = config
 
   const state = store.getState();
 
@@ -38,7 +38,7 @@ async function configure(props, config){
 
   return {
     props: "params" in props? props.params: {},
-    revalidate: 10
+    revalidate: cache || 10
   }
 
 }
