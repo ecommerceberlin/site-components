@@ -1,23 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActions from '@material-ui/core/CardActions';
-
-
 import Avatar from './MyAvatar';
 import Typography from './MyTypography';
-
 import { MyLink } from '../next';
 import Hidden from '@material-ui/core/Hidden';
-
-import { generateLinkParams } from '../helpers';
-
+import { useSettings } from '../helpers';
 import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 import compose from 'recompose/compose';
 import isFunction from 'lodash/isFunction';
@@ -47,8 +38,18 @@ const styles = {
   }
 };
 
-const Person = (props) => {
+const defaultProps = {
+  width: 'md',
+  minimal: true,
+  link: false,
+  mark : false,
+  moreLabel : "common.more"
+};
 
+
+const Person = ({setting, ...props}) => {
+
+  const settings = useSettings(setting)
   const {
     id,
     classes,
@@ -61,17 +62,12 @@ const Person = (props) => {
     data,
     mark,
     moreLabel
-  } = props;
-  
-  const linkParams = isFunction(link) ? link(props) : {}
-  const {as, href} = linkParams
+  } = Object.assign({}, defaultProps, settings, props)
 
   return (
     <Card className={classes.card} elevation={mark ? 2 : 0}>
       <CardHeader
-        avatar={<Avatar id={id} alt="" src={avatar} link={as} />}
-        // title="test"
-        // subheader="srest"
+        avatar={<Avatar id={id} alt="" src={avatar} />}
         classes={{
           ...{root : classes.avatarContainer},
           ...{avatar : classes.avatar}
@@ -80,42 +76,22 @@ const Person = (props) => {
 
       <CardContent>
         <Typography template="presenter1">{title}</Typography>
-
         {subtitle && <Typography template="presenter2">{subtitle}</Typography>}
-
-       
-          {text && 
-           <Hidden smDown implementation="css">
+          {text && (<Hidden smDown implementation="css">
            <Typography template="presenterText">{text}</Typography>
-           </Hidden>
-          }
+           </Hidden>)}
         
       </CardContent>
 
-      {linkParams && (
+      {link && (
         <CardActions>
-          <MyLink {...linkParams} label={moreLabel} />
+          <MyLink href={link} label={moreLabel} />
         </CardActions>
       )}
     </Card>
   );
 };
 
-Person.defaultProps = {
-  width: 'md',
-  minimal: true,
-  link: false,
-  mark : false,
-  moreLabel : "common.more"
-};
-
-Person.propTypes = {
-  classes: PropTypes.object.isRequired,
-  avatar: PropTypes.string.isRequired,
-  title: PropTypes.node,
-  subtitle: PropTypes.node,
-  text: PropTypes.node
-};
 
 const enhance = compose(
   onlyUpdateForKeys(['id', 'avatar', 'mark']),
