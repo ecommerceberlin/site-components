@@ -5,15 +5,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import { StepForm } from '../formik';
 import { useSettings } from '../helpers'
 import isString from 'lodash/isString'
-
+import isEmpty from 'lodash/isEmpty'
 
 const defaultProps = {
   wrapperProps: {
-    label: "seting.wrapperProps.label",
+    label: "setting.wrapperProps.label",
     secondaryLabel: "setting.wrapperProps.secondaryLabel",
     dense: false,
     first: false
   },
+  
   links: [],
   email_template : "",
   options: {},
@@ -22,6 +23,13 @@ const defaultProps = {
   data : {},
   right: null,
   token: null,
+
+  fields: [
+    {name: "email", required: true},
+  ],
+
+  start: ['email'],
+
 };
 
 const useStyles = makeStyles(theme => ({
@@ -59,6 +67,11 @@ const WidgetRegForm = ({setting, ...props}) => {
       wrapperProps,
       api
     } = Object.assign({}, defaultProps, settings, props)
+
+    if(isEmpty(fields)){
+      console.error("WidgetRegForm fields missing... Did you provide setting key?")
+      return null
+    }
 
     const fieldsWithOptions = fields.map(field => "options" in field && options && field.options in options ? {...field, options: options[field.options]} : field)
     
