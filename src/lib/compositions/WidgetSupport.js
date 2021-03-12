@@ -21,6 +21,7 @@ const styles = theme => ({
   },
  
   people : {
+    marginTop: 10,
     marginBottom : 10,
   },
   left : {
@@ -62,12 +63,6 @@ const WidgetSupport = ({
   {(get) => (
     <div className={classes.root}>
   
-    <Typography variant="h4">
-      <RawTranslatedText label={ get("sales_support.title", title) } />
-    </Typography>
-    <Typography variant="subtitle1" color="textSecondary">
-      <RawTranslatedText label={ get("sales_support.description", description) } />
-    </Typography>
   
     <div className={classes.people}>
    
