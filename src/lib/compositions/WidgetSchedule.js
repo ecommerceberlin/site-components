@@ -5,31 +5,14 @@ import Schedule from '../components/Schedule'
 import Presenters from '../datasources/Presenters';
 import Exhibitors from '../datasources/Exhibitors';
 import Settings from '../datasources/Settings';
+import {useDatasource, useSettings} from '../helpers'
 
-const WidgetSchedule = ({link, times, venues, venueStyle, minimized, descriptions, ...wrapper}) => (
 
-    <Wrapper {...wrapper}>
-    <Exhibitors>{
-        (exhibitors) => <Presenters random={false} mobile={0} filter={false}>{
-            (presenters) =>
-            
-            <Settings>{
-                (get) => <Schedule
-                exhibitors={exhibitors}
-                presenters={presenters}
-                times={ get("schedule.times", times) }
-                venues={ get("schedule.venues", venues) }
-                link={link} 
-                descriptions={descriptions}
-                venueStyle={ get("schedule.venueStyle", venueStyle) }
-                minimized={ get("schedule.minimized", minimized) }
-                 />}</Settings>}</Presenters>}</Exhibitors>
-    </Wrapper>  
-)
-
-WidgetSchedule.defaultProps = {
-    label : "presenters.schedule",
-    secondaryLabel : "presenters.list_description",
+const defaultProps = {
+    wrapperProps: {
+        label : "presenters.schedule",
+        secondaryLabel : "presenters.list_description",
+    },
     links : [],
     link : true,
     descriptions : false,
@@ -42,15 +25,38 @@ WidgetSchedule.defaultProps = {
     venueStyle : "black",
     minimized : []
 }
-/* 
 
- 
-   */
-/*
-[
-    // <Link key="all" href="/presenters" label="common.menu.visitors.presenters" variant="flat" color="secondary" />,
-    // <Link key="subjects" href="/schedule" label="common.menu.visitors.schedule" variant="flat" color="secondary" />
-]
-*/
+
+const WidgetSchedule = ({setting = "schedule", ...props}) => {
+
+    const settings = useSettings(setting)
+    const {presenters} = useDatasource({
+        presenters: {
+            resource: "presenters"
+        }
+    })
+
+    const {link, times, venues, venueStyle, minimized, descriptions, wrapperProps} = Object.assign({}, defaultProps, settings, props)
+
+    return (
+
+        <Wrapper {...wrapperProps}>
+        <Exhibitors>{
+            (exhibitors) => (<Schedule
+                exhibitors={ exhibitors }
+                presenters={ presenters }
+                times={ times }
+                venues={ venues }
+                link={link} 
+                descriptions={ descriptions }
+                venueStyle={  venueStyle }
+                minimized={ minimized }
+                 />)}</Exhibitors>
+        </Wrapper>  
+    )
+
+}
+
+
 
 export default WidgetSchedule
