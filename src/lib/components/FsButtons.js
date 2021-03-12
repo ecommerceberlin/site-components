@@ -7,7 +7,7 @@ import {useRouter} from 'next/router'
 import {useSettings} from '../helpers'
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = props => makeStyles(theme => ({
 
   root: {
     display: 'flex',
@@ -17,10 +17,10 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     position: 'relative',
-    height: 600,
+    height: props.height,
     [theme.breakpoints.down('xs')]: {
       width: '100% !important', // Overrides inline-style
-      height: 300,
+      height: props.height/2,
     },
     '&:hover, &$focusVisible': {
       zIndex: 1,
@@ -94,8 +94,8 @@ function FsButtons({ setting = "rolebuttons", ...props }) {
 
   const router = useRouter();
   const settings = useSettings(setting)
-  const classes = useStyles()
-  const {items = [], first = false, accent = "gold"} = Object.assign({}, settings, props)
+  const {items = [], first = false, accent = "gold", height = 600} = Object.assign({}, settings, props)
+  const classes = useStyles({height})()
 
   return (
     <div className={classes.root} style={ first ? {marginTop: 10} : {}}>
