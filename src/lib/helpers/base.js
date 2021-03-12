@@ -3,6 +3,8 @@ import _shuffle from 'lodash/shuffle';
 import _filter from 'lodash/filter';
 import _uniqBy from 'lodash/uniqBy';
 import _get from 'lodash/get';
+import isObject from 'lodash/isObject'
+import isFunction from 'lodash/isFunction'
 
 export const collator = new Intl.Collator('pl-PL', {numeric: true, sensitivity: 'base'});
 
@@ -54,6 +56,60 @@ export const addToken = token => {
 export const isBigScreen = width => {
   return width === 'xl' || width === 'lg';
 };
+
+export const filterFuncFromArr = (arr) => {
+
+  if(isFunction(arr)){
+    return arr;
+  }
+
+  if(!Array.isArray(arr)){
+    return null;
+  }
+
+  return function(item){
+
+    let tests = true;
+    
+    arr.forEach(([path, expectedValue, comparator = "="]) => {
+
+      const value = _get(item, path)
+      
+      switch(comparator){
+        case "=":
+        case "==":
+          if(value != expectedValue){
+            tests = false
+          }
+        break
+        case ">":
+          if(value <= expectedValue){
+            tests = false
+          }
+        break
+        case "<":
+          if(value >= expectedValue){
+            tests = false
+          }
+        break
+        case "contains":
+        if(!value.includes(expectedValue)){
+          tests = false
+        }
+        break
+
+        case "length":
+        if(value.length <= expectedValue){
+          tests = false
+        }
+        break
+
+      }
+    })
+    return tests;
+  }
+}
+
 
 export const processArrayData = (data = [], { sort = null, filter = null, limit = null, random = null, skip = 0 }) => {
   
