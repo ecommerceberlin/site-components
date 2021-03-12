@@ -18,8 +18,6 @@ const defaultGridSettings = {
     xl: 3,
   }
 
-
-
   const useStyles = makeStyles(theme => ({
     root: {
       maxWidth: 700,
@@ -61,10 +59,47 @@ const defaultGridSettings = {
   
 }));
 
+const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons}) => {
+
+    const dialog = useDialog();
+    const [translate] = useTranslate();
+    const dialogContents = {
+        label: `${labelPrefix}.list.name`, 
+        content: translate(`${labelPrefix}.list.description`)
+    }
+
+    const renderIconOrImage = (image) => {
+        if(!image){
+            return null
+        }
+        if(!image.startsWith("http") &&  image in icons){
+            return React.createElement(icons[image], {style: {width: 100, height: 100}})
+        }
+
+        return <Avatar variant="square" src={resizeCloudinaryImage(image, 300, 400)} />
+    }
+
+    return ( <Grid container spacing={2} onClick={()=>dialog(dialogContents)}>
+    <Grid item xl={6} lg={6} md={12}>{renderIconOrImage(image)}</Grid>
+    <Grid item xl={6} lg={6} md={12}><TicketHeader baseLabel={labelPrefix} /></Grid>
+    <Grid item xl={12} lg={12} md={12}><TicketOwnersList detailsUrl={detailsUrl} data={owners} /></Grid>
+    </Grid>)
+}
+
+
 const TicketHeader = ({baseLabel}) => {
     const [translate] = useTranslate();
-    return (<Typography variant="h4">
-    {translate(`${baseLabel}.title`)}</Typography>)
+    return (<Typography variant="h4">{translate(`${baseLabel}.list.name`)}</Typography>)
+}
+
+
+
+
+const TicketOwnersList = ({detailsUrl, owners}) => {
+    if( !Array.isArray(owners) || isEmpty(owners)){
+        return <NoTicketOwner href={detailsUrl} />
+    }
+    return owners.map(owner => <TicketOwner key={owner.id} logotype={owner.profile.logotype_cdn}  />)
 }
 
 const TicketOwner = ({logotype, fluid=true}) => {
@@ -82,32 +117,11 @@ const TicketOwner = ({logotype, fluid=true}) => {
 
 const NoTicketOwner = (props) => <MyButton color="primary" {...props} />
 
-const DisplayTicketOwners = ({owners, moreInfoLabel}) => {
-    if( !Array.isArray(owners) || isEmpty(owners)){
-        return <NoTicketOwner label={moreInfoLabel} href="/legal/exhibitors" />
-    }
-    return owners.map(owner => <TicketOwner key={owner.id} logotype={owner.profile.logotype_cdn}  />)
-}
 
-const TicketDetails = ({data, moreInfoLabel}) => {
-
-    const dialog = useDialog();
-    const [translate] = useTranslate();
-    const dialogContents = {
-        label: `${data.translation_asset_id}.title`, 
-        content: translate(`${data.translation_asset_id}.description`)
-    }
-
-    return ( <Grid container spacing={2} onClick={()=>dialog(dialogContents)}>
-    <Grid item xl={6} lg={6} md={12}>icon</Grid>
-    <Grid item xl={6} lg={6} md={12}><TicketHeader baseLabel={data.translation_asset_id} /></Grid>
-    <Grid item xl={12} lg={12} md={12}><DisplayTicketOwners data={data.owners} moreInfoLabel={moreInfoLabel} /></Grid>
-    </Grid>)
-}
 
 const WidgetTicketOwners = ({setting="sponsors", icons={} }) => {
 
-    const {ticket_group_id, ticket_ids, grid, wrapperProps, moreInfoLabel} = useSettings(setting);
+    const {ticket_group_id, ticket_ids, grid, wrapperProps} = useSettings(setting);
     const {data} = useDatasource({
         data: {
             resource: "ticketowners",
@@ -117,9 +131,9 @@ const WidgetTicketOwners = ({setting="sponsors", icons={} }) => {
 
     const _gridSettings = Object.assign({}, defaultGridSettings, grid)
 
-    return (<Wrapper {...wrapperProps}><Grid container spacing={2}>{
+    return (<Wrapper {...wrapperProps}><Grid container spacing={4}>{
         data.map(item => <Grid key={item.id} item {..._gridSettings}>
-        <TicketDetails data={item} moreInfoLabel={moreInfoLabel}/>
+        <TicketDetails detailsUrl={item.details_url} labelPrefix={item.translation_asset_id} image={item.thumbnail} owners={item.owners} icons={icons} />
         </Grid>)
     }</Grid></Wrapper>)
     
@@ -127,22 +141,6 @@ const WidgetTicketOwners = ({setting="sponsors", icons={} }) => {
 }
 
 
-
-// (
-
-//     <Settings>{(get)=> ( <WidgetTickets
-//         first={first}
-//         label={label}
-//         filter={function(ticket) {
-//           return get("premium.ticketgroups", []).indexOf(ticket.group_id)!== -1
-//         }}
-//         moreInfoLinkHref={moreInfoLinkHref}
-//       />)
-    
-//     }</Settings>
-
-// )
- 
 
 export default WidgetTicketOwners
 
