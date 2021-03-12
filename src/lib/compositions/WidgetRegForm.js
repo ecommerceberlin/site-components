@@ -29,12 +29,17 @@ const defaultProps = {
   ],
 
   start: ['email'],
-
+  rightShadowed: false
 };
 
 const useStyles = makeStyles(theme => ({
 
   image : {
+    width : "100%",
+  
+  },
+
+  rightShadowed: {
     width : "100%",
     transform: 'rotate(3deg)',
     filter: 'drop-shadow(30px 10px 5px #444)'
@@ -56,6 +61,7 @@ const WidgetRegForm = ({setting, ...props}) => {
       start, 
       data, 
       right, 
+      rightShadowed,
       baseLabel, 
       role,
       legend,
@@ -98,7 +104,7 @@ const WidgetRegForm = ({setting, ...props}) => {
               />
             </Grid>
             {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
-              {isString(right)? <img src={ right } className={classes.image}  /> : right}
+              {isString(right)? <img src={ right } className={rightShadowed? classes.rightShadowed: classes.image}  /> : right}
             </Grid> }
           </Grid>
         </Wrapper>)

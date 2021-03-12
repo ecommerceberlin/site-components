@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import RawTranslatedText from './RawTranslatedText'
-import Router from 'next/router'
+import {useRouter} from 'next/router'
 import {useSettings} from '../helpers'
 
 
@@ -84,14 +84,15 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-const scrollTo = (to, as) => {
-  if(typeof window !== 'undefined'){
-    Router.push(to).then(() => window.scrollTo(0, 0))
-  }
-}
+// const scrollTo = (to, as) => {
+//   if(typeof window !== 'undefined'){
+//     Router.push(to).then(() => window.scrollTo(0, 0))
+//   }
+// }
 
 function FsButtons({ setting = "rolebuttons", ...props }) {
 
+  const router = useRouter();
   const settings = useSettings(setting)
   const classes = useStyles()
   const {items = [], first = false, accent = "gold"} = Object.assign({}, settings, props)
@@ -113,7 +114,8 @@ function FsButtons({ setting = "rolebuttons", ...props }) {
             style={{
               width: width,
             }}
-            onClick={() => scrollTo(target)}
+            onClick={target.startsWith("http")? undefined: () => router.push(target)}
+            href={target}
           >
             <span
               className={classes.imageSrc}

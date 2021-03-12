@@ -58,13 +58,12 @@ const styles = theme => ({
 });
 
 const Icon = ({ name, classes, variant, className }) => {
-  const capName = capitalizeFirstLetter(name);
 
-  const IconComponent = icons[capName];
+  name = capitalizeFirstLetter(name)
 
-  const ret = (
-    <IconComponent className={classNames(classes.leftIcon, classes[variant])} />
-  );
+  const IconComponent = name in icons? icons[name] : Website;
+
+  const ret = <IconComponent className={classNames(classes.leftIcon, classes[variant])} />
 
   return React.isValidElement(ret) ? ret : null;
 };
