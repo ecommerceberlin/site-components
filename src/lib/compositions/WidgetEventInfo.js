@@ -1,57 +1,31 @@
 import React from 'react';
-import Settings from '../datasources/Settings'
 import EventInfo from '../components/EventInfo';
+import {useSettings} from '../helpers'
 
-
-const WidgetEventInfo = ({items, ...props}) => (
-
-    <Settings>{get => {
-
-          const filtered = [
-            {
-              name : 'location',
-              icon: 'location',
-              secondary: 'event.location',
-              primary: get("common.event_location")
-            },
-
-            {
-              name : 'date',
-              icon: 'date',
-              secondary: 'event.date',
-              primary: get("common.event_date")
-            },
-
-            {
-              name : 'hours',
-              icon: 'alarm',
-              secondary: 'event.hours',
-              primary: get("common.event_hours")
-            }
-          ].filter(({name}) => items.indexOf(name) > -1)
-
-          return (
-              <EventInfo
-              {...props}
-              items={ filtered }         
-            />
-          )
-      }
-  }
-  </Settings>
-
-)
-
-WidgetEventInfo.defaultProps = {
+const defaultProps = {
     orientation : "v",
-    iconStyle : "black",
-    items : ["location", "date"]
-    
+    showable : ["location", "date"],
+    primaryStyle: "heroPrimary",
+    secondaryStyle: "heroSecondary",
+    iconStyle: "heroIcon"
+}
+
+const WidgetEventInfo = ({setting, ...props}) => {
+
+  const settings = useSettings(setting);
+  const event = useSettings("common", {})
+
+  const {showable = ["date"], orientation, primaryStyle, secondaryStyle, iconStyle, ...other} = Object.assign({}, defaultProps, event, settings, props)
+
+  const data = showable.map(item => ({
+      name : item,
+      icon: item,
+      secondary: `event.${item}`,
+      primary: `event_${item}` in other? other[`event_${item}`]: "undefined"
+  }))
+
+  return (<EventInfo setting={setting} items={ data } {...{orientation, primaryStyle, secondaryStyle, iconStyle}}/>)
+
 }
 
 export default WidgetEventInfo;
-
-
-
-
-  

@@ -1,13 +1,10 @@
-//import PropTypes from 'prop-types';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import classNames from 'classnames'
+import {useSettings} from '../helpers'
+import {useTranslate} from '../i18n'
 
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
-import { isBigScreen } from '../helpers';
-import classNames from 'classnames';
-
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
 
     backgroundRepeat: 'no-repeat no-repeat',
@@ -55,7 +52,11 @@ const styles = theme => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%,-50%)'
+    transform: 'translate(-50%,-50%)',
+
+    [theme.breakpoints.down('md')]: {
+      display: "none"
+    },
   },
 
   overlay: {
@@ -77,44 +78,21 @@ const styles = theme => ({
   },
 
   h1: {}
-});
+}))
 
-const FsVideo = ({ width, videoSrc, background, classes, children, overlay }) => (
+const FsVideo = ({ setting, ...props }) => {
 
-  <section className={classNames(
-    classes.container, classes[overlay]
-    )}
-    style={{ backgroundImage: `url(${background})` }}
-    >
+  const classes = useStyles();
+  const settings = useSettings(setting)
+  const {videoSrc, background, children, overlay} = Object.assign({}, settings, props)
+  return (
+      <section className={classNames(classes.container, classes[overlay])} style={{ backgroundImage: `url(${background})` }}>
+      <div className={classes.overlay}>{children}</div>
+        <video autoPlay muted loop className={classes.video} poster={background}>
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      </section>
+  );
+}
 
-    <div className={classes.overlay}>{children}</div>
-
-    {isBigScreen(width) && videoSrc ? (
-
-      <video autoPlay muted loop className={classes.video} poster={background}>
-        <source src={videoSrc} type="video/mp4" />
-      </video>
-
-    ) : null}
-
-
-  </section>
-
-);
-
-FsVideo.defaultProps = {
-  width: 'xs',
-  background: "",
-  videoSrc : null,
-  label: null,
-  text: '',
-  overlay : 'red'
-};
-
-
-const enhance = compose(
-  connect(state => ({ width: state.app.width })),
-  withStyles(styles)
-);
-
-export default enhance(FsVideo);
+export default FsVideo
