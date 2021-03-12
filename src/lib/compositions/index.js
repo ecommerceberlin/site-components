@@ -6,7 +6,7 @@ export { default as WidgetCompanyBookingmap } from './WidgetCompanyBookingmap';
 
 export { default as WidgetFeaturedExhibitors } from './WidgetFeaturedExhibitors';
 export { default as WidgetFeaturedCompanies } from './WidgetFeaturedCompanies';
-export { default as WidgetFeaturedPresenters } from './WidgetFeaturedPresenters';
+
 
 export { default as WidgetAllExhibitorsAvatarlist } from './WidgetAllExhibitorsAvatarlist';
 export { default as WidgetExhibitorsAvatarlist } from './WidgetExhibitorsAvatarlist';
@@ -26,7 +26,6 @@ export { default as WidgetSchedule } from './WidgetSchedule';
 export { default as WidgetStage } from './WidgetStage';
 
 export { default as WidgetExhibitorsByKeyword } from './WidgetExhibitorsByKeyword'
-export { default as WidgetRoleButtons } from './WidgetRoleButtons'
 export { default as WidgetFooter } from './WidgetFooter'
 export { default as WidgetEventInfo } from './WidgetEventInfo'
 export { default as WidgetVips } from './WidgetVips'
@@ -53,10 +52,7 @@ export { default as WidgetVoteStatus } from './WidgetVoteStatus'
 export { default as DynamicPage} from './DynamicPage';
 export { default as WidgetPremiumTicket } from './WidgetPremiumTicket'
 export { default as WidgetPremiumTickets } from './WidgetPremiumTickets'
-/** compat */
-export { default as WidgetTickets } from './WidgetPremiumTickets'
-/** compat */
-
+ 
 
 export { default as WidgetFaq } from './WidgetFaq'
 export { default as WidgetJurors } from './WidgetJurors'
@@ -67,8 +63,7 @@ export { default as WidgetVerticalTimeline } from './WidgetVerticalTimeline'
 
 export { default as WidgetIconGrid } from './WidgetIconGrid';
 export { default as WidgetRegForm } from './WidgetRegForm'
-export { default as WidgetSpeaking } from './WidgetSpeaking'
-export { default as WidgetVisitor } from './WidgetVisitor'
+
 
 
 export { default as WidgetVoteWithLinkedIn } from './WidgetVoteWithLinkedIn'
@@ -93,3 +88,11 @@ export { default as WidgetPublishers } from './WidgetPublishers'
 export { default as WidgetGridWithImages } from './WidgetGridWithImages'
 export { default as WidgetRoleBasedProfileUpdate } from './WidgetRoleBasedProfileUpdate'
 
+
+/** compat */
+export { default as WidgetSpeaking } from './WidgetRegForm'
+export { default as WidgetVisitor } from './WidgetRegForm'
+export { default as WidgetRoleButtons } from '../components/FsButtons'
+export { default as WidgetTickets } from './WidgetPremiumTickets'
+export { default as WidgetFeaturedPresenters} from './WidgetPresenters'
+/** compat */
