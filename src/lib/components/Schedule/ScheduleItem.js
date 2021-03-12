@@ -101,7 +101,7 @@ const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, sh
         time={data.presentation_time}
         venue={data.presentation_venue}
         buttons={[
-          <IconButton onClick={() => dispatch(dialogShow(dialogData))}>
+          <IconButton key="details" onClick={() => dispatch(dialogShow(dialogData))}>
             <HelpIcon fontSize="large" />
           </IconButton>,
           ...buttons

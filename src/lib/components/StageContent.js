@@ -4,7 +4,7 @@ import Player from 'react-player'
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from '../i18n';
 import { useUserData } from '../helpers'
-import WidgetVisitor from '../compositions/WidgetVisitor'
+import WidgetRegForm from '../compositions/WidgetRegForm'
 
 const useStyles = makeStyles(theme => ({
      wrapper : {
@@ -31,7 +31,7 @@ const StageContent = ({embed, stage, playerProps, placeholder, regform}) => {
     }
 
     if(!user){
-       return <WidgetVisitor setting={regform} />
+       return <WidgetRegForm setting={regform} />
     }
 
     return (
