@@ -5,6 +5,10 @@ import Grid from '@material-ui/core/Grid'
 import Wrapper from '../components/Wrapper'
 import {useTranslate} from '../i18n'
 import Typography from '@material-ui/core/Typography'
+
+import Box from '@material-ui/core/Box'
+import Card from '@material-ui/core/Card'
+
 import Avatar from '@material-ui/core/Avatar'
 import isEmpty from 'lodash/isEmpty'
 import MyButton from '../components/MyButton'
@@ -13,9 +17,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const defaultGridSettings = {
     xs: 6,
     sm: 6,
-    md: 3,
-    lg: 3,
-    xl: 3,
+    md: 6,
+    lg: 4,
+    xl: 4,
   }
 
   const useStyles = makeStyles(theme => ({
@@ -55,49 +59,86 @@ const defaultGridSettings = {
       maxHeight: "80%",
       maxWidth: "80%",
     },
+
+    item: {
+       position: 'relative',
+       height: '100%',
+       padding: 20
+    },
   
-  
+    itemWithIcon: {
+        // textAlign: 'right',
+        // [theme.breakpoints.down("md")]: {
+        //   textAlign: 'center'
+        // }
+    },
+
+    itemWithCatName: {
+        marginTop: 20,
+        color: 'rgba(0,0,0,0.9)',
+        [theme.breakpoints.down("md")]: {
+        //   textAlign: 'center'
+        }
+    },
+
+    itemWithLogo: {
+        position: 'relative',
+        height: '100%',
+        minHeight: 200,
+        display: 'flex',
+        justifyContent: "center",
+        alignItems: "center",
+    }
 }));
 
-const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons}) => {
+const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons, moreInfoLabel}) => {
 
+    const classes = useStyles();
     const dialog = useDialog();
     const [translate] = useTranslate();
     const dialogContents = {
         label: `${labelPrefix}.list.name`, 
         content: translate(`${labelPrefix}.list.description`)
     }
-
+    
     const renderIconOrImage = (image) => {
         if(!image){
             return null
         }
         if(!image.startsWith("http") &&  image in icons){
-            return React.createElement(icons[image], {style: {width: 100, height: 100}})
+            return React.createElement(icons[image], {style: {width: '100%', maxWidth: 100, height: 'auto'}})
         }
 
         return <Avatar variant="square" src={resizeCloudinaryImage(image, 300, 400)} />
     }
 
-    return ( <Grid container spacing={2} onClick={()=>dialog(dialogContents)}>
-    <Grid item xl={6} lg={6} md={12}>{renderIconOrImage(image)}</Grid>
-    <Grid item xl={6} lg={6} md={12}><TicketHeader baseLabel={labelPrefix} /></Grid>
-    <Grid item xl={12} lg={12} md={12}><TicketOwnersList detailsUrl={detailsUrl} data={owners} /></Grid>
-    </Grid>)
+    return ( 
+    
+    <Card variant="outlined" className={classes.item}>
+    <Grid container spacing={2} direction="column" alignItems="center">
+    <Grid item className={classes.itemWithIcon}>{renderIconOrImage(image)}</Grid>
+    <Grid item className={classes.itemWithCatName}><TicketHeader baseLabel={labelPrefix} /></Grid>
+    <Grid item className={classes.itemWithLogo}>
+        <TicketOwnersList detailsUrl={detailsUrl} owners={owners} moreInfoLabel={moreInfoLabel} />
+    </Grid>
+    </Grid>
+    </Card>)
 }
 
 
 const TicketHeader = ({baseLabel}) => {
+
+    const classes = useStyles();
     const [translate] = useTranslate();
-    return (<Typography variant="h4">{translate(`${baseLabel}.list.name`)}</Typography>)
+    return (<Typography className={classes.imageTitle} variant="h4">{translate(`${baseLabel}.list.name`)}</Typography>)
 }
 
 
 
 
-const TicketOwnersList = ({detailsUrl, owners}) => {
+const TicketOwnersList = ({detailsUrl, owners, moreInfoLabel}) => {
     if( !Array.isArray(owners) || isEmpty(owners)){
-        return <NoTicketOwner href={detailsUrl} />
+        return <NoTicketOwner href={detailsUrl} label={moreInfoLabel} />
     }
     return owners.map(owner => <TicketOwner key={owner.id} logotype={owner.profile.logotype_cdn}  />)
 }
@@ -106,12 +147,12 @@ const TicketOwner = ({logotype, fluid=true}) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.container}>
+       
         <Avatar variant="square" src={ resizeCloudinaryImage(logotype, 300, 300) } classes={{
             root: fluid? classes.avatarContainerFluid: classes.avatarContainer,
             img: classes.avatarImg
           }}/>
-        </div>
+      
     )
 }
 
@@ -121,7 +162,7 @@ const NoTicketOwner = (props) => <MyButton color="primary" {...props} />
 
 const WidgetTicketOwners = ({setting="sponsors", icons={} }) => {
 
-    const {ticket_group_id, ticket_ids, grid, wrapperProps} = useSettings(setting);
+    const {ticket_group_id, ticket_ids, grid, wrapperProps, moreInfoLabel} = useSettings(setting);
     const {data} = useDatasource({
         data: {
             resource: "ticketowners",
@@ -131,9 +172,9 @@ const WidgetTicketOwners = ({setting="sponsors", icons={} }) => {
 
     const _gridSettings = Object.assign({}, defaultGridSettings, grid)
 
-    return (<Wrapper {...wrapperProps}><Grid container spacing={4}>{
+    return (<Wrapper {...wrapperProps}><Grid container spacing={2} alignItems="stretch"   >{
         data.map(item => <Grid key={item.id} item {..._gridSettings}>
-        <TicketDetails detailsUrl={item.details_url} labelPrefix={item.translation_asset_id} image={item.thumbnail} owners={item.owners} icons={icons} />
+        <TicketDetails moreInfoLabel={moreInfoLabel} detailsUrl={item.details_url} labelPrefix={item.translation_asset_id} image={item.thumbnail} owners={item.owners} icons={icons} />
         </Grid>)
     }</Grid></Wrapper>)
     
