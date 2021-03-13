@@ -14,8 +14,8 @@ const TranslationProvider = ({ locale, messages, children }) => {
 
   const polyglot = new Polyglot({
     locale,
-    phrases: locale in messages ? messages[locale] : messages[defaultLocale || "en"]
-    //onMissingKey : () => ()
+    phrases: locale in messages ? messages[locale] : messages[defaultLocale || "en"],
+    onMissingKey: (key, options, locale) => key
   });
 
   return (
