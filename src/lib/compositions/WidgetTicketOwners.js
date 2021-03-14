@@ -5,10 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import Wrapper from '../components/Wrapper'
 import {useTranslate} from '../i18n'
 import Typography from '@material-ui/core/Typography'
-
 import Box from '@material-ui/core/Box'
-import Card from '@material-ui/core/Card'
-
 import Avatar from '@material-ui/core/Avatar'
 import isEmpty from 'lodash/isEmpty'
 import MyButton from '../components/MyButton'
@@ -88,6 +85,13 @@ const defaultGridSettings = {
         display: 'flex',
         justifyContent: "center",
         alignItems: "center",
+    },
+
+    imageTitle: {
+        fontSize: theme.typography.pxToRem(20),
+        fontWeight: 900,
+        padding: '2px 10px',
+        backgroundColor: 'gold',
     }
 }));
 
@@ -106,7 +110,7 @@ const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons, moreInfoL
             return null
         }
         if(!image.startsWith("http") &&  image in icons){
-            return React.createElement(icons[image], {style: {width: '100%', maxWidth: 100, height: 'auto'}})
+            return React.createElement(icons[image], {style: {width: '100%', maxWidth: 70, height: 'auto'}})
         }
 
         return <Avatar variant="square" src={resizeCloudinaryImage(image, 300, 400)} />
@@ -114,7 +118,7 @@ const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons, moreInfoL
 
     return ( 
     
-    <Card variant="outlined" className={classes.item}>
+    <Box  className={classes.item}>
     <Grid container spacing={2} direction="column" alignItems="center">
     <Grid item className={classes.itemWithIcon}>{renderIconOrImage(image)}</Grid>
     <Grid item className={classes.itemWithCatName}><TicketHeader baseLabel={labelPrefix} /></Grid>
@@ -122,7 +126,7 @@ const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons, moreInfoL
         <TicketOwnersList detailsUrl={detailsUrl} owners={owners} moreInfoLabel={moreInfoLabel} />
     </Grid>
     </Grid>
-    </Card>)
+    </Box>)
 }
 
 
@@ -138,7 +142,7 @@ const TicketHeader = ({baseLabel}) => {
 
 const TicketOwnersList = ({detailsUrl, owners, moreInfoLabel}) => {
     if( !Array.isArray(owners) || isEmpty(owners)){
-        return <NoTicketOwner href={detailsUrl} label={moreInfoLabel} />
+        return <NoTicketOwner href={detailsUrl} label={moreInfoLabel} color="secondary" />
     }
     return owners.map(owner => <TicketOwner key={owner.id} logotype={owner.profile.logotype_cdn}  />)
 }
