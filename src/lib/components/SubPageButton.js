@@ -1,16 +1,21 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { translate } from '../i18n';
-import Link from 'next/link'
+import { useTranslate } from '../i18n';
+import {useRouter} from 'next/router'
 
 
-const SubPageButton = ({ label, translate, locale, target, ...buttonProps }) => (
+const SubPageButton = ({ label, target, ...buttonProps }) => {
 
-<Link {...target}>
-<Button {...buttonProps} >{translate(label)}</Button>
-</Link>
+  const [translate] = useTranslate();
+  const {push} = useRouter();
 
-);
+  if(!("onClick" in target)){
+    target.onClick = () => push(target.href)
+  }
+
+  return (<Button {...target} {...buttonProps} >{translate(label)}</Button>);
+
+}
 
 SubPageButton.defaultProps = {
   target : {href : "/no-target-defined"},
@@ -20,4 +25,4 @@ SubPageButton.defaultProps = {
   type : "button",
 };
 
-export default translate(SubPageButton);
+export default SubPageButton;
