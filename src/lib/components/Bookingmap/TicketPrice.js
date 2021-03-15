@@ -1,20 +1,24 @@
 import React from 'react';
-import { translate } from '../../i18n';
-import _get from 'lodash/get';
+import { useTranslate } from '../../i18n';
+import get from 'lodash/get';
+import {useRouter} from 'next/router'
 
 
-const TicketPrice = ({ price, locale, translate }) => {
-
-    const currency = locale === "pl" ? "pln" : "eur"
-
-    return `${_get(price, locale, "en")} ${translate(
-      `common.currencies.${currency}`
-    )} ${translate('common.prices.net')}`;
+const localeCurrencyMapping = {
+    pl: "PLN",
+    de: "EUR",
+    en: "EUR"
 }
 
-TicketPrice.defaultProps = {
-    price : {}
+const TicketPrice = ({ price = {} }) => {
+
+    const {locale, defaultLocale, locales} = useRouter();
+    const [translate] = useTranslate();
+
+    const localeLabel = locale in localeCurrencyMapping? localeCurrencyMapping[locale].toUpperCase(): "EUR"
+
+    return `${get(price, locale, "en")} ${localeLabel} ${translate('common.prices.net')}`;
 }
 
-export default translate(TicketPrice)
+export default TicketPrice
 
