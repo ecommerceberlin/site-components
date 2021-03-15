@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar'
 import isEmpty from 'lodash/isEmpty'
 import MyButton from '../components/MyButton'
 import { makeStyles } from '@material-ui/core/styles';
+import TicketImage from '../components/TicketImage'
 
 const defaultGridSettings = {
     xs: 6,
@@ -95,7 +96,7 @@ const defaultGridSettings = {
     }
 }));
 
-const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons, moreInfoLabel}) => {
+const TicketDetails = ({labelPrefix, image, detailsUrl, owners, moreInfoLabel}) => {
 
     const classes = useStyles();
     const dialog = useDialog();
@@ -105,22 +106,12 @@ const TicketDetails = ({labelPrefix, image, detailsUrl, owners, icons, moreInfoL
         content: translate(`${labelPrefix}.list.description`)
     }
     
-    const renderIconOrImage = (image) => {
-        if(!image){
-            return null
-        }
-        if(!image.startsWith("http") &&  image in icons){
-            return React.createElement(icons[image], {style: {width: '100%', maxWidth: 70, height: 'auto'}})
-        }
-
-        return <Avatar variant="square" src={resizeCloudinaryImage(image, 300, 400)} />
-    }
-
+   
     return ( 
     
     <Box  className={classes.item}>
     <Grid container spacing={2} direction="column" alignItems="center">
-    <Grid item className={classes.itemWithIcon}>{renderIconOrImage(image)}</Grid>
+    <Grid item className={classes.itemWithIcon}>{image}</Grid>
     <Grid item className={classes.itemWithCatName}><TicketHeader baseLabel={labelPrefix} /></Grid>
     <Grid item className={classes.itemWithLogo}>
         <TicketOwnersList detailsUrl={detailsUrl} owners={owners} moreInfoLabel={moreInfoLabel} />
@@ -178,7 +169,7 @@ const WidgetTicketOwners = ({setting="sponsors", icons={} }) => {
 
     return (<Wrapper {...wrapperProps}><Grid container spacing={2} alignItems="stretch"   >{
         data.map(item => <Grid key={item.id} item {..._gridSettings}>
-        <TicketDetails moreInfoLabel={moreInfoLabel} detailsUrl={item.details_url} labelPrefix={item.translation_asset_id} image={item.thumbnail} owners={item.owners} icons={icons} />
+        <TicketDetails moreInfoLabel={moreInfoLabel} detailsUrl={item.details_url} labelPrefix={item.translation_asset_id} image={<TicketImage icons={icons} data={item} />} owners={item.owners} />
         </Grid>)
     }</Grid></Wrapper>)
     

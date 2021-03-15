@@ -9,7 +9,7 @@ import {resizeCloudinaryImage, useDatasource, useSettings} from '../helpers'
 import MyTypography from '../components/MyTypography'
 import TicketPrice from  '../components/Bookingmap/TicketPrice'
 import TicketBuyButton from '../components/Bookingmap/TicketBuyButton'
-
+import TicketImage from '../components/TicketImage'
 
 const PremiumTicketBody = (props) => {
 
@@ -19,7 +19,8 @@ const PremiumTicketBody = (props) => {
     resolveLabel, 
     resolveSecondaryLabel, 
     resolveText,
-    setting
+    setting,
+    icon
   } = props;
 
   if(! "image" in ticket){
@@ -27,7 +28,7 @@ const PremiumTicketBody = (props) => {
     return null
   }
 
-  const {disabledBuying} = useSettings(setting)
+  const {disabledBuying, disabledTicketIds = []} = useSettings(setting)
 
   return (
 
@@ -39,16 +40,9 @@ const PremiumTicketBody = (props) => {
     <div style={{ marginTop: 80 }}>
       <TwoColsLayout
         left={
-          <img
-            src={resizeCloudinaryImage(
-              ticket.image,
-              800,
-              800,
-            )}
-            alt=""
-            style={{ width: '100%' }}
-          />
+          icon
         }
+        leftCentered={true}
         right={
           <div style={{ marginLeft: 20 }}>
             <Markdown
@@ -61,12 +55,12 @@ const PremiumTicketBody = (props) => {
               </MyTypography>
             </div>
   
-            {!disabledBuying && <TicketBuyButton
+            {!disabledBuying && ticket.bookable && !disabledTicketIds.includes(ticket.id) ? <TicketBuyButton
               id={ticket.id}
               bookable={ticket.bookable}
               label="common.buy"
               right={<Chatlio label="common.request_more_info" />}
-            />}
+            />: null}
 
           </div>
         }
@@ -83,7 +77,9 @@ PremiumTicketBody.defaultProps = {
   ticket : {}
 }
 
-const WidgetPremiumTicket = ({setting, name, ticket, resolve, ...rest}) => {
+const WidgetPremiumTicket = ({setting, name = "", icons, ticket={}, resolve, ...rest}) => {
+
+  const settings = useSettings(setting);
 
   const {alltickets} = useDatasource({
     alltickets: {
@@ -91,24 +87,19 @@ const WidgetPremiumTicket = ({setting, name, ticket, resolve, ...rest}) => {
     }
   })
 
-  if(ticket && "id" in ticket && ticket.id){
-    return <PremiumTicketBody setting={setting} ticket={ticket} {...rest} />
-  }else{
-    const _ticket = (alltickets || []).find(t => resolve(t, name))
-    return <PremiumTicketBody setting={setting} ticket={_ticket} {...rest} />
-  }
+  const data = ticket && "id" in ticket && ticket.id? ticket: (alltickets || []).find(t => resolve(t, name))
+
+  return <PremiumTicketBody {...rest} setting={setting} ticket={data} icon={<TicketImage data={data} path="image"  icons={icons} maxWidth={300} />} />
+  
 } 
 
 WidgetPremiumTicket.defaultProps = {
   setting: "premium",
   resolve : function(ticket, name){return ticket.translation_asset_id.indexOf(name)>-1},
-  name: "",
-  ticket: {},
   first: true,
   resolveLabel: (ticket) => `${ticket.translation_asset_id}.name`,
   resolveSecondaryLabel: (ticket) => `${ticket.translation_asset_id}.description`,
   resolveText: (ticket) => `${ticket.translation_asset_id}.text`
-
 }
 
 export default WidgetPremiumTicket

@@ -13,6 +13,9 @@ import TicketBuyButton from './Bookingmap/TicketBuyButton'
 import {useSettings, resizeCloudinaryImage} from '../helpers'
 import SubPageButton from './SubPageButton';
 import MyTypography from './MyTypography';
+import TicketImage from './TicketImage'
+import {Centered} from './MyLayouts'
+
 
 const useStyles = makeStyles(theme => ({
 
@@ -46,31 +49,27 @@ const useStyles = makeStyles(theme => ({
 }))
   
 
-const Ticket = ({ setting="premium", data }) => {
+const Ticket = ({ icon = null, setting="premium", data }) => {
     
   const [translate, locale] = useTranslate(); 
   const {disabledBuying, disabledTicketIds = []} = useSettings(setting);
   const classes = useStyles();
   const router = useRouter();
 
-  const jumpToDetails = data.details_url ? {
+  const hasDetailsPage = "details_url" in data && data.details_url.startsWith("/")
+
+  const jumpToDetails = hasDetailsPage ? {
       href: data.details_url,
       onClick: () => router.push(data.details_url)
   }: {}
 
   return (<Card className={data.bookable ? classes.card : classes.cardDisabled }>
-      <CardActionArea {...jumpToDetails} className={classes.cardActionArea}>
+      <CardActionArea className={classes.cardActionArea} {...jumpToDetails}>
 
         {!data.bookable ? <div className={classes.soldout} /> : null}
           
-        <CardMedia
-          component="img"
-          alt=""
-          className={classes.media}
-          height="140"
-          image={resizeCloudinaryImage(data.thumbnail, 500, 500)}
-          title=""
-        />
+        <Centered style={{minHeight: 200, justifyContent: 'center'}}> {icon} </Centered>
+
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">{translate(`${data.translation_asset_id}.name`)}</Typography>
           <Typography component="p">
@@ -82,7 +81,10 @@ const Ticket = ({ setting="premium", data }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      {disabledBuying && <SubPageButton color="default" variant="outlined" target={jumpToDetails} />}
+
+    
+         
+         {hasDetailsPage && <SubPageButton color="default" variant="text" target={jumpToDetails} />} 
       {!disabledBuying && data.bookable && !disabledTicketIds.includes(data.id) ?      
             <TicketBuyButton 
                 label="common.buy" 
@@ -90,9 +92,12 @@ const Ticket = ({ setting="premium", data }) => {
                 id={data.id} 
                 nonBookable={<span></span>} 
                 right={
-                    data.details_url.length ? <SubPageButton color="default" variant="outlined" target={jumpToDetails} /> : null
+                    hasDetailsPage ? <SubPageButton color="default" variant="contained" target={jumpToDetails} /> : null
                 }    
             /> : null}
+        
+
+   
 
       </CardActions>
     </Card>

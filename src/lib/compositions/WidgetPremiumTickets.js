@@ -3,6 +3,7 @@ import {useSettings, useDatasource} from '../helpers'
 import Wrapper from '../components/Wrapper'
 import Grid from '@material-ui/core/Grid';
 import Ticket from '../components/Ticket';
+import TicketImage from '../components/TicketImage';
 
 const defaultWrapperProps = {
     first: true,
@@ -17,7 +18,7 @@ const defaultGridProps = {
     xl: 3 
 }
 
-const WidgetPremiumTickets = ({setting = "premium"}) => {
+const WidgetPremiumTickets = ({icons = {}, setting = "premium"}) => {
 
     const {ticketgroups, wrapperProps, gridProps} = useSettings(setting);
     const {alltickets} = useDatasource({
@@ -35,7 +36,7 @@ const WidgetPremiumTickets = ({setting = "premium"}) => {
 
     return (<Wrapper {..._wrapperProps}><Grid container spacing={3}>{
         alltickets.map(ticket => (<Grid key={ticket.id} item {..._gridProps}>
-        <Ticket data={ticket} setting={setting} />
+        <Ticket data={ticket} icon={<TicketImage data={ticket} icons={icons} />} setting={setting} />
         </Grid>))
     }</Grid></Wrapper>)
 }
