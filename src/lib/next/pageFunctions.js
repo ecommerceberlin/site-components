@@ -8,6 +8,11 @@ import get from 'lodash/get'
 
 async function configure(props, config){
 
+  const project = `${process.env.NEXT_PUBLIC_PROJECT}`
+
+  if(!project || project.length < 5 || !project.includes(".")){
+    throw 'NEXT_PUBLIC_PROJECT missing!';
+  }
   /**
    *  we should pass props if we want to handle new locale properly
    * */

@@ -1,6 +1,6 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
-import _get from 'lodash/get';
+import get from 'lodash/get';
 
 import {
     TwoColsLayout as Section,
@@ -16,8 +16,7 @@ import {useSettings} from '../helpers'
 import SingleRecord from '../datasources/SingleRecord'
 
 
-const getSpeakerAvatar = (profile) => _get(profile, 'avatar_cdn');
-
+const getSpeakerAvatar = (profile) => get(profile, 'avatar_cdn');
 
 const defaultProps = {
     path: "/speakers",
@@ -62,8 +61,8 @@ const WidgetPresenter = ({setting="speakers", id, ...props}) => {
                 right={
                     <div>
                         <Presentation
-                        title={profile.presentation_title}
-                        description={profile.presentation_description}
+                        title={get(profile, "presentation_title")}
+                        description={get(profile, "presentation_description")}
                         />
                         <Divider />
                         <PresenterName data={profile} />
