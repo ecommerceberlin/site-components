@@ -3,7 +3,7 @@ import React from 'react';
 import Wrapper from '../components/Wrapper'
 import People from '../components/People'
 
-import {useSettings, useDatasource, filterFuncFromArr} from '../helpers'
+import {useSettings, useDatasource} from '../helpers'
 
 const defaultProps = {
 
@@ -34,7 +34,7 @@ const WidgetPresenters = ({setting, ...props}) => {
         data: {
             resource: "presenters",
             filters: {
-                filter: filterFuncFromArr(filter),
+                filter: filter,
                 limit: limit
             }
         }
