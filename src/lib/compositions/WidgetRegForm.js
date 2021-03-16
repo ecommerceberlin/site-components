@@ -15,7 +15,6 @@ const defaultProps = {
     dense: false,
     first: false
   },
-  
   links: [],
   email_template : "",
   options: {},
@@ -24,13 +23,12 @@ const defaultProps = {
   data : {},
   right: null,
   token: null,
-
   fields: [
     {name: "email", required: true},
   ],
-
   start: ['email'],
-  rightShadowed: false
+  rightShadowed: false,
+  report: ""
 };
 
 const useStyles = makeStyles(theme => ({
@@ -71,7 +69,8 @@ const WidgetRegForm = ({setting, ...props}) => {
       onSuccess,
       onError,
       wrapperProps,
-      api
+      api,
+      report
     } = Object.assign({}, defaultProps, settings, props)
 
     if(isEmpty(fields)){
@@ -103,8 +102,9 @@ const WidgetRegForm = ({setting, ...props}) => {
                 actionStartedProps={actionStartedProps}
                 onSuccess={onSuccess}
                 onError={onError}
+                report={report}
               />
-              
+
             </Centered>
              
             </Grid>
