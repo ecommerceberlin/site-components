@@ -118,7 +118,7 @@ Wrapper.defaultProps = {
   color: '#ffffff',
   links: [],
   dense: false,
-  typography: 'H2C',
+  typography: 'H2CB',
   style: {},
   classes: {}
 };

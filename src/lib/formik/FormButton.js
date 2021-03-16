@@ -56,9 +56,9 @@ const FormButton = props => {
   return (
     <div style={{ textAlign: 'right' }}>
       <Button
-        variant={isValid ? 'contained' : 'contained'}
-        color={isValid ? 'primary' : 'secondary'}
-        disabled={isSubmitting}
+        variant='outlined'
+        color='secondary'
+        disabled={!isValid || isSubmitting}
         onClick={handleSubmit}
       >
         {translate(label)}

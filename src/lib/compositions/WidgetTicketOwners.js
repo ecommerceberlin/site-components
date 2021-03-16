@@ -92,7 +92,7 @@ const defaultGridSettings = {
         fontSize: theme.typography.pxToRem(20),
         fontWeight: 900,
         padding: '2px 10px',
-        backgroundColor: 'gold',
+        backgroundColor: '#f0f2f5',
     }
 }));
 

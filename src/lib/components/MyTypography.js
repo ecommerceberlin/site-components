@@ -80,7 +80,7 @@ const styles = theme => ({
   },
 
   bold: {
-    fontWeight: 500
+    fontWeight: 900
   },
 
   section: {
