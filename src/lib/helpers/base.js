@@ -78,27 +78,31 @@ export const filterFuncFromArr = (arr) => {
       switch(comparator){
         case "=":
         case "==":
+        case "equals":
           if(value != expectedValue){
             tests = false
           }
         break
         case ">":
+        case "gt":
           if(value <= expectedValue){
             tests = false
           }
         break
         case "<":
+        case "lt":
           if(value >= expectedValue){
             tests = false
           }
         break
         case "contains":
+        case "has":
         if(!value.includes(expectedValue)){
           tests = false
         }
         break
-
         case "length":
+        case "minLength":
         if(value.length <= expectedValue){
           tests = false
         }
@@ -117,7 +121,8 @@ export const processArrayData = (data = [], { sort = null, filter = null, limit 
     return [];
   }
 
-  if (filter && typeof filter === "function") {
+  if(filter){
+    filter = filterFuncFromArr(filter)
     data = data.filter(row => filter(row));
   }
 
