@@ -6,6 +6,7 @@ import { StepForm } from '../formik';
 import { useSettings } from '../helpers'
 import isString from 'lodash/isString'
 import isEmpty from 'lodash/isEmpty'
+import {Centered} from '../components/MyLayouts'
 
 const defaultProps = {
   wrapperProps: {
@@ -36,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 
   image : {
     width : "100%",
-  
   },
 
   rightShadowed: {
@@ -85,7 +85,9 @@ const WidgetRegForm = ({setting, ...props}) => {
         <Wrapper {...wrapperProps}>
           <Grid container spacing={3} justify="space-between">
             <Grid item xs={12} sm={12} md={right? 7: 12} lg={right? 7: 12} xl={right? 7: 12}>
-              <StepForm
+            <Centered>
+
+               <StepForm
                 baseLabel={ baseLabel }
                 data={ data }
                 ticketId={ ticket_id }
@@ -102,6 +104,9 @@ const WidgetRegForm = ({setting, ...props}) => {
                 onSuccess={onSuccess}
                 onError={onError}
               />
+              
+            </Centered>
+             
             </Grid>
             {right && <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
               {isString(right)? <img src={ right } className={rightShadowed? classes.rightShadowed: classes.image}  /> : right}

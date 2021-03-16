@@ -149,7 +149,7 @@ class StepForm extends React.Component {
 
     return (
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{maxWidth: 700, width: "100%"}}>
       <Typography template="legend" label={(legend || `${baseLabel}.form.intro`)} />
       {showStartFields ? startedFields.map( (data, idx) => this.renderField(data, idx)) : null}
       {(this.isStarted() || !showStartFields) && filteredFields.length ? filteredFields.map( (data, idx) =>  this.renderField(data, idx)) : null}
