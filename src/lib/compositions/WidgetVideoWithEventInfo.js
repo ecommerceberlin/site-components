@@ -7,7 +7,8 @@ import MyTypography from '../components/MyTypography'
 import Settings from '../datasources/Settings';
 import WidgetEventInfo from './WidgetEventInfo'
 import {useTranslate} from '../i18n'
-import {useSettings} from '../helpers'
+import {useSettings, resizeCloudinaryImage} from '../helpers'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,17 +23,32 @@ const useStyles = makeStyles(theme => ({
   },
 
   eventinfo : {
-    marginTop : '5vh',
+    marginTop : '4vh',
+  },
+
+  insert: {
+    marginTop: 25,
+    maxWidth: 300,
+    maxHeight: 200,
+
+    [theme.breakpoints.down("md")]: {
+      maxWidth: 220,
+      maxHeight: 150
+    }
   }
 }))
 
+const defaultProps = {
+  heading : "event.claim",
+  subheading : "event.description",
+}
 
 const WidgetVideoWithEventInfo = ({setting = "hero", ...props}) => {
 
   const classes = useStyles();
   const [translate] = useTranslate();
   const settings = useSettings(setting)
-  const {background, videoSrc, overlay, template, heading, subheading} = Object.assign({}, props, settings)
+  const {background, videoSrc, overlay, template, heading, subheading, insert} = Object.assign({}, defaultProps, settings, props)
 
   return (<FsVideo
         setting={setting}
@@ -43,16 +59,12 @@ const WidgetVideoWithEventInfo = ({setting = "hero", ...props}) => {
       <div className={classes.container}>
         <MyTypography template={template} label={ heading } />
         <MyTypography template="subhero" label={ subheading } />
+        {insert && <img src={resizeCloudinaryImage(insert, 300, 300)} className={classes.insert} alt="" />}
         <div className={classes.eventinfo}>
           <WidgetEventInfo setting={setting} />
         </div>
       </div>
       </FsVideo>)
-}
-
-WidgetVideoWithEventInfo.defaultProps = {
-  heading : "event.claim",
-  subheading : "event.description",
 }
 
 export default WidgetVideoWithEventInfo
