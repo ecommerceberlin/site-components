@@ -85,7 +85,7 @@ const Ticket = ({ icon = null, setting="premium", data }) => {
     
          
          {hasDetailsPage && <SubPageButton color="default" variant="text" target={jumpToDetails} />} 
-      {!disabledBuying && data.bookable && !disabledTicketIds.includes(data.id) ?      
+      {!disabledBuying && data.bookable && !(disabledTicketIds || []).includes(data.id) ?      
             <TicketBuyButton 
                 label="common.buy" 
                 bookable={data.bookable} 

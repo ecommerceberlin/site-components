@@ -55,7 +55,7 @@ const PremiumTicketBody = (props) => {
               </MyTypography>
             </div>
   
-            {!disabledBuying && ticket.bookable && !disabledTicketIds.includes(ticket.id) ? <TicketBuyButton
+            {!disabledBuying && ticket.bookable && !(disabledTicketIds || []).includes(ticket.id) ? <TicketBuyButton
               id={ticket.id}
               bookable={ticket.bookable}
               label="common.buy"
