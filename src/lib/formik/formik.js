@@ -34,10 +34,11 @@ export default withFormik({
       tickets: "ticketId" in props && props.ticketId? { [props.ticketId]: 1 } : {},
       token: "token" in props? props.token: null,
       role: "role" in props? props.role: null,
-      report: "report" in props? props.report: false,
-      template : "template" in props ? props.template : "pass template by props or settings",
+      report: "report" in props? props.report: "",
+      template : "template" in props ? props.template : "",
       locale : "locale" in props ? props.locale : "",
-      cc : "cc" in props ? props.cc : "" 
+      cc : "cc" in props ? props.cc : "",
+      bcc : "bcc" in props ? props.bcc : ""  
     }
 
     setSubmitting(true);
