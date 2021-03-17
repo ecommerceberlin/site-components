@@ -15,6 +15,9 @@ export * from './settings/redux/actions'
 export * from './heads'
 
 export { default as get } from 'lodash/get'
+export { default as isEmpty } from 'lodash/isEmpty'
+export { default as isObject } from 'lodash/isObject'
+
 export { default as Divider } from '@material-ui/core/Divider'
 export { connect, useDispatch, useSelector } from 'react-redux'
 export { default as fetch } from 'isomorphic-unfetch'

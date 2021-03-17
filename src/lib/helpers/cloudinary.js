@@ -64,9 +64,9 @@ export const getPresenterFbAd = (
     const avatar = getCloudinaryAsset(_get(participant, "avatar_cdn")) || getCloudinaryAsset(_get(participant, "avatar"));
     const logotype = getCloudinaryAsset(_get(participant, "logotype_cdn"), true) || getCloudinaryAsset(_get(participant, "logotype"), true)
 
-    const avatarTrans = `c_fit,h_500,q_90,r_max,w_500,e_grayscale`;
+    const avatarTrans = `c_fit,h_500,q_90,r_max,w_500`;
     const templateTrans = `g_center,u_${template},x_0,y_200`;
-    const logotypeTrans = `c_fit,g_center,l_${logotype},w_400,h_250,x_0,y_250`;
+    const logotypeTrans = `c_fit,g_center,l_${logotype},w_600,h_250,x_0,y_220`;
 
     return `https://res.cloudinary.com/eventjuicer/image/upload/${avatarTrans}/${templateTrans}/${logotypeTrans}/${avatar}.png`;
     

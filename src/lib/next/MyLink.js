@@ -1,71 +1,44 @@
-import React from 'react';
-import Link from 'next/link';
-import compose from 'recompose/compose';
-import { withStyles } from '@material-ui/core/styles';
-//import classNames from 'classnames'
-//import MyTypography from './MyTypography';
-import { translate } from '../i18n';
-import Button from '@material-ui/core/Button';
 
-const styles = {
-  dumb: {},
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import { useTranslate } from '../i18n';
+import { useRouter } from 'next/router'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
 
   textLink: {
     textDecoration: 'none',
     color: 'rgba(0, 0, 0, 0.87)'
   }
-};
 
-const MyLink = ({
-  as,
-  label,
-  href,
-  classes,
-  translate,
-  variant,
-  color,
-  size,
-  icon,
-  className,
-  disabled,
-  children
-}) => {
+}))
 
 
-  if(!href){
-    return null
+const MyButton = ({ label, href, className, ...rest }) => {
+
+  const [translate] = useTranslate();
+  const router = useRouter();
+  const classes = useStyles();
+
+  if(href && !href.startsWith("http")){
+    rest.onClick = () => router.push(href)
   }
-
-
+  
   return (
-    <Link as={as} href={href}>
-      <Button
-        size={size}
-        variant={variant}
-        color={color}
-        disabled={disabled}
-        className={className}>
-        {label ? translate(label) : children}
-      </Button>
-    </Link>
+    <Button href={href} {...rest} className={classes[className]}>{translate(label)}</Button>
   );
-};
+}
 
-MyLink.defaultProps = {
-  label: null,
-  href : "/",
+MyButton.defaultProps = {
   variant: 'text',
+  label: "link?",
+  href: "/",
   size: 'small',
   color: 'default',
   icon: false,
-  disabled : false
+  disabled: false,
+  className: "textLink"
 };
 
-
-
-const enhance = compose(
-  translate,
-  withStyles(styles)
-);
-
-export default enhance(MyLink);
+export default MyButton;
