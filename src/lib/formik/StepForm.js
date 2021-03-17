@@ -36,8 +36,6 @@ class StepForm extends React.Component {
 
     let difference = prefilled.filter(x => !(start || []).includes(x));
 
-    console.log(difference, params)
-
     if(difference.length || prefilled.length){
       setTouched(params);
     }
