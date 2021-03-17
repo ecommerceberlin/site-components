@@ -15,7 +15,7 @@ import FormSuccess from './FormSuccess';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { formActionStarted, formActionFinished } from './redux'
-import { addToken } from '../helpers';
+import { addToken, fullUrl, getUrlParams } from '../helpers';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MyButton from '../components/MyButton'
 // import shallowEqual from 'recompose/shallowEqual'
@@ -26,21 +26,20 @@ class StepForm extends React.Component {
   componentDidMount(){
 
     const {start, router, setValues, setTouched, values} = this.props;
+    const {asPath} = router;
+    const url = fullUrl(asPath)
+    const params = getUrlParams(asPath)
 
-    const {query} = router;
+    const prefilled = Object.keys(params);
 
-    const prefilled = Object.keys(query);
-    
-    if(prefilled.length){
+    setValues({...values, ...params, url})
 
-      setValues({...values, ...query})
+    let difference = prefilled.filter(x => !(start || []).includes(x));
 
-      let difference = prefilled.filter(x => !(start || []).includes(x));
-  
-      if(difference.length || prefilled.length > 1){
-        setTouched(query);
-      }
+    console.log(difference, params)
 
+    if(difference.length || prefilled.length){
+      setTouched(params);
     }
 
   }

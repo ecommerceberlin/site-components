@@ -1,10 +1,10 @@
 import { slug } from './text';
 
 export const getUrlParams = (search = '') => {
-  if (typeof search !== 'string' || search.charAt(0) !== '/') {
+  if (typeof search !== 'string' || !search.includes("?")) {
     return {};
   }
-
+  //search.charAt(0) !== '/' 
   const hashes = search.slice(search.indexOf(`?`) + 1).split(`&`);
   return hashes.reduce((acc, hash) => {
     const [key, val] = hash.split(`=`);
