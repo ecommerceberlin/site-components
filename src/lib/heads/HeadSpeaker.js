@@ -19,19 +19,21 @@ const HeadVote = ({setting="speakers", id, children, ...props}) => {
 
         <SingleRecord endpoint="presenters" id={id}>{({profile, ...record}) => {
 
+            const translationData =  {
+                name: getSpeakerName(profile),
+                presenter: getSpeakerName(profile),
+                cname2: _get(profile, 'cname2'),
+                position: _get(profile, 'position'),
+                presentation_title: _get(profile, 'presentation_title'),
+                presentation_time: _get(profile, 'presentation_time'),
+                presentation_venue: _get(profile, 'presentation_venue'),
+            }
 
-                return (<MyHead
+            return (<MyHead
                     image={getPresenterOgImage(profile, og_template)}
                     url={`${path}/${record.id}`}
-                    titleLabel={['presenters.opengraph.title', { name : getSpeakerName(profile) }]}
-                    descriptionLabel={[
-                    'presenters.opengraph.description',
-                    {
-                        presenter: getSpeakerName(profile),
-                        cname2: _get(profile, 'cname2'),
-                        presentation_title: _get(profile, 'presentation_title')
-                    }
-                    ]}>{children}</MyHead>)
+                    titleLabel={['presenters.opengraph.title', translationData]}
+                    descriptionLabel={['presenters.opengraph.description', translationData]}>{children}</MyHead>)
     
             }
         
