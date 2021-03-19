@@ -161,8 +161,7 @@ class Schedule extends React.PureComponent {
 
         <Grid
           container
-          spacing={10}
-          wrap="nowrap" 
+          spacing={1}
         >
           {this.renderVenues()}
         </Grid>
@@ -170,7 +169,7 @@ class Schedule extends React.PureComponent {
         </Hidden>
 
         {Object.keys(times).map((time, i) => (
-          <Grid key={time} container spacing={10} wrap="nowrap" >
+          <Grid key={time} container spacing={1} >
             {times[time] !== 'presentation' && this.renderBreak(times[time])}
 
             {times[time] === 'presentation' &&

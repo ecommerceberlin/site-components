@@ -1,62 +1,46 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-//import classnames from 'classnames';
-
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-//import CardActions from '@material-ui/core/CardActions';
-
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-//import IconButton from '@material-ui/core/IconButton';
-//import red from '@material-ui/core/colors/red';
 
 
-const styles = theme => ({
-  card: {
-    //  maxWidth: 400,
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    marginBottom: 20,
+    [theme.breakpoints.down("md")]: {
+      marginBottom: 10,
+    }
   },
 
-  actions: {
-    display: 'flex'
-  },
-  // expand: {
-  //   transform: 'rotate(0deg)',
-  //   transition: theme.transitions.create('transform', {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  //   marginLeft: 'auto',
-  // },
-  // expandOpen: {
-  //   transform: 'rotate(180deg)',
-  // },
+ 
   avatar: {
-    //backgroundColor: red[500],
-    height: 80,
-    width: 80
-  }
-});
 
-const ScheduleItemPresenter = ({ classes, title, text, imageSrc, raised }) => {
+    height: 80,
+    width: 80,
+
+    [theme.breakpoints.down("md")]: {
+      height: 50,
+      width: 50,
+    }
+  }
+}));
+
+const ScheduleItemPresenter = ({ title, text, imageSrc }) => {
+
+  const classes = useStyles()
+    
   return (
-    <Card className={classes.card} raised={raised} elevation={raised ? 1 : 0}>
-      <CardHeader
-        avatar={
-          <Avatar
-            aria-label="Presenter"
-            className={classes.avatar}
-            src={imageSrc}
-          />
-        }
-        // action={
-        //   <IconButton>
-        //     <DotsVertical />
-        //   </IconButton>
-        // }
-        title={title}
-        subheader={text}
+    <Grid container spacing={1} className={classes.root} alignItems="center" wrap="nowrap">
+    <Grid item>
+      <Avatar
+        aria-label="Presenter"
+        className={classes.avatar}
+        src={imageSrc}
       />
-    </Card>
+    </Grid>
+    <Grid item>{title} {text}</Grid>
+    </Grid>
   );
 };
 
@@ -64,8 +48,6 @@ ScheduleItemPresenter.defaultProps = {
   raised: false
 };
 
-ScheduleItemPresenter.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
-export default withStyles(styles)(ScheduleItemPresenter);
+
+export default ScheduleItemPresenter

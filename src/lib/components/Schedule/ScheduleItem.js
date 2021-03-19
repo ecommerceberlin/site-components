@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {useDispatch} from 'react-redux'
-import IconButton from '@material-ui/core/IconButton';
+import Chip from '@material-ui/core/Chip';
 import HelpIcon from '@material-ui/icons/Help';
 import classNames from 'classnames'
 import Presentation from './Presentation';
@@ -101,9 +101,11 @@ const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, sh
         time={data.presentation_time}
         venue={data.presentation_venue}
         buttons={[
-          <IconButton key="details" onClick={() => dispatch(dialogShow(dialogData))}>
-            <HelpIcon fontSize="large" />
-          </IconButton>,
+          <Chip 
+            key="details" 
+            label="Info"
+            icon={<HelpIcon />} onClick={() => dispatch(dialogShow(dialogData))}
+          />,
           ...buttons
         ]}
       />}

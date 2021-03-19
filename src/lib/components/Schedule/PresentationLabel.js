@@ -10,7 +10,16 @@ const useStyles = makeStyles(theme => ({
   },
 
   chip: {
-    margin: theme.spacing(1)
+    marginRight: 15,
+    [theme.breakpoints.down("md")]: {
+      marginRight: 5,
+    }
+  },
+
+  stageLabel: {
+    [theme.breakpoints.down("md")]: {
+      display: 'none'
+    }
   },
 
   venue: {
@@ -26,13 +35,18 @@ const PresentationLabel = ({ time="", venue="", buttons = null }) => {
 
   return (
     <div className={classes.root}>
-      <Chip label={time} className={classes.chip} />
+      <Chip 
+        label={time} 
+        className={classes.chip} 
+        variant="outlined"
+      />
       <Chip
-        label={`${translate("common.stage")} ${venue}`}
+        label={<><span className={classes.stageLabel}>{`${translate("common.stage")} `}</span>{venue}</>}
         className={classes.chip}
         classes={{
           root: classes.venue
         }}
+        variant="outlined"
       />
       {buttons}
     </div>

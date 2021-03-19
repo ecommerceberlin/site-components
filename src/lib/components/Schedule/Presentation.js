@@ -6,21 +6,21 @@ import Typography from '../MyTypography';
 
 const styles = theme => ({
   root: {
-    marginBottom: 10
+    marginTop: 10,
+    marginBottom: 15,
+    marginRight: 20,
+    [theme.breakpoints.down("md")]: {
+      marginTop: 5,
+      marginBottom: 5,
+      marginRight: 5,
+    }
   },
 
   description: {
-    [theme.breakpoints.down('sm')]: {
-      overflow: 'hidden',
-      height: 50,
-      textOverflow: '...'
+    [theme.breakpoints.down('md')]: {
+    
     },
 
-    [theme.breakpoints.only('md')]: {
-      overflow: 'hidden',
-      height: 100,
-      textOverflow: '...'
-    }
   }
 });
 
