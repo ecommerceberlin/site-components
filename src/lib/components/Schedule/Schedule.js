@@ -155,7 +155,7 @@ class Schedule extends React.PureComponent {
     const iterableVenues = this.getIterableVenues();
    
     return (
-      <div style={{overflowX: "scroll"}}>
+      <div>
     
         <Hidden implementation="css" smDown={true}>
 
