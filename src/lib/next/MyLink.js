@@ -18,11 +18,15 @@ const useStyles = makeStyles(theme => ({
 const MyButton = ({ label, href, className, ...rest }) => {
 
   const [translate] = useTranslate();
-  const router = useRouter();
+  const {push} = useRouter();
   const classes = useStyles();
 
   if(href && !href.startsWith("http")){
-    rest.onClick = () => router.push(href)
+    rest.onClick = (e) => {
+      e.preventDefault()
+      push(href)
+    }
+   
   }
   
   return (

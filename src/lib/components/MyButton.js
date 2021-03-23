@@ -6,10 +6,13 @@ import {useRouter} from 'next/router'
 const MyButton = ({ label, href, ...rest }) => {
 
   const [translate] = useTranslate();
-  const router = useRouter();
+  const {push} = useRouter();
 
   if(href && !href.startsWith("http")){
-    rest.onClick = () => router.push(href)
+    rest.onClick = (e) => {
+      e.preventDefault()
+      push(href)
+    }
   }
   
   return (

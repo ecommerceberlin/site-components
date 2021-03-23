@@ -10,7 +10,10 @@ const SubPageButton = ({ label, target, ...buttonProps }) => {
   const {push} = useRouter();
 
   if(!("onClick" in target)){
-    target.onClick = () => push(target.href)
+    target.onClick = (e) => {
+      e.preventDefault()
+      push(target.href)
+    }
   }
 
   return (<Button {...target} {...buttonProps} >{translate(label)}</Button>);
