@@ -4,11 +4,13 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import  {createTheme, defaultTheme}  from '../material-ui';
 //import { reduxWrapper} from '../redux';
-import * as gtag from '../services/gtag';
+// import * as gtag from '../services/gtag';
 import {TranslationProvider} from '../i18n';
 import Layout from '../layouts/LayoutMain'
-import {pageLoadingStart, pageLoadingEnd, pageActionHide } from '../components/redux'
+
 import { connect } from 'react-redux';
+import GoogleTagManager from '../components/GoogleTagManager'
+import PageLoadingIndicator from '../components/PageLoadingIndicator'
 
 
 export function reportWebVitals(metric) {
@@ -17,44 +19,9 @@ export function reportWebVitals(metric) {
 //  }
 }
 
-const WrappedApp = ({Component, pageProps, head, theme, router, pageLoadingStart, pageLoadingEnd, pageActionHide}) => {
+const WrappedApp = ({Component, pageProps, head, theme, router}) => {
 
-  useEffect(() => {
-    
-    const handleStart = (url) => {
-      
-      if(url !== router.asPath){
-        pageLoadingStart();
-      }
-
-    }
-
-    const handleComplete = (url) => {
-
-      if(url === router.asPath){
-        pageLoadingEnd();
-      }
-
-      gtag.pageview(url)
-    }
-    
-
-    router.events.on('routeChangeStart', handleStart)
-    router.events.on('routeChangeComplete', handleComplete)
-    router.events.on('routeChangeError', handleComplete)
-
-    return () => {
-      router.events.off('routeChangeStart', handleStart)
-      router.events.off('routeChangeComplete', handleComplete)
-      router.events.off('routeChangeError', handleComplete)
-
-
-     // pageActionHide();
-
-    }
-
-  })
-
+ 
 
   useEffect(() => {
       // Remove the server-side injected CSS.
@@ -78,9 +45,17 @@ const WrappedApp = ({Component, pageProps, head, theme, router, pageLoadingStart
     <ThemeProvider theme={createTheme(theme)}>
         <CssBaseline /> 
      
-        <Layout>
-        <Component {...pageProps} />
-        </Layout>
+        
+        
+        <PageLoadingIndicator>
+        <GoogleTagManager>
+         <Layout>
+          <Component {...pageProps} />
+          </Layout>
+        </GoogleTagManager>
+        </PageLoadingIndicator>
+
+      
       </ThemeProvider>
     </TranslationProvider>
 
@@ -92,7 +67,7 @@ WrappedApp.defaultProps = {
   theme: defaultTheme
 }
 
-export default connect(undefined, {pageLoadingStart, pageLoadingEnd, pageActionHide})(WrappedApp);
+export default connect()(WrappedApp)
 
 
 

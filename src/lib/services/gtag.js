@@ -1,26 +1,29 @@
 
-// https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-export const pageview = url => {
-  
-  if(typeof window !== "undefined" && window.gtag){
-    
+/**
+ * 
+ * https://github.com/vercel/next.js/blob/canary/examples/with-google-tag-manager/lib/gtm.js
+*/
 
-    window.gtag('config', process.env.NEXT_PUBLIC_GTM, {
-      page_location: url
-    });
-  }
 
-};
+export const pageview = (url) => {
 
-// https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export const event = ({ action, category, label, value }) => {
+  window.dataLayer = window.dataLayer || [];
 
-  if(typeof window !== "undefined" && window.gtag){
-    window.gtag('event', action, {
-      event_category: category,
-      event_label: label,
-      value: value
-    });
-  }
-  
-};
+  window.dataLayer.push({
+    event: 'pageview',
+    page: url,
+  })
+
+}
+
+export const event = ({action, category, label, value }) => {
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: action,
+    category: category, 
+    label: label, 
+    label: label
+  })
+}
