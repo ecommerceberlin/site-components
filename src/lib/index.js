@@ -19,9 +19,13 @@ export { default as isEmpty } from 'lodash/isEmpty'
 export { default as isObject } from 'lodash/isObject'
 
 export { default as Divider } from '@material-ui/core/Divider'
+export { default as Grid } from '@material-ui/core/Grid'
+export { default as Box } from '@material-ui/core/Box'
+export { default as Avatar } from '@material-ui/core/Avatar'
+export { makeStyles } from '@material-ui/core/styles';
+
 export { connect, useDispatch, useSelector } from 'react-redux'
 export { default as fetch } from 'isomorphic-unfetch'
 export { withRouter, useRouter } from 'next/router'
 export { default as YouTube } from 'react-player/youtube'
 export { default as Vimeo } from 'react-player/vimeo'
-export { default as Box } from '@material-ui/core/Box'
