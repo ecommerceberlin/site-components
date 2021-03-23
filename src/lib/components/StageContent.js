@@ -56,6 +56,7 @@ StageContent.defaultProps = {
     playerProps: {
         controls: true, 
         playing: true,  
+        loop: true,
         width: "100%",
         height: "100%"
     },
