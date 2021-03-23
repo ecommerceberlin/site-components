@@ -28,8 +28,8 @@ const StageContent = ({embed, stage, playerProps, placeholder, regform}) => {
     const classes = useStyles()
     const user = useUserData();
 
-    if(!embed){
-        return <img src={placeholder} alt="" style={{width: "100%"}} />
+    if(!embed || !embed.startsWith("http") ){
+        return (<div className={classes.wrapper}><img src={placeholder} alt="" style={{width: "100%"}} /></div>)
     }
 
     if(!user){
