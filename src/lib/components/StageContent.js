@@ -15,7 +15,9 @@ const useStyles = makeStyles(theme => ({
       player : {
         position: "absolute",
         top: 0,
-        left: 0
+        left: 0,
+        width: "100%",
+        height: "100%"
       },
 
 }))
@@ -37,12 +39,12 @@ const StageContent = ({embed, stage, playerProps, placeholder, regform}) => {
     return (
         <div className={classes.wrapper}>
 
-
-        <iframe className={classes.player} width="100%" height="100%" src={`${embed}?loop=1&autoplay=1&modestbranding=1&showinfo=0`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <img className={classes.player} src="https://res.cloudinary.com/eventjuicer/image/upload/v1616511215/tehonline_fpeventcover_start.png" />
+        {/* <iframe className={classes.player} width="100%" height="100%" src={`${embed}?loop=1&autoplay=1&modestbranding=1&showinfo=0`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
 
         {/* <Player 
             {...playerProps}
-            
+            className={classes.player}
             url={embed} 
             style={{
                 position: "absolute",
