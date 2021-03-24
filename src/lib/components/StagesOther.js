@@ -8,6 +8,7 @@ import MyButton from '../components/MyButton'
 import Typography from '@material-ui/core/Typography';
 import {useRouter} from 'next/router'
 import isEmpty from 'lodash/isEmpty'
+import {useSettings} from '../helpers'
 
 const useStyles = makeStyles(theme => ({
 
@@ -15,35 +16,50 @@ const useStyles = makeStyles(theme => ({
           marginTop: 20
       },
 
-      scheduleItem: {
-        maxWidth: 500
+      title: {
+
       },
+
+      scheduleItem: {
+      
+      },
+
+      button:{
+          marginLeft: 25
+      }
    
 }))
 
 
-const StagesOther = ({data, stage}) => {
+const defaultProps = {
+
+}
+
+const StagesOther = ({setting, data, stage, ...props}) => {
 
     const [translate] = useTranslate();
     const classes = useStyles();
     const router = useRouter();
+    const settings = useSettings(setting)
+    const {ekhm} = Object.assign({}, defaultProps, settings, props)
 
-    const other = data && Array.isArray(data) && data.length ? data.filter(item => item.presentation_venue !== stage.toUpperCase()) : null
+    stage = stage.toUpperCase();
+
+    const other = data && Array.isArray(data) && data.length ? data.filter(item => !isEmpty(item.presentation_venue) && item.presentation_venue !== stage) : null
     
-    if(isEmpty(data)){
+    if(isEmpty(stage) || isEmpty(data) || isEmpty(other)){
         return null
     }
 
     return (<div className={classes.stage}>
-    <Typography variant="h6" gutterBottom>{translate("streaming.stages.other")}</Typography>
-    <Grid container spacing={2}>{
-        other && other.map(item => {
+    <Typography className={classes.title} variant="h5" gutterBottom={true}>{translate("streaming.stages.other")}</Typography>
+    <Grid container spacing={2}>{(other || []).map(item => {
 
             const _venue = (item.presentation_venue || "").toLowerCase()
 
-            return (<Grid item key={item.id} className={classes.scheduleItem}>
+            return (<Grid item xl={4} lg={4} md={6} sm={6} xs={12} key={item.id} className={classes.scheduleItem}>
             <ScheduleItem data={item} description={false} buttons={[
-                <MyButton variant="contained" color="primary" label="common.join" onClick={() => router.push(`/stages/${_venue}`)}/>
+                <MyButton className={classes.button} variant="contained" color="primary" label="common.join" onClick={() => router.push(`/stages/${_venue}`)}/>
             ]}/>
           
           </Grid>)

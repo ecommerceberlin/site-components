@@ -11,30 +11,36 @@ import isEmpty from 'lodash/isEmpty'
 import useSWR from 'swr'
 import fetch from 'isomorphic-unfetch'
 // import Box from '@material-ui/core/Box';
-// import Paper from '@material-ui/core/Paper';
+import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import { useTranslate } from '../i18n';
 import moment from 'moment'
+import {useSettings} from '../helpers'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
 
 
 const useStyles = makeStyles(theme => ({
-    root: {
+    list: {
         width: '100%',
-        maxWidth: 300,
-        backgroundColor: theme.palette.background.paper,
-        overflowY: 'scroll',
-        overflowX: "hidden",
         height: "100%",
-        marginBottom: 10
+        maxWidth: 300,
+        maxHeight: 500,
+        overflow: 'hidden',
+        marginBottom: 10,
+
+        [theme.breakpoints.down("lg")]: {
+            maxHeight: 300,
+            marginBottom: 0,
+        }
+
     },
     inline: {
         display: 'inline',
     },
     button: {
-     //     marginLeft: 60,
+      marginBottom: 10,
     }    
 }))
 
@@ -44,9 +50,13 @@ const DiscordLogotype = (props) => (<SvgIcon {...props}  viewBox="0 0 800 272.1"
     </SvgIcon>
 )
 
-const DiscordJoinButton = ({href}) => {
+const DiscordJoinButton = ({href = ""}) => {
 
     const classes = useStyles()
+
+    if(isEmpty(href)){
+        return null
+    }
 
     return  (
         <Button 
@@ -67,45 +77,59 @@ const clearDiscordMsg = (msg) => {
     return msg
 }
 
-const DiscordChat = ({chatId, avatars = true, join = ""}) => {
+const defaultProps = {
+    discordProps: {
+        avatars: false,
+        join: "https://discord.gg/u3Fv9VJGU5",
+        title: "streaming.chat.title",
+        subtitle: "streaming.chat.list",
+        showTime: false
+    },
+}
+
+const DiscordChat = ({setting, stage, ...props}) => {
 
     const [translate, locale] = useTranslate()
     const classes = useStyles()
+    const settings = useSettings(setting)
+    const {discordProps: {join, title, subtitle, avatars, showTime}, stages} = Object.assign({}, defaultProps, settings, props)
 
-    const { data, error } = useSWR(`https://proxy.eventjuicer.com/api/discord/${chatId}`, fetcher, { 
+    stage = stage.toUpperCase();
+
+    const {discord} = stages && stage in stages? stages[stage]: {}
+
+    const { data, error } = useSWR(`https://proxy.eventjuicer.com/api/discord/${discord}`, fetcher, { 
         refreshInterval: 60*1000, //pull every minute
         refreshWhenHidden: true 
     })
 
-    moment.locale(locale);
-
-    const title = `${translate("streaming.chat.title")}`.toUpperCase()
+    moment.locale("pl");
 
     if(error || isEmpty(data)){
         return (<div>
-            <Typography variant="h5" gutterBottom>{title}</Typography><DiscordJoinButton href={join} />
+           <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
         </div>)
     }
     
     return (
         <div>  
-            
-            <Typography variant="h6" gutterBottom>{title}</Typography>
+                        
+            <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
 
-            <List className={classes.root}>
+            <List className={classes.list}>
             {data.map(item => (
-                <ListItem alignItems="flex-start" disableGutters dense={true} divider={true}>
+                <ListItem key={item.id} alignItems="flex-start" disableGutters dense={true} divider={true}>
                {avatars && <ListItemAvatar>
                     <Avatar alt={item.user} src={item.avatar} />
                 </ListItemAvatar>}
                 <ListItemText
                     primary={clearDiscordMsg(item.content)}
-                    secondary={`${item.user} ${moment(item.ts).fromNow()}`}
+                    secondary={showTime? `${item.user} ${moment(item.ts).fromNow()}`: null}
                 />
                 </ListItem>
             ))}
             </List>
-            <DiscordJoinButton href={join} />
+           
         </div>
     )
 }
