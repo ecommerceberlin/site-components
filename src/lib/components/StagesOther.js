@@ -57,7 +57,7 @@ const StagesOther = ({setting, data, stage, ...props}) => {
 
             const _venue = (item.presentation_venue || "").toLowerCase()
 
-            return (<Grid item xl={4} lg={4} md={6} sm={6} xs={12} key={item.id} className={classes.scheduleItem}>
+            return (<Grid key={_venue} item xl={4} lg={4} md={6} sm={6} xs={12} key={item.id} className={classes.scheduleItem}>
             <ScheduleItem data={item} description={false} buttons={[
                 <MyButton className={classes.button} variant="contained" color="primary" label="common.join" onClick={() => router.push(`/stages/${_venue}`)}/>
             ]}/>
