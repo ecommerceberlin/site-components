@@ -98,6 +98,12 @@ const DiscordChat = ({setting, stage, ...props}) => {
 
     const {discord} = stages && stage in stages? stages[stage]: {}
 
+    if(!discord){
+        return (<div>
+            <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
+         </div>)
+    }
+
     const { data, error } = useSWR(`https://proxy.eventjuicer.com/api/discord/${discord}`, fetcher, { 
         refreshInterval: 60*1000, //pull every minute
         refreshWhenHidden: true 
