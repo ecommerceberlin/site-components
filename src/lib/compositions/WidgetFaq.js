@@ -1,36 +1,30 @@
 import React from 'react'
 import Wrapper from '../components/Wrapper'
 import Faq from '../components/Faq'
-import Settings from '../datasources/Settings'
+import {useSettings} from '../helpers'
 
 
-const WidgetFaq = ({setting, label, secondaryLabel, ...defaultFaqProps}) => (
-
-    <Settings>{(get) => {
-
-        const {wrapperProps, ...faqProps} = get(setting)
-
-        return (
-            <Wrapper {...{label, secondaryLabel, ...wrapperProps}}>
-            <Faq {...{...defaultFaqProps, ...faqProps}} />
-            </Wrapper>
-        )
-    }}
-    </Settings>
-
-      
-)
-
-WidgetFaq.defaultProps = {
-    label: "cfp.faq.name",
-    secondaryLabel: "cfp.faq.description",
+const defaultProps = {
+    wrapperProps: {
+        label: "cfp.faq.name",
+        secondaryLabel: "cfp.faq.description",
+    },
     baseLabel: "cfp.faq",
     items: [],
     url: "/",
-    showTitle: false,
+    showTitle: false
+}
 
-    setting: ""
+const WidgetFaq = ({setting, ...props}) => {
 
+    const settings = useSettings(setting)
+    const {wrapperProps} = Object.assign({}, defaultProps, settings, props)
+
+    return (
+        <Wrapper {...wrapperProps}>
+        <Faq setting={setting} />
+        </Wrapper>
+    )
 }
 
 export default WidgetFaq

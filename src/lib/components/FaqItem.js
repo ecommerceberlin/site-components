@@ -18,6 +18,7 @@ import { faqToggle } from './redux';
 
 import { createSelector } from 'reselect';
 import Markdown from './Markdown'
+import {useSettings} from '../helpers'
 
 
 const faqItemSelector = createSelector(

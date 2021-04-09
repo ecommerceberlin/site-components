@@ -7,23 +7,24 @@ import FaqItem from './FaqItem';
 import { faqUrl } from './redux';
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
+import {useSettings} from '../helpers'
 
-/**
- * ServerRouter {
-  route: '/exhibit',
-  pathname: '/exhibit',
-  query: {},
-  asPath: '/exhibit?q=additional_paid_services',
-  basePath: '',
-  events: undefined,
-  isFallback: false
-  }
- */
 
-const Faq = ({ items, baseLabel, selected, showTitle }) => {
+
+const defaultProps = {
+  items: [],
+  baseLabel: 'faq',
+  selected: [],
+  showTitle: true
+}
+
+const Faq = ({setting, ...props}) => {
 
   const router = useRouter();
   const dispatch = useDispatch()
+  const settings = useSettings(setting)
+
+  const {items, baseLabel, selected, showTitle} = Object.assign({}, defaultProps, settings, props)
 
   useEffect(()=>{
     
@@ -47,22 +48,13 @@ const Faq = ({ items, baseLabel, selected, showTitle }) => {
     {showTitle && <MyTypography label={`${baseLabel}.name`} template="SUBH2CH" />}
 
     {items.map(item => (
-      <FaqItem key={item.label} baseLabel={baseLabel} {...item} />
+      <FaqItem setting={setting} key={item.label} baseLabel={baseLabel} {...item} />
     ))}
   </div>
   )
 
 }
 
-Faq.defaultProps = {
-  items: [],
-  baseLabel: 'faq',
-  selected: [],
-  showTitle: true
-};
 
-Faq.propTypes = {
-  //classes: PropTypes.object.isRequired,
-};
 
 export default  Faq
