@@ -174,6 +174,10 @@ function* fetchAccumulatedFetches(endpoint, reload){
   const settings = yield select(Selectors.getSettings) 
   const _apiUrl = get(settings, "system.api", "").trim() || apiUrl
 
+  // if(_apiUrl.split("http").length === 3){
+  //   endpoint = encodeURIComponent(endpoint)
+  // }
+
   const response = yield call(fetch, `${_apiUrl}/${endpoint}`)
   const json = yield call([response, response.json])
 
