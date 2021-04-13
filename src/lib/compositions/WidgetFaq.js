@@ -18,11 +18,11 @@ const defaultProps = {
 const WidgetFaq = ({setting, ...props}) => {
 
     const settings = useSettings(setting)
-    const {wrapperProps} = Object.assign({}, defaultProps, settings, props)
+    const {wrapperProps, icons} = Object.assign({}, defaultProps, settings, props)
 
     return (
         <Wrapper {...wrapperProps}>
-        <Faq setting={setting} />
+        <Faq setting={setting} icons={icons} />
         </Wrapper>
     )
 }

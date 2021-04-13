@@ -4,26 +4,17 @@
  * https://github.com/vercel/next.js/blob/canary/examples/with-google-tag-manager/lib/gtm.js
 */
 
+export const event = (event) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(event)
+  //console.log("datalayer pushed!", event, window.dataLayer)
+}
+
 
 export const pageview = (url) => {
-
-  window.dataLayer = window.dataLayer || [];
-
-  window.dataLayer.push({
+  event({
     event: 'pageview',
     page: url,
   })
-
 }
 
-export const event = ({action, category, label, value }) => {
-
-  window.dataLayer = window.dataLayer || [];
-
-  window.dataLayer.push({
-    event: action,
-    category: category, 
-    label: label, 
-    label: label
-  })
-}

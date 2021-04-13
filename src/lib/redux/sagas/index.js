@@ -19,6 +19,11 @@ import Router from 'next/router';
 import get from 'lodash/get'
 
 import {
+  FORM_ACTION_STARTED,
+  FORM_ACTION_FINISHED
+} from '../../formik/redux/types'
+
+import {
   SNACKBAR_SHOW,
   CART_ITEM_ADD,
   CART_ITEM_REMOVE,
@@ -317,12 +322,18 @@ function* handleRehydrate(actionData){
  * VOTING - ENDS
  */
 
-
+function* handleGtmEvent({payload}){
+  yield call(event, payload)
+}
 
 
 const rootSaga = function* root() {
 
   const sagas = [
+
+    takeEvery(FORM_ACTION_STARTED, handleGtmEvent),
+    takeEvery(FORM_ACTION_FINISHED, handleGtmEvent),
+
     //takeEvery(SNACKBAR_SHOW, handleLogoutFn),
     takeEvery(FAQ_TOGGLE, changeUrlWhenFaqsSelected),
     takeEvery(CART_ITEM_ADD, selectBoothWhenCartItemAdded),

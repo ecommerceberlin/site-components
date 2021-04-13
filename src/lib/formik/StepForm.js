@@ -23,6 +23,13 @@ import isFunction from 'lodash/isFunction'
 
 class StepForm extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      actionStartedNotified: false
+    }
+  }
+
   componentDidMount(){
 
     const {start, router, setValues, setTouched, values} = this.props;
@@ -50,14 +57,16 @@ class StepForm extends React.Component {
   componentDidUpdate(){
     
     const {data, values, status, formActionStarted, formActionFinished, actionStartedProps, actionFinishedProps} = this.props;
+    const {actionStartedNotified} = this.state;
 
-    if( this.isStarted() ) {
-     // formActionStarted(actionStartedProps);
+    if( !actionStartedNotified && this.isStarted() ) {
+      this.setState((prevState, props) => ({actionStartedNotified: true}))
+      formActionStarted(actionStartedProps);
     }
 
     if(status && "data" in status) {
     
-      //  formActionFinished(actionFinishedProps);   
+      formActionFinished(actionFinishedProps);   
 
       if('token' in status.data){
         addToken(status.data.token);
@@ -164,16 +173,12 @@ StepForm.defaultProps = {
   onSuccess: (props) => <FormSuccess baseLabel={props.baseLabel} />,
   onError: (props) => <div>error</div>,
   actionStartedProps: {
-    action : "registration_start", 
-    category : "visitors", 
-    label : "method",
-    value : ""
+    event : "free_signup", 
+    status : "started", 
   },
   actionFinishedProps: {
-    action : "registration_success", 
-    category : "visitors", 
-    label : "method",
-    value : ""
+    event : "free_signup", 
+    status : "success"
   },
   start: null,
   legend: null,

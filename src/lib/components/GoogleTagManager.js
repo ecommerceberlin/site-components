@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import * as gtm from '../services/gtag'
+import {pageview} from '../services/gtag'
 
 const GoogleTagManager = ({ children }) => {
     
   const router = useRouter()
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', gtm.pageview)
+    router.events.on('routeChangeComplete', pageview)
     return () => {
-      router.events.off('routeChangeComplete', gtm.pageview)
+      router.events.off('routeChangeComplete', pageview)
     }
   }, [router.events])
 

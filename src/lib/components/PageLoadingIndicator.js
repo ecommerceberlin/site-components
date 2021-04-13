@@ -11,7 +11,7 @@ const PageLoadingIndicator = ({ children }) => {
 
   const handleStart = (url) => {
       
-    console.log("poczatek", url, router)
+    // console.log("poczatek", url, router)
 
     if(url !== router.asPath){
         dispatch(pageLoadingStart());
@@ -21,7 +21,7 @@ const PageLoadingIndicator = ({ children }) => {
 
   const handleComplete = (url) => {
 
-    console.log("koniec", url, router)
+    // console.log("koniec", url, router)
 
     dispatch(pageLoadingEnd());
   }
