@@ -75,6 +75,7 @@ export default function IconLabelTabs({setting, ...props}) {
   return (
     <Wrapper {...wrapperProps}>
       <div className={classes.root}>
+      
         <Tabs
           value={value}
           onChange={handleChange}
@@ -85,9 +86,13 @@ export default function IconLabelTabs({setting, ...props}) {
           centered
           orientation={orientation}
         >
-          {items.map(item => (<Tab key={`t_${item.label}`} icon={React.createElement(item.icon || PhoneIcon, {})} label={translate(item.label)} />) )}
+          {items.map(item => (<Tab key={`t_${item.label}`} icon={React.createElement(item.icon || PhoneIcon, {style: {fontSize: 40}})} label={translate(item.label)} />) )}
         </Tabs>
+        
+        <div style={{marginTop: 10}}>
         {items.map((item, idx) => (<TabPanel key={`p_${item.label}`} value={value} index={idx}>{item.content}</TabPanel>))}
+        </div>
+
       </div>
     </Wrapper>
   );
