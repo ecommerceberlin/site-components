@@ -41,7 +41,7 @@ function VerticalTimeline({items}) {
               <TimelineConnector className={active? classes.secondaryTail: ""} />
             </TimelineSeparator>
             <TimelineContent>
-              <Paper elevation={3} className={classes.paper}>
+              <Paper elevation={active? 3: 0} className={classes.paper}>
                 <Typography variant="h6" component="h1">
                   {title}
                 </Typography>
