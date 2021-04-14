@@ -6,6 +6,8 @@ import compose from 'recompose/compose';
 import _get from 'lodash/get';
 import classNames from 'classnames'
 import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+
 import green from '@material-ui/core/colors/green';
 
 import { translate } from '../../i18n';
@@ -70,7 +72,7 @@ class Ticket extends React.PureComponent {
 
 
   render() {
-    const { ticket, classes, boothId, label, disabled } = this.props;
+    const { ticket, classes, boothId, label, disabled, translate } = this.props;
 
     if (!ticket) {
       return null;
@@ -83,6 +85,9 @@ class Ticket extends React.PureComponent {
         classes.ticket,
         ticket.bookable ? classes.bookable : classes.nonbookable
         )}>
+
+
+      {ticket.translation_asset_id ? <Box mb={1}><strong>{translate(ticket.translation_asset_id)}</strong></Box>: null}  
 
       <Grid 
         container
