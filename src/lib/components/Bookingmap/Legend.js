@@ -1,19 +1,15 @@
 import React from 'react'
-import compose from 'recompose/compose';
-
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
 import _get from 'lodash/get';
 import MyTypography from '../MyTypography'
-import {FilteredTicketGroupsSelector} from '../../redux/selectors'
-import PropTypes from 'prop-types'
+import {getTicketGroups} from '../../redux/selectors'
 import Booth from './Booth'
 import { getStylingName } from "./boothStyles";
-import Settings from '../../datasources/Settings';
+import { useSettings } from '../../helpers'
 
 
-
-const styles = {
+const useStyles = makeStyles(theme => ({
     root : {
       display: 'flex',
       maxWidth : 1000,
@@ -33,65 +29,38 @@ const styles = {
         flexDirection : 'row',
         flexWrap : 'wrap'
     }
-}
+}));
 
 const data = {
     dh : 40,
     dw : 60,
 }
 
-const Legend = ({ticketgroups, boothStyleMapping, allowedGroupIds, classes}) =>  (
 
-  
-    <div className={classes.root}>
-    <div className={classes.description}>
-      <MyTypography label="event.sales.pool.legend" />
-    </div>
-    <div className={classes.groups}>
-
-
-  <Settings>{(get) => 
-
-
-    ticketgroups.filter(tg => get("bookingmap.allowedGroupIds", allowedGroupIds || []).includes(tg.id)).map(tg => <Booth 
-        key={tg.name} 
-        groupId={tg.id} 
-        legend={true} 
-        style={getStylingName(get("bookingmap.boothStyleMapping", boothStyleMapping || {}), tg.id)} 
-        selected={false} 
-        data={{...data, ti : tg.name}} 
-        onClick={function(){} } 
-        />)
-
-}</Settings>
-
-
-    </div>
-    </div>
-)
-
-Legend.propTypes = {
-    allowedGroupIds : PropTypes.array,
-    ticketgroups: PropTypes.array.isRequired
-}
-
-Legend.defaultProps = {
-    ticketgroups : [],
+const defaultProps = {
     allowedGroupIds: [],
     boothStyleMapping: {}
 }
 
-const enhance = compose(
-    connect( (state,props) => {
-        const mapStateToProps = (state, props) => {
-            return {
-                ticketgroups : FilteredTicketGroupsSelector(state, props),
-            }
-          }
-          return mapStateToProps
-    } ),
-    withStyles(styles),
-  );
+const Legend = ({setting, ...props}) =>  {
+
+    const classes = useStyles()
+    const settings = useSettings(setting)
+    const {allowedGroupIds} = Object.assign({}, defaultProps, settings, props)
+    const ticketgroups = useSelector(getTicketGroups)
+    const filtered = (ticketgroups || []).filter(tg => allowedGroupIds.includes(tg.id))
+
+   return (
+        <div className={classes.root}>
+        <div className={classes.description}>
+        <MyTypography label="event.sales.pool.legend" />
+        </div>
+        <div className={classes.groups}>
+        {filtered.map(tg => <Booth key={tg.name} setting={setting} legend={true} {...data} g={tg.id} ti={tg.name} />)}
+        </div>
+        </div>)
+
+}
   
-export default enhance(Legend);
+export default Legend
   

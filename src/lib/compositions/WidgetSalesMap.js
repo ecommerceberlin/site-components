@@ -3,37 +3,36 @@ import Bookingmap from '../components/Bookingmap/Bookingmap'
 import OrderSteps from '../components/Bookingmap/OrderSteps'
 import Legend from '../components/Bookingmap/Legend'
 import Wrapper from '../components/Wrapper'
-import Settings from '../datasources/Settings';
+import {useSettings} from '../helpers'
 
-
-
-const WidgetSalesMap = ({disabled, steps, allowedGroupIds, boothStyleMapping, disabledTicketIds, ...wrapperProps}) => (
-
-
-    <Wrapper {...wrapperProps}>
-        <Settings>{(get) => (
-            <div>
-                <div>
-                    <OrderSteps items={ get("bookingmap.steps", steps) } active={0} />
-                 <Legend  />
-                </div>
-                <Bookingmap 
-                    disabled={disabled} 
-                    disabledTicketIds={get("bookingmap.disabledTicketIds", disabledTicketIds)} 
-                    height={ get("bookingmap.height") } 
-                    boothStyleMapping={get("bookingmap.boothStyleMapping", boothStyleMapping)}
-                />
-            </div>
-        )}</Settings>
-    </Wrapper>
-    )
-
-WidgetSalesMap.defaultProps = {
+const defaultProps = {
     disabledTicketIds: [],
     steps: [],
     allowedGroupIds: [],
     disabled : false,
-    boothStyleMapping: {}
+    boothStyleMapping: {},
+    wrapperProps: {
+        label: "salesmap"
+    }
 }
+
+
+const WidgetSalesMap = ({setting = "bookingmap", ...props}) => {
+
+    const settings = useSettings(setting, {})
+    const {wrapperProps} = Object.assign({}, defaultProps, settings, props)
+
+    return (
+        <Wrapper {...wrapperProps}>
+        <div>
+                    <div>
+                    <OrderSteps setting={setting}  />
+                    <Legend setting={setting} />
+                    </div>
+                    <Bookingmap setting={setting} />
+        </div>
+        </Wrapper>
+    )
+} 
 
 export default WidgetSalesMap

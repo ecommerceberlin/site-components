@@ -2,38 +2,44 @@ import React from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import { translate } from '../../i18n';
-import { withStyles } from '@material-ui/core/styles';
-import compose from 'recompose/compose'
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {
+import { useTranslate } from '../../i18n';
+import { useSettings } from '../../helpers'
+
+const useStyles = makeStyles(theme => ({
     root : {
         backgroundColor : 'transparent'
     }
-}
+}))
 
-const OrderSteps = ({items, classes, translate, baseLabel, active}) => (
-
-    <Stepper classes={{root : classes.root }} activeStep={active} alternativeLabel>
-    {items.map(label => {
-    return (
-        <Step key={label}>
-        <StepLabel>{ translate(`${baseLabel}.${label}`) }</StepLabel>
-        </Step>
-    );
-    })}
-    </Stepper>
-
-)
-
-OrderSteps.defaultProps = {
-    items : [],
+const defaultProps = {
+    steps : [],
     baseLabel : "event.sales.steps",
     active : 0
 }
 
-const enhance = compose(
-    translate,
-    withStyles(styles)
-)
-export default enhance(OrderSteps)
+const OrderSteps = ({setting, ...props}) => {
+
+    const classes = useStyles();
+    const [translate] = useTranslate()
+    const settings = useSettings(setting)
+    const {steps, baseLabel, active} = Object.assign({}, defaultProps, settings, props)
+
+    return (
+
+        <Stepper classes={{root : classes.root }} activeStep={active} alternativeLabel>
+        {steps.map(label => {
+        return (
+            <Step key={label}>
+            <StepLabel>{ translate(`${baseLabel}.${label}`) }</StepLabel>
+            </Step>
+        );
+        })}
+        </Stepper>
+    
+    )
+}
+
+
+export default OrderSteps
