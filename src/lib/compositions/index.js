@@ -87,6 +87,7 @@ export { default as WidgetTicketOwners } from './WidgetTicketOwners'
 export { default as WidgetPublishers } from './WidgetPublishers'
 export { default as WidgetGridWithImages } from './WidgetGridWithImages'
 export { default as WidgetRoleBasedProfileUpdate } from './WidgetRoleBasedProfileUpdate'
+export { default as WidgetTabs } from './WidgetTabs'
 
 
 /** compat */
