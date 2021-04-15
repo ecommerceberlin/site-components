@@ -33,7 +33,8 @@ const styles = theme => ({
   default: {
     fontSize: theme.typography.pxToRem(17),
     fontWeight: theme.typography.fontWeightRegular,
-    fontFamily: theme.typography.fontFamily
+    fontFamily: theme.typography.fontFamily,
+    backgroundColor: '#f5f5f5'
   },
   expanded: {
     backgroundColor: color[100]
@@ -55,6 +56,7 @@ const FaqItem = ({
   translate
 }) => (
   <Accordion
+    elevation={0}
     classes={{ expanded: classes.expanded }}
     onChange={(event, state) => faqToggle([label], state)}
     expanded={selected}

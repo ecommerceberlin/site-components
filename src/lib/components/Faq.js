@@ -37,16 +37,12 @@ const Faq = ({setting, ...props}) => {
   }) 
 
   return (
-    <div
-    style={{
+    <div style={{
       flexGrow: 1,
-      marginTop: 20,
-      marginBottom: 20,
-      paddingBottom: 20
-    }}
-  >
-    {showTitle && <MyTypography label={`${baseLabel}.name`} template="SUBH2CH" />}
-
+      marginTop: 10,
+      marginBottom: 10,
+      paddingBottom: 10
+    }}>{showTitle && <MyTypography label={`${baseLabel}.name`} template="SUBH2CH" />}
     {items.map(item => (
       <FaqItem setting={setting} key={item.label} baseLabel={baseLabel} {...item} />
     ))}
