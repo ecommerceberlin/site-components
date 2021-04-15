@@ -9,7 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import isFunction from 'lodash/isFunction'
 
 import { translate } from '../i18n';
 
@@ -68,9 +68,9 @@ const Benefits = ({ classes, labels, baseLabel, translate, orientation }) => (
           Icon = DefaultIcon;
         }else{
           primary = "primary" in item ? item.primary : "";
-          Icon  = "icon" in item ? item.icon : DefaultIcon;
+          Icon  = "icon" in item && item.icon && (React.isValidElement(item.icon) || isFunction(item.icon)) ? item.icon: DefaultIcon;
         }
-        
+
         return (
           <ListItem className={classes.item} key={primary}>
             <ListItemIcon>  
