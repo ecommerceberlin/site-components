@@ -91,20 +91,20 @@ class Ticket extends React.PureComponent {
 
       <Grid 
         container
-        spacing={5}
+        spacing={2}
         alignItems="center"
       >
-        <Grid item xs={12} sm={12} md={3}>
+        <Grid item xs={12} sm={8} md={5}>
           <TicketDate start={ticket.start} end={ticket.end} inDates={ticket.in_dates} />
         </Grid>
          
-        <Grid item xs={12} sm={12} md={3}>
-        {<TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />}
+        <Grid item xs={12} sm={4} md={2}>
+        <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
         </Grid>
 
-        <Grid item xs={12} sm={12} md={3}><TicketPrice price={ticket.price} /></Grid>
+        <Grid item xs={12} sm={6} md={3}><TicketPrice price={ticket.price} /></Grid>
 
-        <Grid item xs={12} sm={12} md={3}>
+        <Grid item xs={12} sm={6} md={2}>
 
         <TicketBuyButton formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
 

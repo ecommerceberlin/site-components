@@ -1,27 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import {useDispatch, useSelector} from 'react-redux'
+import { useSettings } from '../../helpers'
+import { useTranslate } from '../../i18n'
 
-import compose from 'recompose/compose';
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
-import translate from '../../i18n/translate'
-import BoothInfo from './BoothInfo';
 import Booth from './Booth';
-import SalesInfo from './SalesInfo';
 import Loader from './Loader'
-import {getStylingName} from './boothStyles'
 
-import {BookingMapSelector} from '../../redux/selectors'
+import {KeyedFormdataSelector, KeyedTicketGroupsSelector, getBookingmap, getBoothsSelected} from '../../redux/selectors'
+
 
 import {
-  dialogShow,
   resourceFetchRequest,
-  boothChecked
 } from '../redux/actions';
 
-import {getCompanyProfileInfo, getCompanyName} from '../../helpers/data'
-
-
-const styles = (theme) => ({
+const useStyles = makeStyles( (theme) => ({
 
   scrollableContainer: {
     overflowX: 'auto',
@@ -55,181 +48,13 @@ const styles = (theme) => ({
     margin: 0,
     zIndex: 3
   }
-});
+}));
 
 
-
-class Bookingmap extends React.PureComponent {
-
-
-  componentDidMount(){
-
-    const {resourceFetchRequest, autorefresh} = this.props
-
-    resourceFetchRequest(["bookingmap", "ticketgroups", "formdata"])
-
-    if(parseInt(autorefresh, 10) > 5 ){
-      this.interval = setInterval(() => resourceFetchRequest(["formdata", "ticketgroups"]), autorefresh * 1000);
-    }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  getStatus(boothId) {
-    const { formdata } = this.props;
-    return boothId in formdata ? formdata[boothId] : {};
-  }
-
-  getStatusShort(boothId) {
-    const { purchase } = this.getStatus(boothId);
-    if (purchase) {
-      return purchase.paid ? 'sold' : 'hold';
-    }
-    return false;
-  }
-
-  getBuyerInfo(boothId) {
-    const { company } = this.getStatus(boothId);
-    return { cname2 : getCompanyName(company), logotype : getCompanyProfileInfo(company, "thumbnail") };
-  }
-
-  getDefaultSize(groupId) {
-    const { ticketgroups, defaultSize } = this.props;
-    if(! (groupId in ticketgroups)){
-      return 0;
-    }
-    const size = parseInt(ticketgroups[groupId].map.width);
-    return !isNaN(size) ? size : defaultSize; 
-  }
- 
-  onBoothClick = (boothId, groupId, label) => {
-
-    const { 
-      dialogShow, 
-      boothChecked, 
-      translate, 
-      disabled, 
-      disabledTicketIds, 
-      resourceFetchRequest, 
-      boothStyleMapping
-    } = this.props;
-
-    resourceFetchRequest(["formdata", "ticketgroups"]);
-
-
-    const status = this.getStatusShort(boothId);
-
-    let modalTitle = '';
-    let modalContent = '';
-    let modalButtons = [];
-
-    const boothProps = {boothId, groupId, label, status}
-
-    const styleName = getStylingName(boothStyleMapping, groupId);
-
-    switch (status) {
-      case 'hold':
-        modalTitle = translate("event.sales.booths.hold");
-        modalContent = <BoothInfo {...boothProps} 
-          style={styleName}  
-        />;
-
-        break;
-      
-      case 'sold':
-        modalTitle = translate("event.sales.booths.sold");
-        modalContent = <BoothInfo {...boothProps} 
-          style={styleName} 
-          formdata={this.getStatus(boothId)} 
-        />;
-
-        break;
-      default:
-        /* THERE IS NOW FORMDATA FOR UNSOLD BOOTHS!!!! */
-        modalTitle = translate("event.sales.booths.free");
-        modalContent = <SalesInfo 
-          disabled={disabled} 
-          style={styleName} 
-          disabledTicketIds={disabledTicketIds} 
-          {...boothProps} 
-        />
-    }
-
-    dialogShow({
-      title: modalTitle,
-      content: modalContent,
-      buttons: modalButtons
-    });
-
-    boothChecked(label);
-
-  };
-
-  isBoothSelected(boothId) {
-    const { selected, boothsSelected } = this.props;
-
-    // const boothsSelected = Object.values(cart).filter(item => "formdata" in item && "id" in item.formdata).map(item => item.formdata.id)
-
-    return (
-      (boothsSelected && boothsSelected.indexOf(boothId) > -1) ||
-      (selected && selected.indexOf(boothId) > -1)
-    );
-  }
-
-  render() {
-
-
-    const { bookingmap, classes, zoom, height, defaultHeight, boothStyleMapping } = this.props;
-    return (
-      
-      <div
-        className={classes.scrollableContainer}
-        style={{
-          height: !isNaN(height) ? height * zoom : defaultHeight * zoom
-        }}
-      >
-       
-          <div
-            className={classes.container}
-            style={{
-              width: 1170 * zoom
-            }}
-          >
-
-           {bookingmap && 'mapsource' in bookingmap ? (
-             <React.Fragment>
-            <img src={bookingmap.mapsource} className={classes.bg} />
-
-            <ul className={classes.booths}>
-              {bookingmap.booths &&
-                bookingmap.booths.map(booth => (
-                  <Booth
-                    groupId={booth.g}
-                    defaultSize={ this.getDefaultSize(booth.g) }
-                    zoom={zoom}
-                    selected={this.isBoothSelected(booth.id)}
-                    onClick={this.onBoothClick}
-                    status={this.getStatusShort(booth.id)}
-                    key={booth.id}
-                    style={getStylingName(boothStyleMapping, booth.g)}
-                //    buyer={this.getBuyerInfo(booth.id)}
-                    data={booth}
-                  />
-                ))}
-            </ul>
-            </React.Fragment>) : <Loader />
-         } 
-         </div>
-      </div>
-    );
-  }
-}
-
-Bookingmap.defaultProps = {
+const defaultProps = {
   zoom: 1,
   height: 750,
+  width: 1170,
   defaultHeight: 500,
   boothsSelected : [],
   formdata : {},
@@ -242,13 +67,65 @@ Bookingmap.defaultProps = {
   boothStyleMapping: {}
 };
 
-const enhance = compose(
-  translate,
-  withStyles(styles),
-  connect(
-    (state) => BookingMapSelector(state),
-    {dialogShow, resourceFetchRequest, boothChecked}
-  )
-);
+const Bookingmap = ({setting, ...props}) => {
 
-export default enhance(Bookingmap);
+  const [translate] = useTranslate();
+  const dispatch = useDispatch()
+  const settings = useSettings(setting)
+  const classes = useStyles()
+
+  // const formdata  = useSelector(KeyedFormdataSelector)
+  const bookingmap = useSelector(getBookingmap)
+  //const ticketgroups = useSelector(KeyedTicketGroupsSelector)
+  //const boothsSelected = useSelector(getBoothsSelected)
+
+  const {
+    autorefresh, 
+    defaultSize, 
+    zoom, 
+    height, 
+    width,
+    defaultHeight, 
+    boothStyleMapping,
+    selected 
+  } = Object.assign({}, defaultProps, settings, props)
+
+  useEffect(() => dispatch(resourceFetchRequest(["bookingmap", "ticketgroups", "formdata"])), [])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(resourceFetchRequest(["formdata", "ticketgroups"]))
+    }, autorefresh * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
+  return (
+
+      <div
+        className={classes.scrollableContainer}
+        style={{
+          height: !isNaN(height) ? height * zoom : defaultHeight * zoom
+        }}
+      >
+      <div
+        className={classes.container}
+        style={{
+          width: width * zoom
+        }}
+      >{bookingmap && 'mapsource' in bookingmap ? (
+             <React.Fragment>
+            <img src={bookingmap.mapsource} className={classes.bg} />
+
+            <ul className={classes.booths}>
+              {bookingmap.booths && bookingmap.booths.map(booth => (<Booth key={booth.id} setting={setting} {...booth} />))}
+            </ul>
+            </React.Fragment>) : <Loader />
+         } 
+         </div>
+      </div>
+    );
+}
+
+
+export default Bookingmap;

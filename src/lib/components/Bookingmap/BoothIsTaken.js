@@ -57,7 +57,7 @@ const styles = theme => ({
 
 });
 
-const BoothInfo = ({ formdata, classes, ...rest}) => {
+const BoothIsTaken = ({ formdata, classes, ...rest}) => {
 
     if(!formdata || !"company" in formdata){
       return (
@@ -111,4 +111,4 @@ const BoothInfo = ({ formdata, classes, ...rest}) => {
 }
 
 
-export default withStyles(styles)(BoothInfo);
+export default withStyles(styles)(BoothIsTaken);
