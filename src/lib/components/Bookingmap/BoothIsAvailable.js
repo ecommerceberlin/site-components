@@ -98,11 +98,8 @@ const BoothIsAvailable = ({setting, disabled,  ...props}) => {
   {selectedBenefits.length? <div style={{
       marginTop: 40,
       marginBottom : 10,
-    }}> <Typography template="salesInfo" icon={ Info } label="exhibitors.standard.info" />  <Benefits
-    orientation="h"
-    baseLabel="exhibitors.standard"
-    labels={selectedBenefits} 
-  /></div>: null} 
+    }}> <Typography template="salesInfo" icon={ Info } label="exhibitors.standard.info" />
+    <Benefits orientation="h" baseLabel="benefits" labels={selectedBenefits} /></div>: null} 
   
 
       </React.Fragment>
