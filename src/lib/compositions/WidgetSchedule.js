@@ -27,12 +27,15 @@ const defaultProps = {
 }
 
 
-const WidgetSchedule = ({setting = "schedule", ...props}) => {
+const WidgetSchedule = ({setting = "schedule", day = null, ...props}) => {
 
     const settings = useSettings(setting)
     const {presenters} = useDatasource({
         presenters: {
-            resource: "presenters"
+            resource: "presenters",
+            filters: {
+                filter: (item) => day ? day.length && "presentation_day" in item && item.presentation_day == day: true
+            }
         }
     })
 
