@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 // import red from '@material-ui/core/colors/red';
 import { useTranslate } from '../../i18n';
+import {useSettings} from '../../helpers'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,13 +29,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const PresentationLabel = ({ time="", venue="", buttons = null }) => {
+const defaultProps = {}
+
+const PresentationLabel = ({ setting, time="", venue="", category=null, buttons = null, ...otherProps }) => {
 
   const [translate] = useTranslate();
   const classes = useStyles();
+  const settings = useSettings(setting)
+  const {categories} = Object.assign({}, defaultProps, settings, otherProps)
+  const styling = category in categories? categories[category]: {}
 
   return (
     <div className={classes.root}>
+
       <Chip 
         label={time} 
         className={classes.chip} 
@@ -48,6 +55,14 @@ const PresentationLabel = ({ time="", venue="", buttons = null }) => {
         }}
         variant="outlined"
       />
+
+      {category && <Chip 
+        label={`tags.${category}`} 
+        className={classes.chip}
+        style={styling} 
+      />}
+
+
       {buttons}
     </div>
   );

@@ -155,7 +155,7 @@ const NoTicketOwner = (props) => <MyButton color="primary" {...props} />
 
 
 
-const WidgetTicketOwners = ({setting="sponsors", icons={} }) => {
+const WidgetTicketOwners = ({setting="sponsors", icons=null }) => {
 
     const {ticket_group_id, ticket_ids, grid, wrapperProps, moreInfoLabel} = useSettings(setting);
     const {data} = useDatasource({

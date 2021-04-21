@@ -2,11 +2,8 @@
 import React from 'react';
 import Wrapper from '../components/Wrapper'
 import Schedule from '../components/Schedule'
-import Presenters from '../datasources/Presenters';
 import Exhibitors from '../datasources/Exhibitors';
-import Settings from '../datasources/Settings';
 import {useDatasource, useSettings} from '../helpers'
-
 
 const defaultProps = {
     wrapperProps: {
@@ -17,19 +14,20 @@ const defaultProps = {
     link : true,
     descriptions : false,
     times: {},
-    venues: {
-        A: { company_id: 0 },
-        B: { company_id: 0 },
-        C: { company_id: 0 }
-    },
+    venues: {},
     venueStyle : "black",
-    minimized : []
+    minimized : [],
+    inserts: {},
+    day: null
 }
 
 
-const WidgetSchedule = ({setting = "schedule", day = null, ...props}) => {
+const WidgetSchedule = ({setting = "schedule", ...props}) => {
 
     const settings = useSettings(setting)
+    const {wrapperProps, day, ...otherProps} = Object.assign({}, defaultProps, settings, props)
+
+
     const {presenters} = useDatasource({
         presenters: {
             resource: "presenters",
@@ -39,22 +37,18 @@ const WidgetSchedule = ({setting = "schedule", day = null, ...props}) => {
         }
     })
 
-    const {link, times, venues, venueStyle, minimized, descriptions, wrapperProps} = Object.assign({}, defaultProps, settings, props)
 
     return (
 
         <Wrapper {...wrapperProps}>
         <Exhibitors>{
             (exhibitors) => (<Schedule
+                day={day}
+                setting={setting}
                 exhibitors={ exhibitors }
                 presenters={ presenters }
-                times={ times }
-                venues={ venues }
-                link={link} 
-                descriptions={ descriptions }
-                venueStyle={  venueStyle }
-                minimized={ minimized }
-                 />)}</Exhibitors>
+                {...otherProps}
+                />)}</Exhibitors>
         </Wrapper>  
     )
 

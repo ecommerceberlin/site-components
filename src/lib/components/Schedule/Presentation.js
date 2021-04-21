@@ -1,10 +1,11 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '../MyTypography';
+import {useSettings} from '../../helpers'
 // <Tags tags={_get(company.profile, "keywords")} />
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     marginTop: 10,
     marginBottom: 15,
@@ -22,18 +23,29 @@ const styles = theme => ({
     },
 
   }
-});
+}))
 
-const Presentation = ({
-  classes,
-  title,
-  description,
-  hideDescriptionOnMobile
-}) => {
+
+const defaultProps = {
+  title: '',
+  description: '',
+  hideDescriptionOnMobile: false
+};
+
+const Presentation = ({setting, ...props}) => {
+
+  const classes = useStyles();
+  const settings = useSettings();
+
+  const {
+    title,
+    description,
+    hideDescriptionOnMobile
+  } = Object.assign({}, defaultProps, settings, props)
+
   return (
     <div className={classes.root}>
       <Typography template="presenter2">{title}</Typography>
-
       <div className={hideDescriptionOnMobile ? classes.description : ''}>
         <Typography template="presenterText">{description}</Typography>
       </div>
@@ -41,10 +53,5 @@ const Presentation = ({
   );
 };
 
-Presentation.defaultProps = {
-  title: '',
-  description: '',
-  hideDescriptionOnMobile: false
-};
 
-export default withStyles(styles)(Presentation);
+export default Presentation

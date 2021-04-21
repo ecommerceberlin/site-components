@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 // import { withStyles } from '@material-ui/core/styles';
 // import compose from 'recompose/compose'
 
@@ -13,21 +13,57 @@ import ScheduleItem from './ScheduleItem';
 import ScheduleItemMinimized from './ScheduleItemMinimized';
 import ScheduleVenue from './ScheduleVenue';
 import ScheduleVenueMinimized from './ScheduleVenueMinimized';
-
+import PresentationLabel from './PresentationLabel';
+import ScheduleBlock from './ScheduleBlock';
 import ScheduleBreak from './ScheduleBreak';
 import {VenueSelector} from './redux'
 import colconfig from './colconfig'
+import {useSettings, filterFuncFromArr} from '../../helpers'
 
-class Schedule extends React.PureComponent {
- 
-  getCompany(id) {
-    return _find(this.props.exhibitors, { id }, {});
+const defaultProps = {
+  day: null,
+  selected: 0,
+  presenters: [],
+  exhibitors: [],
+  times: {},
+  venues: {},
+  inserts: {},
+  descriptions : true,
+  venueStyle : "black",
+  minimized : [],
+  colconfig : colconfig
+};
+
+
+
+const Schedule = ({setting = "schedule", ...props}) => {
+
+  const settings = useSettings(setting)
+  const {
+    day,
+    exhibitors, 
+    presenters, 
+    times, 
+    venues, 
+    descriptions, 
+    venueStyle, 
+    minimized,
+    selected,
+    inserts
+  } = Object.assign({}, defaultProps, settings, props)
+
+  const selectedVenue = useSelector(VenueSelector)
+
+  function getKey(stage, time){
+    return `${stage}${time}`
   }
 
-  findPresentations(search, first = false) {
-   
-    const { presenters, venues, selected, selectedVenue, descriptions, minimized } = this.props;
+  function getCompany(id) {
+    return _find(exhibitors, { id }, {});
+  }
 
+  function findPresentations(search) {
+   
     const details = (selectedVenue && selectedVenue in venues);
 
     return _filter(presenters, search).map((item, i) => {
@@ -47,9 +83,10 @@ class Schedule extends React.PureComponent {
 
       return (
         <ScheduleItem
+          setting={setting}
           key={item.id}
           selected={item.id == selected}
-          first={i === 0}
+          index={i}
           data={item}
           description={details || descriptions}
         />
@@ -60,18 +97,33 @@ class Schedule extends React.PureComponent {
     );
   }
 
-  renderBreak(label) {
+  function renderBreak(label) {
     return (
       <Grid item xs={12}>
-        <ScheduleBreak label={label} />
+        <ScheduleBreak 
+          setting={setting}
+          label={label} 
+        />
       </Grid>
     );
   }
 
-  renderVenues() {
+
+function renderBlock(time) {
+
+  return getIterableVenues().map((venue, j) => {
+
+        const key = getKey(venue, time)
+        const data = key in inserts? presenters.find(filterFuncFromArr(inserts[key])): null
+
+        return (<Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}><ScheduleBlock data={data} /></Grid>)
+
+   })
+ }
+
+  function renderVenues() {
     
-    const { venues, venueStyle, minimized } = this.props;
-    const iterableVenues = this.getIterableVenues();
+    const iterableVenues = getIterableVenues();
 
 
     /*
@@ -87,24 +139,21 @@ class Schedule extends React.PureComponent {
   
           */
     return iterableVenues.map(venue => (
-      <Grid key={venue} item {...this.getColNumber(venue)} style={{minWidth: 300}}>
-      
+      <Grid key={venue} item {...getColNumber(venue)} style={{minWidth: 300}}> 
 
-        
           <ScheduleVenue
+          setting={setting}
           name={venue}
-          company={this.getCompany(_get(venues[venue], 'company_id', 0))}
+          company={getCompany(_get(venues[venue], 'company_id', 0))}
           total={iterableVenues.length}
           template={venueStyle}
           />
-
     
       </Grid>
     ));
   }
   
-  getIterableVenues(){
-    const { venues, selectedVenue } = this.props;
+  function getIterableVenues(){
 
     if(selectedVenue && selectedVenue in venues){
       return [selectedVenue]
@@ -113,12 +162,10 @@ class Schedule extends React.PureComponent {
     return Object.keys(venues);
   }
 
-  getColNumber(currentVenue){
+  function getColNumber(currentVenue){
 
-    const iterableVenues = this.getIterableVenues();
+    const iterableVenues = getIterableVenues();
     const iterableVenuesCount = iterableVenues.length;
-
-    const {minimized, selectedVenue, colconfig} = this.props;
 
     //GRID unfriendly number of scenes - 5....
 
@@ -148,69 +195,42 @@ class Schedule extends React.PureComponent {
     
   }
 
+  function renderPresentation(time){
 
+    return getIterableVenues().map((venue, j) => {
 
-  render() {  
-    const { times } = this.props;
-    const iterableVenues = this.getIterableVenues();
-   
-    return (
-      <div>
-    
-        <Hidden implementation="css" smDown={true}>
+      const key = getKey(venue, time)
 
-        <Grid
-          container
-          spacing={1}
-        >
-          {this.renderVenues()}
+      return (
+        <Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}>{
+              findPresentations({
+                  presentation_venue: venue,
+                  presentation_time: time
+                }, j === 0)}
         </Grid>
+      )
+    })
 
-        </Hidden>
-
-        {Object.keys(times).map((time, i) => (
-          <Grid key={time} container spacing={1} >
-            {times[time] !== 'presentation' && this.renderBreak(times[time])}
-
-            {times[time] === 'presentation' &&
-              iterableVenues.map((venue, j) => (
-                <Grid key={`${time}${venue}`} item {...this.getColNumber(venue)} style={{minWidth: 300}}>
-                  {this.findPresentations(
-                    {
-                      presentation_venue: venue,
-                      presentation_time: time
-                    },
-                    j === 0
-                  )}
-                </Grid>
-              ))}
-          </Grid>
-        ))}
-      </div>
-    );
   }
+
+
+  return (
+    <div>
+  
+      <Hidden implementation="css" smDown={true}>
+      <Grid container spacing={1}>{renderVenues()}</Grid>
+      </Hidden>
+
+      {Object.keys(times).map((time) => (
+        <Grid key={time} container spacing={1} >
+          {times[time].includes('break') && renderBreak(times[time])}
+          {times[time].includes("block") && renderBlock(time)}
+          {times[time].includes('presentation') && renderPresentation(time)}
+        </Grid>
+      ))}
+    </div>
+  );
 }
 
-Schedule.defaultProps = {
-  selectedVenue : null,
-  selected: 0,
-  presenters: [],
-  exhibitors: [],
-  times: {},
 
-  venues: {
-    A: { company_id: 0 },
-    B: { company_id: 0 },
-    C: { company_id: 0 },
-    D: { company_id: 0 }
-  },
-
-  descriptions : true,
-  venueStyle : "black",
-  minimized : [],
-  colconfig : colconfig
-};
-
-export default connect((state) => ({
-  selectedVenue : VenueSelector(state)
-}), null)(Schedule)
+export default Schedule

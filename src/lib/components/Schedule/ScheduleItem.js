@@ -12,7 +12,8 @@ import { dialogShow } from '../redux/actions';
 import { 
   getParticipantCdn,
   getSpeakerAvatar,
-  getSpeakerName
+  getSpeakerName,
+  useSettings
  } from '../../helpers';
 
 import ScheduleItemPresenter from './ScheduleItemPresenter';
@@ -60,14 +61,28 @@ const getFullJobInfo = data => `${data.position} @ ${data.cname2}`;
 
 
 
-const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, showPresentationDetails, buttons }) => {
+const defaultProps = {
+  selected: false,
+  description : true,
+  showPresentationDetails: true,
+  showPlaceDetails: false,
+  buttons: [],
+  data: {},
+  index: 0
+};
+
+const ScheduleItem = ({setting, ...props}) => {
 
   const classes = useStyles()
   const dispatch = useDispatch();
-
+  const settings = useSettings(setting);
+  const {index, data, selected, description, showPlaceDetails, showPresentationDetails, buttons} = Object.assign({}, defaultProps, settings, props)
+ 
+ 
   const dialogData = {
     title: (
       <PresentationLabel
+       setting={setting}
         time={data.presentation_time}
         venue={data.presentation_venue}
       />
@@ -75,10 +90,11 @@ const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, sh
     content: (
       <div>
         <Presentation
+          setting={setting}
           title={data.presentation_title}
           description={data.presentation_description}
         />
-        <Presenter data={data} />
+        <Presenter setting={setting} data={data} />
       </div>
     ),
     buttons: []
@@ -97,9 +113,11 @@ const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, sh
       )}
     >
      
-      {(first || showPlaceDetails) && <PresentationLabel
+      {(index === 0) && <PresentationLabel
+        setting={setting}
         time={data.presentation_time}
         venue={data.presentation_venue}
+        category={data.presentation_category}
         buttons={[
           <Chip 
             key="details" 
@@ -112,9 +130,10 @@ const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, sh
 
       <div className={description ? classes.horizontal : classes.vertical}>
       <div className={classes.presentation}>
-      {(first || showPresentationDetails) && (
+      {(index === 0) && (
         <div >
           <Presentation
+          setting={setting}
           title={data.presentation_title}
           description={description ? data.presentation_description : null}
           hideDescriptionOnMobile={true}
@@ -124,6 +143,7 @@ const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, sh
       </div>
       <div className={classes.presenter}>
       <ScheduleItemPresenter
+        setting={setting}
         title={getSpeakerName(data)}
         text={getFullJobInfo(data)}
         imageSrc={ getSpeakerAvatar(data, [], 100) }
@@ -135,14 +155,7 @@ const ScheduleItem = ({ data, selected, first, description, showPlaceDetails, sh
   );
 };
 
-ScheduleItem.defaultProps = {
-  selected: false,
-  first: true,
-  description : true,
-  showPresentationDetails: true,
-  showPlaceDetails: true,
-  buttons: []
-};
+
 
 
 export default ScheduleItem
