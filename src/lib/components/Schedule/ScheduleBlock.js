@@ -10,11 +10,15 @@ import { makeStyles } from '@material-ui/core/styles';
 // import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
     
-  
+    root: {
+     
+    },
     avatarContainer: {
+      marginLeft: 50,
       minHeight: 100,
       minWidth: 200,
     },
@@ -39,9 +43,9 @@ const ScheduleBlock = ({data = {}}) => {
         return null
     }
 
-    return (<Grid container>
-    <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>{translate("common.thematic_track")}{` `}{translate(`categories.${data.presentation_category}.name`)}{` `}{translate("common.sponsoredby")}</Grid>
-    <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
+    return (<Grid container alignItems="center" className={classes.root}>
+    <Grid item><Typography display="block" variant="overline">{translate("common.thematic_track")}{` `}{translate(`categories.${data.presentation_category}.name`)}{` `}{translate("common.sponsoredby")}</Typography></Grid>
+    <Grid item>
         <Avatar variant="square" src={ resizeCloudinaryImage(data.logotype_cdn, 200, 200) } classes={{
             root: classes.avatarContainer,
             img: classes.avatarImg
