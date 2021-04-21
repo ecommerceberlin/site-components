@@ -35,12 +35,9 @@ const ScheduleBlock = ({data = {}}) => {
     const classes = useStyles();
     const [translate] = useTranslate();
 
-    console.log(data)
-
     if(!data || !("id" in data)){
         return null
     }
-
 
     return (<Grid container>
     <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>{translate("common.thematic_track")}{` `}{translate(`categories.${data.presentation_category}.name`)}{` `}{translate("common.sponsoredby")}</Grid>
