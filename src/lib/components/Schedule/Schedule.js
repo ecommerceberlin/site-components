@@ -116,7 +116,7 @@ function renderBlock(time) {
         const key = getKey(venue, time)
         const data = key in inserts? presenters.find(filterFuncFromArr(inserts[key])): null
 
-        return (<Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}><ScheduleBlock data={data} /></Grid>)
+        return (<Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}><ScheduleBlock setting={setting} data={data} /></Grid>)
 
    })
  }

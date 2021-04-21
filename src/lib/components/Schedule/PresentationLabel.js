@@ -57,7 +57,7 @@ const PresentationLabel = ({ setting, time="", venue="", category=null, buttons 
       />
 
       {category && <Chip 
-        label={`tags.${category}`} 
+        label={translate(`tags.${category}`)} 
         className={classes.chip}
         style={styling} 
       />}
