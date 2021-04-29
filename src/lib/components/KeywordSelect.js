@@ -5,6 +5,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {MyLink as Link} from '../next'
 import { withStyles } from '@material-ui/core/styles';
+import isFunction from 'lodash/isFunction'
 
 const styles = {
 
@@ -15,7 +16,7 @@ const styles = {
 
 }
 
-const KeywordSelect = ({ keywords, selected, href, as, classes }) => {
+const KeywordSelect = ({ keywords, selected, href, classes }) => {
 
    if(!keywords.length) return null
 
@@ -24,10 +25,8 @@ const KeywordSelect = ({ keywords, selected, href, as, classes }) => {
      keywords.map(keyword =>
 
      <Link
-     //  prefetch={false}
        key={keyword}
-       href={href}
-       as={as(keyword)}
+       href={isFunction(href)? href(keyword): href}
        label={`common.tags.${keyword}`}
        variant={keyword === selected ? "contained" : "outlined"}
        color={keyword === selected ? "primary" : "secondary"}
@@ -39,8 +38,7 @@ const KeywordSelect = ({ keywords, selected, href, as, classes }) => {
 
 KeywordSelect.defaultProps = {
   keywords : [],
-  href : "/exhibitor-categories/[keyword]",
-  as : name => `/exhibitor-categories/${name}`
+  href : "/"
 }
 
 KeywordSelect.propTypes = {

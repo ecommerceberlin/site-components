@@ -115,7 +115,7 @@ const Votable = ({id, vote, status, asPath, classes, show_votes, ...rest}) => (
             />
             }
             
-            <KeywordSelect  href="/vote/categories/[category]" as={name => `/vote/categories/${name}`} keywords={[].concat( _get(record, 'presentation_category', "") )} />
+            <KeywordSelect  href={name => `/vote/categories/${name}`} keywords={[].concat( _get(record, 'presentation_category', "") )} />
             
             <Divider />
             

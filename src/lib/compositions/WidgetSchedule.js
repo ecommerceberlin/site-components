@@ -32,7 +32,18 @@ const WidgetSchedule = ({setting = "schedule", ...props}) => {
         presenters: {
             resource: "presenters",
             filters: {
-                filter: (item) => day ? day.length && "presentation_day" in item && item.presentation_day == day: true
+                filter: (item) =>  {
+                    const conditions = []
+                    if(day){
+                        conditions.push(day.length && "presentation_day" in item && item.presentation_day == day)
+                    }
+
+                    // if(short){
+                    //     conditions.push(item.presentation_time < "12:00")
+                    // }
+
+                    return conditions.length? conditions.every(c => c) : true
+                }
             }
         }
     })

@@ -62,7 +62,7 @@ const WidgetContestantCompanies = ({
       
             <Box mt={8}>
                 <Centered>
-                    <KeywordSelect href={`${path_to_category}/[category]`} as={(category) => `${path_to_category}/${category}`} keywords={keywords} selected={keyword} />
+                    <KeywordSelect href={(category) => `${path_to_category}/${category}`} keywords={keywords} selected={keyword} />
                 </Centered> 
             </Box>
 

@@ -111,7 +111,7 @@ const WidgetContestantPerson = ({show_votes, id, vote, status, sections, keyword
                 <Divider />
 
                 <Box mt={4}>
-                    <KeywordSelect  href="/vote/categories/[category]" as={(category)=>`/vote/categories/${category}`} keywords={keywords} />
+                    <KeywordSelect href={(category)=>`/vote/categories/${category}`} keywords={keywords} />
                 </Box>
                 
                 </Box>

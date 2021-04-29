@@ -137,7 +137,7 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
             <div style={{marginTop: 20, marginBottom: 20}}>
              {/* <KeywordSelect  href="/contestants/[keyword]" as={(keyword)=>`/contestants/${keyword}`} keywords={keywords} /> */}
            
-             <KeywordSelect href="/vote/categories/[category]" as={name => `/vote/categories/${name}`} keywords={keywords}   />
+             <KeywordSelect href={name => `/vote/categories/${name}`} keywords={keywords}   />
 
            
             </div>
