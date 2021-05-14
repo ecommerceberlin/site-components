@@ -92,20 +92,15 @@ const useStyles =  makeStyles(theme => ({
 
 }))
 
-const Markdown = ({label, children, rendererData, big}) => {
+const Markdown = ({label = null, children, rendererData = null, big = false}) => {
     const [translate] = useTranslate();
     const classes = useStyles();
     return <div className={cn(classes.root, {
         [classes.post]: big
     })}>
-    <ReactMarkdown source={label ? translate(label) : children} renderers={rendererData? renderers(rendererData): undefined } />
+    <ReactMarkdown children={label ? translate(label) : children} components={rendererData? renderers(rendererData): undefined } />
     </div>
 }
 
-Markdown.defaultProps = {
-    label : null, 
-    rendererData: null,
-    big: false
-}
  
 export default Markdown
