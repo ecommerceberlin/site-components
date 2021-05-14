@@ -5,6 +5,7 @@ import _uniqBy from 'lodash/uniqBy';
 import _get from 'lodash/get';
 import isObject from 'lodash/isObject'
 import isFunction from 'lodash/isFunction'
+import isString from 'lodash/isString'
 
 export const collator = new Intl.Collator('pl-PL', {numeric: true, sensitivity: 'base'});
 
@@ -97,13 +98,13 @@ export const filterFuncFromArr = (arr) => {
         break
         case "contains":
         case "has":
-        if(!value.includes(expectedValue)){
+        if(!isString(value) || !value.includes(expectedValue)){
           tests = false
         }
         break
         case "length":
         case "minLength":
-        if(value.length <= expectedValue){
+        if(!isString(value) || value.length <= expectedValue){
           tests = false
         }
         break
