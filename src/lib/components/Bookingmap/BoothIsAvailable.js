@@ -6,6 +6,7 @@ import BoothInfoContainer from './BoothInfoContainer'
 import OrderSteps from './OrderSteps'
 import { useSettings, capitalizeFirstLetter } from '../../helpers'
 import isString from 'lodash/isString'
+
 import {
   FaBolt as Electricity,
   FaUtensils as Catering,
@@ -57,7 +58,7 @@ const BoothIsAvailable = ({setting, disabled,  ...props}) => {
 
   const settings = useSettings(setting)
   const {disabledTicketIds, benefits, defaultBenefits, groupId} = Object.assign({}, defaultProps, settings, props)
-  let selectedBenefits =  groupId in benefits? benefits[groupId]: defaultBenefits
+  let selectedBenefits =  benefits && groupId in benefits? benefits[groupId]: defaultBenefits
   selectedBenefits = selectedBenefits.map((item) => {
 
     if("icon" in item && item.icon && isString(item.icon)){
