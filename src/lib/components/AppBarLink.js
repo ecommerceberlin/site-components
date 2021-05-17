@@ -37,11 +37,13 @@ const styles = theme => ({
 
 const AppBarLink = ({ as, href, label, classes, locale, translate, router, variant, color, size }) => {
 
-  const external = href.substr(0,4) === "http";
-
+  const handleClick = (e) => {
+    e.preventDefault()
+    router.push(href)
+  }
   return (
 
-    <Button variant={variant} color={color} size={size} onClick={!external ? () => router.push(href, as) : null} href={external ? href : null}>
+    <Button variant={variant} color={color} size={size} onClick={href.startsWith("http") ? undefined: (e) => handleClick(e)} href={href}>
     { translate(label) }
     </Button>
   )
