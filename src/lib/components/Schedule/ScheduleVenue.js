@@ -80,6 +80,8 @@ const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue,
             alt=""
           />}
         
+        <span style={{marginLeft: 10}}>{selectedVenue === name? `(show all stages)` : `(show this stage only)` }</span>
+
         </div>
       </div>
     </Hidden>
