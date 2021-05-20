@@ -11,10 +11,14 @@ const useStyles = makeStyles(theme => ({
   root: {
   },
 
+  columnWithLogotype: {
+    width: 160,
+  },
+
   logotypeContainer: {
 
     height: 50,
-    width: 150,
+    width: 140,
     marginRight: 10,
     marginLeft: 10,
 
@@ -74,7 +78,7 @@ const ScheduleItemPresenter = ({ setting, logotype, ...rest }) => {
   return (
     <Grid container spacing={1} className={classes.root} alignItems="center">
 
-    <Grid item xl={selectedVenue? 12: 3} lg={selectedVenue? 12: 3} md={4} sm={12} xs={12}>
+    <Grid item className={classes.columnWithLogotype}>
     
     <Avatar
       variant="square"
@@ -88,7 +92,7 @@ const ScheduleItemPresenter = ({ setting, logotype, ...rest }) => {
 
     </Grid>
 
-    <Grid item xl={selectedVenue? 12: 9} lg={selectedVenue? 12: 9} md={8} sm={12} xs={12}>
+    <Grid item>
 
       <ScheduleItemPresenterAvatar {...rest} />
 
