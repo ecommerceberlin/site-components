@@ -9,14 +9,18 @@ import {useSettings} from '../../helpers'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: 10,
-    marginBottom: 15,
-    marginRight: 20,
+    marginTop: 20,
+    marginBottom: 25,
+
     [theme.breakpoints.down("md")]: {
-      marginTop: 5,
-      marginBottom: 5,
+      marginTop: 10,
+      marginBottom: 10,
       marginRight: 5,
     }
+  },
+
+  title: {
+    fontWeight: 600
   },
 
   description: {
@@ -47,7 +51,7 @@ const Presentation = ({setting, ...props}) => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h6" className={classes.title}>{title}</Typography>
       <div className={hideDescriptionOnMobile ? classes.description : ''}>
         <MyTypography template="presenterText">{description}</MyTypography>
       </div>

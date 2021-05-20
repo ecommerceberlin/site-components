@@ -24,6 +24,12 @@ import {useSettings, filterFuncFromArr} from '../../helpers'
 
 const useStyles = makeStyles(theme => ({
 
+  root: {
+    borderRadius: 5,
+    backgroundColor: "#f0f2f5", 
+    padding: 10,
+  },
+
   timeSlot: {
     marginBottom: 20
   }
@@ -232,6 +238,7 @@ function renderBlock(time) {
       <Grid container spacing={1}>{renderVenues()}</Grid>
       </Hidden>
 
+    <div className={classes.root}>
       {Object.keys(times).map((time) => (
         <Grid key={time} container spacing={1} className={classes.timeSlot} >
           {times[time].includes('break') && renderBreak(times[time])}
@@ -239,6 +246,7 @@ function renderBlock(time) {
           {times[time].includes('presentation') && renderPresentation(time)}
         </Grid>
       ))}
+    </div>
     </div>
   );
 }

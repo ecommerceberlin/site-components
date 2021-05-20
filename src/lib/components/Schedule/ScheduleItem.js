@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
     borderColor : '#eaeaea',
     padding: 10,
     borderRadius: 5,
-
+    backgroundColor: "#ffffff",
+    
     [theme.breakpoints.down('sm')]: {
       // borderWidth : 1,
       // borderStyle : 'solid',
