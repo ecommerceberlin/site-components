@@ -2,7 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import { useSelector } from 'react-redux'
-// import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+
 // import compose from 'recompose/compose'
 
 import _filter from 'lodash/filter';
@@ -19,6 +20,15 @@ import ScheduleBreak from './ScheduleBreak';
 import {VenueSelector} from './redux'
 import colconfig from './colconfig'
 import {useSettings, filterFuncFromArr} from '../../helpers'
+
+
+const useStyles = makeStyles(theme => ({
+
+  timeSlot: {
+    marginBottom: 20
+  }
+
+}))
 
 const defaultProps = {
   day: null,
@@ -38,6 +48,7 @@ const defaultProps = {
 
 const Schedule = ({setting = "schedule", ...props}) => {
 
+  const classes = useStyles();
   const settings = useSettings(setting)
   const {
     day,
@@ -222,7 +233,7 @@ function renderBlock(time) {
       </Hidden>
 
       {Object.keys(times).map((time) => (
-        <Grid key={time} container spacing={1} >
+        <Grid key={time} container spacing={1} className={classes.timeSlot} >
           {times[time].includes('break') && renderBreak(times[time])}
           {times[time].includes("block") && renderBlock(time)}
           {times[time].includes('presentation') && renderPresentation(time)}

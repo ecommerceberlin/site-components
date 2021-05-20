@@ -1,7 +1,9 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '../MyTypography';
+import Typography from '@material-ui/core/Typography';
+
+import MyTypography from '../MyTypography';
 import {useSettings} from '../../helpers'
 // <Tags tags={_get(company.profile, "keywords")} />
 
@@ -45,9 +47,9 @@ const Presentation = ({setting, ...props}) => {
 
   return (
     <div className={classes.root}>
-      <Typography template="presenter2">{title}</Typography>
+      <Typography variant="h5">{title}</Typography>
       <div className={hideDescriptionOnMobile ? classes.description : ''}>
-        <Typography template="presenterText">{description}</Typography>
+        <MyTypography template="presenterText">{description}</MyTypography>
       </div>
     </div>
   );

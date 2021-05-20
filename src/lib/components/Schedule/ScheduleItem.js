@@ -12,6 +12,7 @@ import { dialogShow } from '../redux/actions';
 import { 
   getParticipantCdn,
   getSpeakerAvatar,
+  getSpeakerLogotype,
   getSpeakerName,
   useSettings
  } from '../../helpers';
@@ -22,11 +23,17 @@ const useStyles = makeStyles(theme => ({
 
   item: {
     
+    borderWidth : 1,
+    borderStyle : 'solid',
+    borderColor : '#eaeaea',
+    padding: 10,
+    borderRadius: 5,
+
     [theme.breakpoints.down('sm')]: {
-      borderWidth : 1,
-      borderStyle : 'solid',
-      borderColor : '#eaeaea',
-      padding: 10
+      // borderWidth : 1,
+      // borderStyle : 'solid',
+      // borderColor : '#eaeaea',
+      // padding: 10
     },
 
   },
@@ -89,6 +96,7 @@ const ScheduleItem = ({setting, ...props}) => {
     ),
     content: (
       <div>
+
         <Presentation
           setting={setting}
           title={data.presentation_title}
@@ -146,6 +154,7 @@ const ScheduleItem = ({setting, ...props}) => {
         setting={setting}
         title={getSpeakerName(data)}
         text={getFullJobInfo(data)}
+        logotype={ getSpeakerLogotype(data, [], 200) }
         imageSrc={ getSpeakerAvatar(data, [], 100) }
       />
       </div>
