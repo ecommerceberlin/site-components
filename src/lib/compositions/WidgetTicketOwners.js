@@ -11,6 +11,7 @@ import isEmpty from 'lodash/isEmpty'
 import MyButton from '../components/MyButton'
 import { makeStyles } from '@material-ui/core/styles';
 import TicketImage from '../components/TicketImage'
+import { useRouter } from 'next/router'
 
 const defaultGridSettings = {
     xs: 6,
@@ -56,6 +57,7 @@ const defaultGridSettings = {
       objectFit: "contain",
       maxHeight: "80%",
       maxWidth: "80%",
+      cursor: 'pointer'
     },
 
     item: {
@@ -96,7 +98,7 @@ const defaultGridSettings = {
     }
 }));
 
-const TicketDetails = ({labelPrefix, image, detailsUrl, owners, moreInfoLabel}) => {
+const TicketDetails = ({setting, labelPrefix, image, detailsUrl, owners, moreInfoLabel}) => {
 
     const classes = useStyles();
     const dialog = useDialog();
@@ -112,16 +114,16 @@ const TicketDetails = ({labelPrefix, image, detailsUrl, owners, moreInfoLabel}) 
     <Box  className={classes.item}>
     <Grid container spacing={2} direction="column" alignItems="center">
     <Grid item className={classes.itemWithIcon}>{image}</Grid>
-    <Grid item className={classes.itemWithCatName}><TicketHeader baseLabel={labelPrefix} /></Grid>
+    <Grid item className={classes.itemWithCatName}><TicketHeader setting={setting} baseLabel={labelPrefix} /></Grid>
     <Grid item className={classes.itemWithLogo}>
-        <TicketOwnersList detailsUrl={detailsUrl} owners={owners} moreInfoLabel={moreInfoLabel} />
+        <TicketOwnersList setting={setting} detailsUrl={detailsUrl} owners={owners} moreInfoLabel={moreInfoLabel} />
     </Grid>
     </Grid>
     </Box>)
 }
 
 
-const TicketHeader = ({baseLabel}) => {
+const TicketHeader = ({setting, baseLabel}) => {
 
     const classes = useStyles();
     const [translate] = useTranslate();
@@ -131,22 +133,24 @@ const TicketHeader = ({baseLabel}) => {
 
 
 
-const TicketOwnersList = ({detailsUrl, owners, moreInfoLabel}) => {
+const TicketOwnersList = ({setting, detailsUrl, owners, moreInfoLabel}) => {
     if( !Array.isArray(owners) || isEmpty(owners)){
         return <NoTicketOwner href={detailsUrl} label={moreInfoLabel} color="secondary" />
     }
-    return owners.map(owner => <TicketOwner key={owner.id} logotype={owner.profile.logotype_cdn}  />)
+    return owners.map(owner => <TicketOwner setting={setting} key={owner.id} id={owner.id} logotype={owner.profile.logotype_cdn}  />)
 }
 
-const TicketOwner = ({logotype, fluid=true}) => {
+const TicketOwner = ({setting, id, logotype, fluid=true}) => {
     const classes = useStyles();
+    const router = useRouter();
+    const {profilePrefix = "/speakers"} = useSettings(setting);
 
     return (
        
         <Avatar variant="square" src={ resizeCloudinaryImage(logotype, 300, 300) } classes={{
             root: fluid? classes.avatarContainerFluid: classes.avatarContainer,
             img: classes.avatarImg
-          }}/>
+          }} onClick={() => router.push(`${profilePrefix}/${id}`) }/>
       
     )
 }
@@ -169,7 +173,7 @@ const WidgetTicketOwners = ({setting="sponsors", icons=null }) => {
 
     return (<Wrapper {...wrapperProps}><Grid container spacing={2} alignItems="stretch"   >{
         data.map(item => <Grid key={item.id} item {..._gridSettings}>
-        <TicketDetails moreInfoLabel={moreInfoLabel} detailsUrl={item.details_url} labelPrefix={item.translation_asset_id} image={<TicketImage icons={icons} data={item} />} owners={item.owners} />
+        <TicketDetails setting={setting} moreInfoLabel={moreInfoLabel} detailsUrl={item.details_url} labelPrefix={item.translation_asset_id} image={<TicketImage icons={icons} data={item} />} owners={item.owners} />
         </Grid>)
     }</Grid></Wrapper>)
     
