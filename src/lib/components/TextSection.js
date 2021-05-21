@@ -5,17 +5,28 @@ import { useTranslate } from '../i18n';
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box';
 import ReactMarkdown from 'react-markdown'
+import {useSettings} from '../helpers'
 
 
 const useStyles = makeStyles(theme => ({
 
 }))
 
+const defaultProps = {
+    baseLabel: "awards.fields",
+    margin: 0,
+    padding: 0,
+    isOption: false,
+    boxProps: {},
+    isLink: false
+}
 
-const TextSection = ({baseLabel, margin, padding, isOption, record, name, isLink, ...boxProps}) => {
+const TextSection = ({setting, isOption, record, name, isLink, ...props}) => {
 
     const [translate] = useTranslate();
     const classes = useStyles();
+    const settings = useSettings(setting, {})
+    const {baseLabel, margin, padding, boxProps} = Object.assign({}, defaultProps, settings, props)
 
     let value = _get(record, name, "").trim();
 
@@ -43,14 +54,6 @@ const TextSection = ({baseLabel, margin, padding, isOption, record, name, isLink
 
 }
 
-TextSection.defaultProps = {
-    baseLabel: "awards.fields",
-    margin: 0,
-    padding: 0,
-    isOption: false,
-    boxProps: {},
-    isLink: false
-}
 
 export default TextSection;
 

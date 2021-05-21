@@ -1,5 +1,7 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
+
 import get from 'lodash/get';
 
 import {
@@ -9,7 +11,8 @@ import {
     Presenter as PresenterName,
     Sharer,
     MyAvatar as Avatar,
-    ProfileLogotype
+    ProfileLogotype,
+    TextSection
   } from '../components';
 
 import {useSettings} from '../helpers'
@@ -24,7 +27,7 @@ const defaultProps = {
         label: null,
         secondaryLabel: null,
         first: true
-    }
+    },
 }
 
 const WidgetPresenter = ({setting="speakers", id, ...props}) => {
@@ -67,6 +70,19 @@ const WidgetPresenter = ({setting="speakers", id, ...props}) => {
                         <Divider />
                         <PresenterName data={profile} />
                         <Sharer url={finalPath} />
+                        <Divider />
+
+                        <Box mt={2}>
+                        <TextSection setting={setting} record={profile} name="cname2" />
+                        <TextSection setting={setting} record={profile} name="company_description" />
+                        <TextSection setting={setting} record={profile} name="product_description" />
+                        <TextSection setting={setting} record={profile} name="company_website" />
+                        <TextSection setting={setting} record={profile} name="profile_facebook" />
+                        <TextSection setting={setting} record={profile} name="profile_linkedin" />
+                        <TextSection setting={setting} record={profile} name="profile_twitter" />
+
+                        </Box>
+
                     </div>
                 }
                 />
