@@ -4,6 +4,7 @@ import Chip from '@material-ui/core/Chip';
 // import red from '@material-ui/core/colors/red';
 import { useTranslate } from '../../i18n';
 import {useSettings} from '../../helpers'
+import isString from 'lodash/isString'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,7 +57,7 @@ const PresentationLabel = ({ setting, time="", venue="", category=null, buttons 
         variant="outlined"
       />
 
-      {category && <Chip 
+      {isString(category) && category.length > 1 && <Chip 
         label={translate(`tags.${category}`)} 
         className={classes.chip}
         style={styling} 
