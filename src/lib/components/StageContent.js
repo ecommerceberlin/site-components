@@ -3,7 +3,7 @@ import React from 'react';
 import Player from 'react-player'
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from '../i18n';
-import { useUserData, useSettings } from '../helpers'
+import { useSavedToken, useSettings } from '../helpers'
 import WidgetRegForm from '../compositions/WidgetRegForm'
 
 const useStyles = makeStyles(theme => ({
@@ -37,7 +37,7 @@ const StageContent = ({stage, setting, ...props }) => {
 
     const [translate] = useTranslate()
     const classes = useStyles()
-    const user = useUserData();
+    const user = useSavedToken();
     const settings = useSettings(setting)
     
     stage = stage.toUpperCase()

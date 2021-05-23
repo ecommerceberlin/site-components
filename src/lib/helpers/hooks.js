@@ -61,6 +61,14 @@ export const useSettings = (_path = null, _fallback = undefined) => {
     return _path? func(_path, _fallback): func;
 }
 
+export const useSavedToken = () => {
+
+    const token = useSelector(state => state.app.token)
+
+    return token
+
+}
+
 export const useUserData = () => {
 
     const [updates, setUpdates] = useState(0);
