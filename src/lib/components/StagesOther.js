@@ -1,11 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+
+
+
 import { useTranslate } from '../i18n';
 import ScheduleItem from '../components/Schedule/ScheduleItem'
 import MyButton from '../components/MyButton'
-import Typography from '@material-ui/core/Typography';
 import {useRouter} from 'next/router'
 import isEmpty from 'lodash/isEmpty'
 import {useSettings} from '../helpers'
@@ -57,9 +61,9 @@ const StagesOther = ({setting, data, stage, ...props}) => {
 
             const _venue = (item.presentation_venue || "").toLowerCase()
 
-            return (<Grid key={_venue} item xl={4} lg={4} md={6} sm={6} xs={12} key={item.id} className={classes.scheduleItem}>
+            return (<Grid key={item.id} className={classes.scheduleItem}>
             <ScheduleItem data={item} description={false} buttons={[
-                <MyButton className={classes.button} variant="contained" color="primary" label="common.join" onClick={() => router.push(`/stages/${_venue}`)}/>
+                <MyButton className={classes.button} variant="contained" color="primary" startIcon={<ExitToAppIcon />} label={null} onClick={() => router.push(`/stages/${_venue}`)}/>
             ]}/>
           
           </Grid>)

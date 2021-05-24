@@ -12,6 +12,8 @@ import useSWR from 'swr'
 import fetch from 'isomorphic-unfetch'
 // import Box from '@material-ui/core/Box';
 import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/AlertTitle';
+
 import Button from '@material-ui/core/Button';
 import { useTranslate } from '../i18n';
 import moment from 'moment'
@@ -92,7 +94,7 @@ const DiscordChat = ({setting, stage, ...props}) => {
     const [translate, locale] = useTranslate()
     const classes = useStyles()
     const settings = useSettings(setting)
-    const {discordProps: {join, title, subtitle, avatars, showTime}, stages} = Object.assign({}, defaultProps, settings, props)
+    const {discordProps: {join, title, description, avatars, showTime}, stages} = Object.assign({}, defaultProps, settings, props)
 
     stage = stage.toUpperCase();
 
@@ -100,44 +102,45 @@ const DiscordChat = ({setting, stage, ...props}) => {
 
     if(!discord){
         return (<div>
-            <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
+            <Alert severity="info" action={ <DiscordJoinButton href={join} /> }>
+            <AlertTitle>{translate(title)}</AlertTitle>{translate(description)}</Alert>
          </div>)
     }
 
-    const { data, error } = useSWR(`https://proxy.eventjuicer.com/api/discord/${discord}`, fetcher, { 
-        refreshInterval: 60*1000, //pull every minute
-        refreshWhenHidden: true 
-    })
+    // const { data, error } = useSWR(`https://proxy.eventjuicer.com/api/discord/${discord}`, fetcher, { 
+    //     refreshInterval: 60*1000, //pull every minute
+    //     refreshWhenHidden: true 
+    // })
 
-    moment.locale("pl");
+    // moment.locale("pl");
 
-    if(error || isEmpty(data)){
-        return (<div>
-           <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
-        </div>)
-    }
+    // if(error || isEmpty(data)){
+    //     return (<div>
+    //        <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
+    //     </div>)
+    // }
     
-    return (
-        <div>  
+    // return (
+    //     <div>  
                         
-            <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
+    //         <Alert severity="info">{translate(title)}<DiscordJoinButton href={join} /></Alert>
 
-            <List className={classes.list}>
-            {data.map(item => (
-                <ListItem key={item.id} alignItems="flex-start" disableGutters dense={true} divider={true}>
-               {avatars && <ListItemAvatar>
-                    <Avatar alt={item.user} src={item.avatar} />
-                </ListItemAvatar>}
-                <ListItemText
-                    primary={clearDiscordMsg(item.content)}
-                    secondary={showTime? `${item.user} ${moment(item.ts).fromNow()}`: null}
-                />
-                </ListItem>
-            ))}
-            </List>
+    //         <List className={classes.list}>
+    //         {data.map(item => (
+    //             <ListItem key={item.id} alignItems="flex-start" disableGutters dense={true} divider={true}>
+    //            {avatars && <ListItemAvatar>
+    //                 <Avatar alt={item.user} src={item.avatar} />
+    //             </ListItemAvatar>}
+    //             <ListItemText
+    //                 primary={clearDiscordMsg(item.content)}
+    //                 secondary={showTime? `${item.user} ${moment(item.ts).fromNow()}`: null}
+    //             />
+    //             </ListItem>
+    //         ))}
+    //         </List>
            
-        </div>
-    )
+    //     </div>
+    // )
 }
 
 export default DiscordChat

@@ -14,103 +14,31 @@ import HelpIcon from '@material-ui/icons/Help';
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-import { dialogShow } from './redux/actions';
 import {useSettings, getSpeakerAvatar, resizeCloudinaryImage, capitalizeFirstLetter} from '../helpers'
 import { useTranslate } from '../i18n';
 
 
 const useStyles = makeStyles(theme => ({
-    pt: {
-
-    },
-    pd: {
-
-    },
-    avs: {
-        margin: 10,
-        display: 'flex',
-        justifyContent: 'center', //horizontal
-        alignItems: 'center', //vertical
-
-        [theme.breakpoints.down("md")]: {
-            flexDirection: 'column',
-            margin: 0
-        }
-
-    },
-    av: {
-        height: 100,
-        width: 100,
-    },
-
-    avC: {
-        height: 200,
-        width: 200,
-        [theme.breakpoints.up("md")]: {
-           marginLeft: 10
-        }
-    },
-    
-    avImg: {
-        objectFit: "contain",
-        padding: "2%"
-    },
-
-    profiles: {
-        margin: 10,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-start', //horizontal
-        alignItems: 'center', //vertical
-    },
+  
 }))
 
 const defaultProps = {
-
+    sponsors: []
 }
 
-const ProfileIcon = ({data}) => {
-
-    const classes = useStyles()
-    const icons = {Facebook, Twitter, Linkedin}
-    const [translate] = useTranslate()
-    
-    if(isEmpty(data)){
-        return null
-    }
-    const profiles = []
-
-    Object.keys(data).forEach(item => {
-        const nameCap = capitalizeFirstLetter(item.replace("profile_", ""))
-        if(item.startsWith("profile_") && !isEmpty(data[item]) && nameCap in icons ){
-            profiles.push({name: nameCap, link: data[item], IconComponent: icons[nameCap]})
-        }
-    })
-
-    return (<div className={classes.profiles}>{!isEmpty(profiles)? translate("presenters.contact.options"): null}{` `}{profiles.map(({name, link, IconComponent})=><Button key={link} href={link} target="_blank" variant="text" color="primary" startIcon={<IconComponent />}>{name}</Button>)}</div>)
-}
-
-
-
-const StageOverview = ({setting, stage, data, ...props}) => {
+const StageSponsors = ({setting, stage, ...props}) => {
 
     const settings = useSettings(setting)
 
     const classes = useStyles()
     // const dispatch = useDispatch();
 
-    const {ekhm} = Object.assign({}, defaultProps, settings, props)
+    const {sponsors} = Object.assign({}, defaultProps, settings, props)
 
-    if(isEmpty(stage) || isEmpty(data)){
+    if(isEmpty(stage) || isEmpty(sponsors)){
         return null
     }
 
-
-
-    // const dialogData = {
-    //     title: "", 
-    //     content: <Typography className={classes.pd}>{get(data, "presentation_description", "")}</Typography> 
-    // }
 
     return (<Box mb={3}>
     <Grid container spacing={2}>
@@ -146,4 +74,4 @@ const StageOverview = ({setting, stage, data, ...props}) => {
    )
 } 
 
-export default StageOverview
+export default StageSponsors

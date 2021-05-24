@@ -16,7 +16,7 @@ const MyButton = ({ label, href, ...rest }) => {
   }
   
   return (
-    <Button href={href} {...rest}>{translate(label)}</Button>
+    <Button href={href} {...rest}>{label ? translate(label): null}</Button>
   );
 }
 

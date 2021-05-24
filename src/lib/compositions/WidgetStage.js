@@ -7,16 +7,23 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
 import Wrapper from '../components/Wrapper'
-// import { useTranslate } from '../i18n';
+import { useTranslate } from '../i18n';
 import StageOverview from '../components/StageOverview'
 import StageContent from '../components/StageContent'
 import StagesOther from '../components/StagesOther'
+import StageSponsors from '../components/StageSponsors'
+
 import DiscordChat from '../components/DiscordChat'
 import {useSettings} from '../helpers'
 import MyButton from '../components/MyButton'
 
-const useStyles = makeStyles(theme => ({
 
+
+
+const useStyles = makeStyles(theme => ({
+    stageButton: {
+        marginRight: 5
+    },
 }))
 
 const fetcher = url => fetch(url).then(r => r.json())
@@ -26,9 +33,13 @@ const getStage = (stages, stage) => stages && Array.isArray(stages) && stages.le
 
 
 const ListOfStages = ({stage="", stages = []}) => {
-    return (<Box mb={2}>{
-        stages.map(item => <MyButton color="primary" variant={stage==item? 'contained': 'text'} key={item} href={`/stages/${item.toLowerCase()}`} label={item} />)
-        }</Box>)
+    const classes = useStyles()
+    const [translate] = useTranslate()
+    return (<Box mb={2} mt={2}><Grid container spacing={1} alignItems="center">
+        <Grid item>{translate("common.stages")}</Grid>
+        <Grid item>{
+        stages.map(item => <MyButton className={classes.stageButton} color={stage==item? 'secondary': 'secondary'} variant={stage==item? 'contained': 'outlined'} key={item} href={`/stages/${item.toLowerCase()}`} label={item} />)
+        }</Grid></Grid></Box>)
 }
 
 const WidgetStage = ({stage, setting}) => {
@@ -40,51 +51,28 @@ const WidgetStage = ({stage, setting}) => {
 
     //AGENDA
     const { data, error } = useSWR(api, fetcher, { 
-        refreshInterval: 10*1000, //pull every 10 seconds
+        refreshInterval: 30*1000, //pull every 10 seconds
         refreshWhenHidden: false 
     })
 
     const current = getStage(data, stage)
 
-    return (
-      
-        <Wrapper label={["streaming.stage.title", {name: stage}]} dense={true}> 
-       
-                {current && <StageOverview setting={setting} data={current} stage={stage} />}
-                <Grid container spacing={3}>
+    return (<Wrapper label={["streaming.stage.title", {name: stage}]} dense={true}> 
+                <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-                        <StageContent 
-                            setting={setting} 
-                            stage={stage} 
-                        />
+                       {current && <StageOverview setting={setting} data={current} stage={stage} />}
+                        <StageContent setting={setting} stage={stage} />
                     </Grid>
-                    <Grid item xs={12} sm={12} md={5} lg={3} xl={3} >
-                        <ListOfStages 
-                            stage={stage} 
-                            stages={Object.keys(stages)}
-                        />
-                      
-                        <DiscordChat 
-                            setting={setting} 
-                            stage={stage} 
-                        />
+                    <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
+                        <DiscordChat setting={setting} stage={stage} />
+                        <ListOfStages setting={setting} stage={stage} stages={Object.keys(stages)} />         
+                        <StageSponsors setting={setting} stage={stage} />
+                        <Divider />
+                        <StagesOther setting={setting} data={data} stage={stage} />
                     </Grid>
-
-                    <Grid item xs={12} sm={12} md={7} lg={12} xl={12} >
-                        <StagesOther 
-                            setting={setting} 
-                            data={data} 
-                            stage={stage} 
-                        />
-                    </Grid>
-
+                    {/* <Grid item xs={12} sm={12} md={7} lg={12} xl={12} ></Grid> */}
                 </Grid>
-
-              
-
-        </Wrapper>
-       
-    )
+    </Wrapper>)
    
 }
 
