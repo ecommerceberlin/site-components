@@ -35,7 +35,7 @@ const getStage = (stages, stage) => stages && Array.isArray(stages) && stages.le
 const ListOfStages = ({stage="", stages = []}) => {
     const classes = useStyles()
     const [translate] = useTranslate()
-    return (<Box mb={2} mt={2}><Grid container spacing={1} alignItems="center">
+    return (<Box mb={3} mt={3}><Grid container spacing={1} alignItems="center">
         <Grid item>{translate("common.stages")}</Grid>
         <Grid item>{
         stages.map(item => <MyButton className={classes.stageButton} color={stage==item? 'secondary': 'secondary'} variant={stage==item? 'contained': 'outlined'} key={item} href={`/stages/${item.toLowerCase()}`} label={item} />)
@@ -64,10 +64,13 @@ const WidgetStage = ({stage, setting}) => {
                         <StageContent setting={setting} stage={stage} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
+                        
+                        <StageSponsors setting={setting} stage={stage} />
+
                         <DiscordChat setting={setting} stage={stage} />
                         <ListOfStages setting={setting} stage={stage} stages={Object.keys(stages)} />         
-                        <StageSponsors setting={setting} stage={stage} />
-                        <Divider />
+                       
+                        {/* <Divider /> */}
                         <StagesOther setting={setting} data={data} stage={stage} />
                     </Grid>
                     {/* <Grid item xs={12} sm={12} md={7} lg={12} xl={12} ></Grid> */}

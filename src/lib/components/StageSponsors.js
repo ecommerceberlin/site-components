@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
+import isObject from 'lodash/isObject'
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
 import Facebook from '@material-ui/icons/Facebook'
@@ -16,62 +17,58 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import {useSettings, getSpeakerAvatar, resizeCloudinaryImage, capitalizeFirstLetter} from '../helpers'
 import { useTranslate } from '../i18n';
-
+import { useDatasource } from '../helpers'
 
 const useStyles = makeStyles(theme => ({
-  
+
+    sponsorImageContainer: {
+        width: 200,
+        height: 80,
+    },
+    sponsorImage: {
+        objectFit: "contain",
+        maxHeight: "90%",
+        maxWidth: "90%",
+    }
 }))
 
 const defaultProps = {
-    sponsors: []
+    stages: {}
 }
 
 const StageSponsors = ({setting, stage, ...props}) => {
 
+    const [translate] = useTranslate()
     const settings = useSettings(setting)
-
     const classes = useStyles()
-    // const dispatch = useDispatch();
+    const {stages} = Object.assign({}, defaultProps, settings, props)
 
-    const {sponsors} = Object.assign({}, defaultProps, settings, props)
+    const {presenters} = useDatasource({
+        presenters: { resource: "presenters" }
+    })
 
-    if(isEmpty(stage) || isEmpty(sponsors)){
+    const {sponsors} = stage && stages && isObject(stages) && stage.toUpperCase() in stages? stages[ stage.toUpperCase() ]: []
+
+    if(isEmpty(stage) || isEmpty(stages) || isEmpty(presenters) || isEmpty(sponsors) || !Array.isArray(sponsors)){
         return null
     }
 
+    return (<Box mb={2}><Typography variant="overline" display="block" align="center" gutterBottom>{translate("streaming.stagesponsors")}</Typography><Grid container spacing={1} direction="column" alignItems="center" justify="center">{sponsors.map(id => {
 
-    return (<Box mb={3}>
-    <Grid container spacing={2}>
-        <Grid item className={classes.avs} xl={3} lg={3} md={3} sm={12} xs={12}>
-            <Avatar 
-                className={classes.av}
-                src={getSpeakerAvatar(data, undefined, 120)} 
-            />
+        const sponsor = presenters.find(item => item.id == id)
+
+        return (<Grid key={id} item xl={12} lg={12} md={12} sm={12} xs={12}>
             <Avatar 
                 variant="square"  
-                src={ resizeCloudinaryImage(get(data, "logotype"), 200, 200) } 
+                src={ resizeCloudinaryImage(get(sponsor, "logotype_cdn"), 300, 300) } 
                 classes={{
-                    root: classes.avC,
-                    img: classes.avImg
+                    root: classes.sponsorImageContainer,
+                    img: classes.sponsorImage
                 }}
             />
-        </Grid>
-        <Grid item xl={8} lg={8} md={9} sm={12} xs={12}>
-            <Typography variant="h4" gutterBottom={true} className={classes.pt}>{`${get(data, "presenter", "")}: ${get(data, "presentation_title", "")}`}
-            
-            {/* <Chip 
-            key="details" 
-            label="Info"
-            icon={<HelpIcon />} onClick={() => dispatch(dialogShow(dialogData))}
-          /> */}
-          </Typography> 
-          <Typography className={classes.pd}>{`${get(data, "presentation_description", "").slice(0, 200)}...`}</Typography> 
-            <Divider />
-             <ProfileIcon data={data} /> 
-        </Grid>
-    </Grid>
-    </Box>
-   )
+        </Grid>)
+    })}</Grid></Box>)
+    
 } 
 
 export default StageSponsors

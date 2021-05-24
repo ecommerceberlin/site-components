@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
     },
     avs: {
-        margin: 10,
+        padding: 10,
         display: 'flex',
         justifyContent: 'center', //horizontal
         alignItems: 'center', //vertical
@@ -39,12 +39,13 @@ const useStyles = makeStyles(theme => ({
 
     },
     av: {
-        height: 100,
-        width: 100,
+        height: 80,
+        width: 80,
+        marginRight: 10,
     },
 
     avC: {
-        height: 200,
+        height: 80,
         width: 200,
         [theme.breakpoints.up("md")]: {
            marginLeft: 10
@@ -53,6 +54,7 @@ const useStyles = makeStyles(theme => ({
     
     avImg: {
         objectFit: "contain",
+        maxWidth: "90%",
         padding: "2%"
     },
 
@@ -113,23 +115,29 @@ const StageOverview = ({setting, stage, data, ...props}) => {
     // }
 
     return (<Box mb={3}>
-    <Grid container spacing={2}>
+    <Grid container spacing={2} alignItems="center">
         <Grid item className={classes.avs} xl={3} lg={3} md={3} sm={12} xs={12}>
+
+
+            <Avatar 
+            variant="square"  
+            src={ resizeCloudinaryImage(get(data, "logotype_cdn"), 200, 200) } 
+            classes={{
+                root: classes.avC,
+                img: classes.avImg
+            }}
+        />
+
+
             <Avatar 
                 className={classes.av}
                 src={getSpeakerAvatar(data, undefined, 120)} 
             />
-            <Avatar 
-                variant="square"  
-                src={ resizeCloudinaryImage(get(data, "logotype"), 200, 200) } 
-                classes={{
-                    root: classes.avC,
-                    img: classes.avImg
-                }}
-            />
+          
+         
         </Grid>
         <Grid item xl={8} lg={8} md={9} sm={12} xs={12}>
-            <Typography variant="h4" gutterBottom={true} className={classes.pt}>{`${get(data, "presenter", "")}: ${get(data, "presentation_title", "")}`}
+            <Typography variant="h5" gutterBottom={true} className={classes.pt}>{`${get(data, "presenter", "")}: ${get(data, "presentation_title", "")}`}
             
             {/* <Chip 
             key="details" 
@@ -137,7 +145,7 @@ const StageOverview = ({setting, stage, data, ...props}) => {
             icon={<HelpIcon />} onClick={() => dispatch(dialogShow(dialogData))}
           /> */}
           </Typography> 
-          <Typography className={classes.pd}>{`${get(data, "presentation_description", "").slice(0, 200)}...`}</Typography> 
+          <Typography variant="body2" className={classes.pd}>{`${get(data, "presentation_description", "")}`}</Typography> 
             <Divider />
              <ProfileIcon data={data} /> 
         </Grid>
