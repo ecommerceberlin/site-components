@@ -136,7 +136,7 @@ const StageOverview = ({setting, stage, data, ...props}) => {
           </Typography> 
           <Typography className={classes.pd}>{get(data, "presentation_description", "")}</Typography> 
             <Divider />
-            <div className={classes.profiles}>Kontakt z Prelegentem: <ProfileIcon data={data} /> </div>
+            <div className={classes.profiles}>{translate("presenters.contact.options")}: <ProfileIcon data={data} /> </div>
         </Grid>
     </Grid>
     </Box>

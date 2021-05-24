@@ -5,6 +5,7 @@ import Chip from '@material-ui/core/Chip';
 import { useTranslate } from '../../i18n';
 import {useSettings} from '../../helpers'
 import isString from 'lodash/isString'
+import isObject from 'lodash/isObject'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,7 +39,7 @@ const PresentationLabel = ({ setting, time="", venue="", category=null, buttons 
   const classes = useStyles();
   const settings = useSettings(setting)
   const {categories} = Object.assign({}, defaultProps, settings, otherProps)
-  const styling = category in categories? categories[category]: {}
+  const styling = isObject(category) && category in categories? categories[category]: {}
 
   return (
     <div className={classes.root}>
