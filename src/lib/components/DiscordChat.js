@@ -65,7 +65,7 @@ const DiscordJoinButton = ({href = ""}) => {
         href={href}
         target="_blank"
         className={classes.button} 
-        startIcon={<DiscordLogotype style={{height: 40, width: "auto"}} />} 
+        startIcon={<DiscordLogotype style={{height: 30, width: "auto"}} />} 
         variant="text" />
     )
 }

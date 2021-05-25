@@ -49,6 +49,9 @@ const useStyles = makeStyles(theme => ({
         width: 200,
         [theme.breakpoints.up("md")]: {
            marginLeft: 10
+        },
+        [theme.breakpoints.down("lg")]: {
+            width: 150
         }
     },
     
@@ -116,7 +119,7 @@ const StageOverview = ({setting, stage, data, ...props}) => {
 
     return (<Box mb={3}>
     <Grid container spacing={2} alignItems="center">
-        <Grid item className={classes.avs} xl={3} lg={3} md={3} sm={12} xs={12}>
+        <Grid item className={classes.avs} xl={3} lg={3} md={4} sm={12} xs={12}>
 
 
             <Avatar 
@@ -136,7 +139,7 @@ const StageOverview = ({setting, stage, data, ...props}) => {
           
          
         </Grid>
-        <Grid item xl={8} lg={8} md={9} sm={12} xs={12}>
+        <Grid item xl={8} lg={8} md={8} sm={12} xs={12}>
             <Typography variant="h5" gutterBottom={true} className={classes.pt}>{`${get(data, "presenter", "")}: ${get(data, "presentation_title", "")}`}
             
             {/* <Chip 
