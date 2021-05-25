@@ -14,7 +14,7 @@ const reducer = (state = {}, action) => {
        * experimental
        */
 
-      if(resource === "posts" || resource === "publishers" || resource === "ticketowners" || resource === "tickets" || resource === "presenters"){
+      if(resource === "posts" || resource === "publishers" || resource === "ticketowners" || resource === "tickets" || resource === "presenters" || resource === "contestant_companies_all"){
         const keyed = keyBy(data, "id");
         return {...state, [resource]: {...state[resource], ...keyed}}     
       }

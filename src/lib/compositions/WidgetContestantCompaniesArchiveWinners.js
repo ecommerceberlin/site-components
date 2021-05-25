@@ -4,48 +4,59 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import Wrapper from '../components/Wrapper'
 import AvatarlistCellProject from '../components/AvatarlistCellProject'
-import ContestantCompaniesArchive from '../datasources/ContestantCompaniesArchive'
 import WinnerCategory from '../components/WinnerCategory'
 import Box from '@material-ui/core/Box';
+import { useDatasource } from '../helpers';
+
 
 const WidgetContestantCompaniesArchiveWinners = ({resolveLink, resolveTitle, resolveAlt, resolveImage, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, ...wrapperProps}) => {
 
 
- return (
+    const {data} = useDatasource({
+        data: {
+            resource: "contestant_companies_all",
+            params: {},
+            filters: {
+                filter: (item) => parseInt(item.winner) === 1 && !item.current,
+            }
+        }
+    });
 
-    <Wrapper {...wrapperProps}>
-    <ContestantCompaniesArchive  
-       limit={limit}
-       random={random}
-       filter={filter} 
-       keyword={keyword}
-       keyword_source={keyword_source}
-       sort={sort}
-   >{({all, filtered, keywords}) => {
 
-        const data = keyword ? filtered : all;
+    return (  <Wrapper {...wrapperProps}>
+        <Box mt={8}>
+        <Grid  container justify={center ? 'center' : 'flex-start'}spacing={spacing}>
+        {data.map((item) => (<AvatarlistCellProject 
+                key={item.id} 
+                title={  resolveTitle(item) } 
+                alt={ resolveAlt(item) }
+                href={ resolveLink(item) }
+                image={ resolveImage(item) }
+                moreLabel={ moreLabel }
+            />))}
+        </Grid></Box></Wrapper>)
+
+
+//  return (
+
+  
+//     <ContestantCompaniesArchive  
+//        limit={limit}
+//        random={random}
+//        filter={filter} 
+//        keyword={keyword}
+//        keyword_source={keyword_source}
+//        sort={sort}
+//    >{({all, filtered, keywords}) => {
+
+//         const data = keyword ? filtered : all;
         
-        return (<Box mt={8}><Grid 
-            container 
-            justify={center ? 'center' : 'flex-start'}
-            spacing={spacing}
-            >
-            {data.map((item) => (<AvatarlistCellProject 
-                    key={item.id} 
-                    title={  resolveTitle(item) } 
-                    alt={ resolveAlt(item) }
-                    href={ resolveLink(item) }
-                    image={ resolveImage(item) }
-                    moreLabel={ moreLabel }
-                />))}
-            </Grid></Box>)}}
+//        }}
 
-</ContestantCompaniesArchive>
-</Wrapper>)
+// </ContestantCompaniesArchive>
+// )
 
 }
-
-
 
 
 WidgetContestantCompaniesArchiveWinners.defaultProps = {
