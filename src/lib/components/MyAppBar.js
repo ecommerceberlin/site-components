@@ -146,7 +146,7 @@ function MyAppBar(props) {
 
             {/* <LoginWithLinkedIn /> */}
 
-            <UpdateProfileLink />
+            {/* <UpdateProfileLink /> */}
             <LanguageSelect locales={ get("system.available_locales", []) } /> 
 
           {/* <Search /> */}
