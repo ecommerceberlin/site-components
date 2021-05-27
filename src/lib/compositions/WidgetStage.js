@@ -42,12 +42,30 @@ const ListOfStages = ({stage="", stages = []}) => {
         }</Grid></Grid></Box>)
 }
 
-const WidgetStage = ({stage, setting}) => {
+const defaultProps = {
+    wrapperProps: {
+        label: "streaming.stage.title",
+        dense: true
+    },
+    regform: "streaming_user.register",
+    api: "https://proxy.eventjuicer.com/api/schedule",
+    discordProps: {},
+    playerProps: {},
+    stages: {},
+    hints: true
+}
+
+const WidgetStage = ({stage = "a", setting = "streaming", ...props}) => {
 
     // const [translate] = useTranslate()
     // const classes = useStyles()
-    const {api, stages = {}} = useSettings(setting, {});
     stage = stage.toUpperCase()
+    const settings = useSettings(setting, {});
+    const  {hints, wrapperProps, api, stages} = Object.assign(defaultProps, settings, props)
+    
+    if(wrapperProps && "label" in wrapperProps && !Array.isArray(wrapperProps.label)){
+        wrapperProps.label = [wrapperProps.label, {name: stage}]
+    }
 
     //AGENDA
     const { data, error } = useSWR(api, fetcher, { 
@@ -57,21 +75,18 @@ const WidgetStage = ({stage, setting}) => {
 
     const current = getStage(data, stage)
 
-    return (<Wrapper label={["streaming.stage.title", {name: stage}]} dense={true}> 
+    return (<Wrapper {...wrapperProps}> 
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-                       {current && <StageOverview setting={setting} data={current} stage={stage} />}
+                       {hints && current && <StageOverview setting={setting} data={current} stage={stage} />}
                         <StageContent setting={setting} stage={stage} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
-                        
                         <StageSponsors setting={setting} stage={stage} />
-
-                        <DiscordChat setting={setting} stage={stage} />
-                        <ListOfStages setting={setting} stage={stage} stages={Object.keys(stages)} />         
-                       
+                        {hints && <DiscordChat setting={setting} stage={stage} />}
+                        {hints && <ListOfStages setting={setting} stage={stage} stages={Object.keys(stages)} />}         
                         {/* <Divider /> */}
-                        <StagesOther setting={setting} data={data} stage={stage} />
+                        {hints && <StagesOther setting={setting} data={data} stage={stage} />}
                     </Grid>
                     {/* <Grid item xs={12} sm={12} md={7} lg={12} xl={12} ></Grid> */}
                 </Grid>
@@ -79,9 +94,6 @@ const WidgetStage = ({stage, setting}) => {
    
 }
 
-WidgetStage.defaultProps = {
-   stage: "",
-   setting: "streaming",
-}
+
 
 export default WidgetStage
