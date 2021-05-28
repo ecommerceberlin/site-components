@@ -43,6 +43,7 @@ const ListOfStages = ({stage="", stages = []}) => {
 }
 
 const defaultProps = {
+    stage: "a",
     wrapperProps: {
         label: "streaming.stage.title",
         dense: true
@@ -55,38 +56,36 @@ const defaultProps = {
     hints: true
 }
 
-const WidgetStage = ({stage = "a", setting = "streaming", ...props}) => {
+const WidgetStage = ({setting = "streaming", ...props}) => {
 
     // const [translate] = useTranslate()
     // const classes = useStyles()
-    stage = stage.toUpperCase()
-    const settings = useSettings(setting, {});
-    const  {hints, wrapperProps, api, stages} = Object.assign(defaultProps, settings, props)
-    
-    if(wrapperProps && "label" in wrapperProps && !Array.isArray(wrapperProps.label)){
-        wrapperProps.label = [wrapperProps.label, {name: stage}]
-    }
 
-    //AGENDA
+    const settings = useSettings(setting, {});
+    const  {hints, wrapperProps, api, stage, stages} = Object.assign(defaultProps, settings, props)
     const { data, error } = useSWR(api, fetcher, { 
         refreshInterval: 30*1000, //pull every 10 seconds
         refreshWhenHidden: false 
     })
+    const _stage = stage.toUpperCase()
+    const current = getStage(data, _stage)
 
-    const current = getStage(data, stage)
+    if(wrapperProps && "label" in wrapperProps && !Array.isArray(wrapperProps.label)){
+        wrapperProps.label = [wrapperProps.label, {name: _stage}]
+    }
 
     return (<Wrapper {...wrapperProps}> 
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-                       {hints && current && <StageOverview setting={setting} data={current} stage={stage} />}
-                        <StageContent setting={setting} stage={stage} />
+                       {hints && current && <StageOverview setting={setting} data={current} stage={_stage} />}
+                        <StageContent setting={setting} stage={_stage} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
-                        <StageSponsors setting={setting} stage={stage} />
-                        {hints && <DiscordChat setting={setting} stage={stage} />}
-                        {hints && <ListOfStages setting={setting} stage={stage} stages={Object.keys(stages)} />}         
+                        <StageSponsors setting={setting} stage={_stage} />
+                        {hints && <DiscordChat setting={setting} stage={_stage} />}
+                        {hints && <ListOfStages setting={setting} stage={_stage} stages={Object.keys(stages)} />}         
                         {/* <Divider /> */}
-                        {hints && <StagesOther setting={setting} data={data} stage={stage} />}
+                        {hints && <StagesOther setting={setting} data={data} stage={_stage} />}
                     </Grid>
                     {/* <Grid item xs={12} sm={12} md={7} lg={12} xl={12} ></Grid> */}
                 </Grid>
