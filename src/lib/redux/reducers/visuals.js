@@ -6,6 +6,9 @@ import {
   DRAWER_SHOW, 
   DRAWER_HIDE,
   DIALOG_SHOW, 
+  DIALOG_TITLE_CHANGE,
+  DIALOG_SAVE,
+  DIALOG_REVERT,
   DIALOG_HIDE,
   SNACKBAR_SHOW, 
   SNACKBAR_HIDE,
@@ -13,7 +16,7 @@ import {
   PAGE_ACTION_HIDE
 } from '../../components/redux';
 
-const reducer = (state = { faqs: [], loading: false, drawer: false, dialog: {}, snackbar: {}, page_action: null }, action) => {
+const reducer = (state = { faqs: [], loading: false, drawer: false, dialog: {}, dialog_backup: {}, snackbar: {}, page_action: null }, action) => {
 
 switch (action.type) {
   
@@ -51,7 +54,19 @@ switch (action.type) {
   case DIALOG_SHOW:
     return {...state, dialog: action.payload};
   break;
+
+  case DIALOG_TITLE_CHANGE:
+    return {...state, dialog: {...state.dialog, title: action.payload}}
+  break;
   
+  case DIALOG_SAVE:
+    return {...state, dialog_backup: state.dialog};
+  break;
+  
+  case DIALOG_REVERT:
+    return {...state, dialog: state.dialog_backup};
+  break;
+
   case DIALOG_HIDE:
     return {...state, dialog: {}};
   break;
