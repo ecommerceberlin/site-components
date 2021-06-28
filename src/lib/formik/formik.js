@@ -2,6 +2,7 @@ import React from 'react'
 import { withFormik } from 'formik';
 import fetch from 'isomorphic-unfetch';
 import { validationSchema } from './validations';
+import isEmpty from 'lodash/isEmpty'
 
 export const filterFields = (fields, start = []) => {
   return Array.isArray(start) && start.length ? fields.filter(item => start.indexOf(item.name) === -1) : fields;
@@ -23,15 +24,17 @@ export default withFormik({
 
   handleSubmit: (payload, { props, setSubmitting, setErrors, setStatus }) => {
 
-    if( !("token" in props && "ticketId" in props && "role" in props) ){
+    if( !("token" in props && "tickets" in props && "role" in props) ){
       console.error("No ticketId/role set...", props);
       setStatus({error: {"message": "no ticketId/role set...."}});
+      setSubmitting(false);
       return;
     }
     
     const data = {
       fields: payload,
-      tickets: "ticketId" in props && props.ticketId? { [props.ticketId]: 1 } : {},
+      tickets: !isEmpty(props.tickets)? props.tickets: {[props.ticket_id]: {quantity: 1, formdata: {}}},
+      // tickets: "ticketId" in props && props.ticketId? { [props.ticketId]: 1 } : props.tickets,
       token: "token" in props? props.token: null,
       role: "role" in props? props.role: null,
       report: "report" in props? props.report: "",

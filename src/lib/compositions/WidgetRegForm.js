@@ -7,6 +7,9 @@ import { useSettings } from '../helpers'
 import isString from 'lodash/isString'
 import isEmpty from 'lodash/isEmpty'
 import {Centered} from '../components/MyLayouts'
+import {useTranslate} from '../i18n'
+import {useSelector} from 'react-redux'
+import {getCart} from '../redux/selectors'
 
 const defaultProps = {
   wrapperProps: {
@@ -28,7 +31,6 @@ const defaultProps = {
   ],
   start: ['email'],
   rightShadowed: false,
-  report: ""
 };
 
 const useStyles = makeStyles(theme => ({
@@ -50,6 +52,8 @@ const WidgetRegForm = ({setting, ...props}) => {
     const classes = useStyles()
     const settings = useSettings(setting)
     const {post_api, service_api} = useSettings("system")
+    const [translate, locale] = useTranslate()
+    const cart = useSelector(getCart)
 
     const { 
       email_template, 
@@ -59,18 +63,12 @@ const WidgetRegForm = ({setting, ...props}) => {
       start, 
       data, 
       right, 
-      rightShadowed,
-      baseLabel, 
+      rightShadowed, 
       role,
-      legend,
       token,
-      actionFinishedProps,
-      actionStartedProps,
-      onSuccess,
-      onError,
       wrapperProps,
       api,
-      report
+      ...other
     } = Object.assign({}, defaultProps, settings, props)
 
     if(isEmpty(fields)){
@@ -87,22 +85,18 @@ const WidgetRegForm = ({setting, ...props}) => {
             <Centered>
 
                <StepForm
-                baseLabel={ baseLabel }
                 data={ data }
-                ticketId={ ticket_id }
+                tickets={ cart }
+                ticket_id={ ticket_id }
                 fields={ fieldsWithOptions }
                 start={ start }
                 template={ email_template }
                 api={ api || post_api }
                 updateApi={ service_api }
                 role={ role }
-                legend={ legend }
                 token={ token }
-                actionFinishedProps={actionFinishedProps}
-                actionStartedProps={actionStartedProps}
-                onSuccess={onSuccess}
-                onError={onError}
-                report={report}
+                locale={ locale }
+                {...other}
               />
 
             </Centered>

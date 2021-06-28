@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import TextInput from './TextInput';
 import SelectInput from './SelectInput';
@@ -8,9 +8,9 @@ import CheckBoxInput from './CheckBoxInput';
 
 import FormButton from './FormButton';
 import withFormik, { filterFields, startFields } from './formik';
-import { withRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { MyTypography as Typography } from '../components';
-import { translate } from '../i18n';
+import { useTranslate } from '../i18n';
 import FormSuccess from './FormSuccess';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
@@ -20,153 +20,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MyButton from '../components/MyButton'
 // import shallowEqual from 'recompose/shallowEqual'
 import isFunction from 'lodash/isFunction'
+import {useDispatch} from 'react-redux'
+import { cartReset } from '../components/redux'
+import isEmpty from 'lodash/isEmpty'
 
-class StepForm extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      actionStartedNotified: false
-    }
-  }
-
-  componentDidMount(){
-
-    const {start, router, setValues, setTouched, values} = this.props;
-    const {asPath} = router;
-    const url = fullUrl(asPath)
-    const params = getUrlParams(asPath)
-
-    const prefilled = Object.keys(params);
-
-    setValues({...values, ...params, url})
-
-    let difference = prefilled.filter(x => !(start || []).includes(x));
-
-    if(difference.length || prefilled.length){
-      setTouched(params);
-    }
-
-  }
-
-  isStarted(){
-    const {touched} = this.props;
-    return Object.keys(touched).length;
-  }
-
-  componentDidUpdate(){
-    
-    const {data, values, status, formActionStarted, formActionFinished, actionStartedProps, actionFinishedProps} = this.props;
-    const {actionStartedNotified} = this.state;
-
-    if( !actionStartedNotified && this.isStarted() ) {
-      this.setState((prevState, props) => ({actionStartedNotified: true}))
-      formActionStarted(actionStartedProps);
-    }
-
-    if(status && "data" in status) {
-    
-      formActionFinished(actionFinishedProps);   
-
-      if('token' in status.data){
-        addToken(status.data.token);
-      }
-    }
-
- //  console.log("updated")
-  }
-
-  renderResetButton(label = "reset"){
-
-    const {setStatus, formActionFinished, actionFinishedProps} = this.props;
-
-    return <div><MyButton variant="outlined" color="primary" size="medium" onClick={e => { formActionFinished(actionFinishedProps);  setStatus(null); }} label={label} /></div>
-  
-  }
-
-  renderField(data, idx){
-
-    const {baseLabel, errors, values, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField} = this.props;
-    const id = data.name;
-    const required = "required" in data && data.required === true;
-    const error = id in errors ? errors[id] : false;
-    const value= id in values ? values[id] : "";
-    const label = `${baseLabel}.fields.${id}`
-    const multiline =  "long" in data && data.long || id.indexOf("description") > -1
-
-    const passedProps = {id, label, required, error, value, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField};
-
-    if("options" in data && Array.isArray(data.options) && data.options.length){
-      return (<SelectInput key={id} options={data.options} {...passedProps} />)
-    }
-
-    if("type" in data){
-      if(data.type === "confirm"){
-        return  (<CheckBoxInput key={id} {...passedProps} />)
-      }
-      if(data.type === "file"){
-        // return  (<FileInput key={id} {...passedProps} />)
-      }
-    }
-
-  
-    return (<TextInput key={idx} multiline={multiline} {...passedProps} />)
-
-  }
-
-
-  render(){
-
-    const {
-      values,
-      // touched,
-      // errors,
-      // dirty,
-      // isValid,
-      // handleChange,
-      // handleBlur,
-      status,
-      handleSubmit,
-      isSubmitting,
-      fields,
-      start,
-      baseLabel,
-      onSuccess,
-      onError,
-      legend
-    } = this.props;
-
-    const filteredFields = filterFields(fields, start);
-    const startedFields = startFields(fields, start);
-    const showStartFields = start && Array.isArray(start) && start.length;
-
-    if(isSubmitting){
-      return <CircularProgress />
-    }
-
-    if (status){
-      if( "data" in status && isFunction(onSuccess)){
-          return <div>{onSuccess({baseLabel, values})}{this.renderResetButton("reset")}</div>;
-      }
-      if( "error" in status && isFunction(onError)){
-          return <div>{onError({baseLabel, values})}{this.renderResetButton("reset")}</div>;
-      }
-    }
-
-    return (
-      
-      <form onSubmit={handleSubmit} style={{maxWidth: 700, width: "100%"}}>
-      <Typography template="legend" label={(legend || `${baseLabel}.form.intro`)} />
-      {showStartFields ? startedFields.map( (data, idx) => this.renderField(data, idx)) : null}
-      {(this.isStarted() || !showStartFields) && filteredFields.length ? filteredFields.map( (data, idx) =>  this.renderField(data, idx)) : null}
-      <FormButton label={`${baseLabel}.form.submit`} {...this.props} />
-    </form>
-    )
-  }
-}
-
-
-StepForm.defaultProps = {
+const defaultProps = {
   template : 'sparkpost-remplate',
   ticketId : 0,
   baseLabel : "visitors",
@@ -185,10 +43,106 @@ StepForm.defaultProps = {
   token: null
 };
 
-const enhance = compose(
-  translate,
-  withRouter,
-  connect(null, {formActionStarted, formActionFinished}),
-  withFormik
-)
-export default enhance(StepForm);
+
+const StepForm = ({setting, handleChange, handleBlur, handleSubmit, isSubmitting, isValid, validateField, setFieldValue, setValues, setFieldTouched, setTouched, setStatus, touched, values, errors, status, ...props}) => {
+
+  const [actionStartedNotified, setActionStartedNotified] = useState(false)
+  const dispatch = useDispatch()
+  const {asPath} = useRouter()
+  const [translate, locale] = useTranslate()
+
+  const {baseLabel, data, start, fields, tickets, actionStartedProps, actionFinishedProps, onSuccess, onError, legend} = Object.assign({}, defaultProps, props)
+
+  useEffect(() => {
+    const url = fullUrl(asPath)
+    const params = getUrlParams(asPath)
+    const prefilled = Object.keys(params);
+    setValues({...values, ...params, url, locale})
+    let difference = prefilled.filter(x => !(start || []).includes(x));
+    if(difference.length || prefilled.length){
+      setTouched(params);
+    }
+  }, [])
+
+  useEffect(() => {
+
+    if( !actionStartedNotified && isStarted() ) {
+      setActionStartedNotified(true)
+      dispatch(formActionStarted(actionStartedProps))
+    }
+
+    if(status && "data" in status) {
+      dispatch(formActionFinished(actionFinishedProps))   
+      if('token' in status.data){
+        addToken(status.data.token);
+      }
+      if(!isEmpty(tickets)){
+        dispatch(cartReset())
+      }
+    }
+  })
+
+  const filteredFields = filterFields(fields, start);
+  const startedFields = startFields(fields, start);
+  const showStartFields = start && Array.isArray(start) && start.length;
+  const isStarted = () => Object.keys(touched).length
+
+  const renderResetButton = (label = "reset") => {
+    return <div><MyButton variant="outlined" color="primary" size="medium" onClick={() => { dispatch(formActionFinished(actionFinishedProps));  setStatus(null); }} label={label} /></div>
+  }
+
+  const renderField = (data, idx) => {
+
+    const id = data.name;
+    const required = "required" in data && data.required === true;
+    const error = id in errors ? errors[id] : false;
+    const value= id in values ? values[id] : "";
+    const label = `${baseLabel}.fields.${id}`
+    const multiline =  "long" in data && data.long || id.indexOf("description") > -1
+    const passedProps = {id, label, required, error, value, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField};
+
+    if("options" in data && Array.isArray(data.options) && data.options.length){
+      return (<SelectInput key={id} options={data.options} {...passedProps} />)
+    }
+
+    if("type" in data){
+      if(data.type === "confirm"){
+        return  (<CheckBoxInput key={id} {...passedProps} />)
+      }
+      if(data.type === "file"){
+        // return  (<FileInput key={id} {...passedProps} />)
+      }
+    }
+
+    return (<TextInput key={idx} multiline={multiline} {...passedProps} />)
+
+  }
+
+  if(isSubmitting){
+    return <CircularProgress />
+  }
+
+  if (status){
+    if( "data" in status && isFunction(onSuccess)){
+        return <div>{onSuccess({baseLabel, values})}{renderResetButton("reset")}</div>;
+    }
+    if( "error" in status && isFunction(onError)){
+        return <div>{onError({baseLabel, values})}{renderResetButton("reset")}</div>;
+    }
+  }
+
+  return (
+      
+    <form onSubmit={handleSubmit} style={{maxWidth: 700, width: "100%"}}>
+    <Typography template="legend" label={(legend || `${baseLabel}.form.intro`)} />
+    {showStartFields ? startedFields.map( (data, idx) => renderField(data, idx)) : null}
+    {(isStarted() || !showStartFields) && filteredFields.length ? filteredFields.map( (data, idx) =>  renderField(data, idx)) : null}
+    <FormButton label={`${baseLabel}.form.submit`} errors={errors} isValid={isValid} isSubmitting={isSubmitting} handleSubmit={handleSubmit} />
+  </form>
+  )
+
+}
+
+export default withFormik(StepForm);
+
+
