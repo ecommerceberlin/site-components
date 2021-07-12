@@ -1,40 +1,32 @@
 import React from 'react';
 import Link from 'next/link';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import compose from 'recompose/compose';
-import { withStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import LinkedIn from '@material-ui/icons/LinkedIn';
-
 import classNames from 'classnames';
-import Cart from './CartButton';
+import CartButton from './CartButton';
 import LanguageSelect from './LanguageSelect';
 // import Search from './Search';
 import AppBarLink from './AppBarLink'
 import UpdateProfileLink from './UpdateProfileLink'
 import RawTranslatedText from './RawTranslatedText'
 import Settings from '../datasources/Settings';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
+import { getCart } from '../redux/selectors'
+import { useSettings } from '../helpers'
+import { drawerShow, dialogShow } from './redux/actions';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
+const useStyles = makeStyles(theme => ({
 
-import {
-  drawerShow,
-  dialogShow
-} from './redux/actions';
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
   spaced: {
-    marginBottom: 65
+    marginBottom: 0
   },
   flex: {
     flex: 1,
@@ -51,9 +43,15 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20
-  }
-});
+  },
 
+  grow: {
+    flexGrow: 1,
+  },
+  buttons: {
+    display: 'flex'
+  }
+}));
 
 
 function ElevationScroll(props) {
@@ -98,95 +96,61 @@ function LoginWithLinkedIn(props){
   )
 }
 
-function MyAppBar(props) {
 
-  const { classes, loading, drawerShow, dialogShow, cart, position, page_action } = props;
+const defaultProps = {
+  position: 'fixed',
+  links: [],
+}
 
-  const noItems = Object.keys(cart).length;
+function MyAppBar({setting="appbar", ...props}) {
+
+  const cart = useSelector(getCart)
+  const loading = useSelector((state) => state.visuals.loading)
+  const page_action = useSelector((state) => state.visuals.page_action)
+  const dispatch = useDispatch()
+  const classes = useStyles()
+  const settings = useSettings(setting)
+  const {event_name} = useSettings("common")
+  const {links, position} = Object.assign({}, defaultProps, settings, props)
+  const noItems = cart? Object.keys(cart).length : 0;
  
-  return (
-
-    <Settings>{(get) => (
-
-    <div
-      className={classNames(classes.root, {
-        [classes.spaced]: noItems
-      })}
-    >
+  return (<div className={classNames(classes.grow, {
+        // [classes.spaced]: noItems
+      })}>
     <ElevationScroll>
     {/* <HideOnScroll> */}
-      <AppBar elevation={0} color="inherit">
+      <AppBar elevation={0} color="inherit" position={position}>
         <Toolbar >
           <IconButton
-            onClick={drawerShow}
+            onClick={()=>dispatch(drawerShow())}
             className={classes.menuButton}
             color="inherit"
             aria-label="Menu"
           >
             <MenuIcon />
           </IconButton>
-
-
-            {loading && <CircularProgress size={20} />}
-
-
             <Link href="/">
-            <Typography
-            component="a"
-            variant="body1"
-            color="inherit"
-            className={classes.flex}>{
-              get("common.event_name")
-            }</Typography>
+            <Typography component="a" variant="body1" color="inherit" className={classes.flex}>{event_name}</Typography>
             </Link>
-            
-
-            {page_action || get("appbar.links", []).map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
-            
-
+            <div className={classes.grow} />
+            <div className={classes.buttons}>
+            {page_action || links.map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
+            {noItems > 0 ? <CartButton count={noItems} /> : null}
             {/* <LoginWithLinkedIn /> */}
-
             {/* <UpdateProfileLink /> */}
-            <LanguageSelect locales={ get("system.available_locales", []) } /> 
-
+            <LanguageSelect /> 
           {/* <Search /> */}
-             
-          {noItems > 0 ? <Cart count={noItems} /> : null}
+          </div>
         </Toolbar>
-
         {/* <Toolbar/> */}
 
+        {loading && <LinearProgress  color="secondary" />}
 
       </AppBar>
       {/* </HideOnScroll> */}
       </ElevationScroll>
-      <Toolbar id="back-to-top-anchor" />
-
-    </div>
-
-    )}</Settings>
-
-  );
+      <div id="back-to-top-anchor" />
+    </div>);
 }
 
-MyAppBar.defaultProps = {
-  position: 'fixed',
-};
-
-MyAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-const enhance = compose(
-  connect(
-    state => ({
-      cart: state.app.cart,
-      loading: "loading" in state.visuals ? state.visuals.loading : false,
-      page_action: "page_action" in state.visuals ? state.visuals.page_action : null
-    }),
-    {drawerShow, dialogShow}
-  ),
-  withStyles(styles)
-);
-
-export default enhance(MyAppBar);
+export default MyAppBar

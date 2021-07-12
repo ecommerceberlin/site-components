@@ -1,6 +1,6 @@
 import React from 'react';
 import compose from 'recompose/compose';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classNames from 'classnames'
 import Button from '@material-ui/core/Button';
 import {useTranslate, changeLocale} from '../i18n'
@@ -34,13 +34,12 @@ const useStyles = makeStyles( theme => ({
 }));
 
 
-const LanguageSelect = ({ label, selectedLocale, dialogShow, changeLocale }) => {
+const LanguageSelect = ({ label="change" }) => {
 
-  const [translate] = useTranslate();
-  const router = useRouter();
+  const [translate, selectedLocale] = useTranslate();
+  const {locales, defaultLocale} = useRouter();
   const classes = useStyles();
-
-  const {locale, locales, defaultLocale} = router;
+  const dispatch = useDispatch()
 
   if(!locales || locales.length === 1){
     return null
@@ -52,10 +51,9 @@ const LanguageSelect = ({ label, selectedLocale, dialogShow, changeLocale }) => 
     alternativeLocale =  locales.find(loc => loc != selectedLocale)
   }
 
-  return (
-    <Button
-    //  variant="outlined"
-      onClick={() => alternativeLocale ? changeLocale(alternativeLocale) : dialogShow({
+  return (<Button
+      //variant="outlined"
+      onClick={() => alternativeLocale ? dispatch(changeLocale(alternativeLocale)) : dispatch(dialogShow({
           title: translate(label),
           content: <div style={{marginTop: 40}}>{
             locales.map( loc => {
@@ -63,7 +61,7 @@ const LanguageSelect = ({ label, selectedLocale, dialogShow, changeLocale }) => 
             })
           }</div>,
           buttons: []
-      })}
+      }))}
       color="inherit"
     >
     <Language className={classNames(classes.leftIcon, classes.iconSmall)} />
@@ -73,12 +71,4 @@ const LanguageSelect = ({ label, selectedLocale, dialogShow, changeLocale }) => 
 
 }
 
-LanguageSelect.defaultProps = {
-  locales : [],
-  label: 'change'
-};
-
-export default connect(
-  (state) => ({selectedLocale : state.app.locale}),
-  {dialogShow, changeLocale}, 
-)(LanguageSelect);
+export default LanguageSelect
