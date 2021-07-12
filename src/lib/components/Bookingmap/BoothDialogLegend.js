@@ -1,13 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { useSelector } from 'react-redux';
 import _get from 'lodash/get';
-import MyTypography from '../MyTypography'
 import {getTicketGroups} from '../../redux/selectors'
 import Booth from './Booth'
-import { getStylingName } from "./boothStyles";
 import { useSettings } from '../../helpers'
-
+import { useTranslate } from '../../i18n'
 
 const useStyles = makeStyles(theme => ({
     root : {
@@ -31,20 +30,16 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const data = {
-    dh : 40,
-    dw : 60,
-}
-
 
 const defaultProps = {
     allowedGroupIds: [],
     boothStyleMapping: {}
 }
 
-const Legend = ({setting, ...props}) =>  {
+const BoothDialogLegend = ({setting, ...props}) =>  {
 
     const classes = useStyles()
+    const [translate] = useTranslate()
     const settings = useSettings(setting)
     const {allowedGroupIds} = Object.assign({}, defaultProps, settings, props)
     const ticketgroups = useSelector(getTicketGroups)
@@ -53,14 +48,14 @@ const Legend = ({setting, ...props}) =>  {
    return (
         <div className={classes.root}>
         <div className={classes.description}>
-        <MyTypography label="event.sales.pool.legend" />
+        <Typography variant="subtitle1">{ translate("event.sales.pool.legend")}</Typography>
         </div>
         <div className={classes.groups}>
-        {filtered.map(tg => <Booth key={tg.name} setting={setting} legend={true} {...data} g={tg.id} ti={tg.name} />)}
+        {filtered.map(tg => <Booth key={tg.name} setting={setting} legend={true}  dh={30} dw={60} g={tg.id} ti={tg.name} />)}
         </div>
         </div>)
 
 }
   
-export default Legend
+export default BoothDialogLegend
   

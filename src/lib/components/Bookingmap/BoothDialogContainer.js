@@ -1,8 +1,8 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import WidgetSupport from '../../compositions/WidgetSupport';
-import BoothInfoHeader from './BoothInfoHeader';
+import BoothDialogContainerHeader from './BoothDialogContainerHeader';
 
 import {
   FaBolt as Electricity,
@@ -14,7 +14,7 @@ import {
   FaCouch as Furniture
 } from 'react-icons/fa';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
 
   root: {
     
@@ -57,43 +57,30 @@ const styles = theme => ({
       }
   }
 
-})
+}))
 
 
+const BoothInfoContainer = ({setting="", header=null, content=null, ...boothProps}) => {
 
+  const classes = useStyles()
 
-const BoothInfoContainer = ({header, content, classes, ...rest}) => (
+  console.log(boothProps)
 
-    <div>
-
+  return (<div>
             { header }
-
             <div className={classes.root}>
                 <div className={classes.boothId}>
-                     <BoothInfoHeader {...rest} />
+                     <BoothDialogContainerHeader {...boothProps} />
                 </div>
-
                 <div className={classes.mainContainer}>
-
                    {content && <Paper className={classes.paper} elevation={1}>{content}</Paper>}
-
                     <WidgetSupport title="event.sales.support" />
-
                 </div>
             </div>
+    </div>)
 
-
-    </div>
-
-
-)
-
-
-BoothInfoContainer.defaultProps = {
-    header : null,
-    content : null,
-    style: {}
 }
 
 
-export default withStyles(styles)(BoothInfoContainer)
+
+export default BoothInfoContainer

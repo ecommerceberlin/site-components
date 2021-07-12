@@ -8,7 +8,8 @@ import {
   CART_ITEM_REMOVE,
   CART_RESET,
   REMOVE_USER_TOKEN,
-  SET_USER_TOKEN
+  SET_USER_TOKEN,
+  UUID_SET
 } from '../../components/redux';
 
 import {VENUE_SELECT, VENUE_SELECT_RESET} from '../../components/Schedule/redux'
@@ -93,8 +94,10 @@ const reducer = (state = defaultState, action) => {
     break;
 
 
-  
-
+    case UUID_SET:
+      return {...state, uuid: action.payload}
+    break;
+    
     default:
       return state;
   }

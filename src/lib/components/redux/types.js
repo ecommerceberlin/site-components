@@ -15,6 +15,9 @@ export const SNACKBAR_SHOW = 'SNACKBAR_SHOW';
 export const SNACKBAR_HIDE = 'SNACKBAR_HIDE';
 
 export const DIALOG_SHOW = 'DIALOG_SHOW';
+export const DIALOG_TITLE_CHANGE = 'DIALOG_TITLE_CHANGE';
+export const DIALOG_SAVE = 'DIALOG_SAVE';
+export const DIALOG_REVERT = 'DIALOG_REVERT';
 export const DIALOG_HIDE = 'DIALOG_HIDE';
 export const DIALOG_MODIFY = 'DIALOG_MODIFY';
 
@@ -68,3 +71,6 @@ export const PAGE_LOADING_END = 'PAGE_LOADING_END'
 
 export const PAGE_ACTION_SHOW = 'PAGE_ACTION_SHOW'
 export const PAGE_ACTION_HIDE = 'PAGE_ACTION_HIDE'
+
+
+export const UUID_SET = 'UUID_SET'

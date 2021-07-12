@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   all,
   call,
@@ -66,7 +68,8 @@ import {
   votingStatusError,
   linkedVoteRequest,
   linkedVoteError,
-  linkedVoteSuccess
+  linkedVoteSuccess,
+  uuidSet
 
 } from '../../components/redux/actions';
 
@@ -207,31 +210,6 @@ function* changeUrlWhenFaqsSelected(actionData) {
 }
 
 
-function* updateDialogForQuickCheckout(actionData) {
-  yield cancel();
-}
-
-function* selectBoothWhenCartItemAdded(actionData) {
-  if ('formdata' in actionData && 'id' in actionData.formdata) {
-    yield put(boothSelect(actionData.formdata.id));
-  }
-  yield cancel();
-}
-
-
-
-function* unSelectBoothWhenCartItemRemoved(actionData) {
-  //console.log(actionData)
-  if ('formdata' in actionData && 'id' in actionData.formdata) {
-    yield put(boothUnselect(actionData.formdata.id));
-  }
-  yield cancel();
-}
-
-function* unSelectAllBooths() {
-  yield put(boothsReset());
-}
-
 function* handleFetchErrors(actionData) {
   yield put(snackbarShow({title : actionData.error}));
 }
@@ -315,11 +293,10 @@ function* handleVoteStatus(actionData){
 }
 
 function* handleRehydrate(actionData){
-
   yield take(REHYDRATE);  //Subscribe to when app finishes loading
    //RESAVE TOKEN DATA!!!!
   yield put(actionData)
- }
+}
 
 
 /**
@@ -331,6 +308,75 @@ function* handleGtmEvent({payload}){
 }
 
 
+
+
+
+
+
+
+
+
+
+/*
+
+function* updateDialogForQuickCheckout(actionData) {
+  yield cancel();
+}
+
+function* selectBoothWhenCartItemAdded(actionData) {
+  if ('formdata' in actionData && 'id' in actionData.formdata) {
+    yield put(boothSelect(actionData.formdata.id));
+  }
+  yield cancel();
+}
+
+function* unSelectBoothWhenCartItemRemoved(actionData) {
+  //console.log(actionData)
+  if ('formdata' in actionData && 'id' in actionData.formdata) {
+    yield put(boothUnselect(actionData.formdata.id));
+  }
+  yield cancel();
+}
+
+function* unSelectAllBooths() {
+  yield put(boothsReset());
+}
+
+*/
+
+function* handleLocks(){
+
+  const cart = yield select(Selectors.getCart)
+  let uuid = yield select(state => state.app.uuid)
+
+  if(!uuid){
+    uuid = uuidv4()
+    yield put(uuidSet(uuid))
+  }
+
+  //`${apiUrl}/lock`
+  
+  const response = yield call(fetch, 'http://eventjuicer-api.test/v1/public/hosts/targiehandlu.pl/lock', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    //credentials : 'include',
+    body: JSON.stringify( {uuid, cart} )
+  }); 
+
+  const json = yield call([response, response.json]);
+
+  if (response.ok && response.status >= 200 && 'data' in json) {
+    // yield put( linkedVoteSuccess(json.data) );
+  } else {
+    // yield put( linkedVoteError(json.error) );
+  }
+
+}
+
+
+
 const rootSaga = function* root() {
 
   const sagas = [
@@ -340,21 +386,25 @@ const rootSaga = function* root() {
 
     //takeEvery(SNACKBAR_SHOW, handleLogoutFn),
     takeEvery(FAQ_TOGGLE, changeUrlWhenFaqsSelected),
-    takeEvery(CART_ITEM_ADD, selectBoothWhenCartItemAdded),
-    takeEvery(CART_ITEM_ADD, updateDialogForQuickCheckout),
-    takeEvery(CART_ITEM_REMOVE, unSelectBoothWhenCartItemRemoved),
-    takeEvery(CART_RESET, unSelectAllBooths),
+    // takeEvery(CART_ITEM_ADD, selectBoothWhenCartItemAdded),
+    // takeEvery(CART_ITEM_ADD, updateDialogForQuickCheckout),
+    // takeEvery(CART_ITEM_REMOVE, unSelectBoothWhenCartItemRemoved),
+    // takeEvery(CART_RESET, unSelectAllBooths),
     takeEvery(RESOURCE_FETCH_REQUESTED, accumulateFetches),
     takeEvery(RESOURCE_FETCH_ERROR, handleFetchErrors),
     takeEvery(BOOTH_CHECKED, handleBoothCheck),
 
     takeEvery(LINKEDIN_VOTE_REQUESTED, handleLinkedinVoteRequest),
-  
     takeEvery(LINKEDIN_VOTE_SUCCESS, handleVotingData),
+
     takeEvery(VOTE_STATUS_CHECK, handleVoteStatus),
     takeEvery(SETTINGS_SET, handleFetchTranslations),
 
     takeEvery(SET_USER_TOKEN, handleRehydrate),
+
+    takeEvery(CART_ITEM_ADD, handleLocks),
+    takeEvery(CART_ITEM_REMOVE, handleLocks),
+    takeEvery(CART_RESET, handleLocks)
 
   ]
 

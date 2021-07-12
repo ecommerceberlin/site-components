@@ -2,10 +2,11 @@ import React from 'react';
 import Typography from '../MyTypography';
 import TicketGroup from './TicketGroup';
 import Benefits from '../Benefits'
-import BoothInfoContainer from './BoothInfoContainer'
-import OrderSteps from './OrderSteps'
+import BoothDialogContainer from './BoothDialogContainer'
+import BoothOrderSteps from './BoothOrderSteps'
 import { useSettings, capitalizeFirstLetter } from '../../helpers'
 import isString from 'lodash/isString'
+
 
 import {
   FaBolt as Electricity,
@@ -54,10 +55,10 @@ const defaultProps = {
 
 const availableIcons = {Space, Furniture, Electricity, Catering, Ids, Catalogue}
 
-const BoothIsAvailable = ({setting, disabled,  ...props}) => {
+const BoothIsAvailable = ({setting,  ...props}) => {
 
   const settings = useSettings(setting)
-  const {disabledTicketIds, benefits, defaultBenefits, groupId} = Object.assign({}, defaultProps, settings, props)
+  const {benefits, defaultBenefits, groupId} = Object.assign({}, defaultProps, settings, props)
   let selectedBenefits =  benefits && groupId in benefits? benefits[groupId]: defaultBenefits
   selectedBenefits = selectedBenefits.map((item) => {
 
@@ -75,24 +76,21 @@ const BoothIsAvailable = ({setting, disabled,  ...props}) => {
   
   return (
 
-    <BoothInfoContainer 
-    {...props} 
-    header={
-      <OrderSteps setting={setting} active={1} />
-    }
+    <BoothDialogContainer {...props} 
+    setting={setting}
+    header={ <BoothOrderSteps setting={setting} active={1} /> }
     content={
       <React.Fragment>
         <div >
-    
+  
     <Typography template="salesInfo" icon={ Info } label="event.sales.pool.info" />
   
     <TicketGroup
       setting={setting}
-      disabled={disabled}
-      disabledTicketIds={disabledTicketIds}
-      noBookableTickets={<div />}
       {...props}
     />
+
+     
   
     </div>
   

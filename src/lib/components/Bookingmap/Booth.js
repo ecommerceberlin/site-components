@@ -1,20 +1,14 @@
 import React from 'react';
-
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux'
-
-import BoothIsTaken from './BoothIsTaken';
-import BoothIsAvailable from './BoothIsAvailable';
+import BoothDialog from './BoothDialog';
 import boothStyles, { getStylingName } from './boothStyles'
 import { useSettings } from '../../helpers'
 import { useTranslate } from '../../i18n'
-import {KeyedFormdataSelector, KeyedTicketGroupsSelector, getBoothsSelected} from '../../redux/selectors'
+import {getCart, KeyedFormdataSelector, KeyedTicketGroupsSelector, getBoothsSelected} from '../../redux/selectors'
 
-import {
-  getCompanyProfileInfo, 
-  getCompanyName
-} from '../../helpers/data'
+
 
 import {
   dialogShow,
@@ -29,11 +23,25 @@ const defaultProps = {
   zoom: 1,
   boothStyleMapping: {},
   disabledTicketIds: [],
-  legend: false,
+  disabledTicketGroupIds: [],
   disabled: false
 }
 
-const Booth = ({setting, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = "", ...props}) => {
+
+const BoothText = ({zoom=1, label="", image="", name=""}) => {
+
+  const classes = useStyles()  
+
+ return (<span className={classNames(classes.boothText, {
+    [classes.boothLogotype]: zoom > 1 && image
+  })}>
+  {label}
+  {name && zoom > 1 ? (<span className={classes.cname}>{name}</span>) : null}
+</span>)
+
+}
+
+const Booth = ({setting, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = "", status=false, selected=false, name="", image="", legend=false, ...props}) => {
 
   const classes = useStyles()  
   const [translate] = useTranslate();
@@ -44,44 +52,9 @@ const Booth = ({setting, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = ""
     zoom,
     boothStyleMapping,
     disabledTicketIds,
-    legend,
+    disabledTicketGroupIds,
     disabled
    } = Object.assign({}, defaultProps, settings, props)
-
-  const formdata  = useSelector(KeyedFormdataSelector)
-  const ticketgroups = useSelector(KeyedTicketGroupsSelector)
-  const boothsSelected = useSelector(getBoothsSelected)
-
-  const getDefaultSize = () => {
-
-    if(! (g in ticketgroups)){
-      return 0;
-    }
-    const size = parseInt(ticketgroups[g].map.width);
-    return !isNaN(size) ? size : 20; 
-  }
-  
-  const getStatus = () => {
-    return id in formdata ? formdata[id] : {};
-  }
-
-  const getStatusShort = () => {
-    const { purchase } = getStatus();
-    if (purchase) {
-      return purchase.paid ? 'sold' : 'hold';
-    }
-    return false;
-  }
-
-  const getBuyerInfo = () => {
-    const { company } = getStatus();
-    return { cname2 : getCompanyName(company), logotype : getCompanyProfileInfo(company, "thumbnail") };
-  }
-
-  const isBoothSelected = () => {
-    // const boothsSelected = Object.values(cart).filter(item => "formdata" in item && "id" in item.formdata).map(item => item.formdata.id)
-    return (boothsSelected && boothsSelected.indexOf(id) > -1) //|| (selected && selected.indexOf(boothId) > -1);
-  }
 
   const onBoothClick = () => {
 
@@ -89,51 +62,19 @@ const Booth = ({setting, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = ""
       return 
     }
 
-    dispatch(resourceFetchRequest(["formdata", "ticketgroups"]));
-
-    let modalTitle = '';
-    let modalContent = '';
-    let modalButtons = [];
-
-    const boothProps = {boothId: id, groupId: g, label: ti, status: getStatusShort()}
-
-    const styleName = getStylingName(boothStyleMapping, g);
-
-    switch (getStatusShort()) {
-      case 'hold':
-        modalTitle = translate("event.sales.booths.hold");
-        modalContent = <BoothIsTaken setting={setting} {...boothProps} style={styleName}  />;
-
-        break;
-      
-      case 'sold':
-        modalTitle = translate("event.sales.booths.sold");
-        modalContent = <BoothIsTaken setting={setting} {...boothProps} style={styleName} formdata={getStatus()} />;
-
-        break;
-      default:
-        /* THERE IS NOW FORMDATA FOR UNSOLD BOOTHS!!!! */
-        modalTitle = translate("event.sales.booths.free");
-        modalContent = <BoothIsAvailable setting={setting} disabled={disabled} style={styleName} disabledTicketIds={disabledTicketIds} {...boothProps} />
+    if(!status){
+      dispatch(resourceFetchRequest(["formdata", "blockings"]));
     }
 
     dispatch(dialogShow({
-      title: modalTitle,
-      content: modalContent,
-      buttons: modalButtons
+      title: '', //will be overwritten....
+      content:  <BoothDialog setting={setting} boothId={id} groupId={g} label={ti} status={status} styleName={getStylingName(boothStyleMapping, g)} />,
+      buttons: []
     }));
-
-    dispatch(boothChecked(ti));
 
   };
 
-
-  const status = getStatusShort();
-  const buyer = getBuyerInfo()
-  const width = dw > 0 ? dw : getDefaultSize();
-  const height = dh > 0 ? dh : getDefaultSize();
-
-  const _zoom = Math.max(1, zoom);
+  const _zoom = parseInt(zoom)
 
   return (
     <li
@@ -146,28 +87,19 @@ const Booth = ({setting, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = ""
         [classes.boothSold]: status === 'sold',
         [classes.boothHold]: status === 'hold',
         [classes.boothUnavailable]: !ti,
-        [classes.boothSelected]: isBoothSelected(),
+        [classes.boothSelected]: selected,
         [classes.boothOnLegend] : legend
       })}
       style={{
-        height: height * _zoom,
-        width: width * _zoom,
+        height: dh * _zoom,
+        width: dw * _zoom,
         top: dt? dt * _zoom : "auto",
         left: dl? dl * _zoom : "auto",
       //  lineHeight: `${data.dh}px`,
       }}
     >
-      <span
-        className={classNames(classes.boothText, {
-          [classes.boothLogotype]: buyer && 'logotype' in buyer && buyer.logotype
-        })}
-      >
-        {status === 'hold' ? "R" : ti}
-  
-        {buyer && 'cname2' in buyer && _zoom > 1 ? (
-          <span className={classes.cname}>{buyer.cname2}</span>
-        ) : null}
-      </span>
+    {/* {  console.log(id, "rendered") } */}
+     <BoothText zoom={_zoom} label={status === 'hold' ? "R" : ti} image={image} name={name} />
     </li>
   );
 

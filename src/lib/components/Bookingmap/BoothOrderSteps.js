@@ -19,7 +19,7 @@ const defaultProps = {
     active : 0
 }
 
-const OrderSteps = ({setting, ...props}) => {
+const BoothOrderSteps = ({setting, ...props}) => {
 
     const classes = useStyles();
     const [translate] = useTranslate()
@@ -42,4 +42,4 @@ const OrderSteps = ({setting, ...props}) => {
 }
 
 
-export default OrderSteps
+export default BoothOrderSteps

@@ -1,61 +1,42 @@
 import React from 'react';
-import compose from 'recompose/compose';
-import { connect } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
-
 import Cart from './Cart';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { useTranslate } from '../i18n'
+import { dialogShow, dialogHide, cartReset } from './redux/actions';
 
-import {
-  dialogShow as dialogShowAction,
-  cartReset as cartResetAction
-} from './redux/actions';
+const CartButton = ({ count=0, label="common.cart" }) => {
 
-const CartButton = ({ dialogShow, cartReset, count, label }) => (
-  <Badge color="secondary" badgeContent={count}>
+  const [translate] = useTranslate();
+  const dispatch = useDispatch()
+
+  const clearCart = () => {
+    dispatch(cartReset());
+    dispatch(dialogHide());
+  }
+
+  const dialog = {
+    title: label,
+    content: <Cart />,
+    buttons: [{
+      label: translate("common.cart_purge"),
+      action: function() { if(confirm(translate("common.cart_purge"))){ clearCart() }}
+    }]
+  }
+
+  return (
+    <Badge color="error" badgeContent={count}>
     <Button
-      variant="contained"
-      onClick={() =>
-        dialogShow({
-          title: label,
-          content: <Cart />,
-          buttons: [
-            {
-              label: 'test',
-              action: function() {
-                alert('asd');
-              }
-            },
-            {
-              label: 'Wyczyść koszyk',
-              action: function() {
-                cartReset();
-              }
-            }
-          ]
-        })
-      }
-      color="inherit"
+    variant="text"
+    onClick={() =>dispatch(dialogShow(dialog))}
+    color="inherit"
     >
-      {label}
+    <ShoppingCartIcon /> { translate(label) }
     </Button>
-  </Badge>
-);
+    </Badge>
+  );
+}
 
-CartButton.defaultProps = {
-  count: 0,
-  label: 'Koszyk'
-};
-
-const enhance = compose(
-  connect(
-    null,
-    {
-      dialogShow: dialogShowAction,
-      cartReset: cartResetAction
-    }
-  )
-);
-
-export default enhance(CartButton);
+export default CartButton

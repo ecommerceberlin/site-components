@@ -89,6 +89,7 @@ export { default as WidgetGridWithImages } from './WidgetGridWithImages'
 export { default as WidgetRoleBasedProfileUpdate } from './WidgetRoleBasedProfileUpdate'
 export { default as WidgetTabs } from './WidgetTabs'
 
+export { default as WidgetTransaction } from './WidgetTransaction'
 
 /** compat */
 export { default as WidgetSpeaking } from './WidgetRegForm'

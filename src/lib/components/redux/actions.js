@@ -182,6 +182,25 @@ export function dialogShow(payload = {}) {
   };
 }
 
+export function dialogTitleChange(payload = {}) {
+  return {
+    type: Types.DIALOG_TITLE_CHANGE,
+    payload: payload
+  };
+}
+
+export function dialogSave() {
+  return {
+    type: Types.DIALOG_SAVE
+  };
+}
+
+export function dialogRevert() {
+  return {
+    type: Types.DIALOG_REVERT
+  };
+}
+
 // export function dialogModify(name, value) {
 //   return {
 //     type: Types.DIALOG_MODIFY,
@@ -232,11 +251,10 @@ export function cartItemAdd(ticketId, quantity, formdata = {}) {
   };
 }
 
-export function cartItemRemove(ticketId, formdata) {
+export function cartItemRemove(ticketId) {
   return {
     type: Types.CART_ITEM_REMOVE,
-    ticketId: ticketId,
-    formdata: formdata
+    ticketId: ticketId
   };
 }
 
@@ -278,5 +296,13 @@ export function pageActionShow(payload) {
 export function pageActionHide() {
   return {
     type: Types.PAGE_ACTION_HIDE
+  }
+}
+
+
+export function uuidSet(payload){
+  return {
+    type: Types.UUID_SET,
+    payload
   }
 }

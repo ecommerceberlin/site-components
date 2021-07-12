@@ -1,30 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
+import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
 import _get from 'lodash/get';
 import classNames from 'classnames'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-
 import green from '@material-ui/core/colors/green';
-
-import { translate } from '../../i18n';
+import { useTranslate } from '../../i18n';
 import TicketRemainingInfo from './TicketRemainingInfo'
 import TicketDate from './TicketDate'
 import TicketPrice from './TicketPrice'
-import TicketBuyButton from './TicketBuyButton'
+import TicketBuyButtonNew from './TicketBuyButtonNew'
+import { getCart } from '../../redux/selectors'
+import { useSettings } from '../../helpers'
+import { cartItemAdd, cartItemRemove } from '../redux/actions';
 
 
-import {
-  cartItemAdd as cartItemAddAction,
-  cartItemRemove as cartItemRemoveAction
-} from '../redux/actions';
-
-
-const styles = {
-
+const useStyles = makeStyles(theme => ({
   ticket : {
     padding: 10,
     fontFamily : "'Lato','Helvetica','Arial', sans-serif",
@@ -33,129 +25,65 @@ const styles = {
     minHeight : 50,
     borderRadius : 3
   },
-
   bookable : {
     backgroundColor : green[100],
   },
-  
   nonbookable : {
     color : '#666666'
   }
+}));
 
-}
-
-//JSON.stringify({ti : booth_id, id : ref.data("id") })
-
-class Ticket extends React.PureComponent {
-
-  handleChange = name => (event, checked) => {
-    // const { ticket, cartItemAdd, cartItemRemove, formdata } = this.props;
-
-    // if (this.isSelected()) {
-    //   cartItemRemove(ticket.id, formdata);
-    // } else {
-    //   cartItemAdd(ticket.id, 1, formdata);
-    // }
-  };
-
-  isSelected() {
-    const { cart, ticket } = this.props;
-    return ticket && ticket.id in cart;
-  }
-
-  getTicketName() {
-    const { ticket, locale } = this.props;
-
-    return _get(ticket, `names.${locale}`);
-  }
-
-
-
-  render() {
-    const { ticket, classes, boothId, label, disabled, translate } = this.props;
-
-    if (!ticket) {
-      return null;
-    }
-
-
-    return (
-
-      <div className={classNames(
-        classes.ticket,
-        ticket.bookable ? classes.bookable : classes.nonbookable
-        )}>
-
-
-      {ticket.translation_asset_id ? <Box mb={1}><strong>{translate(ticket.translation_asset_id)}</strong></Box>: null}  
-
-      <Grid 
-        container
-        spacing={2}
-        alignItems="center"
-      >
-        <Grid item xs={12} sm={8} md={5}>
-          <TicketDate start={ticket.start} end={ticket.end} inDates={ticket.in_dates} />
-        </Grid>
-         
-        <Grid item xs={12} sm={4} md={2}>
-        <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={3}><TicketPrice price={ticket.price} /></Grid>
-
-        <Grid item xs={12} sm={6} md={2}>
-
-        <TicketBuyButton formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
-
-        </Grid>
-    </Grid>
-    </div>
-
-      //
-      // <FormGroup>
-      //   <FormLabel></FormLabel>
-      //   <FormControlLabel
-      //   control={
-      //     <Checkbox
-      //       disabled={!ticket.bookable}
-      //       color="secondary"
-      //       checked={this.isSelected()}
-      //       onChange={this.handleChange('_')}
-      //       value="gilad"
-      //
-      //     />
-      //   }
-      //   label={this.getTicketName()}
-      // />
-      // <FormHelperText>Be careful</FormHelperText>
-      // </FormGroup>
-    );
-  }
-}
-
-Ticket.propTypes = {
-  ticket: PropTypes.object.isRequired,
-  boothId: PropTypes.string.isRequired,
-  label : PropTypes.string.isRequired
-};
-
-Ticket.defaultProps = {
+const defaultProps = {
   disabled : false
 };
 
-const enhance = compose(
-  translate,
-  withStyles(styles),
-  connect(
-    state => ({
-      cart: state.app.cart
-    }),
-    {
-      cartItemAdd: cartItemAddAction,
-      cartItemRemove: cartItemRemoveAction
-    }
-  )
-);
+const Ticket = ({setting, ticket, boothId, label, ...props}) => {
 
-export default enhance(Ticket);
+  const classes = useStyles();
+  const cart = useSelector(getCart)
+
+  const [translate, locale] = useTranslate()
+  const settings = useSettings(setting)
+  const {disabled} = Object.assign({}, defaultProps, settings, props)
+
+  if(!ticket){
+    return null
+  }
+
+  return (
+
+    <div className={classNames(
+      classes.ticket,
+      ticket.bookable ? classes.bookable : classes.nonbookable
+      )}>
+
+    {ticket.translation_asset_id ? <Box mb={1}><strong>{translate(ticket.translation_asset_id)}</strong></Box>: null}  
+
+    <Grid 
+      container
+      spacing={2}
+      alignItems="center"
+    >
+      <Grid item xs={12} sm={8} md={5}>
+        <TicketDate start={ticket.start} end={ticket.end} inDates={ticket.in_dates} />
+      </Grid>
+       
+      <Grid item xs={12} sm={4} md={2}>
+      <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={3}><TicketPrice price={ticket.price} /></Grid>
+
+      <Grid item xs={12} sm={6} md={2}>
+
+      <TicketBuyButtonNew formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
+
+      </Grid>
+  </Grid>
+  </div>);
+}
+
+export default Ticket
+
+
+//JSON.stringify({ti : booth_id, id : ref.data("id") })

@@ -12,12 +12,14 @@ const localeCurrencyMapping = {
 
 const TicketPrice = ({ price = {} }) => {
 
-    const {locale, defaultLocale, locales} = useRouter();
-    const [translate] = useTranslate();
+    const {defaultLocale, locales} = useRouter();
+    const [translate, locale] = useTranslate();
 
-    const localeLabel = locale in localeCurrencyMapping? localeCurrencyMapping[locale].toUpperCase(): "EUR"
+   // const localeLabel = locale in localeCurrencyMapping? localeCurrencyMapping[locale].toUpperCase(): "EUR"
 
-    return `${get(price, locale, "en")} ${localeLabel} ${translate('common.prices.net')}`;
+    const formatedPrice =  new Intl.NumberFormat(locale, { style: 'currency', currency: localeCurrencyMapping[locale]}).format(get(price, locale, defaultLocale));
+
+    return `${formatedPrice} ${translate('common.prices.net')}`;
 }
 
 export default TicketPrice

@@ -1,7 +1,7 @@
 import React from 'react';
 import Bookingmap from '../components/Bookingmap/Bookingmap'
-import OrderSteps from '../components/Bookingmap/OrderSteps'
-import Legend from '../components/Bookingmap/Legend'
+import BoothOrderSteps from '../components/Bookingmap/BoothOrderSteps'
+import BoothDialogLegend from '../components/Bookingmap/BoothDialogLegend'
 import Wrapper from '../components/Wrapper'
 import {useSettings} from '../helpers'
 
@@ -26,8 +26,8 @@ const WidgetSalesMap = ({setting = "bookingmap", ...props}) => {
         <Wrapper {...wrapperProps}>
         <div>
                     <div>
-                    <OrderSteps setting={setting}  />
-                    <Legend setting={setting} />
+                    <BoothOrderSteps setting={setting}  />
+                    <BoothDialogLegend setting={setting} />
                     </div>
                     <Bookingmap setting={setting} />
         </div>
