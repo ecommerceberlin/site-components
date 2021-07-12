@@ -17,7 +17,10 @@ const TicketPrice = ({ price = {} }) => {
 
    // const localeLabel = locale in localeCurrencyMapping? localeCurrencyMapping[locale].toUpperCase(): "EUR"
 
-    const formatedPrice =  new Intl.NumberFormat(locale, { style: 'currency', currency: localeCurrencyMapping[locale]}).format(get(price, locale, defaultLocale));
+    const formatedPrice =  (new Intl.NumberFormat(locale, { 
+        style: 'currency', 
+        currency: get(localeCurrencyMapping, locale, "EUR")
+    })).format(get(price, locale, get(price, defaultLocale)));
 
     return `${formatedPrice} ${translate('common.prices.net')}`;
 }

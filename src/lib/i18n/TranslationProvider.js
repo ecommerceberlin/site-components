@@ -1,20 +1,21 @@
 import React, { Children } from 'react';
-import PropTypes from 'prop-types';
 import Polyglot from 'node-polyglot';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router'
 
 export const Context = React.createContext({ translate: key => key });
 
-const TranslationProvider = ({ locale, messages, children }) => {
+const TranslationProvider = ({ children }) => {
 
   const router = useRouter();
+  const selectedLocale = useSelector(state=>state.app.locale)
+  const messages = useSelector(state=>state.resources.texts)
 
-  const {defaultLocale, locales} = router;
+  const locale = selectedLocale || router.locale || router.defaultLocale
 
   const polyglot = new Polyglot({
     locale,
-    phrases: locale in messages ? messages[locale] : messages[defaultLocale || "en"],
+    phrases: locale in messages ? messages[locale] : messages[router.defaultLocale || "en"],
     onMissingKey: (key, options, locale) => key
   });
 
@@ -27,13 +28,6 @@ const TranslationProvider = ({ locale, messages, children }) => {
   );
 };
 
-TranslationProvider.defaultProps = {
-  messages : {},
-}
 
-const mapStateToProps = state => ({
-  locale: state.app.locale,
-  messages: state.resources.texts
-});
 
-export default connect(mapStateToProps)(TranslationProvider);
+export default TranslationProvider

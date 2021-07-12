@@ -354,9 +354,10 @@ function* handleLocks(){
     yield put(uuidSet(uuid))
   }
 
-  //`${apiUrl}/lock`
+  //
+  //'http://eventjuicer-api.test/v1/public/hosts/targiehandlu.pl/lock'
   
-  const response = yield call(fetch, 'http://eventjuicer-api.test/v1/public/hosts/targiehandlu.pl/lock', {
+  const response = yield call(fetch, `${apiUrl}/lock`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
