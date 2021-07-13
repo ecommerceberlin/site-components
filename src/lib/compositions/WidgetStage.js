@@ -67,6 +67,11 @@ const WidgetStage = ({setting = "streaming", ...props}) => {
         refreshInterval: 30*1000, //pull every 10 seconds
         refreshWhenHidden: false 
     })
+
+    if(!stage){
+        return null
+    }
+
     const _stage = stage.toUpperCase()
     const current = getStage(data, _stage)
 

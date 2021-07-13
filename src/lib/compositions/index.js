@@ -1,4 +1,4 @@
-
+import React from 'react'
 
 export { default as WidgetVideoWithEventInfo } from './WidgetVideoWithEventInfo';
 export { default as WidgetVideoWithReviews } from './WidgetVideoWithReviews';

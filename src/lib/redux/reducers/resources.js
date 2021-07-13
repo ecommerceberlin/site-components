@@ -3,7 +3,9 @@ import { CHANGE_LOCALE_MSGS } from '../../i18n';
 
 import keyBy from 'lodash/keyBy'
 
-const reducer = (state = {}, action) => {
+const reducer = (state = {
+  texts: {}
+}, action) => {
   const { type, resource, data } = action;
 
   switch (type) {
