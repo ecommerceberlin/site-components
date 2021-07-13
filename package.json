@@ -4,7 +4,7 @@
   "main": "src/lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eventjuicer/site-components.git"
+    "url": "git+https://github.com/ecommerceberlin/site-components.git"
   },
   "license": "MIT",
   "files": [
