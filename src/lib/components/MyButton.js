@@ -3,11 +3,20 @@ import Button from '@material-ui/core/Button';
 import { useTranslate } from '../i18n';
 import {useRouter} from 'next/router'
 import isFunction from 'lodash/isFunction'
+import { makeStyles } from '@material-ui/core/styles';
 
-const MyButton = ({ label, href, ...rest }) => {
+const useStyles = makeStyles(theme => ({
+  textLink: {
+    textDecoration: 'none',
+    color: 'rgba(0, 0, 0, 0.87)'
+  }
+}))
+
+const MyButton = ({ label="no label prop", href, className, ...rest }) => {
 
   const [translate] = useTranslate();
   const {push} = useRouter();
+  const classes = useStyles();
 
   //automagically handle internal routing...
   if(href && !href.startsWith("http")){
@@ -21,14 +30,14 @@ const MyButton = ({ label, href, ...rest }) => {
       push(href)
     }
   }
+
+  if("icon" in rest && !rest.icon){
+    delete rest.icon
+  }
   
   return (
-    <Button href={href} {...rest}>{label ? translate(label): null}</Button>
+    <Button href={href} {...rest} className={className? classes[className]: undefined}>{label ? translate(label): null}</Button>
   );
 }
-
-MyButton.defaultProps = {
-  label: 'pass label prop'
-};
 
 export default MyButton;
