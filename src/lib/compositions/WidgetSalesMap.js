@@ -6,13 +6,9 @@ import Wrapper from '../components/Wrapper'
 import {useSettings} from '../helpers'
 
 const defaultProps = {
-    disabledTicketIds: [],
-    steps: [],
-    allowedGroupIds: [],
-    disabled : false,
-    boothStyleMapping: {},
     wrapperProps: {
-        label: "salesmap"
+        label: "exhibitors.map.title",
+        secondaryLabel: "exhibitors.map.opensales"
     }
 }
 

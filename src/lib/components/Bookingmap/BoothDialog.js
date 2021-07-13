@@ -71,13 +71,13 @@ const BoothDialog = ({setting, ...boothProps}) => {
 
     switch(status){
         case "hold":
-        return (<div><Cart /><BoothDialogTakenHold setting={setting} {...boothProps} /></div>)
+        return (<div><Cart embedded /><BoothDialogTakenHold setting={setting} {...boothProps} /></div>)
 
         case "sold":
-        return (<div><Cart /><BoothDialogTakenSold setting={setting} {...boothProps} /></div>)
+        return (<div><Cart embedded /><BoothDialogTakenSold setting={setting} {...boothProps} /></div>)
 
         default: 
-        return (<div><Cart /><BoothDialogAvailable setting={setting} {...boothProps} /></div>)
+        return (<div><Cart embedded /><BoothDialogAvailable setting={setting} {...boothProps} /></div>)
 
     }
 

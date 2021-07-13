@@ -21,7 +21,12 @@ const TranslationProvider = ({ children }) => {
 
   return (
     <Context.Provider
-      value={{ locale: locale, translate: polyglot.t.bind(polyglot) }}
+      value={{ 
+        locale: locale, 
+        translate: polyglot.t.bind(polyglot),
+        defaultLocale: router.defaultLocale,
+        locales: router.locales
+      }}
     >
       {children}
     </Context.Provider>

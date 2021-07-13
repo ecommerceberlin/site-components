@@ -27,6 +27,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const defaultProps = {
+  
+  embedded: false,
 
   purchaseButtonProps: {
     variant : "contained",
@@ -45,7 +47,7 @@ const Cart = ({setting, ...props}) => {
   const classes = useStyles()
   const dispatch = useDispatch();
   const [translate] = useTranslate();
-  const {purchaseButtonProps, disabled} = Object.assign({}, defaultProps, props)
+  const {purchaseButtonProps, disabled, embedded} = Object.assign({}, defaultProps, props)
 
   useEffect(() => {
 
@@ -60,9 +62,13 @@ const Cart = ({setting, ...props}) => {
   }
 
   if(isEmpty(cart) || !isObject(cart)){
-    return null
-  }
 
+    if(embedded){
+      return null
+    }
+
+    return <Paper className={classes.root}>{translate("ecommerce.cart.empty")}</Paper>
+  }
 
 
   return (<Paper className={classes.root}>{Object.keys(cart).map(ticket_id => {
