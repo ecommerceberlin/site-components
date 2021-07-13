@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useTranslate } from '../i18n'
 import { dialogShow, dialogHide, cartReset } from './redux/actions';
 
-const CartButton = ({ count=0, label="common.cart" }) => {
+const CartButton = ({ count=0, label="ecommerce.cart.button" }) => {
 
   const [translate] = useTranslate();
   const dispatch = useDispatch()
@@ -18,11 +18,11 @@ const CartButton = ({ count=0, label="common.cart" }) => {
   }
 
   const dialog = {
-    title: label,
+    title: "ecommerce.cart.dialog",
     content: <Cart />,
     buttons: [{
-      label: translate("common.cart_purge"),
-      action: function() { if(confirm(translate("common.cart_purge"))){ clearCart() }}
+      label: translate("ecommerce.cart.purge_question"),
+      action: function() { if(confirm(translate("ecommerce.cart.purge_confirm"))){ clearCart() }}
     }]
   }
 

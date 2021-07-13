@@ -26,10 +26,10 @@ const TicketGroup = ({setting, groupId, boothId, label, status, ...props}) => {
   const {api} = useSettings("system", {});
   const  {disabled, disabledTicketIds, refreshInterval} = Object.assign(defaultProps, settings, props)
   
-  const { data, error } = useSWR(`${api}/blockings`, fetcher, { 
-      refreshInterval,
-      refreshWhenHidden: false 
-  })
+  // const { data, error } = useSWR(`${api}/XXXblockings`, fetcher, { 
+  //     refreshInterval,
+  //     refreshWhenHidden: false 
+  // })
 
   return tickets.filter(ticket => disabledTicketIds.indexOf(ticket.id)===-1).map(ticket => (
     <Ticket key={ticket.id} setting={setting} ticket={ticket} boothId={boothId} label={label} />

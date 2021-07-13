@@ -6,7 +6,7 @@ import BoothDialogTakenSold from './BoothDialogTakenSold';
 import BoothDialogAvailable from './BoothDialogAvailable';
 import { KeyedFormdataSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux'
-import { dialogTitleChange } from '../redux/actions'
+import { dialogTitleChange, resourceFetchRequest } from '../redux/actions'
 import { useTranslate } from '../../i18n' 
 import Cart from '../Cart'
 
@@ -30,6 +30,7 @@ const BoothDialog = ({setting, ...boothProps}) => {
 
     const getStatus = () => boothId in formdata ? formdata[boothId] : {}
     
+
     const getStatusShort = () => {
         const { purchase } = getStatus();
         if (purchase) {
@@ -57,6 +58,14 @@ const BoothDialog = ({setting, ...boothProps}) => {
     useEffect(() => {
 
         dispatch(dialogTitleChange(getModalTitle()));
+
+        const interval = setInterval(function(){
+            dispatch(resourceFetchRequest(["formdata", "blockings"]));
+        }, 5 * 1000)
+
+        return () => {
+            clearInterval(interval)
+        }
 
     }, [status])
 

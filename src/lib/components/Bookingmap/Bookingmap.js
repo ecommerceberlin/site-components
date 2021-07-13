@@ -5,7 +5,7 @@ import { useSettings } from '../../helpers'
 import { useTranslate } from '../../i18n'
 import Booth from './Booth';
 import Loader from './Loader'
-import { getCart, KeyedFormdataSelector, KeyedTicketGroupsSelector, getBookingmap } from '../../redux/selectors'
+import { getCart, KeyedFormdataSelector, KeyedTicketGroupsSelector, getBookingmap, KeyedBlockingsSelector } from '../../redux/selectors'
 import { getCompanyProfileInfo, getCompanyName } from '../../helpers/data'
 import { resourceFetchRequest } from '../redux/actions';
 
@@ -73,6 +73,7 @@ const Bookingmap = ({setting, ...props}) => {
   const bookingmap = useSelector(getBookingmap)
   const ticketgroups = useSelector(KeyedTicketGroupsSelector)
   const cart = useSelector(getCart)
+  const blockings = useSelector(KeyedBlockingsSelector)
 
   const {
     autorefresh, 
@@ -85,11 +86,31 @@ const Bookingmap = ({setting, ...props}) => {
     selected 
   } = Object.assign({}, defaultProps, settings, props)
 
-
   /**
    * bookingmap - list of booths (id, label, placing, dimensions)
    * ticketgroups - list of available tickets 
    */
+
+   /**
+    * blockings
+    * 
+booth-29-203: {
+  sessid: 735edc77677b2ed88315da20c4c642965c5de29c,
+  ticket_id: 1731,
+  remaining: 563
+}
+    */
+
+   /**
+    * formdata
+    * 
+booth-29-203: {company: {id: 1158, slug: "i-systemspl", featured: 0, debut: 0, promo: 0, …}
+id: "booth-29-203"
+participant_id: 106207
+purchase: {id: 109625, paid: 1, status: "ok", status_source: "manual", created_at: "2019-12-11 12:36:00", …}
+ti: "G8"
+ticket_id: 1732}
+    */
 
   useEffect(() => dispatch(resourceFetchRequest(["bookingmap", "ticketgroups", "formdata"])), [])
 
@@ -113,6 +134,14 @@ const Bookingmap = ({setting, ...props}) => {
     if (purchase) {
       return purchase.paid ? 'sold' : 'hold';
     }
+
+    /***
+     * OWNERSHIP must be checked!!!!
+     */
+    if(id in blockings){
+      return "hold"
+    }
+
     return false;
   }
 
@@ -145,8 +174,7 @@ const Bookingmap = ({setting, ...props}) => {
           height: !isNaN(height) ? height * zoom : defaultHeight * zoom
         }}
       >
-      <div className={classes.container} style={{width: width * zoom}}>{
-        bookingmap && 'mapsource' in bookingmap ? (
+      <div className={classes.container} style={{width: width * zoom}}>{bookingmap && 'mapsource' in bookingmap ? (
             <React.Fragment>
             <img src={bookingmap.mapsource} className={classes.bg} />
             <ul className={classes.booths}>{bookingmap.booths && bookingmap.booths.map(booth => (<Booth key={booth.id} setting={setting} status={getStatusShort(booth.id)} selected={isBoothSelected(booth.id)} {...getBuyerInfo(booth.id)} {...fixBoothData(booth)} />))}</ul>

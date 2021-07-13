@@ -60,6 +60,7 @@ RESOURCES
 */
 export const getTickets = state => state.resources.tickets
 export const getFormdata = state => state.resources.formdata
+export const getBlockings = state => state.resources.blockings
 export const getTicketGroups = state => state.resources.ticketgroups
 export const getBookingmap = state => state.resources.bookingmap
 export const getPhotos = state => state.resources.photos
@@ -353,6 +354,11 @@ PRESENTERS - END
 export const KeyedFormdataSelector = createSelector(
   getFormdata,
   (formdata) => keyBy(formdata, "id")
+)
+
+export const KeyedBlockingsSelector = createSelector(
+  getBlockings,
+  (blockings) => keyBy(blockings, "item_uid")
 )
 
 export const KeyedTicketGroupsSelector = createSelector(

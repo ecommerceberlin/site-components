@@ -64,7 +64,15 @@ const BoothInfoContainer = ({setting="", header=null, content=null, ...boothProp
 
   const classes = useStyles()
 
-  console.log(boothProps)
+
+  /**
+   * 
+   * boothId: "booth-58-377"
+   * groupId: "311"
+   * label: "D4.2"
+   * status: false
+   * styleName: "hot"
+   */
 
   return (<div>
             { header }

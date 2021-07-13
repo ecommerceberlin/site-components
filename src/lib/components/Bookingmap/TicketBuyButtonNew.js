@@ -15,7 +15,7 @@ const defaultProps = {
   },
  
   formdata : {},
-  nonBookable : <span></span>,
+  nonBookable : <span>no valid tickets</span>,
   //temporary fix
   right : null 
 }

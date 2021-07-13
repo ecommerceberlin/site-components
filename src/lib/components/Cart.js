@@ -75,7 +75,7 @@ const Cart = ({setting, ...props}) => {
       <Grid item><TicketVariant {...formdata} /></Grid>
       {quantity>1 && <Grid item>{quantity}{` `}{translate("common.pcs")}</Grid>}
       <Grid item><TicketPrice price={ticket.price} /></Grid>
-      {!disabled && <Grid item><span className={classes.removeButton} onClick={() => removeAction(ticket_id)}>{translate("common.remove")}</span></Grid>}
+      {!disabled && <Grid item><span className={classes.removeButton} onClick={() => removeAction(ticket_id)}>{translate("ecommerce.cart.item_remove")}</span></Grid>}
       </Grid>
       <TicketTotal />
       </div>)
