@@ -13,8 +13,8 @@ import {getCart} from '../redux/selectors'
 
 const defaultProps = {
   wrapperProps: {
-    label: "setting.wrapperProps.label",
-    secondaryLabel: "setting.wrapperProps.secondaryLabel",
+    label: null,
+    secondaryLabel: null,
     dense: false,
     first: false
   },
