@@ -1,40 +1,10 @@
 
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import { useTranslate } from '../i18n';
-import { useRouter } from 'next/router'
-import { makeStyles } from '@material-ui/core/styles';
+import MyButton from '../components/MyButton';
 
-const useStyles = makeStyles(theme => ({
+const MyLink = (props) => <MyButton {...props} />
 
-  textLink: {
-    textDecoration: 'none',
-    color: 'rgba(0, 0, 0, 0.87)'
-  }
-
-}))
-
-
-const MyButton = ({ label, href, className, ...rest }) => {
-
-  const [translate] = useTranslate();
-  const {push} = useRouter();
-  const classes = useStyles();
-
-  if(href && !href.startsWith("http")){
-    rest.onClick = (e) => {
-      e.preventDefault()
-      push(href)
-    }
-   
-  }
-  
-  return (
-    <Button href={href} {...rest} className={classes[className]}>{translate(label)}</Button>
-  );
-}
-
-MyButton.defaultProps = {
+MyLink.defaultProps = {
   variant: 'text',
   label: "link?",
   href: "/",
@@ -45,4 +15,4 @@ MyButton.defaultProps = {
   className: "textLink"
 };
 
-export default MyButton;
+export default MyLink;
