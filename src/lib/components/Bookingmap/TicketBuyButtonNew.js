@@ -29,6 +29,10 @@ const TicketBuyButtonNew = ({setting, ...props}) => {
   const  {id, bookable, formdata, nonBookable, right, addToCartButtonProps} = Object.assign(defaultProps, settings, props)
  
   const handleBtnClick = () => {
+
+    //check if available!
+
+
     dispatch(cartItemAdd(id, 1, formdata))
   }
 
