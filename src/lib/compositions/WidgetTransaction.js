@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import Wrapper from '../components/Wrapper'
 import {TwoColsLayout as Section} from '../components/MyLayouts'
 import Markdown from '../components/Markdown'
