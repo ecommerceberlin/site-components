@@ -58,6 +58,9 @@ const Booth = ({setting, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = ""
 
   const onBoothClick = () => {
 
+
+    dispatch(boothChecked(ti))
+
     if(legend){
       return 
     }

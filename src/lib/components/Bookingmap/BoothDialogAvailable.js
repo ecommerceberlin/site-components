@@ -98,9 +98,7 @@ const BoothIsAvailable = ({setting,  ...props}) => {
       marginTop: 40,
       marginBottom : 10,
     }}> <Typography template="salesInfo" icon={ Info } label="exhibitors.standard.info" />
-    <Benefits orientation="h" baseLabel="benefits" labels={selectedBenefits} /></div>: null} 
-  
-
+      <Benefits setting={setting} orientation="h" baseLabel="benefits" labels={selectedBenefits} /></div>: null} 
       </React.Fragment>
     }/>)
 }

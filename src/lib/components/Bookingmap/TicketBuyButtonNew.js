@@ -32,13 +32,11 @@ const TicketBuyButtonNew = ({setting, ...props}) => {
 
     //check if available!
 
-
     dispatch(cartItemAdd(id, 1, formdata))
   }
 
   const btnDisabled = () =>  Object.values(cart).some(item => "formdata" in item && item.formdata && isEqual(item.formdata, formdata)  )
   
-
 
 //  useEffect(() => {
 
@@ -54,11 +52,11 @@ const TicketBuyButtonNew = ({setting, ...props}) => {
 
 
 if(!id || !bookable){
-  return nonBookable
+  return <MyButton disabled {...addToCartButtonProps} />
+
 }
 
-return (<><MyButton disabled={btnDisabled()} onClick={handleBtnClick} target="_blank" {...addToCartButtonProps} />
-      {right}</>)
+return <MyButton disabled={btnDisabled()} onClick={handleBtnClick} {...addToCartButtonProps} />
 
 
 //       <form action={ get("bookingmap.api") } method="post" target="_blank">
