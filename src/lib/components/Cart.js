@@ -13,6 +13,7 @@ import TicketPrice from './Bookingmap/TicketPrice'
 import TicketName from './Bookingmap/TicketName'
 import TicketVariant from './Bookingmap/TicketVariant'
 import TicketTotal from './Bookingmap/TicketTotal'
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles(theme => ({
 
@@ -32,7 +33,7 @@ const defaultProps = {
 
   purchaseButtonProps: {
     variant : "contained",
-    label : "common.buy",
+    label : "ecommerce.finalize",
     color : "primary",
   },
  
@@ -77,18 +78,22 @@ const Cart = ({setting, ...props}) => {
     const ticket = tickets && ticket_id in tickets? tickets[ticket_id]: {}
 
     return (<div key={ticket_id}><Grid container spacing={1}>
-      <Grid item><TicketName names={ticket.names} label={ticket.translation_asset_id} /></Grid>
+      <Grid item><Box mb={1}><strong><TicketName names={ticket.names} group_id={ticket.group_id} baseLabel={ticket.translation_asset_id} /></strong></Box></Grid>
       <Grid item><TicketVariant {...formdata} /></Grid>
       {quantity>1 && <Grid item>{quantity}{` `}{translate("common.pcs")}</Grid>}
       <Grid item><TicketPrice price={ticket.price} /></Grid>
       {!disabled && <Grid item><span className={classes.removeButton} onClick={() => removeAction(ticket_id)}>{translate("ecommerce.cart.item_remove")}</span></Grid>}
       </Grid>
-      <TicketTotal />
+      <Box mt={3} mb={3}>
+        <Grid container spacing={2} justifyContent="flex-end" alignItems="center">
+          <Grid item><TicketTotal /></Grid>
+          <Grid item> {!disabled && <MyButton onClick={()=>dispatch(dialogHide())} href="/transaction" {...purchaseButtonProps} />}</Grid>
+        </Grid>
+      </Box>
       </div>)
 
   })}
-    {!disabled && <MyButton onClick={()=>dispatch(dialogHide())} href="/transaction" {...purchaseButtonProps} />}
-    {/* <WidgetRegForm setting="exhibitor_registration" /> */}
+
   </Paper>)
 
 }

@@ -10,14 +10,11 @@ const defaultProps = {
 
   addToCartButtonProps: {
     variant : "contained",
-    label : "common.add2cart",
+    label : "ecommerce.cart.add",
     color : "default",
   },
- 
   formdata : {},
-  nonBookable : <span>no valid tickets</span>,
-  //temporary fix
-  right : null 
+  // nonBookable : <span>no valid tickets</span>,
 }
 
 

@@ -14,7 +14,7 @@ import TicketBuyButtonNew from './TicketBuyButtonNew'
 import { getCart } from '../../redux/selectors'
 import { useSettings } from '../../helpers'
 import { cartItemAdd, cartItemRemove } from '../redux/actions';
-
+import TicketName from './TicketName'
 
 const useStyles = makeStyles(theme => ({
   ticket : {
@@ -40,7 +40,7 @@ const defaultProps = {
 const Ticket = ({setting, ticket, boothId, label, ...props}) => {
 
   const classes = useStyles();
-  const cart = useSelector(getCart)
+  // const cart = useSelector(getCart)
 
   const [translate, locale] = useTranslate()
   const settings = useSettings(setting)
@@ -57,29 +57,27 @@ const Ticket = ({setting, ticket, boothId, label, ...props}) => {
       ticket.bookable ? classes.bookable : classes.nonbookable
       )}>
 
-    {ticket.translation_asset_id ? <Box mb={1}><strong>{translate(ticket.translation_asset_id)}</strong></Box>: null}  
+    {/* {ticket.translation_asset_id ? <Box mb={1}><strong>{translate(ticket.translation_asset_id)}</strong></Box>: null}   */}
 
-    <Grid 
-      container
-      spacing={2}
-      alignItems="center"
-    >
-      <Grid item xs={12} sm={8} md={5}>
-        <TicketDate start={ticket.start} end={ticket.end} inDates={ticket.in_dates} />
+    <Grid container spacing={2} alignItems="center">
+      <Grid item xs={12} sm={12} md={6}>
+        <Box mb={1}>
+          <strong><TicketName names={ticket.names} group_id={ticket.group_id} baseLabel={ticket.translation_asset_id} /></strong>
+        </Box>
+        <Box mb={1}>
+          <TicketDate start={ticket.start} end={ticket.end} inDates={ticket.in_dates} />
+        </Box>
+        <Box mb={1}>
+          <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
+        </Box>
       </Grid>
-       
-      <Grid item xs={12} sm={4} md={2}>
-      <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={3}><TicketPrice price={ticket.price} /></Grid>
-
       <Grid item xs={12} sm={6} md={2}>
-
-      <TicketBuyButtonNew formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
-
+        <TicketPrice price={ticket.price} />
       </Grid>
-  </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <TicketBuyButtonNew formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
+      </Grid>
+    </Grid>
   </div>);
 }
 
