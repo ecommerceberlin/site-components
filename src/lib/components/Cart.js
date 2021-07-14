@@ -85,7 +85,7 @@ const Cart = ({setting, ...props}) => {
       {!disabled && <Grid item><span className={classes.removeButton} onClick={() => removeAction(ticket_id)}>{translate("ecommerce.cart.item_remove")}</span></Grid>}
       </Grid>
       <Box mt={3} mb={3}>
-        <Grid container spacing={2} justifyContent="flex-end" alignItems="center">
+        <Grid container spacing={2} justify="flex-end" alignItems="center">
           <Grid item><TicketTotal /></Grid>
           <Grid item> {!disabled && <MyButton onClick={()=>dispatch(dialogHide())} href="/transaction" {...purchaseButtonProps} />}</Grid>
         </Grid>
