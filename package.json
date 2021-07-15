@@ -11,12 +11,12 @@
     "src/lib"
   ],
   "scripts": {
-    "dev": "NODE_OPTIONS=--max_old_space_size=8192 next dev",
-    "build": "next build",
-    "babel": "rimraf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
-    "prepare": "npm run babel",
+    "_dev": "NODE_OPTIONS=--max_old_space_size=8192 next dev",
+    "_build": "next build",
+    "_babel": "rimraf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "_prepare": "npm run babel",
     "lint": "next lint",
-    "start": "NODE_OPTIONS=--max_old_space_size=8192 next start"
+    "_start": "NODE_OPTIONS=--max_old_space_size=8192 next start"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
