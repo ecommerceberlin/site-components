@@ -32,7 +32,9 @@ const CheckBoxInput = props => {
     translate,
     setFieldValue,
     required,
-    validateField
+    validateField,
+    handleBlur,
+    setFieldTouched
   } = props;
 
    const translatedLabel = translate(label);
@@ -47,7 +49,8 @@ const CheckBoxInput = props => {
             name={id}
             color="primary" 
             checked={Boolean(value)}
-            onChange={() => setFieldValue(id, !value) }
+            onChange={ () => setFieldValue(id, !value, true) }
+            onBlur={ (e) => { setFieldTouched(id, true);  validateField(id); }}
             value="1" 
             required={required}
             // classes={classes}

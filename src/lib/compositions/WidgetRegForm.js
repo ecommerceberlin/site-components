@@ -54,6 +54,7 @@ const WidgetRegForm = ({setting, ...props}) => {
     const {post_api, service_api} = useSettings("system")
     const [translate, locale] = useTranslate()
     const cart = useSelector(getCart)
+    const uuid = useSelector(state => state.app.uuid)
 
     const { 
       email_template, 
@@ -96,6 +97,7 @@ const WidgetRegForm = ({setting, ...props}) => {
                 role={ role }
                 token={ token }
                 locale={ locale }
+                uuid={ uuid }
                 {...other}
               />
 

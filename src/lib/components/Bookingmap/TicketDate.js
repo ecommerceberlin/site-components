@@ -1,34 +1,42 @@
 import React from 'react'
 
-import { translate } from '../../i18n';
+import { useTranslate } from '../../i18n';
 import moment from 'moment';
 
-const TicketDate = ({start, end, inDates, translate}) => {
+const TicketDate = ({setting="", start="", end="", inDates = 0}) => {
 
-    const diffDays = moment(end).diff(moment(), "days")
-    const diffHours = moment(end).diff(moment(), "hours")
-    const diffMins = moment(end).diff(moment(), "minutes")
+    const [translate] = useTranslate();
+
+    const endDays = moment(end).diff(moment(), "days")
+    const endHours = moment(end).diff(moment(), "hours")
+    const endMins = moment(end).diff(moment(), "minutes")
+
+    const startDays = moment(start).diff(moment(), "days")
+    const startHours = moment(start).diff(moment(), "hours")
+    const startMins = moment(start).diff(moment(), "minutes")
 
     if(inDates) {
 
-      if(diffDays > 0){
-        return `${translate('event.sales.pool.end')} ${diffDays} ${translate('common.days')}`
+      if(endDays > 0){
+        return `${translate('event.sales.pool.end')} ${endDays} ${translate('common.days')}`
       }  
 
-      if(diffHours > 0){
-        return `${translate('event.sales.pool.end')} ${diffHours} ${translate('common.hours')}`
+      if(endHours > 0){
+        return `${translate('event.sales.pool.end')} ${endHours} ${translate('common.hours')}`
       }  
 
-      return `${translate('event.sales.pool.end')} ${diffMins} ${translate('common.minutes')}`
+      return `${translate('event.sales.pool.end')} ${endMins} ${translate('common.minutes')}`
 
+    }else{
+
+      if(startDays > 0 || startHours > 0){
+        return `${translate('event.sales.pool.start')} ${start.substring(0, 16)}` 
+      }
+
+      return `${translate('event.sales.pool.start')} ${startMins} ${translate('common.minutes')}` 
     }
 
-    return `${translate('event.sales.pool.start')} ${start.substring(0, 16)}` 
 
 }
 
-TicketDate.defaultProps = {
-    inDates : false
-}
-
-export default translate(TicketDate)
+export default TicketDate

@@ -56,7 +56,7 @@ const SelectInput = props => {
       label={translatedLabel}
       value={value}
       onChange={
-       (e, menuItemElement) => {setFieldValue(id, e.target.value); validateField(id); }
+       (e, menuItemElement) => { setFieldValue(id, e.target.value, true); /*validateField(id);*/ }
       }
       onBlur={(e) => {setFieldTouched(id); validateField(id); }}
       margin="normal"

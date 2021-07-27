@@ -18,7 +18,7 @@ const CartButton = ({ count=0, label="ecommerce.cart.button" }) => {
   }
 
   const dialog = {
-    title: "ecommerce.cart.dialog",
+    title: translate("ecommerce.cart.dialog"),
     content: <Cart />,
     buttons: [{
       label: translate("ecommerce.cart.purge_question"),

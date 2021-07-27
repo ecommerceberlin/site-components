@@ -131,8 +131,7 @@ export const validations = (requiredFieldNames) => ({
       accept: Yup.bool()
       .oneOf([true], 'Please accept terms')
       .required('Please accept terms')
-      .requireWhenRequired(requiredFieldNames, 'Please choose category'),
-
+      .requireWhenRequired(requiredFieldNames, 'Please accept terms'),
 
 
       presentation_title: Yup.string()
