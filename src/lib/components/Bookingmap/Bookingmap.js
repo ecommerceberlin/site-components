@@ -139,7 +139,7 @@ ticket_id: 1732}
      * OWNERSHIP must be checked!!!!
      */
     if(id in blockings){
-      return "hold"
+   //   return "hold"
     }
 
     return false;
