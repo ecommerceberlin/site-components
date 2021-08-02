@@ -151,25 +151,7 @@ const settings =  {
     },
 
 
-    heroStreaming : {
-
-        videoSrc : "https://res.cloudinary.com/eventjuicer/video/upload/v1615494822/tehonline.mp4",
-        background : "https://res.cloudinary.com/eventjuicer/image/upload/f_auto/v1615494821/tehonline.jpg",
-        overlay : "black",
-        template : "heroGold",
-        heading : "virtual.event.claim",
-        subheading : "virtual.event.description",
-        showable: ["date"],
-        orientation : "v",
-        primaryStyle: "heroPrimary",
-        secondaryStyle: "heroSecondary",
-        iconStyle: "heroIcon",
-
-        event_name : 'TARGI EHANDLU',
-        event_date : '24 marca  2021',
-        event_hours : '11:00',
-
-    },
+   
 
     rolebuttonsVirtual : {
         accent : "gold",
@@ -183,7 +165,7 @@ const settings =  {
         ]
     },
 
-    heroExpo : {
+    hero : {
 
         videoSrc : "https://res.cloudinary.com/eventjuicer/video/upload/v1534454501/video_presenter_blak.mp4",
         background : "https://res.cloudinary.com/eventjuicer/image/upload/v1534542530/poster_presenter_blak.jpg",
@@ -242,59 +224,6 @@ const settings =  {
             321: "boothSold"
         },
         benefits: {
-            335: [
-                {
-                    icon : "Done", 
-                    primary : "standardtime"
-                },
-            ],
-            336: [
-            {
-                icon : "Done", 
-                primary : "extratime"
-            },
-            {
-                icon : "Done", 
-                primary : "sponsorbranding"
-            },
-            {
-                icon : "Done", 
-                primary : "socialmedia"
-            },
-            {
-                icon : "Done", 
-                primary : "mailing"
-            },
-            ],
-            337: [{
-                icon : "Done", 
-                primary : "watermark"
-            },
-            {
-                icon : "Done", 
-                primary : "headlinebranding"
-            },
-            {
-                icon : "Done", 
-                primary : "mailing"
-            },
-            {
-                icon : "Done", 
-                primary : "exclusive"
-            },
-            {
-                icon : "Done", 
-                primary : "socialmedia"
-            },
-            {
-                icon : "Done", 
-                primary : "studio"
-            },
-            {
-                icon : "Done", 
-                primary : "portal"
-            },
-            ]
         },
         api : "https://stoiska.targiehandlu.pl/preorder"
     },
@@ -570,15 +499,13 @@ const settings =  {
     },
     
     common : {
-
-        organizer_name : 'Infoguru Sp. z o.o. Sp. k.',
-        organizer_address : 'POLAND, Poznań, Truskawiecka 13',
-        organizer_regno : 'VAT ID 7811967834',
-        event_name : '20. Targi eHandlu',
-        event_location : 'EXPO XXI Warszawa, Prądzyńskiego 12/14',
-        event_date : '20 października  2021',
-        event_hours : '10:00-17:00',
-
+        organizer_name : 'Organizer name',
+        organizer_address : 'Organizer address',
+        organizer_regno : 'Organizer reg number',
+        event_name : 'Event name',
+        event_location : 'Event location',
+        event_date : 'Event date',
+        event_hours : 'Event hours',
     },
 
 
@@ -589,12 +516,12 @@ const settings =  {
 
         people : [
             {             
-                name: 'Karolina Michalak',
+                name: 'Joan Smith',
                 position : 'Relationship Manager',
                 langs : ["pl","en"],
                 avatar: 'https://res.cloudinary.com/eventjuicer/image/upload/v1598009850/targiehandlu_people_km.jpg',
                 phone: '+48 721 945 134',
-                email: 'karolina.michalak@targiehandlu.pl',
+                email: 'joan.smith@domain.com',
                 chatlio : true
             },
           
@@ -661,96 +588,8 @@ const settings =  {
 
     },
 
-    covid19 : {
-
-        visitors : {
-
-            label: "covid19.visitors.title",
-            secondaryLabel: "covid19.visitors.description",
-            baseLabel: "covid19.visitors.rules",
-            typography: "subtitle",
-            dense: true,
-
-            items: [
-
-                {
-                    icon : "Accepted",
-                    label :  'accepted',
-                },
-            
-                {
-                    icon : "Invited",
-                    label : 'invited'
-                },
-            
-                {
-                    icon : "Digital",
-                    label : 'no-on-site-regdesk'
-                }
-    
-            ]
-        }, 
-
-        exhibitors : {
-
-            label: "covid19.exhibitors.title",
-            secondaryLabel: "covid19.exhibitors.description",
-            baseLabel: "covid19.exhibitors.rules",
-            typography: "subtitle",
-            dense: true,
-
-            items: [
-
-                {
-                    icon : "Reps",
-                    label :  'reps',
-                },
-            
-                {
-                    icon : "Banned",
-                    label : 'noleaflets'
-                },
-            
-                {
-                    icon : "People",
-                    label : 'exclusive'
-                }
-
-            ]
-        },
-        
-        presenters : {
-
-            label: "covid19.presenters.title",
-            secondaryLabel: "covid19.presenters.description",
-            baseLabel: "covid19.presenters.rules",
-            typography: "subtitle",
-            dense: true,
-            
-            items: [
-
-                {
-                    icon: "Audience",
-                    label: 'audience-limit',
-                },
-            
-                {
-                    icon: "Live",
-                    label: 'streaming'
-                },
-            
-                // {
-                //     icon: "FaTrophy",
-                //     label: 'presentation'
-                // }
-
-            ]
-        }
-
-}
-
-
-    
+   
+ 
 };
 
         
