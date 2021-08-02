@@ -5,8 +5,10 @@ import {resourceFetchRequest, resourceFetchSuccess, setUserToken, removeUserToke
 import {getUserByToken} from './api'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
-import { FilteredDataSelector } from '../redux/selectors'
+import { FilteredDataSelector, KeyedBlockingsSelector } from '../redux/selectors'
 import {useTranslate} from '../i18n'
+import sha1 from 'js-sha1'
+
 
 export const useDialog = () => {
     const [translate] = useTranslate();
@@ -18,6 +20,25 @@ export const useDialog = () => {
     })))
 }
 
+export const useBlocking = () => {
+
+    const blockings = useSelector(KeyedBlockingsSelector)
+    const uuid = useSelector(state => state.app.uuid)
+
+    return function(id){
+
+        if( id && blockings && "id" in blockings ){
+            if( uuid && blockings[id]["sessid"] == sha1(uuid) ){
+                console.log("same owner")
+                return false
+            }
+            console.log("other owner")
+            return "hold"
+        }
+       return false
+    }
+
+}
 
 export const useDatasource = (queries = {}, props = {}) => {
 
