@@ -19,7 +19,7 @@ import settings from '../settings'
   
    <>
 
-    <WidgetVideoWithEventInfo setting="heroExpo" />
+    <WidgetVideoWithEventInfo setting="hero" />
 
     <WidgetSalesMap
       label="exhibitors.map.title"
