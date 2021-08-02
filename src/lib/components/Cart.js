@@ -18,7 +18,8 @@ import Box from '@material-ui/core/Box'
 const useStyles = makeStyles(theme => ({
 
   root: {
-    padding: 20
+    padding: 20,
+    flexGrow: 1,
   },
 
   removeButton: {
@@ -78,23 +79,28 @@ const Cart = ({setting, ...props}) => {
     const ticket = tickets && ticket_id in tickets? tickets[ticket_id]: {}
 
     return (<div key={ticket_id}><Grid container spacing={1}>
-      <Grid item><Box mb={1}><strong><TicketName names={ticket.names} group_id={ticket.group_id} baseLabel={ticket.translation_asset_id} /></strong></Box></Grid>
+      <Grid item md><Box mb={1}><strong><TicketName names={ticket.names} group_id={ticket.group_id} baseLabel={ticket.translation_asset_id} /></strong></Box></Grid>
       <Grid item><TicketVariant {...formdata} /></Grid>
       {quantity>1 && <Grid item>{quantity}{` `}{translate("common.pcs")}</Grid>}
       <Grid item><TicketPrice price={ticket.price} /></Grid>
       {!disabled && <Grid item><span className={classes.removeButton} onClick={() => removeAction(ticket_id)}>{translate("ecommerce.cart.item_remove")}</span></Grid>}
       </Grid>
-      <Box mt={3} mb={3}>
-        <Grid container spacing={2} justify="flex-end" alignItems="center">
-          <Grid item><TicketTotal /></Grid>
-          <Grid item> {!disabled && <MyButton onClick={()=>dispatch(dialogHide())} href="/transaction" {...purchaseButtonProps} />}</Grid>
-        </Grid>
-      </Box>
       </div>)
 
   })}
 
-  </Paper>)
+  <Box mt={2} mb={1}>
+  <Grid container spacing={2} justify="flex-end" alignItems="center">
+    <Grid item><TicketTotal /></Grid>
+    <Grid item> {!disabled && <MyButton onClick={()=>dispatch(dialogHide())} href="/transaction" {...purchaseButtonProps} />}</Grid>
+  </Grid>
+</Box>
+</Paper>
+  
+
+
+
+  )
 
 }
 
