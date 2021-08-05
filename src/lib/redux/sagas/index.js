@@ -42,7 +42,8 @@ import {
   VOTE_STATUS_CHECK,
   SET_USER_TOKEN,
   LOCK_SUCCESS,
-  LOCK_FAILED
+  LOCK_FAILED,
+  RESOURCE_FETCH_SUCCESS
 } from '../../components/redux/types';
 
 import {
@@ -356,7 +357,7 @@ function* handleLocks(){
 
   //'http://eventjuicer-api.test/v1/public/hosts/targiehandlu.pl/lock'
   
-  const response = yield call(fetch, `${apiUrl}/lock`, {
+  const response = yield call(fetch, `${apiUrl}/sync`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -407,11 +408,11 @@ const rootSaga = function* root() {
     takeEvery(SET_USER_TOKEN, handleRehydrate),
 
     // takeEvery(CART_ITEM_ADD, handleLocks),
-    takeEvery(LOCK_SUCCESS, handleCartValidate),
-    takeEvery(LOCK_FAILED, handleCartValidate),
+    // takeEvery(LOCK_SUCCESS, handleCartValidate),
+    // takeEvery(LOCK_FAILED, handleCartValidate),
     takeEvery(CART_ITEM_REMOVE, handleLocks),
-    takeEvery(CART_RESET, handleLocks)
-
+    takeEvery(CART_RESET, handleLocks),
+    // takeEvery(RESOURCE_FETCH_SUCCESS, handleCartValidate)
   ]
 
   yield all(sagas);
