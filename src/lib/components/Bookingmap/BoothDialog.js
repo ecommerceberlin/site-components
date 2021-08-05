@@ -1,14 +1,20 @@
 
-
 import React, {useEffect} from 'react';
 import BoothDialogTakenHold from './BoothDialogTakenHold';
 import BoothDialogTakenSold from './BoothDialogTakenSold';
 import BoothDialogAvailable from './BoothDialogAvailable';
-import { KeyedFormdataSelector } from '../../redux/selectors'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { dialogTitleChange, resourceFetchRequest } from '../redux/actions'
 import { useTranslate } from '../../i18n' 
 import Cart from '../Cart'
+import Pusher from "pusher-js";
+
+
+import {
+    BoothFormdataSelector, 
+    BoothSelectedSelector,
+    BoothBlockedSelector
+  } from './selectors'
 
 /***
  * 
@@ -23,22 +29,30 @@ import Cart from '../Cart'
 
 const BoothDialog = ({setting, ...boothProps}) => {
 
-    const formdata  = useSelector(KeyedFormdataSelector)
+    const {boothId} = boothProps
     const dispatch = useDispatch();
     const [translate] = useTranslate()
-    const {boothId} = boothProps
+    const {status, name, image} = useSelector((state) => BoothFormdataSelector(state, boothId), shallowEqual)
+    const selected = useSelector(state => BoothSelectedSelector(state, boothId))
+    const blocked = useSelector(state => BoothBlockedSelector(state, boothId))
 
-    const getStatus = () => boothId in formdata ? formdata[boothId] : {}
+
+    useEffect(() => {
+        const pusher = new Pusher("ef91111f814df12adcef", {
+          cluster: "eu",
+        });
     
+        var channel = pusher.subscribe('eventjuicer');
+        channel.bind('NewLockWasCreated', function(data) {
+        //   alert(JSON.stringify(data));
+            dispatch(resourceFetchRequest(["formdata", "blockings"]))
+        });
+    
+        return () => {
+          pusher.unsubscribe("eventjuicer");
+        };
+    }, []);
 
-    const getStatusShort = () => {
-        const { purchase } = getStatus();
-        if (purchase) {
-          return purchase.paid ? 'sold' : 'hold';
-        }
-        return false;
-    }
-    const status = getStatusShort()
     
     const getModalTitle = () => {
 
@@ -59,13 +73,6 @@ const BoothDialog = ({setting, ...boothProps}) => {
 
         dispatch(dialogTitleChange(getModalTitle()));
 
-        const interval = setInterval(function(){
-            dispatch(resourceFetchRequest(["formdata", "blockings"]));
-        }, 5 * 1000)
-
-        return () => {
-            clearInterval(interval)
-        }
 
     }, [status])
 

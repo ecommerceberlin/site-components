@@ -1,19 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
 import _get from 'lodash/get';
 import classNames from 'classnames'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import green from '@material-ui/core/colors/green';
-import { useTranslate } from '../../i18n';
 import TicketRemainingInfo from './TicketRemainingInfo'
 import TicketDate from './TicketDate'
 import TicketPrice from './TicketPrice'
 import TicketBuyButtonNew from './TicketBuyButtonNew'
-import { getCart } from '../../redux/selectors'
 import { useSettings } from '../../helpers'
-import { cartItemAdd, cartItemRemove } from '../redux/actions';
 import TicketName from './TicketName'
 
 const useStyles = makeStyles(theme => ({
@@ -40,9 +36,8 @@ const defaultProps = {
 const Ticket = ({setting, ticket, boothId, label, ...props}) => {
 
   const classes = useStyles();
-  // const cart = useSelector(getCart)
 
-  const [translate, locale] = useTranslate()
+
   const settings = useSettings(setting)
   const {disabled} = Object.assign({}, defaultProps, settings, props)
 
@@ -67,15 +62,16 @@ const Ticket = ({setting, ticket, boothId, label, ...props}) => {
         <Box mb={1}>
           <TicketDate start={ticket.start} end={ticket.end} inDates={ticket.in_dates} />
         </Box>
-        <Box mb={1}>
-          <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
-        </Box>
+        {/* <Box mb={1}>
+         
+        </Box> */}
       </Grid>
       <Grid item xs={12} sm={6} md={2}>
         <TicketPrice price={ticket.price} />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <TicketBuyButtonNew formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
+        <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
       </Grid>
     </Grid>
   </div>);

@@ -30,6 +30,7 @@ export const DRAWER_HIDE = 'DRAWER_HIDE';
 export const CART_ITEM_ADD = 'CART_ITEM_ADD';
 export const CART_ITEM_REMOVE = 'CART_ITEM_REMOVE';
 export const CART_RESET = 'CART_RESET';
+export const CART_VALIDATE = 'CART_VALIDATE';
 
 export const BOOTH_CHECKED = 'BOOTH_CHECKED';
 export const BOOTH_SELECT = 'BOOTH_SELECT';
@@ -74,3 +75,8 @@ export const PAGE_ACTION_HIDE = 'PAGE_ACTION_HIDE'
 
 
 export const UUID_SET = 'UUID_SET'
+
+export const LOCK_FAILED = 'LOCK_FAILED';
+export const LOCK_SUCCESS = 'LOCK_SUCCESS';
+
+export const USER_INTERACTED_WITH = 'USER_INTERACTED_WITH'

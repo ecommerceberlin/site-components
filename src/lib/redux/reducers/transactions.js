@@ -3,7 +3,8 @@ import {
     VOTE_STATUS_CHECK,
     VOTE_REQUESTED,
     LINKEDIN_VOTE_REQUESTED,
-    LINKEDIN_VOTE_ERROR
+    LINKEDIN_VOTE_ERROR,
+    USER_INTERACTED_WITH
   } from '../../components/redux/types';
 
 import {
@@ -11,6 +12,7 @@ import {
 } from '../../formik/redux/types'
 
 const defaultState = {
+    interacted: [],
     voting: {},
     forms: []
 };
@@ -18,6 +20,9 @@ const defaultState = {
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
 
+    case USER_INTERACTED_WITH:
+      return {...state, interacted: [...new Set([...state.interacted, ...action.name])] }
+    break;
     case FORM_ACTION_FINISHED:
 
       return {...state, forms: [...state.forms, action.payload ]}

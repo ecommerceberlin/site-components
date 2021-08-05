@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import MyButton from '../../components/MyButton'
-import { useSettings } from '../../helpers'
+import { useSettings, useBlocking } from '../../helpers'
 import {cartItemAdd} from '../redux/actions'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCart } from '../../redux/selectors'
 import isEqual from 'lodash/isEqual'
+import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const defaultProps = {
 
@@ -18,47 +22,63 @@ const defaultProps = {
 }
 
 
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+}));
+
+
 const TicketBuyButtonNew = ({setting, ...props}) => {
 
+  const classes = useStyles();
+  const [checkingBlocking, setCheckingBlocking] = useState(false)
   const cart = useSelector(getCart)
   const dispatch = useDispatch();
   const settings = useSettings(setting, {});
-  const  {id, bookable, formdata, nonBookable, right, addToCartButtonProps} = Object.assign(defaultProps, settings, props)
- 
-  const handleBtnClick = () => {
+  const  {id, bookable, formdata, addToCartButtonProps} = Object.assign(defaultProps, settings, props) 
+  const setBlocking = useBlocking();
 
-    //check if available!
+  const btnDisabled = () => checkingBlocking || !id || !bookable || Object.values(cart).some(item => "formdata" in item && item.formdata && isEqual(item.formdata, formdata)  )
 
-    dispatch(cartItemAdd(id, 1, formdata))
+  const handleBtnClick = async () => {
+    setCheckingBlocking(true)
+    if(btnDisabled()){
+      return;
+    }
+    const blockingStatus = await setBlocking(id, 1, formdata)
+    if(blockingStatus){
+      dispatch(cartItemAdd(id, 1, formdata))
+    }
+    setCheckingBlocking(false)
   }
 
-  const btnDisabled = () =>  Object.values(cart).some(item => "formdata" in item && item.formdata && isEqual(item.formdata, formdata)  )
-  
-
-//  useEffect(() => {
-
-//   fetch(service_api, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ti: label, id: boothId})
-//   }).then(response => response.json()).then((json) => console.log({ti: label, id: boothId}, json))
-
-//  }, [])
-
-
-if(!id || !bookable){
-  return <MyButton disabled {...addToCartButtonProps} />
-
-}
-
-return <MyButton disabled={btnDisabled()} onClick={handleBtnClick} {...addToCartButtonProps} />
-
-
-//       <form action={ get("bookingmap.api") } method="post" target="_blank">
-//       <input type="hidden" name={`tickets[${id}]`} value="1" />
-//       <input type="hidden" name={`ticketdata[${id}]`} value={JSON.stringify(formdata)} />
+  return (
+    <div className={classes.root}>
+    <div className={classes.wrapper}>
+  <MyButton disabled={btnDisabled()} onClick={handleBtnClick} {...addToCartButtonProps} />
+  {checkingBlocking && <CircularProgress size={24} className={classes.buttonProgress} />}
+  </div></div>)
 
 
 }

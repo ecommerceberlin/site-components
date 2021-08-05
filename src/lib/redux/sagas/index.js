@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 
 import {
   all,
@@ -19,6 +18,7 @@ import fetch from 'isomorphic-unfetch';
 import _keyBy from 'lodash/keyBy';
 import Router from 'next/router';
 import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
 
 import {
   FORM_ACTION_STARTED,
@@ -40,7 +40,9 @@ import {
   //LINKEDIN_AUTOVOTE_REQUESTED,
   LINKEDIN_VOTE_SUCCESS,
   VOTE_STATUS_CHECK,
-  SET_USER_TOKEN
+  SET_USER_TOKEN,
+  LOCK_SUCCESS,
+  LOCK_FAILED
 } from '../../components/redux/types';
 
 import {
@@ -69,13 +71,13 @@ import {
   linkedVoteRequest,
   linkedVoteError,
   linkedVoteSuccess,
-  uuidSet
-
+  uuidSet,
+  cartValidate,
 } from '../../components/redux/actions';
 
 import * as Selectors from '../selectors';
 import {event} from '../../services/gtag'
-import {resourceToUrl} from '../../helpers';
+import {resourceToUrl, uuid} from '../../helpers';
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import { HYDRATE } from 'next-redux-wrapper'
 
@@ -349,12 +351,6 @@ function* handleLocks(){
   const cart = yield select(Selectors.getCart)
   let uuid = yield select(state => state.app.uuid)
 
-  if(!uuid){
-    uuid = uuidv4()
-    yield put(uuidSet(uuid))
-  }
-
-  //
   //'http://eventjuicer-api.test/v1/public/hosts/targiehandlu.pl/lock'
   
   const response = yield call(fetch, `${apiUrl}/lock`, {
@@ -362,18 +358,22 @@ function* handleLocks(){
     headers: {
       'Content-Type': 'application/json'
     },
-    //credentials : 'include',
     body: JSON.stringify( {uuid, cart} )
   }); 
 
-  const json = yield call([response, response.json]);
+  const {data} = yield call([response, response.json]);
 
-  if (response.ok && response.status >= 200 && 'data' in json) {
-    // yield put( linkedVoteSuccess(json.data) );
-  } else {
-    // yield put( linkedVoteError(json.error) );
-  }
+  if (response.ok && response.status >= 200 && data) {
+    //update CART (some items may be removed by the server!!!)
+    yield put( cartValidate( data ) );
+  } 
 
+}
+
+
+function* handleCartValidate(payload){
+
+    console.log(payload)
 }
 
 
@@ -403,7 +403,9 @@ const rootSaga = function* root() {
 
     takeEvery(SET_USER_TOKEN, handleRehydrate),
 
-    takeEvery(CART_ITEM_ADD, handleLocks),
+    // takeEvery(CART_ITEM_ADD, handleLocks),
+    takeEvery(LOCK_SUCCESS, handleCartValidate),
+    takeEvery(LOCK_FAILED, handleCartValidate),
     takeEvery(CART_ITEM_REMOVE, handleLocks),
     takeEvery(CART_RESET, handleLocks)
 

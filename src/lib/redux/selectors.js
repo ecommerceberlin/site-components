@@ -27,8 +27,23 @@ export const getFaqs = state => state.visuals.faqs;
 export const getSettings = state => state.settings;
 export const getBoothsSelected = state => state.boothsSelected
 export const getTransactions = state => state.transactions
+export const getUUID = state => state.app.uuid
+
+// export const InteractedSelector = createSelector(
+//   getTransactions,
+//   (state, props) => props.
+// )
+
+
 
 export const getPropsQueries = (state, props) => "queries" in props && isObject(props.queries)? props.queries: {};
+
+
+
+export const CartItemsSelector = createSelector(
+  getCart,
+  cart => isObject(cart)? Object.values(cart).length : 0
+)
 
 
 export const MatchListWithDataSelector = createCachedSelector(
@@ -353,8 +368,11 @@ PRESENTERS - END
 
 export const KeyedFormdataSelector = createSelector(
   getFormdata,
-  (formdata) => keyBy(formdata, "id")
+  (formdata) => keyBy(formdata, "id"),
 )
+
+
+
 
 export const KeyedBlockingsSelector = createSelector(
   getBlockings,

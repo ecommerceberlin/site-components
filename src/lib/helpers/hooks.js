@@ -1,13 +1,25 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import {resourceFetchRequest, resourceFetchSuccess, setUserToken, removeUserToken, dialogShow} from '../components/redux/actions'
+import {
+    resourceFetchRequest, 
+    resourceFetchSuccess, 
+    setUserToken, 
+    removeUserToken, 
+    dialogShow, 
+    uuidSet,
+    lockSuccess,
+    lockFailed
+} from '../components/redux/actions'
 import {getUserByToken} from './api'
 import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
+
 import { useRouter } from 'next/router'
-import { FilteredDataSelector, KeyedBlockingsSelector } from '../redux/selectors'
+import { FilteredDataSelector } from '../redux/selectors'
 import {useTranslate} from '../i18n'
-import sha1 from 'js-sha1'
+import Hashes from 'jshashes'
+import { v4 as uuidv4 } from 'uuid';
 
 
 export const useDialog = () => {
@@ -20,25 +32,54 @@ export const useDialog = () => {
     })))
 }
 
-export const useBlocking = () => {
 
-    const blockings = useSelector(KeyedBlockingsSelector)
+export const sha1 = (str) => (new Hashes.SHA1).hex(str)
+
+export const uuid = () => uuidv4()
+
+export const useBlocking =  () => {
+
+    const dispatch = useDispatch()
+    const {post_api} = useSettings("system")
     const uuid = useSelector(state => state.app.uuid)
 
-    return function(id){
+    useEffect(()=>{
+        if(!uuid){
+            dispatch(uuidSet(uuid()))
+        }
+    }, [])
+ 
+    return useCallback(async (ticket_id, quantity, formdata) => {
 
-        if( id && blockings && "id" in blockings ){
-            if( uuid && blockings[id]["sessid"] == sha1(uuid) ){
-                console.log("same owner")
+        const query = await fetch(post_api.replace("register", "lock"), {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( {uuid, cart: {
+            [ticket_id]: {
+                quantity,
+                formdata
+            }    
+            }} )
+        })
+        if(query.ok && query.status >= 200){
+            const {data, failed} = await query.json()
+            
+            if(isEmpty(failed)){
+                dispatch(lockSuccess(data))
+                return true
+            }else{
+                dispatch(lockFailed(data, failed))
                 return false
             }
-            console.log("other owner")
-            return "hold"
         }
-       return false
-    }
+        return null
 
+    })
 }
+
+
 
 export const useDatasource = (queries = {}, props = {}) => {
 

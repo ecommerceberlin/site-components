@@ -264,6 +264,14 @@ export function cartReset() {
   };
 }
 
+export function cartValidate(payload) {
+  return {
+    type: Types.CART_VALIDATE,
+    payload: payload
+  };
+}
+
+
 export function searchStarted(query) {
   return {
     type: Types.SEARCH_STARTED,
@@ -304,5 +312,28 @@ export function uuidSet(payload){
   return {
     type: Types.UUID_SET,
     payload
+  }
+}
+
+export function lockSuccess(data){
+  return {
+    type: Types.LOCK_SUCCESS,
+    data,
+    failed: []
+  }
+}
+
+export function lockFailed(data, failed){
+  return {
+    type: Types.LOCK_FAILED,
+    data,
+    failed
+  }
+}
+
+export function userInteractedWith(name){
+  return {
+    type: Types.USER_INTERACTED_WITH,
+    name: name
   }
 }
