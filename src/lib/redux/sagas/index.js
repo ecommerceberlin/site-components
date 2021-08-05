@@ -73,6 +73,7 @@ import {
   linkedVoteSuccess,
   uuidSet,
   cartValidate,
+  userInteractedWith
 } from '../../components/redux/actions';
 
 import * as Selectors from '../selectors';
@@ -132,6 +133,8 @@ function* handleBoothCheck({payload}){
         value : payload
   })
   
+  yield put(userInteractedWith("bookingmap"))
+
 }
 
 function* accumulateFetches({resource, reload}) {

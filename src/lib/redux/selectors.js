@@ -38,6 +38,11 @@ export const getUUID = state => state.app.uuid
 
 export const getPropsQueries = (state, props) => "queries" in props && isObject(props.queries)? props.queries: {};
 
+export const UserInteractedWith = createCachedSelector(
+  getTransactions,
+  (state, name) => name,
+  (transactions, name) => transactions && "interacted" in transactions && Array.isArray(transactions.interacted) && transactions.interacted.includes(name)
+)((state, name) => name)
 
 
 export const CartItemsSelector = createSelector(

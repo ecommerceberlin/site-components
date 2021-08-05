@@ -21,7 +21,7 @@ const reducer = (state = defaultState, action) => {
   switch (action.type) {
 
     case USER_INTERACTED_WITH:
-      return {...state, interacted: [...new Set([...state.interacted, ...action.name])] }
+      return {...state, interacted: [...new Set([...state.interacted, action.name])] }
     break;
     case FORM_ACTION_FINISHED:
 

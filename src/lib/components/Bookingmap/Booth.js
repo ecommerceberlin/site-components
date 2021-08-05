@@ -66,7 +66,7 @@ const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti =
 
 
   // console.log(status, name, image, slug, selected)
-  console.log(id, ti, blocked, defaultSize)
+  // console.log(id, ti, blocked, defaultSize)
 
 
   const {
@@ -93,7 +93,7 @@ const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti =
 
     dispatch(dialogShow({
       title: '', //will be overwritten....
-      content:  <BoothDialog setting={setting} boothId={id} groupId={g} label={ti} status={status} styleName={getStylingName(boothStyleMapping, g)} />,
+      content:  <BoothDialog setting={setting} boothId={id} groupId={g} label={ti} styleName={getStylingName(boothStyleMapping, g)} />,
       buttons: []
     }));
 
