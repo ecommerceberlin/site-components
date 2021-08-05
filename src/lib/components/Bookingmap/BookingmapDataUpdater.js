@@ -15,7 +15,7 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
 
     useEffect(() => {
 
-        if(!interacted){
+        if(!interacted && !cartItems){
             return;
         }
 
@@ -30,11 +30,11 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
         return () => {
           pusher.unsubscribe("eventjuicer");
         };
-    }, [interacted]);
+    }, [interacted, cartItems]);
 
     useEffect(() => {
 
-        if(!interacted){
+        if(!interacted && !cartItems){
             return;
         }
 
@@ -42,7 +42,7 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
           dispatch(resourceFetchRequest(["formdata", "blockings"]))
         }, autorefresh * 1000);
         return () => clearInterval(interval);
-    }, [interacted]);
+    }, [interacted, cartItems]);
 
 
     return null
