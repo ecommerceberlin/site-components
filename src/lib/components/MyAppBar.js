@@ -18,7 +18,7 @@ import RawTranslatedText from './RawTranslatedText'
 import Settings from '../datasources/Settings';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
-import { getCart } from '../redux/selectors'
+import { CartItemsSelector } from '../redux/selectors'
 import { useSettings } from '../helpers'
 import { drawerShow, dialogShow } from './redux/actions';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -104,7 +104,7 @@ const defaultProps = {
 
 function MyAppBar({setting="appbar", ...props}) {
 
-  const cart = useSelector(getCart)
+  const cartItems = useSelector(CartItemsSelector)
   const loading = useSelector((state) => state.visuals.loading)
   const page_action = useSelector((state) => state.visuals.page_action)
   const dispatch = useDispatch()
@@ -112,10 +112,10 @@ function MyAppBar({setting="appbar", ...props}) {
   const settings = useSettings(setting)
   const {event_name} = useSettings("common")
   const {links, position} = Object.assign({}, defaultProps, settings, props)
-  const noItems = cart? Object.keys(cart).length : 0;
+
  
   return (<div className={classNames(classes.grow, {
-        // [classes.spaced]: noItems
+        // [classes.spaced]: cartItems
       })}>
     <ElevationScroll>
     {/* <HideOnScroll> */}
@@ -135,7 +135,7 @@ function MyAppBar({setting="appbar", ...props}) {
             <div className={classes.grow} />
             <div className={classes.buttons}>
             {page_action || links.map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
-            {noItems > 0 ? <CartButton count={noItems} /> : null}
+            {cartItems > 0 ? <CartButton count={cartItems} /> : null}
             {/* <LoginWithLinkedIn /> */}
             {/* <UpdateProfileLink /> */}
             <LanguageSelect /> 
