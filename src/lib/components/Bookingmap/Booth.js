@@ -60,7 +60,7 @@ const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti =
   const settings = useSettings(setting);
   const {status, name, image} = useSelector((state) => BoothFormdataSelector(state, id), shallowEqual)
   const selected = useSelector(state => BoothSelectedSelector(state, id))
-  const blocked = useSelector(state => BoothBlockedSelector(state, id))
+  const lock = useSelector(state => BoothBlockedSelector(state, id))
   const defaultSize = useSelector(state => BoothTicketGroupSelector(state, g))
 
 
@@ -76,8 +76,8 @@ const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti =
     disabled
    } = Object.assign({}, defaultProps, settings, props)
 
-
-   const hold = () => status === 'hold' || blocked === false
+   const blocked = () => lock === false
+   const hold = () => status === 'hold'
    const sold = () => status === "sold"
    const unavailable = () => !ti || disabledTicketGroupIds.includes(g)
 
@@ -112,6 +112,7 @@ const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti =
         [classes.boothSold]: sold(),
         [classes.boothHold]: hold(),
         [classes.boothUnavailable]: unavailable(),
+        [classes.boothBlocked]: blocked(),
         [classes.boothSelected]: selected,
         [classes.boothOnLegend] : legend
       })}

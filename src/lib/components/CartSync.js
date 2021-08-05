@@ -6,7 +6,7 @@ import Pusher from "pusher-js";
 
 
 
-const BookingmapDataUpdater = ({autorefresh = 30}) => {
+const CartSync = ({autorefresh = 30}) => {
 
     const dispatch = useDispatch()
     const interacted = useSelector((state) => UserInteractedWith(state, "bookingmap"))
@@ -25,6 +25,7 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
         var channel = pusher.subscribe('eventjuicer');
         channel.bind('NewLockWasCreated', function({data}){
             dispatch(resourceFetchSuccess("blockings", data))
+            // dispatch(resourceFetchRequest(["formdata"]))
         });
         return () => {
           pusher.unsubscribe("eventjuicer");
@@ -47,4 +48,4 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
     return null
 }
 
-export default BookingmapDataUpdater;
+export default CartSync;

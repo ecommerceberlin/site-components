@@ -52,6 +52,13 @@ const styles = {
     boxShadow : 'none'
   },
 
+  boothBlocked: {
+    backgroundColor: '#eeee14 !important',
+    borderSize: 0,
+    boxShadow : 'none',
+    color: '#333 !important'
+  },
+
   boothSelected: {
     backgroundColor: 'blue !important',
     color: 'white !important',
