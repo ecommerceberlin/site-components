@@ -57,13 +57,12 @@ export default withFormik({
         if (response.status !== 200) {
           console.log("passed props", props);
           console.log("final data", data)
+          setSubmitting(false);
         }
         return response.json();
       }).then(data => {
-
         setSubmitting(false);
         setStatus(data);
-
       });
   },
   displayName: 'MyFormikForm'

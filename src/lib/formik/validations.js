@@ -134,21 +134,39 @@ export const validations = (requiredFieldNames) => ({
       .requireWhenRequired(requiredFieldNames, 'Please accept terms'),
 
 
-      presentation_title: Yup.string()
+      presenter: Yup.string()
       .min(2, "Too short :(")
       .max(200, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Valid presenter first and last names are required.'),
+
+      presentation_title: Yup.string()
+      .min(20, "Too short :(")
+      .max(200, 'Please make it shorter.')
       .requireWhenRequired(requiredFieldNames, 'Valid presentation title is required.'),
+
+
+      presentation_category: Yup.string()
+      .min(1, "Too short :(")
+      .max(200, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Valid presentation category is required.'),
+
+    
+      presentation_description: Yup.string()
+      .min(100, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Valid description is required (100 - 2000 chars).'),
+
 
       project_name: Yup.string()
       .min(2, "Too short :(")
       .max(200, 'Please make it shorter.')
       .requireWhenRequired(requiredFieldNames, 'Product/service name is required (2-200 chars).'),
 
-
       project_description: Yup.string()
       .min(100, "Too short :(")
       .max(2000, 'Please make it shorter.')
       .requireWhenRequired(requiredFieldNames, 'Product/service description is required (100 - 2000 chars).'),
+
 
       difference: Yup.string()
       .min(100, "Too short :(")

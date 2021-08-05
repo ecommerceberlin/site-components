@@ -99,7 +99,8 @@ const StepForm = ({setting, handleChange, handleBlur, handleSubmit, isSubmitting
     const value= id in values ? values[id] : "";
     const label = `${baseLabel}.fields.${id}`
     const multiline =  "long" in data && data.long || id.indexOf("description") > -1
-    const passedProps = {id, label, required, error, value, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField};
+    const more = "more" in data && data.more? data.more: ""
+    const passedProps = {id, label, required, more, error, value, handleChange, handleBlur, setFieldValue, setFieldTouched, validateField};
 
     if("options" in data && Array.isArray(data.options) && data.options.length){
       return (<SelectInput key={id} options={data.options} {...passedProps} />)
