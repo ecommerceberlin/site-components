@@ -8,7 +8,7 @@ import isEqual from 'lodash/isEqual'
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import {useTranslate} from '../../i18n'
 
 const defaultProps = {
 
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 const TicketBuyButtonNew = ({setting, ...props}) => {
 
   const classes = useStyles();
+  const [translate] = useTranslate()
   const [checkingBlocking, setCheckingBlocking] = useState(false)
   const cart = useSelector(getCart)
   const dispatch = useDispatch();
@@ -66,6 +67,13 @@ const TicketBuyButtonNew = ({setting, ...props}) => {
     if(btnDisabled()){
       return;
     }
+    //check number of items in the cart!!!!
+    if(Object.values(cart).length>2){
+      alert(translate("ecommerce.cart.exceeded"))
+      setCheckingBlocking(false)
+      return
+    }
+
     const blockingStatus = await setBlocking(id, 1, formdata)
     if(blockingStatus){
       dispatch(cartItemAdd(id, 1, formdata))

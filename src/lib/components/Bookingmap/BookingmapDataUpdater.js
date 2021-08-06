@@ -12,37 +12,27 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
     const interacted = useSelector((state) => UserInteractedWith(state, "bookingmap"))
     const cartItems = useSelector(CartItemsSelector)
 
-
     useEffect(() => {
-
-        if(!interacted && !cartItems){
-            return;
+        if(interacted || cartItems){
+            const pusher = new Pusher("ef91111f814df12adcef", {
+                cluster: "eu",
+            });
+            var channel = pusher.subscribe('eventjuicer');
+            channel.bind('NewLockWasCreated', function({data}){
+                dispatch(resourceFetchSuccess("blockings", data))
+            });
+            return () => pusher.unsubscribe("eventjuicer")
         }
-
-        const pusher = new Pusher("ef91111f814df12adcef", {
-          cluster: "eu",
-        });
-        var channel = pusher.subscribe('eventjuicer');
-        channel.bind('NewLockWasCreated', function({data}){
-            dispatch(resourceFetchSuccess("blockings", data))
-        });
-        return () => {
-          pusher.unsubscribe("eventjuicer");
-        };
     }, [interacted, cartItems]);
 
     useEffect(() => {
-
-        if(!interacted && !cartItems){
-            return;
+        if(interacted || cartItems){
+            const interval = setInterval(() => {
+                dispatch(resourceFetchRequest(["formdata", "blockings"]))
+            }, autorefresh * 1000);
+            return () => clearInterval(interval);
         }
-
-        const interval = setInterval(() => {
-          dispatch(resourceFetchRequest(["formdata", "blockings"]))
-        }, autorefresh * 1000);
-        return () => clearInterval(interval);
     }, [interacted, cartItems]);
-
 
     return null
 }
