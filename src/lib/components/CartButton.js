@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
@@ -16,6 +16,19 @@ const CartButton = ({ count=0, label="ecommerce.cart.button" }) => {
     dispatch(cartReset());
     dispatch(dialogHide());
   }
+
+  useEffect(() => {
+
+
+    // if(count){
+    //   const interval = setInterval(() => {
+    //       dispatch(resourceFetchRequest(["formdata", "blockings"]))
+    //   }, autorefresh * 1000);
+    //   return () => clearInterval(interval);
+    // }
+
+  }, [count])
+
 
   const dialog = {
     title: translate("ecommerce.cart.dialog"),
