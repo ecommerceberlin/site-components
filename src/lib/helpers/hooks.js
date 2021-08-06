@@ -35,7 +35,7 @@ export const useDialog = () => {
 
 export const sha1 = (str) => (new Hashes.SHA1).hex(str)
 
-export const uuid = () => uuidv4()
+export const uuidCreate = () => uuidv4()
 
 export const useBlocking =  () => {
 
@@ -45,7 +45,7 @@ export const useBlocking =  () => {
 
     useEffect(()=>{
         if(!uuid){
-            dispatch(uuidSet(uuid()))
+            dispatch(uuidSet(uuidCreate()))
         }
     }, [])
  
