@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useCallback, useMemo} from 'react';
 import TextField from '@material-ui/core/TextField';
 import { translate } from '../i18n';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose'
+import debounce from 'lodash/debounce'
 
 const styles = theme => ({
     textField: {
@@ -42,8 +43,19 @@ const TextInput = props => {
     translate,
     required,
     validateField,
-    multiline
+    multiline,
+    setFieldValue
   } = props;
+
+
+  const debouncedValidate = useMemo(() => debounce(
+      () => {validateField(id); console.log("validated")}, 1000
+  ))
+
+  const onChange = useCallback((e) => {
+    setFieldValue(id, e.target.value, false);
+    debouncedValidate();
+  }, [])
 
   const translatedLabel = translate(label);
 
@@ -57,7 +69,7 @@ const TextInput = props => {
           input : classes.input}
       }}
       value={value}
-      onChange={(e) => { handleChange(e); }}
+      onChange={onChange}
       onBlur={(e) => { handleBlur(e); validateField(id); }}
       margin="normal"
       multiline={multiline }
