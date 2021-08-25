@@ -48,9 +48,7 @@ const TextInput = props => {
   } = props;
 
 
-  const debouncedValidate = useMemo(() => debounce(
-      () => {validateField(id); console.log("validated")}, 1000
-  ))
+  const debouncedValidate = useMemo(() => debounce(() => validateField(id), 1000))
 
   const onChange = useCallback((e) => {
     setFieldValue(id, e.target.value, false);
