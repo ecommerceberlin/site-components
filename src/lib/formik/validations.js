@@ -94,7 +94,7 @@ export const validations = (requiredFieldNames) => ({
 
       position: Yup.string()
       .min(2, "Should be longer")
-      .max(100, 'Invalid')
+      .max(100, 'Too long - 100 chars max')
       .requireWhenRequired(requiredFieldNames, 'Company name is required.'),
   
       phone: Yup.string()
@@ -108,6 +108,11 @@ export const validations = (requiredFieldNames) => ({
 
 
       company_website: Yup.string()
+      .min(5, "URL address seems invalid")
+      .max(200, 'URL address seems invalid')
+      .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
+
+      avatar: Yup.string()
       .min(5, "URL address seems invalid")
       .max(200, 'URL address seems invalid')
       .requireWhenRequired(requiredFieldNames, 'URL address is required.'),
@@ -155,6 +160,11 @@ export const validations = (requiredFieldNames) => ({
       .min(100, "Too short :(")
       .max(2000, 'Please make it shorter.')
       .requireWhenRequired(requiredFieldNames, 'Valid description is required (100 - 2000 chars).'),
+
+      bio: Yup.string()
+      .min(100, "Too short :(")
+      .max(2000, 'Please make it shorter.')
+      .requireWhenRequired(requiredFieldNames, 'Valid BIO is required (100 - 2000 chars).'),
 
 
       project_name: Yup.string()
