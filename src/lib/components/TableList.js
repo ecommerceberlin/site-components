@@ -67,7 +67,7 @@ const Cell = ({row, column, position, total, selected}) => {
         return (<TableCell component="th" scope="row" align={align || "center"}><ProfileLogotype data={row} tiny={true} /></TableCell>)
 
       case "link":
-        return (<TableCell component="th" scope="row" align={align || "left"}><MyLink {...(isFunction(link) ? link(row) : {})} {...rest} /></TableCell>)
+        return (<TableCell component="th" scope="row" align={align || "left"}><MyLink href={isFunction(link) ? link(row) : "/notset"} {...rest} /></TableCell>)
       
       default: 
         return <TableCell component="th" scope="row" align={align || "left"}>{null}</TableCell>
