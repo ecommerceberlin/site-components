@@ -98,7 +98,7 @@ class VoteWithLinkedIn extends Component {
 
             case 404:
                 this.showDialog('common.vote_error', 
-                    this.handleOAuth()
+                    this.renderStandardButton()
                 );
             break;
 
@@ -157,6 +157,27 @@ class VoteWithLinkedIn extends Component {
         return false;
     }
 
+
+    renderStandardButton(){
+
+
+        const {
+            translate, 
+            classes,
+            labelGuest
+        } = this.props;
+
+        return  (<Button 
+            startIcon={ <LinkedIn className={classes.leftIcon} />} 
+            onClick={(e) => this.createSession(e) } 
+            variant="contained" 
+            size="large" 
+            fullWidth
+            color="primary">{translate(labelGuest)}</Button>)
+    }
+
+
+
     render(){
 
         const {
@@ -209,13 +230,7 @@ class VoteWithLinkedIn extends Component {
         }
 
         
-        return  (<Button 
-            startIcon={ <LinkedIn className={classes.leftIcon} />} 
-            onClick={(e) => this.createSession(e) } 
-            variant="contained" 
-            size="large" 
-            fullWidth
-            color="primary">{translate(labelGuest)}</Button>)
+        return this.renderStandardButton()
        
     }
 
