@@ -13,7 +13,7 @@ import CallForPapersDatasource from '../datasources/CallForPapers'
 import VotesDatasource from '../datasources/Votes'
 
 
-const CallForPapers = ({renderAs, show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
+const CallForPapers = ({renderAs, show_votes, intro, limit, random, filter, link, selected, keyword, keyword_source, sort, ...wrapperProps}) => {
 
 return (
 
@@ -65,9 +65,9 @@ return (
                 {name: "presenter_details", render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment> },
                 {name: "presentation_title", render: (row) => row.presentation_title},
                 {name: "votes", render: (row) => row.votes, style: "big", align: "center"},
-                {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
+                {name: "details", render: "link", link, label: "common.vote_details", variant: "outlined"}
             ]}
-            selected={(row, i) => i < 5}
+             selected={selected}
             // link={link} 
             // title={item =>  }
             // subtitle={item => item.presentation_title}
@@ -105,12 +105,11 @@ CallForPapers.defaultProps = {
     keyword : null,
     keyword_source : "presentation_category",
     sort : null,
-    link : function(item){
-        return {as : `/vote/${item.id}`, href : `/vote/[id]`}
-    },
+    link : function(item){ return  `/vote/${item.id}` },
     intro : null,
     show_votes : false,
-    renderAs : "avatars"
+    renderAs : "avatars",
+    selected: (row, i) => i < 5 
 }
 
 
