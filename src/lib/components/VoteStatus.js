@@ -20,7 +20,7 @@ const VoteStatus = ({all, enabled, classes, translate, max_votes}) => {
     const remaining = max_votes - all.length;
 
     return enabled ? ( <Typography template="benefitsText">
-    {`${translate("awards.remaining.votes")}: ${remaining}`}
+    {`${translate("common.remaining")}: ${remaining} ${translate("common.votes")}`}
     </Typography>) : null
 
 }
