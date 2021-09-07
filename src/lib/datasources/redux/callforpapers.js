@@ -17,7 +17,7 @@ export const FilteredCallForPapers = createSelector(
       let allUsedKeywords = [];
 
       if(Array.isArray(callforpapers)){
-         allUsedKeywords = callforpapers.map(item => "keyword_source" in props && props.keyword_source in item ? item[props.keyword_source] : item.presentation_category).filter(item => item.length > 1)
+         allUsedKeywords = callforpapers.map(item => "keyword_source" in props && props.keyword_source in item ? item[props.keyword_source] : item.presentation_category).filter(item => item && item.length > 1)
       }
 
       return [...new Set(allUsedKeywords )];
