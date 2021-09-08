@@ -25,8 +25,6 @@ import {
 import CallForPapers from '../datasources/CallForPapers'
 
 import { 
-    getCallForPapersOgImage, 
-    getSpeakerName,
     getSpeakerAvatar,
  } from '../helpers';
 

@@ -9,13 +9,13 @@ import {
     getSpeakerName
  } from '../helpers';
   
- const HeadVote = ({id, path, children}) => (
+ const HeadVote = ({id, path, children, template}) => (
 
     <CallForPapers id={id}>{
 
         ({record}) => {
 
-           const image = getCallForPapersOgImage(record)
+           const image = getCallForPapersOgImage(record, template)
            const presentationTitle = _get(record, 'presentation_title') ;
 
             return (<MyHead
@@ -39,7 +39,8 @@ import {
 )
 
 HeadVote.defaultProps = {
-    path : "/vote"
+    path : "/vote",
+    template: "ebe_callforpapers_opengraph_template"
 }
 
 export default HeadVote;
