@@ -91,6 +91,7 @@ export { default as PostFeaturedCard } from './PostFeaturedCard'
 
 export { default as DiscordChat } from './DiscordChat'
 export { default as StageContent } from './StageContent'
+export { default as Categories } from './Categories'
 
 export * from './Bookingmap';
 export * from './Meetups';

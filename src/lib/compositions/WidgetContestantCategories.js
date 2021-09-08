@@ -1,4 +1,7 @@
 import React from 'react'
+import isEmpty from 'lodash/isEmpty'
+import isObject from 'lodash/isObject'
+import CategoriesAsIcons from '../components/Categories'
 
 import {
     Wrapper,
@@ -12,8 +15,9 @@ import {
 import CallForPapersDatasource from '../datasources/CallForPapers'
 import VotesDatasource from '../datasources/Votes'
 
+const WidgetContestantCategories = ({icons, show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
 
-const WidgetContestantCategories = ({renderAs, show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
+const hasIcons = icons && !isEmpty(icons) && isObject(icons)
 
 return (
 
@@ -28,19 +32,17 @@ return (
        keyword={keyword}
        keyword_source={keyword_source}
        sort={sort}
-   >{({all, filtered, keywords}) => (
+   >{({all, filtered, keywords}) => {
 
-    <React.Fragment>
-
-         <Centered>
-          <KeywordSelect  href={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} />
-        </Centered> 
-
-        <VotesDatasource>{(votesData) => (<VoteStatus {...votesData}  />)}</VotesDatasource>
-
+    return (
+        <React.Fragment>
+        {hasIcons ? <CategoriesAsIcons icons={icons} href={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} /> : ( <Centered><KeywordSelect  href={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} /></Centered> )}
+       <VotesDatasource>{(votesData) => (<VoteStatus {...votesData}  />)}</VotesDatasource>   
         </React.Fragment>
+    )
 
-   )}
+
+   }}
     
 </CallForPapersDatasource>
 
@@ -65,8 +67,7 @@ WidgetContestantCategories.defaultProps = {
         return {as : `/vote/${item.id}`, href : `/vote/[id]`}
     },
     intro : null,
-    show_votes : false,
-    renderAs : "avatars"
+    show_votes : false
 }
 
  
