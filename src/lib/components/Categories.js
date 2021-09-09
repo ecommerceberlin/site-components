@@ -33,7 +33,7 @@ const Categories = ({href, keywords, selected, icons, max=200}) => {
     return (<Grid container spacing={3}>{
         keywords.map((keyword) => { 
 
-            return (<Grid key={keyword} item md={2} onClick={() => isFunction(href)? router.push(href(keyword)): null}>
+            return (<Grid key={keyword} item xs={6} sm={4} md={3} lg={2} xl={2} onClick={() => isFunction(href)? router.push(href(keyword)): null}>
             <Grid container direction="column" alignItems="center">
             <Grid item>{keyword in icons && React.createElement(icons[keyword], {className: selected && keyword===selected? classes.selected: classes.icon, style: {width: '100%', maxWidth: max, height: 'auto'}})}</Grid>
             <Grid item><Typography>{translate(`common.tags.${keyword}`)}</Typography></Grid>
