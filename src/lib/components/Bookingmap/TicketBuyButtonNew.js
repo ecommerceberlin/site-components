@@ -60,7 +60,7 @@ const TicketBuyButtonNew = ({setting, ...props}) => {
   const  {id, bookable, formdata, addToCartButtonProps} = Object.assign(defaultProps, settings, props) 
   const setBlocking = useBlocking();
 
-  const btnDisabled = () => checkingBlocking || !id || !bookable || Object.values(cart).some(item => "formdata" in item && item.formdata && isEqual(item.formdata, formdata)  )
+  const btnDisabled = () => checkingBlocking || Object.values(cart).some(item => "formdata" in item && item.formdata && isEqual(item.formdata, formdata)  )
 
   const handleBtnClick = async () => {
     setCheckingBlocking(true)
@@ -79,6 +79,10 @@ const TicketBuyButtonNew = ({setting, ...props}) => {
       dispatch(cartItemAdd(id, 1, formdata))
     }
     setCheckingBlocking(false)
+  }
+
+  if(!id || !bookable){
+    return null
   }
 
   return (
