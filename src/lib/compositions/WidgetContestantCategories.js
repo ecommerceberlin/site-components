@@ -5,11 +5,9 @@ import CategoriesAsIcons from '../components/Categories'
 
 import {
     Wrapper,
-    People,
     Centered,
     KeywordSelect,
     VoteStatus,
-    TableList
 } from '../components';
 
 import CallForPapersDatasource from '../datasources/CallForPapers'
