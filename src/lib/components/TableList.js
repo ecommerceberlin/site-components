@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 // import TableContainer from '@material-ui/core/TableContainer';
 // import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Grid from '@material-ui/core/Grid';
 
 import { makeStyles } from '@material-ui/core/styles';
 // import Paper from '@material-ui/core/Paper';
@@ -13,7 +14,7 @@ import isFunction from 'lodash/isFunction'
 import Avatar from './MyAvatar';
 import { MyLink } from '../next';
 import ProfileLogotype from './ProfileLogotype'
-
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import { 
     getSpeakerName,
@@ -23,7 +24,7 @@ import {
 const useStyles = makeStyles((theme) => ({
 
   table: {
-    minWidth: 650,
+    width: "95%",
     // borderCollapse: "separate", 
     // borderSpacing: "0 3px", 
     marginTop: 30
@@ -48,55 +49,51 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Cell = ({row, column, position, total, selected}) => {
+const Cell = ({row, column, position, total}) => {
 
   const classes = useStyles();
 
-  const {name, render, link, align, style, ...rest} = column;
+  const {width, align} = column;
 
-  const styling = style && classes[style] ? {root: classes[style]} : {}
-
-  if(!isFunction(render)){
-
-    switch(render){
-
-      case "avatar":
-        return (<TableCell component="th" scope="row" align={align || "center"}><Avatar id={row.id} alt="" src={getSpeakerAvatar(row)} tiny={true} /></TableCell>)
-
-      case "logotype":
-        return (<TableCell component="th" scope="row" align={align || "center"}><ProfileLogotype data={row} tiny={true} /></TableCell>)
-
-      case "link":
-        return (<TableCell component="th" scope="row" align={align || "left"}><MyLink href={isFunction(link) ? link(row) : "/notset"} {...rest} /></TableCell>)
-      
-      default: 
-        return <TableCell component="th" scope="row" align={align || "left"}>{null}</TableCell>
-    }
-
-  }else{
-    return <TableCell component="th" scope="row" align={align || "left"} classes={styling}>{column.render(row, position, total)}</TableCell>
+  const renderers = {
+    avatar: () => <Avatar id={row.id} alt="" src={getSpeakerAvatar(row)} tiny={true} />,
+    logotype: () => <ProfileLogotype data={row} tiny={true} />,
+    link: ({link, label, variant, color}) => <MyLink href={isFunction(link) ? link(row) : "/notset"} label={label} variant={variant} color={color} />
   }
 
+  const getStyle = (col) => col.style && col.style in classes ? classes[col.style] : undefined
+  const getRenderer = (col) => {
+
+    if(isFunction(col.render)){
+      return col.render(row, position, total)
+    }
+    if(Array.isArray(col.render)){
+      return renderArray(col)
+    }
+    return col.render in renderers ? renderers[col.render](col): "error";
+  }
+
+  const renderArray = (col) => <Grid container spacing={1} {...(col.container||{})}>{col.render.map(el => <Grid key={el.name} item {...("breakpoints" in el? el.breakpoints: {})}>{getRenderer(el)}</Grid>)}</Grid>
+
+  return <TableCell component="td" width={width} align={align || "left"}><div className={getStyle(column)}>{ getRenderer(column) }</div></TableCell>
 
 }
 
 const TableList = ({rows, columns, primaryKey, selected}) => {
 
   const classes = useStyles();
-  
+  const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
+
+  if(isMobile){
+
+    // return <Grid container></Grid>
+
+  }
+
   return (
     <div className={classes.root}>
-     <Table className={classes.table} aria-label="simple table">
-        {/* <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead> */}
-        <TableBody>
+     <Table className={classes.table}>
+      <TableBody>
           {rows.map((row, position) => (
             <TableRow key={row[primaryKey]} selected={isFunction(selected) && selected(row, position)}>{
               columns.filter(item => item && "name" in item).map(column => <Cell 

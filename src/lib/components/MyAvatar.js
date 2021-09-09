@@ -16,12 +16,18 @@ const styles = theme => ({
   },
 
   tinyAvatar: {
-    width: 50,
-    height: 50,
-
-    [theme.breakpoints.up('sm')]: {
-      width: 100,
-      height: 100
+    width: 70,
+    height: 70,
+    marginRight: 10,
+    [theme.breakpoints.down('lg')]: {
+      width: 55,
+      height: 55,
+      marginRight: 5,
+    },
+    [theme.breakpoints.down('md')]: {
+      width: 40,
+      height: 40,
+      marginRight: 5,
     },
 
   },

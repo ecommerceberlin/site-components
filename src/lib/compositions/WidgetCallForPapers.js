@@ -11,7 +11,8 @@ import {
 
 import CallForPapersDatasource from '../datasources/CallForPapers'
 import VotesDatasource from '../datasources/Votes'
-
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 const CallForPapers = ({renderAs, show_votes, intro, limit, random, filter, link, selected, keyword, keyword_source, sort, ...wrapperProps}) => {
 
@@ -60,12 +61,24 @@ return (
             rows={filtered}
             columns={[
                 {name: "position", render: (row, position) => position < 6 ? <div style={{backgroundColor: 'green'}}></div> : null},
-                {name: "logotype", render: "logotype"},
-                {name: "avatar", render: "avatar"},
-                {name: "presenter_details", render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment> },
-                {name: "presentation_title", render: (row) => row.presentation_title},
+               
+                {name: "descriptions", render: [
+                    {name: "logotype", align: "center", breakpoints:{xs: 12, md: 3, lg: 2}, render: "logotype"},
+                    {name: "presentation_title", style: "big", breakpoints:{xs: 12, md: 5, lg: 6}, render: (row) => <Typography variant="h5">{row.presentation_title}</Typography>},
+                    {name: "secondary_info", container:{ justify:"flex-start",  alignItems:"center"}, breakpoints:{xs: 12, md: 3, lg: 3}, render: [
+
+                        {name: "avatar", render: "avatar", breakpoints:{
+                            xs: 12, sm: 4, md: 3
+                        }},
+                        {name: "presenter_details", render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment>, breakpoints:{
+                            xs: 12, sm: 8, md: 9
+                        }},
+                        
+                    ] },
+                    {name: "details", render: "link", link, label: "common.vote_details", color: "primary", variant: "outlined", breakpoints:{xs: 12, md: 1, lg: 1}}
+                ]},
+                   
                 {name: "votes", render: (row) => row.votes, style: "big", align: "center"},
-                {name: "details", render: "link", link, label: "common.vote_details", variant: "outlined"}
             ]}
              selected={selected}
             // link={link} 

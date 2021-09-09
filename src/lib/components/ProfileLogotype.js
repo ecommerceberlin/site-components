@@ -6,7 +6,6 @@ import {
     getSpeakerLogotype
  } from '../helpers';
 
-
 const useStyles = makeStyles((theme) => ({
     logotype: {
         // width: 100,
@@ -24,9 +23,24 @@ const useStyles = makeStyles((theme) => ({
       },
     
       tinyLogotype: {
-        maxWidth: 200, 
-        maxHeight: 100, 
-        margin: 10
+        maxWidth: 180, 
+        maxHeight: 80, 
+        margin: 20,
+
+        [theme.breakpoints.down('lg')]: {
+            maxWidth: 150,
+            maxHeight: 50,
+            marginRight: "auto",
+            marginLeft: "auto",
+        },
+
+        [theme.breakpoints.down('md')]: {
+            maxWidth: 150,
+            maxHeight: 50,
+            marginRight: 15,
+            marginLeft: 15,
+        },
+
       },
     
       image: {
