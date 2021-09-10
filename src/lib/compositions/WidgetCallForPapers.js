@@ -12,9 +12,9 @@ import CallForPapersDatasource from '../datasources/CallForPapers'
 import VotesDatasource from '../datasources/Votes'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import WidgetVoteStatus from './WidgetVoteStatus'
 
-const CallForPapers = ({renderAs, show_votes, max_votes, intro, limit, random, filter, link, selected, keyword, keyword_source, sort, ...wrapperProps}) => {
+
+const CallForPapers = ({renderAs, show_votes, intro, limit, random, filter, link, selected, keyword, keyword_source, sort, ...wrapperProps}) => {
 
 return (
 
@@ -122,8 +122,7 @@ CallForPapers.defaultProps = {
     intro : null,
     show_votes : false,
     renderAs : "avatars",
-    selected: (row, i) => i < 5,
-    max_votes: 6
+    selected: (row, i) => i < 5
 }
 
 

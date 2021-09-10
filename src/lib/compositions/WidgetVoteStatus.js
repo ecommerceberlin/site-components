@@ -1,37 +1,49 @@
 //import PropTypes from 'prop-types';
 import React from 'react'
 import Datasource from '../datasources/Votes'
-import SimpleVoteStatus from '../components/VoteStatus'
 import { getLinkedInToken } from '../redux/selectors'
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import Alert from '../components/Alert'
+import { makeStyles } from '@material-ui/core/styles';
+import {useTranslate} from '../i18n'
 
+const useStyles = makeStyles(theme => ({
 
-const VoteStatus = ({linkedin, ...rest}) => {
+    voteContainer : {
+        marginBottom: 10,
+    },
+    votedItem : {
+        marginTop: 10
+    }
+
+}))
+
+const WidgetVoteStatus = ({max_votes=10}) => {
+    const classes = useStyles()
+    const [translate] = useTranslate()
+    const linkedin = useSelector(getLinkedInToken)
+    if(!linkedin){
+        return null
+    }
 
     return (
 
-        <Datasource>{(data) => <SimpleVoteStatus enabled={linkedin} {...rest} {...data} />}</Datasource>
-    
+        <Datasource>{({all, keyed}) => {
+            
+            const remaining = max_votes - (all || []).length;
+
+            return ( <Alert type={remaining>0 ? "success": "info"} content={ 
+
+                `${translate("common.remaining")} ${translate("common.votes")}: ${remaining} `
+
+             } />
+            )
+
+        }
+        }</Datasource>
     )
 
 }
 
-VoteStatus.defaultProps = {
-    linkedin : null,
-    max_votes : 10
-}
 
-
-export default connect((state, props) => {
-
-    const mapStateToProps = (state, props) => {
-        return {
-          linkedin : getLinkedInToken(state),
-        //   votes : KeyedVotesSelector(state, props),
-        //   transaction : state.transactions.voting
-        }
-      }
-    return mapStateToProps
-})(VoteStatus)
-
-
+export default WidgetVoteStatus
