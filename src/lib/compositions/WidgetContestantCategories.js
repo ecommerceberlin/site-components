@@ -7,11 +7,10 @@ import {
     Wrapper,
     Centered,
     KeywordSelect,
-    VoteStatus,
 } from '../components';
 
 import CallForPapersDatasource from '../datasources/CallForPapers'
-import VotesDatasource from '../datasources/Votes'
+
 
 const WidgetContestantCategories = ({icons, show_votes, intro, limit, random, filter, link, keyword, keyword_source, sort, ...wrapperProps}) => {
 
@@ -35,7 +34,7 @@ return (
     return (
         <React.Fragment>
         {hasIcons ? <CategoriesAsIcons icons={icons} href={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} /> : ( <Centered><KeywordSelect  href={name => `/vote/categories/${name}`} keywords={keywords} selected={keyword} /></Centered> )}
-       <VotesDatasource>{(votesData) => (<VoteStatus {...votesData}  />)}</VotesDatasource>   
+   
         </React.Fragment>
     )
 

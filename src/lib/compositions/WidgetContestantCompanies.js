@@ -3,8 +3,7 @@ import {
     Wrapper,
 //    People,
     Centered,
-    KeywordSelect,
-    VoteStatus
+    KeywordSelect
 } from '../components';
 
 import AvatarlistCellProject from '../components/AvatarlistCellProject'
@@ -66,7 +65,7 @@ const WidgetContestantCompanies = ({
                 </Centered> 
             </Box>
 
-            {show_vote_status && <VoteStatus {...votesData}  />}
+
     
            {keyword && renderAs==="avatars" && <Box mt={5}>
             <Grid 
@@ -148,7 +147,7 @@ WidgetContestantCompanies.defaultProps = {
     center : false,
     spacing : 5,
     renderAs: "avatarlist",
-    resolveSelected: (row, i) => i < 10
+    resolveSelected: (row, i) => i < 10,
 }
 
 
