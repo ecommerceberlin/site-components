@@ -19,6 +19,7 @@ import { getLinkedInToken } from '../redux/selectors'
 // import { KeyedVotesSelector } from '../datasources/redux/votes'
 import { lsSet, lsGet, uuidv4 } from '../helpers'
 import isEmpty from 'lodash/isEmpty'
+import isFunction from 'lodash/isFunction'
 
 const styles = theme => ({
     buttonContainer : {
@@ -81,13 +82,12 @@ class VoteWithLinkedIn extends Component {
     }
 
     componentDidMount(){
-
         this.handleUrlToken();
     }
 
     componentDidUpdate(){
 
-       const {transaction, votes} = this.props;   
+       const {transaction, onVoted} = this.props;   
        const {code, message} = transaction;
 
         switch (code) {
@@ -104,9 +104,14 @@ class VoteWithLinkedIn extends Component {
 
             case 406:
             //already voted!
+              
             break;
             default:
             break;
+        }
+
+        if(onVoted && isFunction(onVoted) && this.isVoted()){
+            this.showDialog("common.vote_voted_dialog", onVoted(this.hasVoteLeft()))
         }
 
     }
@@ -130,13 +135,29 @@ class VoteWithLinkedIn extends Component {
 
     }
 
-    isDisabled(){
-
+    isVoted(){
         const {
             id, 
             votes,
-            disabled,
+        } = this.props;
+
+        return (!isEmpty(votes) && id in votes)
+    }
+
+    hasVoteLeft(){
+
+        const {
+            votes,
             max_votes,
+        } = this.props;
+
+        return (max_votes > Object.keys(votes).length)
+    }
+
+    isDisabled(){
+
+        const {
+            disabled,
             labelAlreadyVoted,
             labelVotesUsed,
             labelDisabled
@@ -146,11 +167,11 @@ class VoteWithLinkedIn extends Component {
             return labelDisabled
         }
 
-        if(!isEmpty(votes) && id in votes){
+        if(this.isVoted()){
             return labelAlreadyVoted;
         }
 
-        if(Object.keys(votes).length == max_votes){
+        if(!this.hasVoteLeft()){
             return labelVotesUsed
         }
 
@@ -247,7 +268,7 @@ VoteWithLinkedIn.defaultProps = {
     labelDisabled : "common.vote_disabled",
     labelAlreadyVoted : "common.vote_voted",
     labelVotesUsed : "common.votes_used",
-
+    onVoted: null,
     disabled : false,
     url : `https://${process.env.NEXT_PUBLIC_PROJECT}/vote`,
     oAuthUrl : `https://api.eventjuicer.com/v1/public/hosts/${process.env.NEXT_PUBLIC_PROJECT}/ssr`
