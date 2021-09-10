@@ -26,23 +26,13 @@ const WidgetVoteStatus = ({max_votes=10}) => {
         return null
     }
 
-    return (
-
-        <Datasource>{({all, keyed}) => {
-            
+    return (<Datasource>{({all, keyed}) => {
             const remaining = max_votes - (all || []).length;
-
             return ( <Alert type={remaining>0 ? "success": "info"} content={ 
-
                 `${translate("common.remaining")} ${translate("common.votes")}: ${remaining} `
-
              } />
             )
-
-        }
-        }</Datasource>
-    )
-
+        }}</Datasource>)
 }
 
 
