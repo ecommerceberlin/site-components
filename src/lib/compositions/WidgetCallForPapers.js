@@ -78,7 +78,7 @@ return (
                     {name: "details", render: "link", link, label: "common.vote_details", color: "primary", variant: "outlined", breakpoints:{xs: 12, md: 1, lg: 1}}
                 ]},
                    
-                {name: "votes", render: (row) => row.votes, style: "big", align: "center"},
+                {name: "votes", render: (row) => show_votes? row.votes: "", style: "big", align: "center"},
             ]}
              selected={selected}
             // link={link} 
