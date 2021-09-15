@@ -8,6 +8,7 @@ import green from '@material-ui/core/colors/green';
 import TicketRemainingInfo from './TicketRemainingInfo'
 import TicketDate from './TicketDate'
 import TicketPrice from './TicketPrice'
+import TicketBuyButton from './TicketBuyButton'
 import TicketBuyButtonNew from './TicketBuyButtonNew'
 import { useSettings } from '../../helpers'
 import TicketName from './TicketName'
@@ -36,9 +37,8 @@ const defaultProps = {
 const Ticket = ({setting, ticket, boothId, label, ...props}) => {
 
   const classes = useStyles();
-
-
   const settings = useSettings(setting)
+  const {use_old_ecommerce_module} = useSettings("system")
   const {disabled} = Object.assign({}, defaultProps, settings, props)
 
   if(!ticket){
@@ -70,8 +70,8 @@ const Ticket = ({setting, ticket, boothId, label, ...props}) => {
         <TicketPrice price={ticket.price} />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
-        <TicketBuyButtonNew formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />
-        <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
+       {use_old_ecommerce_module ? <TicketBuyButton formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled }  />: <TicketBuyButtonNew formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />} 
+       <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
       </Grid>
     </Grid>
   </div>);
