@@ -7,17 +7,18 @@ import AvatarlistCellProject from '../components/AvatarlistCellProject'
 import WinnerCategory from '../components/WinnerCategory'
 import Box from '@material-ui/core/Box';
 import { useDatasource } from '../helpers';
+import isFunction from 'lodash/isFunction'
 
+const WidgetContestantCompaniesArchiveWinners = ({resolveLink, resolveTitle, resolveAlt, resolveImage, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, wrapperProps}) => {
 
-const WidgetContestantCompaniesArchiveWinners = ({resolveLink, resolveTitle, resolveAlt, resolveImage, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, ...wrapperProps}) => {
-
+    const defaultFilter = (item) => parseInt(item.winner) === 1
 
     const {data} = useDatasource({
         data: {
             resource: "contestant_companies_all",
             params: {},
             filters: {
-                filter: (item) => parseInt(item.winner) === 1 && !item.current,
+                filter: (item) => isFunction(filter)? filter(item) && defaultFilter(item): defaultFilter(item),
             }
         }
     });
@@ -61,14 +62,15 @@ const WidgetContestantCompaniesArchiveWinners = ({resolveLink, resolveTitle, res
 
 WidgetContestantCompaniesArchiveWinners.defaultProps = {
 
-    label : "awards.winners.archive.title",
-    secondaryLabel : "awards.winners.archive.description",
+    wrapperProps: {
+        label : "awards.winners.archive.title",
+        secondaryLabel : "awards.winners.archive.description",
+    },
     links : [],
     limit : 200,
     first : false,
     random : false,
-    filter : (item) => parseInt(item.winner) === 1,
-
+    filter : null,
     resolveLink : function(item){  return `/vote/${item.id}` },
     resolveTitle: (item) => <WinnerCategory keyword={item.awards_category} name={item.product_name} place={item.winner} />,
     resolveAlt:  (item) => "cname2" in item ? `${item.cname2}` : "resolveAlt error",
