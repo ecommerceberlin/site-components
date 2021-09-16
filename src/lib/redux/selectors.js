@@ -95,7 +95,6 @@ export const currentUser = (state, props) => state.resources.currentUser
 
 
 export const getCallForPapers = (state, props) => state.resources.callforpapers
-export const getJurors = (state, props) => state.resources.jurors
 export const getContestantCompanies = (state, props) => state.resources.contestant_companies
 export const getContestantCompaniesAll = (state, props) => state.resources.contestant_companies_all
 export const getVotes = (state, props) => state.resources.votes
