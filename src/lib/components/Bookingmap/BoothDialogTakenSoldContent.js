@@ -54,7 +54,7 @@ const BoothDialogTakenSoldContent = ({setting="", company={}}) => {
     <div className={classes.logotype} style={{
     backgroundImage : `url(${ resizeCloudinaryImage(_get(company, "profile.logotype_cdn"), 300, 150) })`
     }} />
-    <Typography  className={classes.cname} variant="headline" component="h2">{getCompanyName(company)}</Typography> 
+    <Typography  className={classes.cname} variant="h4" component="h2">{getCompanyName(company)}</Typography> 
     </div>
     <Tags tags={_get(company, "profile.keywords")} centered={false} />
     <Typography component="div">
