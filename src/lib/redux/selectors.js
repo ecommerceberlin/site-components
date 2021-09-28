@@ -25,7 +25,6 @@ export const getResources = state => state.resources;
 export const getResourceLists = state => state.resourcelists;
 export const getFaqs = state => state.visuals.faqs;
 export const getSettings = state => state.settings;
-export const getBoothsSelected = state => state.boothsSelected
 export const getTransactions = state => state.transactions
 export const getUUID = state => state.app.uuid
 
@@ -418,11 +417,6 @@ export const BookingMapResourcesSelector = createSelector(
   (formdata, ticketgroups, bookingmap) => ({formdata, ticketgroups, bookingmap})
 )
 
-export const BookingMapSelector = createSelector(
-  BookingMapResourcesSelector,
-  getBoothsSelected,
-  (resources, boothsSelected) => ({...resources, boothsSelected})
-)
 
 export const FilteredByKeywordExhibitors = createSelector(
   FilteredExhibitors,

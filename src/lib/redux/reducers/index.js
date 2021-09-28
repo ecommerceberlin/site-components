@@ -1,6 +1,6 @@
 
 
-import boothsSelected from './boothsSelected';
+
 import resources from './resources';
 import resourcelists from './resourcelists';
 import app from './app';
@@ -13,7 +13,6 @@ export default {
   app,
   transactions,
   visuals,
-  boothsSelected,
   resources,
   resourcelists,
   settings,

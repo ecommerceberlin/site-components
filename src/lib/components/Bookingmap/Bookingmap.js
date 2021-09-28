@@ -51,7 +51,6 @@ const defaultProps = {
   height: 750,
   width: 1170,
   defaultHeight: 500,
-  boothsSelected : [],
   formdata : {},
   ticketgroups : {},
   bookingmap : [],

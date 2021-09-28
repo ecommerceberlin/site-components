@@ -10,7 +10,8 @@ import {
     getCart, 
     getBlockings, 
     getUUID,
-    KeyedTicketGroupsSelector
+    KeyedTicketGroupsSelector,
+    getVisuals
  } from '../../redux/selectors'
 
 
@@ -56,6 +57,13 @@ export const BoothSelectedSelector = createCachedSelector(
     getCart,
     (state, id) => id,
     (cart, id) => Object.values(cart).map(({formdata})=> formdata && "id" in formdata? formdata.id: "").includes(id)
+)((state, id) => id)
+
+
+export const BoothMarkedSelector = createCachedSelector(
+    state => "booths" in state.visuals ? state.visuals.booths: [],
+    (state, id) => id,
+    (marked, id) => marked.includes(id)
 )((state, id) => id)
 
 

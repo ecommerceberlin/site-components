@@ -100,7 +100,7 @@ export const initStore = ({ctx}) => {
     const persistConfig = {
       key: 'root',
       storage : storage,
-      whitelist: ['fromClient', 'boothsSelected', 'app', 'social']
+      whitelist: ['fromClient', 'app', 'social']
     };
     
     store = createStore(

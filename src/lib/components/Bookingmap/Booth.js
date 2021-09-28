@@ -10,13 +10,13 @@ import { useTranslate } from '../../i18n'
 import {
   getCart, 
   KeyedFormdataSelector, 
-  KeyedTicketGroupsSelector, 
-  getBoothsSelected
+  KeyedTicketGroupsSelector
 } from '../../redux/selectors'
 
 import {
   BoothFormdataSelector, 
   BoothSelectedSelector,
+  BoothMarkedSelector,
   BoothBlockedSelector,
   BoothTicketGroupSelector
 } from './selectors'
@@ -60,6 +60,7 @@ const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti =
   const settings = useSettings(setting);
   const {status, name, image} = useSelector((state) => BoothFormdataSelector(state, id), shallowEqual)
   const selected = useSelector(state => BoothSelectedSelector(state, id))
+  const marked = useSelector(state=>(BoothMarkedSelector(state, id)))
   const lock = useSelector(state => BoothBlockedSelector(state, id))
   const defaultSize = useSelector(state => BoothTicketGroupSelector(state, g))
 
@@ -113,7 +114,7 @@ const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti =
         [classes.boothHold]: hold(),
         [classes.boothUnavailable]: unavailable(),
         [classes.boothBlocked]: blocked(),
-        [classes.boothSelected]: selected,
+        [classes.boothSelected]: selected || marked,
         [classes.boothOnLegend] : legend
       })}
       style={{

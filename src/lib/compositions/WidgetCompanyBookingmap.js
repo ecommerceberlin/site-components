@@ -1,62 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React, {useEffect} from 'react';
 import { map, get } from 'lodash';
 import {Wrapper, Bookingmap} from '../components';
 import { getCompanyProfileInfo } from '../helpers';
-import Settings from '../datasources/Settings';
+import {useSettings} from '../helpers/hooks'
+import isEmpty from 'lodash/isEmpty'
+import Alert from '../components/Alert'
+import {useDispatch} from 'react-redux'
+import {markBooths} from '../components/redux'
 
-const styles = {};
+const defaultProps = {
+  company: {},
+  wrapperProps: {
+    label: 'exhibitors.booth_location_full',
+  },
+  mapSetting: "bookingmap",
+  absentLabel: "exhibitors.profile_archived"
+};
 
-const WidgetCompanyBookingmap = ({disabled, steps, allowedGroupIds, boothStyleMapping, disabledTicketIds, company, label, ...wrapperProps}) => {
+const WidgetCompanyBookingmap = ({setting, ...otherProps}) => {
   
-  
+  const dispatch = useDispatch()
+  const settings = useSettings(setting)
+  const {wrapperProps, company, mapSetting, absentLabel} = Object.assign({}, defaultProps, settings, otherProps)
+  const {label} = wrapperProps 
   const name = getCompanyProfileInfo(company, 'name');
-  const purchases = get(company, 'instances');
-  //const data = filterCompanyInstances(purchases, eventId);
+  const purchases = get(company, 'instances', []).filter(p => parseInt(p.sold));
 
   const selectedBoothIds = map(purchases, 'formdata.id').filter(v => v && v.length);
   const selectedBoothNames = map(purchases, 'formdata.ti').filter(v => v && v.length);
 
-  if(!selectedBoothIds.length)
-  {
+  useEffect(()=>{
+    if(!isEmpty(selectedBoothIds)){
+      //dispatch selected booths!
+      dispatch(markBooths(selectedBoothIds))
+    }
+  }, [purchases])
+
+  if(isEmpty(company)){
     return null
   }
 
-  return (<Settings>{(get) => (
-        
-      <Wrapper {...wrapperProps} label={[label, {
-        cname2: name,
-        loc: selectedBoothNames.join(','),
-        smart_count: selectedBoothNames.length
-      }]}>
+  if(isEmpty(purchases)){
+    return <Wrapper><Alert type="info" label={absentLabel} /></Wrapper>
+  }
 
-        <Bookingmap 
-            disabled={disabled} 
-            disabledTicketIds={get("bookingmap.disabledTicketIds", disabledTicketIds)} 
-            height={ get("bookingmap.height") } 
-            boothStyleMapping={get("bookingmap.boothStyleMapping", boothStyleMapping)}
-            selected={selectedBoothIds} 
-        />
-
-        </Wrapper>
-       
-    )}</Settings>);
+  return (
+    <Wrapper {...wrapperProps} label={[label, {
+      cname2: name,
+      loc: selectedBoothNames.join(','),
+      smart_count: selectedBoothNames.length
+    }]}>
+      <Bookingmap setting={mapSetting} />
+      </Wrapper>
+  )
 };
 
-WidgetCompanyBookingmap.propTypes = {
-//  eventId: PropTypes.number.isRequired,
-  company: PropTypes.object.isRequired
-};
 
-WidgetCompanyBookingmap.defaultProps = {
-  company: {},
-  label: 'exhibitors.booth_location_full',
-  disabledTicketIds: [],
-  steps: [],
-  allowedGroupIds: [],
-  disabled : false,
-  boothStyleMapping: {}
-};
-
-export default withStyles(styles)(WidgetCompanyBookingmap);
+export default WidgetCompanyBookingmap
