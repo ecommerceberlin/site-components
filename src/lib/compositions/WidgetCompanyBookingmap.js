@@ -34,7 +34,9 @@ const WidgetCompanyBookingmap = ({setting, ...otherProps}) => {
       //dispatch selected booths!
       dispatch(markBooths(selectedBoothIds))
     }
-  }, [purchases])
+
+    return () => dispatch(markBooths([]))
+  }, [selectedBoothIds])
 
   if(isEmpty(company)){
     return null
