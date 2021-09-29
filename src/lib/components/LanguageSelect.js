@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import compose from 'recompose/compose';
 import { useSelector, useDispatch } from 'react-redux';
 import classNames from 'classnames'
@@ -36,6 +36,7 @@ const useStyles = makeStyles( theme => ({
 
 const LanguageSelect = ({ label="change" }) => {
 
+  const [labelVisible, changeLabelVisibility] = useState(false)
   const [translate, selectedLocale] = useTranslate();
   const {locales, defaultLocale} = useRouter();
   const classes = useStyles();
@@ -65,7 +66,7 @@ const LanguageSelect = ({ label="change" }) => {
       color="inherit"
     >
     <Language className={classNames(classes.leftIcon, classes.iconSmall)} />
-    { translate(`common.locales.${alternativeLocale ? alternativeLocale : label}`) }
+     {labelVisible && translate(`common.locales.${alternativeLocale ? alternativeLocale : label}`) } 
     </Button>
   )
 

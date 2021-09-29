@@ -51,14 +51,7 @@ const defaultProps = {
   height: 750,
   width: 1170,
   defaultHeight: 500,
-  formdata : {},
-  ticketgroups : {},
-  bookingmap : [],
-  disabled : false,
-  disabledTicketIds : [],
-  autorefresh : 60,
-  defaultSize : 21,
-  boothStyleMapping: {}
+  marked: []
 };
 
 const Bookingmap = ({setting, ...props}) => {
@@ -74,7 +67,7 @@ const Bookingmap = ({setting, ...props}) => {
     height, 
     width,
     defaultHeight,
-    selected 
+    marked 
   } = Object.assign({}, defaultProps, settings, props)
 
 
@@ -89,6 +82,8 @@ const Bookingmap = ({setting, ...props}) => {
   ])), [])
 
 
+  const isBoothMarked = (id) => marked.includes(id)
+
   return (<div
         className={classes.scrollableContainer}
         style={{
@@ -99,7 +94,7 @@ const Bookingmap = ({setting, ...props}) => {
       <div className={classes.container} style={{width: width * zoom}}>{bookingmap && 'mapsource' in bookingmap ? (
             <React.Fragment>
             <img src={bookingmap.mapsource} className={classes.bg} />
-            <ul className={classes.booths}>{bookingmap.booths && bookingmap.booths.map(booth => (<Booth key={booth.id} setting={setting} {...booth} />))}</ul>
+            <ul className={classes.booths}>{bookingmap.booths && bookingmap.booths.map(booth => (<Booth key={booth.id} setting={setting} marked={isBoothMarked(booth.id)} {...booth} />))}</ul>
             </React.Fragment>
         ) : <Loader />}</div>
       </div>

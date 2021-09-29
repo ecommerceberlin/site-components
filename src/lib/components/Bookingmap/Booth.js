@@ -16,14 +16,12 @@ import {
 import {
   BoothFormdataSelector, 
   BoothSelectedSelector,
-  BoothMarkedSelector,
   BoothBlockedSelector,
   BoothTicketGroupSelector
 } from './selectors'
 
 import {
   dialogShow,
-  resourceFetchRequest,
   boothChecked
 } from '../redux/actions';
 
@@ -53,17 +51,15 @@ const BoothText = ({zoom=1, label="", image="", name=""}) => {
 
 }
 
-const Booth = ({setting="", g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = "", legend=false, ...props}) => {
+const Booth = ({setting="", marked=false, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = "", legend=false, ...props}) => {
 
   const classes = useStyles()  
   const dispatch = useDispatch()
   const settings = useSettings(setting);
   const {status, name, image} = useSelector((state) => BoothFormdataSelector(state, id), shallowEqual)
   const selected = useSelector(state => BoothSelectedSelector(state, id))
-  const marked = useSelector(state=>(BoothMarkedSelector(state, id)))
   const lock = useSelector(state => BoothBlockedSelector(state, id))
   const defaultSize = useSelector(state => BoothTicketGroupSelector(state, g))
-
 
 
   // console.log(status, name, image, slug, selected)

@@ -60,11 +60,6 @@ export const BoothSelectedSelector = createCachedSelector(
 )((state, id) => id)
 
 
-export const BoothMarkedSelector = createCachedSelector(
-    state => "booths" in state.visuals ? state.visuals.booths: [],
-    (state, id) => id,
-    (marked, id) => marked.includes(id)
-)((state, id) => id)
 
 
 /**

@@ -5,8 +5,8 @@ import { getCompanyProfileInfo } from '../helpers';
 import {useSettings} from '../helpers/hooks'
 import isEmpty from 'lodash/isEmpty'
 import Alert from '../components/Alert'
-import {useDispatch} from 'react-redux'
-import {markBooths} from '../components/redux'
+
+
 
 const defaultProps = {
   company: {},
@@ -19,7 +19,6 @@ const defaultProps = {
 
 const WidgetCompanyBookingmap = ({setting, ...otherProps}) => {
   
-  const dispatch = useDispatch()
   const settings = useSettings(setting)
   const {wrapperProps, company, mapSetting, absentLabel} = Object.assign({}, defaultProps, settings, otherProps)
   const {label} = wrapperProps 
@@ -29,20 +28,11 @@ const WidgetCompanyBookingmap = ({setting, ...otherProps}) => {
   const selectedBoothIds = map(purchases, 'formdata.id').filter(v => v && v.length);
   const selectedBoothNames = map(purchases, 'formdata.ti').filter(v => v && v.length);
 
-  useEffect(()=>{
-    if(!isEmpty(selectedBoothIds)){
-      //dispatch selected booths!
-      dispatch(markBooths(selectedBoothIds))
-    }
-
-    return () => dispatch(markBooths([]))
-  }, [selectedBoothIds])
-
   if(isEmpty(company)){
     return null
   }
 
-  if(isEmpty(purchases)){
+  if(isEmpty(selectedBoothIds)){
     return <Wrapper><Alert type="info" label={absentLabel} /></Wrapper>
   }
 
@@ -52,7 +42,7 @@ const WidgetCompanyBookingmap = ({setting, ...otherProps}) => {
       loc: selectedBoothNames.join(','),
       smart_count: selectedBoothNames.length
     }]}>
-      <Bookingmap setting={mapSetting} />
+      <Bookingmap setting={mapSetting} marked={selectedBoothIds} />
       </Wrapper>
   )
 };

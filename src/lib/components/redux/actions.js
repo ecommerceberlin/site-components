@@ -222,32 +222,7 @@ export function boothChecked(boothName) {
   };
 }
 
-export function markBooths(boothIds) {
-  return {
-    type: Types.BOOTH_SELECT,
-    payload: boothIds
-  };
-}
 
-// export function boothSelect(boothId) {
-//     return {
-//       type: Types.BOOTH_SELECT,
-//       payload: boothId
-//     };
-// }
-
-// export function boothUnselect(boothId) {
-//   return {
-//     type: Types.BOOTH_UNSELECT,
-//     payload: boothId
-//   };
-// }
-
-// export function boothsReset() {
-//   return {
-//     type: Types.BOOTHS_RESET
-//   };
-// }
 
 export function cartItemAdd(ticketId, quantity, formdata = {}) {
   return {
