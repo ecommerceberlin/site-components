@@ -34,7 +34,7 @@ const useStyles = makeStyles( theme => ({
 }));
 
 
-const LanguageSelect = ({ label="change" }) => {
+const LanguageSelect = ({ label="choose" }) => {
 
   const [labelVisible, changeLabelVisibility] = useState(false)
   const [translate, selectedLocale] = useTranslate();
@@ -64,10 +64,20 @@ const LanguageSelect = ({ label="change" }) => {
           buttons: []
       }))}
       color="inherit"
+      onMouseOver={() => changeLabelVisibility(true)}
+      onMouseOut={() => changeLabelVisibility(false)}
     >
+
     <Language className={classNames(classes.leftIcon, classes.iconSmall)} />
-     {labelVisible && translate(`common.locales.${alternativeLocale ? alternativeLocale : label}`) } 
+    {
+      alternativeLocale ? 
+        labelVisible ? `${translate(`common.locales.switch_to_${alternativeLocale}`)}`: alternativeLocale.toUpperCase() : 
+        labelVisible ? translate(`common.locales.${label}`) : null
+
+    }
+    
     </Button>
+
   )
 
 }
