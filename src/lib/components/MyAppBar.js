@@ -111,7 +111,7 @@ function MyAppBar({setting="appbar", ...props}) {
   const classes = useStyles()
   const settings = useSettings(setting)
   const {event_name} = useSettings("common")
-  const {links, position} = Object.assign({}, defaultProps, settings, props)
+  const {logotype, links, position} = Object.assign({}, defaultProps, settings, props)
 
  
   return (<div className={classNames(classes.grow, {
@@ -130,7 +130,9 @@ function MyAppBar({setting="appbar", ...props}) {
             <MenuIcon />
           </IconButton>
             <Link href="/">
-            <Typography component="a" variant="body1" color="inherit" className={classes.flex}>{event_name}</Typography>
+
+          {logotype && logotype.includes("http") ? <img src={logotype} alt="" style={{cursor: "pointer"}} /> :  <Typography component="a" variant="body1" color="inherit" className={classes.flex}>{event_name}</Typography>}
+
             </Link>
             <div className={classes.grow} />
             <div className={classes.buttons}>
