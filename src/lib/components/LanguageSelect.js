@@ -71,7 +71,7 @@ const LanguageSelect = ({ label="choose" }) => {
     <Language className={classNames(classes.leftIcon, classes.iconSmall)} />
     {
       alternativeLocale ? 
-        labelVisible ? `${translate(`common.locales.switch_to_${alternativeLocale}`)}`: alternativeLocale.toUpperCase() : 
+        labelVisible ? `${translate(`common.locales.switch_to_${alternativeLocale}`)}`: selectedLocale.toUpperCase() : 
         labelVisible ? translate(`common.locales.${label}`) : null
 
     }
