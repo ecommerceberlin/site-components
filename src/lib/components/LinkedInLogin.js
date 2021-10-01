@@ -119,12 +119,13 @@ class LinkedInLogin extends Component {
         const {
             oAuthUrl, 
             appid, 
-            url
+            url,
+            redirect
         } = this.props;
         e.preventDefault();
         const uuid = uuidv4();
         lsSet("oauth_session", uuid);
-        window.location.href = `${oAuthUrl}?service=linkedin&appid=${appid}from=${ encodeURIComponent(url) }&session=${uuid}`
+        window.location.href = `${oAuthUrl}?service=linkedin&appid=${appid}&from=${ encodeURIComponent(`${url}/${redirect}`) }&session=${uuid}`
     }
 
     renderStandardButton(){
@@ -196,7 +197,8 @@ LinkedInLogin.defaultProps = {
     labelDisabled : "common.vote_disabled",
     labelAlreadyVoted : "common.vote_voted",
     labelVotesUsed : "common.votes_used",
-    url : `https://${process.env.NEXT_PUBLIC_PROJECT}/vote`,
+    url : `https://${process.env.NEXT_PUBLIC_PROJECT}`,
+    redirect: "planner",
     oAuthUrl : `https://api.eventjuicer.com/v1/public/hosts/${process.env.NEXT_PUBLIC_PROJECT}/ssr`
 }
 
