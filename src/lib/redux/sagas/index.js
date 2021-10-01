@@ -159,6 +159,7 @@ function* accumulateFetches({resource, reload}) {
 
 function* fetchAccumulatedFetches(endpoint, reload){
 
+  let response;
   //check if we have params...
   const resource = endpoint.split("?")[0]
 
@@ -183,11 +184,13 @@ function* fetchAccumulatedFetches(endpoint, reload){
   const settings = yield select(Selectors.getSettings) 
   const _apiUrl = get(settings, "system.api", "").trim() || apiUrl
 
-  // if(_apiUrl.split("http").length === 3){
-  //   endpoint = encodeURIComponent(endpoint)
-  // }
+  //do we use proxy???
+  if( (_apiUrl.match(/http/g) || []).length === 2){
+    response = yield call(fetch, `${_apiUrl}${encodeURIComponent(`/${endpoint}`)}`)
+  }else{
+    response = yield call(fetch, `${_apiUrl}/${endpoint}`)
+  }
 
-  const response = yield call(fetch, `${_apiUrl}/${endpoint}`)
   const json = yield call([response, response.json])
 
   if (response.ok && response.status >= 200 && 'data' in json) {

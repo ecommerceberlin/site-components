@@ -6,7 +6,9 @@ import AvatarlistCell from './AvatarlistCell';
 const Avatarlist = ({data, ...gridProps}) => (
 <Grid 
   container 
-  {...gridProps}
+  justify="space-between"
+  spacing={3}
+  // {...gridProps}
   >
     {data.map((company, i) => (
         <AvatarlistCell key={company.id} id={company.id} company={company} />
@@ -15,9 +17,7 @@ const Avatarlist = ({data, ...gridProps}) => (
 )
 
 Avatarlist.defaultProps = {
-  data : [],
-  justifyContent : "space-between",
-  spacing : 7
+  data : []
 };
 
 export default Avatarlist
