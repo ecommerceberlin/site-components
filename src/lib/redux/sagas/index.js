@@ -182,13 +182,13 @@ function* fetchAccumulatedFetches(endpoint, reload){
 
 
   const settings = yield select(Selectors.getSettings) 
-  const _apiUrl = get(settings, "system.api", "").trim() || apiUrl
+  const {api, proxy} = get(settings, "system")
 
   //do we use proxy???
-  if( (_apiUrl.match(/http/g) || []).length === 2){
-    response = yield call(fetch, `${_apiUrl}${encodeURIComponent(`/${endpoint}`)}`)
+  if(proxy && proxy.includes("http")){
+    response = yield call(fetch, `${proxy}${encodeURIComponent(`${api}/${endpoint}`)}`)
   }else{
-    response = yield call(fetch, `${_apiUrl}/${endpoint}`)
+    response = yield call(fetch, `${api}/${endpoint}`)
   }
 
   const json = yield call([response, response.json])
