@@ -40,25 +40,25 @@ const styles = theme => ({
   heroPrimary: {
     fontWeight: 600,
     color: '#ffffff',
-    fontSize: '2.5rem',
+    fontSize: '1.5rem',
     [theme.breakpoints.down('md')]: {
-      fontSize: '2rem',
+      fontSize: '1.3rem',
     },
     [theme.breakpoints.down('sm')]: {
-        fontSize: '1.8rem',
+        fontSize: '1.15rem',
     }
   },
 
   heroSecondary: {
     color: '#ffffff',
-    fontSize: '1.5rem',
+    fontSize: '1.3rem',
     fontWeight: 300,
     [theme.breakpoints.down('md')]: {
-      fontSize: '1.3rem',
+      fontSize: '1.15rem',
      // fontWeight: 600
     },
     [theme.breakpoints.down('sm')]: {
-        fontSize: '1.1rem',
+        fontSize: '1rem',
     }
   },
 
