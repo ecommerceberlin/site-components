@@ -3,6 +3,19 @@ import { CHANGE_LOCALE_MSGS } from '../../i18n';
 
 import keyBy from 'lodash/keyBy'
 
+const keyableResources = [
+  "posts",
+  "publishers",
+  "ticketowners",
+  "tickets",
+  "presenters",
+  "contestant_companies_all",
+  "jurors",
+  "jurors_all",
+  "ranking",
+  "prizes"
+]
+
 const reducer = (state = {
   texts: {}
 }, action) => {
@@ -16,7 +29,7 @@ const reducer = (state = {
        * experimental
        */
 
-      if(resource === "posts" || resource === "publishers" || resource === "ticketowners" || resource === "tickets" || resource === "presenters" || resource === "contestant_companies_all" || resource === "jurors" || resource === "jurors_all"){
+      if(keyableResources.includes(resource)){
         const keyed = keyBy(data, "id");
         return {...state, [resource]: {...state[resource], ...keyed}}     
       }

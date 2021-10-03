@@ -81,10 +81,8 @@ const WidgetPremiumTicket = ({setting, name = "", icons, ticket={}, resolve, ...
 
   const settings = useSettings(setting);
 
-  const {alltickets} = useDatasource({
-    alltickets: {
-      resource: "tickets"
-    }
+  const alltickets = useDatasource({
+    resource: "tickets"
   })
 
   const data = ticket && "id" in ticket && ticket.id? ticket: (alltickets || []).find(t => resolve(t, name))

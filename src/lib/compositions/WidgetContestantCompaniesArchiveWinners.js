@@ -13,13 +13,11 @@ const WidgetContestantCompaniesArchiveWinners = ({resolveLink, resolveTitle, res
 
     const defaultFilter = (item) => parseInt(item.winner) === 1
 
-    const {data} = useDatasource({
-        data: {
-            resource: "contestant_companies_all",
-            params: {},
-            filters: {
-                filter: (item) => isFunction(filter)? filter(item) && defaultFilter(item): defaultFilter(item),
-            }
+    const data = useDatasource({
+        resource: "contestant_companies_all",
+        params: {},
+        filters: {
+            filter: (item) => isFunction(filter)? filter(item) && defaultFilter(item): defaultFilter(item),
         }
     });
 

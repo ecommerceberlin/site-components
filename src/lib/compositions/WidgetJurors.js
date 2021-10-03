@@ -21,16 +21,14 @@ const defaultProps = {
 const WidgetJurors = ({setting, ...props}) => {
     const settings = useSettings(setting)
     const {all, filter, limit, sort, random, minToShow, link, wrapperProps} = Object.assign({}, defaultProps, settings, props)
-    const {data} = useDatasource({
-        data: {
-            resource: all? "jurors_all": "jurors",
-            params: {},
-            filters: {
-                filter,
-                limit,
-                sort,
-                random
-            }
+    const data = useDatasource({
+        resource: all? "jurors_all": "jurors",
+        params: {},
+        filters: {
+            filter,
+            limit,
+            sort,
+            random
         }
     });
 

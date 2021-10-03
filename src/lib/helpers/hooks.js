@@ -81,24 +81,17 @@ export const useBlocking =  () => {
 
 
 
-export const useDatasource = (queries = {}, props = {}) => {
+export const useDatasource = (query) => {
 
+    const {params} = query;
     const dispatch = useDispatch();
-    const results = useSelector((state) => {
-            const dataSet = {};
-            Object.keys(queries).forEach(key => {
-              dataSet[key] = FilteredDataSelector(state, queries[key])
-            })
-            return dataSet
-          }
-    );
-
-    useEffect(()=>{
-        Object.values(queries).forEach(query => dispatch(resourceFetchRequest(query)) )
-    }, [])
+    const results = useSelector((state) => FilteredDataSelector(state, query))
+    /**
+     * run only once
+     */
+    useEffect(() => dispatch(resourceFetchRequest(query)), [params])
 
     return results;
-
 }
 
 export const useSettings = (_path = null, _fallback = undefined) => {

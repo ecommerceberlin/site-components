@@ -43,9 +43,7 @@ const StageSponsors = ({setting, stage, ...props}) => {
     const classes = useStyles()
     const {stages} = Object.assign({}, defaultProps, settings, props)
 
-    const {presenters} = useDatasource({
-        presenters: { resource: "presenters" }
-    })
+    const presenters = useDatasource({ resource: "presenters" })
 
     const {sponsors} = stage && stages && isObject(stages) && stage.toUpperCase() in stages? stages[ stage.toUpperCase() ]: []
 

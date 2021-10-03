@@ -21,13 +21,11 @@ const defaultGridProps = {
 const WidgetPremiumTickets = ({icons = {}, setting = "premium"}) => {
 
     const {ticketgroups, wrapperProps, gridProps} = useSettings(setting);
-    const {alltickets} = useDatasource({
-        alltickets: {
-            resource: "tickets",
-            params: {},
-            filters: {
-                filter: (t) => (ticketgroups || []).includes(t.group_id)
-            }
+    const alltickets = useDatasource({
+        resource: "tickets",
+        params: {},
+        filters: {
+            filter: (t) => (ticketgroups || []).includes(t.group_id)
         }
     });
 

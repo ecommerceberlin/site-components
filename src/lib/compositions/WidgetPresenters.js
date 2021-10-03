@@ -30,13 +30,11 @@ const WidgetPresenters = ({setting, ...props}) => {
     const settings = useSettings(setting)
     const {wrapperProps, limit, filter, link, bio} = Object.assign({}, defaultProps, settings, props)
 
-    const {data} = useDatasource({
-        data: {
-            resource: "presenters",
-            filters: {
-                filter: filter,
-                limit: limit
-            }
+    const data = useDatasource({
+        resource: "presenters",
+        filters: {
+            filter: filter,
+            limit: limit
         }
     })
 

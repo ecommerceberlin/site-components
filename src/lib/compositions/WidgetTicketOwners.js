@@ -162,11 +162,9 @@ const NoTicketOwner = (props) => <MyButton color="primary" {...props} />
 const WidgetTicketOwners = ({setting="sponsors", icons=null }) => {
 
     const {ticket_group_id, ticket_ids, grid, wrapperProps, moreInfoLabel} = useSettings(setting);
-    const {data} = useDatasource({
-        data: {
-            resource: "ticketowners",
-            params: { ticket_group_id}
-        },
+    const data = useDatasource({
+        resource: "ticketowners",
+        params: { ticket_group_id}
     });
 
     const _gridSettings = Object.assign({}, defaultGridSettings, grid)

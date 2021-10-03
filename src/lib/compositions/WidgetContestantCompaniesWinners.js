@@ -11,17 +11,15 @@ import { useDatasource } from '../helpers';
 
 const WidgetContestantCompaniesWinners = ({resolveLink, resolveTitle, resolveAlt, resolveImage, intro, limit, random, filter, link, keyword, keyword_source, sort, center, spacing, title, alt, moreLabel, ...wrapperProps}) => {
 
-    const {data} = useDatasource({
-        data: {
-            resource: "contestant_companies_all",
-            params: {},
-            filters: {
-                filter: (item) => parseInt(item.winner) === 1 && item.current,
-            }
+    const data = useDatasource({
+        resource: "contestant_companies_all",
+        params: {},
+        filters: {
+            filter: (item) => parseInt(item.winner) === 1 && item.current,
         }
     });
 
-        
+     
     return (
         <Wrapper {...wrapperProps}>
         <React.Fragment>
