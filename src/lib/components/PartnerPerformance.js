@@ -18,12 +18,27 @@ import EmailIcon from '@material-ui/icons/Email';
 import Sharer from './Sharer'
 
 
+import {
+    AssignmentInd as Badges,
+    Mic as Presentation,
+    Videocam as Video_interview,
+    VolumeUp as Brand_highlight,
+    MonetizationOn as Earlybird,
+    Event as Meetups,
+    Description as Blog,
+    AssignmentInd as Rollup
+} from '@material-ui/icons'
+
+
+
 /***
  * 
+ * 
+ * https://v4.mui.com/components/material-icons/
  * const Icons = {
-  presentation : Microphone,
-  video_interview : Video,
-  brand_highlight : Eye,
+
+
+
   leaflets : Ticket,
   meetups : Calendar,
   scanner : BarcodeScan,
