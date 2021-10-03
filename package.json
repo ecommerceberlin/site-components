@@ -39,6 +39,7 @@
     "query-string": "^7.0.1",
     "re-reselect": "^4.0.0",
     "react-content-loader": "^6.0.3",
+    "react-copy-to-clipboard": "^5.0.4",
     "react-dropzone": "^11.4.2",
     "react-markdown": "^6.0.2",
     "react-player": "^2.9.0",
