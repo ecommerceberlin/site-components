@@ -81,7 +81,7 @@ const WidgetRegForm = ({setting, ...props}) => {
     
       return (
         <Wrapper {...wrapperProps}>
-          <Grid container spacing={3} justify="space-between">
+          <Grid container spacing={3} justifyContent="space-between">
             <Grid item xs={12} sm={12} md={right? 7: 12} lg={right? 7: 12} xl={right? 7: 12}>
             <Centered>
 
