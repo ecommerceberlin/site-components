@@ -63,11 +63,11 @@ const PartnerPromo = ({id, icons}) => {
     <Box mt={2} mb={2} p={2}>
     <Grid container spacing={1}>
     <Grid item>
-    <Typography gutterBottom align="center" variant="body">{translate("common.points")}</Typography>
+    <Typography gutterBottom align="center" variant="body1">{translate("common.points")}</Typography>
     <Typography gutterBottom align="center" variant="h4"> {company.stats.sessions} </Typography>
     </Grid>
     <Grid item>
-    <Typography gutterBottom align="center" variant="body">{translate("common.position")}</Typography>
+    <Typography gutterBottom align="center" variant="body1">{translate("common.position")}</Typography>
     <Typography gutterBottom align="center" variant="h4"> {company.stats.sessions ? company.stats.position: "-"} </Typography>
     </Grid>
     </Grid>

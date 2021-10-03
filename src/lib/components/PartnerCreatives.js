@@ -13,8 +13,8 @@ import PartnerPrizes from './PartnerPrizes'
 import Facebook from '@material-ui/icons/Facebook'
 import Twitter from '@material-ui/icons/Twitter'
 import LinkedIn from '@material-ui/icons/LinkedIn'
-
-
+import TextField from '@material-ui/core/TextField'
+import CopyToClipboardButton from './CopyToClipboardButton'
 /***
  * 
  * 
@@ -149,30 +149,59 @@ import LinkedIn from '@material-ui/icons/LinkedIn'
 
 const PartnerCreatives = ({data}) => {
 
+    const [translate] = useTranslate()
+    
     if(isEmpty(data) || !Array.isArray(data)){
         return null
     }
 
-    return <div><Grid container spacing={2}>{data.map(item =><Grid item key={item.id}>{item.act_as === "newsletter" ? <PromoNewsletter {...item} /> : <PromoLink {...item} />}</Grid>)}</Grid>
-    <PromoRawLink />
-    </div>
+    const newsletters = data.filter(item => item.act_as === "newsletter")
+    const links = data.filter(item => item.act_as === "link")
+    const rawlink = links.find(Boolean) || {}
+
+    return (<Box>
+        <Box mb={4}>
+        <Typography gutterBottom variant="h6">{translate("promo.creatives.rawlink.title")}</Typography>
+        <PromoRawLink link={rawlink.link_full}/>
+        </Box>
+        <Box mb={4}>
+        <Typography gutterBottom variant="h6">{translate("promo.creatives.newsletters.title")}</Typography>
+        <Grid container spacing={2}>
+        {newsletters.map(item => (<Grid item key={item.id}>
+        <Typography gutterBottom variant="body1">{translate(`common.locales.${item.lang}`)}</Typography>
+        <PromoNewsletter  {...item} /></Grid>))}
+        </Grid>
+        </Box>
+        <Box mb={4}>
+        <Typography gutterBottom variant="h6">{translate("promo.creatives.links.title")}</Typography>
+        {links.map(item =><PromoLink key={item.id} {...item} />)}
+        </Box>
+    </Box>)
 }
 
 const PromoLink = ({link_full, sharable, enabled, sharers}) => {
     if(!enabled){
         return null
     }
-    return <div><Sharer /></div>
+    return <div>{Object.keys(sharers).map(service => {
+        const link = sharers[service]
+        return (
+            <Box key={service}>
+            <TextField multiline={true} value={link} fullWidth={true} />
+            <CopyToClipboardButton text={link} />
+            </Box>
+        )
+    })}</div>
 }
 
-const PromoRawLink = () => {
-    return "rawlink"
+const PromoRawLink = ({link}) => {
+    return  <TextField multiline={true} value={link} fullWidth={true} />
 }
 
 const PromoNewsletter = ({name, lang, content, newsletter}) => {
-    return (<Grid container direction="column">
-        <Grid item><Button label="newsletter zip" startIcon={<EmailIcon />} href={newsletter.zip} /></Grid>
-        <Grid item><Button label="newsletter html" startIcon={<EmailIcon />} href={newsletter.html} /></Grid>
+    return (<Grid container direction="row">
+        <Grid item ><Button label=".zip" startIcon={<EmailIcon />} href={newsletter.zip} /></Grid>
+        <Grid item><Button label=".html" startIcon={<EmailIcon />} href={newsletter.html} /></Grid>
     </Grid>)
 }
 
