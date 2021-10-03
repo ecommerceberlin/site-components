@@ -50,6 +50,7 @@ const PartnerPrizes = ({active=[], icons={}}) => {
 
         if(name in icons){
             return React.createElement(icons[name], {
+                key: name,
                 fontSize: "large",
                 onClick: () => dialog({label: `prizes.${prize.name}.name`, content: <PartnerPrizeDetails {...prize} />}),
                 className: (active || []).includes(prize.name)? classes.active: classes.disabled
