@@ -326,51 +326,18 @@ const settings =  {
     ui : {
 
         menuItems : [
-           
-            // {
-            //     name: 'virtual',
-            //     items: [
-            //       {name: 'register', to: '/virtual'},
-            //       {name: 'schedule', to: '/schedule'},
-            //       {name: 'speakers', to: '/speakers'},
-            //     ]
-            // },
-
-
-            {
-              name: 'visitors',
-              items: [
-                {name: 'visit', to: '/visit'},
-                // {name: 'schedule', to: '/schedule'},
-                // {name: 'presenters', to: '/presenters'},
-                // {name: 'exhibitors', to: '/exhibitors'},
-                // {name: 'offers', to: '/offers'}
-              ]
-            },
-            {
-              name: 'exhibitors',
-              items: [
-                {name: 'exhibit', to: '/exhibit'},
-                // {name: 'sample-visitors', to: '/sample-visitors'},
-                // {name: 'exhibitors', to: '/exhibitors'},
-                // {name: 'premium-services', to: '/premium'},
-                // {name: 'faq', to: '/faq'},
-              ]
-            },
-
             {
                 name: 'general',
                 items: [
                   {name: 'home', to: '/'},
                 ]
             }
-  
         ]
     },
 
     premium : {
 
-        ticketgroups : [331]
+        ticketgroups : []
 
     },
 
