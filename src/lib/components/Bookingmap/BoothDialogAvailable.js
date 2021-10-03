@@ -13,9 +13,9 @@ import {
   Fastfood as Catering,
   CropSquare as Space,
   Info,
-  Badge as Ids,
+  Receipt as Ids,
   MenuBook as Catalogue,
-  Chair as Furniture
+  EventSeat as Furniture
 } from '@material-ui/icons';
 
 import DefaultIcon from '@material-ui/icons/Done';
