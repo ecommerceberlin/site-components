@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import compose from 'recompose/compose';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import LinkedIn from '@material-ui/icons/LinkedIn';
-import {withRouter} from 'next/router'
-import { translate } from '../i18n'
+import { useRouter } from 'next/router'
+import { useTranslate } from '../i18n'
+import { lsSet, lsGet, uuidv4 } from '../helpers'
+import isEmpty from 'lodash/isEmpty'
+import isFunction from 'lodash/isFunction'
+import { getLinkedInToken } from '../redux/selectors'
+
+
 import { 
     linkedUidReceived, 
     linkedUidReset, 
@@ -15,13 +19,10 @@ import {
     dialogShow 
 } from './redux/actions'
 
-import { getLinkedInToken } from '../redux/selectors'
 // import { KeyedVotesSelector } from '../datasources/redux/votes'
-import { lsSet, lsGet, uuidv4 } from '../helpers'
-import isEmpty from 'lodash/isEmpty'
-import isFunction from 'lodash/isFunction'
 
-const styles = theme => ({
+
+const useStyles = makeStyles(theme => ({
     buttonContainer : {
         marginBottom: 50,
         marginTop: 20
@@ -29,7 +30,7 @@ const styles = theme => ({
     leftIcon: {
         marginRight: theme.spacing(1),
     },
-})
+}))
 
 
 const extractUrlValue = (key, url) =>
@@ -39,157 +40,9 @@ const extractUrlValue = (key, url) =>
 }
 
 
-class LinkedInLogin extends Component {
-    
-    handleUrlToken(){
 
-        const {
-            router, 
-            linkedUidReceived, 
-            linkedVoteRequest, 
-            service,
-            id
-        } = this.props;
-
-        const {asPath} = router;
-
-        const uid = extractUrlValue("uid", asPath);
-        const session = extractUrlValue("session", asPath);
-        const savedSession = lsGet("oauth_session");
-
-      //  console.log(uid, session, savedSession)
-
-        if(uid && uid.length > 3  && session === savedSession){
-        //    console.log("fire up auto voting...");
-            linkedUidReceived(uid);
-        }
-
-    }
-
-    showDialog(titleLabel, content){
-        
-        const {dialogShow, translate} = this.props
-
-        dialogShow({
-            title: translate(titleLabel),
-            content: <div style={{marginTop: 40}}>
-             {content}
-            </div>,
-            buttons: []
-        })
-    }
-
-    componentDidMount(){
-        this.handleUrlToken();
-    }
-
-    componentDidUpdate(){
-
-      console.log(this.props)
-
-       const {transaction, onVoted} = this.props;   
-       const {code, message} = transaction;
-
-        switch (code) {
-           
-            case 400:
-                this.showDialog('common.votes_used');
-            break;
-
-            case 404:
-                this.showDialog('common.vote_error', 
-                    this.renderStandardButton()
-                );
-            break;
-
-            case 406:
-            //already voted!
-              
-            break;
-            default:
-            break;
-        }
-
-     
-
-    }
-
-    createSession = (e) => {
-
-        const {
-            oAuthUrl, 
-            appid, 
-            url,
-            redirect
-        } = this.props;
-        e.preventDefault();
-        const uuid = uuidv4();
-        lsSet("oauth_session", uuid);
-        window.location.href = `${oAuthUrl}?service=linkedin&appid=${appid}&from=${ encodeURIComponent(`${url}/${redirect}`) }&session=${uuid}`
-    }
-
-    renderStandardButton(){
-
-
-        const {
-            translate, 
-            classes,
-            labelGuest
-        } = this.props;
-
-        return  (<Button 
-            startIcon={ <LinkedIn className={classes.leftIcon} />} 
-            onClick={(e) => this.createSession(e) } 
-            variant="contained" 
-            size="large" 
-            fullWidth
-            color="primary">{translate(labelGuest)}</Button>)
-    }
-
-
-
-    render(){
-
-        const {
-            labelLoggedIn,
-            id, 
-            linkedin, 
-            linkedVoteRequest, 
-            translate, 
-            classes,
-            service,
-            labelGuest
-        } = this.props;
-
-        const savedSession = typeof window !== 'undefined' ? lsGet("oauth_session") : false;
-      
-        if(linkedin && savedSession){
-
-            return (
-            <div className={classes.buttonContainer}>
-                <LinkedIn className={classes.leftIcon} />
-{translate(labelLoggedIn)}
-                {/* <Button 
-                    startIcon={ } 
-                    variant="contained" 
-                    size="large" 
-                    color="primary" 
-                    fullWidth
-                    onClick={() => linkedVoteRequest(service, id) }>
-                   
-                </Button> */}
-            </div>)
-        }
-
-        
-        return this.renderStandardButton()
-       
-    }
-
-}
-
-LinkedInLogin.defaultProps = {
-    appid: "planner",
+const defaultProps = {
+    appId: "planner",
     service : "linkedin",
     transaction : {},
     labelLoggedIn : "social.linkedin.connected",
@@ -197,39 +50,199 @@ LinkedInLogin.defaultProps = {
     labelDisabled : "common.vote_disabled",
     labelAlreadyVoted : "common.vote_voted",
     labelVotesUsed : "common.votes_used",
-    url : `https://${process.env.NEXT_PUBLIC_PROJECT}`,
+ //   url : `https://${process.env.NEXT_PUBLIC_PROJECT}`,
+    url: 'http://localhost:3000',
     redirect: "planner",
-    oAuthUrl : `https://api.eventjuicer.com/v1/public/hosts/${process.env.NEXT_PUBLIC_PROJECT}/ssr`
+    apiUrl : `https://api.eventjuicer.com/v1/public/hosts/${process.env.NEXT_PUBLIC_PROJECT}`
 }
 
-LinkedInLogin.propTypes = {
-    id: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired
+
+const getSession = (appId) => typeof window !== 'undefined' ? lsGet(`oauth_session${appId}`) : false;
+const createSession = (appId) => {
+    const uuid = uuidv4();
+    lsSet(`oauth_session${appId}`, uuid);
+    return uuid;
 }
 
-const enhance = compose(
+const LinkedInLogin = (props) => {
+
+    const {appId, apiUrl, labelGuest, labelLoggedIn, url, redirect} = Object.assign(defaultProps, props)
+    const [translate] = useTranslate()
+    const dispatch = useDispatch()
+    const linkedin = useSelector(state => getLinkedInToken(state, appId))
+    const {asPath} = useRouter();
+    const classes = useStyles();
+
+
+    useEffect(() => {
+
+        const uid = extractUrlValue("uid", asPath);
+        const session = extractUrlValue("session", asPath);
+
+        if(uid && uid.length > 3  && session === getSession(appId)){
+                    //    console.log("fire up auto voting...");
+                 ///       linkedUidReceived(uid, appId);
+                 alert("mamy dane!")
+        }
+
+    }, [asPath])
+
+    useEffect(() => {
+
+        const response = fetch(`${apiUrl}/${appId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify( {uid: linkedin})}).then(response => response.json()); 
+
+    }, [linkedin])
+
+
+    const handleSession = (e) => {
+        e.preventDefault();
+        window.location.href = `${apiUrl}/ssr?service=linkedin&appid=${appId}&from=${ encodeURIComponent(`${url}/${redirect}`) }&session=${ createSession(appId) }`
+    }
+
+    if(linkedin){
+        return (<div className={classes.buttonContainer}>
+            <LinkedIn className={classes.leftIcon} />{translate(labelLoggedIn)}
+        </div>)
+    }
+
+    return  (<Button 
+        startIcon={ <LinkedIn className={classes.leftIcon} />} 
+        onClick={handleSession} 
+        variant="contained" 
+        size="large" 
+        fullWidth
+        color="primary">{translate(labelGuest)}</Button>
+    )
+
+    // return "asd"
+
+}
+
+export default LinkedInLogin;
+
+
+
+//     showDialog(titleLabel, content){
+        
+//         const {dialogShow, translate} = this.props
+
+//         dialogShow({
+//             title: translate(titleLabel),
+//             content: <div style={{marginTop: 40}}>
+//              {content}
+//             </div>,
+//             buttons: []
+//         })
+//     }
+
+
+//     componentDidUpdate(){
+
+//       console.log(this.props)
+
+//        const {transaction, onVoted} = this.props;   
+//        const {code, message} = transaction;
+
+//         switch (code) {
+           
+//             case 400:
+//                 this.showDialog('common.votes_used');
+//             break;
+
+//             case 404:
+//                 this.showDialog('common.vote_error', 
+//                     this.renderStandardButton()
+//                 );
+//             break;
+
+//             case 406:
+//             //already voted!
+              
+//             break;
+//             default:
+//             break;
+//         }
+
+     
+
+//     }
+
+
+
+//     renderStandardButton(){
+
+
+//         const {
+//             translate, 
+//             classes,
+//             labelGuest
+//         } = this.props;
+
+//        
+//     }
+
+
+
+//     render(){
+
+//         const {
+//             labelLoggedIn,
+//             id, 
+//             linkedin, 
+//             linkedVoteRequest, 
+//             translate, 
+//             classes,
+//             service,
+//             labelGuest
+//         } = this.props;
+
+//         const savedSession = typeof window !== 'undefined' ? lsGet("oauth_session") : false;
+      
+//         if(linkedin && savedSession){
+
+//             return (
+//           
+//                 {/* <Button 
+//                     startIcon={ } 
+//                     variant="contained" 
+//                     size="large" 
+//                     color="primary" 
+//                     fullWidth
+//                     onClick={() => linkedVoteRequest(service, id) }>
+                   
+//                 </Button> */}
+//             </div>)
+//         }
+
+        
+//         return this.renderStandardButton()
+       
+//     }
+
+// }
+
+
+
+// const enhance = compose(
    
-    connect((state, props) => {
+//     connect((state, props) => {
 
-        const mapStateToProps = (state, props) => {
-            return {
-              linkedin : getLinkedInToken(state),
-              transaction : state.transactions.fav
-            }
-          }
-        return mapStateToProps
-    }, {
-        linkedUidReceived, 
-     //   linkedVoteRequestAfterOauth, 
-        linkedUidReset,
-        dialogShow
-    }),
-    translate,
-    withStyles(styles),
-    withRouter
-
-)
-
-export default enhance(LinkedInLogin);
+//         const mapStateToProps = (state, props) => {
+//             return {
+//               linkedin : getLinkedInToken(state),
+//               transaction : state.transactions.fav
+//             }
+//           }
+//         return mapStateToProps
+//     }, {
+//         linkedUidReceived, 
+//      //   linkedVoteRequestAfterOauth, 
+//         linkedUidReset,
+//         dialogShow
+//     }),
+// )
