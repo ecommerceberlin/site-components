@@ -22,10 +22,11 @@ export function linkedUidReset(){
   }
 }
 
-export function linkedUidReceived(uid) {
+export function linkedUidReceived(uid, appId = "") {
   return {
     type: Types.LINKEDIN_TOKEN_SUCCESS,
-    uid: uid
+    uid,
+    appId
   };
 }
 
