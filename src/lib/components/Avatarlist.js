@@ -6,7 +6,7 @@ import AvatarlistCell from './AvatarlistCell';
 const Avatarlist = ({data, ...gridProps}) => (
 <Grid 
   container 
-  justify="space-between"
+  justifyContent="space-between"
   spacing={3}
   // {...gridProps}
   >

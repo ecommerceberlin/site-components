@@ -49,7 +49,7 @@ const WidgetFooter = ({setting="footer", ...props}) => {
     </Typography>
   
 
-    <Grid container spacing={3} justify="flex-start" alignItems="center">
+    <Grid container spacing={3} justifyContent="flex-start" alignItems="center">
       <Grid item xs={12} sm={12} md={showEventInfo? 4: 6}>
       <WidgetSupport setting={setting} people={people} />
       </Grid>
@@ -80,7 +80,7 @@ const WidgetFooter = ({setting="footer", ...props}) => {
     </Grid>
 
     <div style={{marginTop: 30, marginBottom : 30}}>
-    <Grid container spacing={1} wrap="wrap" justify="space-around" alignItems="center">
+    <Grid container spacing={1} wrap="wrap" justifyContent="space-around" alignItems="center">
     {links.map(({label, href}) => (<Grid item key={label}><Link href={href} label={label} /></Grid>))}        
     </Grid>
     </div> 
