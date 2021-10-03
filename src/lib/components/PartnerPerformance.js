@@ -1,4 +1,4 @@
-
+import React from 'react'
 import Grid from '@material-ui/core/Grid' 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import { useDatasource, resizeCloudinaryImage, useDialog } from '../helpers'
+import { useDatasource, resizeCloudinaryImage, useDialog, capitalizeFirstLetter } from '../helpers'
 import { useTranslate } from '../i18n'
 import Button from './MyButton';
 import Typography from '@material-ui/core/Typography';
@@ -18,16 +18,6 @@ import EmailIcon from '@material-ui/icons/Email';
 import Sharer from './Sharer'
 
 
-import {
-    AssignmentInd as Badges,
-    Mic as Presentation,
-    Videocam as Video_interview,
-    VolumeUp as Brand_highlight,
-    MonetizationOn as Earlybird,
-    Event as Meetups,
-    Description as Blog,
-    AssignmentInd as Rollup
-} from '@material-ui/icons'
 
 
 
@@ -55,14 +45,22 @@ import {
     minWidth: 650,
   },
   avatarContainer: {
-    height: 30,
-    width: 150,
+    height: 40,
+    width: 175,
   },
   avatarImg: {
     objectFit: "contain",
-    maxHeight: "80%",
-    maxWidth: "80%",
+    maxHeight: "85%",
+    maxWidth: "85%",
   },
+  active: {
+    color: "black",
+    cursor: "pointer"
+  },
+  disabled: {
+    color: "#ccc",
+    cursor: "pointer"
+  }
 });
 
 /***
@@ -150,13 +148,56 @@ import {
     },
 */
 
-const Prizes = ({active}) => {
-    const data = useDatasource({resource: "prizes"});
+const PrizeDetails = ({name, min, max, level}) => {
+
+    const [translate] = useTranslate()
+
+/*
+{
+"id": 1,
+"organizer_id": 1,
+"group_id": 1,
+"name": "badges",
+"disabled": 0,
+"min": 1,
+"max": 1,
+"level": 200,
+"created_at": "2021-10-03 12:20:07",
+"updated_at": "2021-10-03 12:20:07"
+},
+ */
+    return (<ul>
+    <li>{translate("prizes.min")}: {min}</li>
+    <li>{translate("prizes.max")}: {max}</li>
+    <li>{translate("prizes.level")}: {level}</li>
+    </ul>)
+}
+
+
+const Prizes = ({active=[], icons={}}) => {
+    const data = useDatasource({resource: "prizes", filters:{
+        sort: "level"
+    }});
+    const dialog = useDialog()
+    const classes = useStyles()
 
     if(isEmpty(data) || !Array.isArray(data)){
         return null
     }
-    return data.map(prize => prize.name)
+    return data.map(prize => {
+
+        const name = capitalizeFirstLetter( prize.name )
+
+        if(name in icons){
+            return React.createElement(icons[name], {
+                fontSize: "large",
+                onClick: () => dialog({label: `prizes.${prize.name}.name`, content: <PrizeDetails {...prize} />}),
+                className: (active || []).includes(prize.name)? classes.active: classes.disabled
+            })
+        }
+
+        return prize.name
+    })
 }
 
 const Promo = ({data}) => {
@@ -189,17 +230,9 @@ const PromoNewsletter = ({name, lang, content, newsletter}) => {
 }
 
 
-const PrizesList = () => {
-
-    const data = useDatasource({resource: "prizes"});
-
-    console.log(data)
-
-    return "dupa";
-}
-
-const PartnerPerformance = () => {
-   const classes = useStyles()
+const PartnerPerformance = ({icons}) => {
+   
+    const classes = useStyles()
    const data = useDatasource({resource: "ranking"});
    const [translate] = useTranslate()
    const dialog = useDialog()
@@ -208,25 +241,23 @@ const PartnerPerformance = () => {
         return null
     }
 
-   // return <PrizesList />
-
    return (<TableContainer component={Paper}>
     <Table className={classes.table} aria-label="simple table">
     <TableHead>
     <TableRow>
-    <TableCell>{translate("common.position")}</TableCell>
-    <TableCell>{translate("common.exhibitor")}</TableCell>
-    <TableCell>{translate("common.points")}</TableCell>
-    <TableCell>{translate("prizes.name")}</TableCell>
+    <TableCell align="right">{translate("common.position")}</TableCell>
+    <TableCell align="center">{translate("common.exhibitor")}</TableCell>
+    <TableCell align="right">{translate("common.points")}</TableCell>
+    <TableCell align="center">{translate("prizes.name")}</TableCell>
     <TableCell>{translate("promo_materials.name")}</TableCell>
     </TableRow>
     </TableHead>
     <TableBody>{data.map((row) => (<TableRow key={row.id}>
-    <TableCell component="th" scope="row">{row.stats.position}</TableCell>
+    <TableCell align="right">{row.stats.position}</TableCell>
     <TableCell align="left" width="200">
         <Grid container spacing={1} direction="column" alignItems="center">
         <Grid item>
-        <Avatar variant="square" src={ resizeCloudinaryImage(row.logotype, 150, 40) } classes={{
+        <Avatar variant="square" src={ resizeCloudinaryImage(row.logotype, 175, 50) } classes={{
             root: classes.avatarContainer,
             img: classes.avatarImg
         }}/>
@@ -234,8 +265,8 @@ const PartnerPerformance = () => {
         <Grid item>{row.name}</Grid>
         </Grid>
     </TableCell>
-    <TableCell><Typography>{row.stats.sessions}</Typography></TableCell>
-    <TableCell><Prizes active={row.stats.prizes} /></TableCell>
+    <TableCell align="right"><Typography variant="h5">{row.stats.sessions}</Typography></TableCell>
+    <TableCell align="center"><Prizes active={row.stats.prizes} icons={icons} /></TableCell>
     <TableCell><Button variant="outlined" onClick={()=>dialog({label: "test", content: <Promo data={row.creatives} />})} label="promo" /></TableCell>
 
     </TableRow>))}
