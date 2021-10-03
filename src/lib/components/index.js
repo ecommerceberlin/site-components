@@ -94,6 +94,9 @@ export { default as DiscordChat } from './DiscordChat'
 export { default as StageContent } from './StageContent'
 export { default as Categories } from './Categories'
 
+export { default as PartnerPerformance } from './PartnerPerformance'
+
+
 export * from './Bookingmap';
 export * from './Meetups';
 export * from './MyLayouts';
