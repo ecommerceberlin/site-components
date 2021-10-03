@@ -95,6 +95,8 @@ export { default as StageContent } from './StageContent'
 export { default as Categories } from './Categories'
 
 export { default as PartnerPerformance } from './PartnerPerformance'
+export { default as PartnerPromo } from './PartnerPromo'
+
 
 
 export * from './Bookingmap';
