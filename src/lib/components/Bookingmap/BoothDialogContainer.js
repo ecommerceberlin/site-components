@@ -4,15 +4,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import WidgetSupport from '../../compositions/WidgetSupport';
 import BoothDialogContainerHeader from './BoothDialogContainerHeader';
 
+
 import {
-  FaBolt as Electricity,
-  FaUtensils as Catering,
-  FaSquare as Space,
-  FaInfoCircle as Info,
-  FaIdCard as Ids,
-  FaBookOpen as Catalogue,
-  FaCouch as Furniture
-} from 'react-icons/fa';
+  Power as Electricity,
+  Fastfood as Catering,
+  CropSquare as Space,
+  Info,
+  Badge as Ids,
+  MenuBook as Catalogue,
+  Chair as Furniture
+} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
 

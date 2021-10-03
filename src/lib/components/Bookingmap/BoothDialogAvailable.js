@@ -9,14 +9,15 @@ import isString from 'lodash/isString'
 
 
 import {
-  FaBolt as Electricity,
-  FaUtensils as Catering,
-  FaSquare as Space,
-  FaInfoCircle as Info,
-  FaIdCard as Ids,
-  FaBookOpen as Catalogue,
-  FaCouch as Furniture
-} from 'react-icons/fa';
+  Power as Electricity,
+  Fastfood as Catering,
+  CropSquare as Space,
+  Info,
+  Badge as Ids,
+  MenuBook as Catalogue,
+  Chair as Furniture
+} from '@material-ui/icons';
+
 import DefaultIcon from '@material-ui/icons/Done';
 
 const defaultProps = {
