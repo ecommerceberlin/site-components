@@ -12,9 +12,11 @@ import Sharer from './Sharer'
 import PartnerPrizes from './PartnerPrizes'
 import Facebook from '@material-ui/icons/Facebook'
 import Twitter from '@material-ui/icons/Twitter'
-import LinkedIn from '@material-ui/icons/LinkedIn'
+import Linkedin from '@material-ui/icons/LinkedIn'
 import TextField from '@material-ui/core/TextField'
 import CopyToClipboardButton from './CopyToClipboardButton'
+
+const icons = {Facebook, Twitter, Linkedin}
 /***
  * 
  * 
@@ -161,11 +163,11 @@ const PartnerCreatives = ({data}) => {
 
     return (<Box>
         <Box mb={4}>
-        <Typography gutterBottom variant="h6">{translate("promo.creatives.rawlink.title")}</Typography>
+        <Typography gutterBottom variant="subtitle2">{translate("promo.creatives.rawlink.title")}</Typography>
         <PromoRawLink link={rawlink.link_full}/>
         </Box>
         <Box mb={4}>
-        <Typography gutterBottom variant="h6">{translate("promo.creatives.newsletters.title")}</Typography>
+        <Typography gutterBottom variant="subtitle2">{translate("promo.creatives.newsletters.title")}</Typography>
         <Grid container spacing={2}>
         {newsletters.map(item => (<Grid item key={item.id}>
         <Typography gutterBottom variant="body1">{translate(`common.locales.${item.lang}`)}</Typography>
@@ -173,7 +175,7 @@ const PartnerCreatives = ({data}) => {
         </Grid>
         </Box>
         <Box mb={4}>
-        <Typography gutterBottom variant="h6">{translate("promo.creatives.links.title")}</Typography>
+        <Typography gutterBottom variant="subtitle2">{translate("promo.creatives.links.title")}</Typography>
         {links.map(item =><PromoLink key={item.id} {...item} />)}
         </Box>
     </Box>)
@@ -186,7 +188,8 @@ const PromoLink = ({link_full, sharable, enabled, sharers}) => {
     return <div>{Object.keys(sharers).map(service => {
         const link = sharers[service]
         return (
-            <Box key={service}>
+            <Box key={service} mb={2}>
+            {React.createElement(icons[capitalizeFirstLetter(service)], {})}
             <TextField multiline={true} value={link} fullWidth={true} />
             <CopyToClipboardButton text={link} />
             </Box>

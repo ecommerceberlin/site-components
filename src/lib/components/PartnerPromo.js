@@ -1,5 +1,7 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid' 
+import Paper from '@material-ui/core/Paper' 
+
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
@@ -32,6 +34,12 @@ import PartnerCreatives from './PartnerCreatives'
   disabled: {
     color: "#ccc",
     cursor: "pointer"
+  },
+  stats: {
+    maxWidth: 300,
+    padding: 10,
+    backgroundColor: "#eaeaea",
+    marginBottom: 20
   }
 });
 
@@ -54,38 +62,45 @@ const PartnerPromo = ({id, icons}) => {
 
     return (<Box mb={8}>
 
-    <Avatar variant="square" src={ resizeCloudinaryImage(company.logotype, 300, 300) } classes={{
+    <Grid spacing={8} container alignItems="center">
+      <Grid item>
+        <Avatar variant="square" src={ resizeCloudinaryImage(company.logotype, 300, 300) } classes={{
         root: classes.avatarContainer,
         img: classes.avatarImg
-    }}/>
+        }}/>
+      </Grid>
+      <Grid item>
+        <Paper className={classes.stats}>
+          <Grid container spacing={1}>
+          <Grid item>
+          <Typography gutterBottom align="center" variant="body1">{translate("common.points")}</Typography>
+          <Typography gutterBottom align="center" variant="h4"> {company.stats.sessions} </Typography>
+          </Grid>
+          <Grid item>
+          <Typography gutterBottom align="center" variant="body1">{translate("common.position")}</Typography>
+          <Typography gutterBottom align="center" variant="h4"> {company.stats.sessions ? company.stats.position: "-"} </Typography>
+          </Grid>
+          </Grid>
+        </Paper>
+      </Grid>
+    </Grid>
 
-    <Box ml={2}>
-    <Box mt={2} mb={2} p={2}>
-    <Grid container spacing={1}>
-    <Grid item>
-    <Typography gutterBottom align="center" variant="body1">{translate("common.points")}</Typography>
-    <Typography gutterBottom align="center" variant="h4"> {company.stats.sessions} </Typography>
+    
+
+    <Box mt={5}>
+    <Grid container spacing={6}>
+    <Grid item xs={12} sm={12} md={7} lg={7} xl={8}>
+    <Typography gutterBottom variant="h4">{translate("exhibitors.promo.list")}</Typography>
+    <PartnerCreatives data={company.creatives} />   
     </Grid>
     <Grid item>
-    <Typography gutterBottom align="center" variant="body1">{translate("common.position")}</Typography>
-    <Typography gutterBottom align="center" variant="h4"> {company.stats.sessions ? company.stats.position: "-"} </Typography>
+    <Typography gutterBottom variant="h4">{translate("exhibitor.prizes.list")}</Typography>
+    <PartnerPrizes active={company.stats.prizes} icons={icons} full={true} points={company.stats.sessions} position={company.stats.position} />
     </Grid>
     </Grid>
     </Box>
 
-    <Box mt={2} mb={2} p={2}>
-    <Typography gutterBottom variant="h4">{translate("asd")}</Typography>
-    <Box mt={2}>
-    <PartnerPrizes active={company.stats.prizes} icons={icons} />
-    </Box>
-    </Box>
-
-    <Box mt={2} mb={2} p={2}>
-    <Typography gutterBottom variant="h4">{translate("asd")}</Typography>
-    <PartnerCreatives data={company.creatives} />
-    </Box>
-    </Box>
-
+   
     </Box>)
 
  }
