@@ -165,13 +165,22 @@ const PartnerCreatives = ({data}) => {
     const rawlink = links.find(Boolean) || {}
 
     return (<Box>
+
         <Box mb={6}>
-        <Typography gutterBottom variant="overline">{translate("exhibitor.creatives.rawlink.title")}</Typography>
+        <Box mb={2}>
+        <Typography variant="h5">{translate("exhibitor.creatives.rawlink.title")} </Typography>
+        <Typography variant="body2">{translate("exhibitor.creatives.rawlink.description")}</Typography>
+        </Box>
+
         <PromoRawLink link={rawlink.link_full}  />
         </Box>
 
         <Box mb={6}>
-        <Typography gutterBottom variant="overline">{translate("exhibitor.creatives.newsletters.title")}</Typography>
+        <Box mb={2}>
+        <Typography variant="h5">{translate("exhibitor.creatives.newsletters.title")} </Typography>
+        <Typography variant="body2">{translate("exhibitor.creatives.newsletters.description")}</Typography>
+        </Box>
+
         <Grid container spacing={5}>
         {newsletters.map(item => (<Grid item key={item.id}>
         <Typography gutterBottom variant="body1"><EmailIcon className={classes.icon_near_text} /> {translate(`common.locales.${item.lang}`)}</Typography>
@@ -180,7 +189,11 @@ const PartnerCreatives = ({data}) => {
         </Box>
         
         <Box mb={6}>
-        <Typography gutterBottom variant="overline">{translate("exhibitor.creatives.social.title")}</Typography>
+        <Box mb={2}>
+        <Typography variant="h5">{translate("exhibitor.creatives.social.title")} </Typography>
+        <Typography variant="body2">{translate("exhibitor.creatives.social.description")}</Typography>
+        </Box>
+
         {links.map(item =><PromoLink key={item.id} {...item} />)}
         <Alert label="exhibitor.creatives.opengraph" type="info" />
         </Box>
