@@ -100,10 +100,17 @@ const PartnerPrizes = ({active=[], icons={}, full=false, points=0, position=0}) 
 
     if(full){
         return (<TableContainer><Table><TableBody>{data.map(prize => (
+            <>
+            <TableRow>
+                <TableCell colSpan={2}>
+                    <Typography variant="subtitle1">{translate(`exhibitor.prizes.${prize.name}.name`)}</Typography>
+                </TableCell>
+            </TableRow>
             <TableRow key={prize.name}>
             <TableCell align="right">{renderIcon(prize, true)}</TableCell>
             <TableCell align="left">{renderAssignment(prize)}</TableCell>
             </TableRow>
+            </>
           ))
         }</TableBody></Table></TableContainer>)
     }

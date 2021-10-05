@@ -166,9 +166,9 @@ const PartnerCreatives = ({data}) => {
 
     return (<Box>
 
-        <Box mb={6}>
+        <Box mb={6} mt={2}>
         <Box mb={2}>
-        <Typography variant="h5">{translate("exhibitor.creatives.rawlink.title")} </Typography>
+        <Typography variant="h6">{translate("exhibitor.creatives.rawlink.title")} </Typography>
         <Typography variant="body2">{translate("exhibitor.creatives.rawlink.description")}</Typography>
         </Box>
 
@@ -177,7 +177,7 @@ const PartnerCreatives = ({data}) => {
 
         <Box mb={6}>
         <Box mb={2}>
-        <Typography variant="h5">{translate("exhibitor.creatives.newsletters.title")} </Typography>
+        <Typography variant="h6">{translate("exhibitor.creatives.newsletters.title")} </Typography>
         <Typography variant="body2">{translate("exhibitor.creatives.newsletters.description")}</Typography>
         </Box>
 
@@ -190,7 +190,7 @@ const PartnerCreatives = ({data}) => {
         
         <Box mb={6}>
         <Box mb={2}>
-        <Typography variant="h5">{translate("exhibitor.creatives.social.title")} </Typography>
+        <Typography variant="h6">{translate("exhibitor.creatives.social.title")} </Typography>
         <Typography variant="body2">{translate("exhibitor.creatives.social.description")}</Typography>
         </Box>
 
@@ -213,7 +213,7 @@ const PromoLink = ({link_full, sharable, enabled, sharers}) => {
             {icon(true)}
             <TextField multiline={true} value={link} fullWidth={true}  variant="outlined" />
             <CopyToClipboardButton text={link} />
-            <Button label="common.share" href={link} startIcon={icon()} />
+            <Button label={`common.share.${service}`} href={link} startIcon={icon()} />
             </Box>
         )
     })}</div>

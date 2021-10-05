@@ -4,10 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import { useDatasource, resizeCloudinaryImage, useDialog, capitalizeFirstLetter } from '../helpers'
 import { useTranslate } from '../i18n'
@@ -21,9 +19,8 @@ import PartnerPrizes from './PartnerPrizes'
     minWidth: 650,
   },
   avatarContainer: {
-    height: 70,
     width: 200,
-    
+    height: 70,
   },
   avatarImg: {
     objectFit: "contain",
@@ -44,25 +41,27 @@ import PartnerPrizes from './PartnerPrizes'
 }));
 
 
-const PartnerPerformance = ({icons}) => {
+const PartnerPerformance = ({icons, limit=undefined}) => {
    
    const classes = useStyles()
-   const data = useDatasource({resource: "ranking"});
+   const data = useDatasource({resource: "ranking", filters:{
+     limit: limit
+   }});
    const [translate] = useTranslate()
 
     if(isEmpty(data)){
         return null
     }
 
-   return (<TableContainer component={Paper}>
+   return ( 
     <Table className={classes.table} aria-label="simple table">
     <TableHead>
     <TableRow>
     <TableCell align="center">{translate("common.position")}</TableCell>
     <TableCell align="center">{translate("common.exhibitor")}</TableCell>
-    {/* <TableCell align="right">{translate("common.points")}</TableCell> */}
+    <TableCell align="right">{translate("common.points")}</TableCell>
     <TableCell align="center">{translate("exhibitor.prizes.list")}</TableCell>
-    <TableCell></TableCell>
+    {!limit && <TableCell></TableCell>}
     </TableRow>
     </TableHead>
     <TableBody>{data.map((row) => (<TableRow key={row.id}>
@@ -78,14 +77,14 @@ const PartnerPerformance = ({icons}) => {
         <Grid item>{row.name}</Grid>
         </Grid>
     </TableCell>
-    {/* <TableCell align="right"><Typography variant="h5">{row.stats.sessions}</Typography></TableCell> */}
+    <TableCell align="right"><Typography variant="h5">{row.stats.sessions}</Typography></TableCell>
     <TableCell align="center"><PartnerPrizes active={row.stats.prizes} icons={icons} /></TableCell>
-    <TableCell><Button variant="outlined" href={`/companies/${row.company_id}`} label="common.details" /></TableCell>
+    {!limit && <TableCell><Button variant="outlined" href={`/companies/${row.company_id}`} label="common.details" /></TableCell>}
 
     </TableRow>))}
     </TableBody>
     </Table>
-    </TableContainer>)
+   )
  }
 
 

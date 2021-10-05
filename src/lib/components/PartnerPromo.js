@@ -44,7 +44,7 @@ import PartnerCreatives from './PartnerCreatives'
 });
 
 
-const PartnerPromo = ({id, icons}) => {
+const PartnerPromo = ({id, icons, sidebar=null}) => {
    
    const classes = useStyles()
    const data = useDatasource({resource: "ranking"});
@@ -91,15 +91,19 @@ const PartnerPromo = ({id, icons}) => {
     <Grid container spacing={6}>
     <Grid item xs={12} sm={12} md={7} lg={7} xl={8}>
     <Typography gutterBottom variant="h4">{translate("exhibitor.promo.list")}</Typography>
-    <PartnerCreatives data={company.creatives} />   
+    <PartnerCreatives data={company.creatives} />
+    <Box mt={5}>{sidebar}</Box>   
     </Grid>
-    <Grid item>
+    <Grid item xs={12} sm={12} md={5} lg={5} xl={4}>
     <Typography gutterBottom variant="h4">{translate("exhibitor.prizes.list")}</Typography>
     <PartnerPrizes active={company.stats.prizes} icons={icons} full={true} points={company.stats.sessions} position={company.stats.position} />
+ 
     </Grid>
     </Grid>
     </Box>
 
+    
+     
    
     </Box>)
 
