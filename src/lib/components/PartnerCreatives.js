@@ -2,19 +2,18 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid' 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import { useDatasource, resizeCloudinaryImage, useDialog, capitalizeFirstLetter } from '../helpers'
+import { capitalizeFirstLetter } from '../helpers'
 import { useTranslate } from '../i18n'
 import Button from './MyButton';
 import Typography from '@material-ui/core/Typography';
 import isEmpty from 'lodash/isEmpty'
 import EmailIcon from '@material-ui/icons/Email';
-import Sharer from './Sharer'
-import PartnerPrizes from './PartnerPrizes'
 import Facebook from '@material-ui/icons/Facebook'
 import Twitter from '@material-ui/icons/Twitter'
 import Linkedin from '@material-ui/icons/LinkedIn'
 import TextField from '@material-ui/core/TextField'
 import CopyToClipboardButton from './CopyToClipboardButton'
+import Alert from './Alert'
 
 const icons = {Facebook, Twitter, Linkedin}
 /***
@@ -56,6 +55,12 @@ const icons = {Facebook, Twitter, Linkedin}
   disabled: {
     color: "#ccc",
     cursor: "pointer"
+  },
+  textfield: {
+      padding: 10
+  },
+  icon_near_text: {
+      marginTop: -10
   }
 });
 
@@ -146,11 +151,9 @@ const icons = {Facebook, Twitter, Linkedin}
 
 
 
-
-
-
 const PartnerCreatives = ({data}) => {
 
+    const classes = useStyles()
     const [translate] = useTranslate()
     
     if(isEmpty(data) || !Array.isArray(data)){
@@ -162,49 +165,57 @@ const PartnerCreatives = ({data}) => {
     const rawlink = links.find(Boolean) || {}
 
     return (<Box>
-        <Box mb={4}>
-        <Typography gutterBottom variant="subtitle2">{translate("promo.creatives.rawlink.title")}</Typography>
-        <PromoRawLink link={rawlink.link_full}/>
+        <Box mb={6}>
+        <Typography gutterBottom variant="overline">{translate("exhibitor.creatives.rawlink.title")}</Typography>
+        <PromoRawLink link={rawlink.link_full}  />
         </Box>
-        <Box mb={4}>
-        <Typography gutterBottom variant="subtitle2">{translate("promo.creatives.newsletters.title")}</Typography>
-        <Grid container spacing={2}>
+
+        <Box mb={6}>
+        <Typography gutterBottom variant="overline">{translate("exhibitor.creatives.newsletters.title")}</Typography>
+        <Grid container spacing={5}>
         {newsletters.map(item => (<Grid item key={item.id}>
-        <Typography gutterBottom variant="body1">{translate(`common.locales.${item.lang}`)}</Typography>
+        <Typography gutterBottom variant="body1"><EmailIcon className={classes.icon_near_text} /> {translate(`common.locales.${item.lang}`)}</Typography>
         <PromoNewsletter  {...item} /></Grid>))}
         </Grid>
         </Box>
-        <Box mb={4}>
-        <Typography gutterBottom variant="subtitle2">{translate("promo.creatives.links.title")}</Typography>
+        
+        <Box mb={6}>
+        <Typography gutterBottom variant="overline">{translate("exhibitor.creatives.social.title")}</Typography>
         {links.map(item =><PromoLink key={item.id} {...item} />)}
+        <Alert label="exhibitor.creatives.opengraph" type="info" />
         </Box>
     </Box>)
 }
 
 const PromoLink = ({link_full, sharable, enabled, sharers}) => {
+    const classes = useStyles()
     if(!enabled){
         return null
     }
     return <div>{Object.keys(sharers).map(service => {
         const link = sharers[service]
+        const icon = (large=false) => React.createElement(icons[capitalizeFirstLetter(service)], {fontSize: large? "large": "medium"})
         return (
             <Box key={service} mb={2}>
-            {React.createElement(icons[capitalizeFirstLetter(service)], {})}
-            <TextField multiline={true} value={link} fullWidth={true} />
+            {icon(true)}
+            <TextField multiline={true} value={link} fullWidth={true}  variant="outlined" />
             <CopyToClipboardButton text={link} />
+            <Button label="common.share" href={link} startIcon={icon()} />
             </Box>
         )
     })}</div>
 }
 
 const PromoRawLink = ({link}) => {
-    return  <TextField multiline={true} value={link} fullWidth={true} />
+    const classes = useStyles()
+    return  <TextField multiline={true} value={link} fullWidth={true}  variant="outlined"  />
 }
 
 const PromoNewsletter = ({name, lang, content, newsletter}) => {
-    return (<Grid container direction="row">
-        <Grid item ><Button label=".zip" startIcon={<EmailIcon />} href={newsletter.zip} /></Grid>
-        <Grid item><Button label=".html" startIcon={<EmailIcon />} href={newsletter.html} /></Grid>
+    const classes = useStyles()
+    return (<Grid container direction="row" spacing={1}>
+        <Grid item ><Button label=".zip" href={newsletter.zip} variant="outlined" /></Grid>
+        <Grid item><Button label=".html" href={newsletter.html}  variant="outlined" /></Grid>
     </Grid>)
 }
 

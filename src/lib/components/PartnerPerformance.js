@@ -16,13 +16,14 @@ import Typography from '@material-ui/core/Typography';
 import isEmpty from 'lodash/isEmpty'
 import PartnerPrizes from './PartnerPrizes'
 
- const useStyles = makeStyles({
+ const useStyles = makeStyles(theme => ({
   table: {
     minWidth: 650,
   },
   avatarContainer: {
-    height: 40,
-    width: 175,
+    height: 70,
+    width: 200,
+    
   },
   avatarImg: {
     objectFit: "contain",
@@ -36,8 +37,11 @@ import PartnerPrizes from './PartnerPrizes'
   disabled: {
     color: "#ccc",
     cursor: "pointer"
+  },
+  grayed: {
+    color: "#ccc"
   }
-});
+}));
 
 
 const PartnerPerformance = ({icons}) => {
@@ -54,19 +58,19 @@ const PartnerPerformance = ({icons}) => {
     <Table className={classes.table} aria-label="simple table">
     <TableHead>
     <TableRow>
-    <TableCell align="right">{translate("common.position")}</TableCell>
+    <TableCell align="center">{translate("common.position")}</TableCell>
     <TableCell align="center">{translate("common.exhibitor")}</TableCell>
     {/* <TableCell align="right">{translate("common.points")}</TableCell> */}
-    <TableCell align="center">{translate("prizes.name")}</TableCell>
-    <TableCell>{translate("promo_materials.name")}</TableCell>
+    <TableCell align="center">{translate("exhibitor.prizes.list")}</TableCell>
+    <TableCell></TableCell>
     </TableRow>
     </TableHead>
     <TableBody>{data.map((row) => (<TableRow key={row.id}>
-    <TableCell align="right">{row.stats.position}</TableCell>
-    <TableCell align="left" width="200">
+    <TableCell align="center"><Typography variant="h4" className={classes.grayed}>{row.stats.position}</Typography></TableCell>
+    <TableCell align="center" width="200">
         <Grid container spacing={1} direction="column" alignItems="center">
         <Grid item>
-        <Avatar variant="square" src={ resizeCloudinaryImage(row.logotype, 175, 50) } classes={{
+        <Avatar variant="square" src={ resizeCloudinaryImage(row.logotype, 200, 70) } classes={{
             root: classes.avatarContainer,
             img: classes.avatarImg
         }}/>
@@ -76,7 +80,7 @@ const PartnerPerformance = ({icons}) => {
     </TableCell>
     {/* <TableCell align="right"><Typography variant="h5">{row.stats.sessions}</Typography></TableCell> */}
     <TableCell align="center"><PartnerPrizes active={row.stats.prizes} icons={icons} /></TableCell>
-    <TableCell><Button variant="outlined" href={`/companies/${row.company_id}`} label="promo" /></TableCell>
+    <TableCell><Button variant="outlined" href={`/companies/${row.company_id}`} label="common.details" /></TableCell>
 
     </TableRow>))}
     </TableBody>

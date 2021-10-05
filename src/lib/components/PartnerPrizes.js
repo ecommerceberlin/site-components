@@ -66,11 +66,11 @@ const PartnerPrizes = ({active=[], icons={}, full=false, points=0, position=0}) 
     const hasPosition = (min, max, position) => position <= max && position >= min? <Ok className={classes.green} />: <NotOk className={classes.red}  />
 
     const renderAssignment = (prize) => (<div>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="flex-end" alignItems="flex-end">
         <Grid item>{translate("prizes.condition.points", {points: prize.level})}</Grid>
         <Grid item>{hasPoints(prize.level, points)}</Grid>
         </Grid>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="flex-end" alignItems="flex-end">
         <Grid item>{translate("prizes.condition.position", {
         min: prize.min, 
         max: prize.max
@@ -79,7 +79,7 @@ const PartnerPrizes = ({active=[], icons={}, full=false, points=0, position=0}) 
         </Grid>
     </div>)
 
-    const renderIcon = (prize) => {
+    const renderIcon = (prize, large=false) => {
         
         const name = capitalizeFirstLetter( prize.name )
 
@@ -87,6 +87,7 @@ const PartnerPrizes = ({active=[], icons={}, full=false, points=0, position=0}) 
             return React.createElement(icons[name], {
                 key: name,
                 fontSize: "large",
+                style: large? {fontSize: 50}: undefined,
                 onClick: () => dialog({label: `prizes.${prize.name}.name`, content: <PartnerPrizeDetails {...prize} />}),
                 className: (active || []).includes(prize.name)? classes.active: classes.disabled
             })
@@ -100,8 +101,8 @@ const PartnerPrizes = ({active=[], icons={}, full=false, points=0, position=0}) 
     if(full){
         return (<TableContainer><Table><TableBody>{data.map(prize => (
             <TableRow key={prize.name}>
-            <TableCell>{renderIcon(prize)}</TableCell>
-            <TableCell>{renderAssignment(prize)}</TableCell>
+            <TableCell align="right">{renderIcon(prize, true)}</TableCell>
+            <TableCell align="left">{renderAssignment(prize)}</TableCell>
             </TableRow>
           ))
         }</TableBody></Table></TableContainer>)

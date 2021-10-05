@@ -90,7 +90,7 @@ const PartnerPromo = ({id, icons}) => {
     <Box mt={5}>
     <Grid container spacing={6}>
     <Grid item xs={12} sm={12} md={7} lg={7} xl={8}>
-    <Typography gutterBottom variant="h4">{translate("exhibitors.promo.list")}</Typography>
+    <Typography gutterBottom variant="h4">{translate("exhibitor.promo.list")}</Typography>
     <PartnerCreatives data={company.creatives} />   
     </Grid>
     <Grid item>
