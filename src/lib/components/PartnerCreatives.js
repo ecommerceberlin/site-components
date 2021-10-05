@@ -221,7 +221,11 @@ const PromoLink = ({link_full, sharable, enabled, sharers}) => {
 
 const PromoRawLink = ({link}) => {
     const classes = useStyles()
-    return  <TextField multiline={true} value={link} fullWidth={true}  variant="outlined"  />
+    return  (<Box>
+            <TextField multiline={true} value={link} fullWidth={true}  variant="outlined"  />
+            <CopyToClipboardButton text={link} />
+            <Button label={`common.test`} href={link} />
+            </Box>)
 }
 
 const PromoNewsletter = ({name, lang, content, newsletter}) => {
