@@ -1,4 +1,4 @@
-export * from './adminreport'
+
 export * from './allpresenters'
 export * from './callforpapers'
 export * from './contestantcompanies'
