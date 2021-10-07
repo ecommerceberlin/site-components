@@ -6,6 +6,8 @@ import { useTranslate } from '../../i18n';
 import {useSettings} from '../../helpers'
 import isString from 'lodash/isString'
 import isObject from 'lodash/isObject'
+import isEmpty from 'lodash/isEmpty'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,20 +47,12 @@ const PresentationLabel = ({ setting, time="", venue="", category=null, buttons 
     <div className={classes.root}>
 
       <Chip 
-        label={time} 
+        label={<><strong>{venue}</strong> {time}</>} 
         className={classes.chip} 
         variant="outlined"
       />
-      <Chip
-        label={<><span className={classes.stageLabel}>{`${translate("common.stage")} `}</span>{venue}</>}
-        className={classes.chip}
-        classes={{
-          root: classes.venue
-        }}
-        variant="outlined"
-      />
-
-      {isString(category) && category.length > 1 && <Chip 
+    
+      {!isEmpty(categories) && isString(category) && category.length > 1 && <Chip 
         label={translate(`tags.${category}`)} 
         className={classes.chip}
         style={styling} 

@@ -7,7 +7,7 @@ import {VenueSelector} from './redux'
 import { useSelector } from 'react-redux'
 import size from 'lodash/size'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = props => makeStyles(theme => ({
   root: {
   },
 
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 const ScheduleItemPresenterAvatar = ({imageSrc, title, text}) => {
 
-  const classes = useStyles()
+  const classes = useStyles({})()
 
   return (<Grid container spacing={1} alignItems="center" wrap="nowrap">
   <Grid item>
@@ -63,7 +63,7 @@ const ScheduleItemPresenterAvatar = ({imageSrc, title, text}) => {
 
 const ScheduleItemPresenter = ({ setting, logotype, ...rest }) => {
 
-  const classes = useStyles()
+  const classes = useStyles({})()
   const {venues} = useSettings(setting)
   const selectedVenue = useSelector(VenueSelector) //A, B...
 

@@ -7,7 +7,7 @@ import MyTypography from '../MyTypography';
 import {useSettings} from '../../helpers'
 // <Tags tags={_get(company.profile, "keywords")} />
 
-const useStyles = makeStyles(theme => ({
+const useStyles = props=> makeStyles(theme => ({
   root: {
     marginTop: 20,
     marginBottom: 25,
@@ -20,7 +20,16 @@ const useStyles = makeStyles(theme => ({
   },
 
   title: {
-    fontWeight: 600
+    fontWeight: 600,
+    
+    fontSize: theme.typography.pxToRem(17),
+
+    [theme.breakpoints.down("md")]: {
+      fontSize: theme.typography.pxToRem(15),
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: theme.typography.pxToRem(13),
+    }
   },
 
   description: {
@@ -40,7 +49,7 @@ const defaultProps = {
 
 const Presentation = ({setting, ...props}) => {
 
-  const classes = useStyles();
+  const classes = useStyles(props)();
   const settings = useSettings();
 
   const {

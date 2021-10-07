@@ -6,8 +6,8 @@ const venues = {
     3 : { xs: 12, sm: 6, md: 4, lg: 3, xl: 3 },
     4 : { xs: 12, sm: 6, md: 6, lg: 3, xl: 3 },
     5 : { xs: 12, sm: 6, md: 3, lg: 3, xl: 3 },
-    6 : { xs: 12, sm: 6, md: 3, lg: 3, xl: 3 },
-    7 : { xs: 12, sm: 6, md: 3, lg: 3, xl: 3 },
+    6 : { xs: 12, sm: 6, md: 3, lg: 2, xl: 2 },
+    7 : { xs: 12, sm: 6, md: 3, lg: 2, xl: 2 },
 
 
 }
