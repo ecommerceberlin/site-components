@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AllExhibitors from '../datasources/AllExhibitors'
+import {useDatasource, useSettings} from '../helpers'
 
 import {
   Avatarlist,
@@ -10,29 +10,32 @@ import {
   Wrapper
 } from '../components';
 
+const defaultProps={
 
-const WidgetAllExhibitorsAvatarlist = (props) => (
+  wrapperProps: {
+    label: "exhibitors.list_current"
+  }
+}
 
-  <Wrapper {...props}>
+const WidgetExhibitorsAvatarlist = ({setting, ...props}) => {
 
-  <AllExhibitors mobile={false} random={false} sort='profile.name'>{
-    (exhibitors, keywords) =>
+  const settings = useSettings(setting)
+  const {wrapperProps} = Object.assign({}, defaultProps, settings, props)
+  const data = useDatasource({resource: "exhibitors2", filters: {
+    sort: "profile.name"
+  }})
 
-    <React.Fragment>
+  if(!data){
+    return null
+  }
 
-      <Centered style={{marginTop: 80}}>
+  return (
 
-        <MyTypography label="exhibitors.list.filter_title" template="SUBH2CH" />
-        <KeywordSelect keywords={keywords} />
+    <Wrapper {...wrapperProps}>
+     <Avatarlist data={data} />
+    </Wrapper>
+  
+  )
 
-      </Centered>
-
-      <Avatarlist data={exhibitors} />
-
-    </React.Fragment>
-  }</AllExhibitors>
-
-  </Wrapper>
-
-)
-export default WidgetAllExhibitorsAvatarlist
+} 
+export default WidgetExhibitorsAvatarlist
