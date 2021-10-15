@@ -19,7 +19,7 @@ export function reportWebVitals(metric) {
 //  }
 }
 
-const WrappedApp = ({Component, pageProps, head, theme, router}) => {
+const WrappedApp = ({Component, pageProps, head, theme, layout=true, router}) => {
 
  
 
@@ -45,17 +45,9 @@ const WrappedApp = ({Component, pageProps, head, theme, router}) => {
     <ThemeProvider theme={createTheme(theme)}>
         <CssBaseline /> 
      
-        
-        
-        <PageLoadingIndicator>
-        <GoogleTagManager>
-         <Layout>
-          <Component {...pageProps} />
-          </Layout>
-        </GoogleTagManager>
-        </PageLoadingIndicator>
-
-      
+  
+    {layout?  (<PageLoadingIndicator><GoogleTagManager><Layout><Component {...pageProps} /></Layout></GoogleTagManager></PageLoadingIndicator>): <Component {...pageProps} />}
+         
       </ThemeProvider>
     </TranslationProvider>
 
