@@ -14,7 +14,9 @@ const keyableResources = [
   "jurors_all",
   "ranking",
   "prizes",
-  "report"
+  "report",
+  "exhibitors2",
+  "companies2"
 ]
 
 const reducer = (state = {
