@@ -29,15 +29,15 @@ const Invite = ({ person={}, text="See you!", template="teh20_visitor_template1"
 
   return (
     <div className={classes.root}>
-    <Typography variant="h4">{`${_get(person, 'fname')}, ${translate("visitors.promorequest.title")}`}</Typography>
+    <Typography variant="h4" gutterBottom>{`${_get(person, 'fname')}, ${translate("visitors.promorequest.title")}`}</Typography>
     <Grid container spacing={2}>
     <Grid item md={5} sm={6} xs={12}>
-      <Box m={1}>
+      <Box m={2}>
       <Sharer url={`/invites/${person.id}`} />
       </Box>
     </Grid>
     <Grid item md={7} sm={6} xs={12}>
-      <Box m={1}>
+      <Box m={4}>
       <Typography variant="body1" gutterBottom>{translate("visitors.promorequest.description")}</Typography>
       <img src={getInviteOgImage(`${text} ${_get(person, 'fname', '')} z ${_get(person, 'cname2')}.`, template)} alt="" className={classes.image} />
       </Box>
