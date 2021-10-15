@@ -9,12 +9,7 @@ module.exports = {
       i18n: {
         locales: ['en','pl'],
         defaultLocale: 'pl',  
-     
       },
 
-      async rewrites() { return [{
-        source: '/presenters',
-        destination: '/speakers',
-        }]
-    },
+ 
 }
