@@ -1,15 +1,14 @@
 import React from 'react';
-import Sharer from './Sharer';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import compose from 'recompose/compose';
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 import _get from 'lodash/get';
-
-import { translate } from '../i18n';
+import { useTranslate } from '../i18n';
 import { getInviteOgImage } from '../helpers';
-import MyTypography from './MyTypography';
+import Sharer from './Sharer';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     marginTop: 50
   },
@@ -17,51 +16,36 @@ const styles = theme => ({
   image: {
     width: '100%',
     height: 'auto',
-    margin: 20,
-   // filter: 'grayscale(100%)',
 
     [theme.breakpoints.down('sm')]: {
       //    maxWidth : 300,
     }
   }
-});
+}));
 
-const Invite = ({ person, classes }) => {
+const Invite = ({ person={}, text="See you!", template="teh20_visitor_template1" }) => {
+  const [translate] = useTranslate()
+  const classes = useStyles()
+
   return (
     <div className={classes.root}>
-      <Grid container spacing={6}>
-        <Grid item md={5} sm={6} xs={12}>
-          <div style={{ marginTop: 20 }}>
-            <MyTypography template="subtitle">
-              {_get(person, 'fname')}, 
-              let your friends know that you support E-commerce Berlin Expo! 
-            </MyTypography>
-
-            <Sharer url={`/invite,${person.id}`} />
-          </div>
-        </Grid>
-
-        <Grid item md={7} sm={6} xs={12}>
-          <img
-            src={getInviteOgImage(
-              `See You! ${_get(person, 'fname', '')} from ${_get(person, 'cname2')}.`
-            )}
-            alt=""
-            className={classes.image}
-          />
-        </Grid>
-      </Grid>
+    <Typography variant="h4">{`${_get(person, 'fname')}, ${translate("visitors.promorequest.title")}`}</Typography>
+    <Grid container spacing={2}>
+    <Grid item md={5} sm={6} xs={12}>
+      <Box m={1}>
+      <Sharer url={`/invites/${person.id}`} />
+      </Box>
+    </Grid>
+    <Grid item md={7} sm={6} xs={12}>
+      <Box m={1}>
+      <Typography variant="body1" gutterBottom>{translate("visitors.promorequest.description")}</Typography>
+      <img src={getInviteOgImage(`${text} ${_get(person, 'fname', '')} z ${_get(person, 'cname2')}.`, template)} alt="" className={classes.image} />
+      </Box>
+    </Grid>
+    </Grid>
     </div>
   );
 };
 
-Invite.defaultProps = {
-  person: {}
-};
 
-const enhance = compose(
-  withStyles(styles),
-  translate
-);
-
-export default enhance(Invite);
+export default Invite

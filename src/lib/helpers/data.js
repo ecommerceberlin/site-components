@@ -57,13 +57,17 @@ export const getParticipantCdn = (url, size = 100, params = ['c_fit','e_grayscal
   return url.trim().replace(/\.svg/, '.png').replace("image/upload/", `image/upload/${paramsStr},w_${size},h_${size}/`);
 };
 
-export const getInviteOgImage = (text = '') => {
+export const getInviteOgImage = (text = '', template="ebe5_visitor_template") => {
   text = text.replace(',', ' ');
   text = text.replace('/', ' ');
 
-  return `https://res.cloudinary.com/eventjuicer/image/upload/w_0.9,c_scale,fl_relative,l_text:Roboto_300_bold:${encodeURIComponent(
+  text = text.toUpperCase()
+
+  text = encodeURIComponent(text)
+
+  return `https://res.cloudinary.com/eventjuicer/image/upload/w_0.9,c_scale,fl_relative,l_text:Lato_300_bold:${encodeURIComponent(
     text
-  )},g_north,y_40,co_rgb:000000,f_auto/v1580869613/ebe5_visitor_template.jpg`;
+  )},g_north,y_40,co_rgb:ffffff,f_auto/v1580869613/${template}.jpg`;
 };
  
 export const filterCompanyInstances = (company, eventId) =>
