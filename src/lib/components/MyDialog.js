@@ -29,7 +29,7 @@ const MyDialog = ({ translate, dialog, dialogHide }) => {
     <Dialog
       fullScreen={fullScreen}
       fullWidth={true}
-      maxWidth="md"
+      maxWidth={"width" in dialog? dialog.width: "md"}
       open={open}
       onClose={dialogHide}
       aria-labelledby="responsive-dialog-title"

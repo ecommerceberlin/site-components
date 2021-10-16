@@ -1,15 +1,20 @@
 import React from 'react';
-import Text from '../components/MyTypography'
 import ProfileErrors from './ProfileErrors'
 import Purchases from './Purchases'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
+import {useDialog} from '../helpers'
+import Bookingmap from '../components/Bookingmap/Bookingmap'
+import Wrapper from '../components/Wrapper'
+import map from 'lodash/map'
 
 const defaultProps = {
 
   show_mobilepass: false,
   show_partyticket: false,
+  mapSetting: "bookingmap",
+  roles: []
 }
 
 const Exhibitor = ({setting, ...props}) => {
@@ -23,18 +28,37 @@ const Exhibitor = ({setting, ...props}) => {
       party,
       meetups,
       show_mobilepass,
-      show_partyticket
+      show_partyticket,
+      mapSetting,
+      roles
     } = Object.assign({}, defaultProps, props);
 
     const { name, password, keywords, lang } = company;
     const { booth, fname, lname, phone } = profile;
-  
+    const dialog = useDialog()
+
+    const handleDialog = (e) => {
+      e.preventDefault()
+      dialog({
+        title: "location",
+        content: <Wrapper><Bookingmap setting={mapSetting} marked={selectedBoothIds()} /></Wrapper>,
+        width: "lg"
+      })
+    }
+
+    const selectedBoothIds = () => map(purchases, 'formdata.id').filter(v => v && v.length);
+    const selectedBoothNames = () => map(purchases, 'formdata.ti').filter(v => v && v.length);
+
+
     return (
       <Box mt={2}>
 
         <Grid container spacing={2} alignItems="flex-end">
         <Grid item>
-        <Typography variant="h4">{name} ({booth})</Typography>
+        <Typography variant="h4">{name}</Typography>
+        </Grid>
+        <Grid item>
+        <Typography variant="h6"><a href="#" onClick={handleDialog}>{booth}</a></Typography>
         </Grid>
         <Grid item>
         <Typography variant="subtitle1">{fname} {lname} {phone}</Typography>
@@ -49,7 +73,7 @@ const Exhibitor = ({setting, ...props}) => {
         </Grid>
     
         <ProfileErrors errors={errors} />
-        <Purchases purchases={purchases} />
+        <Purchases purchases={purchases} roles={roles} />
       </Box>
     );
   };
