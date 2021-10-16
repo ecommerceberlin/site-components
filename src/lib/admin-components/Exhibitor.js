@@ -36,7 +36,7 @@ const Exhibitor = ({setting, ...props}) => {
     } = Object.assign({}, defaultProps, props);
 
     const { name, password, keywords, lang } = company;
-    const { booth, fname, lname, phone } = profile;
+    const { booth, fname, lname, phone, cname } = profile;
     const dialog = useDialog()
 
     const handleDialog = (e) => {
@@ -63,7 +63,7 @@ const Exhibitor = ({setting, ...props}) => {
         <Typography variant="h6"><a href="#" onClick={handleDialog}>{selectedBoothNames()}</a></Typography>
         </Grid>
         <Grid item>
-        <Typography variant="subtitle1">{fname} {lname} {phone}</Typography>
+        <Typography variant="subtitle1">{cname}, {fname} {lname} {phone}</Typography>
         </Grid>
         </Grid>
 
