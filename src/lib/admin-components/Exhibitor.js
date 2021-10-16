@@ -3,7 +3,14 @@ import Text from '../components/MyTypography'
 import ProfileErrors from './ProfileErrors'
 import Purchases from './Purchases'
 
-const Exhibitor = props => {
+
+const defaultProps = {
+
+  show_mobilepass: false,
+  show_partyticket: false,
+}
+
+const Exhibitor = ({setting, ...props}) => {
     const {
       account,
       company,
@@ -13,7 +20,10 @@ const Exhibitor = props => {
       reps,
       party,
       meetups,
-    } = props;
+      show_mobilepass,
+      show_partyticket
+    } = Object.assign({}, defaultProps, props);
+
     const { name, password, keywords, lang } = company;
     const { booth, fname, lname, phone } = profile;
   
@@ -26,14 +36,12 @@ const Exhibitor = props => {
           {fname} {lname} {phone}
         </Text>
 
-        <Text template="benefitsText">
+        {show_mobilepass && <Text template="benefitsText">
          mobile pass: <strong>{password}</strong>
-        </Text>
+        </Text>}
 
-        <Text template="benefitsText">Reps: {reps}</Text>
-        <Text template={party > 2 ? 'benefitsTextError' : 'benefitsText'}>
-          Party: {party}
-        </Text>
+        <Text template="benefitsText"><strong>Reps: {reps}</strong></Text>
+        {show_partyticket && <Text template={party > 2 ? 'benefitsTextError' : 'benefitsText'}>Party: {party}</Text>}
         <Text template="benefitsText">Meetups: {meetups}</Text>
         <ProfileErrors errors={errors} />
         <Purchases purchases={purchases} />
