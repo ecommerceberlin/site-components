@@ -14,7 +14,8 @@ const defaultProps = {
   show_mobilepass: false,
   show_partyticket: false,
   mapSetting: "bookingmap",
-  roles: []
+  roles: [],
+  alert: null
 }
 
 const Exhibitor = ({setting, ...props}) => {
@@ -30,7 +31,8 @@ const Exhibitor = ({setting, ...props}) => {
       show_mobilepass,
       show_partyticket,
       mapSetting,
-      roles
+      roles,
+      alert
     } = Object.assign({}, defaultProps, props);
 
     const { name, password, keywords, lang } = company;
@@ -42,13 +44,13 @@ const Exhibitor = ({setting, ...props}) => {
       dialog({
         title: "location",
         content: <Wrapper><Bookingmap setting={mapSetting} marked={selectedBoothIds()} /></Wrapper>,
-        width: "lg"
+        width: "xl"
       })
     }
 
     const selectedBoothIds = () => map(purchases, 'formdata.id').filter(v => v && v.length);
-    const selectedBoothNames = () => map(purchases, 'formdata.ti').filter(v => v && v.length);
-
+    const selectedBoothNames = () => map(purchases, 'formdata.ti').filter(v => v && v.length).join(", ");
+   
 
     return (
       <Box mt={2}>
@@ -58,12 +60,14 @@ const Exhibitor = ({setting, ...props}) => {
         <Typography variant="h4">{name}</Typography>
         </Grid>
         <Grid item>
-        <Typography variant="h6"><a href="#" onClick={handleDialog}>{booth}</a></Typography>
+        <Typography variant="h6"><a href="#" onClick={handleDialog}>{selectedBoothNames()}</a></Typography>
         </Grid>
         <Grid item>
         <Typography variant="subtitle1">{fname} {lname} {phone}</Typography>
         </Grid>
         </Grid>
+
+        {alert}
 
         <Grid container spacing={2}>
         <Grid item><strong>Reps: {reps}</strong></Grid>
