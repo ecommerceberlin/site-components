@@ -15,7 +15,8 @@ const defaultProps = {
   show_partyticket: false,
   mapSetting: "bookingmap",
   roles: [],
-  alert: null
+  alert: null,
+  dense: false
 }
 
 const Exhibitor = ({setting, ...props}) => {
@@ -32,7 +33,8 @@ const Exhibitor = ({setting, ...props}) => {
       show_partyticket,
       mapSetting,
       roles,
-      alert
+      alert,
+      dense
     } = Object.assign({}, defaultProps, props);
 
     const { name, password, keywords, lang } = company;
@@ -69,7 +71,7 @@ const Exhibitor = ({setting, ...props}) => {
 
         {alert}
 
-        <Grid container spacing={2}>
+        {!dense && <><Grid container spacing={2}>
         <Grid item><strong>Reps: {reps}</strong></Grid>
         {show_mobilepass &&  <Grid item><strong>{password}</strong></Grid>}
         {show_partyticket && <strong>Party: {party}</strong>}
@@ -78,6 +80,8 @@ const Exhibitor = ({setting, ...props}) => {
     
         <ProfileErrors errors={errors} />
         <Purchases purchases={purchases} roles={roles} />
+        </>}
+
       </Box>
     );
   };
