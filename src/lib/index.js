@@ -1,4 +1,3 @@
-export * from './admin-components'
 export * from './components'
 export * from './compositions'
 export * from './datasources'
