@@ -1,24 +1,27 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+// import IconButton from '@material-ui/core/IconButton';
+// import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
+// import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+// import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import MailIcon from '@material-ui/icons/Mail';
+// import NotificationsIcon from '@material-ui/icons/Notifications';
+// import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import * as JsSearch from 'js-search';
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    backgroundColor: "white"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -80,13 +83,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+
+export default function PrimarySearchAppBar({data, indexes, render}) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+
+  const [searchFunction, setSearchFunction] = useState(null)
+  const [query, changeQuery] = useState("")
+  const [filtered, setFiltered] = useState(data)
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+
+  const buildSearchIndex = () => {
+    /***
+     * https://github.com/bvaughn/js-search
+    */
+    const search = new JsSearch.Search('id');
+    search.sanitizer = new JsSearch.LowerCaseSanitizer();
+    search.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
+
+    if(Array.isArray(indexes)){
+      indexes.forEach(idx => search.addIndex(idx))
+      search.addDocuments(data)
+    }
+    setSearchFunction(search)
+  }
+ 
+  useEffect(()=>{
+    buildSearchIndex()
+  }, [])
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -104,6 +132,17 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+
+  const handleSearch = (e) => {
+    const value = e.target.value
+    changeQuery(value)
+    if(value.length>1){
+      setFiltered(searchFunction.search(value))
+    }else{
+      setFiltered(data)
+    }
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -148,17 +187,18 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
+    <>
     <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
+      <AppBar position="static" color="secondary" elevation={0}>
+        <Toolbar variant="dense">
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           {/* <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
           </Typography> */}
@@ -173,10 +213,13 @@ export default function PrimarySearchAppBar() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              value={query}
+              onChange={handleSearch}
+              fullWidth={true}
             />
           </div>
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          {/* <div className={classes.sectionDesktop}>
             <Button aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
@@ -188,8 +231,8 @@ export default function PrimarySearchAppBar() {
               </Badge>
             </Button>
          
-          </div>
-          <div className={classes.sectionMobile}>
+          </div> */}
+          {/* <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -199,11 +242,13 @@ export default function PrimarySearchAppBar() {
             >
               <MoreIcon />
             </IconButton>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
     </div>
+    {render(filtered)}
+    </>
   );
 }
