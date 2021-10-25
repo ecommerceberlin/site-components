@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PrimarySearchAppBar({data, indexes, render}) {
+export default function PrimarySearchAppBar({data, sort="", indexes, render}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -114,7 +114,7 @@ export default function PrimarySearchAppBar({data, indexes, render}) {
  
   useEffect(()=>{
     buildSearchIndex()
-  }, [])
+  }, [sort])
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
