@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PrimarySearchAppBar({data, sort="", indexes, render}) {
+export default function PrimarySearchAppBar({data, sort="company.name", indexes, render}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -101,7 +101,7 @@ export default function PrimarySearchAppBar({data, sort="", indexes, render}) {
     /***
      * https://github.com/bvaughn/js-search
     */
-    const search = new JsSearch.Search('id');
+    const search = new JsSearch.Search("id");
     search.sanitizer = new JsSearch.LowerCaseSanitizer();
     search.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
 

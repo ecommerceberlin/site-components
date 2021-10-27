@@ -44,7 +44,7 @@ import PartnerCreatives from './PartnerCreatives'
 });
 
 
-const PartnerPromo = ({id, icons, sidebar=null}) => {
+const PartnerPromo = ({id, icons, start=null, sidebar=null}) => {
    
    const classes = useStyles()
    const data = useDatasource({resource: "ranking"});
@@ -85,7 +85,7 @@ const PartnerPromo = ({id, icons, sidebar=null}) => {
       </Grid>
     </Grid>
 
-    
+    {start}
 
     <Box mt={5}>
     <Grid container spacing={6}>

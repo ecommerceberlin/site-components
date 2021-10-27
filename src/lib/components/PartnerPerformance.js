@@ -13,6 +13,7 @@ import Button from './MyButton';
 import Typography from '@material-ui/core/Typography';
 import isEmpty from 'lodash/isEmpty'
 import PartnerPrizes from './PartnerPrizes'
+import ToolBar from './ToolBar'
 
  const useStyles = makeStyles(theme => ({
   table: {
@@ -41,11 +42,12 @@ import PartnerPrizes from './PartnerPrizes'
 }));
 
 
-const PartnerPerformance = ({icons, limit=undefined}) => {
+const PartnerPerformance = ({icons, show_points=true, limit=undefined}) => {
    
    const classes = useStyles()
    const data = useDatasource({resource: "ranking", filters:{
-     limit: limit
+     limit: limit,
+     sort: !show_points? "name": undefined
    }});
    const [translate] = useTranslate()
 
@@ -54,18 +56,24 @@ const PartnerPerformance = ({icons, limit=undefined}) => {
     }
 
    return ( 
-    <Table className={classes.table} aria-label="simple table">
+    <ToolBar 
+      data={data} 
+      indexes={[
+        "name",
+        "slug"
+      ]}
+      render={(filtered) => (<Table className={classes.table} aria-label="simple table">
     <TableHead>
     <TableRow>
-    <TableCell align="center">{translate("common.position")}</TableCell>
+    {show_points && <TableCell align="center">{translate("common.position")}</TableCell>}
     <TableCell align="center">{translate("common.exhibitor")}</TableCell>
-    <TableCell align="right">{translate("common.points")}</TableCell>
+    {show_points && <TableCell align="right">{translate("common.points")}</TableCell>}
     <TableCell align="center">{translate("exhibitor.prizes.list")}</TableCell>
     {!limit && <TableCell></TableCell>}
     </TableRow>
     </TableHead>
-    <TableBody>{data.map((row) => (<TableRow key={row.id}>
-    <TableCell align="center"><Typography variant="h4" className={classes.grayed}>{row.stats.position}</Typography></TableCell>
+    <TableBody>{filtered.map((row) => (<TableRow key={row.id}>
+    {show_points && <TableCell align="center"><Typography variant="h4" className={classes.grayed}>{row.stats.position}</Typography></TableCell>}
     <TableCell align="center" width="200">
         <Grid container spacing={1} direction="column" alignItems="center">
         <Grid item>
@@ -77,14 +85,13 @@ const PartnerPerformance = ({icons, limit=undefined}) => {
         <Grid item>{row.name}</Grid>
         </Grid>
     </TableCell>
-    <TableCell align="right"><Typography variant="h5">{row.stats.sessions}</Typography></TableCell>
+    {show_points &&  <TableCell align="right"><Typography variant="h5">{row.stats.sessions}</Typography></TableCell>}
     <TableCell align="center"><PartnerPrizes active={row.stats.prizes} icons={icons} /></TableCell>
     {!limit && <TableCell><Button variant="outlined" href={`/companies/${row.company_id}`} label="common.details" /></TableCell>}
 
     </TableRow>))}
     </TableBody>
-    </Table>
-   )
+    </Table>)} />)
  }
 
 

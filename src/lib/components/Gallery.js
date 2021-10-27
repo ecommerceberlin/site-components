@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+import ImageList from '@material-ui/core/ImageList';
+import ImageListItem from '@material-ui/core/ImageListItem';
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
 import MyTypography from './MyTypography';
 import Red from './svg/Red'
@@ -106,20 +106,20 @@ const Gallery = (props) => {
   
       {/* <WidthAwareInfo /> */}
   
-      <GridList
+      <ImageList
         className={classes.gridList}
         cols={cols}
         cellHeight={300}
       >
         {items.map((item) => (
 
-        <GridListTile  key={item.src} cols={item.cols || 3}>
+        <ImageListItem  key={item.src} cols={item.cols || 3}>
         <img src={makeCloudinaryThumbnail(item.src)} alt="" className={classes.deSaturated} onClick={() => handleClick(item) } />
-        </GridListTile> 
+        </ImageListItem> 
 
         ))}
 
-      </GridList>
+      </ImageList>
     </div>
   
   )

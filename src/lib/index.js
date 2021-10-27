@@ -35,5 +35,6 @@ export { default as fetch } from 'isomorphic-unfetch'
 export { withRouter, useRouter } from 'next/router'
 export { default as YouTube } from 'react-player/youtube'
 export { default as Vimeo } from 'react-player/vimeo'
+export { default as useSWR } from 'swr'
 
 
