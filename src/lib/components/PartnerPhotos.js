@@ -35,13 +35,13 @@ const PhotosDownloadButton = ({id}) => {
   const [translate] = useTranslate()
   const { data, error } = useSWR(`/api/companies/${id}`, fetcher)
 
-  if(!data){
+  if(!data || error){
     return <CircularProgress />
   }
 
-  if(error || !("zip" in data) || !data.zip.includes("http")){
-    return <div>{translate("common.error")}</div>
-  }
+  // if(error || !("zip" in data) || !data.zip.includes("http")){
+  //   return <div>{translate("common.error")}</div>
+  // }
 
   return ( <Box m={2}>
     <Button label="exhibitors.photos.download" variant="contained" href={data.zip} size="large"  color="primary" />
@@ -65,20 +65,20 @@ const PartnerPhotos = ({id}) => {
 
   return (<Box mb={8}>
   <Grid spacing={8} container alignItems="center">
-    <Grid item>
+    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
     <Avatar variant="square" src={ resizeCloudinaryImage(get(company, "profile.logotype_cdn"), 300, 300) } classes={{
     root: classes.avatarContainer,
     img: classes.avatarImg
     }}/>
     </Grid>
-    <Grid item>
+    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
     </Grid>
   </Grid>
 
   <Grid spacing={8} container alignItems="center">
-  <Grid item>
+  <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
   <Markdown label="exhibitors.photos.description" /></Grid>
-  <Grid item>
+  <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
   <PhotosDownloadButton id={id} />
   </Grid>
   </Grid>
