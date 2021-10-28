@@ -96,6 +96,8 @@ export { default as Categories } from './Categories'
 
 export { default as PartnerPerformance } from './PartnerPerformance'
 export { default as PartnerPromo } from './PartnerPromo'
+export { default as PartnerPhotos } from './PartnerPhotos'
+
 
 export { default as ToolBar } from './ToolBar'
 export { default as List } from './List'
