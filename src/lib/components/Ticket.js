@@ -93,7 +93,7 @@ const Ticket = ({ icon = null, setting="premium", data }) => {
                 id={data.id} 
                 nonBookable={<span></span>} 
                 right={
-                    hasDetailsPage ? <SubPageButton color="default" variant="contained" target={jumpToDetails} /> : null
+                    null
                 }    
             /> : null}
         
