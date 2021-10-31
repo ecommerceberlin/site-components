@@ -24,7 +24,7 @@ const WidgetContestantCompaniesArchiveWinners = ({resolveLink, resolveTitle, res
 
     return (  <Wrapper {...wrapperProps}>
         <Box mt={8}>
-        <Grid  container justify={center ? 'center' : 'flex-start'}spacing={spacing}>
+        <Grid  container justifyContent={center ? 'center' : 'flex-start'} spacing={spacing}>
         {data.map((item) => (<AvatarlistCellProject 
                 key={item.id} 
                 title={  resolveTitle(item) } 
