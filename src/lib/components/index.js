@@ -101,6 +101,8 @@ export { default as PartnerPhotos } from './PartnerPhotos'
 
 export { default as ToolBar } from './ToolBar'
 export { default as List } from './List'
+export { default as CompanyCardSimple } from './CompanyCardSimple'
+
 
 
 export * from './Bookingmap';

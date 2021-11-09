@@ -54,7 +54,7 @@ const WidgetContestantCompany = ({show_votes, id, vote, status, asPath, classes,
 
         (record) => {
             
-            console.log(record)
+            // console.log(record)
 
             const product_name = _get(record, 'product_name', "");
             const difference = _get(record, 'difference', "");
