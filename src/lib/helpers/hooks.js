@@ -16,7 +16,7 @@ import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 
 import { useRouter } from 'next/router'
-import { FilteredDataSelector } from '../redux/selectors'
+import { FilteredDataSelector, SingleRecordSelector } from '../redux/selectors'
 import {useTranslate} from '../i18n'
 import Hashes from 'jshashes'
 import { v4 as uuidv4 } from 'uuid';
@@ -93,6 +93,19 @@ export const useDatasource = (query) => {
 
     return results;
 }
+
+export const useRecord = (endpoint, id) => {
+
+    const dispatch = useDispatch();
+    const results = useSelector((state) => SingleRecordSelector(state, {
+        endpoint, id
+    }))
+
+    useEffect(() => dispatch(resourceFetchRequest(`${endpoint}/${id}`)), [endpoint, id])
+
+    return results
+}
+
 
 export const useSettings = (_path = null, _fallback = undefined) => {
 
