@@ -409,6 +409,11 @@ export const getTicketsSortedByStart = createSelector(
   (tickets) => sortBy(tickets, ['start'])
 )
 
+export const getTicketsSortedByEnd = createSelector(
+  getNonPastTickets,
+  (tickets) => sortBy(tickets, ['end'])
+)
+
 
 export const BookingMapResourcesSelector = createSelector(
   KeyedFormdataSelector,
