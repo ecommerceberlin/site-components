@@ -20,9 +20,10 @@ const GridBenefits = ({setting, ...props}) => {
 
   return (<Grid  container spacing={8}>{items && items.map( ({label, icon}) => {
     const IconComponent = icon in icons ?  icons[icon]: Event;
+    const key = `${baseLabel}.${label}`
     return ( 
-      <Grid item xs={12} sm={6} md={6} lg={4} xl={4}>
-        <GridBenefitsItem setting={setting} key={label} label={`${baseLabel}.${label}`} icon={
+      <Grid key={key} item xs={12} sm={6} md={6} lg={4} xl={4}>
+        <GridBenefitsItem setting={setting} label={key} icon={
           <IconComponent key={label} style={{color: iconColor, fontSize: iconSize}} /> 
         }  />
       </Grid>

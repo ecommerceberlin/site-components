@@ -105,6 +105,13 @@ const styles = {
     borderColor: "#004500"
   },
 
+  ultra: {
+    backgroundColor: "#358234",
+    color :  "#ffffff",
+    borderColor: "#004500"
+  },
+
+
   grand: {
     backgroundColor: "#358234",
     color :  "#ffffff",
