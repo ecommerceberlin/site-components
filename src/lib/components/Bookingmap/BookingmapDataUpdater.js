@@ -13,14 +13,21 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
     const cartItems = useSelector(CartItemsSelector)
 
     useEffect(() => {
+
         if(interacted || cartItems){
             const pusher = new Pusher("ef91111f814df12adcef", {
                 cluster: "eu",
             });
             var channel = pusher.subscribe('eventjuicer');
+
             channel.bind('NewLockWasCreated', function({data}){
                 dispatch(resourceFetchSuccess("blockings", data))
             });
+
+            channel.bind('NewItemPurchased', function(){
+               dispatch(resourceFetchRequest(["formdata", "ticketgroups"]))
+            });
+
             return () => pusher.unsubscribe("eventjuicer")
         }
     }, [interacted, cartItems]);
@@ -28,7 +35,7 @@ const BookingmapDataUpdater = ({autorefresh = 30}) => {
     useEffect(() => {
         if(interacted || cartItems){
             const interval = setInterval(() => {
-                dispatch(resourceFetchRequest(["formdata", "blockings"]))
+                dispatch(resourceFetchRequest(["formdata", "blockings", "ticketgroups"]))
             }, autorefresh * 1000);
             return () => clearInterval(interval);
         }
