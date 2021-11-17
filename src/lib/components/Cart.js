@@ -14,6 +14,7 @@ import TicketName from './Bookingmap/TicketName'
 import TicketVariant from './Bookingmap/TicketVariant'
 import TicketTotal from './Bookingmap/TicketTotal'
 import Box from '@material-ui/core/Box'
+import Alert from './Alert'
 
 const useStyles = makeStyles(theme => ({
 
@@ -73,7 +74,13 @@ const Cart = ({setting, ...props}) => {
   }
 
 
-  return (<Paper className={classes.root}>{Object.keys(cart).map(ticket_id => {
+  return (<Paper className={classes.root}>
+
+    <Box mb="2">
+    <Alert type="warning" label="ecommerce.cart.blocking" />
+    </Box>
+    
+    {Object.keys(cart).map(ticket_id => {
 
     const {quantity, formdata} = cart[ticket_id]
     const ticket = tickets && ticket_id in tickets? tickets[ticket_id]: {}
