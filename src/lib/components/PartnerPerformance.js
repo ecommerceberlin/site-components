@@ -49,7 +49,8 @@ const PartnerPerformance = ({icons, event_id=null, show_points=true, limit=undef
    ...(event_id? {params: {event_id}}: {}),
    filters:{
      limit: limit,
-     sort: show_points? "stats.sessions": "slug"
+     sort: show_points? "stats.sessions": "slug",
+     dir: show_points? "DESC": "ASC"
    }});
    const [translate] = useTranslate()
 
