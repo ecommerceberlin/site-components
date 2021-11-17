@@ -116,7 +116,7 @@ export const filterFuncFromArr = (arr) => {
 }
 
 
-export const processArrayData = (data = [], { sort = null, filter = null, limit = null, random = null, skip = 0 }) => {
+export const processArrayData = (data = [], { sort = null, dir="ASC", filter = null, limit = null, random = null, skip = 0 }) => {
   
   if (!Array.isArray(data)) {
     return [];
@@ -128,7 +128,12 @@ export const processArrayData = (data = [], { sort = null, filter = null, limit 
   }
 
   if(sort){
-    data.sort((a, b) => collator.compare(_get(a, sort), _get(b, sort)))
+
+    if(dir && dir.toUpperCase() === "DESC"){
+      data.sort((a, b) => collator.compare(_get(b, sort), _get(a, sort)))
+    }else{
+      data.sort((a, b) => collator.compare(_get(a, sort), _get(b, sort)))
+    }
   }
 
 
