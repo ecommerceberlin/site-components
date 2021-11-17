@@ -34,10 +34,7 @@ const defaultProps = {
   disabled : false
 };
 
-const ecommerceDefaultProps = {
-  show_dates: true,
-  use_old_ecommerce_module: false
-}
+
 
 const Ticket = ({setting, ticket, boothId, label, ...props}) => {
 
@@ -45,9 +42,6 @@ const Ticket = ({setting, ticket, boothId, label, ...props}) => {
   const settings = useSettings(setting, {})
   // const {use_old_ecommerce_module} = useSettings("system")
   const {ecommerce, disabled, use_old_ecommerce_module} = Object.assign({}, defaultProps, settings, props)
-
-  const ecommerceSettings = useSettings(ecommerce, {});
-  const {show_dates} = Object.assign({}, ecommerceDefaultProps, ecommerceSettings)
 
   if(!ticket){
     return null
@@ -68,7 +62,13 @@ const Ticket = ({setting, ticket, boothId, label, ...props}) => {
           <strong><TicketName names={ticket.names} group_id={ticket.group_id} baseLabel={ticket.translation_asset_id} /></strong>
         </Box>
         <Box mb={1}>
-         {show_dates && <TicketDate start={ticket.start} end={ticket.end} inDates={ticket.in_dates} />}
+         <TicketDate
+            setting={ecommerce}
+            start={ticket.start} 
+            end={ticket.end} 
+            bookable={ticket.bookable} 
+            isFuture={(ticket.errors || []).includes("future")}
+          />
         </Box>
         {/* <Box mb={1}>
          
