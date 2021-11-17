@@ -159,6 +159,8 @@ function* accumulateFetches({resource, reload}) {
 
 function* fetchAccumulatedFetches(endpoint, reload){
 
+  const nonProxyableResources = ["blockings", "formdata", "ticketgroups", "tickets"]
+
   let response;
   //check if we have params...
   const resource = endpoint.split("?")[0]
@@ -180,12 +182,13 @@ function* fetchAccumulatedFetches(endpoint, reload){
     // return
   }
 
+  //is the endpoint proxyable???
 
   const settings = yield select(Selectors.getSettings) 
   const {api, proxy} = get(settings, "system")
 
   //do we use proxy???
-  if(proxy && proxy.includes("http")){
+  if(proxy && proxy.includes("http") && !nonProxyableResources.some(res => endpoint.includes(res))){
     response = yield call(fetch, `${proxy}${encodeURIComponent(`${api}/${endpoint}`)}`)
   }else{
     response = yield call(fetch, `${api}/${endpoint}`)
