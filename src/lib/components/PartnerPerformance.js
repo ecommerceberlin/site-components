@@ -42,12 +42,14 @@ import ToolBar from './ToolBar'
 }));
 
 
-const PartnerPerformance = ({icons, show_points=true, limit=undefined}) => {
+const PartnerPerformance = ({icons, event_id=null, show_points=true, limit=undefined}) => {
    
    const classes = useStyles()
-   const data = useDatasource({resource: "ranking", filters:{
+   const data = useDatasource({resource: "ranking", 
+   ...(event_id? {params: {event_id}}: {}),
+   filters:{
      limit: limit,
-     sort: !show_points? "name": undefined
+     sort: show_points? "stats.sessions": "slug"
    }});
    const [translate] = useTranslate()
 
