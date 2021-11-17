@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
   },
   bookable : {
     backgroundColor : green[100],
+    borderColor: green[500],
+    borderStyle: "solid",
+    borderWidth: 1
   },
   nonbookable : {
     color : '#444444'

@@ -6,7 +6,7 @@ import BoothDialogContainer from './BoothDialogContainer'
 import BoothOrderSteps from './BoothOrderSteps'
 import { useSettings, capitalizeFirstLetter } from '../../helpers'
 import isString from 'lodash/isString'
-
+import Alert from '../Alert'
 
 import {
   Power as Electricity,
@@ -84,8 +84,9 @@ const BoothIsAvailable = ({setting,  ...props}) => {
       <React.Fragment>
         <div >
   
-    <Typography template="salesInfo" icon={ Info } label="event.sales.pool.info" />
-  
+    <Alert type="info" label="event.sales.pool.info" />
+
+    
     <TicketGroup
       setting={setting}
       {...props}
