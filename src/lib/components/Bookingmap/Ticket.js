@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor : green[100],
   },
   nonbookable : {
-    color : '#666666'
+    color : '#444444'
   }
 }));
 
@@ -36,7 +36,7 @@ const defaultProps = {
 
 
 
-const Ticket = ({setting, ticket, boothId, label, ...props}) => {
+const Ticket = ({setting, total=0, paid=0, cheapest=false, ticket, boothId="", label="", ...props}) => {
 
   const classes = useStyles();
   const settings = useSettings(setting, {})
@@ -51,7 +51,7 @@ const Ticket = ({setting, ticket, boothId, label, ...props}) => {
 
     <div className={classNames(
       classes.ticket,
-      ticket.bookable ? classes.bookable : classes.nonbookable
+      cheapest ? classes.bookable : classes.nonbookable,
       )}>
 
     {/* {ticket.translation_asset_id ? <Box mb={1}><strong>{translate(ticket.translation_asset_id)}</strong></Box>: null}   */}
@@ -59,27 +59,37 @@ const Ticket = ({setting, ticket, boothId, label, ...props}) => {
     <Grid container spacing={2} alignItems="center">
       <Grid item xs={12} sm={12} md={6}>
         <Box mb={1}>
-          <strong><TicketName names={ticket.names} group_id={ticket.group_id} baseLabel={ticket.translation_asset_id} /></strong>
+          <strong>
+            <TicketName 
+              names={ticket.names} 
+              group_id={ticket.group_id} 
+              baseLabel={ticket.translation_asset_id} 
+              />
+          </strong>
         </Box>
         <Box mb={1}>
-         <TicketDate
-            setting={ecommerce}
-            start={ticket.start} 
-            end={ticket.end} 
-            bookable={ticket.bookable} 
-            isFuture={(ticket.errors || []).includes("future")}
+          <TicketRemainingInfo 
+          setting={ecommerce}
+          bookable={ticket.bookable} 
+          remaining={ticket.remaining} 
+          isFuture={(ticket.errors || []).includes("future")}
           />
         </Box>
-        {/* <Box mb={1}>
-         
-        </Box> */}
+        <Box mb={1}>
+          <TicketDate
+          setting={ecommerce}
+          start={ticket.start} 
+          end={ticket.end} 
+          bookable={ticket.bookable} 
+          isFuture={(ticket.errors || []).includes("future")}
+          />
+        </Box>
       </Grid>
       <Grid item xs={12} sm={6} md={2}>
         <TicketPrice price={ticket.price} />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
        {use_old_ecommerce_module ? <TicketBuyButton formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled }  />: <TicketBuyButtonNew formdata={{ti: label, id: boothId}} id={ticket.id} bookable={ticket.bookable && !disabled } />} 
-       <TicketRemainingInfo isBookable={ticket.bookable} remaining={ticket.remaining} />
       </Grid>
     </Grid>
   </div>);
