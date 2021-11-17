@@ -47,6 +47,8 @@ const Ticket = ({setting, total=0, paid=0, cheapest=false, ticket, boothId="", l
     return null
   }
 
+  // const enabled = parseInt(total) === parseInt(paid)? cheapest: ticket.bookable;
+
   return (
 
     <div className={classNames(

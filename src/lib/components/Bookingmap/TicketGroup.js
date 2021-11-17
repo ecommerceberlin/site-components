@@ -46,7 +46,7 @@ const TicketGroup = ({setting, groupId, boothId, label, status, ...props}) => {
     return !isNaN(get(item, "price.pl", ""))? parseInt(get(item, "price.pl", 0)): parseInt(get(item, "price.en", 0))   
   }))
 
-  return notDisabled.map(ticket => (<Ticket total={allBookable} paid={paidTickets} cheapest={cheapest && cheapest.id == ticket.id} key={ticket.id} setting={setting} ticket={ticket} boothId={boothId} label={label} />))
+  return notDisabled.map(ticket => (<Ticket total={allBookable.length} paid={paidTickets.length} cheapest={cheapest && cheapest.id == ticket.id} key={ticket.id} setting={setting} ticket={ticket} boothId={boothId} label={label} />))
 }
 
 export default TicketGroup
