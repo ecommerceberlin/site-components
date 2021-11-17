@@ -1,10 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { translate } from '../../i18n';
+import { useTranslate } from '../../i18n';
+import { useSettings } from '../../helpers'
 
-const TicketRemainingInfo = ({remaining, isBookable, translate}) => {
 
-  if(!isBookable){
+const ecommerceDefaultProps = {
+  
+}
+
+const TicketRemainingInfo = ({setting="ecommerce", remaining=0, bookable=false, isFuture=false}) => {
+
+  const ecommerceSettings = useSettings(setting, {});
+  // const {show_start, show_end} = Object.assign({}, ecommerceDefaultProps, ecommerceSettings)
+  const [translate] = useTranslate()
+
+  if(!bookable && !isFuture){
     return null
   }
 
@@ -12,14 +21,5 @@ const TicketRemainingInfo = ({remaining, isBookable, translate}) => {
 
 }
 
-TicketRemainingInfo.defaultProps = {
-  isBookable : false,
-  remaining : 0
-}
 
-TicketRemainingInfo.propTypes = {
-  isBookable : PropTypes.number.isRequired,
-  remaining : PropTypes.number.isRequired
-}
-
-export default translate(TicketRemainingInfo)
+export default TicketRemainingInfo

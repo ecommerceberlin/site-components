@@ -414,6 +414,13 @@ export const getTicketsSortedByEnd = createSelector(
   (tickets) => sortBy(tickets, ['end'])
 )
 
+export const getTicketsSortedByPrice = createSelector(
+  getNonPastTickets,
+  (tickets) => sortBy(tickets, function(ticket){
+    //TODO: baseprice
+    return !isNaN(get(ticket, "price.pl", ""))? parseInt(get(ticket, "price.pl", 0)): parseInt(get(ticket, "price.en", 0))   
+  })
+)
 
 export const BookingMapResourcesSelector = createSelector(
   KeyedFormdataSelector,
