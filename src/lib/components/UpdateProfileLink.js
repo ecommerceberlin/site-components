@@ -44,15 +44,17 @@ const UserLogoutButton = ({onClick, label= 'common.logout', buttonProps = button
 
 const UpdateProfileLink = ({ setting = "appbar.profile" }) => {
 
-    const settings = useSettings();
-    const currentUser = useUserData();
+    const modes = useSettings(setting);
     const logout = useUserLogout();
     const classes = useStyles();
 
-    //end of hooks
-    const modes = settings(setting)
+    if(isEmpty(modes) || !Array.isArray(modes)){
+      return null
+    }
 
-    if(isEmpty(modes) || !Array.isArray(modes) || !currentUser){
+    const currentUser = useUserData();
+
+    if(!currentUser){
       return null
     }
 
