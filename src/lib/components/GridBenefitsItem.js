@@ -5,6 +5,9 @@ import Markdown from './Markdown'
 import { useDialog, useSettings } from '../helpers'
 import { useTranslate } from '../i18n'
 import isFunction from 'lodash/isFunction'
+import MyButton from './MyButton'
+import isEmpty from 'lodash/isEmpty';
+import Box from '@material-ui/core/Box'
 
 const defaultProps = {
   dense: false
@@ -50,7 +53,16 @@ const GridBenefitsItemContentDescription = ({onClick=null, label=""}) => {
 }
 
 
-const GridBenefitsItemContent = ({onClick=null, icon, label=""}) => {
+const GridBenefitsItemIcons = ({buttons}) => {
+
+  if(isEmpty(buttons) || !Array.isArray(buttons)){
+    return null
+  }
+
+  return <Box mt={2}>{buttons.map(({href, label}) => <MyButton variant="contained" color="secondary" label={label} href={href} />)}</Box>
+}
+
+const GridBenefitsItemContent = ({onClick=null, icon, label="", buttons=[]}) => {
   const classes = useStyles()
   const [translate] = useTranslate()
   
@@ -60,13 +72,15 @@ const GridBenefitsItemContent = ({onClick=null, icon, label=""}) => {
     <div className={classes.texts}>
       <Typography variant="h5" gutterBottom>{translate(`${label}.title`)}</Typography>
       <GridBenefitsItemContentDescription label={label} onClick={onClick} />
+      <GridBenefitsItemIcons buttons={buttons} />
     </div>
+   
   </div>)
 
 }
 
 
-const GridBenefitsItem = ({setting, icon, label="", ...otherProps}) => {
+const GridBenefitsItem = ({setting, icon, buttons=[], label="", ...otherProps}) => {
 
     const settings = useSettings(setting)
     const dialog = useDialog();
@@ -76,6 +90,7 @@ const GridBenefitsItem = ({setting, icon, label="", ...otherProps}) => {
       <GridBenefitsItemContent 
         icon={icon} 
         label={label} 
+        buttons={buttons}
         onClick={() => dialog({
           label: "",
           content: <GridBenefitsItemContent icon={icon} label={label} />
