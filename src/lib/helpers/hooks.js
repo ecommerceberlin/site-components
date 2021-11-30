@@ -137,32 +137,34 @@ export const useSavedToken = () => {
 
 }
 
-export const useUserData = () => {
+export const useTransactions = (type = "profile_updated") => {
+    const transactions = useSelector(state => state.transactions.forms)
+    return Array.isArray(transactions) ? transactions.filter(item => item.action == type) : []
+}
 
-    const [updates, setUpdates] = useState(0);
+export const useUserData = (doFetch = true) => {
+
+   // const [updates, setUpdates] = useState(0);
     const token = useSelector(state => state.app.token)
     const currentUser = useSelector(state => state.resources.currentUser)
-    const transactions = useSelector(state => state.transactions.forms)
+    const {service_api} = useSettings("system", {})
+    const transactions = useTransactions("profile_updated");
 
-    const filteredTransactions = transactions.filter(item => item.action == "profile_updated")
-    const settings = useSelector(state => state.settings)
     const dispatch = useDispatch();
 
     useEffect(()=>{
 
-        const api = get(settings, "system.service_api")
-
         const fetchTokenAndSetUser = async () => {
-            const data = await getUserByToken(api, token)
+            const data = await getUserByToken(service_api, token)
             dispatch(resourceFetchSuccess("currentUser", data));
         }
         
-        if(api &&  (!currentUser || !("token" in currentUser) || currentUser.token != token)){
+        if(service_api &&  (!currentUser || !("token" in currentUser) || currentUser.token != token)){
             fetchTokenAndSetUser();
             //setUpdates(updates+1);
         }
       
-    }, [token, filteredTransactions])
+    }, [token, transactions])
 
     return currentUser;
     

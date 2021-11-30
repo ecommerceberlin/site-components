@@ -47,12 +47,7 @@ const UpdateProfileLink = ({ setting = "appbar.profile" }) => {
     const modes = useSettings(setting);
     const logout = useUserLogout();
     const classes = useStyles();
-
-    if(isEmpty(modes) || !Array.isArray(modes)){
-      return null
-    }
-
-    const currentUser = useUserData();
+    const currentUser = useUserData( !isEmpty(modes) && Array.isArray(modes) );
 
     if(!currentUser){
       return null
