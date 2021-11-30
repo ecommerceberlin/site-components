@@ -4,6 +4,7 @@ import { useTranslate } from '../i18n';
 import {useRouter} from 'next/router'
 import isFunction from 'lodash/isFunction'
 import { makeStyles } from '@material-ui/core/styles';
+import isString from 'lodash/isString'
 
 const useStyles = makeStyles(theme => ({
   textLink: {
@@ -19,7 +20,7 @@ const MyButton = ({ label="no label prop", href, className, ...rest }) => {
   const classes = useStyles();
 
   //automagically handle internal routing...
-  if(href && !href.startsWith("http")){
+  if(href && isString(href) && !href.startsWith("http")){
     let oldOnclick = function(){}
     if("onClick" in rest && isFunction(rest.onClick)){
       oldOnclick = rest.onClick
