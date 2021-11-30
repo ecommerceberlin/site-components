@@ -35,6 +35,7 @@ const WidgetContestantCompanies = ({
     path_to_category, 
     renderAs, 
     resolveSelected,
+    link,
     ...wrapperProps
 }) => {
 
@@ -86,15 +87,42 @@ const WidgetContestantCompanies = ({
 
             {keyword && renderAs==="table" && <TableList 
             rows={data}
+
+
             columns={[
-                // {name: "position", render: (row, position) => position < 11 ? <div style={{backgroundColor: 'green'}}></div> : null},
-                {name: "logotype", render: (row)=> {
-                    return <Publisher logotype={get(row, "profile.logotype_cdn")} transparent={true} link={`/vote/${data.id}`} />
-                }},
-                {name: "cname2_and_project_name", render: (row) => <><Typography variant="h6">{get(row, "profile.project_name")}</Typography><div>by <Typography display="inline" variant="subtitle1">{get(row, 'profile.cname2')}</Typography></div></> },
-                show_votes?  {name: "votes", render: (row) => `${row.votes || 0} votes`, style: "big", align: "center"}: null,
-                {name: "details", render: "link", link: (row) => ({as: `/vote/${row.id}`, href: "/vote/[id]"}), label: "common.vote_details", variant: "outlined"}
+                {name: "position", render: (row, position) => position < 6 ? <div style={{backgroundColor: 'green'}}></div> : null},
+               
+                {name: "descriptions", render: [
+                    {name: "logotype", align: "center", breakpoints:{xs: 12, md: 3, lg: 2}, render: (row)=> {
+                        return <Publisher logotype={get(row, "profile.logotype_cdn")} transparent={true} link={link(row)} />
+                    }},
+                    {name: "cname2_and_project_name", style: "big", breakpoints:{xs: 12, md: 5, lg: 6}, render: (row) => <><Typography variant="h6">{get(row, "profile.project_name")}</Typography><div>by <Typography display="inline" variant="subtitle1">{get(row, 'profile.cname2')}</Typography></div></>},
+                    // {name: "secondary_info", container:{ justify:"flex-start",  alignItems:"center"}, breakpoints:{xs: 12, md: 3, lg: 3}, render: [
+
+                    //     {name: "avatar", render: "avatar", breakpoints:{
+                    //         xs: 12, sm: 4, md: 3
+                    //     }},
+                    //     {name: "presenter_details", render: (row) => <React.Fragment><div>{row.presenter}</div><div>{row.position}{' '}<strong>{row.cname2}</strong></div> </React.Fragment>, breakpoints:{
+                    //         xs: 12, sm: 8, md: 9
+                    //     }},
+                        
+                    // ] },
+                    {name: "details", render: "link", link, label: "common.vote_details", color: "primary", variant: "outlined", breakpoints:{xs: 12, md: 1, lg: 1}}
+                ]},
+                   
+                {name: "votes", render: (row) => show_votes? row.votes: "", style: "big", align: "center"},
             ]}
+
+
+            // columns={[
+            //     // {name: "position", render: (row, position) => position < 11 ? <div style={{backgroundColor: 'green'}}></div> : null},
+            //     {name: "logotype", render: (row)=> {
+            //         return <Publisher logotype={get(row, "profile.logotype_cdn")} transparent={true} link={`/vote/${data.id}`} />
+            //     }},
+            //     {name: "cname2_and_project_name", render: (row) => <><Typography variant="h6">{get(row, "profile.project_name")}</Typography><div>by <Typography display="inline" variant="subtitle1">{get(row, 'profile.cname2')}</Typography></div></> },
+            //     show_votes?  {name: "votes", render: (row) => `${row.votes || 0} votes`, style: "big", align: "center"}: null,
+            //     {name: "details", render: "link", link: (row) => `/vote/${row.id}`, label: "common.vote_details", variant: "outlined"}
+            // ]}
             selected={resolveSelected}
             // link={link} 
             // title={item =>  }
@@ -148,6 +176,8 @@ WidgetContestantCompanies.defaultProps = {
     spacing : 5,
     renderAs: "avatarlist",
     resolveSelected: (row, i) => i < 10,
+    link : function(item){ return  `/vote/${item.id}` },
+
 }
 
 
