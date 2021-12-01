@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import {
     resourceFetchRequest, 
@@ -79,7 +79,13 @@ export const useBlocking =  () => {
     })
 }
 
-
+export const usePrevious = (value) => {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+}
 
 export const useDatasource = (query) => {
 
@@ -87,9 +93,9 @@ export const useDatasource = (query) => {
     const dispatch = useDispatch();
     const results = useSelector((state) => FilteredDataSelector(state, query))
     /**
-     * run only once
+     * run only once per set of params
      */
-    useEffect(() => dispatch(resourceFetchRequest(query)), [params])
+    useEffect(() => dispatch(resourceFetchRequest(query)), [JSON.stringify(params)])
 
     return results;
 }
