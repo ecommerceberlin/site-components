@@ -53,13 +53,13 @@ const GridBenefitsItemContentDescription = ({onClick=null, label=""}) => {
 }
 
 
-const GridBenefitsItemIcons = ({buttons}) => {
+const GridBenefitsItemIcons = ({baseLabel, buttons}) => {
 
   if(isEmpty(buttons) || !Array.isArray(buttons)){
     return null
   }
 
-  return <Box mt={2}>{buttons.map(({href, label}) => <MyButton variant="contained" color="secondary" label={label} href={href} />)}</Box>
+  return <Box mt={2}>{buttons.map(({href, label}) => <MyButton key={`${baseLabel}${label}`} variant="contained" color="secondary" label={label} href={href} />)}</Box>
 }
 
 const GridBenefitsItemContent = ({onClick=null, icon, label="", buttons=[]}) => {
@@ -72,7 +72,7 @@ const GridBenefitsItemContent = ({onClick=null, icon, label="", buttons=[]}) => 
     <div className={classes.texts}>
       <Typography variant="h5" gutterBottom>{translate(`${label}.title`)}</Typography>
       <GridBenefitsItemContentDescription label={label} onClick={onClick} />
-      <GridBenefitsItemIcons buttons={buttons} />
+      <GridBenefitsItemIcons baseLabel={label} buttons={buttons} />
     </div>
    
   </div>)
