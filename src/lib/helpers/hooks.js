@@ -113,26 +113,21 @@ export const useRecord = (endpoint, id) => {
 }
 
 
-export const useSettings = (_path = null, _fallback = undefined) => {
+export const useSettings = (path = null, fallback = undefined) => {
 
     const settings = useSelector(state => state.settings)
 
-    const func = (path, fallback = undefined) => {
+    const out = get(settings, path, undefined)
 
-        const out = get(settings, path, undefined)
-
-        if(out !== undefined){
-            return out
-        }
-
-        if(fallback !== undefined){
-            return fallback
-        }
-
-        return path
+    if(out !== undefined){
+        return out
     }
-    
-    return _path? func(_path, _fallback): func;
+
+    if(fallback !== undefined){
+        return fallback
+    }
+
+    return null
 }
 
 export const useSavedToken = () => {
