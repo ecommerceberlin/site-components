@@ -50,7 +50,7 @@ const defaultProps = {
 const Presentation = ({setting, ...props}) => {
 
   const classes = useStyles(props)();
-  const settings = useSettings();
+  const settings = useSettings(setting);
 
   const {
     title,
