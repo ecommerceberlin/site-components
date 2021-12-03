@@ -127,7 +127,7 @@ export const useSettings = (path = null, fallback = undefined) => {
         return fallback
     }
 
-    return null
+    return {}
 }
 
 export const useSavedToken = () => {
