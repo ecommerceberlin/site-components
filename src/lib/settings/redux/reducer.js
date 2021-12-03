@@ -1,3 +1,4 @@
+import merge from 'lodash/merge'
 
 import {
   SETTINGS_SET
@@ -13,7 +14,7 @@ const reducer = (state = initialState, action) => {
 
   switch (type) {
     case SETTINGS_SET:
-      return { ...state, ...payload };
+      return Object.assign({}, merge(state, payload))
     break;
 
     default:
