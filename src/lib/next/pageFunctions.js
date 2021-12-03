@@ -5,6 +5,8 @@ import {resourceFetchRequest} from '../components/redux/actions'
 import {setSettings} from '../settings/redux/actions'
 import {changeLocale} from '../i18n'
 import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
+import merge from 'lodash/merge'
 
 async function configure(props, config){
 
@@ -18,11 +20,24 @@ async function configure(props, config){
    * */
   const store = "store" in props ? props.store : props;
 
-  const {settings, preload, cache} = config
+  const {settings, preload, cache, externalSettings} = config
 
   const state = store.getState();
 
-  if(settings){
+  if(externalSettings && Array.isArray(externalSettings)){
+
+    Promise.allSettled(externalSettings.map(arr => fetch(arr).then(response => response.json()))).then(data => {
+      const obj = {}
+      data.forEach((p, i)=> {
+        if(p.status == "fulfilled"){
+          obj[externalSettings[i]] = p.value
+        }
+      })
+      store.dispatch(setSettings(obj))
+    })
+  }
+
+  if(settings && !isEmpty(settings)){
     store.dispatch(setSettings(settings))
   }
 
