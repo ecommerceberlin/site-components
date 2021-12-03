@@ -18,4 +18,5 @@ export { default as DatasourceCallForPapers } from './CallForPapers';
 export { default as DatasourceContestantCompanies } from './ContestantCompanies';
 export { default as DatasourceVotes } from './Votes';
 export { default as CachableDatasource } from './CachableDatasource';
+export { default as ExternalSettings } from './ExternalSettings';
 export { default as DatasourceUrl } from './Url';
