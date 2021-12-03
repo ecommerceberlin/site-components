@@ -111,7 +111,7 @@ function MyAppBar({setting="appbar", ...props}) {
   const dispatch = useDispatch()
   const classes = useStyles()
   const settings = useSettings(setting)
-  const {event_name} = useSettings("common")
+  const {event_name} = useSettings("common", {})
   const {logotype, links, position} = Object.assign({}, defaultProps, settings, props)
 
  
