@@ -19,6 +19,8 @@ export async function handleCors(req, res){
     // Initializing the cors middleware
     const cors = Cors({
         methods: ['GET', 'HEAD'],
+        origin: "*",
+        credentials: true,
     })
 
     await runMiddleware(req, res, cors)
