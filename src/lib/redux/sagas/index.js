@@ -296,6 +296,12 @@ function* handleVoteStatus(actionData){
 
   if (response.ok && response.status >= 200 && 'data' in json) {
     yield put(votingStatusSuccess(json.data));
+
+    //save profile!
+    if("meta" in json && "profile" in json.meta){
+      yield put(resourceFetchSuccess("currentLinkedinUser", json.meta.profile))
+    }
+
   } else {
     if("error" in json && "message" in json.error){
       yield put(votingStatusError(json.error));
