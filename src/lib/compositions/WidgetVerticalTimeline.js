@@ -1,49 +1,50 @@
 import React from 'react'
 import moment from 'moment';
-import 'moment/locale/de' 
+import 'moment/locale/de'
+import 'moment/locale/pl'
+
 import Event from '@material-ui/icons/Event'
 
-import { translate } from '../i18n';
+import { useTranslate } from '../i18n';
+import { useSettings } from '../helpers/hooks'
+
 import VerticalTimeline from '../components/VerticalTimeline'
-import Settings from '../datasources/Settings'
 
 
 
-function WidgetVerticalTimeline({translate, locale, setting, icons}){
+const defaultProps = {
+    icons: {},
+    baseLabel: ""
+}
 
-    return (<Settings>{(get) => {
 
-            moment.locale(locale)
+function WidgetVerticalTimeline({setting="cfptimeline", ...props}){
 
-            const {baseLabel, items, iconSize} = get(setting, {})
+    const settings = useSettings(setting)
+    const [translate, locale] = useTranslate()
+    const {baseLabel, items, iconSize, icons} = Object.assign({}, defaultProps, settings, props)
+    
+    moment.locale(locale)
 
-            const _baseLabel = baseLabel ? `${baseLabel}.` : ""
+    const _baseLabel = baseLabel ? `${baseLabel}.` : ""
 
-            const translatedItems = (items || []).map(({name, date, icon, ...rest}) => {
+    const translatedItems = (items || []).map(({name, date, icon, ...rest}) => {
 
-                const IconComponent = icon in icons && icons[icon] ? icons[icon]: Event;
+        const IconComponent = icon in icons && React.isValidElement(icons[icon]) ? icons[icon]: Event;
 
-                return ({  
-                    ...rest, 
-                    date: moment(date).format("LL"),
-                    title: translate(`${_baseLabel}${name}.title`), 
-                    description: translate(`${_baseLabel}${name}.description`),
-                    icon: <IconComponent style={{fontSize: iconSize}} />
-               })
+        return ({  
+            ...rest, 
+            date: moment(date).format("LL"),
+            title: translate(`${_baseLabel}${name}.title`), 
+            description: translate(`${_baseLabel}${name}.description`),
+            icon: <IconComponent style={{fontSize: iconSize}} />
+       })
 
-            })
+    })
 
-            return <VerticalTimeline items={translatedItems} />
-
-        }
-    }</Settings>)
-
+    return <VerticalTimeline items={translatedItems} />
   
 }
 
-WidgetVerticalTimeline.defaultProps = {
-    setting: "cfptimeline",
-    icons: {}
-}
 
-export default translate(WidgetVerticalTimeline)
+export default WidgetVerticalTimeline
