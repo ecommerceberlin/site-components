@@ -2,20 +2,23 @@ import React, {useState, useEffect} from 'react';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-// import IconButton from '@material-ui/core/IconButton';
-// import Typography from '@material-ui/core/Typography';
+
 import InputBase from '@material-ui/core/InputBase';
-// import Badge from '@material-ui/core/Badge';
+import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
+import * as JsSearch from 'js-search';
+import { isFunction } from 'lodash';
+
+// import IconButton from '@material-ui/core/IconButton';
+// import Typography from '@material-ui/core/Typography';
 // import AccountCircle from '@material-ui/icons/AccountCircle';
 // import MailIcon from '@material-ui/icons/Mail';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 // import MoreIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
-import * as JsSearch from 'js-search';
+// import MenuIcon from '@material-ui/icons/Menu';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -69,22 +72,26 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
+  buttons: {
     display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
   },
+
+  // sectionDesktop: {
+  //   display: 'none',
+  //   [theme.breakpoints.up('md')]: {
+  //     display: 'flex',
+  //   },
+  // },
+  // sectionMobile: {
+  //   display: 'flex',
+  //   [theme.breakpoints.up('md')]: {
+  //     display: 'none',
+  //   },
+  // },
 }));
 
 
-export default function PrimarySearchAppBar({data, sort="company.name", indexes, render}) {
+function ToolBar({data, indexes, onSearch, buttons=null}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -97,24 +104,56 @@ export default function PrimarySearchAppBar({data, sort="company.name", indexes,
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
 
-  const buildSearchIndex = () => {
-    /***
-     * https://github.com/bvaughn/js-search
-    */
-    const search = new JsSearch.Search("id");
-    search.sanitizer = new JsSearch.LowerCaseSanitizer();
-    search.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
-
-    if(Array.isArray(indexes)){
-      indexes.forEach(idx => search.addIndex(idx))
-      search.addDocuments(data)
-    }
-    setSearchFunction(search)
-  }
  
   useEffect(()=>{
     buildSearchIndex()
-  }, [sort])
+  }, [])
+
+  useEffect(() => {
+    if(query.length>1){
+      setFiltered(searchFunction.search(query))
+    }else{
+      //reset to original data
+      setFiltered(data)
+    }
+  },[query])
+
+  useEffect(() => {
+    if(isFunction(onSearch)){
+      onSearch(filtered)
+    }
+  }, [filtered])
+
+/**
+ * 
+ *  
+*/
+
+const buildSearchIndex = () => {
+  /***
+   * https://github.com/bvaughn/js-search
+  */
+  const search = new JsSearch.Search("id");
+  search.sanitizer = new JsSearch.LowerCaseSanitizer();
+  search.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
+
+  if(Array.isArray(indexes)){
+    indexes.forEach(idx => search.addIndex(idx))
+    search.addDocuments(data)
+  }
+  setSearchFunction(search)
+}
+
+const handleSearch = (e) => {
+  changeQuery(e.target.value)
+}
+
+
+/**
+ * 
+ *  
+*/
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -134,16 +173,7 @@ export default function PrimarySearchAppBar({data, sort="company.name", indexes,
   };
 
 
-  const handleSearch = (e) => {
-    const value = e.target.value
-    changeQuery(value)
-    if(value.length>1){
-      setFiltered(searchFunction.search(value))
-    }else{
-      setFiltered(data)
-    }
-  }
-
+ 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -189,7 +219,7 @@ export default function PrimarySearchAppBar({data, sort="company.name", indexes,
   return (
     <>
     <div className={classes.grow}>
-      <AppBar position="static" color="secondary" elevation={0}>
+      <AppBar position="static" color="default" elevation={0}>
         <Toolbar variant="dense">
           {/* <IconButton
             edge="start"
@@ -219,19 +249,10 @@ export default function PrimarySearchAppBar({data, sort="company.name", indexes,
             />
           </div>
           <div className={classes.grow} />
-          {/* <div className={classes.sectionDesktop}>
-            <Button aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </Button>
-            <Button aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </Button>
-         
-          </div> */}
+          <div className={classes.buttons}>
+            {buttons}
+          </div>
+          <div className={classes.sectionDesktop}></div>
           {/* <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
@@ -248,7 +269,9 @@ export default function PrimarySearchAppBar({data, sort="company.name", indexes,
       {renderMobileMenu}
       {renderMenu}
     </div>
-    {render(filtered)}
     </>
   );
 }
+
+
+export default ToolBar
