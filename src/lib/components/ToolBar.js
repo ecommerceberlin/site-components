@@ -252,7 +252,7 @@ const handleSearch = (e) => {
           <div className={classes.buttons}>
             {buttons}
           </div>
-          <div className={classes.sectionDesktop}></div>
+          {/* <div className={classes.sectionDesktop}></div> */}
           {/* <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"

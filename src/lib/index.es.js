@@ -36,3 +36,4 @@ export { withRouter, useRouter } from 'next/router'
 export { default as YouTube } from 'react-player/youtube'
 export { default as Vimeo } from 'react-player/vimeo'
 export { default as useSWR } from 'swr'
+export { default as classNames } from 'classnames';

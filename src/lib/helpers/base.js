@@ -79,6 +79,7 @@ export const filterFuncFromArr = (arr) => {
       switch(comparator){
         case "=":
         case "==":
+        case "===":
         case "equals":
           if(value != expectedValue){
             tests = false
@@ -98,6 +99,7 @@ export const filterFuncFromArr = (arr) => {
         break
         case "contains":
         case "has":
+        case "includes":
         if(!isString(value) || !value.includes(expectedValue)){
           tests = false
         }
