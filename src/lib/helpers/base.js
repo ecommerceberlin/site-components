@@ -6,6 +6,7 @@ import _get from 'lodash/get';
 import isObject from 'lodash/isObject'
 import isFunction from 'lodash/isFunction'
 import isString from 'lodash/isString'
+import { identity } from 'lodash';
 
 export const collator = new Intl.Collator('pl-PL', {numeric: true, sensitivity: 'base'});
 
@@ -70,50 +71,62 @@ export const filterFuncFromArr = (arr) => {
 
   return function(item){
 
-    let tests = true;
+    let isOk = true;
     
-    arr.forEach(([path, expectedValue, comparator = "="]) => {
+    arr.forEach(func => {
 
-      const value = _get(item, path)
-      
-      switch(comparator){
+      if(!isOk){
+        //do not run more tests if previous fails...
+        return;
+      }
+
+      if(isFunction(func)){
+        isOk = func(item)
+      }else{
+        const [path, expectedValue, comparator = "="] = func
+        const value = _get(item, path)
+
+        switch(comparator){
         case "=":
         case "==":
         case "===":
         case "equals":
           if(value != expectedValue){
-            tests = false
+            isOk = false
           }
         break
         case ">":
         case "gt":
           if(value <= expectedValue){
-            tests = false
+            isOk = false
           }
         break
         case "<":
         case "lt":
           if(value >= expectedValue){
-            tests = false
+            isOk = false
           }
         break
         case "contains":
         case "has":
         case "includes":
         if(!isString(value) || !value.includes(expectedValue)){
-          tests = false
+          isOk = false
         }
         break
         case "length":
         case "minLength":
         if(!isString(value) || value.length <= expectedValue){
-          tests = false
+          isOk = false
         }
         break
 
+        }
       }
+
+      
     })
-    return tests;
+    return isOk;
   }
 }
 
