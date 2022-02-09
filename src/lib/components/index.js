@@ -104,6 +104,8 @@ export { default as List } from './List'
 export { default as CompanyCardSimple } from './CompanyCardSimple'
 export { default as HasTicketWithRole } from './HasTicketWithRole'
 
+export { default as Translatable } from './Translatable'
+export { default as DateAgo } from './DateAgo'
 
 
 export * from './Bookingmap';

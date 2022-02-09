@@ -4,6 +4,7 @@ import BoothOrderSteps from '../components/Bookingmap/BoothOrderSteps'
 import BoothDialogLegend from '../components/Bookingmap/BoothDialogLegend'
 import Wrapper from '../components/Wrapper'
 import {useSettings} from '../helpers'
+import RecentPurchases from '../components/Bookingmap/RecentPurchases'
 
 const defaultProps = {
     wrapperProps: {
@@ -26,6 +27,7 @@ const WidgetSalesMap = ({setting = "bookingmap", ...props}) => {
                     <BoothDialogLegend setting={setting} />
                     </div>
                     <Bookingmap setting={setting} />
+                    <RecentPurchases setting={setting} />
         </div>
         </Wrapper>
     )
