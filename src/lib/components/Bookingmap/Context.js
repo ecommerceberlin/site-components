@@ -41,7 +41,7 @@ const BoothContext = ({id, children, setting, dt, dl, dw, dh, ti, g, ...props}) 
 
 
     const {zoom, boothStyleMapping, disabledTicketGroupIds, disabled} = useBookingmapSettings(setting, props) 
-    const {status, name, image} = useSelector((state) => BoothFormdataSelector(state, id), shallowEqual)
+    const {status, name, image, participant_id, company_id} = useSelector((state) => BoothFormdataSelector(state, id), shallowEqual)
     const selected = useSelector(state => BoothSelectedSelector(state, id))
     const lock = useSelector(state => BoothBlockedSelector(state, id))
     const defaultSize = useSelector(state => BoothTicketGroupSelector(state, g))
@@ -74,7 +74,9 @@ const BoothContext = ({id, children, setting, dt, dl, dw, dh, ti, g, ...props}) 
         },
         id,
         g,
-        ti 
+        ti,
+        company_id,
+        participant_id
     }), [setting, selected, lock, status, defaultSize])
 
     return (<BoothContextContainer.Provider value={value}>{children}</BoothContextContainer.Provider>)

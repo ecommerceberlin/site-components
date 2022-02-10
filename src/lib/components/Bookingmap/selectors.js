@@ -60,30 +60,29 @@ export const BoothSelectedSelector = createCachedSelector(
 )((state, id) => id)
 
 
-
-
-/**
-* formdata
-* 
-booth-29-203: {
-    company: {id: 1158, slug: "i-systemspl", featured: 0, debut: 0, promo: 0, …}
-    id: "booth-29-203"
-    participant_id: 106207
-    purchase: {id: 109625, paid: 1, status: "ok", status_source: "manual", created_at: "2019-12-11 12:36:00", …}
-    ti: "G8"
-    ticket_id: 1732
-}
-*/
-
-
 export const BoothFormdataSelector = createCachedSelector(
     getFormdata,
     (state, id) => id,
     (data, id) =>  {
     
-    const { purchase, company } = get(keyBy(data, "id"), id, {})
+    /**
+    * formdata
+    * 
+    booth-29-203: {
+        company: {id: 1158, slug: "i-systemspl", featured: 0, debut: 0, promo: 0, …}
+        id: "booth-29-203"
+        participant_id: 106207
+        purchase: {id: 109625, paid: 1, status: "ok", status_source: "manual", created_at: "2019-12-11 12:36:00", …}
+        ti: "G8"
+        ticket_id: 1732
+    }
+    */
+
+    const { participant_id, purchase, company } = get(keyBy(data, "id"), id, {})
   
       return {
+        participant_id,
+        company_id: company? company.id: 0,
         status: purchase && "paid" in purchase? purchase.paid? "sold" : "hold" : false,
         name : company && "profile" in company? getCompanyName(company) : "", 
         image : company && "profile" in company? getCompanyProfileInfo(company, "thumbnail") : "",
