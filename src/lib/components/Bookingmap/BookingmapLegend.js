@@ -4,9 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import { useSelector } from 'react-redux';
 import _get from 'lodash/get';
 import {getTicketGroups} from '../../redux/selectors'
-import Booth from './Booth'
-import { useSettings } from '../../helpers'
+import BookingmapLegendBooth from './BookingmapLegendBooth'
 import { useTranslate } from '../../i18n'
+import { useBookingmapSettings } from './Context';
 
 const useStyles = makeStyles(theme => ({
     root : {
@@ -30,18 +30,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const BookingmapLegend = ({setting, ...props}) =>  {
 
-const defaultProps = {
-    allowedGroupIds: [],
-    boothStyleMapping: {}
-}
-
-const BoothDialogLegend = ({setting, ...props}) =>  {
-
+    const {allowedGroupIds} = useBookingmapSettings(setting, props)
     const classes = useStyles()
     const [translate] = useTranslate()
-    const settings = useSettings(setting)
-    const {allowedGroupIds} = Object.assign({}, defaultProps, settings, props)
     const ticketgroups = useSelector(getTicketGroups)
     const filtered = (ticketgroups || []).filter(tg => allowedGroupIds.includes(tg.id))
 
@@ -51,11 +44,11 @@ const BoothDialogLegend = ({setting, ...props}) =>  {
         <Typography variant="subtitle1">{ translate("event.sales.pool.legend")}</Typography>
         </div>
         <div className={classes.groups}>
-        {filtered.map(tg => <Booth key={tg.name} setting={setting} legend={true}  dh={30} dw={60} g={tg.id} ti={tg.name} />)}
+        {filtered.map(tg => <BookingmapLegendBooth key={tg.name} setting={setting} g={tg.id} label={tg.name} />)}
         </div>
         </div>)
 
 }
   
-export default BoothDialogLegend
+export default BookingmapLegend
   

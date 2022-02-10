@@ -1,6 +1,6 @@
 import React from 'react';
 import BoothDialogContainer from './BoothDialogContainer'
-import BoothDialogLegend from './BoothDialogLegend'
+import BookingmapLegend from './BookingmapLegend'
 // import {getCompanyProfileInfo, getCompanyName} from '../../helpers'
 import { KeyedFormdataSelector } from '../../redux/selectors'
 import { useSelector } from 'react-redux'
@@ -43,7 +43,7 @@ const BoothDialogTakenSold = ({setting="", ...boothProps}) => {
 
     return (<BoothDialogContainer 
         setting={ setting }
-        header={ <BoothDialogLegend setting={setting} /> }
+        header={ <BookingmapLegend setting={setting} /> }
         content={
           <BoothDialogTakenSoldContent setting={setting} company={ getCompany() }/>
         }

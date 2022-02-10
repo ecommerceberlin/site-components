@@ -1,24 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import BoothDialog from './BoothDialog';
-import boothStyles, { getStylingName } from './boothStyles'
-import { useSettings } from '../../helpers'
-import { useTranslate } from '../../i18n'
-
-import {
-  getCart, 
-  KeyedFormdataSelector, 
-  KeyedTicketGroupsSelector
-} from '../../redux/selectors'
-
-import {
-  BoothFormdataSelector, 
-  BoothSelectedSelector,
-  BoothBlockedSelector,
-  BoothTicketGroupSelector
-} from './selectors'
+import boothStyles from './boothStyles'
+// import { useSettings } from '../../helpers'
+// import { useTranslate } from '../../i18n'
+import { useBoothContext } from './Context';
 
 import {
   dialogShow,
@@ -27,58 +15,42 @@ import {
 
 const useStyles = makeStyles(boothStyles)
 
+const BoothText = () => {
 
-const defaultProps = {
-  zoom: 1,
-  boothStyleMapping: {},
-  disabledTicketIds: [],
-  disabledTicketGroupIds: [],
-  disabled: false
-}
-
-
-const BoothText = ({zoom=1, label="", image="", name=""}) => {
-
-  
   const classes = useStyles()  
+  const {
+    name, 
+    image,
+    hold,
+    zoom,
+    ti
+  } = useBoothContext()
 
- return (<span className={classNames(classes.boothText, {
-    [classes.boothLogotype]: zoom > 1 && image
-  })}>
-  {label}
+ return (<span className={classNames(classes.boothText, {[classes.boothLogotype]: zoom > 1 && image})}>
+  {hold ? "R" : ti}
   {name && zoom > 1 ? (<span className={classes.cname}>{name}</span>) : null}
 </span>)
 
 }
 
-const Booth = ({setting="", marked=false, g = 0, id = "", dt = 0, dl = 0, dw = 0, dh = 0, ti = "", legend=false, ...props}) => {
+const Booth = ({marked=false, legend=false}) => {
 
   const classes = useStyles()  
   const dispatch = useDispatch()
-  const settings = useSettings(setting);
-  const {status, name, image} = useSelector((state) => BoothFormdataSelector(state, id), shallowEqual)
-  const selected = useSelector(state => BoothSelectedSelector(state, id))
-  const lock = useSelector(state => BoothBlockedSelector(state, id))
-  const defaultSize = useSelector(state => BoothTicketGroupSelector(state, g))
-
-
-  // console.log(status, name, image, slug, selected)
-  // console.log(id, ti, blocked, defaultSize)
-
-
   const {
-    zoom,
-    boothStyleMapping,
-    disabledTicketGroupIds,
-    disabled
-   } = Object.assign({}, defaultProps, settings, props)
-
-   const blocked = () => lock === false
-   const hold = () => status === 'hold'
-   const sold = () => status === "sold"
-   const unavailable = () => !ti || disabledTicketGroupIds.includes(g)
-
-  const checkSize = (value) => value > 0? value: defaultSize
+    setting, 
+    selected, 
+    sold,
+    hold,
+    unavailable,
+    blocked,
+    styleName,
+    sizes,
+    xy,
+    id,
+    g,
+    ti
+  } = useBoothContext()
 
   const onBoothClick = () => {
 
@@ -90,13 +62,11 @@ const Booth = ({setting="", marked=false, g = 0, id = "", dt = 0, dl = 0, dw = 0
 
     dispatch(dialogShow({
       title: '', //will be overwritten....
-      content:  <BoothDialog setting={setting} boothId={id} groupId={g} label={ti} styleName={getStylingName(boothStyleMapping, g)} />,
+      content:  <BoothDialog setting={setting} boothId={id} groupId={g} label={ti} styleName={styleName} />,
       buttons: []
     }));
 
   };
-
-  const _zoom = parseInt(zoom)
 
   return (
     <li
@@ -104,25 +74,18 @@ const Booth = ({setting="", marked=false, g = 0, id = "", dt = 0, dl = 0, dw = 0
       onClick={onBoothClick}
       className={classNames(
         classes.booth,
-        classes[getStylingName(boothStyleMapping, g)],
+        classes[styleName],
       {
-        [classes.boothSold]: sold(),
-        [classes.boothHold]: hold(),
-        [classes.boothUnavailable]: unavailable(),
-        [classes.boothBlocked]: blocked(),
+        [classes.boothSold]: sold,
+        [classes.boothHold]: hold,
+        [classes.boothUnavailable]: unavailable,
+        [classes.boothBlocked]: blocked,
         [classes.boothSelected]: selected || marked,
-        [classes.boothOnLegend] : legend
+        [classes.boothOnLegend]: legend
       })}
-      style={{
-        height: checkSize(dh) * _zoom,
-        width: checkSize(dw) * _zoom,
-        top: dt? dt * _zoom : "auto",
-        left: dl? dl * _zoom : "auto",
-      //  lineHeight: `${data.dh}px`,
-      }}
+      style={{...sizes, ...xy}}
     >
-    {/* {  console.log(id, "rendered") } */}
-     <BoothText zoom={_zoom} label={hold() ? "R" : ti} image={image} name={name} />
+     <BoothText  />
     </li>
   );
 

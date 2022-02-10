@@ -2,12 +2,12 @@ import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 // import { useTranslate } from '../../i18n'
-import Booth from './Booth';
 import Loader from './Loader'
 import { getBookingmap } from '../../redux/selectors'
 import { useSettings } from '../../helpers'
 import { resourceFetchRequest } from '../redux/actions';
 import BookingmapDataUpdater from './BookingmapDataUpdater'
+import BoothContext from './Context'
 
 const useStyles = makeStyles( (theme) => ({
 
@@ -54,13 +54,12 @@ const defaultProps = {
   marked: []
 };
 
-const Bookingmap = ({setting, ...props}) => {
+const Bookingmap = ({setting, booth, ...props}) => {
 
   const dispatch = useDispatch()
   const settings = useSettings(setting)
   const classes = useStyles()
   const bookingmap = useSelector(getBookingmap)
-
 
   const {
     zoom, 
@@ -81,7 +80,6 @@ const Bookingmap = ({setting, ...props}) => {
     "blockings"
   ])), [])
 
-
   const isBoothMarked = (id) => marked.includes(id)
 
   return (<div
@@ -94,7 +92,7 @@ const Bookingmap = ({setting, ...props}) => {
       <div className={classes.container} style={{width: width * zoom}}>{bookingmap && 'mapsource' in bookingmap ? (
             <React.Fragment>
             <img src={bookingmap.mapsource} className={classes.bg} />
-            <ul className={classes.booths}>{bookingmap.booths && bookingmap.booths.map(booth => (<Booth key={booth.id} setting={setting} marked={isBoothMarked(booth.id)} {...booth} />))}</ul>
+            <ul className={classes.booths}>{bookingmap.booths && bookingmap.booths.map(b => (<BoothContext key={b.id} setting={setting} {...b}>{booth? React.createElement(booth, {marked: isBoothMarked(b.id)}): null}</BoothContext>))}</ul>
             </React.Fragment>
         ) : <Loader />}</div>
       </div>
@@ -103,3 +101,4 @@ const Bookingmap = ({setting, ...props}) => {
 
 
 export default Bookingmap;
+

@@ -2,8 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import WidgetSupport from '../../compositions/WidgetSupport';
-import BoothDialogContainerHeader from './BoothDialogContainerHeader';
-
+import BookingmapLegendBooth from './BookingmapLegendBooth';
 
 import {
   Power as Electricity,
@@ -64,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 const BoothInfoContainer = ({setting="", header=null, content=null, ...boothProps}) => {
 
   const classes = useStyles()
-
+  const {label, groupId} = boothProps
 
   /**
    * 
@@ -79,7 +78,8 @@ const BoothInfoContainer = ({setting="", header=null, content=null, ...boothProp
             { header }
             <div className={classes.root}>
                 <div className={classes.boothId}>
-                     <BoothDialogContainerHeader {...boothProps} />
+                     <BookingmapLegendBooth setting={setting} label={label} g={groupId} width="90" height="60" />
+                   
                 </div>
                 <div className={classes.mainContainer}>
                    {content && <Paper className={classes.paper} elevation={1}>{content}</Paper>}

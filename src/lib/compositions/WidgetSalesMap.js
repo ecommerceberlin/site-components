@@ -1,10 +1,16 @@
+
 import React from 'react';
-import Bookingmap from '../components/Bookingmap/Bookingmap'
-import BoothOrderSteps from '../components/Bookingmap/BoothOrderSteps'
-import BoothDialogLegend from '../components/Bookingmap/BoothDialogLegend'
 import Wrapper from '../components/Wrapper'
 import {useSettings} from '../helpers'
-import RecentPurchases from '../components/Bookingmap/RecentPurchases'
+
+
+import {
+    Bookingmap,
+    BoothOrderSteps,
+    BookingmapLegend,
+    RecentPurchases,
+    Booth
+} from '../components/Bookingmap'
 
 const defaultProps = {
     wrapperProps: {
@@ -24,9 +30,9 @@ const WidgetSalesMap = ({setting = "bookingmap", ...props}) => {
         <div>
                     <div>
                     <BoothOrderSteps setting={setting}  />
-                    <BoothDialogLegend setting={setting} />
+                    <BookingmapLegend setting={setting} />
                     </div>
-                    <Bookingmap setting={setting} />
+                    <Bookingmap setting={setting} booth={Booth} />
                     <RecentPurchases setting={setting} />
         </div>
         </Wrapper>
