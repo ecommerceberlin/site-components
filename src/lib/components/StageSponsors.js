@@ -51,7 +51,7 @@ const StageSponsors = ({setting, stage, ...props}) => {
         return null
     }
 
-    return (<Box mb={2}><Typography variant="overline" display="block" align="center" gutterBottom>{translate("streaming.stagesponsors")}</Typography><Grid container spacing={1} direction="column" alignItems="center" justify="center">{sponsors.map(id => {
+    return (<Box mb={2}><Typography variant="overline" display="block" align="center" gutterBottom>{translate("streaming.stagesponsors")}</Typography><Grid container spacing={1} direction="column" alignItems="center" justifyContent="center">{sponsors.map(id => {
 
         const sponsor = presenters.find(item => item.id == id)
 

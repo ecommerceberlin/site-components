@@ -97,7 +97,7 @@ const Cart = ({setting, ...props}) => {
   })}
 
   <Box mt={2} mb={1}>
-  <Grid container spacing={2} justify="flex-end" alignItems="center">
+  <Grid container spacing={2} justifyContent="flex-end" alignItems="center">
     <Grid item><TicketTotal /></Grid>
     <Grid item> {!disabled && <MyButton onClick={()=>dispatch(dialogHide())} href="/transaction" {...purchaseButtonProps} />}</Grid>
   </Grid>

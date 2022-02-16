@@ -71,7 +71,7 @@ const WidgetContestantCompanies = ({
            {keyword && renderAs==="avatars" && <Box mt={5}>
             <Grid 
             container 
-            justify={center ? 'center' : 'flex-start'}
+            justifyContent={center ? 'center' : 'flex-start'}
             spacing={spacing}
             >
             {data.map((item) => (

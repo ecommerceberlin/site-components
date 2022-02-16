@@ -57,7 +57,7 @@ const WidgetRoleBasedProfileUpdate = ({
         const fieldsWithOptions = get(`${setting}.fields`, fields).map(field => "options" in field && options && field.options in options ? {...field, options: options[field.options]} : field)
           
         return (<Wrapper label={get(`${setting}.label`, label)} secondaryLabel={get(`${setting}.secondaryLabel`, secondaryLabel)} {...rest}  >
-                <Grid container spacing={1} justify="space-between">
+                <Grid container spacing={1} justifyContent="space-between">
                   <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
                     <StepForm
                       baseLabel={ get(`${setting}.baseLabel`, baseLabel) }

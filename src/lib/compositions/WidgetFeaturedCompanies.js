@@ -17,7 +17,7 @@ const WidgetFeaturedExhibitors = ({filter, limit, mobile, center, ...wrapper}) =
   >
     {(exhibitors, keywords) => <Avatarlist 
       data={exhibitors}  
-      justify={center ? 'center' : 'flex-start'}
+      justifyContent={center ? 'center' : 'flex-start'}
     />}
   
   </Companies>

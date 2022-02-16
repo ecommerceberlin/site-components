@@ -20,7 +20,7 @@ const WidgetVips = ({filter, include, limit, mobile, center, spacing, ...wrapper
     
     <Grid 
     container 
-    justify={center ? 'center' : 'flex-start'}
+    justifyContent={center ? 'center' : 'flex-start'}
     spacing={spacing}
     >
     {visitors.map((visitor) => (

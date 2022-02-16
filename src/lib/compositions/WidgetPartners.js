@@ -23,7 +23,7 @@ const WidgetPartners = ({filter, limit, mobile, center, spacing, placeholder, ..
 
       return (<Grid 
       container 
-      justify={center ? 'center' : 'flex-start'}
+      justifyContent={center ? 'center' : 'flex-start'}
       spacing={spacing}
       >
       {partners.map((partner) => (
