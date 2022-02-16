@@ -77,7 +77,7 @@ const BoothContext = ({id, children, setting, dt, dl, dw, dh, ti, g, ...props}) 
         ti,
         company_id,
         participant_id
-    }), [setting, selected, lock, status, defaultSize])
+    }), [ti, setting, selected, lock, status, defaultSize])
 
     return (<BoothContextContainer.Provider value={value}>{children}</BoothContextContainer.Provider>)
 
