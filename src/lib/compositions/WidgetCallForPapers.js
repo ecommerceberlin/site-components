@@ -65,7 +65,7 @@ return (
                 {name: "descriptions", render: [
                     {name: "logotype", align: "center", breakpoints:{xs: 12, md: 3, lg: 2}, render: "logotype"},
                     {name: "presentation_title", style: "big", breakpoints:{xs: 12, md: 5, lg: 6}, render: (row) => <Typography variant="h5">{row.presentation_title}</Typography>},
-                    {name: "secondary_info", container:{ justify:"flex-start",  alignItems:"center"}, breakpoints:{xs: 12, md: 3, lg: 3}, render: [
+                    {name: "secondary_info", container:{ justifyContent:"flex-start",  alignItems:"center"}, breakpoints:{xs: 12, md: 3, lg: 3}, render: [
 
                         {name: "avatar", render: "avatar", breakpoints:{
                             xs: 12, sm: 4, md: 3

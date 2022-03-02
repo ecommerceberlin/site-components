@@ -154,9 +154,9 @@ export const processArrayData = (data = [], { sort = null, dir="ASC", filter = n
 
   //it cannot be used server side and client side!!!
 
-  // if (random) {
-  //   data = _shuffle(data);
-  // }
+  if (typeof window !== 'undefined' && random) {
+    data = _shuffle(data);
+  }
 
   if(skip){
     data = data.slice(skip);

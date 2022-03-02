@@ -4,7 +4,7 @@ import {Wrapper, Bookingmap} from '../components';
 import { getCompanyProfileInfo } from '../helpers';
 import {useSettings} from '../helpers/hooks'
 import isEmpty from 'lodash/isEmpty'
-import Alert from '../components/Alert'
+import {Alert, Booth} from '../components'
 
 
 
@@ -42,7 +42,7 @@ const WidgetCompanyBookingmap = ({setting, ...otherProps}) => {
       loc: selectedBoothNames.join(','),
       smart_count: selectedBoothNames.length
     }]}>
-      <Bookingmap setting={mapSetting} marked={selectedBoothIds} />
+      <Bookingmap setting={mapSetting} booth={Booth} marked={selectedBoothIds} />
       </Wrapper>
   )
 };
