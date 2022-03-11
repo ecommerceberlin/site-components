@@ -4,7 +4,7 @@ import React from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 import CompanyContacts from './CompanyContacts';
-
+import Markdown from './Markdown';
 
 const styles = theme => ({
 
@@ -52,11 +52,17 @@ function CompanyTabContainer({ children, data, classes }) {
   }
 
   return (
-    <div
-      className={classes.htmlContainer}
-      dangerouslySetInnerHTML={{ __html: data }}
-    />
+ 
+    <Markdown>{data}</Markdown>
   );
 }
 
 export default withStyles(styles)(CompanyTabContainer);
+
+/**
+ *    <div
+      className={classes.htmlContainer}
+      dangerouslySetInnerHTML={{ __html:  }}
+    />
+    
+ */
