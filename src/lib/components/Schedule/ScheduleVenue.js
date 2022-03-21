@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose'
 import { getCompanyProfileInfo } from '../../helpers';
 import {venueSelect, venueSelectReset, VenueSelector} from './redux'
-
+import { useTranslate } from '../../i18n';
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -65,6 +65,7 @@ const styles = theme => ({
 
 const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue, venueSelect, venueSelectReset}) => {
 
+  const [translate] = useTranslate()
   const logotype = getCompanyProfileInfo(company, "thumbnail")
   return (
     <Hidden implementation="css">
@@ -80,7 +81,7 @@ const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue,
             alt=""
           />}
         
-        <span style={{marginLeft: 10}}>{selectedVenue === name? `(show all stages)` : `(show this stage only)` }</span>
+        <span style={{marginLeft: 10}}>{selectedVenue === name? translate("common.click_to_reset"): translate("common.click_to_select") }</span>
 
         </div>
       </div>
