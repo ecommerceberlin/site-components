@@ -43,7 +43,7 @@ export { default as Schedule } from './Schedule';
 export { default as Stage } from './Stage';
 */
 export { default as Presentation } from './Schedule/Presentation';
-export { default as Presenter } from './Schedule/Presenter';
+export { default as Presenter } from './Schedule/DialogContentPresenter';
 
 export { default as Faq } from './Faq';
 export { default as FaqLink } from './FaqLink';

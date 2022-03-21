@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 
 
 import { useTranslate } from '../i18n';
-import ScheduleItem from '../components/Schedule/ScheduleItem'
+
 import IconButton from '@material-ui/core/IconButton';
 import {useRouter} from 'next/router'
 import isEmpty from 'lodash/isEmpty'
@@ -62,9 +62,9 @@ const StagesOther = ({setting, data, stage, ...props}) => {
             const _venue = (item.presentation_venue || "").toLowerCase()
 
             return (<Grid key={item.id} className={classes.scheduleItem}>
-            <ScheduleItem data={item} description={false} buttons={[
+            {/* <ScheduleItem data={item} description={false} buttons={[
                 <IconButton onClick={() => router.push(`/stages/${_venue}`)}><ExitToAppIcon /></IconButton>
-            ]}/>
+            ]}/> */}
           
           </Grid>)
         })

@@ -10,11 +10,8 @@ import _filter from 'lodash/filter';
 import _find from 'lodash/find';
 import _get from 'lodash/get';
 
-import ScheduleItem from './ScheduleItem';
-import ScheduleItemMinimized from './ScheduleItemMinimized';
+import ScheduleItemContainer from './ScheduleItemContainer';
 import ScheduleVenue from './ScheduleVenue';
-import ScheduleVenueMinimized from './ScheduleVenueMinimized';
-import PresentationLabel from './PresentationLabel';
 import ScheduleBlock from './ScheduleBlock';
 import ScheduleBreak from './ScheduleBreak';
 import {VenueSelector} from './redux'
@@ -79,40 +76,7 @@ const Schedule = ({setting = "schedule", ...props}) => {
     return _find(exhibitors, { id }, {});
   }
 
-  function findPresentations(search) {
-   
-    const details = (selectedVenue && selectedVenue in venues);
 
-    return _filter(presenters, search).map((item, i) => {
-
-      // if(Array.isArray(minimized) && minimized.indexOf(item.presentation_venue)>-1){
-
-      //   return (
-
-      //     <ScheduleItemMinimized
-      //     key={item.id}
-      //     selected={item.id == selected}
-      //     first={i === 0}
-      //     data={item}
-      //   />
-      //   )
-      // }
-
-      return (
-        <ScheduleItem
-          setting={setting}
-          key={item.id}
-          selected={item.id == selected}
-          index={i}
-          data={item}
-          description={details || descriptions}
-        />
-      ) 
-
-    }
-    
-    );
-  }
 
   function renderBreak(label) {
     return (
@@ -142,19 +106,6 @@ function renderBlock(time) {
     
     const iterableVenues = getIterableVenues();
 
-
-    /*
-      Array.isArray(minimized) && minimized.indexOf(venue) > -1 ? 
-          
-          <ScheduleVenueMinimized   
-            name={venue}  
-            total={iterableVenues.length}
-            template={venueStyle}
-          />        
-          
-          :
-  
-          */
     return iterableVenues.map(venue => (
       <Grid key={venue} item {...getColNumber(venue)} style={{minWidth: 300}}> 
 
@@ -169,7 +120,33 @@ function renderBlock(time) {
       </Grid>
     ));
   }
+
+
   
+  function renderPresentation(time){
+
+    return getIterableVenues().map((venue, j) => {
+
+      const key = getKey(venue, time)
+
+      const data = _filter(presenters, {
+        presentation_venue: venue,
+        presentation_time: time
+      })
+
+      return (
+        <Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}>
+        <ScheduleItemContainer venue={venue} time={time} setting={setting} data={data} />        
+        </Grid>
+      )
+    })
+
+  }
+
+
+
+
+
   function getIterableVenues(){
 
     if(selectedVenue && selectedVenue in venues){
@@ -212,23 +189,7 @@ function renderBlock(time) {
     
   }
 
-  function renderPresentation(time){
-
-    return getIterableVenues().map((venue, j) => {
-
-      const key = getKey(venue, time)
-
-      return (
-        <Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}>{
-              findPresentations({
-                  presentation_venue: venue,
-                  presentation_time: time
-                }, j === 0)}
-        </Grid>
-      )
-    })
-
-  }
+  
 
 
   return (

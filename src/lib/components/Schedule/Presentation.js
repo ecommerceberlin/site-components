@@ -1,13 +1,8 @@
-import React from 'react';
-//import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { usePresentation } from './context';
 
-import MyTypography from '../MyTypography';
-import {useSettings} from '../../helpers'
-// <Tags tags={_get(company.profile, "keywords")} />
-
-const useStyles = props=> makeStyles(theme => ({
+const useStyles =  makeStyles(theme => ({
   root: {
     marginTop: 20,
     marginBottom: 25,
@@ -17,6 +12,12 @@ const useStyles = props=> makeStyles(theme => ({
       marginBottom: 10,
       marginRight: 5,
     }
+  },
+
+  label: {
+    fontWeight: 200,
+    color: theme.palette.error.main,
+    fontSize: "90%"
   },
 
   title: {
@@ -41,29 +42,17 @@ const useStyles = props=> makeStyles(theme => ({
 }))
 
 
-const defaultProps = {
-  title: '',
-  description: '',
-  hideDescriptionOnMobile: false
-};
+const Presentation = () => {
 
-const Presentation = ({setting, ...props}) => {
-
-  const classes = useStyles(props)();
-  const settings = useSettings(setting);
-
-  const {
-    title,
-    description,
-    hideDescriptionOnMobile
-  } = Object.assign({}, defaultProps, settings, props)
+  const classes = useStyles();
+  const {title, description, showDescription, venue, time} = usePresentation()
 
   return (
     <div className={classes.root}>
-      <Typography variant="h6" className={classes.title}>{title}</Typography>
-      <div className={hideDescriptionOnMobile ? classes.description : ''}>
-        <MyTypography template="presenterText">{description}</MyTypography>
-      </div>
+      <Typography variant="h6" className={classes.title}><span className={classes.label}>{venue}{` `}{time}</span>{` `}{title}</Typography>
+      {showDescription ? <div className={classes.description}>
+        <Typography variant="body2">{description}</Typography>
+      </div>: null}
     </div>
   );
 };

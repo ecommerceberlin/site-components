@@ -26,6 +26,7 @@ export const PresentationContext = ({setting="", data={}, children}) => {
         venues_count: size(venues),
         selectedVenue, 
 
+
         id: data.id,
      
         presenter: data.presenter,
@@ -37,7 +38,9 @@ export const PresentationContext = ({setting="", data={}, children}) => {
         title: data.presentation_title,
         description: data.presentation_description,
         category: data.presentation_category,
-      
+        showDescription: Boolean(selectedVenue),
+
+        
         time: data.presentation_time,
         venue: data.presentation_venue,
      

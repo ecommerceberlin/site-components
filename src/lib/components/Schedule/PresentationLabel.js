@@ -7,7 +7,7 @@ import {useSettings} from '../../helpers'
 import isString from 'lodash/isString'
 import isObject from 'lodash/isObject'
 import isEmpty from 'lodash/isEmpty'
-
+import { usePresentation } from './context';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,12 +35,11 @@ const useStyles = makeStyles(theme => ({
 
 const defaultProps = {}
 
-const PresentationLabel = ({ setting, time="", venue="", category=null, buttons = null, ...otherProps }) => {
+const PresentationLabel = ({ buttons = null}) => {
 
+  const {time, venue, category, categories} = usePresentation()
   const [translate] = useTranslate();
   const classes = useStyles();
-  const settings = useSettings(setting)
-  const {categories} = Object.assign({}, defaultProps, settings, otherProps)
   const styling = isObject(category) && category in categories? categories[category]: {}
 
   return (
