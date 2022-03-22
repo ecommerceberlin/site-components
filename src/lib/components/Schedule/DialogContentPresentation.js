@@ -11,7 +11,7 @@ const DialogContentPresentation = () => {
   const {title, description} = usePresentation()
 
   return (
-    <Box>
+    <Box mb={3}>
       <Typography variant="h5" gutterBottom>{title}</Typography>
       <Box>
       <Typography variant="body1">{description}</Typography>

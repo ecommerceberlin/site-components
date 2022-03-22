@@ -1,7 +1,7 @@
 
 import {head} from 'lodash'
 import {PresentationContext} from './context'
-import PresentationLabel from './PresentationLabel'
+import DialogTitle from './DialogTitle'
 import Card from '@material-ui/core/Card'
 import CardActions from  '@material-ui/core/CardActions'
 import Box from  '@material-ui/core/Box'
@@ -24,7 +24,7 @@ const ScheduleItemDialogTitle = ({setting="", data=[]}) => {
   const header = head(data)
 
   return (<PresentationContext data={header} setting={setting}>
-    <PresentationLabel />
+    <DialogTitle />
   </PresentationContext>
   )
 

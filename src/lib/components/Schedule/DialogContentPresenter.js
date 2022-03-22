@@ -12,7 +12,15 @@ import { usePresentation } from './context';
 
 const useStyles = makeStyles(theme => ({
 
+  avatar: {
+    height: 100,
+    width: 100,
 
+    [theme.breakpoints.down("md")]: {
+      height: 75,
+      width: 75,
+    }
+  }
 }))
 
 
@@ -20,10 +28,10 @@ const useStyles = makeStyles(theme => ({
 const AvatarAndLogotype = () => {
 
   const {avatar} = usePresentation()
-
+  const classes = useStyles()
   return ( <Grid container direction='column' alignItems='center'>
     <Grid item>
-    <Avatar src={avatar} />
+    <Avatar src={avatar} className={classes.avatar} />
     </Grid>
     <Grid item>
     <Box mt={2}>
@@ -37,7 +45,7 @@ const DialogContentPresenter = () => {
 
 
   const {presenter, avatar, company, position, bio} = usePresentation()
-  const classes = useStyles()
+ 
 
   return (
     <Box mt={5}>
