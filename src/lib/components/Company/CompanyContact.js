@@ -76,7 +76,7 @@ const CompanyContact = () => {
 
   return (
     <div>
-      <Button aria-controls="simple-menu" aria-haspopup="true" label="companies.profile.contact" onClick={handleClick} startIcon={<LinkIcon />} variant="outlined" />
+      <Button aria-controls="simple-menu" aria-haspopup="true" label="companies.profile.contact" onClick={handleClick} startIcon={<LinkIcon />} variant="text" />
      
       <Menu
         id="simple-menu"

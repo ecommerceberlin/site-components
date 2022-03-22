@@ -16,6 +16,9 @@ import Wrapper from '../components/Wrapper'
 import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
 import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
+
+
 import {CompanyContext, CompanyData, CompanyLogotype, CompanyContact, CompanyLocation} from '../components/Company'
 
 const WidgetCompany = ({slug, map, router}) => {
@@ -27,34 +30,27 @@ const WidgetCompany = ({slug, map, router}) => {
       <Wrapper label="">
   
       <TwoColsLayout
-        leftSize={7}
-        left={
-        
-        <Box>
-          <CompanyLogotype />
-       
-          <CompanyData />
-        </Box>}
-        leftCentered={true}
+        reverse={true}
+        leftSize={8}
+        left={        
+          <Box>
+            <CompanyLogotype />       
+            <Box mt={3} mb={3}>
+              <Grid container spacing={2} alignItems="center">     
+                <Grid item><KeywordSelect keywords={get(company, 'profile.keywords', [])} /></Grid>
+                <Grid item><CompanyContact /></Grid>
+              </Grid>
+            </Box>
+            <CompanyData />
+          </Box>
+        }
+        leftCentered={false}
         right={
-
-        <Box>
-
-            <Box mb={1}>
-            <KeywordSelect keywords={get(company, 'profile.keywords', [])} />
+          <Box>
+            <Box mt={5}>
+              <CompanyLocation />
             </Box>
-     
-            <Box mb={1}>
-            <CompanyLocation />
-            </Box>
-     
-            <Box mb={1}>
-            <CompanyContact />
-            </Box>
-      
-        </Box>
-
-
+          </Box>
         }
       />
   

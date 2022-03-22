@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 const useStyles = makeStyles(theme => ({
@@ -26,18 +27,13 @@ Centered.defaultProps = {
   style : {}
 }
 
-const TwoColsLayout = ({
-  left,
-  right,
-  leftCentered,
-  rightCentered,
-  leftSize
-}) => {
+const TwoColsLayout = ({left,right,leftCentered,rightCentered,leftSize,reverse=false}) => {
   const ls = parseInt(leftSize) ? leftSize : 6;
   const rs = 12 - ls;
+  const isMobile = useMediaQuery(theme => theme.breakpoints.down('md'));
 
   return (
-    <Grid container spacing={5}>
+    <Grid container spacing={5} direction={isMobile && reverse? "column-reverse": "row"}>
       <Grid item xs={12} sm={12} md={ls} lg={ls} xl={ls}>
         {leftCentered ? <Centered>{left}</Centered> : left}
       </Grid>

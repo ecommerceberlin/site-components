@@ -11,9 +11,9 @@ import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 const useStyles = makeStyles(theme => ({
     root: {
         fontSize: theme.typography.pxToRem(16),
+        maxWidth: 800
     }
-    }
-))
+}))
 
 const MarkdownSection = ({name, text, limit=1000}) => {
 
@@ -44,7 +44,7 @@ const CompanyData = () => {
     const {about, products, expo} = useCompany()
 
 
-    return <Box mt={5}>
+    return <Box>
 
         <MarkdownSection name="about" text={about} />
         <MarkdownSection name="products" text={products} />
