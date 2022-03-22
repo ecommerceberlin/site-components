@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MyButton = ({ label="no label prop", href, className, ...rest }) => {
+const MyButton = ({ label="no label prop", labelProps, href, className, ...rest }) => {
 
   const [translate] = useTranslate();
   const {push} = useRouter();
@@ -37,7 +37,7 @@ const MyButton = ({ label="no label prop", href, className, ...rest }) => {
   }
   
   return (
-    <Button href={href} {...rest} className={className? classes[className]: undefined}>{label ? translate(label): null}</Button>
+    <Button href={href} {...rest} className={className? classes[className]: undefined}>{label ? translate(label, labelProps): null}</Button>
   );
 }
 

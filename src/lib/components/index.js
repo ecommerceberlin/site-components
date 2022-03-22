@@ -26,8 +26,8 @@ export { default as EmbedSection } from './EmbedSection';
 export { default as Benefits } from './Benefits';
 export { default as Icon } from './Icon';
 
-export { default as CompanyData } from './CompanyData';
-export { default as CompanyLogotype } from './CompanyLogotype';
+
+export { default as CompanyLogotype } from './Company/CompanyLogotype';
 
 export { default as FacebookVote } from './FacebookVote';
 
@@ -101,7 +101,6 @@ export { default as PartnerPhotos } from './PartnerPhotos'
 
 export { default as ToolBar } from './ToolBar'
 export { default as List } from './List'
-export { default as CompanyCardSimple } from './CompanyCardSimple'
 export { default as HasTicketWithRole } from './HasTicketWithRole'
 
 export { default as Translatable } from './Translatable'

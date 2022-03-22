@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import get from 'lodash/get'
 import SingleRecord from "../datasources/SingleRecord"
 import Publisher from '../components/Publisher'
-import CompanyTabContainer from '../components/CompanyTabContainer'
+import Markdown from 'react-markdown'
 
 const WidgetPublisher = ({id, company, initialData}) => <SingleRecord initialData={initialData} endpoint="publishers" id={id} slug={company}>{(data) => {
     
@@ -15,7 +15,7 @@ const WidgetPublisher = ({id, company, initialData}) => <SingleRecord initialDat
     return  (<Box mt={5} mb={10}>
     <Publisher logotype={logotype} fluid={true} link={`/authors/${id}`} /> 
       <Box mt={5}>
-     <CompanyTabContainer data={about}  />
+     <Markdown children={about}  />
      </Box>
     </Box>)
     

@@ -11,46 +11,56 @@ import {
 
 import SingleRecord from "../datasources/SingleRecord"
 import Wrapper from '../components/Wrapper'
-import CompanyData from '../components/CompanyData'
-import CompanyLogotype from '../components/CompanyLogotype'
+// import CompanyData from '../components/CompanyData'
+
 import KeywordSelect from '../components/KeywordSelect'
 import {TwoColsLayout, Centered} from '../components/MyLayouts'
-import WidgetCompanyBookingmap from './WidgetCompanyBookingmap'
+import Box from '@material-ui/core/Box'
+import {CompanyContext, CompanyData, CompanyLogotype, CompanyContact, CompanyLocation} from '../components/Company'
 
 const WidgetCompany = ({slug, map, router}) => {
 
   return (
 
-    <SingleRecord endpoint="companies" slug={slug}>{
-    (company) => <React.Fragment>
+    <SingleRecord endpoint="companies" slug={slug}>{(company) => <CompanyContext data={company}>
    
       <Wrapper label="">
   
       <TwoColsLayout
-        leftSize={5}
-        left={<CompanyLogotype company={company} />}
+        leftSize={7}
+        left={
+        
+        <Box>
+          <CompanyLogotype />
+       
+          <CompanyData />
+        </Box>}
         leftCentered={true}
         right={
-  
-        <div style={{marginTop: 50}}>
-  
-          <Centered>
-           <KeywordSelect keywords={get(company, 'profile.keywords', [])} />
-          </Centered>
-  
-          <div style={{marginTop: 10}}>
-            <CompanyData slug={slug} endpoint="companies" />
-          </div>
-        
-        </div>  
-      }
+
+        <Box>
+
+            <Box mb={1}>
+            <KeywordSelect keywords={get(company, 'profile.keywords', [])} />
+            </Box>
+     
+            <Box mb={1}>
+            <CompanyLocation />
+            </Box>
+     
+            <Box mb={1}>
+            <CompanyContact />
+            </Box>
+      
+        </Box>
+
+
+        }
       />
   
       </Wrapper>
-  
-      {map && <WidgetCompanyBookingmap company={company} />}
       
-      </React.Fragment>
+      </CompanyContext>
   }
   </SingleRecord>)
 

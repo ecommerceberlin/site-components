@@ -18,7 +18,7 @@ import {
    ProfileLogotype
   } from '../components';
 
-//import CompanyLogotype from '../components/CompanyLogotype'
+
 
 import SingleRecord from '../datasources/SingleRecord'
 
