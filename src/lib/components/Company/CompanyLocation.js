@@ -57,7 +57,7 @@ const CompanyLocation = () => {
         <Paper className={classes.root}>
             <Grid container alignItems='center' justifyContent='center' spacing={3} direction="column">
                 <Grid item>
-                    <Typography variant="h4">{boothNames}</Typography>
+                    <Typography variant="h4">{boothNames.join(", ")}</Typography>
                 </Grid>
                 <Grid item>
                 <Button onClick={handleClick} startIcon={<LocationOnIcon />} label="exhibitors.map.exhibitor_location" variant="text" />
