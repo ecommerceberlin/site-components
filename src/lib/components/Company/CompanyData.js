@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCompany } from "./context"
-import ReactMarkdown from "react-markdown"
+import Markdown from "react-markdown"
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import { useTranslate } from "../../i18n"
@@ -20,12 +20,14 @@ const MarkdownSection = ({name, text, limit=1000}) => {
     const [showMore, setShowMore] = React.useState(false)
     const [translate] = useTranslate()
     const classes = useStyles()
-
+    const {legacy} = useCompany()
+    
     if(!text){
         return null
     }
 
-    const hasLongText = text.length > limit
+
+    const hasLongText = !legacy && text.length > limit
     const output = hasLongText && !showMore? `${text.substring(0, limit)}...`: text
 
     const toggleMore = () => setShowMore(showMore? false: true)
@@ -33,7 +35,12 @@ const MarkdownSection = ({name, text, limit=1000}) => {
     return (
         <Box>
         <Typography variant="overline" component="div">{translate(`companies.profile.${name}`)}</Typography>
-        <ReactMarkdown className={classes.root}>{output}</ReactMarkdown>
+        
+        {legacy? <div dangerouslySetInnerHTML={{
+        __html: output}} />: null}
+        
+        {!legacy? <Markdown className={classes.root}>{output}</Markdown>: null}
+
         {hasLongText ? <Box textAlign="center"><Button label={showMore? "common.less": "common.more"} onClick={toggleMore} startIcon={<UnfoldMoreIcon /> }/></Box>: null}
         </Box>
     )

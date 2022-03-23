@@ -1,7 +1,7 @@
 import React from 'react'
 // import { useSelector } from 'react-redux'
 import { useSettings, resizeCloudinaryImage} from '../../helpers'
-import {get, map} from 'lodash'
+import {get, map, isEmpty} from 'lodash'
 
 const CompanyContextProvider = React.createContext({});
 
@@ -12,6 +12,9 @@ export const useCompany = () => {
     return context
 }
 
+/**
+ *   const hasHTML = /<\/?[a-z][\s\S]*>/i.test(text)
+ */
 
 export const CompanyContext = ({setting="", data={}, children}) => {
   
@@ -50,7 +53,9 @@ export const CompanyContext = ({setting="", data={}, children}) => {
             boothIds,
             boothNames,
            
-         
+            present: !isEmpty(boothIds),
+            legacy: `${process.env.NEXT_PUBLIC_PROJECT}` == "ecommerceberlin.com",
+
             logotype: get(data, "profile.thumbnail"),
             og_image: get(data, "profile.og_image"),
     
