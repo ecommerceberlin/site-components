@@ -44,9 +44,9 @@ const RecentPurchases = ({setting, ...props}) => {
         limit: 50
     }})
     const classes = useStyles()
-    const settings = useSettings(setting)
+    const {use_old_ecommerce_module} = useSettings(setting)
     
-    if(isEmpty(purchases)){
+    if(use_old_ecommerce_module || isEmpty(purchases)){
         return null
     }
 
