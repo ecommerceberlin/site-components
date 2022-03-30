@@ -8,7 +8,10 @@ import Grid from '@material-ui/core/Grid'
 import { PresentationContext } from '../components/Schedule/context';
 import { PresenterSchedule, LogotypeAndAvatar, PresenterData} from '../components/Presenter'
 import Sharer from '../components/Sharer'
+import GetTicketLink from '../components/GetTicketLink'
+
 import { Divider } from '@material-ui/core';
+
 const WidgetPresenterNew = ({id=0}) => {
 
 // const router = useRouter()
@@ -41,8 +44,11 @@ const WidgetPresenterNew = ({id=0}) => {
       leftCentered={false}
       right={
         <Box>
-          <Box mt={7}>
+          <Box mt={7} maxWidth={300}>
+            
             <PresenterSchedule />
+            <GetTicketLink />
+
           </Box>
         </Box>
       }

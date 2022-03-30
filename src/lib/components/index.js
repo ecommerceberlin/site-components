@@ -105,6 +105,7 @@ export { default as HasTicketWithRole } from './HasTicketWithRole'
 
 export { default as Translatable } from './Translatable'
 export { default as DateAgo } from './DateAgo'
+export { default as GetTicketLink } from './GetTicketLink'
 
 
 export * from './Bookingmap';
