@@ -16,38 +16,40 @@ export const usePresentation = () => {
 
 export const PresentationContext = ({setting="", data={}, children}) => {
   
-    const {times, venues, categories} = useSettings(setting)
+
+    const {times, venues, categories} = useSettings(setting, {})
     const selectedVenue = useSelector(VenueSelector)
     
+    const profile = data && "profile" in data? data.profile: data;
+
     const value = React.useMemo(()=> ({
         categories,
         times,
         venues,
         venues_count: size(venues),
         selectedVenue, 
-
+        showDescription: Boolean(selectedVenue),
 
         id: data.id,
      
-        presenter: data.presenter,
-        company: data.cname2,
-        position: data.position,
-        bio: data.bio,
-        linkedin: data.profile_linkedin,
+        presenter: profile.presenter,
+        company: profile.cname2,
+        position: profile.position,
+        bio: profile.bio,
+        linkedin: profile.profile_linkedin,
 
-        title: data.presentation_title,
-        description: data.presentation_description,
-        category: data.presentation_category,
-        showDescription: Boolean(selectedVenue),
-
-        
-        time: data.presentation_time,
-        venue: data.presentation_venue,
+        title: profile.presentation_title,
+        description: profile.presentation_description,
+        category: profile.presentation_category,
+       
+        time: profile.presentation_time,
+        venue: profile.presentation_venue,
      
-        avatar: resizeCloudinaryImage(data.avatar_cdn, 100, 100),
-        logotype: resizeCloudinaryImage(data.logotype_cdn, 200, 200)
+        avatar: resizeCloudinaryImage(profile.avatar_cdn, 100, 100),
+        avatar_big: resizeCloudinaryImage(profile.avatar_cdn, 200, 200),
+        logotype: resizeCloudinaryImage(profile.logotype_cdn, 200, 200)
 
-    }), [data, selectedVenue, times, venues, categories])
+    }), [data.id, profile, selectedVenue, times, venues, categories])
     
     return <PresentationContextProvider.Provider value={value}>{children}</PresentationContextProvider.Provider>
   }

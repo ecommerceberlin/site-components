@@ -16,6 +16,7 @@ export { default as WidgetExhibitorsColumnList } from './WidgetExhibitorsColumnL
 export { default as WidgetSupport } from './WidgetSupport';
 export { default as WidgetCompany } from './WidgetCompany';
 export { default as WidgetPresenter } from './WidgetPresenter';
+export { default as WidgetPresenterNew } from './WidgetPresenterNew';
 
 
 export { default as WidgetSalesMap } from './WidgetSalesMap';
