@@ -59,7 +59,7 @@ const WidgetVideoWithEventInfo = ({setting = "hero", ...props}) => {
       <div className={classes.container}>
         <MyTypography template={template} label={ heading } />
         <MyTypography template="subhero" label={ subheading } />
-        {insert && <img src={resizeCloudinaryImage(insert, 300, 300)} className={classes.insert} alt="" />}
+        {insert && insert.includes("http") ? <img src={resizeCloudinaryImage(insert, 300, 300)} className={classes.insert} alt="" />: null}
         <div className={classes.eventinfo}>
           <WidgetEventInfo setting={setting} />
         </div>
