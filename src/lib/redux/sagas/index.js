@@ -154,12 +154,17 @@ function* accumulateFetches({resource, reload}) {
     //task will be delayed by 50ms so we may cancel it
     fetchTasks[endpoint] = yield fork(fetchAccumulatedFetches, endpoint, reload)
   }
-
 }
 
 function* fetchAccumulatedFetches(endpoint, reload){
 
-  const nonProxyableResources = ["blockings", "formdata", "ticketgroups", "tickets"]
+  const nonProxyableResources = [
+          "blockings", 
+          "formdata", 
+          "ticketgroups", 
+          "tickets", 
+          "vipcodes"
+  ]
 
   let response;
   //check if we have params...
@@ -168,7 +173,7 @@ function* fetchAccumulatedFetches(endpoint, reload){
   yield delay(50);
 
   const lists = yield select(Selectors.getResourceLists)
-
+  
   //check if we already fetched the URL .. so we should have resourcelist and resource...
   if(!reload && endpoint in lists && Array.isArray(lists[endpoint]) && lists[endpoint].length){
     
