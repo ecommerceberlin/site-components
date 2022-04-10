@@ -100,17 +100,23 @@ export const useDatasource = (query) => {
     return results;
 }
 
-export const useRecord = (endpoint, id) => {
+
+export const useRecord = (endpoint, id_or_slug) => {
 
     const dispatch = useDispatch();
-    const results = useSelector((state) => SingleRecordSelector(state, {
-        endpoint, id
+    const data = useSelector((state) => SingleRecordSelector(state, {
+        endpoint, id: id_or_slug, slug: id_or_slug
     }))
 
-    useEffect(() => dispatch(resourceFetchRequest(`${endpoint}/${id}`)), [endpoint, id])
+    useEffect(()=>{
+        if(endpoint && id_or_slug){
+            dispatch(resourceFetchRequest(`${endpoint}/${id_or_slug}`))
+        }
+    }, [endpoint, id_or_slug])
 
-    return results
+    return data
 }
+
 
 
 export const useSettings = (path = null, fallback = undefined) => {
