@@ -24,9 +24,9 @@ export default withFormik({
 
   handleSubmit: (payload, { props, setSubmitting, setErrors, setStatus }) => {
 
-    if( !("token" in props && "tickets" in props && "role" in props) ){
-      console.error("No ticketId/role set...", props);
-      setStatus({error: {"message": "no ticketId/role set...."}});
+    if( !("ticket_id" in props) && !("token" in props) && !("tickets" in props) && !("role" in props)  ){
+      console.error("ticket_id, tickets, role or token must be set!", props);
+      setStatus({error: {"message": "ticket_id, tickets, role or token must be set!"}});
       setSubmitting(false);
       return;
     }
