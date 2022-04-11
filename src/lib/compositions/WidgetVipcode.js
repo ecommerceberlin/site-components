@@ -95,7 +95,7 @@ const FillEmailForm = ({code}) => {
     switch(status){
         case "register":
             return  <Box>
-                <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("vipcodes.status-regsiter")}</Typography>)
+                <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("vipcodes.status-register")}</Typography>)
                 <WidgetRegForm setting="visitor.register" raw={true} data={{
                 email,
                 code
