@@ -22,6 +22,7 @@ import { CartItemsSelector } from '../redux/selectors'
 import { useSettings } from '../helpers'
 import { drawerShow, dialogShow } from './redux/actions';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles(theme => ({
 
@@ -111,9 +112,9 @@ function MyAppBar({setting="appbar", ...props}) {
   const dispatch = useDispatch()
   const classes = useStyles()
   const settings = useSettings(setting)
-  const {event_name} = useSettings("common", {})
+  const {event_name, event_name_short} = useSettings("common", {})
   const {logotype, links, position} = Object.assign({}, defaultProps, settings, props)
-
+  const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
  
   return (<div className={classNames(classes.grow, {
         // [classes.spaced]: cartItems
@@ -132,7 +133,7 @@ function MyAppBar({setting="appbar", ...props}) {
           </IconButton>
             <Link href="/">
 
-          {logotype && logotype.includes("http") ? <img src={logotype} alt="" style={{cursor: "pointer"}} /> :  <Typography component="a" variant="body1" color="inherit" className={classes.flex}>{event_name}</Typography>}
+          {logotype && logotype.includes("http") ? <img src={logotype} alt="" style={{cursor: "pointer"}} /> :  <Typography component="a" variant="body1" color="inherit" className={classes.flex}>{isMobile && event_name_short? event_name_short: event_name}</Typography>}
 
             </Link>
             <div className={classes.grow} />
