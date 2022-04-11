@@ -18,10 +18,10 @@ import WidgetRegForm from './WidgetRegForm';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        backgroundColor: grey[100]
+        backgroundColor: grey[100],
     },
     heading: {
-      
+      maxWidth: 600
     },
     cname: {
         fontWeight: 900
@@ -38,11 +38,11 @@ const CodeIsValid = ({code="", inviting=""}) => {
     const [translate] = useTranslate()
     const classes = useStyles()
 
-    return (<Box ml={1} mr={1}>
+    return (
         <Paper className={classes.root}>
         <TwoColsLayout 
         left={
-            <Box mt={1} mb={2}>
+            <Box ml={2} mt={1} mb={3}>
             <Grid container alignItems='center' justifyContent='center' direction="column" spacing={1}>
                 <Grid item>
                 <AllInclusiveIcon className={classes.icon} />
@@ -61,8 +61,7 @@ const CodeIsValid = ({code="", inviting=""}) => {
                 <FillEmailForm code={code} />
             </Box>
         } />
-     </Paper>
-    </Box>)
+     </Paper>)
 
 }
 
@@ -72,6 +71,7 @@ const FillEmailForm = ({code}) => {
     const [email, setEmail] = React.useState("")
     const [status, setStatus] = React.useState("")
     const [translate] = useTranslate()
+    const classes = useStyles()
 
     const {api} = useSettings("system")
 
@@ -108,10 +108,17 @@ const FillEmailForm = ({code}) => {
             return (<Typography variant="subtitle1" paragraph className={classes.heading}>{translate("vipcodes.code-is-expired")}</Typography>)
         break;
         default: 
-            return (<Grid container direction="row" alignItems='center'>
-            <Grid item><TextField value={email} onChange={e => setEmail(e.target.value)} label="E-mail" variant="outlined" /></Grid>
-            <Grid item><MyButton onClick={handleCheck} label={translate("common.next")} variant="text" /></Grid>
-            </Grid>)
+            return (<Box mt={5}>
+                 <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("vipcodes.lets-start")}</Typography>
+                <Grid container direction="row" alignItems='center'>
+                <Grid item>
+                    <TextField value={email} onChange={e => setEmail(e.target.value)} label="E-mail" variant="outlined" />
+                </Grid>
+                <Grid item>
+                    <MyButton onClick={handleCheck} label={translate("common.next")} variant="text" />
+                </Grid>
+                </Grid>
+            </Box>)
     }
 
 
