@@ -98,4 +98,6 @@ export { default as WidgetVisitor } from './WidgetRegForm'
 export { default as WidgetRoleButtons } from '../components/FsButtons'
 export { default as WidgetTickets } from './WidgetPremiumTickets'
 export { default as WidgetFeaturedPresenters} from './WidgetPresenters'
+export { default as WidgetExhibitorsWithSearch} from './WidgetExhibitorsWithSearch'
+
 /** compat */

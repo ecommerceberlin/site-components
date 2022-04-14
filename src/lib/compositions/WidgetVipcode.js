@@ -110,7 +110,7 @@ const FillEmailForm = ({code}) => {
         default: 
             return (<Box mt={5}>
                  <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("vipcodes.lets-start")}</Typography>
-                <Grid container direction="row" alignItems='center'>
+                <Grid container direction="row" alignItems='center' justifyContent='center'>
                 <Grid item>
                     <TextField value={email} onChange={e => setEmail(e.target.value)} label="E-mail" variant="outlined" />
                 </Grid>

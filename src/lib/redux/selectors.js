@@ -64,7 +64,7 @@ export const MatchListWithDataSelector = createCachedSelector(
 
 
 export const FilteredDataSelector = createSelector(
-  (state, resourceParams) => "filters" in resourceParams? resourceParams.filters: null,
+  (state, resourceParams) => resourceParams && "filters" in resourceParams? resourceParams.filters: null,
   MatchListWithDataSelector,
   (filters, data) => {
     if(!filters){
