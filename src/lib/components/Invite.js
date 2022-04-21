@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Invite = ({ person={}, text="See you!", template="teh20_visitor_template1" }) => {
+const Invite = ({ person={}, text="See you!", from=", ", template="teh20_visitor_template1" }) => {
   const [translate] = useTranslate()
   const classes = useStyles()
 
@@ -39,7 +39,7 @@ const Invite = ({ person={}, text="See you!", template="teh20_visitor_template1"
     <Grid item md={7} sm={6} xs={12}>
       <Box m={4}>
       <Typography variant="body1" gutterBottom>{translate("visitors.promorequest.description")}</Typography>
-      <img src={getInviteOgImage(`${text} ${_get(person, 'fname', '')} z ${_get(person, 'cname2')}.`, template)} alt="" className={classes.image} />
+      <img src={getInviteOgImage(`${text} ${_get(person, 'fname', '')} ${from} ${_get(person, 'cname2')}.`, template)} alt="" className={classes.image} />
       </Box>
     </Grid>
     </Grid>
