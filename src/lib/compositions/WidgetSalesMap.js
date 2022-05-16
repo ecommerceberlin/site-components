@@ -30,8 +30,8 @@ const WidgetSalesMap = ({setting = "bookingmap", ...props}) => {
         <div>
                     <div>
                     <BoothOrderSteps setting={setting}  />
-                    <RecentPurchases setting={setting} />
                     <BookingmapLegend setting={setting} />
+                    <RecentPurchases setting={setting} />
                     </div>
                     <Bookingmap setting={setting} booth={Booth} />
                   
