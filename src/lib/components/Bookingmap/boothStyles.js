@@ -139,6 +139,13 @@ const styles = {
 
   },
 
+  lastminute : {
+    backgroundColor: "#55cf52",
+    color :  "#55cf52",
+    borderColor: "#55cf52"
+
+  },
+
 
 }
 
