@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getTicketsSortedByStart, getTicketsSortedByEnd } from '../../redux/selectors'
+import { getTicketsSortedByStart, getTicketsSortedByEnd, getTicketsSortedByPrice } from '../../redux/selectors'
 import Ticket from './Ticket';
 import { useSettings } from '../../helpers'
 // import fetch from 'isomorphic-unfetch'
@@ -29,7 +29,7 @@ const TicketGroup = ({setting, groupId, boothId, label, status, ...props}) => {
   const {ecommerce, disabledTicketIds} = Object.assign(defaultProps, settings, props)
   const ecommerceSettings = useSettings(ecommerce, {});
   const {sort} = Object.assign({}, ecommerceDefaultProps, ecommerceSettings)
-  const tickets = useSelector((state) => sort && sort == "end" ? getTicketsSortedByEnd(state, {groupId}): getTicketsSortedByStart(state, {groupId}) )
+  const tickets = useSelector((state) =>getTicketsSortedByPrice(state, {groupId}) )
 
   if(isEmpty(tickets) || !Array.isArray(tickets)){
     return null
