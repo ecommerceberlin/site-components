@@ -87,6 +87,13 @@ export const validations = (requiredFieldNames) => ({
       .max(200, 'Invalid')
       .requireWhenRequired(requiredFieldNames, 'Company name is required.'),
 
+
+      company_address: Yup.string()
+      .min(10, "C'mon, your company address is probably longer than that")
+      .max(500, 'Too long')
+      .requireWhenRequired(requiredFieldNames, 'Company address is required.'),
+
+
       cname2: Yup.string()
       .min(2, "C'mon, your company is probably longer than that")
       .max(200, 'Invalid')
