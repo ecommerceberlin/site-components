@@ -94,6 +94,11 @@ const StepForm = ({setting, handleChange, handleBlur, handleSubmit, isSubmitting
   const renderField = (data, idx) => {
 
     const id = data.name;
+
+    if(!id){
+      return null
+    }
+  
     const required = "required" in data && data.required === true;
     const error = id in errors ? errors[id] : false;
     const value= id in values ? values[id] : "";
