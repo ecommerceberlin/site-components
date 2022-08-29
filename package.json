@@ -1,6 +1,6 @@
 {
   "name": "eventjuicer-site-components",
-  "version": "4.4.41",
+  "version": "4.4.42",
   "main": "src/lib/index.js",
   "repository": {
     "type": "git",
