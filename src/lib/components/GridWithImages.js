@@ -28,9 +28,12 @@ function GridWithImages(props) {
 
         {items.map(item => (<Grid item xl={6} lg={6} md={12} sm={12} xs={12}  key={item.image}> <Paper className={classes.paper}>
             <img src={resizeCloudinaryImage(item.image, 1500, 1000)} style={{
+              ...{
                 width: '100%',
                 margin: '0 auto',
-              }}/></Paper></Grid>
+              },
+              ...(item.style? item.style: {})
+            }}/></Paper></Grid>
         ))}     
       
       </Grid>
