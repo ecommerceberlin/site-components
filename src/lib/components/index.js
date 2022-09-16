@@ -65,6 +65,7 @@ export { default as Offer } from './Offer';
 
 export { default as MyTable } from './MyTable';
 export { default as Markdown } from './Markdown';
+export { default as MarkdownSection } from './MarkdownSection';
 
 export { default as VoteWithLinkedIn } from './VoteWithLinkedIn';
 export { default as LinkedInLogin } from './LinkedInLogin';
