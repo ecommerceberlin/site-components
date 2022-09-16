@@ -3,11 +3,11 @@ import React from 'react'
 import { useSettings, resizeCloudinaryImage} from '../../helpers'
 import {get, map, isEmpty} from 'lodash'
 
-const CompanyContextProvider = React.createContext({});
+const CompanyContextContainer = React.createContext({});
 
 export const useCompany = () => {
 
-    const context = React.useContext(CompanyContextProvider)  
+    const context = React.useContext(CompanyContextContainer)  
 
     return context
 }
@@ -16,7 +16,7 @@ export const useCompany = () => {
  *   const hasHTML = /<\/?[a-z][\s\S]*>/i.test(text)
  */
 
-export const CompanyContext = ({setting="", data={}, children}) => {
+export const CompanyContextProvider = ({setting="", data={}, children}) => {
   
     const settings = useSettings(setting, {})
     
@@ -67,7 +67,7 @@ export const CompanyContext = ({setting="", data={}, children}) => {
 
     }, [data, settings])
     
-    return <CompanyContextProvider.Provider value={value}>{children}</CompanyContextProvider.Provider>
+    return <CompanyContextContainer.Provider value={value}>{children}</CompanyContextContainer.Provider>
 
 }
 

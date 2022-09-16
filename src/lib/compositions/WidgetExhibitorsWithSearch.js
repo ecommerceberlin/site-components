@@ -4,7 +4,7 @@ import {ToolBar, Wrapper} from '../components'
 import { Bookingmap, Booth } from '../components/Bookingmap'
 import { useDatasource } from '../helpers'
 import { Box } from '@material-ui/core'
-import { CompanyContext } from '../components/Company'
+import { CompanyContextProvider } from '../components/Company'
 
 export const findBoothsId = (source) => {
     let booths = [];

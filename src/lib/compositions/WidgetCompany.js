@@ -19,13 +19,13 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 
 
-import {CompanyContext, CompanyData, CompanyLogotype, CompanyContact, CompanyLocation} from '../components/Company'
+import {CompanyContextProvider, CompanyData, CompanyLogotype, CompanyContact, CompanyLocation} from '../components/Company'
 
 const WidgetCompany = ({slug, map, router}) => {
 
   return (
 
-    <SingleRecord endpoint="companies" slug={slug}>{(company) => <CompanyContext data={company}>
+    <SingleRecord endpoint="companies" slug={slug}>{(company) => <CompanyContextProvider data={company}>
    
       <Wrapper label="">
   
@@ -56,7 +56,7 @@ const WidgetCompany = ({slug, map, router}) => {
   
       </Wrapper>
       
-      </CompanyContext>
+      </CompanyContextProvider>
   }
   </SingleRecord>)
 
