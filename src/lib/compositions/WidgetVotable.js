@@ -10,6 +10,7 @@ import {
     MyTypography as Typography,
     Wrapper,
     Sharer,
+    Translatable,
    KeywordSelect,
    TwoColsLayout,
    GetTicketLink
@@ -74,18 +75,17 @@ const WidgetVotable = ({id, vote, status, asPath, classes, show_votes, ...rest})
 
 
 
-<div className={classes.voteButtonContainer}>
+<Box>
 <div>
 {vote}
 </div>
-<div className={classes.voteInfo}>
-<React.Fragment>
-{show_votes && <Typography template="presenter1">Votes: {record.votes}</Typography>}
+ 
+<Box>
+{show_votes && record.votes? <Translatable variant="h5" label={["common.votes", {votes: record.votes}]} />: null}
 {status}
-{/* <Typography template="benefitsText" label="callforpapers.voting.rules.description" />  */}
-</React.Fragment>
-</div>
-</div>
+</Box>
+ 
+</Box>
 
 
 
