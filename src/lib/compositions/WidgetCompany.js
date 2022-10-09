@@ -19,7 +19,14 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 
 
-import {CompanyContextProvider, CompanyData, CompanyLogotype, CompanyContact, CompanyLocation} from '../components/Company'
+import {
+  CompanyContextProvider, 
+  CompanyData, 
+  CompanyLogotype, 
+  CompanyContact, 
+  CompanyLocation,
+  CompanyMeetup
+} from '../components/Company'
 
 const WidgetCompany = ({slug, map, router}) => {
 
@@ -49,6 +56,7 @@ const WidgetCompany = ({slug, map, router}) => {
           <Box>
             <Box mt={5}>
               <CompanyLocation />
+              {/* <CompanyMeetup /> */}
             </Box>
           </Box>
         }

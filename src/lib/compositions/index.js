@@ -63,13 +63,13 @@ export { default as WidgetVerticalTimeline } from './WidgetVerticalTimeline'
 
 export { default as WidgetIconGrid } from './WidgetIconGrid';
 export { default as WidgetRegForm } from './WidgetRegForm'
-export { default as WidgetVipcode } from './WidgetVipcode'
+export { default as WidgetCompanyVip } from './WidgetCompanyVip'
+export { default as WidgetCompanyMeetup } from './WidgetCompanyMeetup'
 
 
 
 export { default as WidgetVoteWithLinkedIn } from './WidgetVoteWithLinkedIn'
 export { default as WidgetBanner } from './WidgetBanner'
-export { default as WidgetMeetup } from './WidgetMeetup'
 export { default as WidgetContestantCategories } from './WidgetContestantCategories'
 
 export { default as WidgetPosts } from './WidgetPosts'

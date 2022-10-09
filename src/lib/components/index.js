@@ -111,6 +111,5 @@ export { default as CompanyCardSimple } from './CompanyCardSimple'
 
 
 export * from './Bookingmap';
-export * from './Meetups';
 export * from './MyLayouts';
 export * from './redux';
