@@ -45,20 +45,26 @@ export const WidgetCompanyMeetupInteraction = () => {
         switch(status){
             case "register":
                 return (<Box m={2}>
-                    <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("exhibitors.meetup.status-register")}</Typography>)
+                    <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("exhibitors.meetup.statuses.register")}</Typography>)
                     <WidgetRegForm setting="visitor.register" raw={true} data={{
                         email, 
                         company_id
                     }} /></Box>)
 
+            case "already_assigned":
+                return (<Box m={2}><Typography variant="h4" paragraph className={classes.heading}>{
+                    translate("exhibitors.meetup.statuses.exists")
+                }</Typography></Box>)
+
+                        
             case "assigned":
                 return (<Box m={2}><Typography variant="h4" paragraph className={classes.heading}>{
-                    translate("exhibitors.meetup.status-assigned")
+                    translate("exhibitors.meetup.statuses.assigned")
                 }</Typography></Box>)
 
             case "error":
                 return (<Box m={2}><Typography variant="subtitle1" paragraph className={classes.heading}>{
-                    translate("exhibitors.meetup.code-is-expired")
+                    translate("exhibitors.meetup.statuses.error")
                 }</Typography></Box>)
 
         }
