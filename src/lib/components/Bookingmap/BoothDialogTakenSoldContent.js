@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Tags from '../Tags'
 import {getCompanyProfileInfo, getCompanyName, resizeCloudinaryImage} from '../../helpers'
 import { useTranslate } from '../../i18n'
-import Markdown from '../Markdown'
-
+// import Markdown from '../Markdown'
+import Markdown from "react-markdown"
 const useStyles = makeStyles(theme => ({
   htmlContainer: {
     minHeight : 75,
@@ -58,11 +58,17 @@ const BoothDialogTakenSoldContent = ({setting="", company={}}) => {
     </div>
     <Tags tags={_get(company, "profile.keywords")} centered={false} />
     <Typography component="div">
-    <div
+
+    {_get(company, 'organizer_id')>1?     <div
       className={classes.htmlContainer}
       dangerouslySetInnerHTML={{
     __html: _get(company, 'profile.about')
-    }}/>
+    }}/>:  <Markdown className={classes.htmlContainer}>{ _get(company, 'profile.about') }</Markdown>}
+    
+
+
+
+
     </Typography>
     </React.Fragment>)
 
