@@ -48,7 +48,7 @@ export const WidgetCompanyMeetupInteraction = () => {
                     <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("exhibitors.meetup.statuses.register")}</Typography>)
                     <WidgetRegForm setting="visitor.register" raw={true} data={{
                         email, 
-                        company_id
+                        company_id: id
                     }} /></Box>)
 
             case "already_assigned":
