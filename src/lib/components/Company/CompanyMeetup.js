@@ -15,7 +15,7 @@ const CompanyMeet = () => {
 
 
     const handleClick = () => dispatch(dialogShow({
-        title: translate("exhibitors.meetup"),
+        title: translate("exhibitors.meetup.create"),
         content: <WidgetCompanyMeetupInteraction /> ,
         width: "xl"
     }))
@@ -25,7 +25,7 @@ const CompanyMeet = () => {
     }
 
     return (
-        <GrayBigButton label="xxx" icon={<RecordVoiceOverIcon />} onClick={handleClick} actionLabel="exhibitors.meetups.create" />
+        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={handleClick} actionLabel="exhibitors.meetups.create" />
 
     )
    

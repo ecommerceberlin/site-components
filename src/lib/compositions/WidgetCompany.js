@@ -56,7 +56,7 @@ const WidgetCompany = ({slug, map, router}) => {
           <Box>
             <Box mt={5}>
               <CompanyLocation />
-              {/* <CompanyMeetup /> */}
+              <CompanyMeetup />
             </Box>
           </Box>
         }
