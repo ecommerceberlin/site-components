@@ -25,7 +25,7 @@ const CompanyMeet = () => {
     }
 
     return (
-        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={handleClick} actionLabel="exhibitors.meetups.create" />
+        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={handleClick} actionLabel="exhibitors.meetup.create" />
 
     )
    
