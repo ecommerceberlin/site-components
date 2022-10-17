@@ -47,7 +47,9 @@ export const PresentationContext = ({setting="", data={}, children}) => {
      
         avatar: resizeCloudinaryImage(profile.avatar_cdn, 100, 100),
         avatar_big: resizeCloudinaryImage(profile.avatar_cdn, 200, 200),
-        logotype: resizeCloudinaryImage(profile.logotype_cdn, 200, 200)
+        logotype: resizeCloudinaryImage(profile.logotype_cdn, 200, 200),
+
+        limited: profile.limited
 
     }), [data.id, profile, selectedVenue, times, venues, categories])
     
