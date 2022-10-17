@@ -31,7 +31,8 @@ export const PresentationContext = ({setting="", data={}, children}) => {
         showDescription: Boolean(selectedVenue),
 
         id: data.id,
-     
+        company_id: data.company_id,
+
         presenter: profile.presenter,
         company: profile.cname2,
         position: profile.position,
