@@ -10,7 +10,7 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
 
 
     const dispatch = useDispatch();
-    const { id, limited, company_id } = usePresentation()
+    const { id, limited, company_id, presenter, title, time, venue } = usePresentation()
     const [translate] = useTranslate()
     const workshopers = useDatasource({resource: "workshopers"})
     const {limit} = useSettings(setting)
@@ -21,13 +21,17 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
     const labelProps = {
         pipeline: pipeline.length, 
         agreed: agreed.length,
-        limit
+        limit,
+        presenter,
+        title,
+        time,
+        venue
     }
 
     // console.log(agreed, limit, workshopers)
 
     const handleClick = () => dispatch(dialogShow({
-        title: translate("workshops.apply.button", labelProps),
+        title: translate("workshops.apply.hello", labelProps),
         content: <ScheduleItemApplyInteraction rel_participant_id={id} company_id={company_id} />, 
         width: "xl"
     }))
