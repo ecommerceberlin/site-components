@@ -5,21 +5,20 @@ import {grey, red} from '@material-ui/core/colors'
 import {TwoColsLayout} from '../components/MyLayouts'
 import { useTranslate } from '../i18n'
 import { CompanyCheckVisitorRelation } from '../components/Company';
-
+import ReactMarkdown from 'react-markdown';
 
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: grey[100],
     },
-    heading: {
-      maxWidth: 600
-    },
-    cname: {
-        fontWeight: 900
-    },
     icon: {
         fontSize: 100,
         color: red[700]
+    },
+    markdown: {
+        maxWidth: 600,
+        fontSize: theme.typography.pxToRem(18),
+        maxWidth: 800
     }
 }))
 
@@ -39,9 +38,7 @@ const WidgetCompanyInteraction = ({icons=null, label="", regFormLabel="", data={
                 {icons}
                 </Grid>
                 <Grid item>
-                <Typography variant="h5" className={classes.heading}>
-                    <span className={classes.cname}>{cname}</span>{` `}{translate(label)}
-                </Typography>        
+                <ReactMarkdown className={classes.markdown}>{translate(label, {cname})}</ReactMarkdown>   
                 </Grid>
             </Grid>
             </Box>
