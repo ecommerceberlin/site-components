@@ -5,6 +5,8 @@ import { usePresentation } from './context';
 import { useTranslate } from '../../i18n';
 import ScheduleItemApplyInteraction from './ScheduleItemApplyInteraction';
 import { useDatasource, useSettings } from '../../helpers';
+import { Typography, Box } from '@material-ui/core';
+
 
 const ScheduleItemApply = ({setting="workshops.apply"}) => {
 
@@ -15,7 +17,7 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
     const workshopers = useDatasource({resource: "workshopers"})
     const {limit} = useSettings(setting)
 
-    const pipeline = Array.isArray(workshopers)? workshopers.filter(item => item.rel_participant_id == id  && item.direction === "LTD" ): [];
+    const pipeline = Array.isArray(workshopers)? workshopers.filter(item => item.rel_participant_id == id  && item.direction === "LTD" && !item.responded_at ): [];
     const agreed = pipeline.filter(item => item.agreed);
 
     const labelProps = {
@@ -25,7 +27,8 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
         presenter,
         title,
         time,
-        venue
+        venue,
+        remaining: limit - agreed.length
     }
 
     // console.log(agreed, limit, workshopers)
@@ -52,7 +55,15 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
     }
 
     return (
-        <MyButton label="workshops.apply.button" labelProps={labelProps} onClick={handleClick} variant="outlined" color="primary" />
+        <Box>
+            <Box>
+            <MyButton label="workshops.apply.button" labelProps={labelProps} onClick={handleClick} variant="contained" color="primary" />
+            </Box>
+            <Box>
+                <Typography variant="overline" display="block">{translate("workshops.apply.remaining", labelProps)}</Typography>
+                <Typography variant="overline"  display="block">{translate("workshops.apply.awaiting", labelProps)}</Typography>
+            </Box>
+        </Box>
     )
 }
 

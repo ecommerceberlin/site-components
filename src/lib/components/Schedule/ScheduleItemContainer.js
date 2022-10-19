@@ -77,7 +77,7 @@ const ScheduleItemContainer = ({setting="", venue="", time="", data=[]}) => {
       </PresentationContext>))}
 
       </Box>
-      <CardActions style={{display: "flex", justifyContent: "right"}}>
+      <CardActions style={{display: "flex", justifyContent: "right", alignItems: "flex-start"}}>
 
 
       <MyButton label="common.details" onClick={() => dispatch(dialogShow({
