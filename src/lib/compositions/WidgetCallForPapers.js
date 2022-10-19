@@ -51,7 +51,7 @@ return (
             link={link} 
             title={item => <React.Fragment>{`${item.presenter}, ${item.position}`} <strong>{item.cname2}</strong> </React.Fragment> }
             subtitle={item => item.presentation_title}
-            text={item => show_votes ? `/${item.votes} votes/` : null}
+            text={item => show_votes && item.votes ? `/${item.votes} votes/` : null}
             voted={votesData.keyed}
             moreLabel="common.vote_details"
         />}
@@ -78,7 +78,7 @@ return (
                     {name: "details", render: "link", link, label: "common.vote_details", color: "primary", variant: "outlined", breakpoints:{xs: 12, md: 1, lg: 1}}
                 ]},
                    
-                {name: "votes", render: (row) => show_votes? row.votes: "", style: "big", align: "center"},
+                {name: "votes", render: (row) => show_votes && row.votes? row.votes: "", style: "big", align: "center"},
             ]}
              selected={selected}
             // link={link} 
