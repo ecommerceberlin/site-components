@@ -17,7 +17,8 @@ const keyableResources = [
   "report",
   "exhibitors2",
   "companies2",
-  "purchases"
+  "purchases",
+  "workshopers"
 ]
 
 const reducer = (state = {
