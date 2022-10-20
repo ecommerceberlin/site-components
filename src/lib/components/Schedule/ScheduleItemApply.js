@@ -17,8 +17,9 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
     const workshopers = useDatasource({resource: "workshopers"})
     const {limit} = useSettings(setting)
 
-    const pipeline = Array.isArray(workshopers)? workshopers.filter(item => item.rel_participant_id == id  && item.direction === "LTD" && !item.responded_at ): [];
-    const agreed = pipeline.filter(item => item.agreed);
+    const all = Array.isArray(workshopers)? workshopers.filter(item => item.rel_participant_id == id  && item.direction === "LTD" ): [];
+    const pipeline = all.filter(item => !item.responded_at);
+    const agreed = all.filter(item => item.agreed);
 
     const labelProps = {
         pipeline: pipeline.length, 
