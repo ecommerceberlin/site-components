@@ -20,6 +20,7 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
     const all = Array.isArray(workshopers)? workshopers.filter(item => item.rel_participant_id == id  && item.direction === "LTD" ): [];
     const pipeline = all.filter(item => !item.responded_at);
     const agreed = all.filter(item => item.agreed);
+    const remaining = Math.max(0, limit - agreed.length)
 
     const labelProps = {
         pipeline: pipeline.length, 
@@ -29,7 +30,7 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
         title,
         time,
         venue,
-        remaining: limit - agreed.length
+        remaining
     }
 
     // console.log(agreed, limit, workshopers)
@@ -51,7 +52,7 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
         return null
     }
 
-    if(agreed >= limit){
+    if(remaining === 0){
         return( <MyButton label="workshops.apply.closed" labelProps={labelProps} disabled={true} variant="contained" color="default" />)
     }
 
