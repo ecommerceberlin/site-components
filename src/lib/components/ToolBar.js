@@ -114,7 +114,7 @@ function ToolBar({data, indexes, onSearch, buttons=null}) {
       setFiltered(searchFunction.search(query))
     }else{
       //reset to original data
-      setFiltered(data)
+      setFiltered([])
     }
   },[query])
 

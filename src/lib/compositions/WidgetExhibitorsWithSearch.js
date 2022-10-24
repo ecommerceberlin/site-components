@@ -1,40 +1,113 @@
 
 import React from 'react'
 import {ToolBar, Wrapper} from '../components'
-import { Bookingmap, Booth } from '../components/Bookingmap'
+import { Bookingmap, BoothVisitor } from '../components/Bookingmap'
 import { useDatasource } from '../helpers'
-import { Box } from '@material-ui/core'
-import { CompanyContextProvider } from '../components/Company'
+import { Box, Button } from '@material-ui/core'
+// import { CompanyContextProvider } from '../components/Company'
+import { isEmpty, flatten } from 'lodash'
+import { useTranslate } from '../i18n'
+
 
 export const findBoothsId = (source) => {
     let booths = [];
 
-    source.forEach(exhibitor => {
-        exhibitor.instances.filter(ticket => ticket.formdata && "id" in ticket.formdata)
-        .map(ticket => ticket.formdata.id)
-        .forEach(formdata => booths.push(formdata))    
-    })
+    if(Array.isArray(source)){
+        source.forEach(exhibitor => {
+            exhibitor.instances.filter(ticket => ticket.formdata && "id" in ticket.formdata)
+            .map(ticket => ticket.formdata.id)
+            .forEach(formdata => booths.push(formdata))    
+        })
+    }
+   
     return booths
 }
 
+const ExhbitorsListUpdaterContextContainer = React.createContext({})
+export const useExhibitorsListUpdaterContext = () => React.useContext(ExhbitorsListUpdaterContextContainer)
+export const ExhbitorsListUpdaterContextProvider = ({children}) => {
+    
+    const [searched, setSearched] = React.useState([])
+    const [keyword, setKeyword] = React.useState("")
+
+    const data = useDatasource({resource: "exhibitors2"})
+    const keywords = React.useMemo(() => [...new Set(flatten(data.map(exhibitor => exhibitor.profile.keywords)))], [data])
+
+    const value = React.useMemo(() => {
+
+        const filteredByKeyword = keyword? data.filter(exh => exh.profile.keywords.includes(keyword)): []
+
+        return {
+            data, 
+            searched, 
+            setSearched, 
+            keyword, 
+            setKeyword,
+            keywords,
+            filteredByKeyword
+        }
+    }, [data, searched, setSearched, keyword, setKeyword, keywords])
+    
+    return (<ExhbitorsListUpdaterContextContainer.Provider value={value}>{children}</ExhbitorsListUpdaterContextContainer.Provider>)
+}
+
+
+const ExhibitorsListToolbar = () => {
+
+    const {setSearched, data} = useExhibitorsListUpdaterContext()
+
+    if(isEmpty(data)){
+        return null
+    }
+
+    return (<Box mb={2}><ToolBar data={data} indexes={[
+        ["profile", "name"],
+        ["slug"],
+    ]} buttons={<Keywords/>} onSearch={setSearched}  /></Box>)
+
+}
+
+const FilteredBookingMap = ({setting="bookingmap"}) => {
+
+    const {searched, keyword, filteredByKeyword} = useExhibitorsListUpdaterContext()
+
+    const marked = findBoothsId(keyword? filteredByKeyword: searched)
+    return (<Bookingmap setting={setting} booth={BoothVisitor} marked={marked} />)
+}
+
+
+const Keywords = () => {
+    const {keywords, keyword, setKeyword} = useExhibitorsListUpdaterContext()
+    const [translate] = useTranslate()
+    const handleSetKeyword = (name) => () => {
+        if(keyword == name){
+            setKeyword("")
+        }else{
+            setKeyword(name)
+        }
+    }
+    return (<Box m={1}>{keywords.map(name => {
+        if(!name){
+            return null
+        }
+
+        return <Button onClick={handleSetKeyword(name)} variant={name === keyword? "outlined": "text"}>{translate(`common.tags.${name}`)}</Button>
+    })}</Box>)
+}
+
+
 const WidgetExhibitorsWithSearch = ({setting="bookingmap"}) => {
-    const exhibitors = useDatasource({resource: "exhibitors2"})
-    const [filtered, setFiltered] = React.useState(exhibitors)
-
-    const marked = filtered.length < 10? findBoothsId(filtered): []
-
+    
+    
     return (<Wrapper label="exhibitors.map.search" secondaryLabel={null}>
-
-    <ToolBar data={exhibitors} onSearch={setFiltered} indexes={["slug", "profile.name"]} /> 
-
-    <Box>
-        <Bookingmap setting={setting} booth={Booth} marked={marked} />
-
-        {/* {filtered.map(exh => <CompanyContext key={exh.id}></CompanyContext>)} */}
-    </Box>
-
+    <ExhbitorsListUpdaterContextProvider>
+    <ExhibitorsListToolbar  /> 
+    <Box><FilteredBookingMap setting={setting} /></Box>
+    </ExhbitorsListUpdaterContextProvider>
     </Wrapper>)
 
 }
 
 export default WidgetExhibitorsWithSearch
+
+
