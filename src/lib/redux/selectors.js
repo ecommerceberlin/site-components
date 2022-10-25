@@ -401,7 +401,7 @@ export const getTicketGroup = createSelector(
 
 export const getNonPastTickets = createSelector(
   getTicketGroup,
-  (ticketgroup) => ticketgroup.tickets.filter(t => t.errors.indexOf("overdue") === -1)
+  (ticketgroup) => ticketgroup && "tickets" in ticketgroup && ticketgroup.tickets? ticketgroup.tickets.filter(t => t.errors.indexOf("overdue") === -1): []
 )
 
 export const getTicketsSortedByStart = createSelector(

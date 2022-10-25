@@ -11,6 +11,7 @@ import { useTranslate } from '../i18n'
 import WidgetCompanyInteraction from './WidgetCompanyInteraction'
 import WidgetRegForm from './WidgetRegForm';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
    
@@ -29,7 +30,7 @@ export const WidgetCompanyMeetupInteraction = ({forcedId = 0}) => {
     const {id} = useRecord("companies", query && "slug" in query && query.slug? query.slug: forcedId)   
 
     if(!id){
-        return null
+        return <CircularProgress />
     }
 
 
