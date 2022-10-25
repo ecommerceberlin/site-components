@@ -21,12 +21,16 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export const WidgetCompanyMeetupInteraction = () => {
+export const WidgetCompanyMeetupInteraction = ({forcedId = 0}) => {
 
     const {query} = useRouter()
     const classes = useStyles()
     const [translate] = useTranslate()
-    const {id} = useRecord("companies", query && "slug" in query? query.slug: "")   
+    const {id} = useRecord("companies", query && "slug" in query && query.slug? query.slug: forcedId)   
+
+    if(!id){
+        return null
+    }
 
 
     return (<WidgetCompanyInteraction 

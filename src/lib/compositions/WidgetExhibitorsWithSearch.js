@@ -72,6 +72,7 @@ const FilteredBookingMap = ({setting="bookingmap"}) => {
     const {searched, keyword, filteredByKeyword} = useExhibitorsListUpdaterContext()
 
     const marked = findBoothsId(keyword? filteredByKeyword: searched)
+
     return (<Bookingmap setting={setting} booth={BoothVisitor} marked={marked} />)
 }
 
@@ -91,7 +92,7 @@ const Keywords = () => {
             return null
         }
 
-        return <Button onClick={handleSetKeyword(name)} variant={name === keyword? "outlined": "text"}>{translate(`common.tags.${name}`)}</Button>
+        return <Button key={name} onClick={handleSetKeyword(name)} color={name === keyword? "primary": "secondary"} variant={name === keyword? "outlined": "text"}>{translate(`common.tags.${name}`)}</Button>
     })}</Box>)
 }
 
