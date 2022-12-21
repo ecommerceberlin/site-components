@@ -20,6 +20,10 @@ const CompanyMeet = () => {
         width: "xl"
     }))
 
+    if("vipcode" in query){
+        return null
+    }
+
     if("meet" in query){
         return null
     }
