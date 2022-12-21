@@ -101,3 +101,7 @@ export { default as WidgetFeaturedPresenters} from './WidgetPresenters'
 export { default as WidgetExhibitorsWithSearch} from './WidgetExhibitorsWithSearch'
 
 /** compat */
+
+
+
+export {default as WidgetUserMeetups} from './WidgetUserMeetups'
