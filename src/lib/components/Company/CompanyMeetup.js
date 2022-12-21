@@ -6,12 +6,15 @@ import GrayBigButton from '../GrayBigButton';
 import {WidgetCompanyMeetupInteraction} from '../../compositions/WidgetCompanyMeetup';
 import { dialogShow } from '../redux/actions';
 import { useRouter } from 'next/router';
+import {useCompany} from './context'
+
 
 const CompanyMeet = () => {
     
     const {query} = useRouter()
     const [translate] = useTranslate()
     const dispatch = useDispatch();
+    const {present} = useCompany()
 
 
     const handleClick = () => dispatch(dialogShow({
@@ -19,6 +22,10 @@ const CompanyMeet = () => {
         content: <WidgetCompanyMeetupInteraction /> ,
         width: "xl"
     }))
+
+    if(!present){
+        return null
+    }
 
     if("vipcode" in query){
         return null

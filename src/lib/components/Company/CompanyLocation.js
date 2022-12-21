@@ -5,7 +5,6 @@ import {useCompany} from './context'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { useDispatch } from 'react-redux';
 import { dialogShow } from '../redux/actions';
-import isEmpty from 'lodash/isEmpty'
 import {Booth, Bookingmap} from '../Bookingmap'
 import { useTranslate } from '../../i18n';
 import GrayBigButton from '../GrayBigButton';
@@ -13,7 +12,7 @@ import GrayBigButton from '../GrayBigButton';
 
 const CompanyLocation = () => {
 
-    const {name, boothIds, boothNames, mapSetting} = useCompany()
+    const {name, boothIds, boothNames, mapSetting, present} = useCompany()
     const [translate] = useTranslate()
     const dispatch = useDispatch();
 
@@ -30,7 +29,7 @@ const CompanyLocation = () => {
         width: "xl"
     }))
 
-    if(isEmpty(boothIds)){
+    if(!present){
         return null
     }
 
