@@ -4,6 +4,7 @@ import Wrapper from '../components/Wrapper'
 import Schedule from '../components/Schedule'
 import Exhibitors from '../datasources/Exhibitors';
 import {useDatasource, useSettings} from '../helpers'
+import { isObject, isEmpty } from 'lodash';
 
 const defaultProps = {
     wrapperProps: {
@@ -25,8 +26,8 @@ const defaultProps = {
 const WidgetSchedule = ({setting = "schedule", ...props}) => {
 
     const settings = useSettings(setting)
-    const {wrapperProps, day, ...otherProps} = Object.assign({}, defaultProps, settings, props)
-
+    const {wrapperProps, day, venues,...otherProps} = Object.assign({}, defaultProps, settings, props)
+    
 
     const presenters = useDatasource({
         resource: "presenters",
@@ -35,6 +36,9 @@ const WidgetSchedule = ({setting = "schedule", ...props}) => {
                 const conditions = []
                 if(day){
                     conditions.push(day.length && "presentation_day" in item && item.presentation_day == day)
+                }
+                if(venues && isObject(venues)){
+                    conditions.push("presentation_venue" in item && Object.keys(venues).includes(item.presentation_venue) )
                 }
 
                 // if(short){
@@ -45,6 +49,10 @@ const WidgetSchedule = ({setting = "schedule", ...props}) => {
             }
         }
     })
+
+    if(isEmpty(presenters)){
+        return null
+    }
 
 
     return (
