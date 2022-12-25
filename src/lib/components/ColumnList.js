@@ -1,43 +1,84 @@
 import React from 'react';
-import _get from 'lodash/get';
-import Grid from '@material-ui/core/Grid';
-import ColumnlistItem from './ColumnlistItem'
-import Highlight from './Highlight'
+import get from 'lodash/get';
+// import Highlight from './Highlight'
+import { 
+  Grid,
+  List, 
+  ListItem, 
+  ListItemText, 
+  ListItemSecondaryAction,
+  IconButton
+} from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/styles';
+import DetailsIcon from '@material-ui/icons/Details'
+import {useRouter} from 'next/router'
+
+const useStyles = makeStyles({
+  listItem: {
+    "&:hover $listItemSecondaryAction": {
+      visibility: "inherit"
+    }
+  },
+  listItemSecondaryAction: {
+    visibility: "hidden"
+  },
+})
 
 
-const ColumnList = ({data, offers, path}) => (
 
-  <Grid container spacing={7}>
-    {data.map((chunk, i) => (
-      <Grid key={i} item xs={12} sm={6} md={4} lg={3} xl={3}>
-        {chunk && Array.isArray(chunk) ? chunk.map((company) => (
+const ColumnListItem = ({slug="", title="", selected=false, path=""}) => {
 
-        <ColumnlistItem 
+  const classes = useStyles()
+  const {push} = useRouter()
+
+  if(!slug || !title){
+    return null;
+  }
+
+  return ( <ListItem 
+    button 
+    component="a"
+    selected={ selected }
+    dense
+    classes={{
+      container: classes.listItem
+    }}
+    href={ `${path}/${slug}` }
+    onClick={ () => push(`${path}/${slug}`) }
+    >
+  <ListItemText primary={ title } secondary={null}  />
+  <ListItemSecondaryAction className={classes.listItemSecondaryAction}>
+    {/* <IconButton>
+    <DetailsIcon />
+    </IconButton> */}
+  </ListItemSecondaryAction>
+  </ListItem>)
+
+}
+
+const ColumnList = ({data=[], marked=[], path="/exhibitors"}) => {
+
+  return (<Grid container spacing={7}>{data.map((chunk, i) => {
+
+  if(!Array.isArray(chunk)){
+    return null;
+  }
+
+  return (<Grid key={i} item xs={12} sm={6} md={4} lg={3} xl={3}>
+      <List component="div">{chunk.map((company) => <ColumnListItem 
           key={company.id} 
-          id={company.id} 
-          path={path}
-          slug={_get(company, "slug")} 
-          name={_get(company, 'profile.name')} 
-          highlighted={offers && _get(company, "promo", 0) ? <Highlight /> : null} 
-        />
+          selected={ Array.isArray(marked) && marked.includes(company.id) }
+          slug={company.slug} 
+          title={get(company, 'profile.name', "")} 
+          path={path} 
+          />)}
+      </List>
+    </Grid>
+  )
 
-        )) : null}
-      </Grid>
-    ))}
-  </Grid>
+})}</Grid>)
 
-)
-
-ColumnList.defaultProps = {
-  data: [],
-  offers : false,
-  path: "/exhibitors"
-};
+}
 
 export default ColumnList
-
-
-/**
- *  
-
- */
