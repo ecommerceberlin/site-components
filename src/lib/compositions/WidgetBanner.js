@@ -2,24 +2,9 @@ import React from 'react'
 import Wrapper from '../components/Wrapper'
 import Settings from '../datasources/Settings'
 import Box from '@material-ui/core/Box'
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import {makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link'
-import {resizeCloudinaryImage} from '../helpers'
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-
-function useWidth() {
-    const theme = useTheme();
-    const keys = [...theme.breakpoints.keys].reverse();
-    return (
-      keys.reduce((output, key) => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const matches = useMediaQuery(theme.breakpoints.up(key));
-        return !output && matches ? key : output;
-      }, null) || 'md'
-    );
-  }
-
+import {resizeCloudinaryImage, useWidth} from '../helpers'
 
 const useStyles = makeStyles((theme) => ({
     root: {
