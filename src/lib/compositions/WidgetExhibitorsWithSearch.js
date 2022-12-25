@@ -31,11 +31,11 @@ export const ExhbitorsListUpdaterContextProvider = ({children}) => {
     const [keyword, setKeyword] = React.useState("")
 
     const data = useDatasource({resource: "exhibitors2"})
-    const keywords = React.useMemo(() => [...new Set(flatten(data.map(exhibitor => exhibitor.profile.keywords)))], [data])
+    const keywords = React.useMemo(() => [...new Set(flatten(data.map(exhibitor => exhibitor.profile.keywords)))].filter(k => isNaN(k)), [data])
 
     const value = React.useMemo(() => {
 
-        const filteredByKeyword = keyword? data.filter(exh => exh.profile.keywords.includes(keyword)): []
+        const filteredByKeyword = keyword? data.filter(exh => "profile" in exh && "keywords" in exh.profile && Array.isArray(exh.profile.keywords) && exh.profile.keywords.includes(keyword)): []
 
         return {
             data, 
@@ -52,7 +52,7 @@ export const ExhbitorsListUpdaterContextProvider = ({children}) => {
 }
 
 
-const ExhibitorsListToolbar = () => {
+export const ExhibitorsListToolbar = () => {
 
     const {setSearched, data} = useExhibitorsListUpdaterContext()
 
