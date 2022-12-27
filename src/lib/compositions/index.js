@@ -11,7 +11,8 @@ export { default as WidgetAllExhibitorsAvatarlist } from './WidgetAllExhibitorsA
 export { default as WidgetExhibitorsAvatarlist } from './WidgetExhibitorsAvatarlist';
 
 export { default as WidgetAllExhibitorsColumnList } from './WidgetAllExhibitorsColumnList';
-export { default as WidgetExhibitorsColumnList } from './WidgetExhibitorsColumnList';
+export { default as WidgetAllOrCurrentExhibitorsColumnList } from './WidgetAllOrCurrentExhibitorsColumnList';
+
 
 export { default as WidgetSupport } from './WidgetSupport';
 export { default as WidgetCompany } from './WidgetCompany';
