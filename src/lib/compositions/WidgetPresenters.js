@@ -38,6 +38,10 @@ const WidgetPresenters = ({setting, ...props}) => {
         }
     })
 
+    if(!data || Array.isArray(data) || !data.length){
+        return true
+    }
+
     return (<Wrapper {...wrapperProps}>
     <People 
         setting={setting}
