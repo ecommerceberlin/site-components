@@ -11,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import * as JsSearch from 'js-search';
 import { isFunction } from 'lodash';
+import Grid from '@material-ui/core/Grid';
 
 // import IconButton from '@material-ui/core/IconButton';
 // import Typography from '@material-ui/core/Typography';
@@ -45,9 +46,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
+    minWidth: 200,
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       width: 'auto',
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(3),
     },
   },
   searchIcon: {
@@ -221,18 +226,10 @@ const handleSearch = (e) => {
     <div className={classes.grow}>
       <AppBar position="static" color="default" elevation={0}>
         <Toolbar variant="dense">
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton> */}
-          {/* <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography> */}
-          <div className={classes.search}>
+          <Grid container spacing={1} justifyContent="center" alignItems='center'>
+            <Grid item xs={12} sm={12} md={4} lg={3}>
+
+            <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -247,11 +244,23 @@ const handleSearch = (e) => {
               onChange={handleSearch}
               fullWidth={true}
             />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.buttons}>
+
+            </div>
+            </Grid>
+            <Grid item xs={12} sm={12} md={8} lg={9}>
+
+            <div className={classes.buttons}>
             {buttons}
           </div>
+
+
+            </Grid>
+          </Grid>
+        
+          
+      
+          {/* <div className={classes.grow} /> */}
+         
           {/* <div className={classes.sectionDesktop}></div> */}
           {/* <div className={classes.sectionMobile}>
             <IconButton
