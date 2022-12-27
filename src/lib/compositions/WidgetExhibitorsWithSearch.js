@@ -27,10 +27,16 @@ const ExhbitorsListUpdaterContextContainer = React.createContext({})
 export const useExhibitorsListUpdaterContext = () => React.useContext(ExhbitorsListUpdaterContextContainer)
 export const ExhbitorsListUpdaterContextProvider = ({children}) => {
     
-    const [searched, setSearched] = React.useState([])
+    const [searched, _setSearched] = React.useState([])
     const [keyword, setKeyword] = React.useState("")
 
     const data = useDatasource({resource: "exhibitors2"})
+
+    const setSearched = React.useCallback((str) => {
+        setKeyword("")
+        _setSearched(str)
+    }, [searched, keyword])
+    
     const keywords = React.useMemo(() => [...new Set(flatten(data.map(exhibitor => exhibitor.profile.keywords)))].filter(k => isNaN(k)), [data])
 
     const value = React.useMemo(() => {
