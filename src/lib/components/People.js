@@ -13,11 +13,19 @@ import {
 } from '../helpers';
 
 
-const FullJobInfo = ({ company, job }) => (
-  <span>
-    {job} @ <strong>{company}</strong>
-  </span>
-);
+const FullJobInfo = ({ company, job }) => {
+
+  if(!company && !job){
+    return null
+  }
+
+
+  return (
+    <span>
+      {job} @ <strong>{company}</strong>
+    </span>
+  );
+}
 
 
 const defaultProps = {

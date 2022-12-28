@@ -38,8 +38,10 @@ const WidgetPresenters = ({setting, ...props}) => {
         }
     })
 
-    if(!data || Array.isArray(data) || !data.length){
-        return true
+    console.log(data)
+
+    if(!data || !Array.isArray(data) || !data.length){
+        return null
     }
 
     return (<Wrapper {...wrapperProps}>
