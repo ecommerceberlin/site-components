@@ -34,11 +34,11 @@ const WidgetPresenters = ({setting, ...props}) => {
         resource: "presenters",
         filters: {
             filter: filter,
-            limit: limit
+            limit: limit,
+            sort: "avatar",
+            dir: "ASC"
         }
     })
-
-    console.log(data)
 
     if(!data || !Array.isArray(data) || !data.length){
         return null
