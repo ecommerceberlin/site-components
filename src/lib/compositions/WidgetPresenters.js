@@ -40,7 +40,7 @@ const WidgetPresenters = ({setting, ...props}) => {
         }
     })
 
-    if(!data || !Array.isArray(data) || !data.length){
+    if(!data || !Array.isArray(data) || data.length < 4){
         return null
     }
 
