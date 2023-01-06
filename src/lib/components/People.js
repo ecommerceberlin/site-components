@@ -4,13 +4,12 @@ import _get from 'lodash/get';
 import Person from './Person';
 import {useSettings } from '../helpers'
 import isFunction from 'lodash/isFunction'
-
 import { 
-//  changeLimitForScreen, 
   getSpeakerName,
   getSpeakerAvatar,
-  generateLinkParams
 } from '../helpers';
+
+
 
 
 const FullJobInfo = ({ company, job }) => {
@@ -29,12 +28,27 @@ const FullJobInfo = ({ company, job }) => {
 
 
 const defaultProps = {
+
   gridData : { xs: 6, sm: 6, md: 4, lg: 3, xl: 3 },
   data: [],
   title : (item) => getSpeakerName(item),
   link: (item) => `/speakers/${item.id}`,
   subtitle : (item) => <FullJobInfo company={_get(item, 'cname2')} job={_get(item, 'position')} />,
-  text : (item) => `${_get(item, 'bio', "").substring(0, 350)}...`,
+  text : (item) => {
+
+    const bio = `${_get(item, 'bio', "")}`
+
+    if(!bio){
+      return null
+    }
+
+    if(bio.length < 350){
+      return bio
+    }
+
+    return `${ bio.substring(0, 350) }... `
+
+  },
   voted : {},
   moreLabel : "common.more"
 };
@@ -54,11 +68,11 @@ const People = ({setting, ...props}) => {
             key={_get(item, 'id')}
             id={_get(item, 'id')}
             avatar={ getSpeakerAvatar(item) }
-            title={ title(item) }
-            subtitle={ subtitle(item) }
-            text={ text(item) }
-            link={isFunction(link)? link(item): undefined}
-            mark={_get(item, "id") in voted}
+            title={ isFunction(title)? title(item): title }
+            subtitle={ isFunction(subtitle)? subtitle(item): subtitle}
+            text={ isFunction(text)? text(item): text }
+            link={ isFunction(link)? link(item): null}
+            mark={_get(item, "id", 0) in voted}
             moreLabel={moreLabel}
           />
         </Grid>

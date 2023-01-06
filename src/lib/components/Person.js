@@ -1,19 +1,16 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from './MyAvatar';
-import Typography from './MyTypography';
 import { MyLink } from '../next';
 import Hidden from '@material-ui/core/Hidden';
 import { useSettings } from '../helpers';
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
-import compose from 'recompose/compose';
-import isFunction from 'lodash/isFunction';
+import Typography from  '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {
+const useStyles = makeStyles({
   avatarContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -36,7 +33,7 @@ const styles = {
   bio: {
     marginTop: 10
   }
-};
+});
 
 const defaultProps = {
   width: 'md',
@@ -49,17 +46,15 @@ const defaultProps = {
 
 const Person = ({setting, ...props}) => {
 
+  const classes = useStyles()
   const settings = useSettings(setting)
   const {
     id,
-    classes,
     avatar,
     title,
     subtitle,
     text,
-    minimal,
     link,
-    data,
     mark,
     moreLabel
   } = Object.assign({}, defaultProps, settings, props)
@@ -75,10 +70,10 @@ const Person = ({setting, ...props}) => {
       />
 
       <CardContent>
-        <Typography template="presenter1">{title}</Typography>
-        {subtitle && <Typography template="presenter2">{subtitle}</Typography>}
+        <Typography variant="h6">{title}</Typography>
+        {subtitle && <Typography variant="subtitle1">{subtitle}</Typography>}
           {text && (<Hidden smDown implementation="css">
-           <Typography template="presenterText">{text}</Typography>
+           <Typography variant="body2">{text}</Typography>
            </Hidden>)}
         
       </CardContent>
@@ -93,9 +88,4 @@ const Person = ({setting, ...props}) => {
 };
 
 
-const enhance = compose(
-  onlyUpdateForKeys(['id', 'avatar', 'mark']),
-  withStyles(styles)
-);
-
-export default enhance(Person);
+export default Person
