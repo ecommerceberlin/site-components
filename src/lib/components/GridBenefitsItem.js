@@ -45,7 +45,7 @@ const GridBenefitsItemContentDescription = ({onClick=null, label=""}) => {
   const description = translate(`${label}.description`) || ""
 
   if(isFunction(onClick) && description.length>200 ){
-    return (<div onClick={onClick} className={classes.expandableText}><Typography variant="body1">{description.substr(0, 120)}{`...`}{`(`}{translate("common.more")}{`)`}</Typography></div>)
+    return (<div onClick={onClick} className={classes.expandableText}><Typography variant="body1">{description.substr(0, 120)}{`... `}<Typography variant="button">{`(`}{translate("common.more")}{`)`}</Typography></Typography></div>)
   }
 
   return <Markdown label={`${label}.description`} />
