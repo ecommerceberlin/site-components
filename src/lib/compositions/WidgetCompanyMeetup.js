@@ -50,7 +50,7 @@ export const WidgetCompanyMeetupInteraction = ({forcedId = 0}) => {
         switch(status){
             case "register":
                 return (<Box m={2}>
-                    <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("exhibitors.meetup.statuses.register")}</Typography>)
+                    <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("exhibitors.meetup.statuses.register")}</Typography>
                     <WidgetRegForm setting="visitor.register" raw={true} data={{
                         email, 
                         company_id: id

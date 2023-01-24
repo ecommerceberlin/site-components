@@ -69,7 +69,7 @@ const WidgetCompanyVip = () => {
                 switch(status){
                     case "register":
                         return ( <Box m={2}>
-                            <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("vipcodes.status-register")}</Typography>)
+                            <Typography variant="subtitle1" paragraph className={classes.heading}>{translate("vipcodes.status-register")}</Typography>
                             <WidgetRegForm setting="visitor.register" raw={true} data={{
                                 email, 
                                 code
