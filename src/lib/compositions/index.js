@@ -65,7 +65,6 @@ export { default as WidgetVerticalTimeline } from './WidgetVerticalTimeline'
 export { default as WidgetIconGrid } from './WidgetIconGrid';
 export { default as WidgetRegForm } from './WidgetRegForm'
 export { default as WidgetCompanyVip } from './WidgetCompanyVip'
-export { default as WidgetVisitorVipUpgrade } from './WidgetVisitorVipUpgrade'
 export { default as WidgetOrganizerVip } from './WidgetOrganizerVip'
 
 
