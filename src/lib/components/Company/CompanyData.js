@@ -20,14 +20,13 @@ const MarkdownSection = ({name, text, limit=1000}) => {
     const [showMore, setShowMore] = React.useState(false)
     const [translate] = useTranslate()
     const classes = useStyles()
-    const {legacy} = useCompany()
     
     if(!text){
         return null
     }
 
 
-    const hasLongText = !legacy && text.length > limit
+    const hasLongText = text.length > limit
     const output = hasLongText && !showMore? `${text.substring(0, limit)}...`: text
 
     const toggleMore = () => setShowMore(showMore? false: true)
@@ -36,10 +35,7 @@ const MarkdownSection = ({name, text, limit=1000}) => {
         <Box>
         <Typography variant="overline" component="div">{translate(`companies.profile.${name}`)}</Typography>
         
-        {legacy? <div dangerouslySetInnerHTML={{
-        __html: output}} />: null}
-        
-        {!legacy? <Markdown className={classes.root}>{output}</Markdown>: null}
+        <Markdown className={classes.root}>{output}</Markdown>
 
         {hasLongText ? <Box textAlign="center"><Button label={showMore? "common.less": "common.more"} onClick={toggleMore} startIcon={<UnfoldMoreIcon /> }/></Box>: null}
         </Box>
