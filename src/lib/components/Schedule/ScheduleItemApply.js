@@ -33,7 +33,7 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
         remaining
     }
 
-    // console.log(agreed, limit, workshopers)
+    //  console.log(labelProps)
 
     const handleClick = () => dispatch(dialogShow({
         title: translate("workshops.apply.hello", labelProps),
