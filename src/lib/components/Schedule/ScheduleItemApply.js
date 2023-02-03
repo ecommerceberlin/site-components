@@ -15,7 +15,7 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
     const { id, limited, company_id, presenter, title, time, venue } = usePresentation()
     const [translate] = useTranslate()
     const workshopers = useDatasource({resource: "workshopers"})
-    const {limit} = useSettings(setting)
+    const {limit, disabled} = useSettings(setting)
 
     const all = Array.isArray(workshopers)? workshopers.filter(item => item.rel_participant_id == id  && item.direction === "LTD" ): [];
     const pipeline = all.filter(item => !item.responded_at);
@@ -52,9 +52,15 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
         return null
     }
 
+    if(disabled){
+        return( <MyButton label="workshops.apply.disabled" disabled={true} variant="contained" color="default" />)
+    }
+
     if(remaining === 0){
         return( <MyButton label="workshops.apply.closed" labelProps={labelProps} disabled={true} variant="contained" color="default" />)
     }
+
+  
 
     return (
         <Box>
