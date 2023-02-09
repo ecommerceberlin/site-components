@@ -12,10 +12,10 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
 
 
     const dispatch = useDispatch();
-    const { id, limited, company_id, presenter, title, time, venue } = usePresentation()
+    const { id, limited, limit, company_id, presenter, title, time, venue } = usePresentation()
     const [translate] = useTranslate()
     const workshopers = useDatasource({resource: "workshopers"})
-    const {limit, disabled} = useSettings(setting)
+    const {disabled} = useSettings(setting)
 
     const all = Array.isArray(workshopers)? workshopers.filter(item => item.rel_participant_id == id  && item.direction === "LTD" ): [];
     const pipeline = all.filter(item => !item.responded_at);
