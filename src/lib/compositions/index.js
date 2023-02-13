@@ -109,4 +109,4 @@ export { default as WidgetExhibitorsWithSearch} from './WidgetExhibitorsWithSear
 
 
 
-export {default as WidgetUserMeetups} from './WidgetUserMeetups'
+export {default as WidgetPlanner} from './WidgetPlanner'
