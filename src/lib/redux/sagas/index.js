@@ -163,7 +163,8 @@ function* fetchAccumulatedFetches(endpoint, reload){
           "formdata", 
           "ticketgroups", 
           "tickets", 
-          "vipcodes"
+          "vipcodes",
+          "planner"
   ]
 
   let response;
@@ -190,7 +191,12 @@ function* fetchAccumulatedFetches(endpoint, reload){
   //is the endpoint proxyable???
 
   const settings = yield select(Selectors.getSettings) 
-  const {api, proxy} = get(settings, "system")
+
+  const {api, proxy} = get(settings, "system", {})
+
+  if(!api || !api.includes("http")){
+    throw "No api defined"
+  }
 
   //do we use proxy???
   if(proxy && proxy.includes("http") && !nonProxyableResources.some(res => endpoint.includes(res))){

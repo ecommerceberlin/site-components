@@ -22,7 +22,15 @@ async function configure(props, config){
 
   const {settings, preload, cache, externalSettings} = config
 
-  const state = store.getState();
+  if(isEmpty(settings) || !("system" in settings)){
+    throw 'SETTINGS required';
+  }
+
+  if(!("getState" in store)){
+    throw 'STORE required';
+  }
+
+  // const state = store.getState();
 
   if(externalSettings && Array.isArray(externalSettings)){
 
@@ -37,11 +45,11 @@ async function configure(props, config){
     })
   }
 
-  if(settings && !isEmpty(settings)){
+  if(settings){
     store.dispatch(setSettings(settings))
   }
 
-  if(preload && Array.isArray(preload)){
+  if(preload && !isEmpty(preload) && Array.isArray(preload)){
     store.dispatch(resourceFetchRequest(preload))
   }
 
