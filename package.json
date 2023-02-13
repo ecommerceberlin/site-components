@@ -44,7 +44,7 @@
     "react-copy-to-clipboard": "^5.0.4",
     "react-dropzone": "^11.4.2",
     "react-markdown": "^6.0.2",
-    "react-player": "^2.9.0",
+    "react-player": "2.11.0",
     "react-redux": "^7.2.5",
     "react-twitter-embed": "^3.0.3",
     "recompose": "^0.30.0",
