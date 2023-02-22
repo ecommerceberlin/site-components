@@ -141,7 +141,7 @@ function MyAppBar({setting="appbar", ...props}) {
             {page_action || links.map(appbarLink => <AppBarLink key={appbarLink.label} {...appbarLink} />)}
             {cartItems > 0 ? <CartButton count={cartItems} /> : null}
             {/* <LoginWithLinkedIn /> */}
-            <UpdateProfileLink />
+            {/* <UpdateProfileLink /> */}
             <LanguageSelect /> 
           {/* <Search /> */}
           </div>

@@ -1,7 +1,21 @@
 
 
 
-import {useDatasource} from 'eventjuicer-site-components'
+import {
+    Wrapper,
+    Bookingmap,
+    useDatasource} from 'eventjuicer-site-components'
+
+
+const WidgetPlannerBookingmap = ({setting="bookingmap"}) => {
+   
+    return (<Wrapper>
+        <Bookingmap setting={setting} booth={(props) => <div {...props}>asdas</div>} />
+        </Wrapper>)
+
+
+}
+
 
 const WidgetPlanner = ({email=""}) => {
 
@@ -21,12 +35,17 @@ const WidgetPlanner = ({email=""}) => {
         }
     })
 
-
+    const favs = useDatasource({
+        resource: "planner", 
+        params: {
+            scope: "favs",
+            email
+        }
+    })
 
     console.log({meetups, schedule})
 
-    return null
-
+    return <WidgetPlannerBookingmap />
 
 }
 
