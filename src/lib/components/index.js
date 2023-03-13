@@ -108,6 +108,7 @@ export { default as Translatable } from './Translatable'
 export { default as DateAgo } from './DateAgo'
 export { default as GetTicketLink } from './GetTicketLink'
 export { default as CompanyCardSimple } from './CompanyCardSimple'
+export { default as ImageButton } from './ImageButton'
 
 
 export * from './Bookingmap';
