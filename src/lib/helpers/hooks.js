@@ -43,10 +43,9 @@ export function useWidth() {
 export const useDialog = () => {
     const [translate] = useTranslate();
     const dispatch = useDispatch();
-    return useCallback(({label, content, buttons})=> dispatch(dialogShow({
+    return useCallback(({label, ...other})=> dispatch(dialogShow({
         title: translate(label),
-        content: content,
-        buttons: buttons
+        ...other
     })))
 }
 
