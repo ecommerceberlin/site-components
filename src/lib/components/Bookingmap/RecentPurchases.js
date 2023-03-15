@@ -10,7 +10,8 @@ import DateAgo from '../DateAgo';
 const useStyles = makeStyles(theme => ({
     root : {
       display: 'flex',
-      maxWidth : 1000,
+      width: "90%",
+      maxWidth : 1200,
       margin: '10px auto 10px auto',
       alignItems : 'center',
       justifyContent : 'center'
