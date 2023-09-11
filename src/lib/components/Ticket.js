@@ -38,7 +38,6 @@ const useStyles = makeStyles(theme => ({
     },
 
     soldout : {
-        backgroundImage : "url('https://res.cloudinary.com/eventjuicer/image/upload/v1561412798/soldout.png')",
         backgroundSize : 'contain',
         backgroundRepeat : 'no-repeat',
         position: 'absolute',
@@ -53,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 const Ticket = ({ icon = null, setting="premium", data }) => {
     
   const [translate, locale] = useTranslate(); 
-  const {disabledBuying, disabledTicketIds = []} = useSettings(setting);
+  const {disabledBuying, disabledTicketIds = [], soldout} = useSettings(setting);
   const classes = useStyles();
   const router = useRouter();
 
@@ -67,7 +66,9 @@ const Ticket = ({ icon = null, setting="premium", data }) => {
   return (<Card className={data.bookable ? classes.card : classes.cardDisabled }>
       <CardActionArea className={classes.cardActionArea} {...jumpToDetails}>
 
-        {!data.bookable ? <div className={classes.soldout} /> : null}
+        {!data.bookable ? <div className={classes.soldout} style={{
+            backgroundImage: `url(${ soldout? soldout: 'https://res.cloudinary.com/eventjuicer/image/upload/v1561412798/soldout.png'})`
+            }} /> : null}
           
         <Centered style={{minHeight: 200, justifyContent: 'center'}}> {icon} </Centered>
 
