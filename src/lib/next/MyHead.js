@@ -94,7 +94,7 @@ MyHead.defaultProps = {
   fb_appid: '222959121587772',
   description: '',
   descriptionLabel: 'event.opengraph.description',
-  image: "https://res.cloudinary.com/ecommerceberlin/image/upload/c_limit,w_1024/v1546943854/ebe_og_home.jpg",
+  image: "https://res.cloudinary.com/ecommerceberlin/image/upload/c_limit,w_1024/v1693817519/Website/ebe24_og_home.jpg",
   url: fullUrl('/'),
   font: 'family=Lato&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,500;1,600;1,700;1,800;1,900&subset=latin,latin-ext'
 };

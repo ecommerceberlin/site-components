@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     soldout : {
-        backgroundImage : "url('https://res.cloudinary.com/eventjuicer/image/upload/v1561412798/soldout.png')",
+        backgroundImage : "url('https://res.cloudinary.com/ecommerceberlin/image/upload/v1684149426/Website/PREMIUM%20SERVICES/sold-out.png')",
         backgroundSize : 'contain',
         backgroundRepeat : 'no-repeat',
         position: 'absolute',
