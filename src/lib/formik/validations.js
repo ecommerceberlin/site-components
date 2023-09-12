@@ -220,6 +220,15 @@ export const validations = (requiredFieldNames) => ({
       .max(100, 'Please make it shorter.')
       .requireWhenRequired(requiredFieldNames, 'Url to linkedin profile is required'),
 
+      participant_type: Yup.string()
+      .min(5, "Too short :(")
+      .max(100, '')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
+
+      company_role: Yup.string()
+      .min(5, "Too short :(")
+      .max(100, '')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
 
 
 
