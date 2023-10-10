@@ -1,12 +1,12 @@
 
 import React from 'react'
-import { useVisitorData } from '../contexts'
+import { FingerprintProvider, useVisitorData } from '../contexts'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const Promoninja = ({id, threshold=200, wait=3000}) => {
+const PromoninjaComponent = ({id, threshold=200, wait=3000}) => {
     
     const scrollTrigger = useScrollTrigger({ threshold });
     const [thresholdMatched, setThresholdMatched] = React.useState(false)
@@ -39,5 +39,7 @@ const Promoninja = ({id, threshold=200, wait=3000}) => {
     return null
 
 }
+
+const Promoninja = (props) => <FingerprintProvider><PromoninjaComponent {...props}/></FingerprintProvider>
 
 export default Promoninja
