@@ -26,8 +26,11 @@ const Promoninja = ({id, threshold=200, wait=3000}) => {
     React.useEffect(() => {
         if(thresholdMatched && id){
             delay(wait).then(() => {
-                getData({tag: id}).then(({visitorId}) => {
-                    console.log(visitorId)
+                getData({tag: {
+                    id, 
+                    project: `${process.env.NEXT_PUBLIC_PROJECT}`
+                }}).then(({visitorId}) => {
+                    //  console.log(visitorId)
                 })
             })
         }
