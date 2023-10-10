@@ -109,6 +109,8 @@ export { default as DateAgo } from './DateAgo'
 export { default as GetTicketLink } from './GetTicketLink'
 export { default as CompanyCardSimple } from './CompanyCardSimple'
 export { default as ImageButton } from './ImageButton'
+export { default as Promoninja } from './Promoninja'
+
 
 
 export * from './Bookingmap';
