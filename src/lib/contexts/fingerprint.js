@@ -30,7 +30,7 @@ const FingerprintProvider = ({
             apiKey,
             region: "eu",
             scriptUrlPattern: scriptUrlPattern? `${host}${scriptUrlPattern}`: undefined,
-            endpoint: subdomain? `${host}${endpoint}` : undefined
+            endpoint: `${host}${endpoint}`
         }}
   >
     {children}
