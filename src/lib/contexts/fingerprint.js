@@ -10,12 +10,13 @@ const FingerprintProvider = ({
     setting="system.fingerprint", 
     children}) => {
 
-    const {apiKey} = useSettings(setting)
+    const {apiKey, endpoint} = useSettings(setting)
 
     return <FpjsProvider
         loadOptions={{
             apiKey,
-            region: "eu"
+            region: "eu",
+            endpoint
         }}
   >
     {children}
