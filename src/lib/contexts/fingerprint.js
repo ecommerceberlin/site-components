@@ -12,8 +12,6 @@ const FingerprintProvider = ({
 
     const {
       apiKey, 
-      endpoint, 
-      scriptUrlPattern,
       subdomain 
     } = useSettings(setting)
 
@@ -29,8 +27,7 @@ const FingerprintProvider = ({
         loadOptions={{
             apiKey,
             region: "eu",
-            scriptUrlPattern: scriptUrlPattern? `${host}${scriptUrlPattern}`: undefined,
-            endpoint: `${host}${endpoint}`
+            endpoint: `${host}`
         }}
   >
     {children}
