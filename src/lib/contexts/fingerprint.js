@@ -10,13 +10,27 @@ const FingerprintProvider = ({
     setting="system.fingerprint", 
     children}) => {
 
-    const {apiKey, endpoint} = useSettings(setting)
+    const {
+      apiKey, 
+      endpoint, 
+      scriptUrlPattern,
+      subdomain 
+    } = useSettings(setting)
+
+    const env = `${process.env.NODE_ENV}`
+
+    if (typeof window == 'undefined' || env === "development") {
+     return null
+    }
+
+    const host = `https://${subdomain}${window.location.hostname}`
 
     return <FpjsProvider
         loadOptions={{
             apiKey,
             region: "eu",
-            endpoint
+            scriptUrlPattern: `${host}${scriptUrlPattern}`,
+            endpoint: `${host}${endpoint}`
         }}
   >
     {children}
