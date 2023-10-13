@@ -1,6 +1,7 @@
 import {
     FpjsProvider,
-    useVisitorData
+    useVisitorData,
+    defaultScriptUrlPattern
   } from '@fingerprintjs/fingerprintjs-pro-react'
 
 import { useSettings } from '../helpers'
@@ -27,7 +28,11 @@ const FingerprintProvider = ({
         loadOptions={{
             apiKey,
             region: "eu",
-            endpoint: `${host}`
+            endpoint: `${host}`,
+            scriptUrlPattern: [
+              `${host}/web/v<version>/<apiKey>/loader_v<loaderVersion>.js`,
+              defaultScriptUrlPattern
+          ]
         }}
   >
     {children}
