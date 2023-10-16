@@ -62,6 +62,9 @@ const ScheduleItemApplyInteraction = ({rel_participant_id, company_id}) => {
     
                 case "over_limit":
                     return (<SimpleMessageBox label="workshops.apply.statuses.over_limit" />)
+
+                case "time_conflict":
+                    return (<SimpleMessageBox label="workshops.apply.statuses.time_conflict" />)
         
                 case "error":
                     return (<SimpleMessageBox label="workshops.apply.statuses.error" />)
