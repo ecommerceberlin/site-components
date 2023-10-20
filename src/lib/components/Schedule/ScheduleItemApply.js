@@ -52,9 +52,6 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
         return null
     }
 
-    if(disabledTreshold && pipeline.length > disabledTreshold){
-        return( <MyButton label="workshops.apply.sustained" disabled={true} variant="contained" color="default" />)
-    }
 
     if(disabled){
         return( <MyButton label="workshops.apply.disabled" disabled={true} variant="contained" color="default" />)
@@ -64,7 +61,10 @@ const ScheduleItemApply = ({setting="workshops.apply"}) => {
         return( <MyButton label="workshops.apply.closed" labelProps={labelProps} disabled={true} variant="contained" color="default" />)
     }
 
-  
+    if(disabledTreshold && disabledTreshold > limit && pipeline.length > disabledTreshold){
+        return( <MyButton label="workshops.apply.sustained" disabled={true} variant="contained" color="default" />)
+    }
+
 
     return (
         <Box>
