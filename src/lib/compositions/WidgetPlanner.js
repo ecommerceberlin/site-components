@@ -68,7 +68,7 @@ const WidgetPlannerWorkshops = ({email="", setting="schedule"}) => {
 
     return ( <Wrapper label="planner.workshops.title"><Grid container spacing={1}>{
         workshops.map(workshop => {
-        return (<Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={workshop.id}><ScheduleItemContainer setting={setting} data={[workshop]} /></Grid>)
+        return (<Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={workshop.id}><ScheduleItemContainer allowApply={false} setting={setting} data={[workshop]} /></Grid>)
     })}</Grid></Wrapper>)
 }
 

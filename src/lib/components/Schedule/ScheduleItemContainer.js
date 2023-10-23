@@ -51,7 +51,7 @@ const ScheduleItemDialogContent = ({setting="", data=[]}) => {
 
 }
 
-const ScheduleItemContainer = ({setting="", data=[]}) => {
+const ScheduleItemContainer = ({setting="", data=[], allowApply = true}) => {
 
   const dispatch = useDispatch();
 
@@ -86,7 +86,7 @@ const ScheduleItemContainer = ({setting="", data=[]}) => {
       }))} />
 
    
-      <ScheduleItemApply />
+      {allowApply? <ScheduleItemApply /> : null}
       
       </CardActions>
 
