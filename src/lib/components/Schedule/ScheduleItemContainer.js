@@ -51,7 +51,7 @@ const ScheduleItemDialogContent = ({setting="", data=[]}) => {
 
 }
 
-const ScheduleItemContainer = ({setting="", venue="", time="", data=[]}) => {
+const ScheduleItemContainer = ({setting="", data=[]}) => {
 
   const dispatch = useDispatch();
 
