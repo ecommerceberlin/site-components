@@ -34,7 +34,7 @@ const WidgetPlannerScheduledMeetups = ({email="", setting="bookingmap"}) => {
     const marked = flatten(filtered.map(item=>get(item, "company.booths", []))).map(item => item.id)
 
     if(isEmpty(marked)){
-        return null
+        return  <Wrapper label="planner.meetups.title" secondaryLabel="planner.meetups.empty"></Wrapper>
     }
 
     return (
@@ -59,7 +59,7 @@ const WidgetPlannerWorkshops = ({email="", setting="schedule"}) => {
     const filtered = filterMeetups(meetups, ["LTD"])
 
     if(isEmpty(filtered)){
-        return null
+        return ( <Wrapper label="planner.workshops.title" secondaryLabel="planner.workshops.empty"></Wrapper>)
     }
 
     const workshops = sortBy(filtered.map(workshop => workshop.presenter), function(item){
@@ -77,21 +77,21 @@ const WidgetPlannerWorkshops = ({email="", setting="schedule"}) => {
 const WidgetPlanner = ({email=""}) => {
 
 
-    const schedule = useDatasource({
-        resource: "planner", 
-        params: {
-            scope: "schedule",
-            email
-        }
-    })
+    // const schedule = useDatasource({
+    //     resource: "planner", 
+    //     params: {
+    //         scope: "schedule",
+    //         email
+    //     }
+    // })
 
-    const favs = useDatasource({
-        resource: "planner", 
-        params: {
-            scope: "favs",
-            email
-        }
-    })
+    // const favs = useDatasource({
+    //     resource: "planner", 
+    //     params: {
+    //         scope: "favs",
+    //         email
+    //     }
+    // })
 
 
     return (<div>
