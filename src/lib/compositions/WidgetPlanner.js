@@ -59,7 +59,7 @@ const WidgetPlannerWorkshops = ({email="", setting="schedule"}) => {
     const filtered = filterMeetups(meetups, ["LTD"])
 
     if(isEmpty(filtered)){
-        return ( <Wrapper label="planner.workshops.title" secondaryLabel="planner.workshops.empty"></Wrapper>)
+        return null
     }
 
     const workshops = sortBy(filtered.map(workshop => workshop.presenter), function(item){
