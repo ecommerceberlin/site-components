@@ -37,6 +37,8 @@ export { default as Reviews } from './Reviews';
 export { default as WidthAwareInfo } from './WidthAwareInfo';
 
 export { default as People } from './People';
+export { default as Person } from './Person';
+
 export { default as Schedule } from './Schedule';
 /*
 //we must adapt Schedule to display single stage
