@@ -6,10 +6,12 @@ import RawTranslatedText from '../components/RawTranslatedText'
 //import classNames from 'classnames'
 //import PlayArrowIcon from 'material-ui/icons/PlayArrow';
 import Chatlio from '../services/Chatlio';
+import { useSettings } from '../helpers';
+import { makeStyles } from '@material-ui/core/styles';
+import { useTranslate } from '../i18n';
 
-import Settings from '../datasources/Settings';
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
   root: {
    
   },
@@ -50,72 +52,61 @@ const styles = theme => ({
     width : 100,
     height : 100
   }
-});
+}) );
 
 
-const WidgetSupport = ({
-  classes,
-  title,
-  description,
-  people
-}) => (
-  <Settings>
-  {(get) => (
-    <div className={classes.root}>
-  
-  
-    <div className={classes.people}>
-   
-    {get("sales_support.people", people).map(({name, position, langs, avatar, phone, email, chatlio}, i) => (
-      
-      <div key={name} className={classes.container}>
-        <div className={classes.left}>
-          <Avatar
-            //alt={opinion.person}
-            src={avatar}
-            className={people.length > 1 ? classes.avatarMultiple : classes.avatar}
-          />
-        </div>
-        <div className={classes.right}>
-        
-        <Typography variant="h6" color="textSecondary">
-          {`${name} ${position}`}
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary">
-        {email}<br/>{phone}  
-        </Typography>
-  
-        {chatlio ? <Chatlio /> : null }
-  
-        </div>
-      </div>
-      
-      )
-    )}
-     </div>
+const WidgetSupport = ({setting="footer"}) => {
+
+  const {title, description, people} = useSettings(setting)
+  const classes = useStyles();
+  const [translate] = useTranslate()
+
+  return (
+  <div className={classes.root}>
+    
+  {title? 
+  <Typography variant="h4">{ 
+  translate(title) 
+  }</Typography>:
+  null}
+  {description? 
+  <Typography variant="subtitle1" color="textSecondary">{ 
+  translate(description) 
+  }</Typography>: 
+  null }
+
+  <div className={classes.people}>
      
-    </div>
-  )}
-  </Settings>
-);
+      {(people || []).map(({name, position, langs, avatar, phone, email, chatlio}, i) => (
+        
+        <div key={name} className={classes.container}>
+          <div className={classes.left}>
+            <Avatar
+              //alt={opinion.person}
+              src={avatar}
+              className={people.length > 1 ? classes.avatarMultiple : classes.avatar}
+            />
+          </div>
+          <div className={classes.right}>
+          
+          <Typography variant="h6" color="textSecondary">
+            {`${name} ${position}`}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+          {email}<br/>{phone}  
+          </Typography>
+    
+          {chatlio ? <Chatlio /> : null }
+    
+          </div>
+        </div>
+        
+        )
+      )}
+       </div>
+       
+      </div>
+  )
+}
 
-WidgetSupport.defaultProps = {
-
-  title : 'event.support.hello',
-  description: 'event.support.description',
-
-  people : [
-    {
-      name: '',
-      position : '',
-      langs : [],
-      avatar: '',
-      phone: '000-000-000',
-      email: 'email@domain.com',
-      chatlio : true
-    }
-  ]
- 
-};
-
-export default withStyles(styles)(WidgetSupport);
+export default WidgetSupport
