@@ -7,9 +7,7 @@ import WidgetSupport from './WidgetSupport';
 import Link from '../next/MyLink'
 import WidgetEventInfo from './WidgetEventInfo'
 import {useSettings} from '../helpers'
-import Typography from '@material-ui/core/Typography';
-import RawTranslatedText from '../components/RawTranslatedText'
-import { isEmpty, isString } from 'lodash';
+import { isEmpty, isString, get } from 'lodash';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -78,11 +76,12 @@ const useHasSupport = (setting) => {
 }
 
 
+
 const WidgetFooter = ({setting="footer", ...props}) => {
 
   const settings = useSettings(setting)
   const classes = useStyles()
-  const {title, description, links,showEventInfo, backgroundColor} = Object.assign({}, defaultProps, settings, props)
+  const {links, showEventInfo, backgroundColor} = Object.assign({}, defaultProps, settings, props)
 
   const hasSupport = useHasSupport(setting)
   const hasOrganizerInfo = useHasOrganizerInfo(setting)
@@ -116,17 +115,17 @@ const WidgetFooter = ({setting="footer", ...props}) => {
       items={[
         {
         secondary: 'event.organizer.name',
-        primary: organizer_name
+        primary: get(hasOrganizerInfo, "organizer_name")
         },
 
         {
         secondary: 'event.organizer.address',
-        primary: organizer_address
+        primary: get(hasOrganizerInfo, "organizer_address")
         },
 
         {
         secondary: 'event.organizer.registration',
-        primary: organizer_regno
+        primary: get(hasOrganizerInfo, "organizer_regno")
         }
       ]}
       orientation="v"
