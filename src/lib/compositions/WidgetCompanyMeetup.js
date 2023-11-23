@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import {grey, red} from '@material-ui/core/colors'
 import { useRouter } from 'next/router';
 import Wrapper from '../components/Wrapper'
-import { useRecord } from '../helpers';
+import { useRecord, useSettings } from '../helpers';
 import { useTranslate } from '../i18n'
 import WidgetCompanyInteraction from './WidgetCompanyInteraction'
 import WidgetRegForm from './WidgetRegForm';
@@ -82,8 +82,13 @@ export const WidgetCompanyMeetupInteraction = ({forcedId = 0}) => {
 const WidgetCompanyMeetup = () => {
 
     const {query} = useRouter()
+    const {disableMeetups} = useSettings("exhibitors")
 
     if(!("meet" in query)){
+        return null
+    }
+
+    if(disableMeetups){
         return null
     }
 

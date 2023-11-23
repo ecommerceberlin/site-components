@@ -7,7 +7,7 @@ import {WidgetCompanyMeetupInteraction} from '../../compositions/WidgetCompanyMe
 import { dialogShow } from '../redux/actions';
 import { useRouter } from 'next/router';
 import {useCompany} from './context'
-
+import { useSettings } from '../../helpers';
 
 const CompanyMeet = () => {
     
@@ -15,13 +15,17 @@ const CompanyMeet = () => {
     const [translate] = useTranslate()
     const dispatch = useDispatch();
     const {present} = useCompany()
-
+    const {disableMeetups} = useSettings("exhibitors")
 
     const handleClick = () => dispatch(dialogShow({
         title: translate("exhibitors.meetup.create"),
         content: <WidgetCompanyMeetupInteraction /> ,
         width: "xl"
     }))
+
+    if(disableMeetups){
+        return null
+    }
 
     if(!present){
         return null

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import _get from 'lodash/get';
 
 import Tags from '../Tags'
-import {resizeCloudinaryImage} from '../../helpers'
+import {resizeCloudinaryImage, useSettings} from '../../helpers'
 import { useTranslate } from '../../i18n'
 // import Markdown from '../Markdown'
 
@@ -54,18 +54,35 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
+const CompanyMeetupButton = ({id}) => {
+
+  const {disableMeetups} = useSettings("exhibitors")
+  const [translate] = useTranslate()
+  const dispatch = useDispatch();
+
+  const handleClick = () => dispatch(dialogShow({
+    title: translate("exhibitors.meetup.create"),
+    content: <WidgetCompanyMeetupInteraction forcedId={id} /> ,
+    width: "xl"
+}))
+
+  if(disableMeetups){
+    return null
+  }
+
+
+  return (  <Button variant="contained" color="primary"  onClick={handleClick} startIcon={<RecordVoiceOverIcon />}>{translate("exhibitors.meetup.create")}</Button>
+  
+  )
+}
+
+
+
 const BoothDialogTakenSoldContent = ({setting="", company={}}) => {
 
     const classes = useStyles()
     const [translate] = useTranslate()
-    const dispatch = useDispatch();
-
-    const handleClick = () => dispatch(dialogShow({
-      title: translate("exhibitors.meetup.create"),
-      content: <WidgetCompanyMeetupInteraction forcedId={company.id} /> ,
-      width: "xl"
-  }))
-
+   
     return (
     <React.Fragment>   
     <Grid container justifyContent='center' alignItems='flex-start' direction='row'>
@@ -81,7 +98,8 @@ const BoothDialogTakenSoldContent = ({setting="", company={}}) => {
       </Grid>
       <Grid item xs={12} sm={12} md={4}>
 
-        <Button variant="contained" color="primary"  onClick={handleClick} startIcon={<RecordVoiceOverIcon />}>{translate("exhibitors.meetup.create")}</Button>
+        <CompanyMeetupButton id={company.id} />
+
        <Tags tags={_get(company, "profile.keywords")} centered={false} />
       </Grid>
     </Grid>
