@@ -146,8 +146,7 @@ export const validations = (requiredFieldNames) => ({
       .requireWhenRequired(requiredFieldNames, 'Please accept terms'),
 
       location: Yup.string()
-      .min(2, "Please select")
-      .max(200, 'Please select')
+      .oneOf(["yes", "no"], 'Please select one of the following')
       .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
 
       party_participant_type: Yup.string()
