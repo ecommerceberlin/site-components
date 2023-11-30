@@ -102,7 +102,7 @@ export const validations = (requiredFieldNames) => ({
       position: Yup.string()
       .min(2, "Should be longer")
       .max(100, 'Too long - 100 chars max')
-      .requireWhenRequired(requiredFieldNames, 'Company name is required.'),
+      .requireWhenRequired(requiredFieldNames, 'This field is required.'),
   
       phone: Yup.string()
       .min(9, 'Phone number seems too short')
@@ -145,6 +145,15 @@ export const validations = (requiredFieldNames) => ({
       .required('Please accept terms')
       .requireWhenRequired(requiredFieldNames, 'Please accept terms'),
 
+      location: Yup.string()
+      .min(2, "Please select")
+      .max(200, 'Please select')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
+
+      party_participant_type: Yup.string()
+      .min(2, "Please select")
+      .max(200, 'Please select')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
 
       presenter: Yup.string()
       .min(2, "Too short :(")
