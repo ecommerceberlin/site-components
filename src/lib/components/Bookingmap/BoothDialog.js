@@ -33,7 +33,7 @@ const BoothDialog = ({setting, ...boothProps}) => {
     const {boothId} = boothProps
     const dispatch = useDispatch();
     const [translate] = useTranslate()
-    const {status, name, image} = useSelector((state) => BoothFormdataSelector(state, boothId), shallowEqual)
+    const {status} = useSelector((state) => BoothFormdataSelector(state, boothId), shallowEqual)
     const selected = useSelector(state => BoothSelectedSelector(state, boothId))
     const available = useSelector(state => BoothBlockedSelector(state, boothId))
     
@@ -51,9 +51,7 @@ const BoothDialog = ({setting, ...boothProps}) => {
         return translate("event.sales.booths.free");
     }
 
-    useEffect(() => {
-        dispatch(dialogTitleChange(getModalTitle()));
-    })
+    useEffect(() => dispatch(dialogTitleChange(getModalTitle())), [available, status])
 
     if(available === false){
         return (<div><Cart embedded /><BoothDialogTakenBlocked setting={setting} {...boothProps} /></div>)

@@ -11,12 +11,16 @@ import { useTranslate } from '../../i18n'
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Markdown from "react-markdown"
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {WidgetCompanyMeetupInteraction} from '../../compositions/WidgetCompanyMeetup';
 import { dialogShow } from '../redux/actions';
+import {BoothFormdataSelector} from './selectors'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import useSWR from 'swr'
 
 
 
@@ -77,12 +81,35 @@ const CompanyMeetupButton = ({id}) => {
 }
 
 
+const useGetCompanyFromPurchase = (boothId) => {
 
-const BoothDialogTakenSoldContent = ({setting="", company={}}) => {
+  const {api} = useSettings("system")
+
+  const {purchase_id} = useSelector((state) => BoothFormdataSelector(state, boothId), shallowEqual)
+
+  const { data, error } = useSWR(`${api}/purchases/${purchase_id}/company`, (url) => fetch(url).then(r => r.json()))
+
+  if(!api || !purchase_id || !data || error || !("data" in data)){
+    return false
+  }
+
+  return data.data
+}
+
+
+const BoothDialogTakenSoldContent = ({setting="", boothId}) => {
 
     const classes = useStyles()
     const [translate] = useTranslate()
+
+    const company = useGetCompanyFromPurchase(boothId)
+
+    if(!company){
+      return <Box m={4}><CircularProgress /></Box>
+    }
    
+    console.log(company)
+
     return (
     <React.Fragment>   
     <Grid container justifyContent='center' alignItems='flex-start' direction='row'>
