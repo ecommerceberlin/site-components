@@ -78,15 +78,18 @@ export const BoothFormdataSelector = createCachedSelector(
     }
     */
 
-    const { participant_id, purchase, company } = get(keyBy(data, "id"), id, {})
+    const { participant_id, purchase_id, purchase } = get(keyBy(data, "id"), id, {})
   
       return {
         participant_id,
-        company_id: company? company.id: 0,
+        purchase_id, 
         status: purchase && "paid" in purchase? purchase.paid? "sold" : "hold" : false,
-        name : company && "profile" in company? getCompanyName(company) : "", 
-        image : company && "profile" in company? getCompanyProfileInfo(company, "thumbnail") : "",
-        slug: company? company.slug: ""
+      
+        /** removed company info from /formdata api call */
+        // company_id: company? company.id: 0,
+        // name : company && "profile" in company? getCompanyName(company) : "", 
+        // image : company && "profile" in company? getCompanyProfileInfo(company, "thumbnail") : "",
+        // slug: company? company.slug: ""
       }
     }
 )((state, id) => id)
