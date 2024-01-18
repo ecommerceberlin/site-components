@@ -70,10 +70,9 @@ const CompanyMeetupButton = ({id}) => {
     width: "xl"
 }))
 
-  if(disableMeetups){
+  if(!id || disableMeetups){
     return null
   }
-
 
   return (  <Button variant="contained" color="primary"  onClick={handleClick} startIcon={<RecordVoiceOverIcon />}>{translate("exhibitors.meetup.create")}</Button>
   
@@ -87,7 +86,11 @@ const useGetCompanyFromPurchase = (boothId) => {
 
   const {purchase_id} = useSelector((state) => BoothFormdataSelector(state, boothId), shallowEqual)
 
-  const { data, error } = useSWR(`${api}/purchases/${purchase_id}/company`, (url) => fetch(url).then(r => r.json()))
+  const { data, error, isLoading } = useSWR(`${api}/purchases/${purchase_id}/company`, (url) => fetch(url).then(r => r.json()))
+
+  if(isLoading){
+    return null
+  }
 
   if(!api || !purchase_id || !data || error || !("data" in data)){
     return false
@@ -104,11 +107,13 @@ const BoothDialogTakenSoldContent = ({setting="", boothId}) => {
 
     const company = useGetCompanyFromPurchase(boothId)
 
-    if(!company){
+    if(company===null){
       return <Box m={4}><CircularProgress /></Box>
     }
    
-    console.log(company)
+    if(company===false){
+      return null;
+    }
 
     return (
     <React.Fragment>   
