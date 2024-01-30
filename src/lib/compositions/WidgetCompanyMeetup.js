@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export const WidgetCompanyMeetupInteraction = ({forcedId = 0, regFormProps={}}) => {
+export const WidgetCompanyMeetupInteraction = ({forcedId = 0, regFormProps={} }) => {
 
     const {query} = useRouter()
     const classes = useStyles()
@@ -46,6 +46,7 @@ export const WidgetCompanyMeetupInteraction = ({forcedId = 0, regFormProps={}}) 
       
     }
     render={ ( {email, status} ) => {
+
 
         switch(status){
             case "register":
