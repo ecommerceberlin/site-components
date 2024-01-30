@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export const WidgetCompanyMeetupInteraction = ({forcedId = 0}) => {
+export const WidgetCompanyMeetupInteraction = ({forcedId = 0, regFormProps={}}) => {
 
     const {query} = useRouter()
     const classes = useStyles()
@@ -54,7 +54,7 @@ export const WidgetCompanyMeetupInteraction = ({forcedId = 0}) => {
                     <WidgetRegForm setting="visitor.register" raw={true} data={{
                         email, 
                         company_id: id
-                    }} /></Box>)
+                    }} {...regFormProps} /></Box>)
 
             case "already_assigned":
                 return (<Box m={2}><Typography variant="h4" paragraph className={classes.heading}>{
@@ -79,7 +79,7 @@ export const WidgetCompanyMeetupInteraction = ({forcedId = 0}) => {
     />)
 }
 
-const WidgetCompanyMeetup = () => {
+const WidgetCompanyMeetup = (props) => {
 
     const {query} = useRouter()
     const {disableMeetups} = useSettings("exhibitors")
@@ -92,7 +92,7 @@ const WidgetCompanyMeetup = () => {
         return null
     }
 
-    return (<Wrapper first><WidgetCompanyMeetupInteraction /></Wrapper>)
+    return (<Wrapper first><WidgetCompanyMeetupInteraction {...props} /></Wrapper>)
 }
  
 
