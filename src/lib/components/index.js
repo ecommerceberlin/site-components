@@ -113,6 +113,7 @@ export { default as CompanyCardSimple } from './CompanyCardSimple'
 export { default as ImageButton } from './ImageButton'
 export { default as Promoninja } from './Promoninja'
 
+export { default as RecentSubmissions } from './RecentSubmissions'
 
 
 export * from './Bookingmap';
