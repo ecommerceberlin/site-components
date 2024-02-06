@@ -32,7 +32,7 @@ const CodeIsExpired = () => {
     return <Typography variant="h4">{translate("vipcodes.code-is-expired")}</Typography>
 }
 
-const WidgetCompanyVip = ({regFormProps={}}) => {
+const WidgetCompanyVip = () => {
 
     const {query} = useRouter()
     const {should_be_expired, code, id, company} = useRecord("vipcodes", query && "vipcode" in query? query.vipcode: "")
@@ -73,7 +73,7 @@ const WidgetCompanyVip = ({regFormProps={}}) => {
                             <WidgetRegForm setting="visitor.register" raw={true} data={{
                                 email, 
                                 code
-                            }} {...regFormProps} /></Box>)
+                            }} /></Box>)
 
                     case "assigned":
                         return (<Box m={2}><Typography variant="h4" paragraph className={classes.heading}>{translate("vipcodes.status-assigned")}</Typography></Box>)

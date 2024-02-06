@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export const WidgetCompanyMeetupInteraction = ({forcedId = 0, regFormProps={} }) => {
+export const WidgetCompanyMeetupInteraction = ({forcedId = 0 }) => {
 
     const {query} = useRouter()
     const classes = useStyles()
@@ -55,7 +55,7 @@ export const WidgetCompanyMeetupInteraction = ({forcedId = 0, regFormProps={} })
                     <WidgetRegForm setting="visitor.register" raw={true} data={{
                         email, 
                         company_id: id
-                    }} {...regFormProps} /></Box>)
+                    }}  /></Box>)
 
             case "already_assigned":
                 return (<Box m={2}><Typography variant="h4" paragraph className={classes.heading}>{
