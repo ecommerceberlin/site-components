@@ -27,7 +27,6 @@ export const CompanyContextProvider = ({setting="", data={}, children}) => {
         const boothIds = map(purchases, 'formdata.id').filter(v => v && v.length);  
         const boothNames = map(purchases, 'formdata.ti').filter(v => v && v.length);  
         
-        console.log(boothIds)
 
         return {
      
