@@ -17,15 +17,18 @@ export const useCompany = () => {
  */
 
 export const CompanyContextProvider = ({setting="", data={}, children}) => {
+
   
     const settings = useSettings(setting, {})
     
     const value = React.useMemo(()=> {
 
-        const purchases = get(data, 'instances', []).filter(p => parseInt(p.sold));
-        const boothIds = map(purchases, 'formdata.id').filter(v => v && v.length);
+        const purchases = get(data, 'instances', [])
+        const boothIds = map(purchases, 'formdata.id').filter(v => v && v.length);  
         const boothNames = map(purchases, 'formdata.ti').filter(v => v && v.length);  
         
+        console.log(boothIds)
+
         return {
      
             id: data.id,

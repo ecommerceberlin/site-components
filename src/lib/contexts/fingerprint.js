@@ -41,5 +41,15 @@ const FingerprintProvider = ({
 
 }
 
+/**
+ * 
+ * FingerprintJS.load({
+  apiKey: "DX6tMYsW74dcjf3JGHcg",
+  region: "eu",
+  endpoint: "https://metrics.targiehandlu.pl",
+  scriptUrlPattern: "https://metrics.targiehandlu.pl/web/v<version>/<apiKey>/loader_v<loaderVersion>.js"
+})
+ */
+
   
 export {FingerprintProvider, useVisitorData}
