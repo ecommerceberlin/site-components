@@ -38,7 +38,7 @@ const WidgetPlannerScheduledMeetups = ({email="", setting="bookingmap"}) => {
     }
 
     return (
-        <Wrapper label="planner.meetups.title">
+        <Wrapper label="planner.meetups.title"  secondaryLabel="planner.meetups.description">
         <Bookingmap setting={setting} booth={Booth} marked={marked} />
         </Wrapper>
     )
