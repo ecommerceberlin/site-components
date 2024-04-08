@@ -89,7 +89,7 @@ const FsVideo = ({ setting, ...props }) => {
       <section className={classNames(classes.container, classes[overlay])} style={{ backgroundImage: `url(${background})` }}>
       <div className={classes.overlay}>{children}</div>
 
-        {videoSrc ?  <video autoPlay muted loop playsinline className={classes.video} poster={background}>
+        {videoSrc ?  <video autoPlay muted loop playsInline className={classes.video} poster={background}>
           <source src={videoSrc} type="video/mp4" />
         </video>: null}
        
