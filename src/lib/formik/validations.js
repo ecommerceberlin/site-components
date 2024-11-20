@@ -145,6 +145,12 @@ export const validations = (requiredFieldNames) => ({
       .required('Please accept terms')
       .requireWhenRequired(requiredFieldNames, 'Please accept terms'),
 
+      terms_and_conditions: Yup.bool()
+      .oneOf([true], 'Please accept terms')
+      .required('Please accept terms')
+      .requireWhenRequired(requiredFieldNames, 'Please accept terms'),
+
+
       location: Yup.string()
       .oneOf(["yes", "no"], 'Please select one of the following')
       .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
