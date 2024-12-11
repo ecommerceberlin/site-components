@@ -10,6 +10,7 @@ const defaultProps = {
     wrapperProps: {
         label : "presenters.schedule",
         secondaryLabel : "presenters.list_description",
+        id: null
     },
     links : [],
     link : true,

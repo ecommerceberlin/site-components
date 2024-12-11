@@ -65,13 +65,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Wrapper = ({label, classes, title, typography, secondaryLabel, secondaryTitle, secondaryTypography, children, color, links, dense, first, style
+const Wrapper = ({id=null, label, classes, title, typography, secondaryLabel, secondaryTitle, secondaryTypography, children, color, links, dense, first, style
 }) => {
 
   const _classes = useStyles();
 
   return (
     <section
+      id={id}
       className={classNames(_classes.root, {
         [_classes.dense]: dense,
         [_classes.first]: first,

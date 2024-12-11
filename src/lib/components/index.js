@@ -114,6 +114,7 @@ export { default as ImageButton } from './ImageButton'
 export { default as Promoninja } from './Promoninja'
 
 export { default as RecentSubmissions } from './RecentSubmissions'
+export { default as BottomNavi } from './BottomNavi'
 
 
 export * from './Bookingmap';
