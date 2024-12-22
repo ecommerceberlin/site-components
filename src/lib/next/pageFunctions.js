@@ -66,7 +66,7 @@ async function configure(props, config){
 
   return {
     props: "params" in props? props.params: {},
-    revalidate: cache || 30
+    revalidate: cache || 100
   }
 
 }
