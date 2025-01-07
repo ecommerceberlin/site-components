@@ -35,8 +35,8 @@ const WidgetPresenters = ({setting, ...props}) => {
         filters: {
             filter: filter,
             limit: limit,
-            sort: "avatar",
-            dir: "ASC"
+            sort: "featured",
+            dir: "DESC"
         }
     })
 
