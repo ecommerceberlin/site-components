@@ -97,7 +97,7 @@ function renderBlock(time) {
         const key = getKey(venue, time)
         const data = key in inserts? presenters.find(filterFuncFromArr(inserts[key])): null
 
-        return (<Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}><ScheduleBlock setting={setting} data={data} /></Grid>)
+        return (<Grid key={key} item  xs={12} md><ScheduleBlock setting={setting} data={data} /></Grid>)
 
    })
  }
@@ -107,7 +107,7 @@ function renderBlock(time) {
     const iterableVenues = getIterableVenues();
 
     return iterableVenues.map(venue => (
-      <Grid key={venue} item {...getColNumber(venue)} style={{minWidth: 300}}> 
+      <Grid key={venue} item  xs={12} md> 
 
           <ScheduleVenue
           setting={setting}
@@ -135,16 +135,13 @@ function renderBlock(time) {
       })
 
       return (
-        <Grid key={key} item {...getColNumber(venue)} style={{minWidth: 300}}>
+        <Grid key={key} item xs={12} md>
         <ScheduleItemContainer venue={venue} time={time} setting={setting} data={data} />        
         </Grid>
       )
     })
 
   }
-
-
-
 
 
   function getIterableVenues(){
@@ -155,41 +152,6 @@ function renderBlock(time) {
 
     return Object.keys(venues);
   }
-
-  function getColNumber(currentVenue){
-
-    const iterableVenues = getIterableVenues();
-    const iterableVenuesCount = iterableVenues.length;
-
-    //GRID unfriendly number of scenes - 5....
-
-    if(selectedVenue || iterableVenuesCount <= 4){
-
-      const cols = 12 / iterableVenues.length;
-      return { xs: 12, sm: 12, md: cols, lg: cols, xl: cols };
-
-    }else{
-
-      return colconfig[iterableVenuesCount]
-
-      //if we have 5 stages than 2 must be collapsed (=1) and 3 shown...
-      //if we have 7 stages than 6 must be collapsed (3 slots) and 1 shown...
-
-    //   //odd number of stages...
-    //   if(Array.isArray(minimized) && minimized.indexOf(currentVenue)>-1){
-
-    //     return { xs: 12, sm: 12, md: 1, lg: 1, xl: 1 };
-
-    //   }
-
-    //  // const cols = 12 / (iterableVenues.length + minimized.length);
-    //   return { xs: 12, sm: 12, md: 3, lg: 3, xl: 3 };
-
-    }
-    
-  }
-
-  
 
 
   return (
