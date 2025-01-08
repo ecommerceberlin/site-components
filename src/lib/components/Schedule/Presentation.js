@@ -15,21 +15,27 @@ const useStyles =  makeStyles(theme => ({
   },
 
   label: {
-    fontWeight: 200,
-    color: theme.palette.error.main,
-    fontSize: "90%"
+    fontWeight: 500,
+    color: theme.palette.grey[600],
+    fontSize: "85%",
+    backgroundColor: theme.palette.grey[200],
+    padding: "2px 6px",
+    borderRadius: 3,
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+    marginRight: theme.spacing(1)
   },
 
   title: {
     fontWeight: 600,
     
-    fontSize: theme.typography.pxToRem(17),
+    fontSize: theme.typography.pxToRem(16),
 
     [theme.breakpoints.down("md")]: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: theme.typography.pxToRem(14),
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: theme.typography.pxToRem(13),
+      fontSize: theme.typography.pxToRem(12),
     }
   },
 
