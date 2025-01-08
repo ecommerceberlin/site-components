@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar';
-
+import Markdown from '../Markdown';
 import PresenterLogotype from './PresenterLogotype';
 import { usePresentation } from './context';
 
@@ -66,7 +66,8 @@ const DialogContentPresenter = () => {
           <Typography variant="subtitle1">{`${position} ${company}`}</Typography>
 
           <Box mt={2}>
-          <Typography variant="body2">{bio}</Typography>
+          {/* <Typography variant="body2">{bio}</Typography> */}
+          <Markdown label={bio} />
           </Box>
 
 
