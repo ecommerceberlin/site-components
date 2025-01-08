@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 5,
     backgroundColor: "#f0f2f5", 
     padding: 10,
+    boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.1)",
   },
 
   timeSlot: {
