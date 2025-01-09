@@ -24,14 +24,14 @@ const useStyles = props => makeStyles(theme => ({
       width: '50%',
       transition: 'background-color 0.3s ease',
       backgroundColor: 'transparent',
-      '&:hover': {
+      '&:hover, &.active': {
         backgroundColor: 'rgba(0, 0, 0, 0.04)',
       },
       [theme.breakpoints.down('xs')]: {
-        width: '100% !important', // Overrides inline-style
+        width: '100% !important',
         height: props.height/2,
       },
-      '&:hover, &$focusVisible': {
+      '&:hover, &$focusVisible, &.active': {
         zIndex: 1,
         '& $imageBackdrop': {
           opacity: 0.15,
@@ -152,7 +152,7 @@ function BottomNavi({targets=[], height=100}){
       <ButtonBase
         focusRipple
         key={target.label}
-        className={classes.image}
+        className={`${classes.image} ${visibleSections.has(target.target) ? 'active' : ''}`}
         focusVisibleClassName={classes.focusVisible}
         onClick={() => scrollIntoTheView(target.target)}
         >
