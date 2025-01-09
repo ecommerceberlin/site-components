@@ -131,7 +131,7 @@ useEffect(() => {
 
  */
 
-function BottomNavi({targets=[], height=100}){
+function BottomNavi({targets=[], height=100, hideIfNoVisibleTargets=false}){
 
     const classes = useStyles({height})()
 
@@ -139,6 +139,11 @@ function BottomNavi({targets=[], height=100}){
 
     if(!Array.isArray(targets)){
         return null
+    }
+
+    const hasVisibleTargets = targets.some(target => visibleSections.has(target.target));
+    if (!hasVisibleTargets && hideIfNoVisibleTargets) {
+        return null;
     }
 
     return (
