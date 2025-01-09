@@ -11,7 +11,7 @@ import Layout from '../layouts/LayoutMain'
 import { connect } from 'react-redux';
 import GoogleTagManager from '../components/GoogleTagManager'
 import PageLoadingIndicator from '../components/PageLoadingIndicator'
-
+import { IntersectionProvider } from '../contexts/IntersectionContext';
 
 export function reportWebVitals(metric) {
 //  if (metric.label === 'web-vital') {
@@ -44,10 +44,10 @@ const WrappedApp = ({Component, pageProps, head, theme, layout=true, router}) =>
   
     <ThemeProvider theme={createTheme(theme)}>
         <CssBaseline /> 
-     
+        <IntersectionProvider>
   
     {layout?  (<PageLoadingIndicator><GoogleTagManager><Layout><Component {...pageProps} /></Layout></GoogleTagManager></PageLoadingIndicator>): <Component {...pageProps} />}
-         
+        </IntersectionProvider>
       </ThemeProvider>
     </TranslationProvider>
 

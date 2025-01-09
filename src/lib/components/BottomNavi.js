@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import RawTranslatedText from './RawTranslatedText'
 import AppBar from '@material-ui/core/AppBar';
-
+import { useIntersection } from '../contexts/IntersectionContext';
 
 const useStyles = props => makeStyles(theme => ({
 
@@ -134,6 +134,11 @@ useEffect(() => {
 function BottomNavi({targets=[], height=100}){
 
     const classes = useStyles({height})()
+
+    const { visibleSections } = useIntersection();
+
+
+    console.log({visibleSections});
 
     if(!Array.isArray(targets)){
         return null

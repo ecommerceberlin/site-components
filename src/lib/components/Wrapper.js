@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MyTypography from './MyTypography';
 import classNames from 'classnames';
+import { useWrapperIntersection } from '../contexts/IntersectionContext';
 
 const useStyles = makeStyles(theme => ({
 
@@ -69,9 +70,14 @@ const Wrapper = ({id=null, label, classes, title, typography, secondaryLabel, se
 }) => {
 
   const _classes = useStyles();
+  const ref = useWrapperIntersection(id, {
+    threshold: 0.1,
+  });
+
 
   return (
     <section
+      ref={ref}
       id={id}
       className={classNames(_classes.root, {
         [_classes.dense]: dense,
