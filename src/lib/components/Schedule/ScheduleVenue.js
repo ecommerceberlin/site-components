@@ -21,31 +21,40 @@ const styles = theme => ({
       marginTop: 10,
       marginBottom: 15
     },
+
+    '&:hover .MuiAvatar-root': {  // Add this block
+      backgroundColor: 'gold',
+      color: 'black'
+    }
    
   },
 
   avatar: {
-    width: 60,
-    height: 60,
+    width: 45,
+    height: 45,
     fontSize: 25,
     fontWeight: 900,
-   
+    color : "black",
+    backgroundColor : theme.palette.grey[200],
+    borderRadius: 3,
 
     [theme.breakpoints.down('md')]: {
-      width: 40,
-      height: 40,
+      width: 35,
+      height: 35,
       fontSize: 18
-    }
+    },
+
+  
+
+
   },
 
-  black : {
-    
+  active : {
+    backgroundColor : "gold",
+    color : "black"
   },
 
-  gold : {
-    color : "black",
-    backgroundColor : "gold"
-  },
+ 
 
   logotype: {
     maxWidth: 200,
@@ -71,7 +80,11 @@ const ScheduleVenue = ({ name, company, classes, total, template, selectedVenue,
     <Hidden implementation="css">
       <div className={classes.root} onClick={ () => selectedVenue === name ? venueSelectReset() : venueSelect(name) }>
         <div>
-          <Avatar className={classNames(classes.avatar, classes[template])}>{name}</Avatar>
+          <Avatar variant="square" className={classNames(
+            {
+              [classes.avatar]: true,
+              [classes.active]: selectedVenue === name
+            } )}>{name}</Avatar>
         </div>
         <div> {logotype &&   <img
             src={logotype}
