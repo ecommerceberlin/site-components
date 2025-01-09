@@ -11,20 +11,25 @@ const useStyles = props => makeStyles(theme => ({
     appBar: {
         top: 'auto',
         bottom: 0,
-        height: 'auto',
     },
     root: {
       display: 'flex',
       flexWrap: 'wrap',
+      minWidth: 300,
       width: '100%',
     },
     image: {
       position: 'relative',
       height: props.height,
       width: '50%',
+      transition: 'background-color 0.3s ease',
+      backgroundColor: 'transparent',
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.04)',
+      },
       [theme.breakpoints.down('xs')]: {
-        width: '100%',
-        height: props.height/1.5,
+        width: '100% !important', // Overrides inline-style
+        height: props.height/2,
       },
       '&:hover, &$focusVisible': {
         zIndex: 1,
@@ -73,8 +78,11 @@ const useStyles = props => makeStyles(theme => ({
     },
     imageTitle: {
       position: 'relative',
-      padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(6)}px`,
-      fontSize : 40
+      padding: `${theme.spacing(2)}px ${theme.spacing(2)}px`,
+      fontSize: '1.25rem',
+      fontWeight: 500,
+      textTransform: 'uppercase',
+      letterSpacing: '0.5px',
     },
     imageMarked: {
       height: 3,
