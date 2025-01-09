@@ -137,9 +137,6 @@ function BottomNavi({targets=[], height=100}){
 
     const { visibleSections } = useIntersection();
 
-
-    console.log({visibleSections});
-
     if(!Array.isArray(targets)){
         return null
     }
