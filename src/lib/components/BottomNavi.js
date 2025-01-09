@@ -11,19 +11,20 @@ const useStyles = props => makeStyles(theme => ({
     appBar: {
         top: 'auto',
         bottom: 0,
+        height: 'auto',
     },
     root: {
       display: 'flex',
       flexWrap: 'wrap',
-      minWidth: 300,
       width: '100%',
     },
     image: {
       position: 'relative',
       height: props.height,
+      width: '50%',
       [theme.breakpoints.down('xs')]: {
-        width: '100% !important', // Overrides inline-style
-        height: props.height/2,
+        width: '100%',
+        height: props.height/1.5,
       },
       '&:hover, &$focusVisible': {
         zIndex: 1,
@@ -140,9 +141,6 @@ function BottomNavi({targets=[], height=100}){
         key={target.label}
         className={classes.image}
         focusVisibleClassName={classes.focusVisible}
-        style={{
-        width: "50%",
-        }}
         onClick={() => scrollIntoTheView(target.target)}
         >
         <span className={classes.imageBackdrop} />
