@@ -244,6 +244,26 @@ export const validations = (requiredFieldNames) => ({
       .max(100, '')
       .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
 
+      employee: Yup.string()
+      .min(5, "Too short :(")
+      .max(100, '')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
+
+      revenue: Yup.string()
+      .min(5, "Too short :(")
+      .max(100, '')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
+
+      business_model: Yup.string()
+      .min(5, "Too short :(")
+      .max(100, '')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
+
+      objective: Yup.string()
+      .min(5, "Too short :(")
+      .max(100, '')
+      .requireWhenRequired(requiredFieldNames, 'Please select one of the following'),
+
 
 
 
