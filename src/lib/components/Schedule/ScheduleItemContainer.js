@@ -61,11 +61,11 @@ const ScheduleItemContainer = ({setting="", data=[], allowApply = true}) => {
     return null
   }
 
-  return (<Card style={{marginTop: 0}} elevation={0} >
+  return (<Card >
     
       <PresentationContext data={header} setting={setting}>
       
-      <Box pl={2} pr={2}>
+      <Box p={1}>
      
       <Presentation />
     
