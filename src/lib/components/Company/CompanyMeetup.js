@@ -11,7 +11,7 @@ import { useSettings } from '../../helpers';
 
 const CompanyMeet = () => {
     
-    const {query} = useRouter()
+    const {query, push} = useRouter()
     const [translate] = useTranslate()
     const dispatch = useDispatch();
     const {present, id} = useCompany()
@@ -41,7 +41,7 @@ const CompanyMeet = () => {
 
 
     return (
-        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} href={`https://ecomm.berlin/people/exhibitors#${encodeURIComponent(JSON.stringify({page: 1, company_id: id}))}`} actionLabel="exhibitors.meetup.create" />
+        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={() => push(`https://ecomm.berlin/people/exhibitors#${encodeURIComponent(JSON.stringify({page: 1, company_id: id}))}`)} actionLabel="exhibitors.meetup.create" />
     )
    
     // return (
