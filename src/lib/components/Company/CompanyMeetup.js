@@ -14,7 +14,7 @@ const CompanyMeet = () => {
     const {query} = useRouter()
     const [translate] = useTranslate()
     const dispatch = useDispatch();
-    const {present} = useCompany()
+    const {present, id} = useCompany()
     const {disableMeetups} = useSettings("exhibitors")
 
     const handleClick = () => dispatch(dialogShow({
@@ -39,10 +39,15 @@ const CompanyMeet = () => {
         return null
     }
 
-    return (
-        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={handleClick} actionLabel="exhibitors.meetup.create" />
 
+    return (
+        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} href={`https://ecomm.berlin/people/exhibitors#${encodeURIComponent(JSON.stringify({page: 1, company_id: id}))}`} actionLabel="exhibitors.meetup.create" />
     )
+   
+    // return (
+    //     <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={handleClick} actionLabel="exhibitors.meetup.create" />
+
+    // )
    
 }
 
