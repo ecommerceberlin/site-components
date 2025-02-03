@@ -41,7 +41,7 @@ const CompanyMeet = () => {
 
 
     return (
-        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={() => push(`https://ecomm.berlin/people/exhibitors#${encodeURIComponent(JSON.stringify({page: 1, company_id: id}))}`)} actionLabel="exhibitors.meetup.create" />
+        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={() => push(`https://ecomm.berlin/people/exhibitors#%7B%22page%22%3A1%2C%22company_id%22%3A${id}%7D`)} actionLabel="exhibitors.meetup.create" />
     )
    
     // return (
