@@ -31,13 +31,13 @@ const CompanyMeet = () => {
         return null
     }
 
-    if("vipcode" in query){
-        return null
-    }
+    // if("vipcode" in query){
+    //     return null
+    // }
 
-    if("meet" in query){
-        return null
-    }
+    // if("meet" in query){
+    //     return null
+    // }
 
 
     return (
