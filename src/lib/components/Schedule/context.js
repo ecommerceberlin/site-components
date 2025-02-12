@@ -43,6 +43,7 @@ export const PresentationContext = ({setting="", data={}, children}) => {
         description: profile.presentation_description,
         category: profile.presentation_category,
        
+        day: profile.tm_visitday || profile.presentation_day,
         time: profile.presentation_time,
         venue: profile.presentation_venue,
      

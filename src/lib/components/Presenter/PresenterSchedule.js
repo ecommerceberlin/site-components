@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 const PresenterSchedule = () => {
 
-    const {time, venue} = usePresentation()
+    const {day, time, venue} = usePresentation()
     const [translate] = useTranslate()
     const classes = useStyles()
     const router = useRouter()
@@ -41,6 +41,7 @@ const PresenterSchedule = () => {
         <Paper className={classes.root}>
             <Grid container alignItems='center' justifyContent='center' spacing={3} direction="column">
                 <Grid item>
+                    {day && <Typography variant="h5">{day}</Typography>}
                     <Typography variant="h4">{venue} {time}</Typography>
                 </Grid>
                 <Grid item>
