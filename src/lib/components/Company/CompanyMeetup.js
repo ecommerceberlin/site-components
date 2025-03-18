@@ -15,7 +15,7 @@ const CompanyMeet = () => {
     const [translate] = useTranslate()
     const dispatch = useDispatch();
     const {present, id} = useCompany()
-    const {disableMeetups} = useSettings("exhibitors")
+    const {disableMeetups, meetupApplicationURL} = useSettings("exhibitors")
 
     const handleClick = () => dispatch(dialogShow({
         title: translate("exhibitors.meetup.create"),
@@ -24,7 +24,7 @@ const CompanyMeet = () => {
     }))
 
     if(disableMeetups){
-        return null
+        // return null
     }
 
     if(!present){
@@ -41,7 +41,7 @@ const CompanyMeet = () => {
 
 
     return (
-        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={() => push(`https://ecomm.berlin/people/exhibitors#%7B%22page%22%3A1%2C%22company_id%22%3A${id}%7D`)} actionLabel="exhibitors.meetup.create" />
+        <GrayBigButton label="" icon={<RecordVoiceOverIcon />} onClick={() => push(`${meetupApplicationURL}#%7B%22page%22%3A1%2C%22company_id%22%3A${id}%7D`)} actionLabel="exhibitors.meetup.create" />
     )
    
     // return (
