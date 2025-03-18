@@ -24,7 +24,7 @@ const CompanyMeet = () => {
     }))
 
     if(disableMeetups){
-        // return null
+        return null
     }
 
     if(!present){
