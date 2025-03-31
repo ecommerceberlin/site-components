@@ -58,26 +58,26 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CompanyMeetupButton = ({id}) => {
+// const CompanyMeetupButton = ({id}) => {
 
-  const {disableMeetups} = useSettings("exhibitors")
-  const [translate] = useTranslate()
-  const dispatch = useDispatch();
+//   const {disableMeetups} = useSettings("exhibitors")
+//   const [translate] = useTranslate()
+//   const dispatch = useDispatch();
 
-  const handleClick = () => dispatch(dialogShow({
-    title: translate("exhibitors.meetup.create"),
-    content: <WidgetCompanyMeetupInteraction forcedId={id} /> ,
-    width: "xl"
-}))
+//   const handleClick = () => dispatch(dialogShow({
+//     title: translate("exhibitors.meetup.create"),
+//     content: <WidgetCompanyMeetupInteraction forcedId={id} /> ,
+//     width: "xl"
+// }))
 
-  if(!id || disableMeetups){
-    return null
-  }
+//   if(!id || disableMeetups){
+//     return null
+//   }
 
-  return (  <Button variant="contained" color="primary"  onClick={handleClick} startIcon={<RecordVoiceOverIcon />}>{translate("exhibitors.meetup.create")}</Button>
+//   return (  <Button variant="contained" color="primary"  onClick={handleClick} startIcon={<RecordVoiceOverIcon />}>{translate("exhibitors.meetup.create")}</Button>
   
-  )
-}
+//   )
+// }
 
 
 const useGetCompanyFromPurchase = (boothId) => {
@@ -130,7 +130,7 @@ const BoothDialogTakenSoldContent = ({setting="", boothId}) => {
       </Grid>
       <Grid item xs={12} sm={12} md={4}>
 
-        <CompanyMeetupButton id={company.id} />
+        {/* <CompanyMeetupButton id={company.id} /> */}
 
        <Tags tags={_get(company, "profile.keywords")} centered={false} />
       </Grid>
