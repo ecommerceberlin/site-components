@@ -96,7 +96,7 @@ const WidgetPlanner = ({email=""}) => {
 
     return (<div>
         <WidgetPlannerWorkshops email={email} />
-        <WidgetPlannerScheduledMeetups email={email} />
+        {/* <WidgetPlannerScheduledMeetups email={email} /> */}
     </div>)
 
 }
