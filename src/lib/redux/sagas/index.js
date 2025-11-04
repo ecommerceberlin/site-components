@@ -404,6 +404,25 @@ function* handleCartValidate(payload){
     console.log(payload)
 }
 
+/**
+ * CRITICAL FIX: Show user feedback when lock fails
+ */
+function* handleLockFailed({failed}){
+  if(failed && Array.isArray(failed) && failed.length > 0){
+    yield put(snackbarShow({
+      title: `Failed to reserve: ${failed.join(', ')}`
+    }));
+  }
+}
+
+/**
+ * CRITICAL FIX: Optional success confirmation
+ */
+function* handleLockSuccess(){
+  // Optional: Show success message
+  // yield put(snackbarShow({title: "Booth reserved successfully"}));
+}
+
 
 
 const rootSaga = function* root() {
@@ -431,9 +450,10 @@ const rootSaga = function* root() {
 
     takeEvery(SET_USER_TOKEN, handleRehydrate),
 
-    // takeEvery(CART_ITEM_ADD, handleLocks),
-    // takeEvery(LOCK_SUCCESS, handleCartValidate),
-    // takeEvery(LOCK_FAILED, handleCartValidate),
+    // CRITICAL FIX: Enable lock feedback handlers
+    takeEvery(LOCK_SUCCESS, handleLockSuccess),
+    takeEvery(LOCK_FAILED, handleLockFailed),
+
     takeEvery(CART_ITEM_REMOVE, handleLocks),
     takeEvery(CART_RESET, handleLocks),
     // takeEvery(RESOURCE_FETCH_SUCCESS, handleCartValidate)
