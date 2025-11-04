@@ -159,6 +159,7 @@ function* accumulateFetches({resource, reload}) {
 function* fetchAccumulatedFetches(endpoint, reload){
 
   const nonProxyableResources = [
+          "bookingmap",
           "blockings", 
           "formdata", 
           "ticketgroups", 
